@@ -1,0 +1,19 @@
+{
+  "name": "planet-cargo",
+  "version": "0.0.1",
+  "description": "Planet Cargo: Node, React & Websockets",
+  "dependencies": {
+    "express": "^4.15.4",
+    "preact": "^8.2.5",
+    "preact-render-to-string": "^3.6.3",
+    "ts-loader": "^2.3.4",
+    "typescript": "^2.5.2",
+    "webpack": "^3.5.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "server": "webpack --config webpack/server.config.js",
+    "client": "webpack --config webpack/client.config.js",
+    "start": "node server.js"
+  }
+}
