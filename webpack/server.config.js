@@ -12,7 +12,7 @@ const settings = {
     libraryTarget: 'commonjs-module'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       'scss': path.resolve(__dirname, '../src/scss')
     }

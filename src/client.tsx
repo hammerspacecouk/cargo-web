@@ -1,8 +1,17 @@
-import { h, render } from 'preact';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './App';
 
-// todo, cut the mustard test
-
-const root = document.getElementById('root');
-const target = document.getElementById('app');
-render(<App name="Client" />, root, target);
+// cut the mustard for features we use. Everything else will be server rendering
+if ('fetch' in window) {
+    ReactDOM.render(
+        (
+            <BrowserRouter>
+                <App name="Client" />
+            </BrowserRouter>
+        ),
+        document.getElementById('root')
+    );
+}

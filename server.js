@@ -1,52 +1,51 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
-const express = require('express');
+const http = require('http');
+const url = require('url');
+const serverEntryScript = require('./dist/server.js');
+const port = 3000;
 
-// Server-side Entry
-const serverEntry = require('./dist/server.js');
+http.createServer((request, response) => {
 
-// basic HTTP server via express:
-const app = express();
+  const uri = url.parse(request.url).pathname;
 
-const BUNDLE_FILE_URL = '/client.js';
-const BUNDLE_FILE_PATH = path.join(__dirname, `dist${BUNDLE_FILE_URL}`);
+  if (uri.indexOf('/static') === 0) {
+    const filename = `${__dirname}/dist/${uri}`;
 
-// bundle js file
-app.get(BUNDLE_FILE_URL, (req, res) => {
-  fs.readFile(BUNDLE_FILE_PATH, 'utf-8', (err, ctx) => {
-  res.send(ctx);
-});
-});
+    
+    fs.exists(filename, (exists) => {
+      if(!exists) {
+        response.writeHead(404, {'Content-Type': 'text/plain'});
+        response.write('404 Not Found');
+        response.end();
+        return;
+      }
 
-// on each request, render and return a component:
-app.get('/', (req, res) => {
+      fs.readFile(filename, 'binary', (err, file) => {
+        if(err) {
+          response.writeHead(500, {'Content-Type': 'text/plain'});
+          response.write(err);
+          response.end();
+          return;
+        }
 
-const serverResult = serverEntry.default({
-    // id,
-    name: 'Hans',
-    age: Math.round(Math.random() * 50),
-  });
-// send it back wrapped up as an HTML5 document:
-res.send(`<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Planet Cargo</title>
-</head>
-<body>
-<div id="root">${serverResult.html}</div>
-<script>window.__state_data__ = ${JSON.stringify(serverResult.state)};</script>
-<script src="/client.js"></script>
-</body>
-</html>`);
-});
+        const contentTypesByExtension = {
+          '.css':  'text/css',
+          '.js':   'text/javascript'
+        };
 
-// start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Preact Server start on ${PORT}`);
-});
+        response.writeHead(200);
+        response.write(file, 'binary');
+        response.end();
+      });
+    });
+    return;
+  }
+
+  const res = require('./dist/server.js').default(uri); // todo - pass in other wanted request properties
+
+  response.writeHead(res.statusCode, res.headers || {});
+  response.write(res.body);
+  response.end();
+}).listen(port);

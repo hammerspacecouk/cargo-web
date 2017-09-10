@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "removeComments": true,
     "sourceMap": true,
     "module": "commonjs",
     "jsx": "react",
-    "jsxFactory": "h",
-    "target": "es5"
+    "target": "es6"
   },
   "include": [
     "src/*.ts",

@@ -6,12 +6,12 @@ const settings = {
     app: path.resolve(__dirname, '../src/client.tsx')
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist/static'),
     publicPath: '/',
     filename: 'client.js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       'scss': path.resolve(__dirname, '../src/scss')
     }
