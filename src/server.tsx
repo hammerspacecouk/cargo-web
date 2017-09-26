@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Express from 'express';
 import * as ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
@@ -11,73 +12,64 @@ declare namespace Server {
         url?: string;
         statusCode?: number;
     }
-
-    interface ResponseData {
-        statusCode: number;
-        headers: object;
-        body?: string;
-    }
 }
 
-export default (path: string): Server.ResponseData => {
-    // Render the component to a string
+export default (app: Express.Application) => {
 
-    const context: Server.RouterContext = {
-        url: null,
-        statusCode: null
-    };
-
-    const appElement = ReactDOMServer.renderToString(
-        <StaticRouter location={path} context={context}>
-            <App name="Server" />
-        </StaticRouter>
-    );
-
-    if (context.url) {
-        // Somewhere a `<Redirect>` was rendered
-        return {
-            statusCode: context.statusCode || 301,
-            headers: {
-                location: context.url
-            },
-            body: null
+    app.get('*', (req, res) => {
+        const path = req.url;
+        const context: Server.RouterContext = {
+            url: null,
+            statusCode: null
         };
-    }
 
-    const body = `<!doctype html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Planet Cargo</title>
-        </head>
-        <body>
-        <div id="root">${appElement}</div>
-        <script>
-          const supportsES6 = function() {
-            try {
-              new Function("(a = 0) => a");
-              return true;
-            } catch (e) {
-              return false;
-            }
-          }();
-          if (supportsES6) {
-            let script = document.createElement('script');
-            script.src = "/static/client.js";
-            document.head.appendChild(script);
-          }   
-        </script>
-        </body>
-        </html>
-    `;
-
-    return {
-        statusCode: 200, // todo - read from routes and queries
-        headers: {
+        res.set({
             'content-type' : 'text/html', // todo - cache headers
-            'cache-control': 'private'
-        },
-        body
-    };
+            'cache-control': 'private',
+            'link': [
+                `</static/styles.css>; rel=preload; as=style`,
+                `</static/vendor.js>; rel=preload; as=script`,
+                `</static/client.js>; rel=preload; as=script`,
+            ],
+        });
+        const stream = ReactDOMServer.renderToNodeStream(
+            <StaticRouter location={path} context={context}>
+                <App name="Server" />
+            </StaticRouter>
+        );
+        res.write(`<!doctype html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Planet Cargo</title>
+            </head>
+            <body>
+            <div id="root">`
+        );
+        stream.pipe(res, { end: false });
+        stream.on('end', () => {
+            res.write(`</div>
+                <script src="/static/vendor.js"></script>
+                <script>
+                  const supportsES6 = function() {
+                    try {
+                      new Function("(a = 0) => a");
+                      return true;
+                    } catch (e) {
+                      return false;
+                    }
+                  }();
+                  if (supportsES6) {
+                    let script = document.createElement('script');
+                    script.src = "/static/client.js";
+                    document.head.appendChild(script);
+                  }   
+                </script>
+                </body>
+                </html>`
+            );
+            res.end();
+        });
+    });
 };

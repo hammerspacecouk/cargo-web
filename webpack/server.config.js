@@ -5,6 +5,7 @@ const settings = {
   entry: {
     app: path.resolve(__dirname, '../src/server.tsx')
   },
+  target: "node",
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
