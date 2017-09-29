@@ -45,6 +45,7 @@ export default (app: Express.Application) => {
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Planet Cargo</title>
+            <link rel="stylesheet" href="/static/app.css" />
         </head>
         <body>
         <div id="root">${appElement}</div>
@@ -74,7 +75,7 @@ export default (app: Express.Application) => {
             'cache-control': 'private',
             'link': [
                 // todo - use static asset map
-                `</static/styles.css>; rel=preload; as=style`,
+                `</static/app.css>; rel=preload; as=style`,
                 `</static/vendor.js>; rel=preload; as=script`,
                 `</static/client.js>; rel=preload; as=script`,
             ],

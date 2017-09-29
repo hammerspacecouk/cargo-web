@@ -1,6 +1,8 @@
 const Webpack = require('webpack');
 const Path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const settings = {
   devtool: 'source-map',
@@ -29,7 +31,16 @@ const settings = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loaders: ['ts-loader']
-      }
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          use : [
+            'css-loader',
+            'sass-loader'
+          ]
+        })
+      },
     ]
   },
   plugins: [
@@ -44,6 +55,8 @@ const settings = {
       filename: 'vendor.js'
     }),
     new UglifyJSPlugin(),
+    new ExtractTextPlugin('[name].css'),
+    new OptimizeCssAssetsPlugin(),
   ]
 };
 
