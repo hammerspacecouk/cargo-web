@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 
-import Home from './containers/Home/Home';
-import Ports from './containers/Ports';
+import Home from './pages/Home/Home';
+import Ports from './pages/Ports';
 
-import NotFound from './components/Error/NotFound';
+import Error from './pages/Error';
 
-export interface AppProps {
-    name: string;
-}
+export interface AppProps {}
 
 export default class App extends React.Component<AppProps, undefined> {
     render() {
@@ -22,7 +20,7 @@ export default class App extends React.Component<AppProps, undefined> {
                     <Switch>
                         <Route path="/ports" component={Ports} />
                         <Route path="/" exact component={Home} />
-                        <Route component={NotFound} />
+                        <Route component={Error} />
                     </Switch>
                 </div>
             </div>
