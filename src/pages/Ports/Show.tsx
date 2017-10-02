@@ -1,46 +1,60 @@
 import * as React from 'react';
 
-import { Port } from './List';
+import { Port } from '../../models/Port';
+import DI from '../../DI';
 
-export interface Props {
+interface Params {
+    portId: string;
+}
+
+interface Props {
     match: {
-        params: {
-            portId: string;
-        }
+        params: Params;
+    };
+    staticContext: {
+        initialData?: Port;
     };
 }
 
-export interface State {
+interface State {
     port?: Port;
 }
 
 export default class Component extends React.Component<Props, State> {
-    constructor() {
+    constructor(props: Props) {
         super();
-        this.state = {
-            port: null
+
+        let port: Port;
+
+        if (typeof window !== 'undefined') {
+            port = (window as any).__DATA;
+            delete (window as any).__DATA;
+        } else if (props.staticContext.initialData) {
+            port = props.staticContext.initialData;
+        }
+
+        this.state = { port };
+    }
+
+    async componentDidMount() {
+        if (!this.state.port) {
+            let port: Port = await Component.requestInitialData(this.props.match.params);
+            this.setState({
+                port
+            });
         }
     }
 
-    componentDidMount() {
-        // todo - abstract API calls, to sort withCredentials, and to get hostname from ENV. use DI container
-        fetch('http://api.dev.planetcargo.live/ports/' + this.props.match.params.portId)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    port: responseJson,
-                });
-            })
-            .catch((error) => {
-                // todo - show 500
-                console.error(error);
-            });
+    static requestInitialData(routeParams: Params = null) {
+        return DI.models.getPorts().getById(routeParams.portId);
     }
 
 
     render() {
         if (!this.state.port) {
-            return null;
+            return (
+                <p>LOADING</p>
+            );
         }
 
         return (

@@ -6,7 +6,7 @@ export interface LoginFormProps {
     emailSent: boolean
 }
 
-const Component = (props: LoginFormProps) => {
+export default (props: LoginFormProps) => {
     let sentMsg = null;
     if (props.emailSent) {
         sentMsg = (
@@ -43,5 +43,3 @@ const Component = (props: LoginFormProps) => {
         </div>
     );
 };
-
-export default Component;

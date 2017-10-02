@@ -1,28 +1,50 @@
 import * as React from 'react';
 import * as Express from 'express';
 import * as ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter, matchPath } from 'react-router-dom';
 
+import DI from './DI';
 import App from './App';
 
-// todo - create the DI container, so that I have the assets manifest
+import routes, { RouteConfig } from './routes';
+
+// init the DI container specifically with server settings
+DI.init(require('../build/assets-manifest.json'));
 
 declare namespace Server {
     interface RouterContext {
         url?: string;
-        statusCode?: number;
+        status?: number;
+        initialData?: any;
     }
 }
 
 export default (app: Express.Application) => {
 
-    app.get('*', (req, res) => {
+    app.get('*', async (req, res) => {
         // Render the component to a string
         const path = req.url;
         const context: Server.RouterContext = {
             url: null,
-            statusCode: null,
+            status: null,
+            initialData: null,
         };
+
+        let params: object;
+        const activeRoute = routes.find(
+            (route: RouteConfig) => {
+                const matched = matchPath(path, route);
+                if (matched) {
+                    params = matched.params;
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        if (activeRoute.component.requestInitialData) {
+            context.initialData = await activeRoute.component.requestInitialData(params);
+        }
 
         const appElement = ReactDOMServer.renderToString(
             <StaticRouter location={path} context={context}>
@@ -32,7 +54,7 @@ export default (app: Express.Application) => {
 
         if (context.url) {
             res.redirect(
-                context.statusCode || 301,
+                context.status || 301,
                 context.url
             );
             res.end();
@@ -45,12 +67,14 @@ export default (app: Express.Application) => {
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Planet Cargo</title>
-            <link rel="stylesheet" href="/static/app.css" />
+            <link rel="stylesheet" href="${DI.getAssets().get('app.css')}" />
         </head>
         <body>
         <div id="root">${appElement}</div>
-        <script src="/static/vendor.js"></script>
+        <script src="${DI.getAssets().get('vendor.js')}"></script>
         <script>
+          window.__ASSETS = ${DI.getAssets().getJSON()};
+          window.__DATA = ${await JSON.stringify(context.initialData)};
           const supportsES6 = function() {
             try {
               new Function("(a = 0) => a");
@@ -61,7 +85,7 @@ export default (app: Express.Application) => {
           }();
           if (supportsES6) {
             let script = document.createElement('script');
-            script.src = "/static/client.js";
+            script.src = '${DI.getAssets().get('app.js')}';
             document.head.appendChild(script);
           }   
         </script>
@@ -69,15 +93,14 @@ export default (app: Express.Application) => {
         </html>
     `;
 
-        res.status(200);
+        res.status(context.status || 200);
         res.set({
             'content-type' : 'text/html', // todo - cache headers
             'cache-control': 'private',
             'link': [
-                // todo - use static asset map
-                `</static/app.css>; rel=preload; as=style`,
-                `</static/vendor.js>; rel=preload; as=script`,
-                `</static/client.js>; rel=preload; as=script`,
+                `<${DI.getAssets().get('app.css')}>; rel=preload; as=style`,
+                `<${DI.getAssets().get('vendor.js')}>; rel=preload; as=script`,
+                `<${DI.getAssets().get('app.js')}>; rel=preload; as=script`,
             ],
         });
         res.end(body);

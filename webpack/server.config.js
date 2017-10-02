@@ -1,13 +1,14 @@
-const path = require('path');
+const Webpack = require('webpack');
+const Path = require('path');
 
 const settings = {
   devtool: 'source-map',
   entry: {
-    app: path.resolve(__dirname, '../src/server.tsx')
+    app: Path.resolve(__dirname, '../src/server.tsx')
   },
-  target: "node",
+  target: 'node',
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: Path.resolve(__dirname, '../build'),
     publicPath: '/',
     filename: 'server.js',
     libraryTarget: 'commonjs-module'
@@ -15,7 +16,7 @@ const settings = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      'scss': path.resolve(__dirname, '../src/scss')
+      'scss': Path.resolve(__dirname, '../src/scss')
     }
   },
   module: {
@@ -28,13 +29,15 @@ const settings = {
     ]
   },
   plugins: [
-    // ensure we are production mode (for react etc)
-    // new Webpack.DefinePlugin({
-    //   'process.env':{
-    //     'NODE_ENV': JSON.stringify('production')
-    //   }
-    // }),
-  ]
+    new Webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new Webpack.ProvidePlugin({
+      'fetch': require.resolve('node-fetch')
+    }),
+  ],
 };
 
 module.exports = settings;

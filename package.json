@@ -9,6 +9,7 @@
     "@types/react-router": "^4.0.15",
     "@types/react-router-dom": "^4.0.7",
     "express": "^4.15.5",
+    "node-fetch": "^1.7.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2"
@@ -16,16 +17,20 @@
   "devDependencies": {
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^1.1.4",
     "node-sass": "^4.5.3",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "sass-loader": "^6.0.6",
     "ts-loader": "^2.3.4",
     "typescript": "^2.5.2",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.2",
-    "webpack": "^3.5.6"
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-manifest-plugin": "^1.3.2"
   },
   "scripts": {
-    "server": "webpack --config webpack/server.config.js",
+    "dev": "webpack --config webpack/dev.config.js",
+    "server": "yarn client && webpack --config webpack/server.config.js",
     "client": "webpack --config webpack/client.config.js",
     "start": "node server.js"
   }

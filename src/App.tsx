@@ -1,26 +1,24 @@
 import * as React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 
-import Home from './pages/Home/Home';
-import Ports from './pages/Ports';
+import DI from './DI';
 
-import Error from './pages/Error';
+import routes from './routes';
 
-export interface AppProps {}
-
-export default class App extends React.Component<AppProps, undefined> {
+export default class App extends React.Component<undefined, undefined> {
     render() {
         return (
             <div>
+                <div>
+                    <img src={DI.getAssets().get('placeholder-logo.png')} alt="Test Logo" />
+                </div>
                 <nav><ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/ports">Ports</Link></li>
                 </ul></nav>
                 <div>
                     <Switch>
-                        <Route path="/ports" component={Ports} />
-                        <Route path="/" exact component={Home} />
-                        <Route component={Error} />
+                        {routes.map((route: object, i: number) => <Route key={i} {...route} />)}
                     </Switch>
                 </div>
             </div>

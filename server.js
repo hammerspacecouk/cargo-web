@@ -3,7 +3,7 @@
 const Express = require('express');
 const App = Express();
 
-const serverEntryScript = require('./dist/server.js');
+const serverEntryScript = require('./build/server.js');
 const port = 3000;
 
 serverEntryScript.default(App);

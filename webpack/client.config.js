@@ -3,6 +3,7 @@ const Path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const settings = {
   devtool: 'source-map',
@@ -15,9 +16,9 @@ const settings = {
     ]
   },
   output: {
-    path: Path.resolve(__dirname, '../dist/static'),
+    path: Path.resolve(__dirname, '../build/static'),
     publicPath: '/',
-    filename: 'client.js'
+    filename: '[chunkhash].[name].js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
@@ -41,7 +42,11 @@ const settings = {
           ]
         })
       },
-    ]
+      {
+        test: /\.(png|svg|ico)$/,
+        loader: 'file-loader?name=[hash].[name].[ext]'
+      },
+    ],
   },
   plugins: [
     // ensure we are production mode (for react etc)
@@ -52,11 +57,14 @@ const settings = {
     }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.js'
+      filename: '[chunkhash].vendor.js'
     }),
     new UglifyJSPlugin(),
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('[contenthash].[name].css'),
     new OptimizeCssAssetsPlugin(),
+    new ManifestPlugin({
+      fileName : Path.resolve(__dirname, '../build/assets-manifest.json'),
+    }),
   ]
 };
 
