@@ -11,12 +11,12 @@ export default class LoginForm extends React.Component<Props, undefined> {
 
     render() {
         // todo - inject environment/API URL manager
-        const loginPathGoogle: string = '//api.dev.planetcargo.live/login/google';
-        const loginPathEmail: string = '//api.dev.planetcargo.live/login/email';
 
         return <LoginFormComponent
-            loginPathGoogle={loginPathGoogle}
-            loginPathEmail={loginPathEmail}
+            loginPathEmail="//api.dev.planetcargo.live/login/email"
+            loginPathFacebook="//api.dev.planetcargo.live/login/facebook"
+            loginPathGoogle="//api.dev.planetcargo.live/login/google"
+            loginPathTwitter="//api.dev.planetcargo.live/login/twitter"
             emailSent={this.props.sent}
         />
     }
