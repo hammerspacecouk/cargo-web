@@ -6,24 +6,24 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 const settings = {
-  devtool: 'source-map',
   entry: {
     app: Path.resolve(__dirname, '../src/client.tsx'),
     vendor: [
       'react',
       'react-dom',
       'react-router-dom',
+      'react-modal',
     ]
   },
   output: {
     path: Path.resolve(__dirname, '../build/static'),
     publicPath: '/',
-    filename: '[chunkhash].[name].js'
+    filename: '[chunkhash].[name].js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      'scss': Path.resolve(__dirname, '../src/scss')
+      'scss': Path.resolve(__dirname, '../src/scss'),
     }
   },
   module: {
@@ -31,20 +31,21 @@ const settings = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loaders: ['ts-loader']
+        loaders: ['ts-loader'],
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           use : [
             'css-loader',
-            'sass-loader'
-          ]
+            'postcss-loader',
+            'sass-loader',
+          ],
         })
       },
       {
         test: /\.(png|svg|ico)$/,
-        loader: 'file-loader?name=[hash].[name].[ext]'
+        loader: 'file-loader?name=[hash].[name].[ext]',
       },
     ],
   },

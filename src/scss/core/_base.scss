@@ -1,0 +1,16 @@
+body {
+  background: $color-body;
+  color: $color-text;
+  font-family: $font-body;
+}
+
+a {
+  font-weight: inherit;
+  color: $color-link;
+  text-decoration: inherit;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+  }
+}

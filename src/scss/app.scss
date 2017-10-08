@@ -1,3 +1,8 @@
-body {
-  background: beige;
-}
+@charset "UTF-8";
+
+@import 'setup/setup';
+
+@import 'core/core';
+@import 'atoms/atoms';
+@import 'molecules/molecules';
+@import 'organisms/organisms';

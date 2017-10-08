@@ -1,0 +1,51 @@
+.modal {
+  $header-height: $cta-size;
+  $border-width: 1px;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  margin: $grid-unit;
+  max-height: calc(100vh - #{(2 * $grid-unit)});
+  border: $border-width solid rgb(204, 204, 204);
+  background: $color-body;
+  border-radius: 4px;
+  outline: none;
+
+  &__header {
+    height: $header-height;
+    display: flex;
+    border-bottom: solid 1px $color-keyline;
+  }
+
+  &__title {
+    @extend .c;
+    padding: $grid-unit;
+    line-height: ($header-height - (2*$grid-unit));
+    flex: 1;
+  }
+
+  &__close {
+    line-height: $cta-size;
+    width: $cta-size;
+    background: none;
+    border: none;
+  }
+
+  &__body {
+    max-height: calc(100vh - (#{(2 * $grid-unit) + $header-height + (2 * $border-width)}));
+    overflow: auto;
+  }
+  &__content {
+    padding: $grid-unit;
+  }
+}

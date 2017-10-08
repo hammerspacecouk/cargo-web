@@ -20,7 +20,10 @@ export default class {
     }
 
     get(key: string): string {
-        return this.getPrefix() + this.assets[key];
+        if (this.assets && key in this.assets) {
+            return this.getPrefix() + this.assets[key];
+        }
+        return '/' + key;
     }
 
     getJSON(): string {

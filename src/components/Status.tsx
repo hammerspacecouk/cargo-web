@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
 
-export interface Props {
+interface Props {
     code: number,
     children: any
 }

@@ -1,0 +1,72 @@
+.login-form {
+  &__social-list {
+    @extend .list--unstyled;
+    margin-top: $grid-unit;
+    text-align: center;
+    > li {
+      margin: 0 $grid-unit $grid-unit 0;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  $social-button-height: 48px;
+  $social-button-padding: 8px;
+
+  &__social-item {
+    @extend .e;
+    display: inline-block;
+    height: $social-button-height;
+    padding: $social-button-padding;
+    line-height: $social-button-height - (2 * $social-button-padding);
+    border-radius: 4px;
+    background: $color-black;
+    color: #fff;
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+    font-weight: bold;
+    &:hover,
+    &:focus {
+      box-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+    }
+    &:active {
+      box-shadow: none;
+    }
+
+    &--facebook {
+      background: #3b5998;
+      color: #ffffff;
+    }
+
+    &--google {
+      background: #fff;
+      color: #121212;
+    }
+
+    &--twitter {
+      background: #1da1f2;
+      color: #ffffff;
+    }
+  }
+
+  &__social-logo {
+    display: inline-block;
+    width: $social-button-height - (2 * $social-button-padding);
+    vertical-align: top;
+
+    &--twitter {
+      padding-top: 4px;
+    }
+    &--microsoft,
+    &--facebook {
+      padding: 4px;
+    }
+    &--google {
+      padding: 2px;
+    }
+  }
+
+  &__social-text {
+    display: inline-block;
+    padding: 0 ($social-button-padding * 2);
+  }
+}

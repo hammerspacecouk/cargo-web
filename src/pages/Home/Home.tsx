@@ -1,8 +1,6 @@
 import * as React from 'react';
 import LoginForm from '../../containers/LoginForm';
 
-import DI from '../../DI';
-
 import QueryString from '../../helpers/QueryString';
 
 export interface Props {
@@ -20,7 +18,7 @@ export default class Home extends React.Component<Props, undefined> {
             <div>
                 <h1>HOME</h1>
                 <div>
-                    <img src={DI.getAssets().get('placeholder-logo.png')} alt="Test Logo" />
+                    <h1>Welcome welcome welcome</h1>
                 </div>
                 <LoginForm sent={queryString.hasParam('mailsent')}/>
             </div>

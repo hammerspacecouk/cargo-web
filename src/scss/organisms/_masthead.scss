@@ -1,0 +1,24 @@
+.masthead {
+  background: $color-black;
+  color: $color-white;
+  display: flex;
+
+  &__logo {
+    flex: 50%;
+    > a {
+      display: inline-block;
+      color: inherit;
+      padding: $grid-unit;
+    }
+  }
+
+  &__login {
+    text-align: right;
+    flex: 50%;
+    > a {
+      display: inline-block;
+      padding: $grid-unit;
+      color: inherit;
+    }
+  }
+}

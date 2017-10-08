@@ -2,7 +2,6 @@ const Webpack = require('webpack');
 const Path = require('path');
 
 const settings = {
-  devtool: 'source-map',
   entry: {
     app: Path.resolve(__dirname, '../src/server.tsx')
   },
@@ -15,9 +14,6 @@ const settings = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-    alias: {
-      'scss': Path.resolve(__dirname, '../src/scss')
-    }
   },
   module: {
     loaders: [
