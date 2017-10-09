@@ -22,7 +22,7 @@ export default (props: LoginFormProps) => {
             {sentMsg}
             <p>
                 We identify which player you are by confirming your unique e-mail address.
-                Use one of the following methods. We don't get access to your data on these services.
+                Use one of the following methods. We don't get access to your accounts on these services.
                 No spam, no sharing with third parties.
             </p>
             <ul className="login-form__social-list">
@@ -113,7 +113,7 @@ export default (props: LoginFormProps) => {
                     no passwords required.
                 </p>
                 <p>
-                    <input id="login-email" type="email" name="target" placeholder="name@example.com" />
+                    <input id="login-email" type="email" name="target" required placeholder="name@example.com" />
                     <button type="submit">Send</button>
                 </p>
             </form>

@@ -10,7 +10,7 @@ import './scss/app.scss';
 import './imgs';
 
 // init the DI container specifically with client settings
-DI.init((window as any).__ASSETS);
+DI.init((window as any).__ASSETS, (window as any).__PLAYER);
 
 ReactDOM.render(
     (

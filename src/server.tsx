@@ -8,8 +8,7 @@ import App from './App';
 
 import routes, { RouteConfig } from './routes';
 
-// init the DI container specifically with server settings
-DI.init(require('../build/assets-manifest.json'));
+const assets = require('../build/assets-manifest.json');
 
 declare namespace Server {
     interface RouterContext {
@@ -22,6 +21,11 @@ declare namespace Server {
 export default (app: Express.Application) => {
 
     app.get('*', async (req, res) => {
+        const isPlayer = req.cookies && 'refresh_token' in req.cookies;
+
+        // init the DI container specifically with server settings
+        DI.init(assets, isPlayer);
+
         // Render the component to a string
         const path = req.url;
         const context: Server.RouterContext = {
@@ -75,6 +79,7 @@ export default (app: Express.Application) => {
         <script>
           window.__ASSETS = ${DI.getAssets().getJSON()};
           window.__DATA = ${await JSON.stringify(context.initialData)};
+          window.__PLAYER = ${isPlayer ? 'true' : 'false'};
           const supportsES6 = function() {
             try {
               new Function("(a = 0) => a");

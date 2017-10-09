@@ -1,4 +1,5 @@
-import Home from './pages/Home/Home';
+import * as Home from './pages/Home';
+import * as Player from './pages/Player';
 import * as Ports from './pages/Ports';
 
 import NotFound from './components/Error/NotFound';
@@ -20,9 +21,21 @@ const routes: RouteConfig[] = [
         component: Ports.Show,
         exact: true,
     },
+
+    {
+        path: "/profile",
+        component: Player.Profile,
+        exact: true,
+    },
+
+    {
+        path: "/login",
+        component: Home.Login,
+        exact: true,
+    },
     {
         path: "/",
-        component: Home,
+        component: Home.Home,
         exact: true,
     },
     {

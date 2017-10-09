@@ -9,6 +9,7 @@
     "@types/react-modal": "^2.2.2",
     "@types/react-router": "^4.0.15",
     "@types/react-router-dom": "^4.0.7",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.5",
     "node-fetch": "^1.7.3",
     "react": "^16.0.0",

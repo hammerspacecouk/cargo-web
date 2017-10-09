@@ -1,17 +1,25 @@
 import * as React from 'react';
 import LoginForm from '../../containers/LoginForm';
+import { Link } from 'react-router-dom';
 
-import QueryString from '../../helpers/QueryString';
+import DI from '../../DI';
 
-export interface Props {
-    location : {
-        search?: string
-    }
-}
-
-export default class Home extends React.Component<Props, undefined> {
+export default class Home extends React.Component<undefined, undefined> {
     render() {
-        const queryString = new QueryString(this.props.location.search);
+
+        let loginPanel = (
+            <div>
+                <h2>Login</h2>
+                <LoginForm />
+            </div>
+        );
+        if (DI.isLoggedIn()) {
+            loginPanel = (
+                <div>
+                    <Link to="/play">Play</Link>
+                </div>
+            );
+        }
 
         // todo - login form is just a link to "play" if you're logged in (might only do that on client so it can be cached)
         return (
@@ -20,7 +28,7 @@ export default class Home extends React.Component<Props, undefined> {
                 <div>
                     <h1>Welcome welcome welcome</h1>
                 </div>
-                <LoginForm sent={queryString.hasParam('mailsent')}/>
+                {loginPanel}
             </div>
         )
     }

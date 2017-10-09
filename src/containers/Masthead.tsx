@@ -5,6 +5,8 @@ import LoginForm from './LoginForm';
 import PublicMasthead from '../components/Masthead/PublicMasthead';
 import PlayerMasthead from '../components/Masthead/PlayerMasthead';
 
+import DI from '../DI';
+
 export default class Masthead extends React.Component<undefined, undefined> {
 
     constructor() {
@@ -22,9 +24,7 @@ export default class Masthead extends React.Component<undefined, undefined> {
     }
 
     render() {
-        const isLoggedIn = false;
-
-        if (isLoggedIn) {
+        if (DI.isLoggedIn()) {
             return (
                 <div>
                     <PlayerMasthead />
