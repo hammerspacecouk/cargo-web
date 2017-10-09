@@ -16,6 +16,7 @@ export default class LoginForm extends React.Component<Props, undefined> {
             loginPathEmail="//api.dev.planetcargo.live/login/email"
             loginPathFacebook="//api.dev.planetcargo.live/login/facebook"
             loginPathGoogle="//api.dev.planetcargo.live/login/google"
+            loginPathMicrosoft="//api.dev.planetcargo.live/login/microsoft"
             loginPathTwitter="//api.dev.planetcargo.live/login/twitter"
             emailSent={this.props.sent}
         />

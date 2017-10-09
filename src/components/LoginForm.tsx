@@ -4,6 +4,7 @@ export interface LoginFormProps {
     loginPathEmail: string;
     loginPathFacebook: string;
     loginPathGoogle: string;
+    loginPathMicrosoft: string;
     loginPathTwitter: string;
     emailSent: boolean;
 }
@@ -23,9 +24,6 @@ export default (props: LoginFormProps) => {
                 We identify which player you are by confirming your unique e-mail address.
                 Use one of the following methods. We don't get access to your data on these services.
                 No spam, no sharing with third parties.
-            </p>
-            <p>
-                <a href="#">More info on our policy</a>
             </p>
             <ul className="login-form__social-list">
                 <li>
@@ -75,7 +73,7 @@ export default (props: LoginFormProps) => {
                     </a>
                 </li>
                 <li>
-                    <a href={props.loginPathGoogle} className="login-form__social-item login-form__social-item--microsoft">
+                    <a href={props.loginPathMicrosoft} className="login-form__social-item login-form__social-item--microsoft">
                         <svg className="login-form__social-logo login-form__social-logo--microsoft"
                              viewBox="0 0 220 220">
                             <path fill="#F35325" d="M104.868 104.868H0V0h104.868v104.868z"/>
@@ -108,17 +106,20 @@ export default (props: LoginFormProps) => {
                 </li>
             </ul>
             <form action={props.loginPathEmail} method="post">
-                <h3>Receive a one-time e-mail login link</h3>
+                <h3 className="d"><label htmlFor="login-email">Login via e-mail</label></h3>
                 <p>
-                    <label>
-                        E-mail address
-                        <input type="email" name="target" />
-                    </label>
+                    If you'd rather use your e-mail directly enter your e-mail address and we'll
+                    send you a link that lets you login immediately. The link is valid for one hour and there are
+                    no passwords required.
                 </p>
                 <p>
+                    <input id="login-email" type="email" name="target" placeholder="name@example.com" />
                     <button type="submit">Send</button>
                 </p>
             </form>
+            <p>
+                <a href="#">More info on our login policies</a>
+            </p>
         </div>
     );
 };
