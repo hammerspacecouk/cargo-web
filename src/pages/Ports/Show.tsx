@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Port } from '../../models/Port';
-import DI from '../../DI';
+import Loading from '../../components/Loading';
+
+import { Services } from '../../DI';
 
 interface Params {
     portId: string;
@@ -33,6 +36,8 @@ export default class Component extends React.Component<Props, State> {
             port = props.staticContext.initialData;
         }
 
+        // todo - 404s if ID didn't exist
+
         this.state = { port };
     }
 
@@ -45,22 +50,29 @@ export default class Component extends React.Component<Props, State> {
         }
     }
 
-    static requestInitialData(routeParams: Params = null) {
-        return DI.models.getPorts().getById(routeParams.portId);
+    static requestInitialData(routeParams: Params) {
+        return Services.ports.getById(routeParams.portId);
     }
 
-
     render() {
-        if (!this.state.port) {
-            return (
-                <p>LOADING</p>
-            );
+        let port = null;
+        if (this.state.port) {
+           port = (
+               <div>
+                   <h1>{this.state.port.name}</h1>
+                   <p>{this.state.port.id}</p>
+               </div>
+           );
         }
 
         return (
             <div>
-                <h1>{this.state.port.name}</h1>
-                <p>{this.state.port.id}</p>
+                <ol className="breadcrumbs">
+                    <li className="breadcrumbs__item"><Link to="/ports" className="breadcrumbs__link">Ports</Link></li>
+                </ol>
+                <Loading>
+                    {port}
+                </Loading>
             </div>
         )
     }

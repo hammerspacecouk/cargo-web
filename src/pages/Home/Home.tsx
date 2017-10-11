@@ -1,34 +1,37 @@
 import * as React from 'react';
-import LoginForm from '../../containers/LoginForm';
 import { Link } from 'react-router-dom';
-
-import DI from '../../DI';
 
 export default class Home extends React.Component<undefined, undefined> {
     render() {
 
-        let loginPanel = (
-            <div>
-                <h2>Login</h2>
-                <LoginForm />
-            </div>
-        );
-        if (DI.isLoggedIn()) {
-            loginPanel = (
-                <div>
-                    <Link to="/play">Play</Link>
-                </div>
-            );
-        }
+        // let loginPanel = (
+        //     <div>
+        //         <h2>Login</h2>
+        //         <LoginForm />
+        //     </div>
+        // );
+        // if (DI.isLoggedIn()) {
+        //     loginPanel = (
+        //         <div>
+        //             <Link to="/play">Play</Link>
+        //         </div>
+        //     );
+        // }
 
-        // todo - login form is just a link to "play" if you're logged in (might only do that on client so it can be cached)
+        // on component mount, check if the user is logged in. If so, redirect to /play. If not, replace the play
+        // link with the login panel
+
         return (
             <div>
                 <h1>HOME</h1>
                 <div>
                     <h1>Welcome welcome welcome</h1>
                 </div>
-                {loginPanel}
+                <ul>
+                    <li><Link to="/play">Play</Link></li>
+                    <li><Link to="/ports">Ports</Link></li>
+                    <li><Link to="/profile">Profile</Link></li>
+                </ul>
             </div>
         )
     }

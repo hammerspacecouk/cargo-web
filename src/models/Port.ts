@@ -11,11 +11,14 @@ export interface Port {
 
 export default class {
     private dataClient: DataClient;
+    private logger: Console;
 
     constructor(
-        dataClient: DataClient
+        dataClient: DataClient,
+        logger: Console
     ) {
         this.dataClient = dataClient;
+        this.logger = logger;
     }
 
     async getAll(): Promise<Port[]> {

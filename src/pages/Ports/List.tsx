@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Port } from '../../models/Port';
-import DI from '../../DI';
+import Loading from '../../components/Loading';
+
+import { Services } from '../../DI';
 
 export interface Props {
     staticContext: {
@@ -23,7 +25,7 @@ export default class Component extends React.Component<Props, State> {
         if (typeof window !== 'undefined') {
             ports = (window as any).__DATA;
             delete (window as any).__DATA;
-        } else if (props.staticContext.initialData) {
+        } else if (props.staticContext.initialData !== undefined) {
             ports = props.staticContext.initialData;
         }
 
@@ -39,27 +41,30 @@ export default class Component extends React.Component<Props, State> {
         }
     }
 
-    static requestInitialData(routeParams: object = null) {
-        return DI.models.getPorts().getAll();
+    static requestInitialData() {
+        return Services.ports.getAll();
     }
 
     render() {
-        if (!this.state.ports) {
-            return (
-                <p>LOADING</p>
-            );
-        }
-
-        return (
-            <div>
-                <h1>LIST OF PORTS</h1>
+        let list = null;
+        if (!!this.state.ports) {
+            list = (
                 <ul>{this.state.ports.map((port: Port, index: number) => {
                     const path = '/ports/' + port.id;
                     return (
                         <li key={index}><Link to={path}>{port.name}</Link></li>
                     );
                 })}</ul>
-            </div>
+            );
+        }
+
+        return (
+                <div>
+                    <h1>LIST OF PORTS</h1>
+                    <Loading>
+                        {list}
+                    </Loading>
+                </div>
         )
     }
 };
