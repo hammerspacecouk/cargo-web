@@ -1,22 +1,20 @@
 import * as React from 'react';
 import Modal from './Modal';
 import LoginForm from './LoginForm';
+import {UserInterface} from "../models/User";
 
 import PublicMasthead from '../components/Masthead/PublicMasthead';
 import PlayerMasthead from '../components/Masthead/PlayerMasthead';
 
-interface State {
-    loggedIn: boolean;
+interface Props {
+    user?: UserInterface;
 }
 
-export default class Masthead extends React.Component<undefined, State> {
+export default class Masthead extends React.Component<Props, undefined> {
 
     constructor() {
         super();
         this.loginClicked = this.loginClicked.bind(this);
-        this.state = {
-            loggedIn: false
-        }
     }
 
     refs : {
@@ -29,7 +27,9 @@ export default class Masthead extends React.Component<undefined, State> {
     }
 
     render() {
-        if (this.state.loggedIn) {
+        const loggedIn = !!this.props.user;
+
+        if (loggedIn) {
             return (
                 <div>
                     <PlayerMasthead />

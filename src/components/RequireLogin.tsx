@@ -19,7 +19,7 @@ export default (props: Props) => {
 
     return (
         <Status code={403}>
-            <h1>You must login to proceed</h1>
+            <h1>We need to identify you</h1>
             <LoginForm />
         </Status>
     )

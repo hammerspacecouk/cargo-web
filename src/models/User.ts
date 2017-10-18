@@ -12,7 +12,7 @@ export interface UserCookie {
     }
 }
 
-export interface User {
+export interface UserInterface {
     id: string,
     cookies: UserCookie[]
 }
@@ -29,18 +29,21 @@ export default class {
         this.logger = logger;
     }
 
-    async init(cookies: {[key: string] : string}): Promise<User> {
+    async init(cookies?: {[key: string] : string}): Promise<UserInterface> {
         // make a user to get started with the initial cookies
-        const user = {
-            id: '',
-            cookies: Object.keys(cookies).map((key: string): UserCookie => {
-                const value: string = cookies[key];
-                return {
-                    name: key,
-                    value
-                }
-            }),
-        };
+        let user = null;
+        if (cookies) {
+            user = {
+                id: '',
+                cookies: Object.keys(cookies).map((key: string): UserCookie => {
+                    const value: string = cookies[key];
+                    return {
+                        name: key,
+                        value
+                    }
+                }),
+            };
+        }
         return await this.dataClient.fetchData('/login/check', user);
     }
 }

@@ -1,5 +1,5 @@
-import {User, UserCookie} from "./User";
-import CacheControl from "../helpers/CacheControl"; // todo - preferably injected
+import {UserInterface, UserCookie} from "./User";
+import CacheControl from "../helpers/CacheControl";
 
 interface StoredUrlData {
     expires: any,
@@ -52,7 +52,7 @@ export default class {
         sessionStorage.setItem(key, JSON.stringify(stored));
     }
 
-    async fetchData(path: string, user?: User): Promise<any>  {
+    async fetchData(path: string, user?: UserInterface): Promise<any>  {
         const key: string = this.getCacheKey(path);
 
         const stored = this.getFromCache(key);
@@ -94,8 +94,7 @@ export default class {
 
             const cacheControl = response.headers.get('cache-control');
 
-            console.log(cacheControl);
-            this.setInCache(key, data, new CacheControl(cacheControl)); // todo - read from max-age
+            this.setInCache(key, data, new CacheControl(cacheControl));
             return data;
 
         } catch (e) {

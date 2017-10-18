@@ -1,5 +1,5 @@
 import DataClient from "./DataClient";
-import {User} from "./User";
+import {UserInterface} from "./User";
 
 export interface Play {
     id: string,
@@ -18,7 +18,7 @@ export default class {
         this.logger = logger;
     }
 
-    async get(user?: User): Promise<Play> {
+    async get(user?: UserInterface): Promise<Play> {
         return await this.dataClient.fetchData('/play', user);
     }
 }
