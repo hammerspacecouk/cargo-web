@@ -1,4 +1,6 @@
 .login-form {
+  max-width: 472px;
+
   &__social-list {
     @extend .list--unstyled;
     margin-top: $grid-unit;

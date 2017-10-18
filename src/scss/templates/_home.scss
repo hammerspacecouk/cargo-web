@@ -1,0 +1,4 @@
+.template--home {
+  grid-template-columns: repeat(12, minmax((100% / 12), ($max-width / 12)));
+  grid-template-rows: 400px 1fr;
+}

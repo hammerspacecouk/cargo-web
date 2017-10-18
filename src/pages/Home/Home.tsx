@@ -1,37 +1,56 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import {UserInterface} from "../../models/User";
+import {Services} from "../../DI";
+import LoginForm from "../../containers/LoginForm";
 
-export default class Home extends React.Component<undefined, undefined> {
+interface State {
+    user?: UserInterface;
+    userChecked: boolean;
+}
+
+
+export default class Home extends React.Component<undefined, State> {
+    constructor() {
+        super();
+        this.state = {
+            user: null,
+            userChecked: false,
+        }
+    }
+
+    async componentDidMount() {
+        this.setState({
+            user: await Services.user.init(),
+            userChecked: true,
+        });
+    }
+
     render() {
+        let playPanel = <Link to="/play">Go to the islands >>></Link>;
 
-        // let loginPanel = (
-        //     <div>
-        //         <h2>Login</h2>
-        //         <LoginForm />
-        //     </div>
-        // );
-        // if (DI.isLoggedIn()) {
-        //     loginPanel = (
-        //         <div>
-        //             <Link to="/play">Play</Link>
-        //         </div>
-        //     );
-        // }
-
-        // on component mount, check if the user is logged in. If so, redirect to /play. If not, replace the play
-        // link with the login panel
+        if (this.state.userChecked && !this.state.user) {
+            playPanel = <LoginForm />;
+        }
 
         return (
-            <div>
-                <h1>HOME</h1>
-                <div>
+            <div className="template template--home">
+                <div className="template-home__hero">
+                    <h1>Planet Cargo</h1>
+                </div>
+                <div className="template-home__intro">
                     <h1>Welcome welcome welcome</h1>
                 </div>
-                <ul>
+                <ul className="template-home__links">
                     <li><Link to="/play">Play</Link></li>
                     <li><Link to="/ports">Ports</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/styleguide">Styleguide</Link></li>
                 </ul>
+                <div className="template-home__play">
+                    <h2>Play now</h2>
+                    {playPanel}
+                </div>
             </div>
         )
     }

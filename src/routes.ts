@@ -56,6 +56,12 @@ const routes: RouteItem[] = [
         cacheControl: cachePublic,
     },
     {
+        path: "/styleguide",
+        component: Home.Styleguide,
+        exact: true,
+        cacheControl: cachePublic,
+    },
+    {
         path: "/",
         component: Home.Home,
         exact: true,

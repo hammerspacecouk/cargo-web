@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
-@import 'setup/setup';
+@import "setup/setup";
 
-@import 'core/core';
-@import 'atoms/atoms';
-@import 'molecules/molecules';
-@import 'organisms/organisms';
+@import "core/core";
+@import "atoms/atoms";
+@import "molecules/molecules";
+@import "organisms/organisms";
+@import "templates/templates";

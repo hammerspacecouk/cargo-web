@@ -2,14 +2,15 @@
 
 const Express = require('express');
 const CookieParser = require('cookie-parser');
-const App = Express();
+const app = Express();
 
 const serverEntryScript = require('./build/server.js');
 const port = 3000;
 
-App.use(CookieParser());
-serverEntryScript.default(App);
+app.disable('x-powered-by'); // no need to tell the world what technology to attack
+app.use(CookieParser());
+serverEntryScript.default(app);
 
-App.listen(port, function () {
+app.listen(port, function () {
   console.log('Webapp listening on port 3000!')
 });

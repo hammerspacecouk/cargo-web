@@ -3,7 +3,7 @@ import RequireLogin from '../../components/RequireLogin';
 import PlayContainer from '../../containers/Play';
 
 import { Services } from '../../DI';
-import { User } from "../../models/User";
+import { UserInterface } from "../../models/User";
 
 interface Play {
 
@@ -12,16 +12,15 @@ interface Play {
 interface Props {
     staticContext: {
         initialData?: Play;
-        user?: User;
+        user?: UserInterface;
     };
 }
+
 interface State {
     play?: Play;
 }
 
 export default class Component extends React.Component<Props, State> {
-    private user?: User;
-
     constructor(props: Props) {
         super();
 
@@ -32,10 +31,6 @@ export default class Component extends React.Component<Props, State> {
             delete (window as any).__DATA;
         } else if (props.staticContext && props.staticContext.initialData !== undefined) {
             play = props.staticContext.initialData;
-        }
-
-        if (props.staticContext && props.staticContext.user !== undefined) {
-            this.user = props.staticContext.user;
         }
 
         this.state = { play };
@@ -50,7 +45,7 @@ export default class Component extends React.Component<Props, State> {
         }
     }
 
-    static requestInitialData(params?: any, user?: User) {
+    static requestInitialData(params?: any, user?: UserInterface) {
         return Services.play.get(user);
     }
 

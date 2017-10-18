@@ -7,7 +7,7 @@ import DI, { Services } from './DI';
 import App from './App';
 
 import routes, { RouteItem } from './routes';
-import {User} from "./models/User";
+import {UserInterface} from "./models/User";
 
 const assets = require('../build/assets-manifest.json');
 
@@ -19,7 +19,7 @@ declare namespace Server {
         url?: string;
         status?: number;
         initialData?: any;
-        user?: User;
+        user?: UserInterface;
     }
 }
 
@@ -70,7 +70,7 @@ export default (app: Express.Application) => {
 
             appElement = ReactDOMServer.renderToString(
                 <StaticRouter location={path} context={context}>
-                    <App/>
+                    <App user={context.user} />
                 </StaticRouter>
             );
         } catch (e) {
@@ -108,7 +108,8 @@ export default (app: Express.Application) => {
         <script src="${DI.getAssets().get('vendor.js')}"></script>
         <script>
           window.__ASSETS = ${DI.getAssets().getJSON()};
-          window.__DATA = ${await JSON.stringify(context.initialData)};
+          window.__DATA = ${JSON.stringify(context.initialData)};
+          window.__USER = ${JSON.stringify(context.user)};
           const supportsES6 = function() {
             try {
               new Function("(a = 0) => a");
@@ -130,7 +131,7 @@ export default (app: Express.Application) => {
         const code = context.status || 200;
         res.status(code);
         res.set({
-            'content-type' : 'text/html', // todo - cache headers
+            'content-type' : 'text/html',
             'cache-control': activeRoute.cacheControl,
             'link': [
                 `<${DI.getAssets().get('app.css')}>; rel=preload; as=style`,
