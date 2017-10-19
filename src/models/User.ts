@@ -1,4 +1,5 @@
 import DataClient from "./DataClient";
+import Score from "./Score";
 
 export interface UserCookie {
     name: string;
@@ -13,8 +14,9 @@ export interface UserCookie {
 }
 
 export interface UserInterface {
-    id: string,
-    cookies: UserCookie[]
+    id: string;
+    cookies: UserCookie[];
+    score?: Score
 }
 
 export default class {
@@ -44,6 +46,10 @@ export default class {
                 }),
             };
         }
-        return await this.dataClient.fetchData('/login/check', user);
+        const data = await this.dataClient.fetchData('/login/check', user);
+        if (data.score) {
+            data.score = new Score(data.score.value, data.score.rate, data.score.time);
+        }
+        return data;
     }
 }
