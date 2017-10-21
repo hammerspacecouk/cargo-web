@@ -32,7 +32,7 @@ export default class Masthead extends React.Component<Props, undefined> {
         if (loggedIn) {
             return (
                 <div>
-                    <PlayerMasthead />
+                    <PlayerMasthead user={this.props.user} />
                 </div>
             );
         }
