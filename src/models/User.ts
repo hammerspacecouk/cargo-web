@@ -48,7 +48,7 @@ export default class {
         }
         const data = await this.dataClient.fetchData('/login/check', user);
         if (data.score) {
-            data.score = new Score(data.score.value, data.score.rate, data.score.time);
+            data.score = new Score(data.score.value, data.score.rate, data.score.datetime);
         }
         return data;
     }

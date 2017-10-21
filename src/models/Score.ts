@@ -1,21 +1,21 @@
 export default class {
     private value: number;
     private rate: number;
-    private date: Date;
+    private datetime: Date;
 
     constructor(
         value: number,
         rate: number,
-        date: string
+        datetime: string
     ) {
         this.value = value;
         this.rate = rate;
-        this.date = new Date(date);
+        this.datetime = new Date(datetime);
     }
 
     getValue(now: Date): string
     {
-        const secondsDiff = (now.getTime() - this.date.getTime()) / 1000,
+        const secondsDiff = (now.getTime() - this.datetime.getTime()) / 1000,
             earned = secondsDiff * this.rate;
 
         let current = this.value + earned;

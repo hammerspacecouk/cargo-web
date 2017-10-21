@@ -9,12 +9,17 @@ import App from './App';
 import './scss/app.scss';
 import './imgs';
 import {UserInterface} from "./models/User";
+import Score from "./models/Score";
 
 // init the DI container specifically with client settings
 DI.init((window as any).__ASSETS);
 
-const user: UserInterface = (window as any).__USER;
+const user = (window as any).__USER;
 delete (window as any).__USER;
+
+if (user && user.score) {
+    user.score = new Score(user.score.value, user.score.rate, user.score.datetime);
+}
 
 ReactDOM.render(
     (
