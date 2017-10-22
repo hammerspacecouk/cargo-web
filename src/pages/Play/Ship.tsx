@@ -4,25 +4,34 @@ import PlayContainer from '../../containers/Play';
 
 import { Services } from '../../DI';
 import { UserInterface } from "../../models/User";
-import {Redirect} from "react-router";
-import {PlayInterface} from "../../models/Play";
+import {PlayShipInterface} from "../../models/Play";
+
+interface Params {
+    shipId: string;
+}
 
 interface Props {
+    match: {
+        params: Params;
+    };
+    location: {
+        search?: string;
+    }
     staticContext: {
-        initialData?: PlayInterface;
+        initialData?: PlayShipInterface;
         user?: UserInterface;
     };
 }
 
 interface State {
-    play?: PlayInterface;
+    play?: PlayShipInterface;
 }
 
 export default class Component extends React.Component<Props, State> {
     constructor(props: Props) {
         super();
 
-        let play: PlayInterface;
+        let play: PlayShipInterface;
 
         if (typeof window !== 'undefined' && (window as any).__DATA) {
             play = (window as any).__DATA;
@@ -36,27 +45,27 @@ export default class Component extends React.Component<Props, State> {
 
     async componentDidMount() {
         if (!this.state.play) {
-            const play: PlayInterface = await Component.requestInitialData();
+            let play: PlayShipInterface = await Component.requestInitialData(this.props.match.params);
             this.setState({
                 play
             });
         }
     }
 
-    static requestInitialData(params?: any, user?: UserInterface) {
-        return Services.play.get(user);
+    static requestInitialData(params: Params, user?: UserInterface) {
+        return Services.play.getForShip(params.shipId, user);
     }
+
 
     render() {
         let playContainer = null;
+        let welcome = '';
+        if (this.props.location.search === '?welcome') {
+            welcome = 'WELCOME!'; // todo - welcome page
+        }
         if (this.state.play) {
-            const shipId = this.state.play.ships[0].id;
-            let status = '';
-            if (this.state.play.status === 'WELCOME') {
-                status = '?welcome';
-            }
-            // todo - redirect to the ship with the most recent event
-            return <Redirect to={`/play/ships/${shipId}${status}`} />;
+            // todo - handle travelling state
+            playContainer = <PlayContainer play={this.state.play} />;
         }
         return (
             <RequireLogin loading={this.state.play === undefined}>

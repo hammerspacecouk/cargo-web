@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Port } from '../../models/Port';
+import { PortInterface } from '../../models/Port';
 import Loading from '../../components/Loading';
 
 import { Services } from '../../DI';
@@ -15,19 +15,19 @@ interface Props {
         params: Params;
     };
     staticContext: {
-        initialData?: Port;
+        initialData?: PortInterface;
     };
 }
 
 interface State {
-    port?: Port;
+    port?: PortInterface;
 }
 
 export default class Component extends React.Component<Props, State> {
     constructor(props: Props) {
         super();
 
-        let port: Port;
+        let port: PortInterface;
 
         if (typeof window !== 'undefined') {
             port = (window as any).__DATA;
@@ -43,7 +43,7 @@ export default class Component extends React.Component<Props, State> {
 
     async componentDidMount() {
         if (!this.state.port) {
-            let port: Port = await Component.requestInitialData(this.props.match.params);
+            let port: PortInterface = await Component.requestInitialData(this.props.match.params);
             this.setState({
                 port
             });
