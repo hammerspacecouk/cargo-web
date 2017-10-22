@@ -1,10 +1,10 @@
 import DataClient from "./DataClient";
 
 interface GetPortsResponse {
-    items: Port[];
+    items: PortInterface[];
 }
 
-export interface Port {
+export interface PortInterface {
     id: string,
     name: string
 }
@@ -21,12 +21,12 @@ export default class {
         this.logger = logger;
     }
 
-    async getAll(): Promise<Port[]> {
+    async getAll(): Promise<PortInterface[]> {
         const data: GetPortsResponse = await this.dataClient.fetchData('/ports');
         return data.items;
     }
 
-    async getById(id: string): Promise<Port> {
+    async getById(id: string): Promise<PortInterface> {
         return await this.dataClient.fetchData('/ports/' + id);
     }
 }
