@@ -5,8 +5,9 @@ interface GetPortsResponse {
 }
 
 export interface PortInterface {
-    id: string,
-    name: string
+    id: string;
+    name: string;
+    type: string;
 }
 
 export default class {

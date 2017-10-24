@@ -13,6 +13,7 @@ const settings = {
       'react-dom',
       'react-router-dom',
       'react-modal',
+      'moment',
     ]
   },
   output: {

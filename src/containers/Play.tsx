@@ -1,12 +1,33 @@
 import * as React from 'react';
-import {DirectionInterface, PlayShipInterface} from "../models/Play";
+import * as moment from 'moment';
+import {ChannelInterface, DirectionInterface, PlayShipInterface} from "../models/Play";
 import DI from "../DI";
+
+import Port from '../components/Play/Port';
+import Travelling from "../components/Play/Travelling";
+import {PortInterface} from "../models/Port";
 
 interface Props {
     play: PlayShipInterface;
 }
 
-export default class Component extends React.Component<Props, undefined> {
+interface State {
+    showCountdown: boolean;
+    now: any; // todo - moment type?
+}
+
+export default class Component extends React.Component<Props, State> {
+
+    private allowAnimationUpdate: boolean;
+
+    constructor() {
+        super();
+        this.allowAnimationUpdate = false;
+        this.state = {
+            showCountdown : false,
+            now: moment(),
+        }
+    }
 
     renderDirection(dir: string, dirData: DirectionInterface)
     {
@@ -42,34 +63,56 @@ export default class Component extends React.Component<Props, undefined> {
         );
     }
 
+    isTravelling(location: PortInterface | ChannelInterface): location is ChannelInterface {
+        return (location as ChannelInterface).type === 'Channel';
+    }
+
+    getArrivalString(location: ChannelInterface): string {
+        const arrivalDate = moment(location.arrival);
+        if (this.state.showCountdown) {
+            const duration = moment.duration(arrivalDate.diff(this.state.now));
+            if (duration.asSeconds() <= 0) {
+                return 'Arriving...';
+            }
+            return `${duration.hours()}h:${duration.minutes()}m:${duration.seconds()}s`; // todo - format nicer
+        }
+
+        return arrivalDate.format("dddd, Do MMMM YYYY, h:mm:ss a");
+    }
+
+    updateTime() {
+        if (!this.allowAnimationUpdate) {
+            return;
+        }
+        this.setState({
+            now: moment(),
+        });
+        window.requestAnimationFrame(() => this.updateTime());
+    }
+
+    componentDidMount() {
+        this.allowAnimationUpdate = true;
+        this.setState({
+            showCountdown : true
+        });
+        this.updateTime();
+    }
+    componentWillUnmount() {
+        this.allowAnimationUpdate = false;
+    }
+
     render() {
-        // todo - make stateless component
         const play = this.props.play;
+        if (this.isTravelling(play.location)) {
+            return <Travelling arrival={this.getArrivalString(play.location)}
+                destinationName={play.location.destination.name}
+            />
+        }
 
-        const destinations = [];
-
-        return (
-            <div>
-            <h1>{play.ship.name}</h1>
-            <h2>Current Location: {play.location.name}</h2>
-
-            <form action={`${DI.apiHostname}${play.directions.actionPath}`} method="post">
-                <div>
-                    {this.renderDirection('NW', play.directions.directions.NW)}
-                    {this.renderDirection('NE', play.directions.directions.NE)}
-                </div>
-                <div>
-                    {this.renderDirection('W', play.directions.directions.W)}
-                    {this.renderDirection('E', play.directions.directions.E)}
-                </div>
-                <div>
-                    {this.renderDirection('SW', play.directions.directions.SW)}
-                    {this.renderDirection('SE', play.directions.directions.SE)}
-                </div>
-
-            </form>
-
-            </div>
-        );
+        return <Port actionPath={`${DI.apiHostname}${play.directions.actionPath}`}
+                     shipName={play.ship.name}
+                     portName={play.location.name}
+                     directions={play.directions.directions}
+        />;
     }
 }
