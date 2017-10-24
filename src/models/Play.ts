@@ -19,23 +19,29 @@ export interface DirectionInterface {
     }
 }
 
+export interface DirectionsInterface {
+    NE? : DirectionInterface,
+    E? : DirectionInterface,
+    SE? : DirectionInterface,
+    SW? : DirectionInterface,
+    W? : DirectionInterface,
+    NW? : DirectionInterface,
+}
+
+export interface ChannelInterface {
+    type: string;
+    arrival: string;
+    destination: PortInterface;
+}
+
 export interface PlayShipInterface {
     ship: {
         name: string;
     };
-    location: {
-        name: string;
-    };
-    directions: {
+    location: PortInterface|ChannelInterface;
+    directions?: {
         actionPath: string;
-        directions: {
-            NE? : DirectionInterface,
-            E? : DirectionInterface,
-            SE? : DirectionInterface,
-            SW? : DirectionInterface,
-            W? : DirectionInterface,
-            NW? : DirectionInterface,
-        }
+        directions: DirectionsInterface;
     };
 }
 
