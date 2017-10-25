@@ -29,40 +29,6 @@ export default class Component extends React.Component<Props, State> {
         }
     }
 
-    renderDirection(dir: string, dirData: DirectionInterface)
-    {
-        let destination = null;
-        if (dirData) {
-            // todo - abstract time format to a helper
-            const time: string[] = [];
-            let minutes: number = dirData.journeyTimeMinutes;
-
-            const hours = Math.floor(minutes / 60);
-            if (hours > 0) {
-                time.push(`${hours}h`);
-            }
-            minutes = minutes - (hours * 60);
-            if (minutes > 0) {
-                time.push(`${minutes}m`);
-            }
-
-            destination = (
-                <div>
-                    <h4>{dirData.destination.name}</h4>
-                    <p>Distance: {time.join(', ')} ({dirData.distanceUnit} units)</p>
-                    <button type="submit" name="token" value={dirData.action.token}>Go</button>
-                </div>
-            );
-        }
-
-        return (
-            <div className={dir}>
-                <h3>{dir}</h3>
-                {destination}
-            </div>
-        );
-    }
-
     isTravelling(location: PortInterface | ChannelInterface): location is ChannelInterface {
         return (location as ChannelInterface).type === 'Channel';
     }
@@ -70,6 +36,7 @@ export default class Component extends React.Component<Props, State> {
     getArrivalString(location: ChannelInterface): string {
         const arrivalDate = moment(location.arrival);
         if (this.state.showCountdown) {
+            // todo - add some time to give the worker time to process
             const duration = moment.duration(arrivalDate.diff(this.state.now));
             if (duration.asSeconds() <= 0) {
                 return 'Arriving...';
