@@ -64,7 +64,6 @@ export default class Component extends React.Component<Props, State> {
             welcome = 'WELCOME!'; // todo - welcome page
         }
         if (this.state.play) {
-            // todo - handle travelling state
             playContainer = <PlayContainer play={this.state.play} />;
         }
         return (

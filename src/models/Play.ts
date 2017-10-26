@@ -31,12 +31,14 @@ export interface DirectionsInterface {
 export interface ChannelInterface {
     type: string;
     arrival: string;
+    travelTime: number;
     destination: PortInterface;
 }
 
 export interface PlayShipInterface {
     ship: {
         name: string;
+        id: string;
     };
     location: PortInterface|ChannelInterface;
     directions?: {
