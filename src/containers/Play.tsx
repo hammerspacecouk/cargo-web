@@ -106,6 +106,7 @@ export default class Component extends React.Component<Props, State> {
 
         return <Port actionPath={`${DI.apiHostname}${play.directions.actionPath}`}
                      shipName={play.ship.name}
+                     shipId={play.ship.id}
                      portName={play.location.name}
                      directions={play.directions.directions}
         />;

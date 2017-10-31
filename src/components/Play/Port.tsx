@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {DirectionInterface, DirectionsInterface} from "../../models/Play";
+import {Link} from "react-router-dom";
 
 interface Props {
     shipName: string;
+    shipId: string;
     portName: string;
     actionPath: string;
     directions: DirectionsInterface;
@@ -44,7 +46,8 @@ const renderDirection = (dir: string, dirData: DirectionInterface) => {
 export default (props: Props) => {
     return (
         <div>
-            <h1>{props.shipName}</h1>
+            <h1>{props.shipName}
+               (<Link to={`/play/ships/${props.shipId}/name`}>edit</Link>)</h1>
             <h2>Current Location: {props.portName}</h2>
 
             <form action={`${props.actionPath}`} method="post">

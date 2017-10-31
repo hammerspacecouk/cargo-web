@@ -43,6 +43,14 @@ const routes: RouteItem[] = [
         cacheControl: cachePrivate,
     },
 
+    {
+        path: "/play/ships/:shipId/name",
+        component: Play.ShipName,
+        login: true,
+        exact: true,
+        cacheControl: cachePrivate,
+    },
+
     // public data routes
     {
         path: "/ports",

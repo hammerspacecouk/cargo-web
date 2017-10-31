@@ -16,7 +16,7 @@ interface Props {
     };
     location: {
         search?: string;
-    }
+    };
     staticContext: {
         initialData?: PlayShipInterface;
         user?: UserInterface;
@@ -54,6 +54,7 @@ export default class Component extends React.Component<Props, State> {
 
     static requestInitialData(params: Params, user?: UserInterface) {
         return Services.play.getForShip(params.shipId, user);
+        // todo - if not your ship redirect to /ships/:id
     }
 
 
