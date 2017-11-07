@@ -34,23 +34,28 @@ export default class Home extends React.Component<undefined, State> {
         }
 
         return (
-            <div className="template template--home">
-                <div className="template-home__hero">
-                    <h1>Planet Cargo</h1>
+            <div className="t-home">
+                <div className="t-home__hero">
+                    <div className="t-home_hero-contents home-hero">
+                        <h1>Planet Cargo</h1>
+                    </div>
                 </div>
-                <div className="template-home__intro">
-                    <h1>Welcome welcome welcome</h1>
-                </div>
-                <ul className="template-home__links">
-                    <li><Link to="/play">Play</Link></li>
-                    <li><Link to="/ports">Ports</Link></li>
-                    <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/styleguide">Styleguide</Link></li>
-                </ul>
-                <div className="template-home__play">
+                <div className="t-home__play panel">
                     <h2>Play now</h2>
                     {playPanel}
                 </div>
+                <main className="t-home__main">
+                    <h1>Welcome welcome welcome</h1>
+                    <ul>
+                        <li><Link to="/play">Play</Link></li>
+                        <li><Link to="/ports">Ports</Link></li>
+                        <li><Link to="/profile">Profile</Link></li>
+                        <li><Link to="/styleguide">Styleguide</Link></li>
+                    </ul>
+                </main>
+                <aside className="t-home__aside">
+                    <p>More side stuff</p>
+                </aside>
             </div>
         )
     }

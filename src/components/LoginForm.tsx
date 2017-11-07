@@ -22,7 +22,7 @@ export default (props: LoginFormProps) => {
             {sentMsg}
             <p>
                 We identify which player you are by confirming your unique e-mail address.
-                Use one of the following methods. We don't get access to your accounts on these services.
+                Use any one of the following methods. We don't get access to your accounts on these services.
                 No spam, no sharing with third parties.
             </p>
             <ul className="login-form__social-list">
@@ -85,7 +85,7 @@ export default (props: LoginFormProps) => {
                     </a>
                 </li>
                 <li>
-                    <a href={props.loginPathFacebook} className="login-form__social-item login-form__social-item--twitter">
+                    <a href={props.loginPathTwitter} className="login-form__social-item login-form__social-item--twitter">
                         <svg className="login-form__social-logo login-form__social-logo--twitter"
                              xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 300 244.187">

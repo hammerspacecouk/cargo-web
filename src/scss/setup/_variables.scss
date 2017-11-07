@@ -12,7 +12,7 @@ $color-primary-mid: #518f75;
 $color-primary-light: #79c6a7;
 
 $color-text: #424248;
-$color-body: #EFEFEF;
+$color-body: #fdfdfd;
 $color-link: #3C4C9C;
 
 $color-keyline: #93939c;
@@ -21,8 +21,9 @@ $color-panel: #a5c5c9;
 
 // Sizes
 $grid-unit: 16px;
-
 $cta-size: 48px;
+
+$max-content-width: 1280px;
 
 // Fonts
 $font-body: -apple-system,

@@ -1,12 +1,11 @@
 .login-form {
-  max-width: 472px;
-
   &__social-list {
     @extend .list--unstyled;
     margin-top: $grid-unit;
+    margin-left: -$grid-unit;
     text-align: center;
     > li {
-      margin: 0 $grid-unit $grid-unit 0;
+      margin: 0 0 $grid-unit $grid-unit;
       display: inline-block;
       vertical-align: top;
     }

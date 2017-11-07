@@ -1,4 +1,67 @@
-.template--home {
-  grid-template-columns: repeat(12, minmax((100% / 12), ($max-width / 12)));
-  grid-template-rows: 400px 1fr;
+.t-home {
+  display: grid;
+  grid-template-columns: [edge-left] 0 [main] calc(100% - 32px) 0 [edge-right];
+  grid-gap: $grid-unit;
+}
+.t-home__hero {
+  grid-column: edge-left / edge-right;
+  grid-row: 1;
+}
+.t-home_hero-contents {
+  margin: 0 auto;
+  max-width: calc(#{$max-content-width} - #{$grid-unit * 2});
+}
+
+.t-home__main,
+.t-home__aside,
+.t-home__play{
+  grid-column: main;
+}
+
+.t-home__play {
+  grid-row: 2;
+}
+
+@include mq($from: m) {
+  .t-home {
+    grid-template-columns: [edge-left] 1fr [main] calc(50% - 32px) [aside] calc(50% - 32px) 1fr [edge-right];
+    grid-template-rows: [hero] auto [content-start] auto [aside-start] auto [end];
+  }
+
+  .t-home__main {
+    grid-column: main;
+    grid-row: content-start / end;
+  }
+
+  .t-home__play {
+    grid-column: aside;
+    grid-row: content-start;
+  }
+
+  .t-home__aside {
+    grid-column: aside;
+    grid-row: aside-start;
+  }
+}
+
+@include mq($from: l) {
+  .t-home {
+    grid-template-columns: [edge-left] 1fr [main] calc(60% - 32px) [aside] calc(40% - 32px) 1fr [edge-right];
+  }
+}
+
+@include mq($from: xxl) {
+  .t-home {
+    grid-template-columns: [edge-left] 1fr [main] 736px [aside] 480px 1fr [edge-right];
+  }
+}
+
+
+
+
+
+// temp. move this to an organism
+.t-home__hero {
+  background: #434477;
+  color: #fff;
 }
