@@ -1,0 +1,19 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - echo Installing node dependencies...
+      - yarn install
+  build:
+    commands:
+      - yarn server
+
+artifacts:
+  files:
+    - appspec.yml
+    - app/**/*
+    - bin/**/*
+    - build/**/*
+    - nginx/**/*
+    - server.js
