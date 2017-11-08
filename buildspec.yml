@@ -1,13 +1,23 @@
 version: 0.1
 
 phases:
+  install:
+      commands:
+        # Install yarn natively https://yarnpkg.com/en/docs/install#linux-tab
+        - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        - apt-get update
+        - apt-get install -y yarn
   pre_build:
     commands:
       - echo Installing node dependencies...
-      - yarn install
+      - yarn
   build:
     commands:
       - yarn server
+  post_build:
+    commands:
+      - aws s3 sync --cache-control "max-age=31536000" build/static "s3://${STATIC_BUCKET_NAME}"
 
 artifacts:
   files:
