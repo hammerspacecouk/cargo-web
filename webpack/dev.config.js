@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const settings = {
   devtool: 'source-map',
   entry: {
-    app: Path.resolve(__dirname, '../src/client.tsx'),
+    app: Path.resolve(__dirname, '../src/index.client.tsx'),
   },
   output: {
     path: Path.resolve(__dirname, '../build/static'),
@@ -14,7 +14,7 @@ const settings = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      'scss': Path.resolve(__dirname, '../src/scss')
+      'scss': Path.resolve(__dirname, '../src/assets/scss')
     }
   },
   devServer: {
