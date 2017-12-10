@@ -1,0 +1,19 @@
+# docker-compose file for local dev only
+version: "3"
+
+services:
+  cargo-web-node:
+    image: node:9.2.1
+    volumes:
+      - .:/var/www
+    working_dir: /var/www
+
+  cargo-web-nginx:
+    image: nginx:latest
+    links:
+      - cargo-web-node
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www
+      - ./nginx:/etc/nginx/conf.d
