@@ -41,6 +41,9 @@ Parameters:
     Type: String
     Default: latest
 
+  StaticBucket:
+    Type: String
+
 
 Resources:
   Repository:
@@ -116,6 +119,12 @@ Resources:
                   - logs:PutLogEvents
                   - ecr:GetAuthorizationToken
               - Resource: !Sub arn:aws:s3:::${ArtifactBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:GetObjectVersion
+              - Resource: !Sub arn:aws:s3:::${StaticBucket}/*
                 Effect: Allow
                 Action:
                   - s3:GetObject
@@ -228,6 +237,7 @@ Resources:
                 - docker tag ${REPOSITORY_URI}:latest ${REPOSITORY_URI}:${TAG}
             post_build:
               commands:
+                - aws s3 sync build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
                 - docker push ${REPOSITORY_URI}:latest
                 - docker push ${REPOSITORY_URI}:${TAG}
                 - printf '{"tag":"%s"}' $TAG > build.json
@@ -244,6 +254,8 @@ Resources:
             Value: !Sub ${NodeImageTag}
           - Name: REPOSITORY_URI
             Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}
+          - Name: STATIC_BUCKET
+            Value: !Sub arn:aws:s3:::${StaticBucket}
       Name: "planet-cargo-web-build"
       ServiceRole: !Ref CodeBuildServiceRole
 

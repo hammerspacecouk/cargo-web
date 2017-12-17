@@ -9,10 +9,15 @@ export default class {
 
     constructor(
         assets: AssetsObject,
-        staticPrefix = '/static/'
+        appEnv: string
     ) {
         this.assets = assets;
-        this.staticPrefix = staticPrefix;
+
+        if (appEnv === 'dev') {
+            this.staticPrefix = '/static/';
+        } else {
+            this.staticPrefix = 'https://static.planetcargo.live/';
+        }
     }
 
     getPrefix(): string {

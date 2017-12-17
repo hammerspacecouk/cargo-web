@@ -11,8 +11,10 @@ import './imgs';
 import {UserInterface} from "./models/User";
 import Score from "./models/Score";
 
+const config = (window as any).__CONFIG;
+
 // init the DI container specifically with client settings
-DI.init((window as any).__ASSETS);
+DI.init(config.assets);
 
 const user = (window as any).__USER;
 delete (window as any).__USER;

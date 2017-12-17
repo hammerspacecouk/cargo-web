@@ -45,7 +45,7 @@ export default class Home extends React.Component<undefined, State> {
                     {playPanel}
                 </div>
                 <main className="t-home__main">
-                    <h1>Welcome welcome welcome</h1>
+                    <h1>Welcome to the world</h1>
                     <ul>
                         <li><Link to="/play">Play</Link></li>
                         <li><Link to="/ports">Ports</Link></li>

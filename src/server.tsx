@@ -11,6 +11,9 @@ import {UserInterface} from "./models/User";
 
 const assets = require('../build/assets-manifest.json');
 
+const appEnv = process.env.APP_ENV || 'Unknown';
+const appVersion = process.env.APP_VERSION || 'Unknown';
+
 // init the DI container specifically with server settings
 DI.init(assets);
 
@@ -107,7 +110,11 @@ export default (app: Express.Application) => {
         <div id="root">${appElement}</div>
         <script src="${DI.getAssets().get('vendor.js')}"></script>
         <script>
-          window.__ASSETS = ${DI.getAssets().getJSON()};
+          window.__CONFIG = {
+            assets: ${DI.getAssets().getJSON()},
+            appVersion: '${appVersion}',
+            appEnv: '${appEnv}'
+          };
           window.__DATA = ${JSON.stringify(context.initialData)};
           window.__USER = ${JSON.stringify(context.user)};
           const supportsES6 = function() {

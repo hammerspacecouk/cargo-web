@@ -51,12 +51,6 @@ const settings = {
     ],
   },
   plugins: [
-    // ensure we are production mode (for react etc)
-    new Webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: '[chunkhash].vendor.js'

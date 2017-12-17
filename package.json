@@ -37,8 +37,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack/dev.config.js",
-    "server": "webpack --config webpack/client.config.js && webpack --config webpack/server.config.js",
-    "client": "webpack --config webpack/client.config.js",
+    "server": "webpack --config webpack/client.config.js --env.NODE_ENV=production && webpack --config webpack/server.config.js  --env.NODE_ENV=production",
+    "client": "webpack --config webpack/client.config.js --env.NODE_ENV=production",
     "start": "node server.js"
   }
 }

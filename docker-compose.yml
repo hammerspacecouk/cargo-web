@@ -9,15 +9,25 @@ services:
     ports:
       - 3000:3000
     working_dir: /var/www
+    environment:
+      APP_ENV: "dev"
+      APP_VERSION: "dev-server"
     command:
-      # For development
-      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
-      - "--config"
-      - "webpack/dev.config.js"
-      - "--host"
-      - "0.0.0.0"
-#    command: ["yarn", "dev"] # For development (once bin links work)
-#    command: ["node", "server.js"] # For testing prod server
+#### For development ###########
+#      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+#      - "--config"
+#      - "webpack/dev.config.js"
+#      - "--host"
+#      - "0.0.0.0"
+#### For Testing prod server
+      - "sh"
+      - "-c"
+      - >
+        node_modules/webpack/bin/webpack.js --config webpack/client.config.js &&
+        node_modules/webpack/bin/webpack.js --config webpack/server.config.js &&
+        APP_ENV=dev APP_VERSION=dev-server node server.js
+
+
 
   cargo-web-nginx:
     image: nginx:latest
