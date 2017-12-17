@@ -1,4 +1,8 @@
+# ARG BASED REPO won't work until the docker version is updated. Use explict repo for now
 FROM node:9.2.1
+
+ARG BASE
+#FROM ${BASE}
 
 # Setup the application
 COPY ./nginx /etc/nginx/conf.d/
