@@ -91,11 +91,11 @@ Resources:
       Role: !Ref ECSServiceRole
       DesiredCount: !Ref DesiredTaskCount
       TaskDefinition: !Ref TaskDefinition
-#      LoadBalancers:
-#        - ContainerName: cargo-web-nginx
-#          ContainerPort: 80
-#          TargetGroupArn:
-#            Fn::ImportValue: !Sub "${ALBStack}::TargetGroup"
+      LoadBalancers:
+        - ContainerName: cargo-web-nginx
+          ContainerPort: 80
+          TargetGroupArn:
+            Fn::ImportValue: !Sub "${ALBStack}::TargetGroupWeb"
 
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
