@@ -1,0 +1,30 @@
+# docker-compose file for local dev only
+version: "3"
+
+services:
+  cargo-web-node:
+    image: node:latest
+    volumes:
+      - .:/var/www
+    ports:
+      - 3000:3000
+    working_dir: /var/www
+    command:
+      # For development
+      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+      - "--config"
+      - "webpack/dev.config.js"
+      - "--host"
+      - "0.0.0.0"
+#    command: ["yarn", "dev"] # For development (once bin links work)
+#    command: ["node", "server.js"] # For testing prod server
+
+  cargo-web-nginx:
+    image: nginx:latest
+    links:
+      - cargo-web-node
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www
+      - ./nginx:/etc/nginx/conf.d
