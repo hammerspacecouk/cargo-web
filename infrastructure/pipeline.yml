@@ -199,8 +199,9 @@ Resources:
                 - echo Installing dependencies...
                 - yarn
             post_build:
-              - echo Static files to S3
-              - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
+              commands:
+                - echo Static files to S3
+                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
           artifacts:
             files: *
       Environment:
