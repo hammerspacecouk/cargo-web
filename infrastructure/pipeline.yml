@@ -184,46 +184,46 @@ Resources:
           - ExpirationInDays: 21
             Status: Enabled
 
-#  CodeBuildProjectTest:
-#    Type: AWS::CodeBuild::Project
-#    Properties:
-#      Artifacts:
-#        Location: !Ref ArtifactBucket
-#        Type: "S3"
-#      Source:
-#        Location: !Sub ${ArtifactBucket}/source.zip
-#        Type: "S3"
-#        BuildSpec: |
-#          version: 0.2
-#          phases:
-#            pre_build:
-#              commands:
-#                - echo Installing dependencies...
-#                - yarn
-#            build:
-#              commands:
-#                - yarn test
-#      Environment:
-#        ComputeType: "BUILD_GENERAL1_SMALL"
-#        Image: !Sub ${NodeImageTag}
-#        Type: "LINUX_CONTAINER"
-#        EnvironmentVariables:
-#          - Name: AWS_DEFAULT_REGION
-#            Value: !Ref AWS::Region
-#          - Name: APP_ENV
-#            Value: build
-#      Name: "planet-cargo-web-test"
-#      ServiceRole: !Ref CodeBuildServiceRole
+  CodeBuildProjectBuildApp:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Artifacts:
+        Type: CODEPIPELINE
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: |
+          version: 0.2
+          phases:
+            pre_build:
+              commands:
+                - echo Installing dependencies...
+                - yarn
+            post_build:
+              - echo Static files to S3
+              - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
+          artifacts:
+            files: *
+      Environment:
+        ComputeType: "BUILD_GENERAL1_SMALL"
+        Image: !Sub ${NodeImageTag}
+        Type: "LINUX_CONTAINER"
+        EnvironmentVariables:
+          - Name: AWS_DEFAULT_REGION
+            Value: !Ref AWS::Region
+          - Name: APP_ENV
+            Value: build
+          - Name: STATIC_BUCKET
+            Value: !Sub arn:aws:s3:::${StaticBucket}
+      Name: "planet-cargo-web-build-app"
+      ServiceRole: !Ref CodeBuildServiceRole
 
   CodeBuildProjectImage:
     Type: AWS::CodeBuild::Project
     Properties:
       Artifacts:
-        Location: !Ref ArtifactBucket
-        Type: "S3"
+        Type: CODEPIPELINE
       Source:
-        Location: !Sub ${ArtifactBucket}/source.zip
-        Type: "S3"
+        Type: CODEPIPELINE
         BuildSpec: |
           version: 0.2
           phases:
@@ -237,7 +237,6 @@ Resources:
                 - docker tag ${REPOSITORY_URI}:latest ${REPOSITORY_URI}:${TAG}
             post_build:
               commands:
-                - aws s3 sync build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
                 - docker push ${REPOSITORY_URI}:latest
                 - docker push ${REPOSITORY_URI}:${TAG}
                 - printf '{"tag":"%s"}' $TAG > build.json
@@ -254,9 +253,7 @@ Resources:
             Value: !Sub ${NodeImageTag}
           - Name: REPOSITORY_URI
             Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}
-          - Name: STATIC_BUCKET
-            Value: !Sub arn:aws:s3:::${StaticBucket}
-      Name: "planet-cargo-web-build"
+      Name: "planet-cargo-web-build-image"
       ServiceRole: !Ref CodeBuildServiceRole
 
   Pipeline:
@@ -296,20 +293,6 @@ Resources:
               Configuration:
                 S3Bucket: !Ref TemplateBucket
                 S3ObjectKey: web/templates.zip
-#        - Name: Test
-#          Actions:
-#            - Name: Test
-#              ActionTypeId:
-#                Category: Build
-#                Owner: AWS
-#                Version: 1
-#                Provider: CodeBuild
-#              Configuration:
-#                ProjectName: !Ref CodeBuildProjectTest
-#              InputArtifacts:
-#                - Name: App
-#              OutputArtifacts: []
-#              RunOrder: 2
         - Name: Build
           Actions:
             - Name: Build
@@ -319,9 +302,24 @@ Resources:
                 Version: 1
                 Provider: CodeBuild
               Configuration:
-                ProjectName: !Ref CodeBuildProjectImage
+                ProjectName: !Ref CodeBuildProjectBuildApp
               InputArtifacts:
                 - Name: App
+              OutputArtifacts:
+                - Name: AppOutput
+              RunOrder: 2
+        - Name: BuildImage
+          Actions:
+            - Name: BuildImage
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref CodeBuildProjectImage
+              InputArtifacts:
+                - Name: AppOutput
               OutputArtifacts:
                 - Name: BuildOutput
               RunOrder: 2

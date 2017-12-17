@@ -10,10 +10,6 @@ COPY . /var/www
 
 WORKDIR /var/www
 
-# Install deps production
-RUN yarn \
-    && yarn server
-
 # Allow to volume to share
 VOLUME /var/www /etc/nginx/conf.d
 
