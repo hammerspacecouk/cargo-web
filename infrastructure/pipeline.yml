@@ -203,7 +203,7 @@ Resources:
                 - echo Static files to S3
                 - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
           artifacts:
-            files: *
+            files: "**/*"
       Environment:
         ComputeType: "BUILD_GENERAL1_SMALL"
         Image: !Sub ${NodeImageTag}
