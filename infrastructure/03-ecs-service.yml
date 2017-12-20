@@ -71,13 +71,13 @@ Resources:
             Resource:
               - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/planet-cargo/${Environment}/*
 
-  CloudFormationNginx:
+  CloudWatchNginx:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub ${Environment}-planet-cargo-web-nginx
       RetentionInDays: 30
 
-  CloudFormationNode:
+  CloudWatchNode:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub ${Environment}-planet-cargo-web-node
@@ -91,6 +91,9 @@ Resources:
       Role: !Ref ECSServiceRole
       DesiredCount: !Ref DesiredTaskCount
       TaskDefinition: !Ref TaskDefinition
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
       LoadBalancers:
         - ContainerName: cargo-web-nginx
           ContainerPort: 80
@@ -106,7 +109,7 @@ Resources:
         - Name: cargo-web-node
           Image: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${ECSRepository}:${ImageTag}
           Cpu: 64
-          Memory: 256
+          Memory: 128
           Essential: false
           Environment:
             - Name: APP_VERSION
@@ -118,7 +121,7 @@ Resources:
           LogConfiguration:
             LogDriver: awslogs
             Options:
-              awslogs-group: !Sub ${CloudFormationNode}
+              awslogs-group: !Sub ${CloudWatchNode}
               awslogs-region: !Sub ${AWS::Region}
               awslogs-stream-prefix: cargo-ecs-node
           Command:
@@ -139,7 +142,7 @@ Resources:
           LogConfiguration:
             LogDriver: awslogs
             Options:
-              awslogs-group: !Sub ${CloudFormationNginx}
+              awslogs-group: !Sub ${CloudWatchNginx}
               awslogs-region: !Sub ${AWS::Region}
               awslogs-stream-prefix: cargo-ecs-web-nginx
           VolumesFrom:

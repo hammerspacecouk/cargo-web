@@ -13,6 +13,7 @@ const assets = require('../build/assets-manifest.json');
 
 const appEnv = process.env.APP_ENV || 'Unknown';
 const appVersion = process.env.APP_VERSION || 'Unknown';
+const host = process.env.HOSTNAME || 'Unknown';
 
 // init the DI container specifically with server settings
 DI.init(assets);
@@ -113,7 +114,8 @@ export default (app: Express.Application) => {
           window.__CONFIG = {
             assets: ${DI.getAssets().getJSON()},
             appVersion: '${appVersion}',
-            appEnv: '${appEnv}'
+            appEnv: '${appEnv}',
+            host: '${host}'
           };
           window.__DATA = ${JSON.stringify(context.initialData)};
           window.__USER = ${JSON.stringify(context.user)};

@@ -130,6 +130,7 @@ Resources:
                   - s3:GetObject
                   - s3:PutObject
                   - s3:GetObjectVersion
+                  - s3:PutObjectAcl
               - Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/${Repository}
                 Effect: Allow
                 Action:
@@ -198,15 +199,18 @@ Resources:
               commands:
                 - echo Installing dependencies...
                 - yarn
+            build:
+              commands:
+                - yarn server
             post_build:
               commands:
                 - echo Static files to S3
-                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000
+                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000 --acl public-read
           artifacts:
             files: "**/*"
       Environment:
         ComputeType: "BUILD_GENERAL1_SMALL"
-        Image: !Sub ${NodeImageTag}
+        Image: thiagoxvo/awscli-node-docker:latest
         Type: "LINUX_CONTAINER"
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION
@@ -214,7 +218,7 @@ Resources:
           - Name: APP_ENV
             Value: build
           - Name: STATIC_BUCKET
-            Value: !Sub arn:aws:s3:::${StaticBucket}
+            Value: !Ref StaticBucket
       Name: "planet-cargo-web-build-app"
       ServiceRole: !Ref CodeBuildServiceRole
 
@@ -231,7 +235,7 @@ Resources:
             pre_build:
               commands:
                 - $(aws ecr get-login)
-                - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+                - TAG=r$(date +%F-%H%M%S-%N)
             build:
               commands:
                 - docker build -t ${REPOSITORY_URI} --build-arg BASE=${NODE_IMAGE_TAG} .
