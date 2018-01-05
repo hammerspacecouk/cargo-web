@@ -1,11 +1,11 @@
-import PortActionTypes from './PortActionTypes';
+import PortActionTypes from './ActionTypes';
 import {Dispatch} from "redux";
 
-import DataClient from "../Models/DataClient";
-import {Port} from "../Domain/Port";
+import DataClient from "../../Models/DataClient";
+import {Port} from "../../Domain/Port";
 
 export const fetchList = async (dispatch: Dispatch<any>): Promise<void> => {
-    const data = await DataClient.fetchData('/ports');
+    const data = await DataClient.fetchData('/listedPorts');
     const ports = data.items.map((item: any) => {
         return new Port(item.id, item.name)
     });

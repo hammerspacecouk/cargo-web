@@ -1,0 +1,16 @@
+.error {
+  display: block;
+  max-width: 524px; // todo - variable
+  margin: 0 auto;
+  padding: $grid-unit * 2 $grid-unit;
+  text-align: center;
+
+  &__title {
+    margin-bottom: $grid-unit * 2;
+    font-size: 5rem; // todo - variable
+  }
+
+  &__message {
+    margin-bottom: $grid-unit * 2;
+  }
+}

@@ -1,4 +1,4 @@
-import ScoreActionTypes from './ScoreActionTypes';
+import ScoreActionTypes from './ActionTypes';
 import {Dispatch} from "redux";
 
 export const increase = (dispatch: Dispatch<any>): void => {

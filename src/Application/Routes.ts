@@ -6,7 +6,7 @@
 import * as Home from '../Containers/Pages/Home';
 import * as Ports from '../Containers/Pages/Ports';
 
-import NotFound from '../Views/Components/Error/NotFound';
+import NotFound from '../Components/Error/NotFound';
 import StyleguideView from "../Views/Pages/Home/StyleguideView";
 
 export interface RouteItem {
@@ -21,13 +21,13 @@ const cachePrivate = 'private, no-cache';
 const cachePublic = 'public, max-age=600';
 
 const routes: RouteItem[] = [
-    {
-        path: "/profile",
-        component: Player.Profile,
-        login: true,
-        exact: true,
-        cacheControl: cachePrivate,
-    },
+    // {
+    //     path: "/profile",
+    //     component: Player.Profile,
+    //     login: true,
+    //     exact: true,
+    //     cacheControl: cachePrivate,
+    // },
     //
     // play routes
     // {

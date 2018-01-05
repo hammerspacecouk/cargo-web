@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
 import scoreReducer, {ScoreStateInterface} from './Score';
 import portsReducer, {PortsStateInterface} from './Ports';
+import sessionReducer, {SessionStateInterface} from './Session';
 
 export interface StateInterface {
-    score: ScoreStateInterface;
-    ports: PortsStateInterface;
+    // ports: PortsStateInterface;
+    session: SessionStateInterface;
 }
 
 // Combine Reducers
 export default combineReducers({
-    score: scoreReducer,
-    ports: portsReducer,
+    session: sessionReducer,
+    // ports: portsReducer,
 });

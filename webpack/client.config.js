@@ -7,7 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 const settings = {
   entry: {
-    app: Path.resolve(__dirname, '../src/client.entry.tsx'),
+    app: Path.resolve(__dirname, '../src/index.client.tsx'),
     vendor: [
       'react',
       'react-dom',

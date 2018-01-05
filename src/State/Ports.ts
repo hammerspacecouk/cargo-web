@@ -1,14 +1,14 @@
 import {Port} from "../Domain/Port";
 import {ActionInterface} from "../Actions/ActionInterface";
-import PortActionTypes from "../Actions/PortActionTypes";
+import PortActionTypes from "../Actions/Port/ActionTypes";
 
 export interface PortsStateInterface {
-    ports: Port[];
+    listedPorts: Port[];
     port?: Port;
 }
 
 const initialState: PortsStateInterface = {
-    ports: [],
+    listedPorts: [],
     port: null
 };
 
@@ -16,7 +16,7 @@ export default (state: PortsStateInterface = initialState, action: ActionInterfa
     const newState: PortsStateInterface = Object.assign({}, state);
     switch (action.type) {
         case PortActionTypes.FETCH_LIST:
-            newState.ports = action.payload;
+            newState.listedPorts = action.payload;
             return newState;
         case PortActionTypes.FETCH_SINGLE:
             newState.port = action.payload;

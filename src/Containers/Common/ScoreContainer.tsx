@@ -6,20 +6,20 @@ interface Props {
     score: Score;
 }
 
-interface State {
+interface LocalState {
     digits: string[];
     rate: string;
     effectClass: string;
 }
 
-export default class extends React.Component<Props, State> {
+export default class extends React.Component<Props, LocalState> {
 
     public props: Props;
-    public state: State;
+    public state: LocalState;
     private allowAnimationUpdate: boolean;
 
     constructor(props: Props) {
-        super();
+        super(props);
         this.allowAnimationUpdate = false;
         this.state = this.calculateScoreState(props.score);
     }
@@ -32,7 +32,7 @@ export default class extends React.Component<Props, State> {
         return output.split('');
     }
 
-    calculateScoreState(score: Score): State {
+    calculateScoreState(score: Score): LocalState {
         const value = score.getValue(new Date());
         const rate = score.changeRate;
         let effectClass = '';
@@ -81,3 +81,4 @@ export default class extends React.Component<Props, State> {
         );
     }
 }
+

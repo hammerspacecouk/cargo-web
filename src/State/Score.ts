@@ -1,6 +1,6 @@
 import {Score} from "../Domain/Score";
 import {ActionInterface} from "../Actions/ActionInterface";
-import ScoreActionTypes from "../Actions/ScoreActionTypes";
+import ScoreActionTypes from "../Actions/Score/ActionTypes";
 
 export interface ScoreStateInterface extends Score {}
 

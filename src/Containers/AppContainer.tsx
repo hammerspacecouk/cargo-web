@@ -2,28 +2,44 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {withRouter} from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 
-import AppView from '../Views/Pages/AppView';
-import * as ScoreActions from "../Actions/ScoreActions";
-import {Score} from "../Domain/Score";
-import {StateInterface} from "../State/index";
+import MastheadContainer from "./Common/MastheadContainer";
+import About from "./Pages/About";
+import Home from "./Pages/Home";
+import Ports from "./Pages/Ports";
+
+import NotFound from "../Components/Error/NotFound";
+
+import {refreshSession} from '../Actions/Session/Actions';
 
 interface Props {
-    score: Score;
     dispatch: Dispatch<any>;
 }
 
 class Container extends React.Component<Props, undefined> {
+    componentWillMount() {
+        refreshSession(this.props.dispatch);
+    }
+
     render() {
-        return <AppView score={this.props.score}
-                        onIncrease={() => ScoreActions.increase(this.props.dispatch)}
-                        onDecrease={() => ScoreActions.decrease(this.props.dispatch)}
-        />;
+        return (
+            <div>
+                <MastheadContainer />
+                <main><div className="main">
+                    <Switch>
+                        <Route path="/ports" component={Ports} />
+                        <Route path="/about" component={About} />
+
+                        {/*<Route path="/login" component={Login} />*/}
+                        <Route path="/" component={Home} exact={true} />
+
+                        <Route component={NotFound} />
+                    </Switch>
+                </div></main>
+            </div>
+        );
     }
 }
 
-export default withRouter(connect(
-    (state: StateInterface) => ({
-        score: state.score
-    })
-)(Container));
+export default withRouter(connect()(Container) as any);

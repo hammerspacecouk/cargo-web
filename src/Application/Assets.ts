@@ -2,6 +2,11 @@ export interface AssetsObject {
     [key: string]: string;
 }
 
+interface AssetInterface {
+    asset: string;
+    url: string;
+}
+
 let staticPrefixStore: string;
 let assetsStore: AssetsObject;
 
@@ -19,6 +24,10 @@ export const getAsset = (key: string): string => {
         return getPrefix() + assetsStore[key];
     }
     return '/' + key;
+};
+
+export const getAll = (): AssetsObject => {
+    return assetsStore;
 };
 
 export const getJSON = (): string => JSON.stringify(assetsStore);

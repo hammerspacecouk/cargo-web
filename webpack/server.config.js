@@ -3,7 +3,7 @@ const Path = require('path');
 
 const settings = {
   entry: {
-    app: Path.resolve(__dirname, '../src/server.entry.tsx')
+    app: Path.resolve(__dirname, '../src/index.server.tsx')
   },
   target: 'node',
   output: {

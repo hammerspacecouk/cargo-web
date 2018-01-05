@@ -12,9 +12,9 @@ export default (props: ErrorProps) => {
 
     return (
         <Status code={props.code}>
-            <div>
-                <h1>{props.code}</h1>
-                <p>{msg}</p>
+            <div className="error">
+                <h1 className="error__title">{props.code}</h1>
+                <p className="error__message">{msg}</p>
             </div>
         </Status>
     );

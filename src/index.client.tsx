@@ -1,23 +1,25 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import {render as ReactDomRender} from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
-
+//
 import store from './store';
 import AppContainer from './Containers/AppContainer';
-import {init as AssetsInit} from "./Application/Assets";
-import {init as ParametersInit} from "./Application/Parameters";
+// import {init as AssetsInit} from "./Application/Assets";
+// import {init as ParametersInit} from "./Application/Parameters";
 
 // static assets
 import './assets/scss/app.scss';
 import './assets/imgs';
 
-const config = (window as any).__CARGO_CONFIG;
+const config = (window as any).__CONFIG;
+//
+// AssetsInit((window as any).__ASSETS, config.assetsPrefix);
+// ParametersInit(config.apiHostname);
+//
 
-AssetsInit((window as any).__ASSETS, config.assetsPrefix);
-ParametersInit(config.apiHostname);
 
-ReactDOM.render(
+ReactDomRender(
     (
         <Provider store={store}>
             <BrowserRouter>
