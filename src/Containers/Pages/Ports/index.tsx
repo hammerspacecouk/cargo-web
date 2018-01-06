@@ -1,20 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from "redux";
 import {Route, Switch} from "react-router";
 
-import {Port} from "../../../Domain/Port";
 import ListContainer from "./ListContainer";
 import ShowContainer from "./ShowContainer";
 import NotFound from "../../../Components/Error/NotFound";
 import BreadCrumbs from "../../../Components/BreadCrumbs";
 
-interface Props {
-    ports: Port[];
-    dispatch: Dispatch<any>;
-}
-
-class Container extends React.Component<Props, undefined> {
+class Container extends React.Component<undefined, undefined> {
 
     render() {
         return (

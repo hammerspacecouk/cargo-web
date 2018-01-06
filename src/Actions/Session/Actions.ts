@@ -2,28 +2,20 @@ import SessionActionTypes from './ActionTypes';
 import {Dispatch} from "redux";
 import {Player} from "../../Domain/Player";
 import {Score} from "../../Domain/Score";
+import {APIClientInterface} from "../../Data/API/index";
 
-export const refreshSession = async (dispatch: Dispatch<any>): Promise<void> => {
+export const refreshSession = async (apiClient: APIClientInterface, dispatch: Dispatch<any>): Promise<void> => {
 
     dispatch({type: SessionActionTypes.FETCHING_PLAYER});
 
-    // todo - fetch from server (fake a timeout for now)
-    const timeout = (ms: number) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    };
-    await timeout(1000);
+    const data = await apiClient.fetch('/login/check');
+    let player = null;
+    let score = null;
+    if (data) {
+        player = new Player(data.id);
+        score = new Score(data.score.value, data.score.rate, new Date(data.score.datetime))
+    }
 
-    const player = new Player(
-        'id-12134',
-        new Score(
-            10000,
-            3,
-            new Date('2018-01-04T21:40:00+00:00')
-        )
-    );
-
-    dispatch({
-        type: SessionActionTypes.FETCHED_PLAYER,
-        payload: player
-    });
+    dispatch({type: SessionActionTypes.SCORE_UPDATED, payload: score});
+    dispatch({type: SessionActionTypes.FETCHED_PLAYER, payload: player});
 };

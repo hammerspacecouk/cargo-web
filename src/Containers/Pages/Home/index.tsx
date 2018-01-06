@@ -3,21 +3,28 @@ import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
 
 import {PATH_LIST as portsPath} from "../../../Domain/Port";
-import {getAsset} from "../../../Application/Assets";
+import {StateInterface} from "../../../State/index";
+import {Player} from "../../../Domain/Player";
+import LoginForm from "../../Common/LoginForm";
 
-class Container extends React.Component<undefined, undefined> {
+interface Props {
+    sessionPlayer?: Player,
+    sessionChecked: boolean
+}
+
+class Container extends React.Component<Props, undefined> {
     render() {
         let playPanel = <Link to="/play">Go to the islands >>></Link>;
 
-        // if (this.state.userChecked && !this.state.user) {
-        //     playPanel = <LoginForm />;
-        // }
+        if (this.props.sessionChecked && !this.props.sessionPlayer) {
+            playPanel = <LoginForm />;
+        }
 
         return (
             <div className="t-home">
                 <div className="t-home__hero">
                     <div className="t-home_hero-contents home-hero">
-                        <h1>Planet Cargo - {getAsset('app.js')}</h1>
+                        <h1>Planet Cargo</h1>
                     </div>
                 </div>
                 <div className="t-home__play panel">
@@ -42,4 +49,10 @@ class Container extends React.Component<undefined, undefined> {
     }
 }
 
-export default connect()(Container);
+export default connect(
+    (state: StateInterface) => ({
+        sessionPlayer: state.session.player,
+        sessionChecked: state.session.playerFetched,
+    }),
+    null
+)(Container);

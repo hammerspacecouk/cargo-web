@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import {getAll as allAssets, getAsset} from "../../../Application/Assets";
 import {ReactElement} from "react";
+import {StateInterface} from "../../../State/index";
+import {EnvironmentStateInterface} from "../../../State/Environment";
 
-class Container extends React.Component<undefined, undefined> {
+interface Props {
+    environment?: EnvironmentStateInterface;
+}
+
+class Container extends React.Component<Props, undefined> {
     appEnv: string;
     appVersion: string;
     host: string;
@@ -26,19 +31,20 @@ class Container extends React.Component<undefined, undefined> {
     }
 
     renderAssets(): ReactElement<HTMLTableRowElement>[] {
-        const assets = allAssets();
+        const assets = this.props.environment.assets;
         if (!assets) {
             return null;
         }
-        const rows = [];
-        for (const key in assets) {
-            rows.push(
-                <tr key={key}>
-                    <td>{key}</td>
-                    <td>{getAsset(key)}</td>
-                </tr>
-            );
-        }
+        // todo - environment should hold the assets object
+        // const rows = [];
+        // for (const key in assets) {
+        //     rows.push(
+        //         <tr key={key}>
+        //             <td>{key}</td>
+        //             <td>{getAsset(key)}</td>
+        //         </tr>
+        //     );
+        // }
     }
 
     render() {
@@ -46,17 +52,25 @@ class Container extends React.Component<undefined, undefined> {
             <div className="t-doc">
                 <div className="t-doc__main">
                     <h1>Status</h1>
-                    <p className="right"><a href="api" className="btn">API Status</a></p>
+                    <p className="right"><a
+                        href={`${this.props.environment.apiHostname}/status`}
+                        className="btn"
+                        target="_blank"
+                    >API Status</a></p>
                     <h2>App</h2>
                     <table className="table table--striped">
                         <tbody>
                         <tr>
                             <th>Environment</th>
-                            <td>{this.appEnv}</td>
+                            <td>{this.props.environment.appEnv}</td>
                         </tr>
                         <tr>
                             <th>Version</th>
-                            <td>{this.appVersion}</td>
+                            <td>{this.props.environment.appVersion}</td>
+                        </tr>
+                        <tr>
+                            <th>API Hostname</th>
+                            <td>{this.props.environment.apiHostname}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -66,7 +80,15 @@ class Container extends React.Component<undefined, undefined> {
                         <tbody>
                         <tr>
                             <th>Host</th>
-                            <td>{this.host}</td>
+                            <td>{this.props.environment.host}</td>
+                        </tr>
+                        <tr>
+                            <th>Server Rendered</th>
+                            <td>{this.props.environment.isServer ? 'yes' : 'no'}</td>
+                        </tr>
+                        <tr>
+                            <th>Client Rendered</th>
+                            <td>{this.props.environment.isClient ? 'yes' : 'no'}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -89,4 +111,9 @@ class Container extends React.Component<undefined, undefined> {
     }
 }
 
-export default connect()(Container);
+export default connect(
+    (state: StateInterface) => ({
+        environment: state.environment
+    }),
+    null
+)(Container);

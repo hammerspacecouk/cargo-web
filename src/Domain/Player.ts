@@ -1,11 +1,7 @@
-import {Score} from "./Score";
-
 export class Player {
     public id: string;
-    public score?: Score;
 
-    constructor(id: string, score: Score) {
+    constructor(id: string) {
         this.id = id;
-        this.score = score;
     };
 }

@@ -2,23 +2,30 @@ import * as React from 'react';
 import {render as ReactDomRender} from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
-//
-import store from './store';
+import { createStore } from 'redux';
+
 import AppContainer from './Containers/AppContainer';
-// import {init as AssetsInit} from "./Application/Assets";
-// import {init as ParametersInit} from "./Application/Parameters";
+import Assets from './Domain/Assets';
+import reducers from './State';
+import {EnvironmentStateInterface} from "./State/Environment";
+import BrowserClient from "./Data/API/BrowserClient";
+import console from "./Console";
 
 // static assets
-import './assets/scss/app.scss';
-import './assets/imgs';
-
-const config = (window as any).__CONFIG;
-//
-// AssetsInit((window as any).__ASSETS, config.assetsPrefix);
-// ParametersInit(config.apiHostname);
-//
+import '../static/scss/app.scss';
+import '../static/imgs';
 
 
+const environment: EnvironmentStateInterface = (window as any).__CONFIG; // todo - all stores here?
+
+environment.isClient = true;
+environment.isServer = false;
+environment.apiClient = new BrowserClient(environment.apiHostname, console);
+environment.assets = new Assets(environment.assetsManifest, environment.apiHostname);
+
+const store = createStore(reducers, {
+    environment
+});
 ReactDomRender(
     (
         <Provider store={store}>
