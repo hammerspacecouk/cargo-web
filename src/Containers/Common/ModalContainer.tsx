@@ -11,8 +11,8 @@ interface State {
 }
 
 export default class Modal extends React.Component<Props, State> {
-    constructor() {
-        super();
+    constructor(props: Props) {
+        super(props);
 
         this.state = {
             modalIsOpen: false
@@ -34,8 +34,16 @@ export default class Modal extends React.Component<Props, State> {
     render() {
         const title = this.props.title || '';
 
+        // todo. on server just render the children (as you can't open modals on server)
+        if (typeof window === 'undefined') {
+            return this.props.children;
+        }
+
+        const appElement = (window as any).document.getElementById('root');
+
         return (
             <ModalHandler
+                appElement={appElement}
                 isOpen={this.state.modalIsOpen}
                 onRequestClose={this.closeModal}
                 contentLabel={title}

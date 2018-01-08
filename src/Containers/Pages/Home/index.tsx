@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {PATH_LIST as portsPath} from "../../../Domain/Port";
 import {StateInterface} from "../../../State/index";
 import {Player} from "../../../Domain/Player";
-import LoginForm from "../../Common/LoginForm";
+import LoginForm from "../../Common/LoginFormContainer";
 
 interface Props {
     sessionPlayer?: Player,
@@ -50,7 +50,7 @@ class Container extends React.Component<Props, undefined> {
 }
 
 export default connect(
-    (state: StateInterface) => ({
+    (state: StateInterface): Props => ({
         sessionPlayer: state.session.player,
         sessionChecked: state.session.playerFetched,
     }),

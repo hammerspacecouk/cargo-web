@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "Planet Cargo: Node, React",
   "dependencies": {
+    "@types/query-string": "^5.0.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.5",
     "moment": "^2.19.1",
     "node-fetch": "^1.7.3",
+    "query-string": "^5.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-modal": "^3.0.0",

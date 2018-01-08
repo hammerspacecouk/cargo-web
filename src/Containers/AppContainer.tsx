@@ -9,6 +9,7 @@ import About from "./Pages/About";
 import Home from "./Pages/Home";
 import Ports from "./Pages/Ports";
 import Profile from "./Pages/Profile";
+import Login from "./Pages/LoginContainer";
 
 import NotFound from "../Components/Error/NotFound";
 
@@ -44,7 +45,7 @@ class Container extends React.Component<Props, undefined> {
 
         // todo - store an update time in the session prop and don't bother refetching if it is recent
         refreshSession(this.props.apiClient, this.props.dispatch);
-        window.setTimeout(() => this.updateSession(), 1000 * 60);
+        window.setTimeout(() => this.updateSession(), 1000 * 120);
     }
 
     render() {
@@ -57,7 +58,7 @@ class Container extends React.Component<Props, undefined> {
                         <Route path="/profile" component={Profile} />
                         <Route path="/about" component={About} />
 
-                        {/*<Route path="/login" component={Login} />*/}
+                        <Route path="/login" component={Login} />
                         <Route path="/" component={Home} exact={true} />
 
                         <Route component={NotFound} />

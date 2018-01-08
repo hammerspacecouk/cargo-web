@@ -6,7 +6,7 @@ import LoginFormComponent from '../../Components/LoginForm';
 
 interface Props {
     apiHostname?: string;
-    // sent: boolean; // todo - how to populate this
+    sent?: boolean;
 }
 
 class Container extends React.Component<Props, undefined> {
@@ -19,7 +19,7 @@ class Container extends React.Component<Props, undefined> {
             loginPathGoogle={`${this.props.apiHostname}/login/google`}
             loginPathMicrosoft={`${this.props.apiHostname}/login/microsoft`}
             loginPathTwitter={`${this.props.apiHostname}/login/twitter`}
-            emailSent={false}
+            emailSent={this.props.sent}
         />
     }
 }

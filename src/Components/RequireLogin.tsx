@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LoginForm from '../Containers/Common/LoginForm';
+import LoginForm from '../Containers/Common/LoginFormContainer';
 import Status from './Status';
 import Loading from './Loading';
 
