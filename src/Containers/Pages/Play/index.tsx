@@ -2,11 +2,12 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Route, Switch} from "react-router";
 
+import EditContainer from "./EditContainer";
+import PlayContainer from "./PlayContainer";
+import WelcomeContainer from "./WelcomeContainer";
 import NotFound from "../../../Components/Error/NotFound";
-import BreadCrumbs from "../../../Components/BreadCrumbs";
-import ProfileContainer from "./ProfileContainer";
-import {Player} from "../../../Domain/Player";
 import {StateInterface} from "../../../State/index";
+import {Player} from "../../../Domain/Player";
 import RequireLogin from "../../../Components/RequireLogin";
 import Loading from "../../../Components/Loading";
 
@@ -25,12 +26,10 @@ class Container extends React.Component<Props, undefined> {
 
         return (
             <div>
-                <BreadCrumbs crumbs={[
-                    {link: '/profile', title: 'Profile'},
-                ]} />
                 <Switch>
-                    {/*<Route path="/profile/delete" component={DeleteContainer} exact={true} />*/}
-                    <Route path="/profile" component={ProfileContainer} exact={true} />
+                    <Route path="/play/:shipId/edit" component={EditContainer} exact={true} />
+                    <Route path="/play/:shipId" component={PlayContainer} exact={true} />
+                    <Route path="/play" component={WelcomeContainer} exact={true} />
                     <Route component={NotFound} />
                 </Switch>
             </div>

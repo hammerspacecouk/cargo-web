@@ -4,6 +4,11 @@
   grid-gap: $grid-unit;
 }
 
+.t-doc__title {
+  grid-column: main;
+  margin: $grid-unit 0;
+}
+
 .t-doc__main {
   grid-column: main;
 }

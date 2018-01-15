@@ -8,9 +8,11 @@ import {StateInterface} from "../../../State/index";
 import Loading from "../../../Components/Loading";
 import {Link} from "react-router-dom";
 import {APIClientInterface} from "../../../Data/API/index";
+import Error from "../../../Components/Error/Error";
 
 interface Props {
     ports: Port[];
+    listLoaded: boolean;
     apiClient: APIClientInterface;
     dispatch: Dispatch<any>;
 }
@@ -22,20 +24,16 @@ class Container extends React.Component<Props, undefined> {
     }
 
     render() {
-        let list = null;
-        if (!!this.props.ports) {
-            list = (
-                <ul>{this.props.ports.map((port: Port, index: number) => {
-                    return (
-                        <li key={index}><Link to={PATH_SHOW(port.id)}>{port.name}</Link></li>
-                    );
-                })}</ul>
-            );
+        if (!this.props.ports) {
+            return this.props.listLoaded ? <Error /> : <Loading />;
         }
+
         return (
-            <Loading>
-                {list}
-            </Loading>
+            <ul>{this.props.ports.map((port: Port, index: number) => {
+                return (
+                    <li key={index}><Link to={PATH_SHOW(port.id)}>{port.name}</Link></li>
+                );
+            })}</ul>
         );
     }
 }
@@ -43,7 +41,7 @@ class Container extends React.Component<Props, undefined> {
 export default connect(
     (state: StateInterface) => ({
         apiClient: state.environment.apiClient,
-        ports: state.ports.listedPorts
+        ports: state.ports.listedPorts,
+        listLoaded : !state.ports.fetchingList
     })
 )(Container);
-

@@ -1,21 +1,16 @@
 import * as React from 'react';
 import LoginForm from '../Containers/Common/LoginFormContainer';
 import Status from './Status';
-import Loading from './Loading';
 
-interface Props {
-    loading?: boolean;
-}
-
-export default (props: Props) => {
-    if (props.loading) {
-        return <Loading />
-    }
-
+export default () => {
     return (
         <Status code={403}>
-            <h1>We need to identify you</h1>
-            <LoginForm />
+            <div className="t-doc">
+                <h1 className="t-doc__title">You must login to do this</h1>
+                <div className="t-doc__main">
+                    <LoginForm />
+                </div>
+            </div>
         </Status>
     )
 };

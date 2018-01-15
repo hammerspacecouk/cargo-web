@@ -1,14 +1,7 @@
 import * as React from 'react';
 
-interface Props {
-    children?: any;
-}
-
-export default (props: Props) => {
-    if (props.children) {
-        return props.children;
-    }
-
+// todo - different types of loaders (local vs whole page)
+export default () => {
     return (
         <div className="loading">
             <svg className="loading__spinner" xmlns="http://www.w3.org/2000/svg">

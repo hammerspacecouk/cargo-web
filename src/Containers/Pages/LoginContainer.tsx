@@ -7,15 +7,16 @@ import LoginFormContainer from '../Common/LoginFormContainer';
 
 export interface Props {
     mailSent?: boolean
+    mailFail?: boolean
 }
 
 class Container extends React.Component<Props, undefined> {
     render() {
         return (
             <div className="t-doc">
+                <h1 className="t-doc__title">Login</h1>
                 <div className="t-doc__main">
-                    <h1>Login</h1>
-                    <LoginFormContainer sent={this.props.mailSent}/>
+                    <LoginFormContainer sent={this.props.mailSent} fail={this.props.mailFail}/>
                 </div>
             </div>
         )
@@ -27,6 +28,7 @@ export default withRouter(connect(
         const query = parseQueryString(props.location.search);
         return {
             mailSent : ("mailsent" in query),
+            mailFail : ("mailfail" in query),
         }
     },
     null

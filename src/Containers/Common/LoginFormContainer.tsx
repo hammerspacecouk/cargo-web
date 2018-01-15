@@ -6,7 +6,9 @@ import LoginFormComponent from '../../Components/LoginForm';
 
 interface Props {
     apiHostname?: string;
+    loginToken?: string;
     sent?: boolean;
+    fail?: boolean; // todo - generic Messages array
 }
 
 class Container extends React.Component<Props, undefined> {
@@ -19,7 +21,9 @@ class Container extends React.Component<Props, undefined> {
             loginPathGoogle={`${this.props.apiHostname}/login/google`}
             loginPathMicrosoft={`${this.props.apiHostname}/login/microsoft`}
             loginPathTwitter={`${this.props.apiHostname}/login/twitter`}
+            loginToken={this.props.loginToken}
             emailSent={this.props.sent}
+            emailError={this.props.fail}
         />
     }
 }
@@ -27,6 +31,7 @@ class Container extends React.Component<Props, undefined> {
 export default connect(
     (state: StateInterface) => ({
         apiHostname: state.environment.apiHostname,
+        loginToken: state.session.loginToken,
     }),
     null
 )(Container);

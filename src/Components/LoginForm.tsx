@@ -1,4 +1,5 @@
 import * as React from 'react';
+import CsrfField from "./CsrfField";
 
 export interface LoginFormProps {
     loginPathEmail: string;
@@ -6,20 +7,27 @@ export interface LoginFormProps {
     loginPathGoogle: string;
     loginPathMicrosoft: string;
     loginPathTwitter: string;
+    loginToken: string;
     emailSent: boolean;
+    emailError: boolean;
 }
 
 export default (props: LoginFormProps) => {
-    let sentMsg = null;
+    let statusMessage = null;
     if (props.emailSent) {
-        sentMsg = (
+        statusMessage = (
             <p className="message" style={{color:"red"}}>Check your e-mail for the login link</p>
+        );
+    }
+    if (props.emailError) {
+        statusMessage = (
+            <p className="message" style={{color:"red"}}>There was an error sending the e-mail. Please try again</p>
         );
     }
 
     return (
         <div className="login-form">
-            {sentMsg}
+            {statusMessage}
             <p>
                 We identify which player you are by confirming your unique e-mail address.
                 Use any one of the following methods. We don't get access to your accounts on these services.
@@ -113,6 +121,7 @@ export default (props: LoginFormProps) => {
                     no passwords required.
                 </p>
                 <p>
+                    <CsrfField token={props.loginToken} />
                     <input id="login-email" type="email" name="target" required placeholder="name@example.com" />
                     <button type="submit">Send</button>
                 </p>
