@@ -49,6 +49,7 @@ class Container extends React.Component<Props, State> {
         // todo - fancy animation to hide loading (look like its decrypting words on the fly)
         // todo - use the form fields?
         // todo also - this should be a POST
+        // todo - disable the button while in progress
         const response = await fetch(`http://api.dev.planetcargo.live:8080${this.props.requestShipNameToken.path}?token=${this.props.requestShipNameToken.token}`);
         const data = await response.json();
         this.setState({
