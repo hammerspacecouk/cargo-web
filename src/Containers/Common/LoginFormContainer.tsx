@@ -15,6 +15,10 @@ class Container extends React.Component<Props, undefined> {
     // todo - client side submit
 
     render() {
+        if (!this.props.loginToken) {
+            return null;
+        }
+
         return <LoginFormComponent
             loginPathEmail={`${this.props.apiHostname}/login/email`}
             loginPathFacebook={`${this.props.apiHostname}/login/facebook`}

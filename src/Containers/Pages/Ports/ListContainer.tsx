@@ -3,15 +3,15 @@ import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
 import * as PortActions from "../../../Actions/Port/Actions";
-import {Port, PATH_SHOW} from "../../../Domain/Port";
 import {StateInterface} from "../../../State/index";
 import Loading from "../../../Components/Loading";
 import {Link} from "react-router-dom";
 import {APIClientInterface} from "../../../Data/API/index";
 import Error from "../../../Components/Error/Error";
+import PortInterface, {PATH_SHOW} from "../../../DomainInterfaces/PortInterface";
 
 interface Props {
-    ports: Port[];
+    ports: PortInterface[];
     listLoaded: boolean;
     apiClient: APIClientInterface;
     dispatch: Dispatch<any>;
@@ -29,7 +29,7 @@ class Container extends React.Component<Props, undefined> {
         }
 
         return (
-            <ul>{this.props.ports.map((port: Port, index: number) => {
+            <ul>{this.props.ports.map((port: PortInterface, index: number) => {
                 return (
                     <li key={index}><Link to={PATH_SHOW(port.id)}>{port.name}</Link></li>
                 );

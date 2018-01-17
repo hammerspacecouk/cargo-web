@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import { createStore } from 'redux';
 
 import AppContainer from './Containers/AppContainer';
-import Assets from './Domain/Assets';
+import Assets from './Helpers/Assets';
 import reducers from './State';
 import {EnvironmentStateInterface} from "./State/Environment";
 import BrowserClient from "./Data/API/BrowserClient";
@@ -25,7 +25,7 @@ environment.assets = new Assets(environment.assetsManifest, environment.apiHostn
 
 const store = createStore(reducers, {
     environment
-});
+}, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__());
 ReactDomRender(
     (
         <Provider store={store}>

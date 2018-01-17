@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 import Modal from './ModalContainer';
 import GuestMasthead from '../../Components/Masthead/GuestMasthead';
 import PlayerMasthead from '../../Components/Masthead/PlayerMasthead';
-import {Player} from "../../Domain/Player";
 import {StateInterface} from "../../State";
-import {Score} from "../../Domain/Score";
 import LoginForm from './LoginFormContainer';
+import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
+import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 
 interface Props {
-    sessionPlayer?: Player;
-    sessionScore?: Score;
+    sessionPlayer?: PlayerInterface;
+    sessionScore?: ScoreInterface;
 }
 
 class Container extends React.Component<Props, undefined> {

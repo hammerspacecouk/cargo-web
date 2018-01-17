@@ -31,7 +31,7 @@ export default class implements APIClientInterface {
         if (storedData) {
             const result: StoredUrlData = JSON.parse(storedData);
 
-            const now = Date.now(); // todo - use moment and centralise application time for client-side?
+            const now = Date.now(); // todo - use date-fns and centralise application time for client-side?
             if (result.expires > now) {
                 // still valid in the cache
                 return result.data;

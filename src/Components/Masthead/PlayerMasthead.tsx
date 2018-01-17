@@ -1,12 +1,12 @@
 import * as React from 'react';
 import ScoreContainer from "../../Containers/Common/ScoreContainer";
-import {Player} from "../../Domain/Player";
 import {Link} from "react-router-dom";
-import {Score} from "../../Domain/Score";
+import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
+import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 
 interface Props {
-    player: Player;
-    score: Score;
+    player: PlayerInterface;
+    score: ScoreInterface;
 }
 
 export default (props: Props) => {

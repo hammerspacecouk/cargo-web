@@ -1,10 +1,10 @@
-import {Ship} from "../Domain/Ship";
 import {ActionInterface} from "../Actions/ActionInterface";
 import PlayActionTypes from "../Actions/Play/ActionTypes";
-import ActionTokenInterface from "../Domain/ActionTokenInterface";
+import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
+import ShipInterface from "../DomainInterfaces/ShipInterface";
 
 export interface PlayStateInterface {
-    ship?: Ship;
+    ship?: ShipInterface;
     requestShipNameToken?: ActionTokenInterface;
     fetching: boolean;
 }

@@ -1,12 +1,10 @@
-export interface AssetsObject {
-    [key: string]: string;
-}
+import {KeyValueInterface} from "../DomainInterfaces/KeyValueInterface";
 
 export default class {
-    private assets?: AssetsObject;
+    private assets?: KeyValueInterface;
     private staticPrefix: string;
 
-    constructor(assets: AssetsObject, staticPrefix: string) {
+    constructor(assets: KeyValueInterface, staticPrefix: string) {
         this.assets = assets;
         this.staticPrefix = staticPrefix;
     }
@@ -18,7 +16,7 @@ export default class {
         return '/' + asset;
     }
 
-    getAll(): AssetsObject {
+    getAll(): KeyValueInterface {
         return this.assets;
     };
 

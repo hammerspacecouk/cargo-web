@@ -1,10 +1,10 @@
-import {Port} from "../Domain/Port";
 import {ActionInterface} from "../Actions/ActionInterface";
 import PortActionTypes from "../Actions/Port/ActionTypes";
+import PortInterface from "../DomainInterfaces/PortInterface";
 
 export interface PortsStateInterface {
-    listedPorts?: Port[];
-    port?: Port;
+    listedPorts?: PortInterface[];
+    port?: PortInterface;
     fetchingList: boolean;
     fetchingPort: boolean;
 }

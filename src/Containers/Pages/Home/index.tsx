@@ -2,13 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
 
-import {PATH_LIST as portsPath} from "../../../Domain/Port";
+import {PATH_LIST as portsPath} from "../../../DomainInterfaces/PortInterface";
 import {StateInterface} from "../../../State/index";
-import {Player} from "../../../Domain/Player";
 import LoginForm from "../../Common/LoginFormContainer";
+import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 
 interface Props {
-    sessionPlayer?: Player,
+    sessionPlayer?: PlayerInterface,
     sessionChecked: boolean
 }
 

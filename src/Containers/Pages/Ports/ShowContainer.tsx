@@ -2,13 +2,12 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
-import {Port} from "../../../Domain/Port";
-
 import * as PortActions from "../../../Actions/Port/Actions";
 import {StateInterface} from "../../../State/index";
 import Loading from "../../../Components/Loading";
 import {APIClientInterface} from "../../../Data/API/index";
 import NotFound from "../../../Components/Error/NotFound";
+import PortInterface from "../../../DomainInterfaces/PortInterface";
 
 interface Props {
     match: {
@@ -16,7 +15,7 @@ interface Props {
             portId: string;
         };
     };
-    port: Port;
+    port: PortInterface;
     portLoaded: boolean;
     dispatch: Dispatch<any>;
     apiClient: APIClientInterface;

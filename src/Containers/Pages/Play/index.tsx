@@ -7,12 +7,12 @@ import PlayContainer from "./PlayContainer";
 import WelcomeContainer from "./WelcomeContainer";
 import NotFound from "../../../Components/Error/NotFound";
 import {StateInterface} from "../../../State/index";
-import {Player} from "../../../Domain/Player";
 import RequireLogin from "../../../Components/RequireLogin";
 import Loading from "../../../Components/Loading";
+import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 
 interface Props {
-    player?: Player;
+    player?: PlayerInterface;
     playerFetched: boolean;
 }
 

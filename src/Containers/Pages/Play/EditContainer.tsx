@@ -5,10 +5,10 @@ import {Dispatch} from "redux";
 import * as PlayActions from "../../../Actions/Play/Actions";
 import {StateInterface} from "../../../State/index";
 import {APIClientInterface} from "../../../Data/API/index";
-import {Ship} from "../../../Domain/Ship";
 import Loading from "../../../Components/Loading";
 import NotFound from "../../../Components/Error/NotFound";
-import ActionTokenInterface from "../../../Domain/ActionTokenInterface";
+import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
+import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 
 // todo - this is the same as PlayContainer - how do I share it?
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
             shipId: string;
         };
     };
-    ship: Ship;
+    ship: ShipInterface;
     requestShipNameToken: ActionTokenInterface;
     loaded: boolean;
     dispatch: Dispatch<any>;

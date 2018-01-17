@@ -6,9 +6,9 @@ import {Link} from "react-router-dom";
 import * as PlayActions from "../../../Actions/Play/Actions";
 import {StateInterface} from "../../../State/index";
 import {APIClientInterface} from "../../../Data/API/index";
-import {Ship} from "../../../Domain/Ship";
 import Loading from "../../../Components/Loading";
 import NotFound from "../../../Components/Error/NotFound";
+import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 
 interface Props {
     match: {
@@ -16,7 +16,7 @@ interface Props {
             shipId: string;
         };
     };
-    ship: Ship;
+    ship: ShipInterface;
     loaded: boolean;
     dispatch: Dispatch<any>;
     apiClient: APIClientInterface;

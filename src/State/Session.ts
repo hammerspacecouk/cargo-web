@@ -1,13 +1,13 @@
 import {ActionInterface} from "../Actions/ActionInterface";
 import SessionActionTypes from "../Actions/Session/ActionTypes";
-import {Player} from "../Domain/Player";
-import {Score} from "../Domain/Score";
-import {Ship} from "../Domain/Ship";
+import PlayerInterface from "../DomainInterfaces/PlayerInterface";
+import ScoreInterface from "../DomainInterfaces/ScoreInterface";
+import ShipInterface from "../DomainInterfaces/ShipInterface";
 
 export interface SessionStateInterface {
-    player?: Player;
-    score?: Score;
-    ships?: Ship[];
+    player?: PlayerInterface;
+    score?: ScoreInterface;
+    ships?: ShipInterface[];
     loginToken? : string;
     playerFetched: boolean;
     playerFetching: boolean;

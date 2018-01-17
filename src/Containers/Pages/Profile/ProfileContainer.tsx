@@ -2,10 +2,10 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 
 import {StateInterface} from "../../../State/index";
-import {Player} from "../../../Domain/Player";
+import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 
 interface Props {
-    player: Player;
+    player: PlayerInterface;
     apiHostname: string;
 }
 

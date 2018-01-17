@@ -8,7 +8,7 @@ import { createStore } from 'redux';
 import {EnvironmentStateInterface} from "./State/Environment";
 import console from "./Console";
 import AppContainer from './Containers/AppContainer';
-import Assets from './Domain/Assets';
+import Assets from './Helpers/Assets';
 import ServerClient from "./Data/API/ServerClient";
 import reducers from './State';
 

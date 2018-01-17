@@ -1,7 +1,6 @@
 import PlayActionTypes from './ActionTypes';
 import {Dispatch} from "redux";
 
-import {Ship} from "../../Domain/Ship";
 import {APIClientInterface} from "../../Data/API/index";
 
 export const fetchShip = async (

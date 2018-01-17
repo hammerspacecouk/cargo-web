@@ -1,9 +1,10 @@
 import * as React from 'react';
+import * as differenceInSeconds from 'date-fns/difference_in_seconds';
 
-import {Score} from "../../Domain/Score";
+import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 
 interface Props {
-    score: Score;
+    score: ScoreInterface;
 }
 
 interface LocalState {
@@ -32,18 +33,32 @@ export default class extends React.Component<Props, LocalState> {
         return output.split('');
     }
 
-    calculateScoreState(score: Score): LocalState {
-        const value = score.getValue(new Date());
-        const rate = score.changeRate;
+    getValue(score: ScoreInterface, now: Date): number {
+        const calculationDate = new Date(score.datetime);
+        const secondsDiff = differenceInSeconds(now, calculationDate);
+
+        const earned = secondsDiff * score.rate;
+
+        const current = score.value + earned;
+
+        if (current < 0) {
+            return 0;
+        }
+
+        return current;
+    }
+
+    calculateScoreState(score: ScoreInterface): LocalState {
+        const value = this.getValue(score, new Date());
         let effectClass = '';
 
-        if (rate < 0 && value <= 0) {
+        if (score.rate < 0 && value <= 0) {
             effectClass = 'score--dead';
         }
 
         return {
             digits: this.formatNumber(value),
-            rate: rate.toString(),
+            rate: score.rate.toString(),
             effectClass
         };
     }
@@ -81,4 +96,3 @@ export default class extends React.Component<Props, LocalState> {
         );
     }
 }
-
