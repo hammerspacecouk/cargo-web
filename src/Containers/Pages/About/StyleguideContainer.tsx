@@ -6,6 +6,7 @@ class Container extends React.Component<undefined, undefined> {
         return (
             <div className="t-doc">
                 <div className="t-doc__main">
+                    <div className="text--prose">
                     <h1>Styleguide</h1>
                     <p>
                         This is a collection of elements to demonstrate the overall design of the application.
@@ -13,6 +14,15 @@ class Container extends React.Component<undefined, undefined> {
 
                     <h2>Core</h2>
                     <h2>Atoms</h2>
+
+                    <h3>Buttons</h3>
+
+                    <p><button className="btn">Standard button</button></p>
+                    <p><button className="btn btn--confirm">Confirm</button></p>
+                    <p><button className="btn btn--danger">Reject</button></p>
+                    <p><button className="btn btn--soft-danger">Soft Reject</button></p>
+
+
                     <h2>Molecules</h2>
 
                     <h3>Breadcrumbs</h3>
@@ -31,6 +41,7 @@ class Container extends React.Component<undefined, undefined> {
                     </ol>
 
                     <h2>Organisms</h2>
+                    </div>
                 </div>
             </div>
         )

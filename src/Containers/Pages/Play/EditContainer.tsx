@@ -62,15 +62,15 @@ class Container extends React.Component<Props, State> {
             return this.props.loaded ? <NotFound /> : <Loading />;
         }
 
-        // todo - abstract token hidden fields
+        // todo - break out components
         let name = null;
         if (this.state.newName) {
             name = (
                 <form method="post" action={this.state.newName.action.path}>
                     <h3>Name offered: {this.state.newName.nameOffered}</h3>
                     <input type="hidden" name="token" value={this.state.newName.action.token} />
-                    <button type="submit">Accept</button>
-                    <button type="submit">Reject</button>
+                    <button className="btn btn--soft-danger" type="submit">Reject</button>
+                    <button className="btn btn--confirm" type="submit">Accept</button>
                 </form>
             )
         }
@@ -82,18 +82,32 @@ class Container extends React.Component<Props, State> {
                     {this.props.ship.name} (1 week and three quarters)
                 </h1>
                 <div className="t-doc__main">
+
+                    <table className="table table--striped">
+                        <tbody>
+                        <tr>
+                            <th>Class</th>
+                            <td>Paddle boat</td>
+                        </tr>
+                        <tr>
+                            <th>Capacity</th>
+                            <td>2</td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <h2>Request a new ship name</h2>
                     <p>A new name will be selected at random. You don't have to take it, but no refunds</p>
                     <form method="post" action={this.props.requestShipNameToken.path}>
                         <input type="hidden" name="token" value={this.props.requestShipNameToken.token} />
-                        <button type="submit" onClick={this.requestShipName.bind(this)}>500 credits</button>
+                        <button className="btn" type="submit" onClick={this.requestShipName.bind(this)}>500 credits</button>
                     </form>
 
                     {name}
 
                     <h2>Upgrade ship</h2>
+                    <p>Upgrade to a [X]: capacity [X]</p>
                     <form>
-                        <button type="submit">500 credits</button>
+                        <button className="btn" type="submit">500 credits</button>
                     </form>
                 </div>
             </div>

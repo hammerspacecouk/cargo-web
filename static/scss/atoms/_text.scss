@@ -1,0 +1,13 @@
+// restore proper margins to semantic objects
+.text--prose {
+  p, ul, h1, h2, h3, h4, h5, h6, table {
+    // when part of prose, elements get their spacing back
+    margin-bottom: $grid-unit;
+
+    // maximum readable line-length
+    max-width: 700px;
+  }
+  li {
+    padding-left: $grid-unit;
+  }
+}
