@@ -1,5 +1,7 @@
 export default {
-    CHANGING_VIEW: Symbol(),
+    CHANGING_SHIP: Symbol(),
 
-    CHANGED_VIEW: Symbol(),
+    RECEIVED_NO_SUCH_SHIP: Symbol(),
+    RECEIVED_SHIP_DATA: Symbol(),
+    RECEIVED_SHIP_NAME_TOKEN: Symbol(),
 };

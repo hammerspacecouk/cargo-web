@@ -3,12 +3,15 @@ import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
 import * as PlayActions from "../../../Actions/Play/Actions";
+import * as EditShipActions from  "../../../Actions/EditShip/Actions";
+import EditShipActionTypes from  "../../../Actions/EditShip/ActionTypes";
 import {StateInterface} from "../../../State/index";
 import {APIClientInterface} from "../../../Data/API/index";
 import Loading from "../../../Components/Loading";
 import NotFound from "../../../Components/Error/NotFound";
 import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
 import ShipInterface from "../../../DomainInterfaces/ShipInterface";
+import TokenButton from "../../Common/TokenButton";
 
 // todo - this is the same as PlayContainer - how do I share it?
 interface Props {
@@ -18,68 +21,58 @@ interface Props {
         };
     };
     ship: ShipInterface;
-    requestShipNameToken: ActionTokenInterface;
     loaded: boolean;
+
+    requestShipNameToken: ActionTokenInterface;
+    requestingShipName: boolean;
+    offeredShipName?: string;
+    offeredShipNameToken?: ActionTokenInterface;
+
     dispatch: Dispatch<any>;
     apiClient: APIClientInterface;
 }
 
-interface State {
-    newName?: any;
-}
-
-class Container extends React.Component<Props, State> {
-
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            newName: null
-        };
-    }
-
+class Container extends React.Component<Props, undefined> {
     componentDidMount() {
         if (!this.props.ship || this.props.ship.id !== this.props.match.params.shipId) {
             PlayActions.fetchShip(this.props.match.params.shipId, this.props.apiClient, this.props.dispatch);
         }
     }
 
-    // todo - proper things
-    async requestShipName(e: any) {
+    rejectNameOffer(e: Event) {
         e.preventDefault();
-        // todo - fancy animation to hide loading (look like its decrypting words on the fly)
-        // todo - use the form fields?
-        // todo also - this should be a POST
-        // todo - disable the button while in progress
-        const response = await fetch(`http://api.dev.planetcargo.live:8080${this.props.requestShipNameToken.path}?token=${this.props.requestShipNameToken.token}`);
-        const data = await response.json();
-        this.setState({
-            newName : data
-        });
+        this.props.dispatch({type: EditShipActionTypes.REJECT_SHIP_NAME_OFFER});
     }
 
     render() {
         if (!this.props.ship) {
-            return this.props.loaded ? <NotFound /> : <Loading />;
+            return this.props.loaded ? <NotFound message="You be making ship up" /> : <Loading />;
         }
 
         // todo - break out components
         let name = null;
-        if (this.state.newName) {
+        if (this.props.offeredShipName) {
             name = (
-                <form method="post" action={this.state.newName.action.path}>
-                    <h3>Name offered: {this.state.newName.nameOffered}</h3>
-                    <input type="hidden" name="token" value={this.state.newName.action.token} />
-                    <button className="btn btn--soft-danger" type="submit">Reject</button>
+                <TokenButton token={this.props.offeredShipNameToken}
+                             handler={EditShipActions.acceptShipName}>
+                    <h3>Name offered: {this.props.offeredShipName}</h3>
+                    <a href="." className="btn btn--soft-danger" onClick={this.rejectNameOffer.bind(this)}>Reject</a>
                     <button className="btn btn--confirm" type="submit">Accept</button>
-                </form>
-            )
+                </TokenButton>
+            );
         }
+
+        // todo - fancy animation to hide loading (look like its decrypting words on the fly)
+        // todo - use the form fields?
+        // todo also - this should be a POST
+        // todo - disable the button while in progress
+
 
         // todo - real values obviously
         return (
             <div className="t-doc">
                 <h1 className="t-doc__title">
-                    {this.props.ship.name} (1 week and three quarters)
+                    {this.props.ship.name}
                 </h1>
                 <div className="t-doc__main">
 
@@ -97,11 +90,11 @@ class Container extends React.Component<Props, State> {
                     </table>
                     <h2>Request a new ship name</h2>
                     <p>A new name will be selected at random. You don't have to take it, but no refunds</p>
-                    <form method="post" action={this.props.requestShipNameToken.path}>
-                        <input type="hidden" name="token" value={this.props.requestShipNameToken.token} />
-                        <button className="btn" type="submit" onClick={this.requestShipName.bind(this)}>500 credits</button>
-                    </form>
-
+                    <TokenButton token={this.props.requestShipNameToken}
+                                 handler={EditShipActions.requestShipName}
+                    >
+                        <button className="btn" type="submit" disabled={this.props.requestingShipName}>500 credits</button>
+                    </TokenButton>
                     {name}
 
                     <h2>Upgrade ship</h2>
@@ -116,11 +109,18 @@ class Container extends React.Component<Props, State> {
     }
 }
 
+
 export default connect(
     (state: StateInterface) => ({
         apiClient: state.environment.apiClient,
+
         ship: state.play.ship,
-        requestShipNameToken: state.play.requestShipNameToken,
         loaded: !state.play.fetching,
-    })
+
+        requestShipNameToken: state.editShip.requestShipNameToken,
+        requestingShipName: state.editShip.requestingShipName,
+        offeredShipName: state.editShip.offeredShipName,
+        offeredShipNameToken: state.editShip.offeredShipNameToken,
+    }),
+    null
 )(Container);

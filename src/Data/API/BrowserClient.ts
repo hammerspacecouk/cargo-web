@@ -80,6 +80,10 @@ export default class implements APIClientInterface {
                 // didn't exist - todo - differentiate from 403
                 return null;
             }
+            if (response.status !== 200) {
+                // todo - all other errors (perhaps split by 4xx/5xx)
+                return null;
+            }
 
             const data = await response.json();
 

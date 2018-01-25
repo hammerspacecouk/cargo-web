@@ -31,7 +31,7 @@ class Container extends React.Component<Props, undefined> {
 
     render() {
         if (!this.props.ship) {
-            return this.props.loaded ? <NotFound /> : <Loading />;
+            return this.props.loaded ? <NotFound message="You be making ship up" /> : <Loading />;
         }
 
         return (

@@ -1,30 +1,39 @@
 import {ActionInterface} from "../Actions/ActionInterface";
 import PlayActionTypes from "../Actions/Play/ActionTypes";
-import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 import ShipInterface from "../DomainInterfaces/ShipInterface";
+import PortInterface from "../DomainInterfaces/PortInterface";
+import DirectionsInterface from "../DomainInterfaces/DirectionsInterface";
 
 export interface PlayStateInterface {
     ship?: ShipInterface;
-    requestShipNameToken?: ActionTokenInterface;
     fetching: boolean;
+    status?: string;
+    currentPort?: PortInterface;
+    // currentChannel?: ChannelInterface;
+    directions?: DirectionsInterface;
 }
 
 const initialState: PlayStateInterface = {
     ship: null,
     fetching: false,
+    status: null,
+    currentPort: null,
+    directions: null,
 };
 
 export default (state: PlayStateInterface = initialState, action: ActionInterface): PlayStateInterface => {
     const newState: PlayStateInterface = Object.assign({}, state);
     switch (action.type) {
-        case PlayActionTypes.CHANGING_VIEW:
+        case PlayActionTypes.CHANGING_SHIP:
             newState.fetching = true;
             newState.ship = null;
-            newState.requestShipNameToken = null;
             return newState;
-        case PlayActionTypes.CHANGED_VIEW:
-            newState.ship = action.payload.ship;
-            newState.requestShipNameToken = action.payload.requestShipNameToken;
+        case PlayActionTypes.RECEIVED_SHIP_DATA:
+            newState.ship = action.payload;
+            newState.fetching = false;
+            return newState;
+        case PlayActionTypes.RECEIVED_NO_SUCH_SHIP:
+            newState.ship = null;
             newState.fetching = false;
             return newState;
         default:
