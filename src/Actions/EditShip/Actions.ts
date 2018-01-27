@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 
 import EditActionTypes from './ActionTypes';
+import PlayActionTypes from '../Play/ActionTypes';
 import SessionActionTypes from '../Session/ActionTypes';
 import {APIClientInterface} from "../../Data/API/index";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
@@ -41,5 +42,18 @@ export const acceptShipName: TokenHandlerInterface = async (
     apiClient: APIClientInterface,
     dispatch: Dispatch<any>
 ): Promise<void> => {
-  // todo
+    dispatch({type: EditActionTypes.ACCEPTING_SHIP_NAME});
+
+    const data = await apiClient.fetch(`${token.path}?token=${token.token}`); // todo - use POST
+    if (!data) {
+        // todo - some sort of error state action
+        return;
+    }
+
+    dispatch({
+        type: PlayActionTypes.RECEIVED_SHIP_DATA,
+        payload: data.ship
+    });
+
+    dispatch({type: EditActionTypes.ACCEPTED_SHIP_NAME});
 };

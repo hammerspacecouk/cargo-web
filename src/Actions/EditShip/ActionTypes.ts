@@ -1,5 +1,7 @@
 export default {
     REQUESTING_SHIP_NAME: Symbol(),
+    ACCEPTING_SHIP_NAME: Symbol(),
+    ACCEPTED_SHIP_NAME: Symbol(),
 
     RECEIVED_TOKEN_REQUEST_SHIP_NAME: Symbol(),
     RECEIVED_SHIP_NAME_OFFER: Symbol(),

@@ -4,6 +4,7 @@ import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 
 export interface EditShipStateInterface {
     requestingShipName: boolean;
+    acceptingShipName: boolean;
     offeredShipName?: string;
     requestShipNameToken?: ActionTokenInterface;
     offeredShipNameToken?: ActionTokenInterface;
@@ -11,6 +12,7 @@ export interface EditShipStateInterface {
 
 const initialState: EditShipStateInterface = {
     requestingShipName: false,
+    acceptingShipName: false,
     offeredShipName: null,
     offeredShipNameToken: null,
     requestShipNameToken: null,
@@ -25,6 +27,14 @@ export default (state: EditShipStateInterface = initialState, action: ActionInte
         case EditShipActionTypes.REQUESTING_SHIP_NAME:
             newState.requestingShipName = true;
             newState.offeredShipName = null;
+            return newState;
+        case EditShipActionTypes.ACCEPTING_SHIP_NAME:
+            newState.offeredShipName = null;
+            newState.acceptingShipName = true;
+            return newState;
+        case EditShipActionTypes.ACCEPTED_SHIP_NAME:
+            newState.offeredShipName = null;
+            newState.acceptingShipName = false;
             return newState;
         case EditShipActionTypes.RECEIVED_SHIP_NAME_OFFER:
             newState.offeredShipName = action.payload.nameOffered;

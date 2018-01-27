@@ -25,6 +25,7 @@ interface Props {
 
     requestShipNameToken: ActionTokenInterface;
     requestingShipName: boolean;
+    acceptingShipName: boolean;
     offeredShipName?: string;
     offeredShipNameToken?: ActionTokenInterface;
 
@@ -60,6 +61,8 @@ class Container extends React.Component<Props, undefined> {
                     <button className="btn btn--confirm" type="submit">Accept</button>
                 </TokenButton>
             );
+        } else if (this.props.acceptingShipName) {
+            name = (<h3>Updating</h3>);
         }
 
         // todo - fancy animation to hide loading (look like its decrypting words on the fly)
@@ -119,6 +122,7 @@ export default connect(
 
         requestShipNameToken: state.editShip.requestShipNameToken,
         requestingShipName: state.editShip.requestingShipName,
+        acceptingShipName: state.editShip.acceptingShipName,
         offeredShipName: state.editShip.offeredShipName,
         offeredShipNameToken: state.editShip.offeredShipNameToken,
     }),
