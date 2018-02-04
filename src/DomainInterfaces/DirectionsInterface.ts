@@ -1,4 +1,10 @@
+import DirectionInterface from "./DirectionInterface";
+
 export default interface DirectionsInterface {
-    path: string;
-    token: string;
+    NW?: DirectionInterface;
+    NE?: DirectionInterface;
+    E?: DirectionInterface;
+    SE?: DirectionInterface;
+    SW?: DirectionInterface;
+    W?: DirectionInterface;
 }

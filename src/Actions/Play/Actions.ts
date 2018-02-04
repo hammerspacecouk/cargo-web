@@ -4,6 +4,8 @@ import PlayActionTypes from './ActionTypes';
 import EditShipActionTypes from '../EditShip/ActionTypes';
 
 import {APIClientInterface} from "../../Data/API/index";
+import {TokenHandlerInterface} from "../TokenHandlerInterface";
+import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 
 export const fetchShip = async (
     shipId: string,
@@ -27,4 +29,32 @@ export const fetchShip = async (
         type: PlayActionTypes.RECEIVED_SHIP_DATA,
         payload: data.ship
     });
+
+    dispatch({
+        type: PlayActionTypes.RECEIVED_SHIP_LOCATION,
+        payload: data
+    });
+};
+
+export const moveShip: TokenHandlerInterface = async (
+    token: ActionTokenInterface,
+    apiClient: APIClientInterface,
+    dispatch: Dispatch<any>
+): Promise<void> => {
+    alert('ACCEPTED');
+
+    // dispatch({type: EditActionTypes.ACCEPTING_SHIP_NAME});
+    //
+    // const data = await apiClient.fetch(`${token.path}?token=${token.token}`); // todo - use POST
+    // if (!data) {
+    //     // todo - some sort of error state action
+    //     return;
+    // }
+    //
+    // dispatch({
+    //     type: PlayActionTypes.RECEIVED_SHIP_DATA,
+    //     payload: data.ship
+    // });
+    //
+    // dispatch({type: EditActionTypes.ACCEPTED_SHIP_NAME});
 };

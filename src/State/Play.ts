@@ -27,9 +27,17 @@ export default (state: PlayStateInterface = initialState, action: ActionInterfac
         case PlayActionTypes.CHANGING_SHIP:
             newState.fetching = true;
             newState.ship = null;
+            newState.currentPort = null;
+            newState.directions = null;
             return newState;
         case PlayActionTypes.RECEIVED_SHIP_DATA:
             newState.ship = action.payload;
+            newState.fetching = false;
+            return newState;
+        case PlayActionTypes.RECEIVED_SHIP_LOCATION:
+            newState.currentPort = action.payload.port;
+            newState.directions = action.payload.directions;
+            // newState.currentChannel = action.payload.channel;
             newState.fetching = false;
             return newState;
         case PlayActionTypes.RECEIVED_NO_SUCH_SHIP:

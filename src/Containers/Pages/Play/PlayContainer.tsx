@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import * as PlayActions from "../../../Actions/Play/Actions";
 import {StateInterface} from "../../../State/index";
 import {APIClientInterface} from "../../../Data/API/index";
+import PortContainer from "../../Common/Play/PortContainer";
+import TravellingContainer from "../../Common/Play/TravellingContainer";
 import Loading from "../../../Components/Loading";
 import NotFound from "../../../Components/Error/NotFound";
 import ShipInterface from "../../../DomainInterfaces/ShipInterface";
@@ -18,6 +20,7 @@ interface Props {
     };
     ship: ShipInterface;
     loaded: boolean;
+    isInPort: boolean;
     dispatch: Dispatch<any>;
     apiClient: APIClientInterface;
 }
@@ -34,10 +37,20 @@ class Container extends React.Component<Props, undefined> {
             return this.props.loaded ? <NotFound message="You be making ship up" /> : <Loading />;
         }
 
+        let main = null;
+        if (this.props.isInPort) {
+            main = <PortContainer />
+        } else {
+            main = <TravellingContainer/>
+        }
+
         return (
-            <h1>
-                {this.props.ship.name} (<Link to={`/play/${this.props.ship.id}/edit`}>edit</Link>)
-            </h1>
+            <main>
+                <h1>
+                    {this.props.ship.name} (<Link to={`/play/${this.props.ship.id}/edit`}>edit</Link>)
+                </h1>
+                {main}
+            </main>
         );
     }
 }
@@ -47,5 +60,6 @@ export default connect(
         apiClient: state.environment.apiClient,
         ship: state.play.ship,
         loaded: !state.play.fetching,
+        isInPort: !!state.play.currentPort,
     })
 )(Container);
