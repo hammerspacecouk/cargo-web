@@ -8,7 +8,6 @@ export interface SessionStateInterface {
     player?: PlayerInterface;
     score?: ScoreInterface;
     ships?: ShipInterface[];
-    loginToken? : string;
     playerFetched: boolean;
     playerFetching: boolean;
 }
@@ -17,7 +16,6 @@ const initialState: SessionStateInterface = {
     player: null,
     score: null,
     ships: null,
-    loginToken: null,
     playerFetched: false,
     playerFetching: false
 };
@@ -26,7 +24,6 @@ export default (state: SessionStateInterface = initialState, action: ActionInter
     const newState: SessionStateInterface = Object.assign({}, state);
     switch (action.type) {
         case SessionActionTypes.FETCHED_GUEST:
-            newState.loginToken = action.payload;
             newState.player = null;
             newState.playerFetching = false;
             newState.playerFetched = true;

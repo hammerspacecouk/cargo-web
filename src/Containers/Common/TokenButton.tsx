@@ -9,15 +9,17 @@ import {APIClientInterface} from "../../Data/API/index";
 interface Props {
     readonly token: ActionTokenInterface;
     readonly children: any;
-    readonly handler: TokenHandlerInterface;
     readonly dispatch: Dispatch<any>;
     readonly apiClient: APIClientInterface;
+    readonly handler: TokenHandlerInterface | null;
 }
 
 class TokenButton extends React.Component<Props, undefined> {
     onSubmit(e: Event) {
-        e.preventDefault();
-        this.props.handler(this.props.token, this.props.apiClient, this.props.dispatch);
+        if (this.props.handler) {
+            e.preventDefault();
+            this.props.handler(this.props.token, this.props.apiClient, this.props.dispatch);
+        }
     }
 
     // todo - path needs to have the API hostname in there
@@ -37,6 +39,6 @@ export default connect(
         apiClient: state.environment.apiClient,
         token: ownProps.token,
         children: ownProps.children,
-        handler: ownProps.handler,
+        handler: ownProps.handler || null,
     })
 )(TokenButton);

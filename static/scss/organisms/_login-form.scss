@@ -23,11 +23,26 @@
     border-radius: 4px;
     background: $color-black;
     color: #fff;
+    position: relative;
     box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
     font-weight: bold;
+    &:after {
+      content: "•";
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      color: #000;
+      line-height: 6px;
+      font-size: 2rem;
+      text-decoration: none;
+    }
+    &:visited:after {
+      color: $color-warning;
+    }
     &:hover,
     &:focus {
       box-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+      text-decoration: none;
     }
     &:active {
       box-shadow: none;
@@ -36,16 +51,25 @@
     &--facebook {
       background: #3b5998;
       color: #ffffff;
+      &:after {
+        color: #3b5998;
+      }
     }
 
     &--google {
       background: #fff;
       color: #121212;
+      &:after {
+        color: #fff;
+      }
     }
 
     &--twitter {
       background: #1da1f2;
       color: #ffffff;
+      &:after {
+        color: #1da1f2;
+      }
     }
   }
 

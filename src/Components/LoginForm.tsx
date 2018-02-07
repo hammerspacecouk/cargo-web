@@ -1,5 +1,4 @@
 import * as React from 'react';
-import CsrfField from "./CsrfField";
 
 export interface LoginFormProps {
     loginPathEmail: string;
@@ -7,7 +6,6 @@ export interface LoginFormProps {
     loginPathGoogle: string;
     loginPathMicrosoft: string;
     loginPathTwitter: string;
-    loginToken: string;
     emailSent: boolean;
     emailError: boolean;
 }
@@ -121,7 +119,6 @@ export default (props: LoginFormProps) => {
                     no passwords required.
                 </p>
                 <p>
-                    <CsrfField token={props.loginToken} />
                     <input id="login-email" type="email" name="target" required placeholder="name@example.com" />
                     <button type="submit">Send</button>
                 </p>

@@ -23,16 +23,16 @@
   }
 
   &--confirm {
-    background: #33cc66; // todo variables
+    background: $color-ok;
     color: #fff;
   }
 
   &--danger {
-    background: #cc3333; // todo variables
+    background: $color-important;
     color: #fff;
   }
 
   &--soft-danger {
-    color: #cc3333;
+    color: $color-important;
   }
 }

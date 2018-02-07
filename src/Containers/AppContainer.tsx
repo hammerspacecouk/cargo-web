@@ -10,6 +10,7 @@ import Home from "./Pages/Home";
 import Play from "./Pages/Play";import Ports from "./Pages/Ports";
 import Profile from "./Pages/Profile";
 import Login from "./Pages/LoginContainer";
+import LoginEmail from "./Pages/LoginEmailContainer";
 
 import NotFound from "../Components/Error/NotFound";
 
@@ -59,6 +60,7 @@ class Container extends React.Component<Props, undefined> {
                         <Route path="/ports" component={Ports} />
                         <Route path="/profile" component={Profile} />
 
+                        <Route path="/login/email" component={LoginEmail} exact={true} />
                         <Route path="/login" component={Login} exact={true} />
                         <Route path="/" component={Home} exact={true} />
 
