@@ -1,4 +1,6 @@
 import * as React from 'react';
+import MessageInterface from "../DomainInterfaces/MessageInterface";
+import Messages from "./Messages";
 
 export interface LoginFormProps {
     loginPathEmail: string;
@@ -6,26 +8,15 @@ export interface LoginFormProps {
     loginPathGoogle: string;
     loginPathMicrosoft: string;
     loginPathTwitter: string;
-    emailSent: boolean;
-    emailError: boolean;
+    messages?: MessageInterface[];
 }
 
 export default (props: LoginFormProps) => {
-    let statusMessage = null;
-    if (props.emailSent) {
-        statusMessage = (
-            <p className="message" style={{color:"red"}}>Check your e-mail for the login link</p>
-        );
-    }
-    if (props.emailError) {
-        statusMessage = (
-            <p className="message" style={{color:"red"}}>There was an error sending the e-mail. Please try again</p>
-        );
-    }
+
 
     return (
         <div className="login-form">
-            {statusMessage}
+            <Messages messages={props.messages} />
             <p>
                 We identify which player you are by confirming your unique e-mail address.
                 Use any one of the following methods. We don't get access to your accounts on these services.

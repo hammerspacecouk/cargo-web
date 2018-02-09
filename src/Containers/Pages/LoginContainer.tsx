@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {RouteProps, withRouter} from 'react-router';
-import {parse as parseQueryString} from 'query-string';
 
 import LoginFormContainer from '../Common/LoginFormContainer';
+import MessageInterface from "../../DomainInterfaces/MessageInterface";
+
+import messageQueryString from '../../Helpers/MessageQueryString';
 
 export interface Props {
-    mailSent?: boolean
-    mailFail?: boolean
+    messages?: MessageInterface[];
 }
 
 class Container extends React.Component<Props, undefined> {
@@ -16,7 +17,7 @@ class Container extends React.Component<Props, undefined> {
             <div className="t-doc">
                 <h1 className="t-doc__title">Login</h1>
                 <div className="t-doc__main">
-                    <LoginFormContainer sent={this.props.mailSent} fail={this.props.mailFail}/>
+                    <LoginFormContainer messages={this.props.messages}/>
                 </div>
             </div>
         )
@@ -25,10 +26,8 @@ class Container extends React.Component<Props, undefined> {
 
 export default withRouter(connect(
     (state: {}, props: RouteProps) => {
-        const query = parseQueryString(props.location.search);
         return {
-            mailSent : ("mailsent" in query),
-            mailFail : ("mailfail" in query),
+            messages: messageQueryString(props.location.search),
         }
     },
     null

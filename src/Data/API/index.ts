@@ -1,3 +1,4 @@
 export interface APIClientInterface {
-    fetch(path: string): Promise<any>
+    getUrl(path: string): string;
+    fetch(path: string): Promise<any>;
 }

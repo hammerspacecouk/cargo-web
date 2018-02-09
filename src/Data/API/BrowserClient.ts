@@ -53,6 +53,10 @@ export default class implements APIClientInterface {
         sessionStorage.setItem(key, JSON.stringify(stored));
     }
 
+    getUrl(path: string): string {
+        return this.apiHostname + path;
+    }
+
     async fetch(path: string): Promise<any>  {
         const key: string = this.getCacheKey(path);
 
@@ -61,7 +65,7 @@ export default class implements APIClientInterface {
             return stored;
         }
 
-        const url = this.apiHostname + path;
+        const url = this.getUrl(path);
         try {
             const start = Date.now();
 

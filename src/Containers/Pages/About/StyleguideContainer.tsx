@@ -25,6 +25,14 @@ class Container extends React.Component<undefined, undefined> {
 
                     <h2>Molecules</h2>
 
+                    <h3>Messages</h3>
+                        <ul className="messages">
+                            <li className="messages__message">Default message (info)</li>
+                            <li className="messages__message messages__message--ok">Success message (ok)</li>
+                            <li className="messages__message messages__message--error">Error message (error)</li>
+                            <li className="messages__message messages__message--warning">Warning message (warning)</li>
+                        </ul>
+
                     <h3>Breadcrumbs</h3>
 
                     <h3>Single item:</h3>

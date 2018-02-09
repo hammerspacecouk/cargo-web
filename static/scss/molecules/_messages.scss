@@ -1,0 +1,22 @@
+.messages {
+  @extend .list--unstyled;
+
+  &__message {
+    background: $color-info;
+    border: solid 1px rgba(0,0,0,0.4);
+    color: $color-white;
+    padding: $grid-unit / 2 $grid-unit;
+    border-radius: 2px;
+    margin-bottom: $grid-unit;
+
+    &--ok {
+      background: $color-ok;
+    }
+    &--error {
+      background: $color-important;
+    }
+    &--warning {
+      background: $color-warning;
+    }
+  }
+}

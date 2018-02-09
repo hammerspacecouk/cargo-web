@@ -22,11 +22,11 @@ class TokenButton extends React.Component<Props, undefined> {
         }
     }
 
-    // todo - path needs to have the API hostname in there
-
     render() {
         return (
-            <form method="post" action={this.props.token.path} onSubmit={this.onSubmit.bind(this)}>
+            <form method="post"
+                  action={this.props.apiClient.getUrl(this.props.token.path)}
+                  onSubmit={this.onSubmit.bind(this)}>
                 <input type="hidden" name="token" value={this.props.token.token} />
                 {this.props.children}
             </form>

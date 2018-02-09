@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 
 import {StateInterface} from "../../State/index";
 import LoginFormComponent from '../../Components/LoginForm';
+import MessageInterface from "../../DomainInterfaces/MessageInterface";
 
 interface Props {
     apiHostname?: string;
-    sent?: boolean;
-    fail?: boolean; // todo - generic Messages array
+    messages?: MessageInterface[];
 }
 
 class Container extends React.Component<Props, undefined> {
@@ -20,8 +20,7 @@ class Container extends React.Component<Props, undefined> {
             loginPathGoogle={`${this.props.apiHostname}/login/google`}
             loginPathMicrosoft={`${this.props.apiHostname}/login/microsoft`}
             loginPathTwitter={`${this.props.apiHostname}/login/twitter`}
-            emailSent={this.props.sent}
-            emailError={this.props.fail}
+            messages={this.props.messages}
         />
     }
 }

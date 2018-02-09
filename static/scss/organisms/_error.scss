@@ -8,6 +8,7 @@
   &__title {
     margin-bottom: $grid-unit * 2;
     font-size: 5rem; // todo - variable
+    @extend .animate-jiggle;
   }
 
   &__message {

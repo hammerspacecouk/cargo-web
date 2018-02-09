@@ -4,6 +4,7 @@ import {RouteProps, withRouter} from 'react-router';
 import {parse as parseQueryString} from 'query-string';
 import TokenButton from "../Common/TokenButton";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
+import Error from "../../Components/Error/Error";
 
 export interface Props {
     token?: string
@@ -11,8 +12,12 @@ export interface Props {
 
 class Container extends React.Component<Props, undefined> {
     render() {
+        if (!this.props.token) {
+            return <Error code={400} message="Bad request (Missing token)" />
+        }
+
         const token: ActionTokenInterface = {
-            path: '/login/email', // todo - needs api hostname
+            path: '/login/email',
             token: this.props.token
         };
 

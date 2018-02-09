@@ -16,8 +16,12 @@ export default class implements APIClientInterface {
         this.userCookies = userCookies; // todo - store the real cookies
     }
 
+    getUrl(path: string): string {
+        return this.apiHostname + path;
+    }
+
     async fetch(path: string): Promise<any>  {
-        const url = this.apiHostname + path;
+        const url = this.getUrl(path);
         try {
             const start = Date.now();
 
