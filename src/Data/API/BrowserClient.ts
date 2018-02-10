@@ -57,10 +57,10 @@ export default class implements APIClientInterface {
         return this.apiHostname + path;
     }
 
-    async fetch(path: string): Promise<any>  {
+    async fetch(path: string, payload?: object): Promise<any>  {
         const key: string = this.getCacheKey(path);
 
-        const stored = this.getFromCache(key);
+        const stored = !payload ? this.getFromCache(key) : null; // bypass the cache for POST requests
         if (stored) {
             return stored;
         }
@@ -69,9 +69,19 @@ export default class implements APIClientInterface {
         try {
             const start = Date.now();
 
-            const response = await fetch(url, {
-                credentials: 'include'
-            });
+            let options: any = {
+                credentials: 'include',
+                method: 'GET',
+                headers : { 'accept' : 'application/json' },
+            };
+
+            if (payload) {
+                options.method = 'POST';
+                options.body = JSON.stringify(payload);
+                options.headers['content-type'] = 'application/json';
+            }
+
+            const response = await fetch(url, options);
 
             const time = Date.now() - start;
             this.console.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);

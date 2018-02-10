@@ -41,9 +41,10 @@ export const moveShip: TokenHandlerInterface = async (
     apiClient: APIClientInterface,
     dispatch: Dispatch<any>
 ): Promise<void> => {
+    dispatch({type: PlayActionTypes.DEPARTING_PORT});
+
     alert('ACCEPTED');
 
-    // dispatch({type: EditActionTypes.ACCEPTING_SHIP_NAME});
     //
     // const data = await apiClient.fetch(`${token.path}?token=${token.token}`); // todo - use POST
     // if (!data) {

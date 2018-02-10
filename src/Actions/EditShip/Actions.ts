@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import EditActionTypes from './ActionTypes';
 import PlayActionTypes from '../Play/ActionTypes';
 import SessionActionTypes from '../Session/ActionTypes';
-import {APIClientInterface} from "../../Data/API/index";
+import {APIClientInterface} from "../../Data/API";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 import {TokenHandlerInterface} from "../TokenHandlerInterface";
 
@@ -14,7 +14,7 @@ export const requestShipName: TokenHandlerInterface = async (
 ): Promise<void> => {
     dispatch({type: EditActionTypes.REQUESTING_SHIP_NAME});
 
-    const data = await apiClient.fetch(`${token.path}?token=${token.token}`); // todo - use POST
+    const data = await apiClient.fetch(token.path, {token:token.token}); // todo - use POST
     if (!data) {
         // todo - some sort of error state action
         return;

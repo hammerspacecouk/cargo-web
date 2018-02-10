@@ -1,6 +1,8 @@
 export default {
     CHANGING_SHIP: Symbol(),
 
+    DEPARTING_PORT: Symbol(),
+
     RECEIVED_NO_SUCH_SHIP: Symbol(),
     RECEIVED_SHIP_DATA: Symbol(),
     RECEIVED_SHIP_LOCATION: Symbol(),

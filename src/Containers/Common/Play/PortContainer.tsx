@@ -2,8 +2,8 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 import * as PlayActions from "../../../Actions/Play/Actions";
-import {StateInterface} from "../../../State/index";
-import {APIClientInterface} from "../../../Data/API/index";
+import {StateInterface} from "../../../State";
+import {APIClientInterface} from "../../../Data/API";
 import PortInterface from "../../../DomainInterfaces/PortInterface";
 import DirectionsInterface from "../../../DomainInterfaces/DirectionsInterface";
 import DirectionInterface from "../../../DomainInterfaces/DirectionInterface";
@@ -14,6 +14,7 @@ interface Props {
     readonly directions: DirectionsInterface;
     readonly dispatch: Dispatch<any>;
     readonly apiClient: APIClientInterface;
+    readonly departingPort: boolean;
 }
 
 class Container extends React.Component<Props, undefined> {
@@ -37,6 +38,15 @@ class Container extends React.Component<Props, undefined> {
 
     // todo - break out into components
     render() {
+        if (this.props.departingPort) {
+            return (
+                <div>
+                    <h1>{this.props.port.name}</h1>
+                    <p>Departing...</p>
+                </div>
+            );
+        }
+
         return (
             <div>
                 <h1>{this.props.port.name}</h1>
@@ -83,5 +93,6 @@ export default connect(
         apiClient: state.environment.apiClient,
         port: state.play.currentPort,
         directions: state.play.directions,
+        departingPort: state.play.departingPort,
     })
 )(Container);

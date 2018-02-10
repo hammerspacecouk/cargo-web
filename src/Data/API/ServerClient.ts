@@ -1,10 +1,5 @@
 import {APIClientInterface} from "./index";
 
-interface StoredUrlData {
-    expires: any,
-    data: object
-}
-
 export default class implements APIClientInterface {
     private apiHostname: string;
     private console: Console;
