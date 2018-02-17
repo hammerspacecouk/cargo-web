@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 import {TokenHandlerInterface} from "../../Actions/TokenHandlerInterface";
-import {StateInterface} from "../../State/index";
-import {APIClientInterface} from "../../Data/API/index";
+import {StateInterface} from "../../State";
+import {APIClientInterface} from "../../Data/API";
 
 interface Props {
     readonly token: ActionTokenInterface;

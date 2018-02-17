@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as differenceInSeconds from 'date-fns/difference_in_seconds';
 
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
+import {connect} from "react-redux";
 
 interface Props {
     score: ScoreInterface;
@@ -13,10 +14,8 @@ interface LocalState {
     effectClass: string;
 }
 
-export default class extends React.Component<Props, LocalState> {
+class Container extends React.Component<Props, LocalState> {
 
-    public props: Props;
-    public state: LocalState;
     private allowAnimationUpdate: boolean;
 
     constructor(props: Props) {
@@ -96,3 +95,9 @@ export default class extends React.Component<Props, LocalState> {
         );
     }
 }
+
+export default connect(
+    (undefined, ownProps: any) => ({
+        score: ownProps.score
+    })
+)(Container);

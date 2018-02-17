@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 
 interface Props {

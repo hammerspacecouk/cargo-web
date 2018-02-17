@@ -1,6 +1,6 @@
 import SessionActionTypes from './ActionTypes';
 import {Dispatch} from "redux";
-import {APIClientInterface} from "../../Data/API/index";
+import {APIClientInterface} from "../../Data/API";
 
 export const refreshSession = async (apiClient: APIClientInterface, dispatch: Dispatch<any>): Promise<void> => {
 

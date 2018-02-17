@@ -1,4 +1,4 @@
-import {APIClientInterface} from "../Data/API/index";
+import {APIClientInterface} from "../Data/API";
 import Assets from "../Helpers/Assets";
 import {KeyValueInterface} from "../DomainInterfaces/KeyValueInterface";
 

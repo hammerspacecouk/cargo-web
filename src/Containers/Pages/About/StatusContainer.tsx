@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import {ReactElement} from "react";
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import {EnvironmentStateInterface} from "../../../State/Environment";
 
 interface Props {

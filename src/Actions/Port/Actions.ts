@@ -1,7 +1,7 @@
 import PortActionTypes from './ActionTypes';
 import {Dispatch} from "redux";
 
-import {APIClientInterface} from "../../Data/API/index";
+import {APIClientInterface} from "../../Data/API";
 
 export const fetchList = async (apiClient: APIClientInterface, dispatch: Dispatch<any>): Promise<void> => {
     dispatch({type: PortActionTypes.FETCHING_LIST});

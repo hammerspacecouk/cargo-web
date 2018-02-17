@@ -5,7 +5,7 @@ import {Route, Switch} from "react-router";
 import NotFound from "../../../Components/Error/NotFound";
 import BreadCrumbs from "../../../Components/BreadCrumbs";
 import ProfileContainer from "./ProfileContainer";
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import RequireLogin from "../../../Components/RequireLogin";
 import Loading from "../../../Components/Loading";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";

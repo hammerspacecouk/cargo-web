@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
 
 import {PATH_LIST as portsPath} from "../../../DomainInterfaces/PortInterface";
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import LoginForm from "../../Common/LoginFormContainer";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 

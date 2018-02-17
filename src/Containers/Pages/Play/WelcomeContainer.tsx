@@ -2,8 +2,8 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
-import {StateInterface} from "../../../State/index";
-import {APIClientInterface} from "../../../Data/API/index";
+import {StateInterface} from "../../../State";
+import {APIClientInterface} from "../../../Data/API";
 import ShipInterface, {PLAY_PATH_SHOW} from "../../../DomainInterfaces/ShipInterface";
 import {Redirect} from "react-router";
 

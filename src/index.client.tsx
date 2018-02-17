@@ -56,7 +56,7 @@ ReactDomRender(
 //
 //
 // // import DI from '../src/___to-move___/DI';
-// import App from '../src/index';
+// import App from '../src';
 // // import AppContainer from '../src/___to-move___/flux-test/AppContainer';
 //
 // // static assets

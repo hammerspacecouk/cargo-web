@@ -4,6 +4,8 @@ FROM node:9.2.1
 ARG BASE
 #FROM ${BASE}
 
+# todo - USER command for www-data. Can I haz non-priviledged containers?
+
 # Setup the application
 COPY ./nginx /etc/nginx/conf.d/
 COPY . /var/www

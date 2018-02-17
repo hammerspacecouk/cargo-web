@@ -4,8 +4,8 @@ import {Dispatch} from "redux";
 import {Link} from "react-router-dom";
 
 import * as PlayActions from "../../../Actions/Play/Actions";
-import {StateInterface} from "../../../State/index";
-import {APIClientInterface} from "../../../Data/API/index";
+import {StateInterface} from "../../../State";
+import {APIClientInterface} from "../../../Data/API";
 import PortContainer from "../../Common/Play/PortContainer";
 import TravellingContainer from "../../Common/Play/TravellingContainer";
 import Loading from "../../../Components/Loading";
@@ -21,6 +21,7 @@ interface Props {
     ship: ShipInterface;
     loaded: boolean;
     isInPort: boolean;
+    isInChannel: boolean;
     dispatch: Dispatch<any>;
     apiClient: APIClientInterface;
 }
@@ -28,7 +29,7 @@ interface Props {
 class Container extends React.Component<Props, undefined> {
     componentDidMount() {
         if (!this.props.ship || this.props.ship.id !== this.props.match.params.shipId) {
-            PlayActions.fetchShip(this.props.match.params.shipId, this.props.apiClient, this.props.dispatch);
+            PlayActions.changeShip(this.props.match.params.shipId, this.props.apiClient, this.props.dispatch);
         }
     }
 
@@ -40,7 +41,7 @@ class Container extends React.Component<Props, undefined> {
         let main = null;
         if (this.props.isInPort) {
             main = <PortContainer />
-        } else {
+        } else if (this.props.isInChannel) {
             main = <TravellingContainer/>
         }
 
@@ -61,5 +62,6 @@ export default connect(
         ship: state.play.ship,
         loaded: !state.play.fetching,
         isInPort: !!state.play.currentPort,
+        isInChannel: !!state.play.currentChannel,
     })
 )(Container);

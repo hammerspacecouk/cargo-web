@@ -15,8 +15,8 @@ import LoginEmail from "./Pages/LoginEmailContainer";
 import NotFound from "../Components/Error/NotFound";
 
 import {refreshSession} from '../Actions/Session/Actions';
-import {StateInterface} from "../State/index";
-import {APIClientInterface} from "../Data/API/index";
+import {StateInterface} from "../State";
+import {APIClientInterface} from "../Data/API";
 
 interface Props {
     dispatch: Dispatch<any>;
@@ -24,6 +24,7 @@ interface Props {
 }
 
 class Container extends React.Component<Props, undefined> {
+    private sessionRefreshTime: number = 1000 * 60 * 2;
     private allowUpdate: boolean = false;
     componentWillMount() {
         // todo - only do this on the server if it is not a public page
@@ -32,7 +33,7 @@ class Container extends React.Component<Props, undefined> {
 
     componentDidMount() {
         this.allowUpdate = true;
-        this.updateSession();
+        window.setTimeout(() => this.updateSession(), this.sessionRefreshTime);
     }
 
     componentWillUnmount() {
@@ -46,7 +47,7 @@ class Container extends React.Component<Props, undefined> {
 
         // todo - store an update time in the session prop and don't bother refetching if it is recent
         refreshSession(this.props.apiClient, this.props.dispatch);
-        window.setTimeout(() => this.updateSession(), 1000 * 120);
+        window.setTimeout(() => this.updateSession(), this.sessionRefreshTime);
     }
 
     render() {

@@ -5,8 +5,8 @@ import {Dispatch} from "redux";
 import * as PlayActions from "../../../Actions/Play/Actions";
 import * as EditShipActions from  "../../../Actions/EditShip/Actions";
 import EditShipActionTypes from  "../../../Actions/EditShip/ActionTypes";
-import {StateInterface} from "../../../State/index";
-import {APIClientInterface} from "../../../Data/API/index";
+import {StateInterface} from "../../../State";
+import {APIClientInterface} from "../../../Data/API";
 import Loading from "../../../Components/Loading";
 import NotFound from "../../../Components/Error/NotFound";
 import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
@@ -36,7 +36,7 @@ interface Props {
 class Container extends React.Component<Props, undefined> {
     componentDidMount() {
         if (!this.props.ship || this.props.ship.id !== this.props.match.params.shipId) {
-            PlayActions.fetchShip(this.props.match.params.shipId, this.props.apiClient, this.props.dispatch);
+            PlayActions.changeShip(this.props.match.params.shipId, this.props.apiClient, this.props.dispatch);
         }
     }
 

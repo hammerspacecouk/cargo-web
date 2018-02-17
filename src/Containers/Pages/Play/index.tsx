@@ -6,7 +6,7 @@ import EditContainer from "./EditContainer";
 import PlayContainer from "./PlayContainer";
 import WelcomeContainer from "./WelcomeContainer";
 import NotFound from "../../../Components/Error/NotFound";
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import RequireLogin from "../../../Components/RequireLogin";
 import Loading from "../../../Components/Loading";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";

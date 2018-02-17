@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from "redux";
 import * as PlayActions from "../../../Actions/Play/Actions";
 import {StateInterface} from "../../../State";
-import {APIClientInterface} from "../../../Data/API";
 import PortInterface from "../../../DomainInterfaces/PortInterface";
 import DirectionsInterface from "../../../DomainInterfaces/DirectionsInterface";
 import DirectionInterface from "../../../DomainInterfaces/DirectionInterface";
@@ -12,8 +10,6 @@ import TokenButton from "../../Common/TokenButton";
 interface Props {
     readonly port: PortInterface;
     readonly directions: DirectionsInterface;
-    readonly dispatch: Dispatch<any>;
-    readonly apiClient: APIClientInterface;
     readonly departingPort: boolean;
 }
 
@@ -90,7 +86,6 @@ class Container extends React.Component<Props, undefined> {
 
 export default connect(
     (state: StateInterface) => ({
-        apiClient: state.environment.apiClient,
         port: state.play.currentPort,
         directions: state.play.directions,
         departingPort: state.play.departingPort,

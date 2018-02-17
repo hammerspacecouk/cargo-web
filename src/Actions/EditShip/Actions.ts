@@ -14,7 +14,7 @@ export const requestShipName: TokenHandlerInterface = async (
 ): Promise<void> => {
     dispatch({type: EditActionTypes.REQUESTING_SHIP_NAME});
 
-    const data = await apiClient.fetch(token.path, {token:token.token}); // todo - use POST
+    const data = await apiClient.fetch(token.path, {token:token.token});
     if (!data) {
         // todo - some sort of error state action
         return;
@@ -44,7 +44,7 @@ export const acceptShipName: TokenHandlerInterface = async (
 ): Promise<void> => {
     dispatch({type: EditActionTypes.ACCEPTING_SHIP_NAME});
 
-    const data = await apiClient.fetch(`${token.path}?token=${token.token}`); // todo - use POST
+    const data = await apiClient.fetch(token.path, {token:token.token});
     if (!data) {
         // todo - some sort of error state action
         return;

@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
 import * as PortActions from "../../../Actions/Port/Actions";
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import Loading from "../../../Components/Loading";
 import {Link} from "react-router-dom";
-import {APIClientInterface} from "../../../Data/API/index";
+import {APIClientInterface} from "../../../Data/API";
 import Error from "../../../Components/Error/Error";
 import PortInterface, {PATH_SHOW} from "../../../DomainInterfaces/PortInterface";
 

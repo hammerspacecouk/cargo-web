@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
 import * as PortActions from "../../../Actions/Port/Actions";
-import {StateInterface} from "../../../State/index";
+import {StateInterface} from "../../../State";
 import Loading from "../../../Components/Loading";
-import {APIClientInterface} from "../../../Data/API/index";
+import {APIClientInterface} from "../../../Data/API";
 import NotFound from "../../../Components/Error/NotFound";
 import PortInterface from "../../../DomainInterfaces/PortInterface";
 
