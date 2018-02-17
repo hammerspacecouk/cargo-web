@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "noErrorTruncation": true,
     "noImplicitAny": true,
     "removeComments": true,
     "sourceMap": true,
     "module": "commonjs",
     "jsx": "react",
-    "target": "es6"
+    "target": "ES2017"
   },
   "include": [
     "src/*.ts",

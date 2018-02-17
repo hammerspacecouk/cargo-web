@@ -7,7 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 const settings = {
   entry: {
-    app: Path.resolve(__dirname, '../src/client.tsx'),
+    app: Path.resolve(__dirname, '../src/index.client.tsx'),
     vendor: [
       'react',
       'react-dom',
@@ -24,7 +24,7 @@ const settings = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      'scss': Path.resolve(__dirname, '../src/scss'),
+      'scss': Path.resolve(__dirname, '../src/assets/resources/scss'),
     }
   },
   module: {

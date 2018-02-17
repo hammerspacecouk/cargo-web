@@ -11,6 +11,4 @@ app.disable('x-powered-by'); // no need to tell the world what technology to att
 app.use(CookieParser());
 serverEntryScript.default(app);
 
-app.listen(port, function () {
-  console.log('Webapp listening on port 3000!')
-});
+app.listen(port, () => console.log(`Webapp listening on port ${port}`));
