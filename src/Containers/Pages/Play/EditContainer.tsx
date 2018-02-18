@@ -12,6 +12,7 @@ import NotFound from "../../../Components/Error/NotFound";
 import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
 import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 import TokenButton from "../../Common/TokenButton";
+import CreditsButton from "../../Common/CreditsButton";
 
 // todo - this is the same as PlayContainer - how do I share it?
 interface Props {
@@ -96,14 +97,14 @@ class Container extends React.Component<Props, undefined> {
                     <TokenButton token={this.props.requestShipNameToken}
                                  handler={EditShipActions.requestShipName}
                     >
-                        <button className="btn" type="submit" disabled={this.props.requestingShipName}>500 credits</button>
+                        <CreditsButton amount={500} disabled={this.props.requestingShipName} />
                     </TokenButton>
                     {name}
 
                     <h2>Upgrade ship</h2>
                     <p>Upgrade to a [X]: capacity [X]</p>
                     <form>
-                        <button className="btn" type="submit">500 credits</button>
+                        <CreditsButton amount={450} />
                     </form>
                 </div>
             </div>

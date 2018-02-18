@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as differenceInSeconds from 'date-fns/difference_in_seconds';
+import * as differenceInMilliseconds from 'date-fns/difference_in_milliseconds';
 
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 import {connect} from "react-redux";
@@ -13,6 +13,21 @@ interface LocalState {
     rate: string;
     effectClass: string;
 }
+
+export const getValue = (score: ScoreInterface, now: Date) => {
+    const calculationDate = new Date(score.datetime);
+    const millisecondsDiff = differenceInMilliseconds(now, calculationDate);
+
+    const earned = (millisecondsDiff / 1000) * score.rate;
+
+    const current = score.value + earned;
+
+    if (current < 0) {
+        return 0;
+    }
+
+    return current;
+};
 
 class Container extends React.Component<Props, LocalState> {
 
@@ -32,23 +47,8 @@ class Container extends React.Component<Props, LocalState> {
         return output.split('');
     }
 
-    getValue(score: ScoreInterface, now: Date): number {
-        const calculationDate = new Date(score.datetime);
-        const secondsDiff = differenceInSeconds(now, calculationDate);
-
-        const earned = secondsDiff * score.rate;
-
-        const current = score.value + earned;
-
-        if (current < 0) {
-            return 0;
-        }
-
-        return current;
-    }
-
     calculateScoreState(score: ScoreInterface): LocalState {
-        const value = this.getValue(score, new Date());
+        const value = getValue(score, new Date());
         let effectClass = '';
 
         if (score.rate < 0 && value <= 0) {

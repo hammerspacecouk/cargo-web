@@ -9,11 +9,12 @@ const settings = {
   entry: {
     app: Path.resolve(__dirname, '../src/index.client.tsx'),
     vendor: [
+      'redux',
       'react',
       'react-dom',
       'react-router-dom',
       'react-modal',
-      'moment',
+      'react-redux',
     ]
   },
   output: {
