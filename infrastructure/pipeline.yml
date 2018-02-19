@@ -205,7 +205,7 @@ Resources:
             post_build:
               commands:
                 - echo Static files to S3
-                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control max-age=31536000 --acl public-read
+                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control="max-age=31536000, immutable" --acl public-read
           artifacts:
             files: "**/*"
       Environment:

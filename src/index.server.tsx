@@ -21,12 +21,12 @@ declare namespace Server {
     }
 }
 
-const assetPrefix = process.env.assetPrefix; // todo - check
-const apiHostname = process.env.apiHostname; // todo - check
-const appVersion = process.env.appVersion; // todo - check
-const appEnv = process.env.appEnv; // todo - check
-const host = process.env.host; // todo - check
-const assets = new Assets(assetsManifest, apiHostname);
+const assetPrefix = process.env.APP_ASSET_PREFIX;
+const apiHostname = process.env.APP_API_HOSTNAME;
+const appVersion = process.env.APP_VERSION;
+const appEnv = process.env.APP_ENV;
+const host = process.env.HOSTNAME;
+const assets = new Assets(assetsManifest, assetPrefix);
 
 export default (app: Express.Application) => {
 
@@ -48,27 +48,27 @@ export default (app: Express.Application) => {
             assets,
         };
 
-        const store = createStore(reducers, {
-            environment
-        });
-
+        // const store = createStore(reducers, {
+        //     environment
+        // });
+        //
         // Render the component to a string
         const path = req.url;
-        //
+
         const context: Server.RouterContext = {
             url: null,
             status: null, // todo - how do we get these back out of the application?
         };
 
-        let appElement;
+        let appElement = '';
         try {
-            appElement = ReactDOMServer.renderToString(
-                <Provider store={store}>
-                    <StaticRouter location={path}>
-                        <AppContainer />
-                    </StaticRouter>
-                </Provider>
-            );
+            // appElement = ReactDOMServer.renderToString(
+            //     <Provider store={store}>
+            //         <StaticRouter location={path}>
+            //             <AppContainer />
+            //         </StaticRouter>
+            //     </Provider>
+            // );
         } catch (e) {
             const code = context.status || 500;
             res.status(code);
@@ -103,6 +103,15 @@ export default (app: Express.Application) => {
         <div id="root">${appElement}</div>
         <script src="${environment.assets.get('vendor.js')}"></script>
         <script>
+           window.__CONFIG = {
+             assetsManifest: ${JSON.stringify(assetsManifest)},
+             assetPrefix: '${assetPrefix}',
+             apiHostname: '${apiHostname}',
+             appVersion: '${appVersion}',
+             appEnv: '${appEnv}',
+             host: '${host}',
+          };
+        
           const supportsES6 = function() {
             try {
               new Function("(a = 0) => a");
@@ -121,7 +130,8 @@ export default (app: Express.Application) => {
         </html>
     `;
 
-        const code = context.status || 200;
+        // const code = context.status || 200;
+        const code = 200;
         res.status(code);
         res.set({
             'content-type' : 'text/html',

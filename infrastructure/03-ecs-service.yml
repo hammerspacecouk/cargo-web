@@ -12,9 +12,18 @@ Parameters:
   ECSRepository:
     Type: String
 
+  ApiHostname:
+    Type: String
+
+  AssetPrefix:
+    Type: String
+
   Environment:
     Type: String
     Default: prod
+
+  Environment:
+    Type: String
 
   ImageTag:
     Type: String
@@ -116,6 +125,10 @@ Resources:
               Value: !Ref ImageTag
             - Name: APP_ENV
               Value: !Ref Environment
+            - Name: APP_API_HOSTNAME
+              Value: !Ref ApiHostname
+            - Name: APP_ASSET_PREFIX
+              Value: !Ref AssetPrefix
           PortMappings:
             - ContainerPort: 3000
           LogConfiguration:
