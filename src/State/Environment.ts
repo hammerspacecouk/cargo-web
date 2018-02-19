@@ -2,8 +2,6 @@ import {APIClientInterface} from "../Data/API";
 import Assets from "../Helpers/Assets";
 import {KeyValueInterface} from "../DomainInterfaces/KeyValueInterface";
 
-// todo - docs explaining why this is different
-
 export interface EnvironmentStateInterface {
     assetsManifest?: KeyValueInterface,
     assetPrefix?: string,

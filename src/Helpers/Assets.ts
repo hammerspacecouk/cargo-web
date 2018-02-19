@@ -16,6 +16,10 @@ export default class {
         return '/' + asset;
     }
 
+    getKeys(): string[] {
+        return Object.keys(this.assets);
+    }
+
     getAll(): KeyValueInterface {
         return this.assets;
     };

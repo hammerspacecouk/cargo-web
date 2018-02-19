@@ -35,16 +35,12 @@ class Container extends React.Component<Props, undefined> {
         if (!assets) {
             return null;
         }
-        // todo - environment should hold the assets object
-        // const rows = [];
-        // for (const key in assets) {
-        //     rows.push(
-        //         <tr key={key}>
-        //             <td>{key}</td>
-        //             <td>{getAsset(key)}</td>
-        //         </tr>
-        //     );
-        // }
+        return assets.getKeys().map((key) => (
+            <tr key={key}>
+                <td>{key}</td>
+                <td><a href={assets.get(key)} target="_blank">{assets.get(key)}</a></td>
+            </tr>
+        ));
     }
 
     render() {

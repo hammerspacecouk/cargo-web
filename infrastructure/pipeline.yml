@@ -23,6 +23,9 @@ Parameters:
   TemplateBucket:
     Type: String
 
+  AssetPrefix:
+    Type: String
+
   AlphaALBStack:
     Type: String
 
@@ -32,6 +35,9 @@ Parameters:
   AlphaDesiredTaskCount:
     Type: Number
     Default: 1
+
+  AlphaApiHostname:
+    Type: String
 
   NodeImageTag:
     Type: String
@@ -328,7 +334,7 @@ Resources:
               OutputArtifacts:
                 - Name: BuildOutput
               RunOrder: 2
-        - Name: Deploy
+        - Name: DeployAlpha
           Actions:
             - Name: DeployAlpha
               ActionTypeId:
@@ -351,7 +357,9 @@ Resources:
                     "DesiredTaskCount": "${AlphaDesiredTaskCount}",
                     "ECSRepository": "${Repository}",
                     "Environment": "alpha",
-                    "NginxImageTag": "${NginxImageTag}"
+                    "NginxImageTag": "${NginxImageTag}",
+                    "ApiHostname": "${AlphaApiHostname}",
+                    "AssetPrefix": "${AssetPrefix}"
                   }
               InputArtifacts:
                 - Name: Template

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render as ReactDomRender} from 'react-dom';
+import {hydrate as ReactDomRender} from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 import { createStore } from 'redux';
@@ -21,7 +21,7 @@ const environment: EnvironmentStateInterface = (window as any).__CONFIG; // todo
 environment.isClient = true;
 environment.isServer = false;
 environment.apiClient = new BrowserClient(environment.apiHostname, console);
-environment.assets = new Assets(environment.assetsManifest, environment.apiHostname);
+environment.assets = new Assets(environment.assetsManifest, environment.assetPrefix);
 
 const store = createStore(reducers, {
     environment

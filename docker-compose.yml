@@ -19,18 +19,18 @@ services:
       api.dev.planetcargo.live: 172.19.0.1
     command:
 #### For development ###########
-#      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
-#      - "--config"
-#      - "webpack/dev.config.js"
-#      - "--host"
-#      - "0.0.0.0"
+      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+      - "--config"
+      - "webpack/dev.config.js"
+      - "--host"
+      - "0.0.0.0"
 #### For Testing prod server
-      - "sh"
-      - "-c"
-      - >
-        node_modules/webpack/bin/webpack.js --config webpack/client.config.js &&
-        node_modules/webpack/bin/webpack.js --config webpack/server.config.js &&
-        node server.js
+#      - "sh"
+#      - "-c"
+#      - >
+#        node_modules/webpack/bin/webpack.js --config webpack/client.config.js &&
+#        node_modules/webpack/bin/webpack.js --config webpack/server.config.js &&
+#        node server.js
 
   cargo-web-nginx:
     image: nginx:latest

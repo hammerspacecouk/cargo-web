@@ -27,12 +27,11 @@ class Container extends React.Component<Props, undefined> {
     private sessionRefreshTime: number = 1000 * 60 * 2;
     private allowUpdate: boolean = false;
     componentWillMount() {
-        // todo - only do this on the server if it is not a public page
-        refreshSession(this.props.apiClient, this.props.dispatch);
     }
 
     componentDidMount() {
         this.allowUpdate = true;
+        refreshSession(this.props.apiClient, this.props.dispatch); // todo - allow this on the server on private pages
         window.setTimeout(() => this.updateSession(), this.sessionRefreshTime);
     }
 

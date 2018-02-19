@@ -32,13 +32,12 @@ export default class Modal extends React.Component<Props, State> {
 
 
     render() {
-        const title = this.props.title || '';
-
-        // todo. on server just render the children (as you can't open modals on server)
+        // on server just render nothing (as you can't open modals on server)
         if (typeof window === 'undefined') {
-            return this.props.children;
+            return null;
         }
 
+        const title = this.props.title || '';
         const appElement = (window as any).document.getElementById('root');
 
         return (

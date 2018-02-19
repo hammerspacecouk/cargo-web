@@ -1,14 +1,19 @@
 import {APIClientInterface} from "./index";
 
+export interface UserCookieInterface {
+    name: string;
+    value: string;
+}
+
 export default class implements APIClientInterface {
     private apiHostname: string;
     private console: Console;
-    private userCookies: string[];
+    private userCookies: UserCookieInterface[];
 
-    constructor(apiHostname: string, userCookies: string[], console: Console) {
+    constructor(apiHostname: string, userCookies: UserCookieInterface[], console: Console) {
         this.apiHostname = apiHostname;
         this.console = console;
-        this.userCookies = userCookies; // todo - store the real cookies
+        this.userCookies = userCookies;
     }
 
     getUrl(path: string): string {
@@ -21,7 +26,7 @@ export default class implements APIClientInterface {
             const start = Date.now();
 
             const headers = {
-                cookie: this.userCookies.map((cookie: any): string => { // todo - UserCookie interface?
+                cookie: this.userCookies.map((cookie: UserCookieInterface): string => {
                     return encodeURIComponent(cookie.name) + '=' + encodeURIComponent(cookie.value);
                 }).join(';'),
             };

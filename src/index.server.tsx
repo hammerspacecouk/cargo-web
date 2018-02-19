@@ -9,7 +9,7 @@ import {EnvironmentStateInterface} from "./State/Environment";
 import console from "./Console";
 import AppContainer from './Containers/AppContainer';
 import Assets from './Helpers/Assets';
-import ServerClient from "./Data/API/ServerClient";
+import ServerClient, {UserCookieInterface} from "./Data/API/ServerClient";
 import reducers from './State';
 
 const assetsManifest = require('../build/assets-manifest.json');
@@ -28,6 +28,21 @@ const appEnv = process.env.APP_ENV;
 const host = process.env.HOSTNAME;
 const assets = new Assets(assetsManifest, assetPrefix);
 
+const formatUserCookies = (input: any): UserCookieInterface[] => {
+    const cookies = [];
+    for (let property in input) {
+        if (input.hasOwnProperty(property)) {
+            const userCookie: UserCookieInterface = {
+                name: property,
+                value: input[property]
+            };
+
+            cookies.push(userCookie);
+        }
+    }
+    return cookies;
+};
+
 export default (app: Express.Application) => {
 
     app.get('*', async (req, res, next) => {
@@ -44,31 +59,31 @@ export default (app: Express.Application) => {
             isClient : false,
             isServer : true,
 
-            apiClient : new ServerClient(apiHostname, [], console), // todo - get real cookies
+            apiClient : new ServerClient(apiHostname, formatUserCookies(req.cookies), console),
             assets,
         };
 
-        // const store = createStore(reducers, {
-        //     environment
-        // });
+        const store = createStore(reducers, {
+            environment
+        });
         //
         // Render the component to a string
         const path = req.url;
 
         const context: Server.RouterContext = {
             url: null,
-            status: null, // todo - how do we get these back out of the application?
+            status: null,
         };
 
         let appElement = '';
         try {
-            // appElement = ReactDOMServer.renderToString(
-            //     <Provider store={store}>
-            //         <StaticRouter location={path}>
-            //             <AppContainer />
-            //         </StaticRouter>
-            //     </Provider>
-            // );
+            appElement = ReactDOMServer.renderToString(
+                <Provider store={store}>
+                    <StaticRouter context={context} location={path}>
+                        <AppContainer />
+                    </StaticRouter>
+                </Provider>
+            );
         } catch (e) {
             const code = context.status || 500;
             res.status(code);
