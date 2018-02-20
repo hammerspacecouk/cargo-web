@@ -207,7 +207,7 @@ Resources:
                 - yarn
             build:
               commands:
-                - yarn server
+                - NODE_ENV=production && yarn server
             post_build:
               commands:
                 - echo Static files to S3
