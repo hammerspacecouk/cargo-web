@@ -26,6 +26,7 @@ const apiHostname = process.env.APP_API_HOSTNAME;
 const appVersion = process.env.APP_VERSION;
 const appEnv = process.env.APP_ENV;
 const host = process.env.HOSTNAME;
+const nodeEnv = process.env.NODE_ENV;
 const assets = new Assets(assetsManifest, assetPrefix);
 
 const formatUserCookies = (input: any): UserCookieInterface[] => {
@@ -55,6 +56,7 @@ export default (app: Express.Application) => {
             appVersion,
             appEnv,
             host,
+            nodeEnv,
 
             isClient : false,
             isServer : true,
@@ -116,6 +118,7 @@ export default (app: Express.Application) => {
         </head>
         <body>
         <div id="root">${appElement}</div>
+        <script src="${environment.assets.get('manifest.js')}"></script>
         <script src="${environment.assets.get('vendor.js')}"></script>
         <script>
            window.__CONFIG = {
@@ -125,6 +128,7 @@ export default (app: Express.Application) => {
              appVersion: '${appVersion}',
              appEnv: '${appEnv}',
              host: '${host}',
+             nodeEnv: '${nodeEnv}'
           };
         
           const supportsES6 = function() {
@@ -153,6 +157,7 @@ export default (app: Express.Application) => {
             'cache-control': 'no-cache', // todo - use this: activeRoute.cacheControl,
             'link': [
                 `<${environment.assets.get('app.css')}>; rel=preload; as=style`,
+                `<${environment.assets.get('manifest.js')}>; rel=preload; as=script`,
                 `<${environment.assets.get('vendor.js')}>; rel=preload; as=script`,
                 `<${environment.assets.get('app.js')}>; rel=preload; as=script`,
             ],

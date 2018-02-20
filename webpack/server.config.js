@@ -25,6 +25,9 @@ const settings = {
     ]
   },
   plugins: [
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     new Webpack.ProvidePlugin({
       'fetch': require.resolve('node-fetch')
     }),

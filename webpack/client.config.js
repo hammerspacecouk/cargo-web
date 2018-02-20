@@ -52,9 +52,15 @@ const settings = {
     ],
   },
   plugins: [
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new Webpack.HashedModuleIdsPlugin(),
     new Webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: '[chunkhash].vendor.js'
+      name: 'vendor'
+    }),
+    new Webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest'
     }),
     new UglifyJSPlugin(),
     new ExtractTextPlugin('[contenthash].[name].css'),

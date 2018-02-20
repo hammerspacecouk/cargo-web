@@ -68,6 +68,10 @@ class Container extends React.Component<Props, undefined> {
                             <th>API Hostname</th>
                             <td>{this.props.environment.apiHostname}</td>
                         </tr>
+                        <tr>
+                            <th>NODE_ENV</th>
+                            <td>{this.props.environment.nodeEnv}</td>
+                        </tr>
                         </tbody>
                     </table>
 

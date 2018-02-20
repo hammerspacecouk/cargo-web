@@ -9,6 +9,7 @@ export interface EnvironmentStateInterface {
     appVersion: string,
     appEnv: string,
     host: string,
+    nodeEnv: string,
     isClient: boolean;
     isServer: boolean;
 
