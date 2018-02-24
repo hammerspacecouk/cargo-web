@@ -31,6 +31,11 @@ export const fetchShipData = async (
         type: SessionActionTypes.SCORE_UPDATED,
         payload: data.playerScore,
     });
+
+    dispatch({
+        type: SessionActionTypes.PLAYER_RANK_UPDATED,
+        payload: data.playerRankStatus,
+    });
 };
 
 export const changeShip = async (

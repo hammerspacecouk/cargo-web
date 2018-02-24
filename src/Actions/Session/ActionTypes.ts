@@ -6,4 +6,5 @@ export default {
 
     SCORE_UPDATED: Symbol(),
     SHIPS_UPDATED: Symbol(),
+    PLAYER_RANK_UPDATED: Symbol(),
 };

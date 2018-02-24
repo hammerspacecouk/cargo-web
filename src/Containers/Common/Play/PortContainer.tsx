@@ -70,12 +70,12 @@ class Container extends React.Component<Props, undefined> {
                     </tr>
                     <tr>
                         <td>
-                            <h2>SE</h2>
-                            {this.renderDirection(this.props.directions.SE)}
-                        </td>
-                        <td>
                             <h2>SW</h2>
                             {this.renderDirection(this.props.directions.SW)}
+                        </td>
+                        <td>
+                            <h2>SE</h2>
+                            {this.renderDirection(this.props.directions.SE)}
                         </td>
                     </tr>
                 </tbody></table>
