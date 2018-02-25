@@ -12,6 +12,7 @@ export interface PlayStateInterface {
     currentPort?: PortInterface;
     currentChannel?: ChannelInterface;
     directions?: DirectionsInterface;
+    shipsInLocation?: ShipInterface[];
     departingPort: boolean;
 }
 
@@ -23,6 +24,7 @@ const initialState: PlayStateInterface = {
     currentPort: null,
     currentChannel: null,
     directions: null,
+    shipsInLocation: null
 };
 
 export default (state: PlayStateInterface = initialState, action: ActionInterface): PlayStateInterface => {
@@ -35,6 +37,7 @@ export default (state: PlayStateInterface = initialState, action: ActionInterfac
             newState.currentPort = null;
             newState.currentChannel = null;
             newState.directions = null;
+            newState.shipsInLocation = null;
             return newState;
         case PlayActionTypes.RECEIVED_SHIP_DATA:
             newState.ship = action.payload;
@@ -48,6 +51,7 @@ export default (state: PlayStateInterface = initialState, action: ActionInterfac
             newState.currentPort = action.payload.port;
             newState.directions = action.payload.directions;
             newState.currentChannel = action.payload.channel;
+            newState.shipsInLocation = action.payload.shipsInLocation;
             newState.fetching = false;
             return newState;
         case PlayActionTypes.RECEIVED_NO_SUCH_SHIP:

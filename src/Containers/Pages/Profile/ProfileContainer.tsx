@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {StateInterface} from "../../../State";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
+import PlayerFlag from "../../../Components/PlayerFlag";
 
 interface Props {
     player: PlayerInterface;
@@ -16,16 +17,11 @@ class Container extends React.Component<Props, undefined> {
         return (
             <div>
                 <h1>Profile</h1>
-                <p>ID: {this.props.player.id}</p>
-                <span style={{
-                    display: 'block',
-                    height: '40px',
-                    width: '100%',
-                    backgroundColor: this.props.player.colour
-                }} />
+                <PlayerFlag player={this.props.player} />
 
                 <h2>Rank</h2>
                 <h3>{this.props.rankStatus.currentRank.title}</h3>
+
 
                 <table>
                     <tbody>
@@ -50,6 +46,10 @@ class Container extends React.Component<Props, undefined> {
                         </tr>
                     </tbody>
                 </table>
+
+
+                <h2>Home port</h2>
+                <h3>todo</h3>
 
                 <ul>
                     <li><a href={`${this.props.apiHostname}/logout`}>Logout</a></li>

@@ -6,11 +6,18 @@ import PortInterface from "../../../DomainInterfaces/PortInterface";
 import DirectionsInterface from "../../../DomainInterfaces/DirectionsInterface";
 import DirectionInterface from "../../../DomainInterfaces/DirectionInterface";
 import TokenButton from "../../Common/TokenButton";
+import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
+import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
+import PlayerFlag from "../../../Components/PlayerFlag";
+import ScoreContainer from "../ScoreContainer";
+import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 
 interface Props {
     readonly port: PortInterface;
+    readonly playerRankStatus: RankStatusInterface;
     readonly directions: DirectionsInterface;
     readonly departingPort: boolean;
+    readonly shipsInLocation: ShipInterface[];
 }
 
 class Container extends React.Component<Props, undefined> {
@@ -43,10 +50,36 @@ class Container extends React.Component<Props, undefined> {
             );
         }
 
+        let welcome = null;
+        if (this.props.playerRankStatus.portsVisited === 0) {
+            welcome = (
+                <div className="text--prose">
+                <p>
+                    Welcome to {this.props.port.name}. It is a <strong>Safe Haven</strong>.
+                    It costs you nothing to be here and your ship cannot be harmed while it is here.
+                </p>
+                <p>
+                    This is your home port. Should you run out of time on the high seas,
+                    your ships will be returned to here
+                </p>
+                </div>
+            );
+        }
+
+        let players: React.ReactElement<HTMLLIElement>[] = [];
+        this.props.shipsInLocation.forEach((ship: ShipInterface) => {
+           players.push(
+                <li key={ship.id}>
+                    <h4><PlayerFlag player={ship.owner} size="mini" />{ship.name}</h4>
+                    <ScoreContainer score={ship.owner.score} />
+                </li>
+           );
+        });
+
         return (
             <div>
                 <h1>{this.props.port.name}</h1>
-
+                {welcome}
                 <table style={{"minWidth" : "400px"}}><tbody>
                     <tr>
                         <td>
@@ -79,6 +112,9 @@ class Container extends React.Component<Props, undefined> {
                         </td>
                     </tr>
                 </tbody></table>
+
+                <h2>Players</h2>
+                <ul>{players}</ul>
             </div>
         );
     }
@@ -87,7 +123,9 @@ class Container extends React.Component<Props, undefined> {
 export default connect(
     (state: StateInterface) => ({
         port: state.play.currentPort,
+        playerRankStatus: state.session.rankStatus,
         directions: state.play.directions,
         departingPort: state.play.departingPort,
+        shipsInLocation: state.play.shipsInLocation
     })
 )(Container);
