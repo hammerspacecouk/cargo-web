@@ -1,0 +1,137 @@
+.menu {
+  $menu-background-color: #353535;
+  $menu-background-color-hover: #272727;
+  $menu-text-color: #fff;
+  $menu-header-color: #999;
+  $menu-border-color: #4d4d4d;
+  $menu-border-color-under: #000;
+  $menu-item-height: 48px;
+
+  background: $menu-background-color;
+  color: $menu-text-color;
+  display: block;
+  position: fixed;
+  max-height: calc(100% - #{$masthead-height});
+  top: 48px;
+  width: 100%;
+  max-width: 400px;
+  transform: translate(0, -100%);
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+  z-index: $z-high-silver;
+
+  &--open {
+    transform: translate(0, 0);
+  }
+
+  // todo - remove
+  a:link, a:visited {
+    color: $menu-text-color
+  }
+
+  &__title {
+    color: $menu-header-color;
+    &--ships {
+      border-top: $menu-border-color-under solid 1px;
+      padding: ($grid-unit / 2) $grid-unit;
+    }
+  }
+
+  &__flag {
+    // todo - flags should be better
+    display: inline-block;
+    width: 30px;
+    float: right;
+    margin-left: $grid-unit;
+  }
+
+  &__ships {
+    @extend .list--unstyled;
+    border-top: $menu-border-color-under solid 1px;
+    border-bottom: solid 1px $menu-border-color-under;
+    min-height: 240px;
+  }
+
+  &__ship {
+    display: flex;
+    border-top: solid 1px $menu-border-color;
+    border-bottom: solid 1px $menu-border-color-under;
+  }
+
+  &__ship-link {
+    flex: 1;
+    padding: 0 $grid-unit;
+    line-height: $menu-item-height;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover, &:active, &:focus {
+      background: $menu-background-color-hover;
+      text-decoration: none;
+    }
+  }
+
+  &__ship-edit {
+    width: $menu-item-height;
+    height: $menu-item-height;
+    display: inline-block;
+    text-align: right;
+    padding: 14px;
+    fill: $menu-text-color;
+    &:hover, &:active, &:focus {
+      background: $menu-background-color-hover;
+    }
+  }
+
+  &__rank {
+    border-top: $menu-border-color solid 1px;
+    border-bottom: solid 1px $menu-border-color-under;
+    padding: 10px $grid-unit $grid-unit;
+  }
+  &__rank-row {
+    display: flex;
+    align-items: flex-end;
+    padding: ($grid-unit / 2) 0 0;
+
+    > :first-child {
+      flex: 1;
+      margin-right: $grid-unit;
+    }
+  }
+
+  &__footer {
+    border-top: $menu-border-color solid 1px;
+    display:flex;
+  }
+
+  &__footer-link {
+    display: flex;
+    width: 50%;
+    line-height: $menu-item-height;
+    fill: $menu-text-color;
+    &:first-child {
+      border-right: $menu-border-color solid 1px;
+    }
+    &:last-child {
+      border-left: $menu-border-color-under solid 1px;
+    }
+    &:hover, &:active, &:focus {
+      background: $menu-background-color-hover;
+      text-decoration: none;
+    }
+  }
+
+  &__footer-icon {
+    display: inline-block;
+    width: $menu-item-height;
+    height: $menu-item-height;
+    padding: 9px;
+  }
+
+  &__footer-text {
+    padding: 0 $grid-unit / 2;
+    line-height: $menu-item-height;
+    flex: 1;
+  }
+
+}

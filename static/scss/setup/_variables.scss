@@ -32,6 +32,7 @@ $grid-unit: 16px;
 $cta-size: 48px;
 
 $max-content-width: 1280px;
+$masthead-height: 48px;
 
 // Fonts
 $font-body: -apple-system,
@@ -48,3 +49,19 @@ $font-body: -apple-system,
   sans-serif;
 
 $font-heading: inherit;
+
+// z-indexes
+$z-modal-panel: 3100;
+$z-modal-blanking: 3000;
+
+$z-high-gold: 2200;
+$z-high-silver: 2100;
+$z-high-bronze: 2000;
+
+$z-page-gold: 1200;
+$z-page-silver: 1100;
+$z-page-bronze: 1000;
+
+$z-default: 1;
+$z-ground: 0;
+$z-buried: -1;

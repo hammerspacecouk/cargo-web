@@ -25,9 +25,6 @@ class Container extends React.Component<Props, undefined> {
 
         return (
             <div>
-                <BreadCrumbs crumbs={[
-                    {link: '/profile', title: 'Profile'},
-                ]} />
                 <Switch>
                     {/*<Route path="/profile/delete" component={DeleteContainer} exact={true} />*/}
                     <Route path="/profile" component={ProfileContainer} exact={true} />

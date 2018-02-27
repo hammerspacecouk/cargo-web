@@ -8,20 +8,36 @@ import {StateInterface} from "../../State";
 import LoginForm from './LoginFormContainer';
 import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
+import ShipInterface from "../../DomainInterfaces/ShipInterface";
+import AppMenu from "../../Components/Masthead/AppMenu";
+import RankStatusInterface from "../../DomainInterfaces/RankStatusInterface";
 
 interface Props {
-    sessionPlayer?: PlayerInterface;
-    sessionScore?: ScoreInterface;
+    readonly sessionPlayer?: PlayerInterface;
+    readonly sessionScore?: ScoreInterface;
+    readonly currentShip?: ShipInterface;
+    readonly playerRankStatus?: RankStatusInterface;
+    readonly playerShips?: ShipInterface[];
 }
 
-class Container extends React.Component<Props, undefined> {
+interface LocalState {
+    menuOpen: boolean
+}
+
+class Container extends React.Component<Props, LocalState> {
 
     constructor(props: Props) {
         super(props);
+        this.state = {
+            menuOpen : false,
+        };
+
         this.loginClicked = this.loginClicked.bind(this);
+        this.menuButtonHandler = this.menuButtonHandler.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     }
 
-    refs : {
+    refs: {
         loginModal: Modal;
     };
 
@@ -30,16 +46,36 @@ class Container extends React.Component<Props, undefined> {
         this.refs.loginModal.openModal();
     }
 
+    menuButtonHandler(event: React.MouseEvent<HTMLElement>) {
+        event.preventDefault();
+        this.setState({menuOpen: !this.state.menuOpen});
+    }
+
+    closeMenu() {
+        this.setState({menuOpen: false});
+    }
+
     render() {
         let masthead;
         if (this.props.sessionPlayer) {
-            masthead = <PlayerMasthead player={this.props.sessionPlayer}
-                                       score={this.props.sessionScore} />;
+            masthead = [
+                <PlayerMasthead key="masthead"
+                                currentShip={this.props.currentShip}
+                                menuButtonHandler={this.menuButtonHandler}
+                                score={this.props.sessionScore}/>,
+                <AppMenu key="appMenu"
+                         isOpen={this.state.menuOpen}
+                         linkClicked={this.closeMenu}
+                         player={this.props.sessionPlayer}
+                         playerRankStatus={this.props.playerRankStatus}
+                         playerShips={this.props.playerShips}
+                />
+            ];
         } else {
             masthead = [
-                <GuestMasthead key="masthead" loginClicked={this.loginClicked} />,
+                <GuestMasthead key="masthead" loginClicked={this.loginClicked}/>,
                 <Modal key="modal" ref="loginModal" title="Login">
-                    <LoginForm />
+                    <LoginForm/>
                 </Modal>
             ];
         }
@@ -52,6 +88,9 @@ export default connect(
     (state: StateInterface) => ({
         sessionPlayer: state.session.player,
         sessionScore: state.session.score,
+        playerRankStatus: state.session.rankStatus,
+        currentShip: state.play.ship,
+        playerShips: state.session.ships,
     }),
     null
 )(Container);

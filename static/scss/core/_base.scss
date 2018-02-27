@@ -2,6 +2,9 @@ body {
   background: $color-body;
   color: $color-text;
   font-family: $font-body;
+  margin: 0 auto;
+  padding-top: $masthead-height + $grid-unit;
+  max-width: $max-content-width;
 }
 
 a {

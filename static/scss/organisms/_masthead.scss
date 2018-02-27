@@ -1,7 +1,39 @@
 .masthead {
-  background: $color-black;
-  color: $color-white;
+  $masthead-background-color: #353535;
+  $masthead-background-color-hover: #272727;
+  $masthead-text-color: #fff;
+  $masthead-link-padding: 8px;
+
+  background: $masthead-background-color;
+  color: $masthead-text-color;
+  height: $masthead-height;
   display: flex;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: $max-content-width;
+  z-index: $z-high-gold;
+
+  &__box-link {
+    color: $masthead-text-color;
+    padding: $masthead-link-padding;
+    display: inline-block;
+    &:hover, &:active, &:focus {
+      background: $masthead-background-color-hover;
+      text-decoration: none;
+    }
+    &--menu {
+      width: $masthead-height;
+      height: $masthead-height;
+      fill: $masthead-text-color;
+    }
+    &--ship {
+      line-height: $masthead-height - (2 * $masthead-link-padding);
+    }
+  }
+
+
 
   &__logo {
     flex: 1;
@@ -23,6 +55,7 @@
   &__score {
     flex: 1;
     text-align: right;
-    padding: $grid-unit;
+    padding: 0 ($masthead-link-padding * 2);
+    line-height: $masthead-height;
   }
 }

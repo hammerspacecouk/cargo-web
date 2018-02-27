@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: $z-modal-blanking;
   }
 
   margin: $grid-unit;
@@ -20,6 +21,7 @@
   background: $color-body;
   border-radius: 4px;
   outline: none;
+  z-index: $z-modal-panel;
 
   &__header {
     height: $header-height;
