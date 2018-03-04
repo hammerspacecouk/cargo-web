@@ -52,21 +52,9 @@ class Container extends React.Component<Props, undefined> {
                 <h3>todo</h3>
 
                 <ul>
-                    <li><a href={`${this.props.apiHostname}/logout`}>Logout</a></li>
+                    <li><a className="btn" href={`${this.props.apiHostname}/logout`}>Logout</a></li>
+                    <li><a className="btn btn--soft-danger" href="/profile/delete">Delete account</a></li>
                 </ul>
-                <h2>Delete account - todo, screens</h2>
-                <p>
-                    1/3. Are you aware that if you go ahead to the last screen and press the
-                    ‘Yes’ button, you will lose all data and your account completely?
-                </p>
-                <p>
-                    2/3. Are you certain you understand that if you proceed and press the ‘Yes’
-                    button on the next screen that you will lose your game and it cannot be recovered?
-                </p>
-                <p>
-                    3/3. All data will now be deleted and you will be signed out.
-                    Press ‘Yes’ to proceed.
-                </p>
             </div>
         );
     }

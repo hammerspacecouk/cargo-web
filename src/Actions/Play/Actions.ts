@@ -53,7 +53,7 @@ export const changeShip = async (
 
     dispatch({
         type: EditShipActionTypes.RECEIVED_TOKEN_REQUEST_SHIP_NAME,
-        payload: data.requestShipNameToken
+        payload: data.requestShipName
     });
 
     dispatch({

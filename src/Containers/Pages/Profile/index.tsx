@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {Route, Switch} from "react-router";
 
 import NotFound from "../../../Components/Error/NotFound";
-import BreadCrumbs from "../../../Components/BreadCrumbs";
 import ProfileContainer from "./ProfileContainer";
+import DeleteContainer from "./DeleteContainer";
 import {StateInterface} from "../../../State";
 import RequireLogin from "../../../Components/RequireLogin";
 import Loading from "../../../Components/Loading";
@@ -26,7 +26,7 @@ class Container extends React.Component<Props, undefined> {
         return (
             <div>
                 <Switch>
-                    {/*<Route path="/profile/delete" component={DeleteContainer} exact={true} />*/}
+                    <Route path="/profile/delete" component={DeleteContainer} exact={true} />
                     <Route path="/profile" component={ProfileContainer} exact={true} />
                     <Route component={NotFound} />
                 </Switch>

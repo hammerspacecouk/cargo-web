@@ -3,6 +3,7 @@ import EditShipActionTypes from "../Actions/EditShip/ActionTypes";
 import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 
 export interface EditShipStateInterface {
+    requestShipNameCost: number;
     requestingShipName: boolean;
     acceptingShipName: boolean;
     offeredShipName?: string;
@@ -11,6 +12,7 @@ export interface EditShipStateInterface {
 }
 
 const initialState: EditShipStateInterface = {
+    requestShipNameCost: 0,
     requestingShipName: false,
     acceptingShipName: false,
     offeredShipName: null,
@@ -22,7 +24,8 @@ export default (state: EditShipStateInterface = initialState, action: ActionInte
     const newState: EditShipStateInterface = Object.assign({}, state);
     switch (action.type) {
         case EditShipActionTypes.RECEIVED_TOKEN_REQUEST_SHIP_NAME:
-            newState.requestShipNameToken = action.payload;
+            newState.requestShipNameToken = action.payload.actionToken;
+            newState.requestShipNameCost = action.payload.cost;
             return newState;
         case EditShipActionTypes.REQUESTING_SHIP_NAME:
             newState.requestingShipName = true;

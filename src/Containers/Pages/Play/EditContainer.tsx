@@ -24,6 +24,7 @@ interface Props {
     ship: ShipInterface;
     loaded: boolean;
 
+    requestShipNameCost: number;
     requestShipNameToken: ActionTokenInterface;
     requestingShipName: boolean;
     acceptingShipName: boolean;
@@ -97,7 +98,7 @@ class Container extends React.Component<Props, undefined> {
                     <TokenButton token={this.props.requestShipNameToken}
                                  handler={EditShipActions.requestShipName}
                     >
-                        <CreditsButton amount={500} disabled={this.props.requestingShipName} />
+                        <CreditsButton amount={this.props.requestShipNameCost} disabled={this.props.requestingShipName} />
                     </TokenButton>
                     {name}
 
@@ -122,6 +123,7 @@ export default connect(
         loaded: !state.play.fetching,
 
         requestShipNameToken: state.editShip.requestShipNameToken,
+        requestShipNameCost: state.editShip.requestShipNameCost,
         requestingShipName: state.editShip.requestingShipName,
         acceptingShipName: state.editShip.acceptingShipName,
         offeredShipName: state.editShip.offeredShipName,

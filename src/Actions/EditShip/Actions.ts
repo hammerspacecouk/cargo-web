@@ -27,7 +27,7 @@ export const requestShipName: TokenHandlerInterface = async (
 
     dispatch({
         type: EditActionTypes.RECEIVED_TOKEN_REQUEST_SHIP_NAME,
-        payload: data.requestShipNameToken
+        payload: data.requestShipName
     });
 
     // update the user score

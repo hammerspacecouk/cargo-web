@@ -25,6 +25,7 @@ class TokenButton extends React.Component<Props, undefined> {
     render() {
         return (
             <form method="post"
+                  className="form form--inline"
                   action={this.props.apiClient.getUrl(this.props.token.path)}
                   onSubmit={this.onSubmit.bind(this)}>
                 <input type="hidden" name="token" value={this.props.token.token} />

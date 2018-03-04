@@ -27,7 +27,7 @@ export default (props: Props) => {
                 <div className="menu__flag">
                     <PlayerFlag player={props.player} size="mini" />
                 </div>
-                Ships
+                My fleet
             </h2>
             <ul className="menu__ships">
                 {props.playerShips.map((ship: ShipInterface, i: number) => (
@@ -46,10 +46,9 @@ export default (props: Props) => {
             </ul>
 
             <div className="menu__rank">
-                <h2 className="menu__title c">Rank</h2>
+                <h2 className="menu__title c">My rank</h2>
                 <div className="menu__rank-row">
                     <h3 className="e">{props.playerRankStatus.currentRank.title}</h3>
-                    <p>{props.playerRankStatus.portsVisited}/1000</p>
                 </div>
                 <div className="menu__rank-row">
                     <ProgressBar percent={props.playerRankStatus.levelProgress} />

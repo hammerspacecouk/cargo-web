@@ -1,5 +1,6 @@
 .menu {
   $menu-background-color: #353535;
+  $menu-background-color-inactive: #1f1f1f;
   $menu-background-color-hover: #272727;
   $menu-text-color: #fff;
   $menu-header-color: #999;
@@ -48,14 +49,17 @@
   &__ships {
     @extend .list--unstyled;
     border-top: $menu-border-color-under solid 1px;
-    border-bottom: solid 1px $menu-border-color-under;
+    background: $menu-background-color-inactive;
     min-height: 240px;
+    overflow: auto;
+    max-height: calc(100vh - 340px);
   }
 
   &__ship {
     display: flex;
     border-top: solid 1px $menu-border-color;
     border-bottom: solid 1px $menu-border-color-under;
+    background: $menu-background-color;
   }
 
   &__ship-link {
