@@ -4,7 +4,6 @@ import {Dispatch} from "redux";
 
 import * as PlayActions from "../../../Actions/Play/Actions";
 import * as EditShipActions from  "../../../Actions/EditShip/Actions";
-import EditShipActionTypes from  "../../../Actions/EditShip/ActionTypes";
 import {StateInterface} from "../../../State";
 import {APIClientInterface} from "../../../Data/API";
 import Loading from "../../../Components/Loading";
@@ -13,6 +12,7 @@ import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface
 import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 import TokenButton from "../../Common/TokenButton";
 import CreditsButton from "../../Common/CreditsButton";
+import ShipNameContainer from "../../Common/ShipNameContainer";
 
 // todo - this is the same as PlayContainer - how do I share it?
 interface Props {
@@ -42,38 +42,11 @@ class Container extends React.Component<Props, undefined> {
         }
     }
 
-    rejectNameOffer(e: Event) {
-        e.preventDefault();
-        this.props.dispatch({type: EditShipActionTypes.REJECT_SHIP_NAME_OFFER});
-    }
-
     render() {
         if (!this.props.ship) {
             return this.props.loaded ? <NotFound message="You be making ship up" /> : <Loading />;
         }
 
-        // todo - break out components
-        let name = null;
-        if (this.props.offeredShipName) {
-            name = (
-                <TokenButton token={this.props.offeredShipNameToken}
-                             handler={EditShipActions.acceptShipName}>
-                    <h3>Name offered: {this.props.offeredShipName}</h3>
-                    <a href="." className="btn btn--soft-danger" onClick={this.rejectNameOffer.bind(this)}>Reject</a>
-                    <button className="btn btn--confirm" type="submit">Accept</button>
-                </TokenButton>
-            );
-        } else if (this.props.acceptingShipName) {
-            name = (<h3>Updating</h3>);
-        }
-
-        // todo - fancy animation to hide loading (look like its decrypting words on the fly)
-        // todo - use the form fields?
-        // todo also - this should be a POST
-        // todo - disable the button while in progress
-
-
-        // todo - real values obviously
         return (
             <div className="t-doc">
                 <h1 className="t-doc__title">
@@ -100,13 +73,7 @@ class Container extends React.Component<Props, undefined> {
                     >
                         <CreditsButton amount={this.props.requestShipNameCost} disabled={this.props.requestingShipName} />
                     </TokenButton>
-                    {name}
-
-                    <h2>Upgrade ship</h2>
-                    <p>Upgrade to a [X]: capacity [X]</p>
-                    <form>
-                        <CreditsButton amount={450} />
-                    </form>
+                    <ShipNameContainer />
                 </div>
             </div>
 
