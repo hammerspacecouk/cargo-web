@@ -165,7 +165,7 @@ class Container extends React.Component<Props, LocalState> {
                 <tr>
                     <td>
                         <h3 className="d">Name offered</h3>
-                        <p className="b" style={{fontFamily:"monospace"}}>{this.state.nameGuess}</p>
+                        <p className="b monospace">{this.state.nameGuess}</p>
                     </td>
                     <td className="text--right">
                         {acceptanceButtons}
