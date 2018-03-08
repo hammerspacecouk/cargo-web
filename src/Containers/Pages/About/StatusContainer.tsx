@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {ReactElement} from "react";
 import {StateInterface} from "../../../State";
 import {EnvironmentStateInterface} from "../../../State/Environment";
+import CrumbTitle from "../../../Components/CrumbTitle";
 
 interface Props {
     environment?: EnvironmentStateInterface;
@@ -46,8 +47,12 @@ class Container extends React.Component<Props, undefined> {
     render() {
         return (
             <div className="t-doc">
+                <div className="t-doc__title">
+                    <CrumbTitle crumbs={[{link:'/about', title: 'About Planet Cargo'}]}>
+                        Status
+                    </CrumbTitle>
+                </div>
                 <div className="t-doc__main">
-                    <h1>Status</h1>
                     <p className="right"><a
                         href={`${this.props.environment.apiHostname}/status`}
                         className="btn"

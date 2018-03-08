@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import {APIClientInterface} from "../../../Data/API";
 import Error from "../../../Components/Error/Error";
 import PortInterface, {PATH_SHOW} from "../../../DomainInterfaces/PortInterface";
+import CrumbTitle from "../../../Components/CrumbTitle";
 
 interface Props {
     ports: PortInterface[];
@@ -24,16 +25,31 @@ class Container extends React.Component<Props, undefined> {
     }
 
     render() {
-        if (!this.props.ports) {
-            return this.props.listLoaded ? <Error /> : <Loading />;
+        let ports = null;
+
+        if (this.props.ports) {
+            ports = (
+                <ul>{this.props.ports.map((port: PortInterface, index: number) => {
+                    return (
+                        <li key={index}><Link to={PATH_SHOW(port.id)}>{port.name}</Link></li>
+                    );
+                })}</ul>
+            );
+        } else {
+            ports = this.props.listLoaded ? <Error /> : <Loading />;
         }
 
         return (
-            <ul>{this.props.ports.map((port: PortInterface, index: number) => {
-                return (
-                    <li key={index}><Link to={PATH_SHOW(port.id)}>{port.name}</Link></li>
-                );
-            })}</ul>
+            <div className="t-doc">
+                <div className="t-doc__title">
+                    <CrumbTitle>
+                        Ports
+                    </CrumbTitle>
+                </div>
+                <div className="t-doc__main">
+                    {ports}
+                </div>
+            </div>
         );
     }
 }

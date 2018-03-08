@@ -69,7 +69,9 @@ class Container extends React.Component<Props, undefined> {
 
         return (
             <div className="t-doc">
-                <h1 className="t-doc__title text--center">WELCOME</h1>
+                <div className="t-doc__title">
+                    <h1>Welcome</h1>
+                </div>
                 <div className="t-doc__main">
                     <table>
                         <tbody>

@@ -9,11 +9,11 @@
   $menu-item-height: 48px;
 
   background: $menu-background-color;
+  pointer-events: auto;
   color: $menu-text-color;
   display: block;
-  position: fixed;
+  position: relative;
   max-height: calc(100% - #{$masthead-height});
-  top: 48px;
   width: 100%;
   max-width: 400px;
   transform: translate(0, -100%);

@@ -46,7 +46,7 @@ class Container extends React.Component<Props, undefined> {
         }
 
         return (
-            <main>
+            <main className="t-play__content-contain">
                 <h1>
                     {this.props.ship.name} (<Link to={`/play/${this.props.ship.id}/edit`}>edit</Link>)
                 </h1>

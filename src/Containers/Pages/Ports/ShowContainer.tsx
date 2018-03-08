@@ -8,6 +8,7 @@ import Loading from "../../../Components/Loading";
 import {APIClientInterface} from "../../../Data/API";
 import NotFound from "../../../Components/Error/NotFound";
 import PortInterface from "../../../DomainInterfaces/PortInterface";
+import CrumbTitle from "../../../Components/CrumbTitle";
 
 interface Props {
     match: {
@@ -27,14 +28,26 @@ class Container extends React.Component<Props, undefined> {
     }
 
     render() {
-        if (!this.props.port) {
-            return this.props.portLoaded ? <NotFound /> : <Loading />;
+        let portData = null;
+        let title = '';
+
+        if (this.props.port) {
+            portData = (
+                <p>{this.props.port.id}</p>
+            );
+            title = this.props.port.name;
+        } else {
+            portData = this.props.portLoaded ? <NotFound /> : <Loading />;
         }
         return (
             <div className="t-doc">
+                <div className="t-doc__title">
+                    <CrumbTitle crumbs={[{link:'/ports', title: 'Ports'}]}>
+                        {title}
+                    </CrumbTitle>
+                </div>
                 <div className="t-doc__main">
-                    <h1>{this.props.port.name}</h1>
-                    <p>{this.props.port.id}</p>
+                    {portData}
                 </div>
             </div>
         )

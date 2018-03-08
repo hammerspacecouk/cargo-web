@@ -17,7 +17,10 @@ export default class {
     }
 
     getKeys(): string[] {
-        return Object.keys(this.assets);
+        if (this.assets) {
+            return Object.keys(this.assets);
+        }
+        return [];
     }
 
     getAll(): KeyValueInterface {

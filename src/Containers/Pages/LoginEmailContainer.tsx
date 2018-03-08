@@ -29,7 +29,9 @@ class Container extends React.Component<Props, undefined> {
 
         return (
             <div className="t-doc">
-                <h1 className="t-doc__title">Login using e-mail</h1>
+                <div className="t-doc__title">
+                    <h1>Login using e-mail</h1>
+                </div>
                 <div className="t-doc__main">
                     <p>
                         Thank you for clicking the link in your e-mail.

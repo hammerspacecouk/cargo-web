@@ -22,7 +22,9 @@ class Container extends React.Component<Props, undefined> {
 
         return (
             <div className="t-doc">
-                <h1 className="t-doc__title">Login</h1>
+                <div className="t-doc__title">
+                    <h1>Login</h1>
+                </div>
                 <div className="t-doc__main">
                     <LoginFormContainer messages={this.props.messages}/>
                 </div>

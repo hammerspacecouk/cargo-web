@@ -1,12 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import CrumbTitle from "../../../Components/CrumbTitle";
 
 class Container extends React.Component<undefined, undefined> {
     render() {
         return (
             <div className="t-doc">
+                <div className="t-doc__title">
+                    <CrumbTitle crumbs={[{link:'/about', title: 'About Planet Cargo'}]}>
+                        Policies
+                    </CrumbTitle>
+                </div>
                 <div className="t-doc__main">
-                    <h1>Policies</h1>
                     <h2>Human readable</h2>
                     <h3>Security</h3>
                     <p>

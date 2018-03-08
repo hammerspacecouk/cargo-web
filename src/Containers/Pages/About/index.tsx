@@ -8,7 +8,6 @@ import StyleguideContainer from "./StyleguideContainer";
 import StatusContainer from "./StatusContainer";
 
 import NotFound from "../../../Components/Error/NotFound";
-import BreadCrumbs from "../../../Components/BreadCrumbs";
 
 
 class Container extends React.Component<undefined, undefined> {
@@ -16,10 +15,6 @@ class Container extends React.Component<undefined, undefined> {
     render() {
         return (
             <div>
-                <BreadCrumbs crumbs={[
-                    {link: '/', title: 'Home'},
-                    {link: '/about', title: 'About'},
-                ]} />
                 <Switch>
                     <Route path="/about/policies" component={PoliciesContainer} exact={true} />
                     <Route path="/about/status" component={StatusContainer} exact={true} />

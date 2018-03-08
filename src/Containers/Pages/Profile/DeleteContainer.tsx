@@ -5,6 +5,7 @@ import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface
 import {StateInterface} from "../../../State";
 import {parse as parseQueryString} from "query-string";
 import {RouteProps, withRouter} from "react-router";
+import CrumbTitle from "../../../Components/CrumbTitle";
 
 interface Props {
     apiHostname: string;
@@ -46,18 +47,24 @@ class Container extends React.Component<Props, undefined> {
         }
 
         return (
-            <div>
-                <h1>Delete account</h1>
-                <div className="text--prose">
-                    <h2>{stageNumber}/3</h2>
-                    <p>{stageText}</p>
+            <div className="t-doc">
+                <div className="t-doc__title">
+                    <CrumbTitle crumbs={[{link:'/profile', title: 'Profile'}]}>
+                        Delete account
+                    </CrumbTitle>
                 </div>
+                <div className="t-doc__main">
+                    <div className="text--prose">
+                        <h2>{stageNumber}/3</h2>
+                        <p>{stageText}</p>
+                    </div>
 
-                <div className="text--center">
-                    <a className="btn btn--confirm" href="/profile">Cancel</a>
-                    <TokenButton token={token}>
-                        <button type="submit" className="btn btn--danger">Yes</button>
-                    </TokenButton>
+                    <div className="text--center">
+                        <a className="btn btn--confirm" href="/profile">Cancel</a>
+                        <TokenButton token={token}>
+                            <button type="submit" className="btn btn--danger">Yes</button>
+                        </TokenButton>
+                    </div>
                 </div>
             </div>
         );

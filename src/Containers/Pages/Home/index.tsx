@@ -40,6 +40,13 @@ class Container extends React.Component<Props, undefined> {
                         <li><Link to="/about/styleguide">Styleguide</Link></li>
                         <li><Link to="/about/status">Status</Link></li>
                     </ul>
+                    <div className="text--prose">
+                        <p>
+                            There are <strong>1000</strong> ports to find. It will take some time to find them
+                            all. Find them by sending out ships. Explore faster by getting more ships.
+                            Get more ships by transporting cargo and owning ports.
+                        </p>
+                    </div>
                 </main>
                 <aside className="t-home__aside">
                     <p>More side stuff</p>

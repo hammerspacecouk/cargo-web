@@ -1,0 +1,52 @@
+.play-bar {
+  $root: &;
+  $play-bar-background-color: #353535;
+  $play-bar-background-color-hover: #272727;
+  $play-bar-text-color: #fff;
+
+  background: $play-bar-background-color;
+  color: $play-bar-text-color;
+  height: $play-bar-height;
+  overflow: hidden;
+
+  &__list {
+    @extend .list--inline;
+    display: flex;
+    padding: $grid-unit 0;
+    text-align: center;
+    justify-content: space-evenly;
+  }
+
+  &__item {
+    line-height: $grid-unit;
+  }
+
+  &__icon {
+    $icon-margin: 8px;
+
+    fill: $play-bar-text-color;
+    // determine height from the height of the bar minus the various paddings
+    height: $play-bar-height - (2 * $grid-unit) - $grid-unit - ($icon-margin / 2);
+    margin: 0 auto $icon-margin auto;
+    display: block;
+  }
+
+  // todo - handle play-bar__link--disabled
+  &__link {
+
+    @extend .f;
+    display: inline-block;
+    color: $play-bar-text-color;
+    padding: 0 $grid-unit;
+    text-transform: uppercase;
+    &:hover, &:active, &--active {
+      color: #1da1f2; // todo - variable
+      text-decoration: none;
+
+      #{$root}__icon {
+        fill: #1da1f2;
+      }
+    }
+
+  }
+}

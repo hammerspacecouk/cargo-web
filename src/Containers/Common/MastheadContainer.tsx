@@ -80,7 +80,13 @@ class Container extends React.Component<Props, LocalState> {
             ];
         }
 
-        return (<header>{masthead}</header>);
+        return (
+            <header className="masthead-position">
+                <div className="base-width-limit">
+                {masthead}
+                </div>
+            </header>
+        );
     }
 }
 

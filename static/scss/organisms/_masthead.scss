@@ -1,3 +1,10 @@
+.masthead-position {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
 .masthead {
   $masthead-background-color: #353535;
   $masthead-background-color-hover: #272727;
@@ -9,11 +16,9 @@
   height: $masthead-height;
   display: flex;
   overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: $max-content-width;
   z-index: $z-high-gold;
+  position: relative;
+  pointer-events: auto;
 
   &__box-link {
     color: $masthead-text-color;

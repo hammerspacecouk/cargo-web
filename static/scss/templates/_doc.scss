@@ -1,12 +1,17 @@
 .t-doc {
   display: grid;
-  grid-template-columns: [edge-left] 0 [main] calc(100% - 32px) 0 [edge-right];
+  grid-template-columns: [edge-left] 0 [main] calc(100% - #{($grid-unit * 2)}) 0 [edge-right];
   grid-gap: $grid-unit;
 }
 
 .t-doc__title {
-  grid-column: main;
-  margin: $grid-unit 0;
+  @extend %template-title-header;
+  grid-column: edge-left / edge-right;
+  > * {
+    margin: 0 auto;
+    max-width: $max-content-width;
+    padding: ($grid-unit * 2) $grid-unit;
+  }
 }
 
 .t-doc__main {
@@ -15,7 +20,7 @@
 
 @include mq($from: xxl) {
   .t-doc {
-    grid-template-columns: [edge-left] 1fr [main] 1232px 1fr [edge-right]; // todo - variables for number
+    grid-template-columns: [edge-left] 1fr [main] #{$max-content-width - ($grid-unit * 2)} 1fr [edge-right];
   }
 }
 

@@ -1,12 +1,17 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+import CrumbTitle from "../../../Components/CrumbTitle";
 
 class Container extends React.Component<undefined, undefined> {
     render() {
         return (
             <div className="t-doc">
-                <h1 className="t-doc__title">About Planet Cargo</h1>
+                <div className="t-doc__title">
+                    <CrumbTitle>
+                        About Planet Cargo
+                    </CrumbTitle>
+                </div>
                 <div className="t-doc__main">
                     <p>
                         More stuff. Twitter etc

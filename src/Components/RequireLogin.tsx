@@ -6,7 +6,9 @@ export default () => {
     return (
         <Status code={403}>
             <div className="t-doc">
-                <h1 className="t-doc__title">You must login to do this</h1>
+                <div className="t-doc__title">
+                    <h1>You must login to do this</h1>
+                </div>
                 <div className="t-doc__main">
                     <LoginForm />
                 </div>
