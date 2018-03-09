@@ -22,7 +22,7 @@ interface Props {
     apiClient: APIClientInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class ShowContainer extends React.Component<Props, undefined> {
     componentDidMount() {
         PortActions.fetchSingle(this.props.match.params.portId, this.props.apiClient, this.props.dispatch);
     }
@@ -60,4 +60,4 @@ export default connect(
         port: state.ports.port,
         portLoaded: !state.ports.fetchingPort,
     })
-)(Container);
+)(ShowContainer);

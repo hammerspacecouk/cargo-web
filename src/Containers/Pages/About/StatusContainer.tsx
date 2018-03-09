@@ -10,7 +10,7 @@ interface Props {
     environment?: EnvironmentStateInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class StatusContainer extends React.Component<Props, undefined> {
     appEnv: string;
     appVersion: string;
     host: string;
@@ -121,4 +121,4 @@ export default connect(
         environment: state.environment
     }),
     null
-)(Container);
+)(StatusContainer);

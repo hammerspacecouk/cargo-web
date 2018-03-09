@@ -14,7 +14,7 @@ export interface Props {
     messages?: MessageInterface[];
 }
 
-class Container extends React.Component<Props, undefined> {
+class LoginContainer extends React.Component<Props, undefined> {
     render() {
         if (this.props.player) {
             return <Redirect to="/play" />;
@@ -41,4 +41,4 @@ export default withRouter(connect(
         }
     },
     null
-)(Container) as any);
+)(LoginContainer) as any);

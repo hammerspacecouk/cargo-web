@@ -26,7 +26,7 @@ interface Props {
     apiClient: APIClientInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class PlayContainer extends React.Component<Props, undefined> {
     componentDidMount() {
         if (!this.props.ship || this.props.ship.id !== this.props.match.params.shipId) {
             PlayActions.changeShip(this.props.match.params.shipId, this.props.apiClient, this.props.dispatch);
@@ -64,4 +64,4 @@ export default connect(
         isInPort: !!state.play.currentPort,
         isInChannel: !!state.play.currentChannel,
     })
-)(Container);
+)(PlayContainer);

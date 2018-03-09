@@ -29,7 +29,7 @@ export const getValue = (score: ScoreInterface, now: Date) => {
     return current;
 };
 
-class Container extends React.Component<Props, LocalState> {
+class ScoreContainer extends React.Component<Props, LocalState> {
 
     private allowAnimationUpdate: boolean;
 
@@ -100,4 +100,4 @@ export default connect(
     (undefined, ownProps: any) => ({
         score: ownProps.score
     })
-)(Container);
+)(ScoreContainer);

@@ -25,7 +25,7 @@ interface Props {
     ship?: ShipInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class PlayIndexContainer extends React.Component<Props, undefined> {
 
     render() {
         // todo - abstract this for reuse
@@ -62,4 +62,4 @@ export default connect(
         ship: state.play.ship,
     }),
     null
-)(Container);
+)(PlayIndexContainer);

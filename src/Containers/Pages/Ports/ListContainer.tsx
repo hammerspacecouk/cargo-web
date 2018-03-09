@@ -18,7 +18,7 @@ interface Props {
     dispatch: Dispatch<any>;
 }
 
-class Container extends React.Component<Props, undefined> {
+class ListContainer extends React.Component<Props, undefined> {
 
     componentDidMount() {
         PortActions.fetchList(this.props.apiClient, this.props.dispatch);
@@ -60,4 +60,4 @@ export default connect(
         ports: state.ports.listedPorts,
         listLoaded : !state.ports.fetchingList
     })
-)(Container);
+)(ListContainer);

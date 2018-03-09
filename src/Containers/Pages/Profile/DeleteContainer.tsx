@@ -13,7 +13,7 @@ interface Props {
     stage: number;
 }
 
-class Container extends React.Component<Props, undefined> {
+class DeleteContainer extends React.Component<Props, undefined> {
 
     private textFirst: string = `Are you aware that if you go ahead to the last screen and press the
                     ‘Yes’ button, you will lose all data and your account completely?`;
@@ -81,4 +81,4 @@ export default withRouter(connect(
         }
     },
     null
-)(Container) as any);
+)(DeleteContainer) as any);

@@ -46,7 +46,7 @@ export default (props: Props) => {
     if (props.ship) {
         items.push(
             (
-                <li className="play-bar__item">
+                <li className="play-bar__item" key="location">
                     <Link to={`/play/${props.ship.id}`} className="play-bar__link">
                         {iconLocation}
                         Location
@@ -55,7 +55,7 @@ export default (props: Props) => {
             ),
             (
 
-                <li className="play-bar__item">
+                <li className="play-bar__item" key="map">
                     <Link to={`/play/${props.ship.id}/map`} className="play-bar__link">
                         {iconMap}
                         Map
@@ -63,7 +63,7 @@ export default (props: Props) => {
                 </li>
             ),
             (
-                <li className="play-bar__item">
+                <li className="play-bar__item" key="cargo">
                     <Link to={`/play/${props.ship.id}/cargo`} className="play-bar__link">
                         {iconCargo}
                         Cargo
@@ -74,7 +74,7 @@ export default (props: Props) => {
     } else {
         items.push(
             (
-                <li className="play-bar__item">
+                <li className="play-bar__item" key="location">
                     <span className="play-bar__link play-bar__link--disabled">
                         {iconLocation}
                         Location
@@ -83,7 +83,7 @@ export default (props: Props) => {
             ),
             (
 
-                <li className="play-bar__item">
+                <li className="play-bar__item" key="map">
                     <span className="play-bar__link play-bar__link--disabled">
                         {iconMap}
                         Map
@@ -91,7 +91,7 @@ export default (props: Props) => {
                 </li>
             ),
             (
-                <li className="play-bar__item">
+                <li className="play-bar__item" key="cargo">
                     <span className="play-bar__link play-bar__link--disabled">
                         {iconCargo}
                         Cargo

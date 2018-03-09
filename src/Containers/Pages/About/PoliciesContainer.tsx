@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import CrumbTitle from "../../../Components/CrumbTitle";
 
-class Container extends React.Component<undefined, undefined> {
+class PoliciesContainer extends React.Component<undefined, undefined> {
     render() {
         return (
             <div className="t-doc">
@@ -46,4 +46,4 @@ class Container extends React.Component<undefined, undefined> {
     }
 }
 
-export default connect()(Container);
+export default connect()(PoliciesContainer);

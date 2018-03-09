@@ -13,7 +13,7 @@ interface Props {
     apiHostname: string;
 }
 
-class Container extends React.Component<Props, undefined> {
+class ProfileContainer extends React.Component<Props, undefined> {
     render() {
         return (
             <div className="t-doc">
@@ -73,5 +73,5 @@ export default connect(
         rankStatus: state.session.rankStatus,
         apiHostname: state.environment.apiHostname,
     })
-)(Container);
+)(ProfileContainer);
 

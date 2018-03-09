@@ -12,7 +12,7 @@ interface Props {
     sessionChecked: boolean
 }
 
-class Container extends React.Component<Props, undefined> {
+class HomeIndexContainer extends React.Component<Props, undefined> {
     render() {
         let playPanel = <Link to="/play">Go to the islands >>></Link>;
 
@@ -62,4 +62,4 @@ export default connect(
         sessionChecked: state.session.playerFetched,
     }),
     null
-)(Container);
+)(HomeIndexContainer);

@@ -6,7 +6,7 @@ import ListContainer from "./ListContainer";
 import ShowContainer from "./ShowContainer";
 import NotFound from "../../../Components/Error/NotFound";
 
-class Container extends React.Component<undefined, undefined> {
+class PortsIndexContainer extends React.Component<undefined, undefined> {
 
     render() {
         return (
@@ -21,5 +21,5 @@ class Container extends React.Component<undefined, undefined> {
     }
 }
 
-export default connect()(Container);
+export default connect()(PortsIndexContainer);
 

@@ -15,7 +15,7 @@ interface Props {
     playerFetched: boolean;
 }
 
-class Container extends React.Component<Props, undefined> {
+class ProfileIndexContainer extends React.Component<Props, undefined> {
 
     render() {
         // todo - abstract this for reuse
@@ -41,4 +41,4 @@ export default connect(
         playerFetched: state.session.playerFetched
     }),
     null
-)(Container);
+)(ProfileIndexContainer);

@@ -7,7 +7,7 @@ interface Props {
 const SECONDS_IN_HOUR: number = 60 * 60;
 const SECONDS_IN_MINUTE: number = 60;
 
-class Container extends React.Component<Props, undefined> {
+class IntervalFormatContainer extends React.Component<Props, undefined> {
 
 
     getParts(seconds: number): string[] {
@@ -31,4 +31,4 @@ class Container extends React.Component<Props, undefined> {
     }
 }
 
-export default Container;
+export default IntervalFormatContainer;

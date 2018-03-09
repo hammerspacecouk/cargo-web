@@ -10,7 +10,7 @@ import StatusContainer from "./StatusContainer";
 import NotFound from "../../../Components/Error/NotFound";
 
 
-class Container extends React.Component<undefined, undefined> {
+class AboutIndexContainer extends React.Component<undefined, undefined> {
 
     render() {
         return (
@@ -27,5 +27,5 @@ class Container extends React.Component<undefined, undefined> {
     }
 }
 
-export default connect()(Container);
+export default connect()(AboutIndexContainer);
 

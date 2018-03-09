@@ -19,7 +19,7 @@ interface Props {
     apiClient: APIClientInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class PortfolioContainer extends React.Component<Props, undefined> {
 
     render() {
         return (
@@ -40,4 +40,4 @@ export default connect(
         isInPort: !!state.play.currentPort,
         isInChannel: !!state.play.currentChannel,
     })
-)(Container);
+)(PortfolioContainer);

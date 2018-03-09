@@ -24,7 +24,7 @@ interface LocalState {
     menuOpen: boolean
 }
 
-class Container extends React.Component<Props, LocalState> {
+class MastheadContainer extends React.Component<Props, LocalState> {
 
     constructor(props: Props) {
         super(props);
@@ -99,4 +99,4 @@ export default connect(
         playerShips: state.session.ships,
     }),
     null
-)(Container);
+)(MastheadContainer);

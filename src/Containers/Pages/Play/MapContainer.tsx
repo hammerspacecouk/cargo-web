@@ -20,7 +20,7 @@ interface Props {
     apiClient: APIClientInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class MapContainer extends React.Component<Props, undefined> {
 
     renderHexagons() {
         const width = 100;
@@ -73,4 +73,4 @@ export default connect(
         isInPort: !!state.play.currentPort,
         isInChannel: !!state.play.currentChannel,
     })
-)(Container);
+)(MapContainer);

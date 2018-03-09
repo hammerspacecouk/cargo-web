@@ -7,7 +7,6 @@ import DirectionsInterface from "../../../DomainInterfaces/DirectionsInterface";
 import DirectionInterface from "../../../DomainInterfaces/DirectionInterface";
 import TokenButton from "../../Common/TokenButton";
 import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
-import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 import PlayerFlag from "../../../Components/PlayerFlag";
 import ScoreContainer from "../ScoreContainer";
 import ShipInterface from "../../../DomainInterfaces/ShipInterface";
@@ -20,7 +19,7 @@ interface Props {
     readonly shipsInLocation: ShipInterface[];
 }
 
-class Container extends React.Component<Props, undefined> {
+class PortContainer extends React.Component<Props, undefined> {
 
     renderDirection(direction?: DirectionInterface) {
         if (!direction) {
@@ -128,4 +127,4 @@ export default connect(
         departingPort: state.play.departingPort,
         shipsInLocation: state.play.shipsInLocation
     })
-)(Container);
+)(PortContainer);

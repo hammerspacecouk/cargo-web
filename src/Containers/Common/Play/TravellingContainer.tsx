@@ -23,7 +23,7 @@ interface LocalState {
     isArriving: boolean;
 }
 
-class Container extends React.Component<Props, LocalState> {
+class TravellingContainer extends React.Component<Props, LocalState> {
 
     private allowAnimationUpdate: boolean;
     private allowArrivalCheck: boolean;
@@ -126,4 +126,4 @@ export default connect(
         channel: state.play.currentChannel,
         ship: state.play.ship,
     })
-)(Container);
+)(TravellingContainer);

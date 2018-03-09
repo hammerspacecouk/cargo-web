@@ -23,7 +23,7 @@ interface Props {
     apiClient: APIClientInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class AppContainer extends React.Component<Props, undefined> {
     private sessionRefreshTime: number = 1000 * 60 * 2;
     private allowUpdate: boolean = false;
     componentWillMount() {
@@ -77,6 +77,6 @@ export default withRouter(connect(
         apiClient: state.environment.apiClient,
     }),
     null
-)(Container) as any);
+)(AppContainer) as any);
 
 

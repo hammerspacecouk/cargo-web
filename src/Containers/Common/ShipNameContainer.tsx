@@ -24,13 +24,14 @@ interface Props {
     apiClient?: APIClientInterface;
 }
 
-class Container extends React.Component<Props, LocalState> {
+class ShipNameContainer extends React.Component<Props, LocalState> {
 
     private allowAnimationUpdate: boolean;
     private nameToMatch?: string = null;
     private overrideTimer: any;
     private guessArray?: string[];
     private characters: string[] = `abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ'`.split('');
+    private lastGuess: number = 0;
 
     constructor(props: Props) {
         super(props);
@@ -75,6 +76,7 @@ class Container extends React.Component<Props, LocalState> {
             return;
         }
 
+
         if (this.state.nameGuess && this.state.nameGuess.trim() === this.nameToMatch) {
             this.guessArray = null;
             this.overrideTimer = null;
@@ -84,6 +86,14 @@ class Container extends React.Component<Props, LocalState> {
             });
             return;
         }
+
+        const now = Date.now();
+        if (now < (this.lastGuess + 35)) {
+            // slow the animation down by only running every x milliseconds
+            window.requestAnimationFrame(() => this.updateGuess());
+            return;
+        }
+        this.lastGuess = now;
 
         if (!this.guessArray) {
             let guessStartLength = 25;
@@ -202,4 +212,4 @@ export default connect(
         offeredShipNameToken: state.editShip.offeredShipNameToken,
     }),
     null
-)(Container);
+)(ShipNameContainer);

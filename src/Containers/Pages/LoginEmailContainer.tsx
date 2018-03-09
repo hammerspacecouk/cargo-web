@@ -13,7 +13,7 @@ export interface Props {
     token?: string;
 }
 
-class Container extends React.Component<Props, undefined> {
+class LoginEmailContainer extends React.Component<Props, undefined> {
     render() {
         if (this.props.player) {
             return <Redirect to="/play" />;
@@ -56,4 +56,4 @@ export default withRouter(connect(
         }
     },
     null
-)(Container) as any);
+)(LoginEmailContainer) as any);

@@ -13,7 +13,7 @@ interface Props {
     rank: RankStatusInterface;
 }
 
-class Container extends React.Component<Props, undefined> {
+class WelcomeContainer extends React.Component<Props, undefined> {
 
     renderShip() {
         const flagColour = this.props.player.colour;
@@ -105,5 +105,5 @@ export default connect(
         rank: state.session.rankStatus,
         player: state.session.player,
     })
-)(Container);
+)(WelcomeContainer);
 

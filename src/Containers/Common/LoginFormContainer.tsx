@@ -10,7 +10,7 @@ interface Props {
     messages?: MessageInterface[];
 }
 
-class Container extends React.Component<Props, undefined> {
+class LoginFormContainer extends React.Component<Props, undefined> {
     // todo - client side submit
 
     render() {
@@ -30,5 +30,5 @@ export default connect(
         apiHostname: state.environment.apiHostname,
     }),
     null
-)(Container);
+)(LoginFormContainer);
 
