@@ -11,7 +11,6 @@ interface Props {
 }
 
 class LoginFormContainer extends React.Component<Props, undefined> {
-    // todo - client side submit
 
     render() {
         return <LoginFormComponent

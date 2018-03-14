@@ -25,7 +25,7 @@ export default (props: Props) => {
         <div className={`menu ${props.isOpen ? 'menu--open' : ''}`}>
             <h2 className="menu__title menu__title--ships c">
                 <div className="menu__flag">
-                    <PlayerFlag player={props.player} size="mini" />
+                    <PlayerFlag player={props.player} />
                 </div>
                 My fleet
             </h2>

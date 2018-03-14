@@ -69,7 +69,7 @@ class PortContainer extends React.Component<Props, undefined> {
         this.props.shipsInLocation.forEach((ship: ShipInterface) => {
            players.push(
                 <li key={ship.id}>
-                    <h4><PlayerFlag player={ship.owner} size="mini" />{ship.name}</h4>
+                    <h4><PlayerFlag player={ship.owner} />{ship.name}</h4>
                     <ScoreContainer score={ship.owner.score} />
                 </li>
            );
