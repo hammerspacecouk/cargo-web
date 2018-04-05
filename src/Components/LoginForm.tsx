@@ -109,10 +109,15 @@ export default (props: LoginFormProps) => {
                     send you a link that lets you login immediately. The link is valid for one hour and there are
                     no passwords required.
                 </p>
-                <p>
-                    <input id="login-email" type="email" name="target" required placeholder="name@example.com" />
-                    <button type="submit">Send</button>
-                </p>
+                <div className="form__group form__group--inline">
+                    <input id="login-email"
+                           type="email"
+                           name="target"
+                           className="input"
+                           required
+                           placeholder="name@example.com" />
+                    <button type="submit" className="btn">Send</button>
+                </div>
             </form>
             <p>
                 <a href="#">More info on our login policies</a>

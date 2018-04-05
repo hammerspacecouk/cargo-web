@@ -2,11 +2,12 @@
   outline: none;
   display: inline-block;
   border: none;
-  border-bottom: solid 3px rgba(0,0,0,0.2);
+  border-bottom: solid $size-input-border rgba(0,0,0,0.2);
   background: rgb(228, 228, 228);
   padding: $grid-unit / 2 $grid-unit;
   border-radius: 4px;
   user-select: none;
+  font-weight: bold;
   &:not([disabled]) {
     &:hover, &:focus {
       background: rgba(0,0,0,0.5);

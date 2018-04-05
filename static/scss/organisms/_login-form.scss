@@ -16,16 +16,14 @@
 
   &__social-item {
     @extend .e;
+    @extend .btn;
     display: inline-block;
     height: $social-button-height;
     padding: $social-button-padding;
     line-height: $social-button-height - (2 * $social-button-padding);
-    border-radius: 4px;
-    background: $color-black;
+    background: #4f4f4f;
     color: #fff;
     position: relative;
-    box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
-    font-weight: bold;
     &:after {
       content: "•";
       position: absolute;
@@ -41,8 +39,7 @@
     }
     &:hover,
     &:focus {
-      box-shadow: 1px 1px 6px rgba(0,0,0,0.9);
-      text-decoration: none;
+      background: initial;
     }
     &:active {
       box-shadow: none;

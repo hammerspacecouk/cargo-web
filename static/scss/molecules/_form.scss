@@ -2,4 +2,19 @@
   &--inline {
     display: inline;
   }
+
+  &__group {
+    display: block;
+    margin: $grid-unit / 2 0;
+
+    &--inline {
+      display: flex;
+      > * {
+        margin-left: $grid-unit;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
 }

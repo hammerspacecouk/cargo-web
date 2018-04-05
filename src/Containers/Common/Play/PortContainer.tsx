@@ -10,6 +10,7 @@ import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
 import PlayerFlag from "../../../Components/PlayerFlag";
 import ScoreContainer from "../ScoreContainer";
 import ShipInterface from "../../../DomainInterfaces/ShipInterface";
+import ShipList from "../../../Components/ShipList";
 
 interface Props {
     readonly port: PortInterface;
@@ -68,7 +69,7 @@ class PortContainer extends React.Component<Props, undefined> {
         let players: React.ReactElement<HTMLLIElement>[] = [];
         this.props.shipsInLocation.forEach((ship: ShipInterface) => {
            players.push(
-                <li key={ship.id}>
+                <li key={ship.id} className="player-list">
                     <h4><PlayerFlag player={ship.owner} />{ship.name}</h4>
                     <ScoreContainer score={ship.owner.score} />
                 </li>
@@ -113,7 +114,7 @@ class PortContainer extends React.Component<Props, undefined> {
                 </tbody></table>
 
                 <h2>Players</h2>
-                <ul>{players}</ul>
+                <ShipList ships={this.props.shipsInLocation} />
             </div>
         );
     }
