@@ -1,124 +1,132 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import * as React from "react";
+import { connect } from "react-redux";
 
-import {ReactElement} from "react";
-import {StateInterface} from "../../../State";
-import {EnvironmentStateInterface} from "../../../State/Environment";
+import { ReactElement } from "react";
+import { StateInterface } from "../../../State";
+import { EnvironmentStateInterface } from "../../../State/Environment";
 import CrumbTitle from "../../../Components/CrumbTitle";
 
 interface Props {
-    environment?: EnvironmentStateInterface;
+  environment?: EnvironmentStateInterface;
 }
 
 class StatusContainer extends React.Component<Props, undefined> {
-    appEnv: string;
-    appVersion: string;
-    host: string;
+  appEnv: string;
+  appVersion: string;
+  host: string;
 
-    constructor(props: any) {
-        super(props);
+  constructor(props: any) {
+    super(props);
 
-        if (typeof window !== 'undefined') {
-            const config = (window as any).__CONFIG;
+    if (typeof window !== "undefined") {
+      const config = (window as any).__CONFIG;
 
-            this.appEnv = config.appEnv;
-            this.appVersion = config.appVersion;
-            this.host = config.host;
-        } else if (process.env) {
-            this.appEnv = process.env.APP_ENV;
-            this.appVersion = process.env.APP_VERSION;
-            this.host = process.env.HOSTNAME;
-        }
+      this.appEnv = config.appEnv;
+      this.appVersion = config.appVersion;
+      this.host = config.host;
+    } else if (process.env) {
+      this.appEnv = process.env.APP_ENV;
+      this.appVersion = process.env.APP_VERSION;
+      this.host = process.env.HOSTNAME;
     }
+  }
 
-    renderAssets(): ReactElement<HTMLTableRowElement>[] {
-        const assets = this.props.environment.assets;
-        if (!assets) {
-            return null;
-        }
-        return assets.getKeys().map((key) => (
-            <tr key={key}>
-                <td>{key}</td>
-                <td><a href={assets.get(key)} target="_blank">{assets.get(key)}</a></td>
-            </tr>
-        ));
+  renderAssets(): ReactElement<HTMLTableRowElement>[] {
+    const assets = this.props.environment.assets;
+    if (!assets) {
+      return null;
     }
+    return assets.getKeys().map(key => (
+      <tr key={key}>
+        <td>{key}</td>
+        <td>
+          <a href={assets.get(key)} target="_blank">
+            {assets.get(key)}
+          </a>
+        </td>
+      </tr>
+    ));
+  }
 
-    render() {
-        return (
-            <div className="t-doc">
-                <div className="t-doc__title">
-                    <CrumbTitle crumbs={[{link:'/about', title: 'About Planet Cargo'}]}>
-                        Status
-                    </CrumbTitle>
-                </div>
-                <div className="t-doc__main">
-                    <p className="right"><a
-                        href={`${this.props.environment.apiHostname}/status`}
-                        className="btn"
-                        target="_blank"
-                    >API Status</a></p>
-                    <h2>App</h2>
-                    <table className="table table--striped">
-                        <tbody>
-                        <tr>
-                            <th>Environment</th>
-                            <td>{this.props.environment.appEnv}</td>
-                        </tr>
-                        <tr>
-                            <th>Version</th>
-                            <td>{this.props.environment.appVersion}</td>
-                        </tr>
-                        <tr>
-                            <th>API Hostname</th>
-                            <td>{this.props.environment.apiHostname}</td>
-                        </tr>
-                        <tr>
-                            <th>NODE_ENV</th>
-                            <td>{this.props.environment.nodeEnv}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+  render() {
+    return (
+      <div className="t-doc">
+        <div className="t-doc__title">
+          <CrumbTitle
+            crumbs={[{ link: "/about", title: "About Planet Cargo" }]}
+          >
+            Status
+          </CrumbTitle>
+        </div>
+        <div className="t-doc__main">
+          <p className="right">
+            <a
+              href={`${this.props.environment.apiHostname}/status`}
+              className="btn"
+              target="_blank"
+            >
+              API Status
+            </a>
+          </p>
+          <h2>App</h2>
+          <table className="table table--striped">
+            <tbody>
+              <tr>
+                <th>Environment</th>
+                <td>{this.props.environment.appEnv}</td>
+              </tr>
+              <tr>
+                <th>Version</th>
+                <td>{this.props.environment.appVersion}</td>
+              </tr>
+              <tr>
+                <th>API Hostname</th>
+                <td>{this.props.environment.apiHostname}</td>
+              </tr>
+              <tr>
+                <th>NODE_ENV</th>
+                <td>{this.props.environment.nodeEnv}</td>
+              </tr>
+            </tbody>
+          </table>
 
-                    <h2>Request</h2>
-                    <table className="table table--striped">
-                        <tbody>
-                        <tr>
-                            <th>Host</th>
-                            <td>{this.props.environment.host}</td>
-                        </tr>
-                        <tr>
-                            <th>Server Rendered</th>
-                            <td>{this.props.environment.isServer ? 'yes' : 'no'}</td>
-                        </tr>
-                        <tr>
-                            <th>Client Rendered</th>
-                            <td>{this.props.environment.isClient ? 'yes' : 'no'}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+          <h2>Request</h2>
+          <table className="table table--striped">
+            <tbody>
+              <tr>
+                <th>Host</th>
+                <td>{this.props.environment.host}</td>
+              </tr>
+              <tr>
+                <th>Server Rendered</th>
+                <td>{this.props.environment.isServer ? "yes" : "no"}</td>
+              </tr>
+              <tr>
+                <th>Client Rendered</th>
+                <td>{this.props.environment.isClient ? "yes" : "no"}</td>
+              </tr>
+            </tbody>
+          </table>
 
-                    <h2>Assets</h2>
-                    <table className="table table--striped">
-                        <thead>
-                        <tr>
-                            <th>Asset</th>
-                            <th>Full path</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {this.renderAssets()}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        )
-    }
+          <h2>Assets</h2>
+          <table className="table table--striped">
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Full path</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderAssets()}</tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default connect(
-    (state: StateInterface) => ({
-        environment: state.environment
-    }),
-    null
+  (state: StateInterface) => ({
+    environment: state.environment
+  }),
+  null
 )(StatusContainer);

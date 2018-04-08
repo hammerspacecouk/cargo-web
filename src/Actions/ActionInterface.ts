@@ -1,4 +1,4 @@
 export interface ActionInterface {
-    type: symbol;
-    payload?: any;
+  type: symbol;
+  payload?: any;
 }

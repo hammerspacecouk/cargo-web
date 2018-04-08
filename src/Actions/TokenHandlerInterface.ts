@@ -1,10 +1,12 @@
-import {Dispatch} from "redux";
+import { Dispatch } from "redux";
 
 import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
-import {APIClientInterface} from "../Data/API";
+import { APIClientInterface } from "../Data/API";
 
 export interface TokenHandlerInterface {
-    (token: ActionTokenInterface,
-     apiClient: APIClientInterface,
-     dispatch: Dispatch<any>): Promise<void>
+  (
+    token: ActionTokenInterface,
+    apiClient: APIClientInterface,
+    dispatch: Dispatch<any>
+  ): Promise<void>;
 }

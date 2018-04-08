@@ -1,57 +1,46 @@
-import * as React from 'react';
-import {hydrate as ReactDomRender} from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from "react-redux";
-import { createStore } from 'redux';
+import * as React from "react";
+import { hydrate as ReactDomRender } from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-import AppContainer from './Containers/AppContainer';
-import Assets from './Helpers/Assets';
-import reducers from './State';
-import {EnvironmentStateInterface} from "./State/Environment";
+import AppContainer from "./Containers/AppContainer";
+import Assets from "./Helpers/Assets";
+import reducers from "./State";
+import { EnvironmentStateInterface } from "./State/Environment";
 import BrowserClient from "./Data/API/BrowserClient";
 import console from "./Console";
 
 // static assets
-import '../static/scss/app.scss';
-import '../static/imgs';
-
+import "../static/scss/app.scss";
+import "../static/imgs";
 
 const environment: EnvironmentStateInterface = (window as any).__CONFIG; // todo - all stores here?
 
 environment.isClient = true;
 environment.isServer = false;
 environment.apiClient = new BrowserClient(environment.apiHostname, console);
-environment.assets = new Assets(environment.assetsManifest, environment.assetPrefix);
-
-const store = createStore(reducers, {
-    environment
-}, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__());
-ReactDomRender(
-    (
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppContainer />
-            </BrowserRouter>
-        </Provider>
-    ),
-    document.getElementById('root')
+environment.assets = new Assets(
+  environment.assetsManifest,
+  environment.assetPrefix
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const store = createStore(
+  reducers,
+  {
+    environment
+  },
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+);
+ReactDomRender(
+  <Provider store={store}>
+    <BrowserRouter>
+      <AppContainer />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
+);
 
 //
 //

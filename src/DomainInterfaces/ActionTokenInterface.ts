@@ -1,4 +1,4 @@
 export default interface ActionTokenInterface {
-    path: string;
-    token: string;
-}
+  path: string;
+  token: string;
+};

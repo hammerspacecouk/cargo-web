@@ -1,3 +1,3 @@
 export default interface RankInterface {
-    title: string;
-}
+  title: string;
+};
