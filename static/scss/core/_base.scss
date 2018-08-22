@@ -1,6 +1,6 @@
 body {
-  background: $color-body;
-  color: $color-text;
+  background: $color-body-bg;
+  color: $color-body-text;
   font-family: $font-body;
   margin: 0;
   padding: 0;
@@ -8,7 +8,7 @@ body {
 
 a {
   font-weight: inherit;
-  color: $color-link;
+  color: $color-body-link;
   text-decoration: inherit;
   &:hover,
   &:active,

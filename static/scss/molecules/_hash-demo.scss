@@ -1,0 +1,22 @@
+.m-hash-demo {
+  @extend .c;
+  font-family: monospace;
+  display: block;
+  padding: $grid-unit / 2;
+  background: $color-grey-darkest;
+  margin-bottom: $grid-unit;
+  &__email {
+    text-align: center;
+    &:after {
+      @extend .b;
+      content: "⬇";
+      display: block;
+      margin: ($grid-unit / 2) 0;
+    }
+  }
+  &__code {
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

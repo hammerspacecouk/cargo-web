@@ -8,6 +8,7 @@
   border-radius: 4px;
   user-select: none;
   font-weight: bold;
+  color: $color-black;
   &:not([disabled]) {
     &:hover, &:focus {
       background: rgba(0,0,0,0.5);
@@ -26,15 +27,13 @@
 
   &--confirm {
     background: $color-ok;
-    color: #fff;
   }
 
   &--danger {
-    background: $color-important;
-    color: #fff;
+    background: $color-danger;
   }
 
   &--soft-danger {
-    color: $color-important;
+    color: $color-danger;
   }
 }

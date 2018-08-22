@@ -1,4 +1,8 @@
 .panel {
   padding: $grid-unit;
-  background: $color-panel;
+  background: $color-panel-bg;
+  color: $color-panel-text;
+  a {
+    color: $color-tertiary-dark
+  }
 }

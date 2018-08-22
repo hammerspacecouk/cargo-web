@@ -18,7 +18,7 @@
   margin: $grid-unit;
   max-height: calc(100vh - #{(2 * $grid-unit)});
   border: $border-width solid rgb(204, 204, 204);
-  background: $color-body;
+  background: $color-body-bg;
   border-radius: 4px;
   outline: none;
   z-index: $z-modal-panel;

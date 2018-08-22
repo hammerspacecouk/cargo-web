@@ -33,6 +33,7 @@ img, svg {
 }
 svg:not(:root) {
   overflow: hidden;
+  fill: currentColor;
 }
 
 button,

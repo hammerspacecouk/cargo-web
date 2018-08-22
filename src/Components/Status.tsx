@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Route } from "react-router-dom";
+import { Route, RouteComponentProps } from "react-router-dom";
+import { StaticContext } from "react-router";
 
 interface Props {
   code: number;
@@ -8,9 +9,11 @@ interface Props {
 
 export default (props: Props) => (
   <Route
-    render={({ staticContext }) => {
+    render={({
+      staticContext
+    }: RouteComponentProps<any, StaticContext, any>) => {
       if (staticContext) {
-        staticContext.status = props.code;
+        staticContext.statusCode = props.code;
       }
       return props.children;
     }}

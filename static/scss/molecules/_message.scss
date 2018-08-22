@@ -1,0 +1,42 @@
+.m-message {
+  background: $color-info;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  color: $color-black;
+  padding: 0;
+  display: flex;
+  align-items: center;
+
+  & + &,
+  &-wrap:not(:first-child) {
+    margin-top: -1px;
+  }
+
+  &__icon {
+    $icon-size: 64px;
+    min-width: $icon-size;
+    height: $icon-size;
+    align-self: start;
+    padding: $grid-unit;
+    background: rgba(0, 0, 0, 0.2);
+    svg {
+      opacity: 0.6;
+    }
+  }
+
+  &--ok {
+    background: $color-ok;
+  }
+  &--error {
+    background: $color-danger;
+  }
+  &--warning {
+    background: $color-warning;
+  }
+
+  &__text {
+    padding: $grid-unit / 2 $grid-unit;
+    color: $color-black;
+  }
+
+
+}
