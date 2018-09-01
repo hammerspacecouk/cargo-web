@@ -1,37 +1,50 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
 
-import * as PortActions from "../../../Actions/Port/Actions";
-import { StateInterface } from "../../../State";
 import Loading from "../../../Components/Loading";
 import { Link } from "react-router-dom";
-import { APIClientInterface } from "../../../Data/API";
 import Error from "../../../Components/Error/Error";
 import PortInterface, {
   PATH_SHOW
 } from "../../../DomainInterfaces/PortInterface";
 import CrumbTitle from "../../../Components/CrumbTitle";
+import { fetchList } from "../../../Models/Port";
 
-interface Props {
-  ports: PortInterface[];
+interface StateInterface {
+  ports?: PortInterface[];
   listLoaded: boolean;
-  apiClient: APIClientInterface;
-  dispatch: Dispatch<any>;
 }
 
-class ListContainer extends React.Component<Props, undefined> {
-  componentDidMount() {
-    PortActions.fetchList(this.props.apiClient, this.props.dispatch);
+class ListContainer extends React.Component<undefined, StateInterface> {
+  constructor(props: undefined) {
+    super(props);
+    this.state = {
+      ports: null,
+      listLoaded: false
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const ports = await fetchList();
+      this.setState({
+        ports: ports.items,
+        listLoaded: true
+      });
+    } catch (e) {
+      this.setState({
+        ports: null,
+        listLoaded: true
+      });
+    }
   }
 
   render() {
     let ports = null;
 
-    if (this.props.ports) {
+    if (this.state.ports) {
       ports = (
         <ul>
-          {this.props.ports.map((port: PortInterface, index: number) => {
+          {this.state.ports.map((port: PortInterface, index: number) => {
             return (
               <li key={index}>
                 <Link to={PATH_SHOW(port.id)}>{port.name}</Link>
@@ -41,7 +54,7 @@ class ListContainer extends React.Component<Props, undefined> {
         </ul>
       );
     } else {
-      ports = this.props.listLoaded ? <Error /> : <Loading />;
+      ports = this.state.listLoaded ? <Error /> : <Loading />;
     }
 
     return (
@@ -55,8 +68,4 @@ class ListContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default connect((state: StateInterface) => ({
-  apiClient: state.environment.apiClient,
-  ports: state.ports.listedPorts,
-  listLoaded: !state.ports.fetchingList
-}))(ListContainer);
+export default ListContainer;

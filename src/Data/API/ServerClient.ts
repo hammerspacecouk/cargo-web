@@ -1,27 +1,10 @@
-import { APIClientInterface } from "./index";
-
-export interface UserCookieInterface {
-  name: string;
-  value: string;
-}
+import { APIClientInterface, UserCookieInterface } from "./index";
+import Environment from "../Environment";
+import Logger from "../Logger";
 
 export default class implements APIClientInterface {
-  private apiHostname: string;
-  private console: Console;
-  private userCookies: UserCookieInterface[];
-
-  constructor(
-    apiHostname: string,
-    userCookies: UserCookieInterface[],
-    console: Console
-  ) {
-    this.apiHostname = apiHostname;
-    this.console = console;
-    this.userCookies = userCookies;
-  }
-
   getUrl(path: string): string {
-    return this.apiHostname + path;
+    return Environment.apiHostname + path;
   }
 
   async fetch(path: string): Promise<any> {
@@ -30,7 +13,7 @@ export default class implements APIClientInterface {
       const start = Date.now();
 
       const headers = {
-        cookie: this.userCookies
+        cookie: Environment.cookies
           .map((cookie: UserCookieInterface): string => {
             return (
               encodeURIComponent(cookie.name) +
@@ -44,7 +27,7 @@ export default class implements APIClientInterface {
       const response = await fetch(url, { headers });
 
       const time = Date.now() - start;
-      this.console.info(
+      Logger.info(
         `[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`
       );
 
@@ -63,7 +46,7 @@ export default class implements APIClientInterface {
 
       return response.json();
     } catch (e) {
-      this.console.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
+      Logger.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
       throw e;
     }
   }

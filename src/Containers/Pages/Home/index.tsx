@@ -1,10 +1,7 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { PATH_LIST as portsPath } from "../../../DomainInterfaces/PortInterface";
-import { StateInterface } from "../../../State";
-import LoginForm from "../../Common/LoginFormContainer";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
 
 interface Props {
@@ -12,13 +9,14 @@ interface Props {
   sessionChecked: boolean;
 }
 
-class HomeIndexContainer extends React.Component<Props, undefined> {
+class HomeIndexContainer extends React.Component<undefined, undefined> {
   render() {
     let playPanel = <Link to="/play">Go to the islands >>></Link>;
 
-    if (this.props.sessionChecked && !this.props.sessionPlayer) {
-      playPanel = <LoginForm />;
-    }
+    // todo - check this differently on the homepage so it doesn't create a new player immediately
+    // if (this.props.sessionChecked && !this.props.sessionPlayer) {
+    //   playPanel = <LoginForm />;
+    // }
 
     return (
       <div className="t-home">
@@ -67,10 +65,4 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default connect(
-  (state: StateInterface): Props => ({
-    sessionPlayer: state.session.player,
-    sessionChecked: state.session.playerFetched
-  }),
-  null
-)(HomeIndexContainer);
+export default HomeIndexContainer;

@@ -1,44 +1,28 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { RouteProps, withRouter, Redirect } from "react-router";
+import { RouteProps, withRouter } from "react-router";
 
-import LoginFormContainer from "../Common/LoginFormContainer";
-import MessageInterface from "../../DomainInterfaces/MessageInterface";
+import LoginForm from "../../Components/LoginForm";
 
-import messageQueryString from "../../Helpers/MessageQueryString";
-import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
-import { StateInterface } from "../../State";
+import messageQueryString from "../../Utils/MessageQueryString";
+import EnsureLoggedOut from "../Common/EnsureLoggedOut";
 
-export interface Props {
-  player?: PlayerInterface;
-  messages?: MessageInterface[];
-}
-
-class LoginContainer extends React.Component<Props, undefined> {
+class LoginContainer extends React.Component<RouteProps, undefined> {
   render() {
-    if (this.props.player) {
-      return <Redirect to="/play" />;
-    }
-
     return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <h1>Login</h1>
+      <EnsureLoggedOut>
+        <div className="t-doc">
+          <div className="t-doc__title">
+            <h1>Login</h1>
+          </div>
+          <div className="t-doc__main">
+            <LoginForm
+              messages={messageQueryString(this.props.location.search)}
+            />
+          </div>
         </div>
-        <div className="t-doc__main">
-          <LoginFormContainer messages={this.props.messages} />
-        </div>
-      </div>
+      </EnsureLoggedOut>
     );
   }
 }
 
-export default withRouter(connect(
-  (state: StateInterface, props: RouteProps) => {
-    return {
-      messages: messageQueryString(props.location.search),
-      player: state.session.player
-    };
-  },
-  null
-)(LoginContainer) as any);
+export default withRouter(LoginContainer as any);

@@ -1,14 +1,10 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
 
-import * as PortActions from "../../../Actions/Port/Actions";
-import { StateInterface } from "../../../State";
 import Loading from "../../../Components/Loading";
-import { APIClientInterface } from "../../../Data/API";
 import NotFound from "../../../Components/Error/NotFound";
 import PortInterface from "../../../DomainInterfaces/PortInterface";
 import CrumbTitle from "../../../Components/CrumbTitle";
+import { getPort } from "../../../Models/Port";
 
 interface Props {
   match: {
@@ -16,30 +12,46 @@ interface Props {
       portId: string;
     };
   };
-  port: PortInterface;
-  portLoaded: boolean;
-  dispatch: Dispatch<any>;
-  apiClient: APIClientInterface;
 }
 
-class ShowContainer extends React.Component<Props, undefined> {
-  componentDidMount() {
-    PortActions.fetchSingle(
-      this.props.match.params.portId,
-      this.props.apiClient,
-      this.props.dispatch
-    );
+interface StateInterface {
+  port?: PortInterface;
+  portLoaded: boolean;
+}
+
+class ShowContainer extends React.Component<Props, StateInterface> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      port: null,
+      portLoaded: false
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const port = await getPort(this.props.match.params.portId);
+      this.setState({
+        port,
+        portLoaded: true
+      });
+    } catch (e) {
+      this.setState({
+        port: null,
+        portLoaded: true
+      });
+    }
   }
 
   render() {
     let portData = null;
     let title = "";
 
-    if (this.props.port) {
-      portData = <p>{this.props.port.id}</p>;
-      title = this.props.port.name;
+    if (this.state.port) {
+      portData = <p>{this.state.port.id}</p>;
+      title = this.state.port.name;
     } else {
-      portData = this.props.portLoaded ? <NotFound /> : <Loading />;
+      portData = this.state.portLoaded ? <NotFound /> : <Loading />;
     }
     return (
       <div className="t-doc">
@@ -54,8 +66,4 @@ class ShowContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default connect((state: StateInterface) => ({
-  apiClient: state.environment.apiClient,
-  port: state.ports.port,
-  portLoaded: !state.ports.fetchingPort
-}))(ShowContainer);
+export default ShowContainer;

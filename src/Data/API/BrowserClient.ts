@@ -1,5 +1,7 @@
 import CacheControl from "./CacheControlHelper";
 import { APIClientInterface } from "./index";
+import Logger from "../Logger";
+import Environment from "../Environment";
 
 interface StoredUrlData {
   expires: any;
@@ -9,14 +11,10 @@ interface StoredUrlData {
 export default class implements APIClientInterface {
   private cachePrefix: string = "cargo-data-";
   private canStore: boolean;
-  private apiHostname: string;
-  private console: Console;
 
-  constructor(apiHostname: string, console: Console) {
+  constructor() {
     // just in case the user has disabled it or private browsing or something
     this.canStore = "sessionStorage" in window;
-    this.apiHostname = apiHostname;
-    this.console = console;
   }
 
   getCacheKey(path: string): string {
@@ -54,7 +52,7 @@ export default class implements APIClientInterface {
   }
 
   getUrl(path: string): string {
-    return this.apiHostname + path;
+    return Environment.apiHostname + path;
   }
 
   async fetch(path: string, payload?: object): Promise<any> {
@@ -84,7 +82,7 @@ export default class implements APIClientInterface {
       const response = await fetch(url, options);
 
       const time = Date.now() - start;
-      this.console.info(
+      Logger.info(
         `[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`
       );
 
@@ -108,7 +106,7 @@ export default class implements APIClientInterface {
       this.setInCache(key, data, new CacheControl(cacheControl));
       return data;
     } catch (e) {
-      this.console.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
+      Logger.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
       throw e;
     }
   }

@@ -1,35 +1,38 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
-import { StateInterface } from "../../../State";
-import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
-import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
+import Environment from "../../../Data/Environment";
+import { SessionContext } from "../../../Context/SessionContext";
+
 import PlayerFlag from "../../../Components/PlayerFlag";
 import CrumbTitle from "../../../Components/CrumbTitle";
+import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
+import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
 
-interface Props {
-  player: PlayerInterface;
-  rankStatus: RankStatusInterface;
-  apiHostname: string;
-}
-
-class ProfileContainer extends React.Component<Props, undefined> {
+class ProfileContainer extends React.Component<undefined, undefined> {
   render() {
+    return (
+      <SessionContext.Consumer>
+        {({ player, rankStatus }) => this.renderPage(player, rankStatus)}
+      </SessionContext.Consumer>
+    );
+  }
+
+  renderPage(player: PlayerInterface, rankStatus: RankStatusInterface) {
     return (
       <div className="t-doc">
         <div className="t-doc__title">
           <CrumbTitle>Profile</CrumbTitle>
         </div>
         <div className="t-doc__main">
-          <PlayerFlag player={this.props.player} />
+          <PlayerFlag player={player} />
 
           <h2>Rank</h2>
-          <h3>{this.props.rankStatus.currentRank.title}</h3>
+          <h3>{rankStatus.currentRank.title}</h3>
 
           <table>
             <tbody>
               <tr>
-                <td>{this.props.rankStatus.currentRank.title}</td>
+                <td>{rankStatus.currentRank.title}</td>
                 <td style={{ minWidth: "400px" }}>
                   <div
                     style={{
@@ -46,12 +49,12 @@ class ProfileContainer extends React.Component<Props, undefined> {
                       style={{
                         height: "32px",
                         background: "#6c6",
-                        width: `${this.props.rankStatus.levelProgress}%`
+                        width: `${rankStatus.levelProgress}%`
                       }}
                     />
                   </div>
                 </td>
-                <td>{this.props.rankStatus.nextRank.title}</td>
+                <td>{rankStatus.nextRank.title}</td>
               </tr>
             </tbody>
           </table>
@@ -61,7 +64,7 @@ class ProfileContainer extends React.Component<Props, undefined> {
 
           <ul>
             <li>
-              <a className="btn" href={`${this.props.apiHostname}/logout`}>
+              <a className="btn" href={`${Environment.apiHostname}/logout`}>
                 Logout
               </a>
             </li>
@@ -77,8 +80,4 @@ class ProfileContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default connect((state: StateInterface) => ({
-  player: state.session.player,
-  rankStatus: state.session.rankStatus,
-  apiHostname: state.environment.apiHostname
-}))(ProfileContainer);
+export default ProfileContainer;

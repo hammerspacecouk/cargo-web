@@ -1,23 +1,64 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { StateInterface } from "../../../State";
 import ShipInterface, {
   PLAY_PATH_SHOW
 } from "../../../DomainInterfaces/ShipInterface";
 import { Redirect } from "react-router";
-import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
+import { SessionContext } from "../../../Context/SessionContext";
 
-interface Props {
-  ship: ShipInterface;
-  player: PlayerInterface;
-  rank: RankStatusInterface;
-}
+class WelcomeContainer extends React.Component<undefined, undefined> {
+  render() {
+    return (
+      <SessionContext.Consumer>
+        {({ ships, rankStatus, player }) => {
+          const firstShip = ships[0];
 
-class WelcomeContainer extends React.Component<Props, undefined> {
-  renderShip() {
-    const flagColour = this.props.player.colour;
+          if (rankStatus.portsVisited > 0) {
+            return <Redirect to={PLAY_PATH_SHOW(firstShip.id)} />;
+          }
+
+          return this.renderPage(firstShip, player);
+        }}
+      </SessionContext.Consumer>
+    );
+  }
+
+  renderPage(firstShip: ShipInterface, player: PlayerInterface) {
+    return (
+      <div className="t-doc">
+        <div className="t-doc__title">
+          <h1>Welcome</h1>
+        </div>
+        <div className="t-doc__main">
+          <table>
+            <tbody>
+              <tr>
+                <td style={{ width: "50%" }}>
+                  {this.renderShip(firstShip, player)}
+                </td>
+                <td className="text--prose">
+                  <p>
+                    This is your first ship. It can carry 2 crates. It will be
+                    placed in a safe port where you can pick up some cargo to
+                    transport.
+                  </p>
+                  <p className="text--center">
+                    <Link to={PLAY_PATH_SHOW(firstShip.id)} className="btn">
+                      Begin
+                    </Link>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  renderShip(ship: ShipInterface, player: PlayerInterface) {
+    const flagColour = player.colour;
 
     return (
       <div style={{ position: "relative" }}>
@@ -89,53 +130,11 @@ class WelcomeContainer extends React.Component<Props, undefined> {
             boxShadow: "1px 1px 5px #000"
           }}
         >
-          {this.props.ship.name}
+          {ship.name}
         </h2>
-      </div>
-    );
-  }
-
-  render() {
-    if (this.props.rank.portsVisited > 0) {
-      return <Redirect to={PLAY_PATH_SHOW(this.props.ship.id)} />;
-    }
-
-    return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <h1>Welcome</h1>
-        </div>
-        <div className="t-doc__main">
-          <table>
-            <tbody>
-              <tr>
-                <td style={{ width: "50%" }}>{this.renderShip()}</td>
-                <td className="text--prose">
-                  <p>
-                    This is your first ship. It can carry 2 crates. It will be
-                    placed in a safe port where you can pick up some cargo to
-                    transport.
-                  </p>
-                  <p className="text--center">
-                    <Link
-                      to={PLAY_PATH_SHOW(this.props.ship.id)}
-                      className="btn"
-                    >
-                      Begin
-                    </Link>
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     );
   }
 }
 
-export default connect((state: StateInterface) => ({
-  ship: state.session.ships[0],
-  rank: state.session.rankStatus,
-  player: state.session.player
-}))(WelcomeContainer);
+export default WelcomeContainer;

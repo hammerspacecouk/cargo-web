@@ -61,12 +61,16 @@ export default (props: ListsProps) => {
 
   const items: React.ReactElement<HTMLLIElement>[] = [];
   props.messages.forEach((message: MessageInterface, index) => {
-    items.push(<li key={index} className="m-message-wrap">{message.message}</li>);
+    items.push(
+      <li key={index} className="m-message-wrap">
+        {message.message}
+      </li>
+    );
   });
   return (
-      <React.Fragment>
-          <h2 className="hidden">Messages</h2>
-          <ul className="list--unstyled">{items}</ul>
-      </React.Fragment>
+    <React.Fragment>
+      <h2 className="hidden">Messages</h2>
+      <ul className="list--unstyled">{items}</ul>
+    </React.Fragment>
   );
 };

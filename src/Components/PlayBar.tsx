@@ -98,7 +98,7 @@ export default (props: Props) => {
   );
 
   return (
-    <nav className="play-bar base-width-limit">
+    <nav className="play-bar">
       <ul className="play-bar__list">{items}</ul>
     </nav>
   );

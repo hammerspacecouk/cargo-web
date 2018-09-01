@@ -1,9 +1,7 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { withRouter } from "react-router";
 import { Route, Switch } from "react-router-dom";
 
+import SessionContextComponent from "../Context/SessionContext";
 import MastheadContainer from "./Common/MastheadContainer";
 import About from "./Pages/About";
 import Home from "./Pages/Home";
@@ -14,69 +12,28 @@ import Login from "./Pages/LoginContainer";
 import LoginEmail from "./Pages/LoginEmailContainer";
 
 import NotFound from "../Components/Error/NotFound";
+import CurrentShipContextComponent from "../Context/CurrentShipContext";
 
-import { refreshSession } from "../Actions/Session/Actions";
-import { StateInterface } from "../State";
-import { APIClientInterface } from "../Data/API";
+export default () => (
+  <SessionContextComponent>
+    <CurrentShipContextComponent>
+      <MastheadContainer />
+      <main>
+        <div className="main">
+          <Switch>
+            <Route path="/about" component={About} />
+            <Route path="/play" component={Play} />
+            <Route path="/ports" component={Ports} />
+            <Route path="/profile" component={Profile} />
 
-interface Props {
-  dispatch: Dispatch<any>;
-  apiClient: APIClientInterface;
-}
+            <Route path="/login/email" component={LoginEmail} exact={true} />
+            <Route path="/login" component={Login} exact={true} />
+            <Route path="/" component={Home} exact={true} />
 
-class AppContainer extends React.Component<Props, undefined> {
-  private sessionRefreshTime: number = 1000 * 60 * 2;
-  private allowUpdate: boolean = false;
-  componentWillMount() {}
-
-  componentDidMount() {
-    this.allowUpdate = true;
-    refreshSession(this.props.apiClient, this.props.dispatch); // todo - allow this on the server on private pages
-    window.setTimeout(() => this.updateSession(), this.sessionRefreshTime);
-  }
-
-  componentWillUnmount() {
-    this.allowUpdate = false;
-  }
-
-  updateSession() {
-    if (!this.allowUpdate) {
-      return;
-    }
-
-    // todo - store an update time in the session prop and don't bother refetching if it is recent
-    refreshSession(this.props.apiClient, this.props.dispatch);
-    window.setTimeout(() => this.updateSession(), this.sessionRefreshTime);
-  }
-
-  render() {
-    return (
-      <div>
-        <MastheadContainer />
-        <main>
-          <div className="main">
-            <Switch>
-              <Route path="/about" component={About} />
-              <Route path="/play" component={Play} />
-              <Route path="/ports" component={Ports} />
-              <Route path="/profile" component={Profile} />
-
-              <Route path="/login/email" component={LoginEmail} exact={true} />
-              <Route path="/login" component={Login} exact={true} />
-              <Route path="/" component={Home} exact={true} />
-
-              <Route component={NotFound} />
-            </Switch>
-          </div>
-        </main>
-      </div>
-    );
-  }
-}
-
-export default withRouter(connect(
-  (state: StateInterface) => ({
-    apiClient: state.environment.apiClient
-  }),
-  null
-)(AppContainer) as any);
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </main>
+    </CurrentShipContextComponent>
+  </SessionContextComponent>
+);

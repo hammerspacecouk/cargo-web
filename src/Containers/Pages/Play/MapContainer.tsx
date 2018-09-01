@@ -1,26 +1,7 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { StateInterface } from "../../../State";
-import { APIClientInterface } from "../../../Data/API";
-import ShipInterface from "../../../DomainInterfaces/ShipInterface";
-import { calculateHexPoints, Point } from "../../../Helpers/Hexagons";
+import { calculateHexPoints, Point } from "../../../Utils/Hexagons";
 
-interface Props {
-  match: {
-    params: {
-      shipId: string;
-    };
-  };
-  ship: ShipInterface;
-  loaded: boolean;
-  isInPort: boolean;
-  isInChannel: boolean;
-  dispatch: Dispatch<any>;
-  apiClient: APIClientInterface;
-}
-
-class MapContainer extends React.Component<Props, undefined> {
+class MapContainer extends React.Component<undefined, undefined> {
   renderHexagons() {
     const width = 100;
     const height = width / (Math.sqrt(3) / 2);
@@ -69,10 +50,4 @@ class MapContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default connect((state: StateInterface) => ({
-  apiClient: state.environment.apiClient,
-  ship: state.play.ship,
-  loaded: !state.play.fetching,
-  isInPort: !!state.play.currentPort,
-  isInChannel: !!state.play.currentChannel
-}))(MapContainer);
+export default MapContainer;

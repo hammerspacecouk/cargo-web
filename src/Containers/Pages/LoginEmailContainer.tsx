@@ -1,32 +1,37 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { RouteProps, withRouter, Redirect } from "react-router";
+import { RouteProps, withRouter } from "react-router";
 import { parse as parseQueryString } from "query-string";
 import TokenButton from "../Common/TokenButton";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 import Error from "../../Components/Error/Error";
 import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
-import { StateInterface } from "../../State";
+import EnsureLoggedOut from "../Common/EnsureLoggedOut";
 
 export interface Props {
   player?: PlayerInterface;
   token?: string;
 }
 
-class LoginEmailContainer extends React.Component<Props, undefined> {
-  render() {
-    if (this.props.player) {
-      return <Redirect to="/play" />;
-    }
-    if (!this.props.token) {
+class LoginEmailContainer extends React.Component<RouteProps, undefined> {
+  getResponse() {
+    const query = parseQueryString(this.props.location.search);
+    if (!query.token) {
       return <Error code={400} message="Bad request (Missing token)" />;
     }
 
     const token: ActionTokenInterface = {
       path: "/login/email",
-      token: this.props.token
+      token: query.token
     };
 
+    return this.renderPage(token);
+  }
+
+  render() {
+    return <EnsureLoggedOut>{this.getResponse()}</EnsureLoggedOut>;
+  }
+
+  renderPage(token: ActionTokenInterface) {
     return (
       <div className="t-doc">
         <div className="t-doc__title">
@@ -47,13 +52,4 @@ class LoginEmailContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default withRouter(connect(
-  (state: StateInterface, props: RouteProps) => {
-    const query = parseQueryString(props.location.search);
-    return {
-      token: query.token,
-      player: state.session.player
-    };
-  },
-  null
-)(LoginEmailContainer) as any);
+export default withRouter(LoginEmailContainer as any);

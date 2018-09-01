@@ -1,5 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import CrumbTitle from "../../../Components/CrumbTitle";
 
@@ -31,4 +30,4 @@ class AboutContainer extends React.Component<undefined, undefined> {
   }
 }
 
-export default connect()(AboutContainer);
+export default AboutContainer;

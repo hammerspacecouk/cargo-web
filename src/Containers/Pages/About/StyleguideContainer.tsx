@@ -1,5 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import CrumbTitle from "../../../Components/CrumbTitle";
 import {
   MessageError,
@@ -141,4 +140,4 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
   }
 }
 
-export default connect()(StyleguideContainer);
+export default StyleguideContainer;

@@ -7,8 +7,6 @@
   }
 
   &__content-contain {
-    max-width: $max-content-width;
     margin: $masthead-height auto $play-bar-height;
-    padding: ($grid-unit * 2) $grid-unit;
   }
 }

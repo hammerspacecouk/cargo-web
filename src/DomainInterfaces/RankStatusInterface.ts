@@ -1,4 +1,6 @@
-import RankInterface from "./RankInterface";
+interface RankInterface {
+  title: string;
+}
 
 export default interface RankStatusInterface {
   portsVisited: number;

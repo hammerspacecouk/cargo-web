@@ -1,26 +1,52 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import * as PlayActions from "../../../Actions/Play/Actions";
-import { StateInterface } from "../../../State";
-import PortInterface from "../../../DomainInterfaces/PortInterface";
-import DirectionsInterface from "../../../DomainInterfaces/DirectionsInterface";
 import DirectionInterface from "../../../DomainInterfaces/DirectionInterface";
 import TokenButton from "../../Common/TokenButton";
 import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
-import PlayerFlag from "../../../Components/PlayerFlag";
-import ScoreContainer from "../ScoreContainer";
-import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 import ShipList from "../../../Components/ShipList";
+import { SessionContext } from "../../../Context/SessionContext";
+import {
+  CurrentShipContext,
+  CurrentShipContextInterface
+} from "../../../Context/CurrentShipContext";
+import ScoreInterface from "../../../DomainInterfaces/ScoreInterface";
+import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
+import { moveShip, requestShipName } from "../../../Models/Ship";
 
 interface Props {
-  readonly port: PortInterface;
-  readonly playerRankStatus: RankStatusInterface;
-  readonly directions: DirectionsInterface;
-  readonly departingPort: boolean;
-  readonly shipsInLocation: ShipInterface[];
+  readonly shipContext: CurrentShipContextInterface;
 }
 
-class PortContainer extends React.Component<Props, undefined> {
+interface LocalProps extends Props {
+  readonly updateScore: (newScore: ScoreInterface) => void;
+  readonly playerRankStatus: RankStatusInterface;
+}
+
+interface StateInterface {
+  departingPort: boolean;
+}
+
+class PortContainer extends React.Component<LocalProps, StateInterface> {
+  constructor(props: LocalProps) {
+    super(props);
+    this.state = {
+      departingPort: false
+    };
+  }
+
+  async moveShip(token: ActionTokenInterface) {
+    this.setState({
+      departingPort: true
+    });
+
+    try {
+      const data = await moveShip(token);
+      this.props.updateScore(data.playerScore);
+      this.props.shipContext.updateFullResponse(data);
+    } catch (e) {
+      // todo - error handling
+    }
+  }
+
   renderDirection(direction?: DirectionInterface) {
     if (!direction) {
       return null;
@@ -29,7 +55,10 @@ class PortContainer extends React.Component<Props, undefined> {
     return (
       <div>
         <h3>{direction.destination.name}</h3>
-        <TokenButton token={direction.action} handler={PlayActions.moveShip}>
+        <TokenButton
+          token={direction.action}
+          handler={this.moveShip.bind(this)}
+        >
           <button className="btn" type="submit">
             Go ({direction.distanceUnit})
           </button>
@@ -40,10 +69,10 @@ class PortContainer extends React.Component<Props, undefined> {
 
   // todo - break out into components
   render() {
-    if (this.props.departingPort) {
+    if (this.state.departingPort) {
       return (
         <div>
-          <h1>{this.props.port.name}</h1>
+          <h1>{this.props.shipContext.port.name}</h1>
           <p>Departing...</p>
         </div>
       );
@@ -54,7 +83,7 @@ class PortContainer extends React.Component<Props, undefined> {
       welcome = (
         <div className="text--prose">
           <p>
-            Welcome to {this.props.port.name}. It is a{" "}
+            Welcome to {this.props.shipContext.port.name}. It is a{" "}
             <strong>Safe Haven</strong>. It costs you nothing to be here and
             your ship cannot be harmed while it is here.
           </p>
@@ -66,69 +95,60 @@ class PortContainer extends React.Component<Props, undefined> {
       );
     }
 
-    let players: React.ReactElement<HTMLLIElement>[] = [];
-    this.props.shipsInLocation.forEach((ship: ShipInterface) => {
-      players.push(
-        <li key={ship.id} className="player-list">
-          <h4>
-            <PlayerFlag player={ship.owner} />
-            {ship.name}
-          </h4>
-          <ScoreContainer score={ship.owner.score} />
-        </li>
-      );
-    });
-
     return (
       <div>
-        <h1>{this.props.port.name}</h1>
+        <h1>{this.props.shipContext.port.name}</h1>
         {welcome}
         <table style={{ minWidth: "400px" }}>
           <tbody>
             <tr>
               <td>
                 <h2>NW</h2>
-                {this.renderDirection(this.props.directions.NW)}
+                {this.renderDirection(this.props.shipContext.directions.NW)}
               </td>
               <td>
                 <h2>NE</h2>
-                {this.renderDirection(this.props.directions.NE)}
+                {this.renderDirection(this.props.shipContext.directions.NE)}
               </td>
             </tr>
             <tr>
               <td>
                 <h2>W</h2>
-                {this.renderDirection(this.props.directions.W)}
+                {this.renderDirection(this.props.shipContext.directions.W)}
               </td>
               <td>
                 <h2>E</h2>
-                {this.renderDirection(this.props.directions.E)}
+                {this.renderDirection(this.props.shipContext.directions.E)}
               </td>
             </tr>
             <tr>
               <td>
                 <h2>SW</h2>
-                {this.renderDirection(this.props.directions.SW)}
+                {this.renderDirection(this.props.shipContext.directions.SW)}
               </td>
               <td>
                 <h2>SE</h2>
-                {this.renderDirection(this.props.directions.SE)}
+                {this.renderDirection(this.props.shipContext.directions.SE)}
               </td>
             </tr>
           </tbody>
         </table>
 
         <h2>Players</h2>
-        <ShipList ships={this.props.shipsInLocation} />
+        <ShipList ships={this.props.shipContext.shipsInLocation} />
       </div>
     );
   }
 }
 
-export default connect((state: StateInterface) => ({
-  port: state.play.currentPort,
-  playerRankStatus: state.session.rankStatus,
-  directions: state.play.directions,
-  departingPort: state.play.departingPort,
-  shipsInLocation: state.play.shipsInLocation
-}))(PortContainer);
+export default (props: Props) => (
+  <SessionContext.Consumer>
+    {({ updateScore, rankStatus }) => (
+      <PortContainer
+        {...props}
+        playerRankStatus={rankStatus}
+        updateScore={updateScore}
+      />
+    )}
+  </SessionContext.Consumer>
+);

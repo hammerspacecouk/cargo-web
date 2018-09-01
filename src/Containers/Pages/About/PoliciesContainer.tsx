@@ -1,5 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import CrumbTitle from "../../../Components/CrumbTitle";
 import Messages from "../../../Components/Messages";
 
@@ -148,4 +147,4 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
   }
 }
 
-export default connect()(PoliciesContainer);
+export default PoliciesContainer;

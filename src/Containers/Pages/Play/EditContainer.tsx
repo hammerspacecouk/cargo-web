@@ -1,67 +1,99 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
 
-import * as PlayActions from "../../../Actions/Play/Actions";
-import * as EditShipActions from "../../../Actions/EditShip/Actions";
-import { StateInterface } from "../../../State";
-import { APIClientInterface } from "../../../Data/API";
-import Loading from "../../../Components/Loading";
-import NotFound from "../../../Components/Error/NotFound";
 import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
-import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 import TokenButton from "../../Common/TokenButton";
 import CreditsButton from "../../Common/CreditsButton";
 import ShipNameContainer from "../../Common/ShipNameContainer";
+import EnsureShipContainer from "./EnsureShipContainer";
+import { ShipParamsInterface } from "./index";
+import {
+  CurrentShipContext,
+  CurrentShipContextInterface
+} from "../../../Context/CurrentShipContext";
+import { SessionContext } from "../../../Context/SessionContext";
+import ScoreInterface from "../../../DomainInterfaces/ScoreInterface";
+import { requestShipName } from "../../../Models/Ship";
 
-// todo - this is the same as PlayContainer - how do I share it?
-interface Props {
-  match: {
-    params: {
-      shipId: string;
-    };
-  };
-  ship: ShipInterface;
-  loaded: boolean;
-
+interface Props extends ShipParamsInterface {
   requestShipNameCost: number;
   requestShipNameToken: ActionTokenInterface;
-  requestingShipName: boolean;
-  acceptingShipName: boolean;
-  offeredShipName?: string;
-  offeredShipNameToken?: ActionTokenInterface;
-
-  dispatch: Dispatch<any>;
-  apiClient: APIClientInterface;
 }
 
-class EditContainer extends React.Component<Props, undefined> {
-  componentDidMount() {
-    if (
-      !this.props.ship ||
-      this.props.ship.id !== this.props.match.params.shipId
-    ) {
-      PlayActions.changeShip(
-        this.props.match.params.shipId,
-        this.props.apiClient,
-        this.props.dispatch
-      );
+interface State {
+  requestingShipName: boolean;
+  offeredShipName?: string;
+  offeredShipNameToken?: ActionTokenInterface;
+}
+
+class EditContainer extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      requestingShipName: false,
+      offeredShipName: null,
+      offeredShipNameToken: null
+    };
+  }
+
+  async requestShipName(
+    token: ActionTokenInterface,
+    updateScoreHandler: (newScore: ScoreInterface) => void
+  ) {
+    this.setState({
+      requestingShipName: true,
+      offeredShipName: null,
+      offeredShipNameToken: null
+    });
+
+    //make the API call
+    try {
+      const data = await requestShipName(token);
+
+      // update the state
+      this.setState({
+        requestingShipName: false,
+        offeredShipName: data.nameOffered,
+        offeredShipNameToken: data.offeredShipNameToken
+      });
+
+      // update the score
+      updateScoreHandler(data.newScore);
+    } catch (e) {
+      // todo - error handling, including if you didn't have enough credits
     }
   }
 
   render() {
-    if (!this.props.ship) {
-      return this.props.loaded ? (
-        <NotFound message="You be making ship up" />
-      ) : (
-        <Loading />
+    return (
+      <EnsureShipContainer shipId={this.props.match.params.shipId}>
+        <CurrentShipContext.Consumer>
+          {this.renderPage.bind(this)}
+        </CurrentShipContext.Consumer>
+      </EnsureShipContainer>
+    );
+  }
+
+  renderPage(currentShip: CurrentShipContextInterface) {
+    let shipName = null;
+    if (this.state.requestingShipName || this.state.offeredShipName) {
+      shipName = (
+        <ShipNameContainer
+          offeredShipName={this.state.offeredShipName}
+          offeredShipNameToken={this.state.offeredShipNameToken}
+          resetOffer={() => {
+            this.setState({
+              offeredShipName: null,
+              offeredShipNameToken: null
+            });
+          }}
+        />
       );
     }
 
     return (
       <div className="t-doc">
         <div className="t-doc__title">
-          <h1>{this.props.ship.name}</h1>
+          <h1>{currentShip.ship.name}</h1>
         </div>
         <div className="t-doc__main">
           <table className="table table--striped">
@@ -81,35 +113,26 @@ class EditContainer extends React.Component<Props, undefined> {
             A new name will be selected at random. You don't have to take it,
             but no refunds
           </p>
-          <TokenButton
-            token={this.props.requestShipNameToken}
-            handler={EditShipActions.requestShipName}
-          >
-            <CreditsButton
-              amount={this.props.requestShipNameCost}
-              disabled={this.props.requestingShipName}
-            />
-          </TokenButton>
-          <ShipNameContainer />
+          <SessionContext.Consumer>
+            {({ updateScore }) => (
+              <TokenButton
+                token={currentShip.requestShipNameToken.actionToken}
+                handler={(token: ActionTokenInterface) =>
+                  this.requestShipName(token, updateScore)
+                }
+              >
+                <CreditsButton
+                  amount={currentShip.requestShipNameToken.cost}
+                  disabled={this.state.requestingShipName}
+                />
+              </TokenButton>
+            )}
+          </SessionContext.Consumer>
+          {shipName}
         </div>
       </div>
     );
   }
 }
 
-export default connect(
-  (state: StateInterface) => ({
-    apiClient: state.environment.apiClient,
-
-    ship: state.play.ship,
-    loaded: !state.play.fetching,
-
-    requestShipNameToken: state.editShip.requestShipNameToken,
-    requestShipNameCost: state.editShip.requestShipNameCost,
-    requestingShipName: state.editShip.requestingShipName,
-    acceptingShipName: state.editShip.acceptingShipName,
-    offeredShipName: state.editShip.offeredShipName,
-    offeredShipNameToken: state.editShip.offeredShipNameToken
-  }),
-  null
-)(EditContainer);
+export default EditContainer;

@@ -23,7 +23,6 @@ interface Props {
 export default (props: Props) => {
   // todo - ships should show their location
   // todo - flags should be better
-
   return (
     <div className={`menu ${props.isOpen ? "menu--open" : ""}`}>
       <h2 className="menu__title menu__title--ships c">

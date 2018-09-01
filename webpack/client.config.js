@@ -9,18 +9,16 @@ const settings = {
   entry: {
     app: Path.resolve(__dirname, '../src/index.client.tsx'),
     vendor: [
-      'redux',
       'react',
       'react-dom',
       'react-router-dom',
       'react-modal',
-      'react-redux',
     ]
   },
   output: {
     path: Path.resolve(__dirname, '../build/static'),
     publicPath: '/',
-    filename: '[chunkhash].[name].js',
+    filename: '[chunkhash:10].[name].js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
@@ -47,7 +45,7 @@ const settings = {
       },
       {
         test: /\.(png|svg|ico)$/,
-        loader: 'file-loader?name=[hash].[name].[ext]',
+        loader: 'file-loader?name=[hash:10].[name].[ext]',
       },
     ],
   },

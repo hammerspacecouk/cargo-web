@@ -1,20 +1,21 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { StateInterface } from "../../../State";
 import ChannelInterface from "../../../DomainInterfaces/ChannelInterface";
-import IntervalFormatContainer from "../IntervalFormatContainer";
+import IntervalFormat from "../../../Components/IntervalFormat";
 import * as differenceInSeconds from "date-fns/difference_in_seconds";
-import { APIClientInterface } from "../../../Data/API";
 
-import { Dispatch } from "redux";
-import { fetchShipData } from "../../../Actions/Play/Actions";
-import ShipInterface from "../../../DomainInterfaces/ShipInterface";
+import { CurrentShipContextInterface } from "../../../Context/CurrentShipContext";
+import { getPlayDataByShipId } from "../../../Models/Ship";
+import { SessionContext } from "../../../Context/SessionContext";
+import ScoreInterface from "../../../DomainInterfaces/ScoreInterface";
+import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
 
 interface Props {
-  readonly dispatch: Dispatch<any>;
-  readonly apiClient: APIClientInterface;
-  readonly channel: ChannelInterface;
-  readonly ship: ShipInterface;
+  readonly shipContext: CurrentShipContextInterface;
+}
+
+interface LocalProps extends Props {
+  readonly updateScore: (newScore: ScoreInterface) => void;
+  readonly updateRankStatus: (newRankStatus: RankStatusInterface) => void;
 }
 
 interface LocalState {
@@ -23,15 +24,15 @@ interface LocalState {
   isArriving: boolean;
 }
 
-class TravellingContainer extends React.Component<Props, LocalState> {
+class TravellingContainerState extends React.Component<LocalProps, LocalState> {
   private allowAnimationUpdate: boolean;
   private allowArrivalCheck: boolean;
 
-  constructor(props: Props) {
+  constructor(props: LocalProps) {
     super(props);
     this.allowAnimationUpdate = false;
     this.allowArrivalCheck = false;
-    this.state = this.calculateState(props.channel);
+    this.state = this.calculateState(props.shipContext.channel);
   }
 
   calculateState(channel: ChannelInterface): LocalState {
@@ -63,16 +64,20 @@ class TravellingContainer extends React.Component<Props, LocalState> {
     };
   }
 
-  handleArrival() {
+  async handleArrival() {
     if (!this.allowArrivalCheck) {
       return;
     }
-    fetchShipData(
-      this.props.ship.id,
-      this.props.apiClient,
-      this.props.dispatch
-    );
-    setTimeout(() => {
+    try {
+      const data = await getPlayDataByShipId(this.props.shipContext.ship.id);
+      this.props.shipContext.updateFullResponse(data);
+      this.props.updateScore(data.playerScore);
+      this.props.updateRankStatus(data.playerRankStatus);
+      return;
+    } catch (e) {
+      // do nothing. we'll try again in a moment
+    }
+    window.setTimeout(() => {
       this.handleArrival();
     }, 3500);
   }
@@ -92,21 +97,19 @@ class TravellingContainer extends React.Component<Props, LocalState> {
       return;
     }
 
-    this.setState(this.calculateState(this.props.channel));
+    this.setState(this.calculateState(this.props.shipContext.channel));
     window.requestAnimationFrame(() => this.updateValue());
   }
 
   render() {
     let remaining: any = "Arriving...";
     if (this.state.secondsRemaining) {
-      remaining = (
-        <IntervalFormatContainer seconds={this.state.secondsRemaining} />
-      );
+      remaining = <IntervalFormat seconds={this.state.secondsRemaining} />;
     }
 
     return (
       <div>
-        <h2>Destination: {this.props.channel.destination.name}</h2>
+        <h2>Destination: {this.props.shipContext.channel.destination.name}</h2>
         <h3 className="text--center">{remaining}</h3>
         <div
           style={{
@@ -132,8 +135,14 @@ class TravellingContainer extends React.Component<Props, LocalState> {
   }
 }
 
-export default connect((state: StateInterface) => ({
-  apiClient: state.environment.apiClient,
-  channel: state.play.currentChannel,
-  ship: state.play.ship
-}))(TravellingContainer);
+export default (props: Props) => (
+  <SessionContext.Consumer>
+    {({ updateScore, updateRankStatus }) => (
+      <TravellingContainerState
+        {...props}
+        updateScore={updateScore}
+        updateRankStatus={updateRankStatus}
+      />
+    )}
+  </SessionContext.Consumer>
+);

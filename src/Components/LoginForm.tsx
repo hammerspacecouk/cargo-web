@@ -1,17 +1,19 @@
 import * as React from "react";
 import MessageInterface from "../DomainInterfaces/MessageInterface";
 import Messages from "./Messages";
+import Environment from "../Data/Environment";
 
 export interface LoginFormProps {
-  loginPathEmail: string;
-  loginPathFacebook: string;
-  loginPathGoogle: string;
-  loginPathMicrosoft: string;
-  loginPathTwitter: string;
   messages?: MessageInterface[];
 }
 
 export default (props: LoginFormProps) => {
+  const loginPathEmail = `${Environment.apiHostname}/login/email`;
+  const loginPathFacebook = `${Environment.apiHostname}/login/facebook`;
+  const loginPathGoogle = `${Environment.apiHostname}/login/google`;
+  const loginPathMicrosoft = `${Environment.apiHostname}/login/microsoft`;
+  const loginPathTwitter = `${Environment.apiHostname}/login/twitter`;
+
   return (
     <div className="login-form">
       <Messages messages={props.messages} />
@@ -23,7 +25,7 @@ export default (props: LoginFormProps) => {
       <ul className="login-form__social-list">
         <li>
           <a
-            href={props.loginPathFacebook}
+            href={loginPathFacebook}
             className="login-form__social-item login-form__social-item--facebook"
           >
             <svg
@@ -45,7 +47,7 @@ export default (props: LoginFormProps) => {
         </li>
         <li>
           <a
-            href={props.loginPathGoogle}
+            href={loginPathGoogle}
             className="login-form__social-item login-form__social-item--google"
           >
             <svg
@@ -87,7 +89,7 @@ export default (props: LoginFormProps) => {
         </li>
         <li>
           <a
-            href={props.loginPathMicrosoft}
+            href={loginPathMicrosoft}
             className="login-form__social-item login-form__social-item--microsoft"
           >
             <svg
@@ -113,7 +115,7 @@ export default (props: LoginFormProps) => {
         </li>
         <li>
           <a
-            href={props.loginPathTwitter}
+            href={loginPathTwitter}
             className="login-form__social-item login-form__social-item--twitter"
           >
             <svg
@@ -139,7 +141,7 @@ export default (props: LoginFormProps) => {
           </a>
         </li>
       </ul>
-      <form action={props.loginPathEmail} method="post">
+      <form action={loginPathEmail} method="post">
         <h3 className="d">
           <label htmlFor="login-email">Login via e-mail</label>
         </h3>

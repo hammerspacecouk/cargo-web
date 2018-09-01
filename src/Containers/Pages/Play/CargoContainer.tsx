@@ -1,25 +1,6 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { StateInterface } from "../../../State";
-import { APIClientInterface } from "../../../Data/API";
-import ShipInterface from "../../../DomainInterfaces/ShipInterface";
 
-interface Props {
-  match: {
-    params: {
-      shipId: string;
-    };
-  };
-  ship: ShipInterface;
-  loaded: boolean;
-  isInPort: boolean;
-  isInChannel: boolean;
-  dispatch: Dispatch<any>;
-  apiClient: APIClientInterface;
-}
-
-class CargoContainer extends React.Component<Props, undefined> {
+class CargoContainer extends React.Component<undefined, undefined> {
   render() {
     return (
       <main className="t-play__content-contain">
@@ -29,10 +10,4 @@ class CargoContainer extends React.Component<Props, undefined> {
   }
 }
 
-export default connect((state: StateInterface) => ({
-  apiClient: state.environment.apiClient,
-  ship: state.play.ship,
-  loaded: !state.play.fetching,
-  isInPort: !!state.play.currentPort,
-  isInChannel: !!state.play.currentChannel
-}))(CargoContainer);
+export default CargoContainer;

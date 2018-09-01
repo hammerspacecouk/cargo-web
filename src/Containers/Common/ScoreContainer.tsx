@@ -2,7 +2,6 @@ import * as React from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
-import { connect } from "react-redux";
 
 interface Props {
   score: ScoreInterface;
@@ -100,6 +99,4 @@ class ScoreContainer extends React.Component<Props, LocalState> {
   }
 }
 
-export default connect((undefined, ownProps: any) => ({
-  score: ownProps.score
-}))(ScoreContainer);
+export default ScoreContainer;

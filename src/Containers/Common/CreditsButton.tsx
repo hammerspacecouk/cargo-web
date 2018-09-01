@@ -1,12 +1,14 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { StateInterface } from "../../State";
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 import { getValue } from "./ScoreContainer";
+import { SessionContext } from "../../Context/SessionContext";
 
 interface Props {
   readonly amount: number;
   readonly disabled?: boolean;
+}
+
+interface LocalProps extends Props {
   readonly playerScore: ScoreInterface;
 }
 
@@ -14,10 +16,10 @@ interface LocalState {
   disabled: boolean;
 }
 
-class CreditsButton extends React.Component<Props, LocalState> {
+class CreditsButtonState extends React.Component<LocalProps, LocalState> {
   private allowAnimationUpdate: boolean;
 
-  constructor(props: Props) {
+  constructor(props: LocalProps) {
     super(props);
     this.allowAnimationUpdate = false;
     this.state = {
@@ -72,8 +74,10 @@ class CreditsButton extends React.Component<Props, LocalState> {
   }
 }
 
-export default connect((state: StateInterface, ownProps: any): Props => ({
-  amount: ownProps.amount,
-  disabled: ownProps.disabled || false,
-  playerScore: state.session.score
-}))(CreditsButton);
+const CreditsButton = (props: Props) => (
+  <SessionContext.Consumer>
+    {({ score }) => <CreditsButtonState {...props} playerScore={score} />}
+  </SessionContext.Consumer>
+);
+
+export default CreditsButton;
