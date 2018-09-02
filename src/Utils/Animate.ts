@@ -9,7 +9,7 @@ export class SlowedAnimationFrame {
 
   private doFrame(now: number) {
     // if not enough frames have passed since the last time, loop round again
-    if (this.lastTime && now < (this.lastTime + this.millisecondsToWait)) {
+    if (this.lastTime && now < this.lastTime + this.millisecondsToWait) {
       window.requestAnimationFrame(this.doFrame.bind(this));
       return;
     }

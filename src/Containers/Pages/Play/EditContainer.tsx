@@ -121,7 +121,11 @@ class EditContainer extends React.Component<Props, State> {
               <TokenButton
                 token={currentShip.requestShipNameToken.actionToken}
                 handler={(token: ActionTokenInterface) =>
-                  this.requestShipName(token, updateScore, currentShip.updateRenameToken)
+                  this.requestShipName(
+                    token,
+                    updateScore,
+                    currentShip.updateRenameToken
+                  )
                 }
               >
                 <CreditsButton

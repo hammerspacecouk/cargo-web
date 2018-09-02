@@ -5,7 +5,7 @@ import TokenButton from "../Common/TokenButton";
 import ShipInterface from "../../DomainInterfaces/ShipInterface";
 import { CurrentShipContext } from "../../Context/CurrentShipContext";
 import { acceptShipName } from "../../Models/Ship";
-import {SlowedAnimationFrame} from "../../Utils/Animate";
+import { SlowedAnimationFrame } from "../../Utils/Animate";
 
 interface State {
   nameGuess: string;
@@ -71,7 +71,7 @@ class ShipNameContainer extends React.Component<Props, State> {
       this.props.offeredShipName &&
       this.props.offeredShipName !== prevProps.offeredShipName
     ) {
-      this.endGuessing(this.props.offeredShipName)
+      this.endGuessing(this.props.offeredShipName);
     }
   }
 
@@ -99,8 +99,7 @@ class ShipNameContainer extends React.Component<Props, State> {
 
     // make an array equal to the largest of the originalGuess or nameToMatch
     let namePadded =
-      this.nameToMatch +
-      new Array(this.originalGuessLength).fill(" ").join("");
+      this.nameToMatch + new Array(this.originalGuessLength).fill(" ").join("");
     let reduced = namePadded.slice(
       0,
       Math.max(this.nameToMatch.length, this.originalGuessLength)

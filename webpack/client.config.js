@@ -1,13 +1,18 @@
-const Webpack = require('webpack');
-const Path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const Webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ManifestPlugin = require("webpack-manifest-plugin");
+
+const path = require("path");
+const autoprefixer = require("autoprefixer");
+
+const IS_DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') >= 0;
+const chunkHashFormat = IS_DEV_SERVER ? '' : "[chunkhash:10].";
+const hashFormat = IS_DEV_SERVER ? '' : "[hash:10].";
 
 const settings = {
+  devtool: 'source-map',
   entry: {
-    app: Path.resolve(__dirname, '../src/index.client.tsx'),
+    app: path.resolve(__dirname, '../src/index.client.tsx'),
     vendor: [
       'react',
       'react-dom',
@@ -16,56 +21,70 @@ const settings = {
     ]
   },
   output: {
-    path: Path.resolve(__dirname, '../build/static'),
+    path: path.resolve(__dirname, '../build/static'),
     publicPath: '/',
-    filename: '[chunkhash:10].[name].js',
+    filename: `${chunkHashFormat}[name].js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      'scss': Path.resolve(__dirname, '../src/assets/resources/scss'),
+      'scss': path.resolve(__dirname, '../src/assets/scss')
     }
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loaders: ['ts-loader'],
+        loader: 'ts-loader',
       },
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use : [
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
-        })
+        test: /\.s?css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+              minimize: true,
+              sourceMap: true
+            }
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [autoprefixer]
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|ico)$/,
-        loader: 'file-loader?name=[hash:10].[name].[ext]',
-      },
-    ],
+        loader: "file-loader",
+        options: {
+          name: `${hashFormat}[name].[ext]`,
+          sourceMap: true
+        }
+      }
+    ]
   },
   plugins: [
-    new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
     new Webpack.HashedModuleIdsPlugin(),
-    new Webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+    new MiniCssExtractPlugin({
+      filename: `${hashFormat}[name].css`
     }),
-    new Webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest'
-    }),
-    new UglifyJSPlugin(),
-    new ExtractTextPlugin('[contenthash].[name].css'),
-    new OptimizeCssAssetsPlugin(),
     new ManifestPlugin({
-      fileName : Path.resolve(__dirname, '../build/assets-manifest.json'),
-    }),
+      fileName: path.resolve(
+        __dirname,
+        "../build/assets-manifest.json"
+      )
+    })
   ]
 };
 

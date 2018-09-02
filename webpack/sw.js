@@ -14,7 +14,7 @@ const hashString = (input) => {
 const VERSION_FORCE = 1;
 const ASSETS_HASH = hashString(JSON.stringify(assetManifest));
 const CACHE_NAME = `planetcargo-sw-cache-${VERSION_FORCE}-${ASSETS_HASH}`;
-const STATIC_HOST = 'https://static.tubealert.co.uk/';
+const STATIC_HOST = 'https://static.planetcargo.live/';
 
 // Perform install steps (cache statics)
 self.addEventListener('install', event => event.waitUntil(
