@@ -23,7 +23,7 @@ export interface RequestShipNameResponse {
   readonly requestShipName: ShipNameTokenInterface;
   readonly newScore: ScoreInterface;
   readonly nameOffered: string;
-  readonly offeredShipNameToken: ActionTokenInterface;
+  readonly action: ActionTokenInterface;
 }
 
 export const getPlayDataByShipId = (

@@ -5,6 +5,7 @@ import TokenButton from "../Common/TokenButton";
 import ShipInterface from "../../DomainInterfaces/ShipInterface";
 import { CurrentShipContext } from "../../Context/CurrentShipContext";
 import { acceptShipName } from "../../Models/Ship";
+import {SlowedAnimationFrame} from "../../Utils/Animate";
 
 interface State {
   nameGuess: string;
@@ -27,9 +28,9 @@ class ShipNameContainer extends React.Component<Props, State> {
   private characters: string[] = `abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ'`.split(
     ""
   );
-  private lastGuess: number = 0;
   private originalGuessLength: number = 25;
   private characterIncrement: number = 7;
+  private animate: SlowedAnimationFrame;
 
   constructor(props: Props) {
     super(props);
@@ -39,6 +40,8 @@ class ShipNameContainer extends React.Component<Props, State> {
       matched: false,
       acceptingShipName: false
     };
+
+    this.animate = new SlowedAnimationFrame(35, this.updateGuess.bind(this));
   }
 
   componentDidMount() {
@@ -49,25 +52,18 @@ class ShipNameContainer extends React.Component<Props, State> {
         nameGuess: this.props.offeredShipName,
         matched: true
       });
+      return;
     }
-    window.requestAnimationFrame(this.updateGuess.bind(this));
+    // otherwise, begin the guessing
+    this.startGuessing();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     // if we've been updated with no shipName, then we're fetching a new one.
     // Begin the animation.
     if (!this.props.offeredShipName && prevProps.offeredShipName) {
-      // on the first run make an array of Random characters.
-      // Each character will increment until it matches
-      this.guessArray = [];
-      for (let i = 0; i < this.originalGuessLength; i++) {
-        this.guessArray.push(
-          this.characters[Math.floor(Math.random() * this.characters.length)]
-        );
-      }
-      this.nameToMatch = null;
-      this.nameToMatchArray = null;
-      window.requestAnimationFrame(this.updateGuess.bind(this));
+      this.startGuessing();
+      return;
     }
 
     // if we now have a shipName then save it to start bringing the animation to an end
@@ -75,37 +71,7 @@ class ShipNameContainer extends React.Component<Props, State> {
       this.props.offeredShipName &&
       this.props.offeredShipName !== prevProps.offeredShipName
     ) {
-      this.nameToMatch = this.props.offeredShipName;
-
-      // make an array equal to the largest of the originalGuess or nameToMatch
-      let namePadded =
-        this.nameToMatch +
-        new Array(this.originalGuessLength).fill(" ").join("");
-      let reduced = namePadded.slice(
-        0,
-        Math.max(this.nameToMatch.length, this.originalGuessLength)
-      );
-      this.nameToMatchArray = reduced.split("");
-
-      // if the name we're trying to match now has more characters, add more characters to the guess
-      const nameLength = this.nameToMatchArray.length;
-      const guessLength = this.guessArray.length;
-      if (nameLength > guessLength) {
-        for (let i = guessLength; i < nameLength; i++) {
-          this.guessArray.push(
-            this.characters[Math.floor(Math.random() * this.characters.length)]
-          );
-        }
-      }
-
-      // add an override timer to stop the animation getting stuck forever
-      this.overrideTimer = window.setTimeout(() => {
-        if (this.overrideTimer) {
-          this.setState({
-            nameGuess: this.nameToMatch
-          });
-        }
-      }, 3000);
+      this.endGuessing(this.props.offeredShipName)
     }
   }
 
@@ -114,8 +80,65 @@ class ShipNameContainer extends React.Component<Props, State> {
     this.overrideTimer = null;
   }
 
-  updateGuess(now: number) {
-    if (!this.allowAnimationUpdate) {
+  startGuessing() {
+    // on the first run make an array of Random characters.
+    // Each character will increment until it matches
+    this.guessArray = [];
+    for (let i = 0; i < this.originalGuessLength; i++) {
+      this.guessArray.push(
+        this.characters[Math.floor(Math.random() * this.characters.length)]
+      );
+    }
+    this.nameToMatch = null;
+    this.nameToMatchArray = null;
+    this.updateGuess();
+  }
+
+  endGuessing(nameToMatch: string) {
+    this.nameToMatch = nameToMatch.trim();
+
+    // make an array equal to the largest of the originalGuess or nameToMatch
+    let namePadded =
+      this.nameToMatch +
+      new Array(this.originalGuessLength).fill(" ").join("");
+    let reduced = namePadded.slice(
+      0,
+      Math.max(this.nameToMatch.length, this.originalGuessLength)
+    );
+    this.nameToMatchArray = reduced.split("");
+
+    // if the name we're trying to match now has more characters, add more characters to the guess
+    const nameLength = this.nameToMatchArray.length;
+    const guessLength = this.guessArray.length;
+    if (nameLength > guessLength) {
+      for (let i = guessLength; i < nameLength; i++) {
+        this.guessArray.push(
+          this.characters[Math.floor(Math.random() * this.characters.length)]
+        );
+      }
+    }
+
+    // add an override timer to stop the animation getting stuck forever
+    this.overrideTimer = window.setTimeout(() => {
+      if (this.overrideTimer) {
+        this.setState({
+          nameGuess: this.nameToMatch
+        });
+      }
+    }, 3000);
+  }
+
+  finished() {
+    this.guessArray = null;
+    this.overrideTimer = null;
+    this.setState({
+      nameGuess: this.nameToMatch,
+      matched: true
+    });
+  }
+
+  updateGuess() {
+    if (!this.allowAnimationUpdate || !this.guessArray) {
       return;
     }
 
@@ -124,24 +147,9 @@ class ShipNameContainer extends React.Component<Props, State> {
       this.state.nameGuess &&
       this.state.nameGuess.trim() === this.nameToMatch
     ) {
-      this.guessArray = null;
-      this.overrideTimer = null;
-      this.setState({
-        nameGuess: this.nameToMatch,
-        matched: true
-      });
+      this.finished();
       return;
     }
-    if (!this.guessArray) {
-      return;
-    }
-
-    // slow the animation down by only running every x milliseconds
-    if (this.lastGuess && now < this.lastGuess + 35) {
-      window.requestAnimationFrame(this.updateGuess.bind(this));
-      return;
-    }
-    this.lastGuess = now;
 
     const charactersLength = this.characters.length;
     const guessLength = this.guessArray.length;
@@ -170,13 +178,12 @@ class ShipNameContainer extends React.Component<Props, State> {
       nameGuess: this.guessArray.join("")
     });
 
-    window.requestAnimationFrame(this.updateGuess.bind(this));
+    this.animate.frame();
   }
 
   rejectNameOffer(e: Event) {
     e.preventDefault();
     this.props.resetOffer();
-    // this.props.dispatch({type: EditShipActionTypesonTypes.REJECT_SHIP_NAME_OFFER});
   }
 
   async acceptShipName(

@@ -13,6 +13,7 @@ import {
 import { SessionContext } from "../../../Context/SessionContext";
 import ScoreInterface from "../../../DomainInterfaces/ScoreInterface";
 import { requestShipName } from "../../../Models/Ship";
+import ShipNameTokenInterface from "../../../DomainInterfaces/ShipNameTokenInterface";
 
 interface Props extends ShipParamsInterface {
   requestShipNameCost: number;
@@ -37,7 +38,8 @@ class EditContainer extends React.Component<Props, State> {
 
   async requestShipName(
     token: ActionTokenInterface,
-    updateScoreHandler: (newScore: ScoreInterface) => void
+    updateScoreHandler: (newScore: ScoreInterface) => void,
+    updateRenameToken: (newToken: ShipNameTokenInterface) => void
   ) {
     this.setState({
       requestingShipName: true,
@@ -53,11 +55,12 @@ class EditContainer extends React.Component<Props, State> {
       this.setState({
         requestingShipName: false,
         offeredShipName: data.nameOffered,
-        offeredShipNameToken: data.offeredShipNameToken
+        offeredShipNameToken: data.action
       });
 
       // update the score
       updateScoreHandler(data.newScore);
+      updateRenameToken(data.requestShipName);
     } catch (e) {
       // todo - error handling, including if you didn't have enough credits
     }
@@ -118,7 +121,7 @@ class EditContainer extends React.Component<Props, State> {
               <TokenButton
                 token={currentShip.requestShipNameToken.actionToken}
                 handler={(token: ActionTokenInterface) =>
-                  this.requestShipName(token, updateScore)
+                  this.requestShipName(token, updateScore, currentShip.updateRenameToken)
                 }
               >
                 <CreditsButton
