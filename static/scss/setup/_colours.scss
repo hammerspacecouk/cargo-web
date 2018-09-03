@@ -13,11 +13,11 @@ $color-white: #fafafa;
 @include colorHelper('color-white', $color-white);
 
 // Neutral greys
-$color-grey-darkest: lighten($color-black, 10%);
-$color-grey-dark: lighten($color-black, 25%);
+$color-grey-darkest: lighten($color-black, 20%);
+$color-grey-dark: lighten($color-black, 33%);
 $color-grey-mid: lighten($color-black, 50%);
-$color-grey-light: lighten($color-black, 75%);
-$color-grey-lightest: lighten($color-black, 90%);
+$color-grey-light: lighten($color-black, 66%);
+$color-grey-lightest: lighten($color-black, 80%);
 @include colorHelper('color-grey-darkest', $color-grey-darkest);
 @include colorHelper('color-grey-dark', $color-grey-dark);
 @include colorHelper('color-grey-mid', $color-grey-mid);
@@ -60,21 +60,20 @@ $color-tertiary-light: tint($color-tertiary, 20%);
 @include colorHelper('color-tertiary-dark', $color-tertiary-dark);
 @include colorHelper('color-tertiary-light', $color-tertiary-light);
 
-
 // message colours. not exactly on the palette as they have meaning in colour
-$color-danger: hsl(7, 100%, 74%);
-$color-warning: hsl(45, 100%, 74%);
-$color-ok: hsl(131,100%, 74%);
-$color-info: hsl(200,100%, 74%);
+$color-danger: hsl(7, 60%, 85%);
+$color-warning: hsl(45, 60%, 85%);
+$color-ok: hsl(131, 60%, 85%);
+$color-info: hsl(200, 60%, 85%);
 @include colorHelper('color-danger', $color-danger);
 @include colorHelper('color-warning', $color-warning);
 @include colorHelper('color-ok', $color-ok);
 @include colorHelper('color-info', $color-info);
 
 // named variables for special usages - these should all use the colours above
-$color-body-bg: $color-main-black;
-$color-body-text: $color-white;
-$color-body-link: $color-secondary;
+$color-body-bg: $color-white;
+$color-body-text: $color-main-black;
+$color-body-link: $color-primary;
 
 $color-keyline: $color-grey-mid;
 

@@ -1,3 +1,5 @@
+// todo - delete me once no longer needed as a reference
+
 import * as React from "react";
 import { calculateHexPoints, Point } from "../../../Utils/Hexagons";
 

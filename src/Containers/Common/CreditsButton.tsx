@@ -2,6 +2,9 @@ import * as React from "react";
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 import { getValue } from "./ScoreContainer";
 import { SessionContext } from "../../Context/SessionContext";
+import IconButton from "../../Components/IconButton";
+import CreditsIcon from "../../Components/Icons/CreditsIcon";
+import ScoreValue from "../../Components/ScoreValue";
 
 interface Props {
   readonly amount: number;
@@ -67,8 +70,8 @@ class CreditsButtonState extends React.Component<LocalProps, LocalState> {
 
   render() {
     return (
-      <button className="btn" type="submit" disabled={this.state.disabled}>
-        {this.props.amount} credits
+      <button className="button" type="submit" disabled={this.state.disabled}>
+        <ScoreValue score={this.props.amount.toString(10)} />
       </button>
     );
   }

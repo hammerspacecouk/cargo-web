@@ -1,6 +1,6 @@
 import * as React from "react";
 import CrumbTitle from "../../../Components/CrumbTitle";
-import Messages from "../../../Components/Messages";
+import { MessageOk } from "../../../Components/Messages";
 
 class PoliciesContainer extends React.Component<undefined, undefined> {
   render() {
@@ -15,9 +15,9 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
         </div>
         <div className="t-doc__main text--prose">
           <h2>Human readable</h2>
-          <Messages
-            messages={[{ type: "ok", message: "We store NO personal data" }]}
-          />
+          <div className="unit">
+            <MessageOk>We store NO personal data</MessageOk>
+          </div>
           <h3>Security</h3>
           <p>
             We don't ask for a password, so we don't have to store your

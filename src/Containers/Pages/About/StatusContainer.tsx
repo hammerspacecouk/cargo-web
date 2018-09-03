@@ -17,7 +17,7 @@ class StatusContainer extends React.Component<undefined, undefined> {
           <p className="right">
             <a
               href={`${Environment.apiHostname}/status`}
-              className="btn"
+              className="button"
               target="_blank"
             >
               API Status

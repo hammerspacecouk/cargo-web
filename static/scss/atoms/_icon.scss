@@ -1,0 +1,21 @@
+.icon {
+  // todo - convert all icon usages to this class, and make it better
+  display: inline-block;
+
+  &--mini {
+    width: 24px;
+    height: 24px;
+  }
+  &--standard {
+    width: 32px;
+    height: 32px;
+  }
+  &--mid {
+    width: 49px;
+    height: 49px;
+  }
+  &--max {
+    width: 64px;
+    height: 64px;
+  }
+}

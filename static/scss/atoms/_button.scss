@@ -1,4 +1,4 @@
-.btn {
+.button {
   outline: none;
   display: inline-block;
   border: none;
@@ -22,18 +22,20 @@
     }
   }
   &[disabled] {
-    opacity: 0.7;
+    opacity: 0.4;
   }
 
   &--confirm {
     background: $color-ok;
+    color: darken(saturate($color-ok, 30%), 50%);
   }
 
   &--danger {
     background: $color-danger;
+    color: darken(saturate($color-danger, 30%), 50%);
   }
 
   &--soft-danger {
-    color: $color-danger;
+    color: darken(saturate($color-danger, 30%), 50%);
   }
 }

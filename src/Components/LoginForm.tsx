@@ -159,7 +159,7 @@ export default (props: LoginFormProps) => {
             required
             placeholder="name@example.com"
           />
-          <button type="submit" className="btn">
+          <button type="submit" className="button">
             Send
           </button>
         </div>

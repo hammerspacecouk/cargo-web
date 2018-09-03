@@ -27,7 +27,9 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
         </div>
         <div className="t-home__play panel">
           <h2>Play now</h2>
+          <p>Start playing immediately without logging in</p>
           {playPanel}
+          <p>Or login to resume a previous game:</p>
         </div>
         <main className="t-home__main">
           <h1>Welcome welcome welcome</h1>

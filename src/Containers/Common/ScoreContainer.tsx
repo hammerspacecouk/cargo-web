@@ -2,13 +2,14 @@ import * as React from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
+import ScoreValue from "../../Components/ScoreValue";
 
 interface Props {
   score: ScoreInterface;
 }
 
 interface LocalState {
-  digits: string[];
+  scoreText: string;
   rate: string;
   effectClass: string;
 }
@@ -37,12 +38,11 @@ class ScoreContainer extends React.Component<Props, LocalState> {
     this.state = this.calculateScoreState(props.score);
   }
 
-  formatNumber(input: number): string[] {
+  formatNumber(input: number): string {
     let output = input.toFixed(0);
 
     // minimum 5 digits
-    output = output.padStart(5, "0");
-    return output.split("");
+    return output.padStart(5, "0");
   }
 
   calculateScoreState(score: ScoreInterface): LocalState {
@@ -54,7 +54,7 @@ class ScoreContainer extends React.Component<Props, LocalState> {
     }
 
     return {
-      digits: this.formatNumber(value),
+      scoreText: this.formatNumber(value),
       rate: score.rate.toString(),
       effectClass
     };
@@ -83,18 +83,9 @@ class ScoreContainer extends React.Component<Props, LocalState> {
 
   render() {
     return (
-      <div
-        className={`score ${this.state.effectClass}`}
-        data-rate={this.state.rate}
-      >
-        {this.state.digits.map((digit, i) => {
-          return (
-            <span className="score__digit" key={i}>
-              {digit}
-            </span>
-          );
-        })}
-      </div>
+      <ScoreValue
+        score={this.state.scoreText}
+        effectClass={this.state.effectClass} />
     );
   }
 }

@@ -76,7 +76,8 @@ class CurrentShipContextComponent extends React.Component<
   updateFullResponse(data?: PlayShipResponse) {
     if (!data) {
       this.setState({
-        ...initial
+        ...initial,
+        loaded: true
       });
       return;
     }

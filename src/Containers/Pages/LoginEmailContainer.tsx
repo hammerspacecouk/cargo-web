@@ -44,7 +44,7 @@ class LoginEmailContainer extends React.Component<RouteProps, undefined> {
             continue to your game click below.
           </p>
           <TokenButton token={token}>
-            <button className="btn btn--confirm">Continue</button>
+            <button className="button button--confirm">Continue</button>
           </TokenButton>
         </div>
       </div>

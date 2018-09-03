@@ -5,12 +5,14 @@ import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
 import ShipList from "../../../Components/ShipList";
 import { SessionContext } from "../../../Context/SessionContext";
 import {
-  CurrentShipContext,
   CurrentShipContextInterface
 } from "../../../Context/CurrentShipContext";
 import ScoreInterface from "../../../DomainInterfaces/ScoreInterface";
 import ActionTokenInterface from "../../../DomainInterfaces/ActionTokenInterface";
-import { moveShip, requestShipName } from "../../../Models/Ship";
+import { moveShip } from "../../../Models/Ship";
+import ShieldIcon from "../../../Components/Icons/ShieldIcon";
+import { MessageInfo } from "../../../Components/Messages";
+import CreditsIcon from "../../../Components/Icons/CreditsIcon";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -47,23 +49,54 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     }
   }
 
-  renderDirection(direction?: DirectionInterface) {
+  renderDirection(directionTitle: string, direction?: DirectionInterface) {
     if (!direction) {
-      return null;
+      return (
+        <tr className="destinations__row destinations__row--inactive">
+          <td className="destinations__direction">{directionTitle}</td>
+          <td/>
+          <td/>
+          <td/>
+          <td/>
+          <td/>
+        </tr>
+      );
+    }
+
+    let safe = null;
+    if (direction.destination.safeHaven) {
+      safe = (
+        <abbr title="Safe Haven" className="icon icon--mini">
+          <ShieldIcon/>
+        </abbr>
+      );
     }
 
     return (
-      <div>
-        <h3>{direction.destination.name}</h3>
-        <TokenButton
-          token={direction.action}
-          handler={this.moveShip.bind(this)}
-        >
-          <button className="btn" type="submit">
-            Go ({direction.distanceUnit})
-          </button>
-        </TokenButton>
-      </div>
+      <tr className="destinations__row">
+        <td className="destinations__direction">{directionTitle}</td>
+        <td className="destinations__destination">
+          {direction.destination.name} {safe}
+        </td>
+        <td className="destinations__distance">
+          <span className="d">{direction.distanceUnit}</span>
+          <span className="f">km</span>
+        </td>
+        <td className="destinations__time">2m 4s</td>
+        {/* todo - real value */}
+        <td className="destinations__earnings">-</td>
+        {/* todo - set this based on current cargo stocked in ship */}
+        <td className="destinations__action">
+          <TokenButton
+            token={direction.action}
+            handler={this.moveShip.bind(this)}
+          >
+            <button className="button" type="submit">
+              Go
+            </button>
+          </TokenButton>
+        </td>
+      </tr>
     );
   }
 
@@ -81,61 +114,62 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     let welcome = null;
     if (this.props.playerRankStatus.portsVisited === 0) {
       welcome = (
-        <div className="text--prose">
+        <MessageInfo>
           <p>
             Welcome to {this.props.shipContext.port.name}. It is a{" "}
-            <strong>Safe Haven</strong>. It costs you nothing to be here and
+            <strong>Safe Haven</strong>
+            <abbr title="Safe Haven" className="icon icon--mini">
+              <ShieldIcon/>
+            </abbr>. It costs you nothing to be here and
             your ship cannot be harmed while it is here.
           </p>
           <p>
-            This is your home port. Should you run out of time on the high seas,
+            This is your home port. Should you run out of <abbr title="Credits" className="icon icon--mini">
+            <CreditsIcon/>
+          </abbr> on the high seas,
             your ships will be returned to here
           </p>
-        </div>
+        </MessageInfo>
+      );
+    }
+
+    let safe = null;
+    if (this.props.shipContext.port.safeHaven) {
+      safe = (
+        <abbr title="Safe Haven" className="icon icon--mid">
+          <ShieldIcon/>
+        </abbr>
       );
     }
 
     return (
       <div>
-        <h1>{this.props.shipContext.port.name}</h1>
+        <h1>{this.props.shipContext.port.name} {safe}</h1>
         {welcome}
-        <table style={{ minWidth: "400px" }}>
+        <h2 className="table-head">Where next?</h2>
+        <table className="destinations">
+          <thead>
+          <tr>
+            <th>Direction</th>
+            <th>Destination Port</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Earnings</th>
+            <th>Go?</th>
+          </tr>
+          </thead>
           <tbody>
-            <tr>
-              <td>
-                <h2>NW</h2>
-                {this.renderDirection(this.props.shipContext.directions.NW)}
-              </td>
-              <td>
-                <h2>NE</h2>
-                {this.renderDirection(this.props.shipContext.directions.NE)}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <h2>W</h2>
-                {this.renderDirection(this.props.shipContext.directions.W)}
-              </td>
-              <td>
-                <h2>E</h2>
-                {this.renderDirection(this.props.shipContext.directions.E)}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <h2>SW</h2>
-                {this.renderDirection(this.props.shipContext.directions.SW)}
-              </td>
-              <td>
-                <h2>SE</h2>
-                {this.renderDirection(this.props.shipContext.directions.SE)}
-              </td>
-            </tr>
+          {this.renderDirection("NW", this.props.shipContext.directions.NW)}
+          {this.renderDirection("NE", this.props.shipContext.directions.NE)}
+          {this.renderDirection("W", this.props.shipContext.directions.W)}
+          {this.renderDirection("E", this.props.shipContext.directions.E)}
+          {this.renderDirection("SW", this.props.shipContext.directions.SW)}
+          {this.renderDirection("SE", this.props.shipContext.directions.SE)}
           </tbody>
         </table>
 
         <h2>Players</h2>
-        <ShipList ships={this.props.shipContext.shipsInLocation} />
+        <ShipList ships={this.props.shipContext.shipsInLocation}/>
       </div>
     );
   }

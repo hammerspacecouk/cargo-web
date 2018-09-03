@@ -1,13 +1,14 @@
 import * as React from "react";
 
-class PortfolioContainer extends React.Component<undefined, undefined> {
+class UpgradesContainer extends React.Component<undefined, undefined> {
+
   render() {
     return (
       <main className="t-play__content-contain">
-        <h1>PORTFOLIO</h1>
+        <h1>Upgrades</h1>
       </main>
     );
   }
 }
 
-export default PortfolioContainer;
+export default UpgradesContainer;

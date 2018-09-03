@@ -3,73 +3,63 @@ import * as React from "react";
 import Environment from "../../../Data/Environment";
 import { SessionContext } from "../../../Context/SessionContext";
 
-import PlayerFlag from "../../../Components/PlayerFlag";
 import CrumbTitle from "../../../Components/CrumbTitle";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
-import RankStatusInterface from "../../../DomainInterfaces/RankStatusInterface";
 
 class ProfileContainer extends React.Component<undefined, undefined> {
   render() {
     return (
       <SessionContext.Consumer>
-        {({ player, rankStatus }) => this.renderPage(player, rankStatus)}
+        {({ player }) => this.renderPage(player)}
       </SessionContext.Consumer>
     );
   }
 
-  renderPage(player: PlayerInterface, rankStatus: RankStatusInterface) {
+  renderPage(player: PlayerInterface) {
     return (
       <div className="t-doc">
         <div className="t-doc__title">
           <CrumbTitle>Profile</CrumbTitle>
         </div>
         <div className="t-doc__main">
-          <PlayerFlag player={player} />
 
-          <h2>Rank</h2>
-          <h3>{rankStatus.currentRank.title}</h3>
+          <h2>Home port: Galloping Stable</h2>
+          <h3>Playing Since: Thursday</h3>
+          <h3>ID: 12132224-1131-1313-293828348134</h3>
+          <h3>Contact PIN: asasasvas</h3>
+          <h3>Verified account: Yes</h3>
+          <h3>Subscription Active until: never</h3>
 
-          <table>
-            <tbody>
-              <tr>
-                <td>{rankStatus.currentRank.title}</td>
-                <td style={{ minWidth: "400px" }}>
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "600px",
-                      margin: "16px auto",
-                      background: "#666",
-                      height: "16px",
-                      borderRadius: "64px",
-                      overflow: "hidden"
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: "32px",
-                        background: "#6c6",
-                        width: `${rankStatus.levelProgress}%`
-                      }}
-                    />
-                  </div>
-                </td>
-                <td>{rankStatus.nextRank.title}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div>
+            <h2>Identification Information</h2>
+            <p>
+              Because we don't store any of your personal data, we need a way
+              for you to verify you are the owner of this account if you contact
+              us. Tell us the information below if you try to contact us:
+            </p>
+            <table className="table table--striped">
+              <tbody>
+                <tr>
+                  <th>ID</th>
+                  <td>{player.id}</td>
+                </tr>
+                <tr>
+                  <th>PIN</th>
+                  <td>abed5432</td>{/* todo */}
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          <h2>Home port</h2>
-          <h3>todo</h3>
 
           <ul>
             <li>
-              <a className="btn" href={`${Environment.apiHostname}/logout`}>
+              <a className="button" href={`${Environment.apiHostname}/logout`}>
                 Logout
               </a>
             </li>
             <li>
-              <a className="btn btn--soft-danger" href="/profile/delete">
+              <a className="button button--soft-danger" href="/profile/delete">
                 Delete account
               </a>
             </li>

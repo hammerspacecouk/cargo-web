@@ -86,6 +86,11 @@ export default class implements APIClientInterface {
         `[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`
       );
 
+      if (response.status === 409) {
+        // you tried to perform an action you weren't allowed to perform. CHEAT!
+        window.location.href = '/about/cheating';
+        return null;
+      }
       if (response.status === 403) {
         // you don't have access to this. might need to login or not allowed
         return null;

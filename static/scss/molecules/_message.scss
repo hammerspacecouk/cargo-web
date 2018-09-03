@@ -1,10 +1,19 @@
 .m-message {
-  background: $color-info;
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  color: $color-black;
+  $root: &;
+  $icon-size: 32px;
+
+  @mixin message($input-color) {
+    background: $input-color;
+    color: darken(saturate($input-color, 30%), 50%);
+    #{$root}__icon {
+      background: darken(saturate($input-color, 20%), 10%);
+    }
+  }
+
+  @include message($color-info);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
   display: flex;
-  align-items: center;
 
   & + &,
   &-wrap:not(:first-child) {
@@ -12,31 +21,33 @@
   }
 
   &__icon {
-    $icon-size: 64px;
-    min-width: $icon-size;
-    height: $icon-size;
-    align-self: start;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
     padding: $grid-unit;
-    background: rgba(0, 0, 0, 0.2);
-    svg {
-      opacity: 0.6;
-    }
+    line-height: 0;
+    width: $icon-size + (2 * $grid-unit);
   }
 
-  &--ok {
-    background: $color-ok;
-  }
-  &--error {
-    background: $color-danger;
-  }
-  &--warning {
-    background: $color-warning;
+  &__icon-img {
+    width: $icon-size;
+    height: $icon-size;
   }
 
   &__text {
     padding: $grid-unit / 2 $grid-unit;
-    color: $color-black;
+    flex: 1;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
   }
 
+  &--ok {
+    @include message($color-ok);
+  }
+  &--error {
+    @include message($color-danger);
+  }
+  &--warning {
+    @include message($color-warning);
+  }
 
 }

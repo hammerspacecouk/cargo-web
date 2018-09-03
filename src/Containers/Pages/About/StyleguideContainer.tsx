@@ -6,24 +6,36 @@ import {
   MessageOk,
   MessageWarning
 } from "../../../Components/Messages";
+import CreditsIcon from "../../../Components/Icons/CreditsIcon";
+import WarningIcon from "../../../Components/Icons/WarningIcon";
+import TickIcon from "../../../Components/Icons/TickIcon";
+import ProfileIcon from "../../../Components/Icons/ProfileIcon";
+import MenuIcon from "../../../Components/Icons/MenuIcon";
+import InfoIcon from "../../../Components/Icons/InfoIcon";
+import HomeIcon from "../../../Components/Icons/HomeIcon";
+import ErrorIcon from "../../../Components/Icons/ErrorIcon";
+import EditIcon from "../../../Components/Icons/EditIcon";
+import ChevronLeftIcon from "../../../Components/Icons/ChevronLeftIcon";
+import ChevronRightIcon from "../../../Components/Icons/ChevronRightIcon";
+import ShieldIcon from "../../../Components/Icons/ShieldIcon";
 
 const colourTable = (colourNames: string[]) => (
   <table className="table">
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Example</th>
-      </tr>
+    <tr>
+      <th>Name</th>
+      <th>Example</th>
+    </tr>
     </thead>
     <tbody>
-      {colourNames.map(color => (
-        <tr key={color}>
-          <th>
-            <code>$color-{color}</code>
-          </th>
-          <td className={`color-${color}`} />
-        </tr>
-      ))}
+    {colourNames.map(color => (
+      <tr key={color}>
+        <th>
+          <code>$color-{color}</code>
+        </th>
+        <td className={`color-${color}`}/>
+      </tr>
+    ))}
     </tbody>
   </table>
 );
@@ -86,22 +98,102 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
             <p>These are colours that imply a meaning</p>
             {colourTable(["info", "ok", "danger", "warning"])}
 
+          </div>
+
+          <h2 className="unit">Icons</h2>
+          <ul className="unit m-box-list m-box-list--icons">
+            <li>
+              <h3 className="m-box-list__title">ChevronLeftIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <ChevronLeftIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">ChevronRightIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <ChevronRightIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">CreditsIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <CreditsIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">EditIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <EditIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">ErrorIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <ErrorIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">HomeIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <HomeIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">InfoIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <InfoIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">MenuIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <MenuIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">ProfileIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <ProfileIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">ShieldIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <ShieldIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">TickIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <TickIcon/>
+              </div>
+            </li>
+            <li>
+              <h3 className="m-box-list__title">WarningIcon</h3>
+              <div className="m-box-list__item m-box-list__item--icon">
+                <WarningIcon/>
+              </div>
+            </li>
+          </ul>
+
+          <div className="text--prose">
+
             <h2>Core</h2>
             <h2>Atoms</h2>
 
             <h3>Buttons</h3>
 
             <p>
-              <button className="btn">Standard button</button>
+              <button className="button">Standard button</button>
             </p>
             <p>
-              <button className="btn btn--confirm">Confirm</button>
+              <button className="button button--confirm">Confirm</button>
             </p>
             <p>
-              <button className="btn btn--danger">Reject</button>
+              <button className="button button--danger">Reject</button>
             </p>
             <p>
-              <button className="btn btn--soft-danger">Soft Reject</button>
+              <button className="button button--soft-danger">Soft Reject</button>
             </p>
 
             <h2>Molecules</h2>
@@ -118,7 +210,7 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
               Warning message (<code>warning</code>)
             </MessageWarning>
             <MessageError>
-              Error message (<code>error</code>). <br />
+              Error message (<code>error</code>). <br/>
               This one has a lot of text to demo some lines. Lorem ipsum dolor
               sit amet, consectetur adipiscing elit. Sed feugiat ligula id enim
               feugiat posuere. Vestibulum feugiat dui eget lorem dictum

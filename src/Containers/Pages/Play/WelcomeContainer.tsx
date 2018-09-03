@@ -38,13 +38,25 @@ class WelcomeContainer extends React.Component<undefined, undefined> {
                   {this.renderShip(firstShip, player)}
                 </td>
                 <td className="text--prose">
+                  <h2
+                    style={{
+                      borderRadius: "500px",
+                      background: "#ad5825",
+                      color: "#ffffff",
+                      textAlign: "center",
+                      padding: "16px",
+                      boxShadow: "1px 1px 5px #000"
+                    }}
+                  >
+                    {firstShip.name}
+                  </h2>
                   <p>
                     This is your first ship. It can carry 2 crates. It will be
                     placed in a safe port where you can pick up some cargo to
                     transport.
                   </p>
                   <p className="text--center">
-                    <Link to={PLAY_PATH_SHOW(firstShip.id)} className="btn">
+                    <Link to={PLAY_PATH_SHOW(firstShip.id)} className="button">
                       Begin
                     </Link>
                   </p>
@@ -116,22 +128,6 @@ class WelcomeContainer extends React.Component<undefined, undefined> {
             />
           </svg>
         </div>
-        <h2
-          style={{
-            position: "absolute",
-            bottom: "48px",
-            borderRadius: "500px",
-            left: "16px",
-            right: "16px",
-            background: "#ad5825",
-            color: "#ffffff",
-            textAlign: "center",
-            padding: "16px",
-            boxShadow: "1px 1px 5px #000"
-          }}
-        >
-          {ship.name}
-        </h2>
       </div>
     );
   }

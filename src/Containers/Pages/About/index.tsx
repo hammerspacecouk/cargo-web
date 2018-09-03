@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route, Switch } from "react-router";
 
 import AboutContainer from "./AboutContainer";
+import CheatingContainer from "./CheatingContainer";
 import PoliciesContainer from "./PoliciesContainer";
 import StyleguideContainer from "./StyleguideContainer";
 import StatusContainer from "./StatusContainer";
@@ -14,6 +15,11 @@ export default () => (
       <Route
         path="/about/policies"
         component={PoliciesContainer}
+        exact={true}
+      />
+      <Route
+        path="/about/cheating"
+        component={CheatingContainer}
         exact={true}
       />
       <Route path="/about/status" component={StatusContainer} exact={true} />

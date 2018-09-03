@@ -56,11 +56,11 @@ class DeleteContainer extends React.Component<RouteProps, undefined> {
           </div>
 
           <div className="text--center">
-            <a className="btn btn--confirm" href="/profile">
+            <a className="button button--confirm" href="/profile">
               Cancel
             </a>
             <TokenButton token={token}>
-              <button type="submit" className="btn btn--danger">
+              <button type="submit" className="button button--danger">
                 Yes
               </button>
             </TokenButton>

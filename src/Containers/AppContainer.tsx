@@ -2,7 +2,6 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import SessionContextComponent from "../Context/SessionContext";
-import MastheadContainer from "./Common/MastheadContainer";
 import About from "./Pages/About";
 import Home from "./Pages/Home";
 import Play from "./Pages/Play";
@@ -12,12 +11,11 @@ import Login from "./Pages/LoginContainer";
 import LoginEmail from "./Pages/LoginEmailContainer";
 
 import NotFound from "../Components/Error/NotFound";
-import CurrentShipContextComponent from "../Context/CurrentShipContext";
+import Masthead from "../Components/Masthead";
 
 export default () => (
   <SessionContextComponent>
-    <CurrentShipContextComponent>
-      <MastheadContainer />
+      <Masthead />
       <main>
         <div className="main">
           <Switch>
@@ -34,6 +32,5 @@ export default () => (
           </Switch>
         </div>
       </main>
-    </CurrentShipContextComponent>
   </SessionContextComponent>
 );

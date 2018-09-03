@@ -25,12 +25,11 @@ services:
       - "--host=0.0.0.0"
       - "--watch"
       - "--watch-aggregate-timeout=300"
-      - "--progress"
       - "--port=3000"
       - "--watch-poll=1000"
       - "--allowed-hosts=dev.planetcargo.live"
       - "--content-base=webpack/"
-      - "--history-api-fallback=/"
+      - "--history-api-fallback"
 
 
 #### For Testing prod server

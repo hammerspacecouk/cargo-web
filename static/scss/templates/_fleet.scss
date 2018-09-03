@@ -1,0 +1,18 @@
+.t-fleet {
+  &__title-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: $grid-unit;
+    padding: $grid-unit;
+    background: $color-main-black;
+    color: $color-white;
+  }
+  &__title {
+    flex: 1;
+    line-height: 1;
+  }
+  &__flag {
+    width: 60px;
+    margin-left: $grid-unit;
+  }
+}

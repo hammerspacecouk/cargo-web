@@ -1,66 +1,92 @@
 .masthead-position {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
-  pointer-events: none;
 }
 
+
 .masthead {
+  $root: &;
   $masthead-background-color: #353535;
   $masthead-background-color-hover: #272727;
   $masthead-text-color: #fff;
   $masthead-link-padding: 8px;
 
+  @keyframes pulse-play-icon {
+    0% {
+      color: $masthead-text-color;
+      transform: translateX(-2px);
+    }
+    70% {
+      color: $masthead-text-color;
+    }
+    100% {
+      color: $color-primary;
+      transform: translateX(2px);
+    }
+  }
+
   background: $masthead-background-color;
   color: $masthead-text-color;
-  height: $masthead-height;
   display: flex;
-  overflow: hidden;
+  justify-content: space-between;
   z-index: $z-high-gold;
-  position: relative;
-  pointer-events: auto;
 
-  &__box-link {
-    color: $masthead-text-color;
-    padding: $masthead-link-padding;
-    display: inline-block;
+  &__link {
+    color: inherit;
     &:hover, &:active, &:focus {
-      background: $masthead-background-color-hover;
+      background: rgba(255, 255, 255, 0.2);
       text-decoration: none;
     }
-    &--menu {
-      width: $masthead-height;
-      height: $masthead-height;
-      fill: $masthead-text-color;
-    }
-    &--ship {
-      line-height: $masthead-height - (2 * $masthead-link-padding);
-    }
   }
 
-
+  &__link-box {
+    display: flex;
+    > a {
+      display: flex;
+      align-items: center;
+      padding: $grid-unit;
+    }
+  }
 
   &__logo {
-    flex: 1;
+    @extend .d;
+  }
+  &__actions {
+    display: flex;
+  }
+
+  &__play-text {
+    display: inline-block;
+  }
+  &__play-icon {
+    display: inline-block;
+    margin-left: $grid-unit / 2;
+    width: 28px;
+    height: 28px;
+    animation: 2s pulse-play-icon infinite alternate ease-in;
+  }
+
+  &__score {
+    display: flex;
     > a {
-      display: inline-block;
-      color: inherit;
-      padding: $grid-unit;
+      display: flex;
+      padding: 0 $grid-unit;
     }
   }
 
-  &__login {
-    text-align: right;
+  &__profile {
+    display: flex;
     > a {
-      display: inline-block;
-      padding: $grid-unit;
-      color: inherit;
+      padding: 0 $grid-unit 0 0;
+      display: flex;
+      svg {
+        align-self: center;
+        height: 32px;
+        width: 32px + 12px;
+        padding-left: 12px;
+        border-left: solid 1px shade($masthead-text-color, 50%);
+      }
     }
-  }
-  &__score {
-    flex: 1;
-    text-align: right;
-    padding: 0 ($masthead-link-padding * 2);
-    line-height: $masthead-height;
   }
 }

@@ -26,8 +26,16 @@ export interface SingleProps {
 
 const genericMessage = (icon: any, type: string, children: any) => (
   <div className={`m-message m-message--${type}`}>
-    <span className="m-message__icon">{icon}</span>
-    <span className="m-message__text">{children}</span>
+    <div className="m-message__icon">
+      <div className="m-message__icon-img">
+      {icon}
+      </div>
+    </div>
+    <div className="m-message__text">
+      <div>
+        {children}
+      </div>
+    </div>
   </div>
 );
 

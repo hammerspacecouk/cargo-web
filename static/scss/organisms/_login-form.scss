@@ -16,7 +16,7 @@
 
   &__social-item {
     @extend .e;
-    @extend .btn;
+    @extend .button;
     display: inline-block;
     height: $social-button-height;
     padding: $social-button-padding;

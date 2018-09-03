@@ -13,6 +13,15 @@
 
 .table--striped {
   tr:nth-child(even) {
-    background: $color-grey-darkest;
+    background: $color-grey-light;
+    color: $color-body-text;
   }
+}
+
+.table-head {
+  @extend .d;
+  margin: 0;
+  padding: $grid-unit / 2;
+  background: $color-panel-bg;
+  color: $color-panel-text;
 }

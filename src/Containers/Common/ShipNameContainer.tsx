@@ -228,7 +228,7 @@ class ShipNameContainer extends React.Component<Props, State> {
         <React.Fragment>
           <a
             href="."
-            className="btn btn--soft-danger"
+            className="button button--soft-danger"
             onClick={this.rejectNameOffer.bind(this)}
           >
             Reject
@@ -242,7 +242,7 @@ class ShipNameContainer extends React.Component<Props, State> {
                   this.acceptShipName(token, updateCurrentShip)
                 }
               >
-                <button className="btn btn--confirm" type="submit">
+                <button className="button button--confirm" type="submit">
                   Accept
                 </button>
               </TokenButton>
