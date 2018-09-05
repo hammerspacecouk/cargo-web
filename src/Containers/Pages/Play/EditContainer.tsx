@@ -136,6 +136,8 @@ class EditContainer extends React.Component<Props, State> {
             )}
           </SessionContext.Consumer>
           {shipName}
+          <h2>Upgrades</h2>
+          <p>todo</p>
         </div>
       </div>
     );

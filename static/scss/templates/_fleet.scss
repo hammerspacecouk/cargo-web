@@ -1,10 +1,9 @@
 .t-fleet {
   &__title-bar {
+    @extend %template-title-header;
     display: flex;
     align-items: center;
-    margin-bottom: $grid-unit;
-    padding: $grid-unit;
-    background: $color-main-black;
+    padding: ($grid-unit * 2) ($grid-unit * 2) ($grid-unit * 2) $grid-unit;
     color: $color-white;
   }
   &__title {
@@ -14,5 +13,36 @@
   &__flag {
     width: 60px;
     margin-left: $grid-unit;
+  }
+
+  &__ships {
+    margin-bottom: $grid-unit;
+  }
+
+  &__rank {
+    background: $color-body-bg;
+    color: $color-body-text;
+    padding: $grid-unit;
+    border-radius: 8px; // todo -variable
+  }
+  &__main {
+    width: 100%;
+    padding: 0 $grid-unit;
+  }
+
+  @include mq($from: xl) {
+    &__main {
+      display: flex;
+    }
+    &__ships {
+      flex: 1;
+      display: flex;
+      margin-bottom: 0;
+    }
+    &__rank {
+      flex: 1;
+      max-width: 380px;
+      margin-left: $grid-unit;
+    }
   }
 }

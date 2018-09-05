@@ -8,9 +8,10 @@
   grid-column: edge-left / edge-right;
   grid-row: 1;
 }
-.t-home_hero-contents {
+.t-home__hero-contents {
   margin: 0 auto;
   max-width: $max-content-width;
+  padding: 32px $grid-unit;
 }
 
 .t-home__main,

@@ -52,32 +52,6 @@ const getShipLink = () => (
   </CurrentShipContext.Consumer>
 );
 
-const getUpgradesLink = () => (
-  <CurrentShipContext.Consumer>
-    {({ ship }) => {
-      if (ship) {
-        return (
-          <li className="play-bar__item">
-            <Link to={`/play/${ship.id}/upgrades`} className="play-bar__link">
-              {iconMoney}
-              Upgrades
-            </Link>
-          </li>
-        );
-      }
-
-      return (
-        <li className="play-bar__item">
-        <span className="play-bar__link play-bar__link--disabled">
-          {iconMoney}
-          Upgrades
-        </span>
-        </li>
-      );
-    }}
-  </CurrentShipContext.Consumer>
-);
-
 export default () => {
   return (
     <nav className="play-bar">
@@ -86,10 +60,15 @@ export default () => {
         <li className="play-bar__item">
           <Link to="/play/fleet" className="play-bar__link">
             {iconStuff}
-            Fleet
+            Fleet {/* todo - add a notification icon if any ships are in port */}
           </Link>
         </li>
-        {getUpgradesLink()}
+        <li className="play-bar__item">
+          <Link to={`/play/upgrades`} className="play-bar__link">
+            {iconMoney}
+            Upgrades
+          </Link>
+        </li>
       </ul>
     </nav>
   );

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { SessionContext, SessionContextInterface } from "../../../Context/SessionContext";
 import PlayerFlag from "../../../Components/PlayerFlag";
-import ShipInterface, { PLAY_PATH_EDIT, PLAY_PATH_SHOW } from "../../../DomainInterfaces/ShipInterface";
-import { Link } from "react-router-dom";
-import EditIcon from "../../../Components/Icons/EditIcon";
 import ProgressBar from "../../../Components/ProgressBar";
+import FleetShips from "../../../Components/FleetShips";
+
+
 
 class FleetContainer extends React.Component<undefined, undefined> {
 
@@ -28,32 +28,15 @@ class FleetContainer extends React.Component<undefined, undefined> {
           </div>
           <div className="t-fleet__main">
             <div className="t-fleet__ships">
-              <ul>
-                {sessionContext.ships.map((ship: ShipInterface) => (
-                  <li key={ship.id}>
-                    <Link to={PLAY_PATH_SHOW(ship.id)}>
-                      {ship.name} <br />
-                      ship class <br />
-                      current location
-                    </Link>
-                    <div className="icon--standard">
-                    <Link
-                      to={PLAY_PATH_EDIT(ship.id)}
-                      title="Edit"
-                    >
-                      <EditIcon/>
-                    </Link></div>
-                  </li>
-                ))}
-              </ul>
+              <FleetShips ships={sessionContext.ships} />
             </div>
             <div className="t-fleet__rank">
-              <h2>My rank</h2>
-              <div className="menu__rank-row">
-                <h3 className="e">{sessionContext.rankStatus.currentRank.title}</h3>
-              </div>
-              <div className="menu__rank-row">
-                <ProgressBar percent={sessionContext.rankStatus.levelProgress} />
+              <h2>{sessionContext.rankStatus.currentRank.title}</h2>
+              <br /><br /><br /><br /><br /><br /><br /><br />
+              <br /><br /><br /><br /><br /><br /><br /><br />
+              <br /><br /><br /><br /><br /><br />
+              <div>
+                <ProgressBar percent={sessionContext.rankStatus.levelProgress}/>
                 <p className="f">{sessionContext.rankStatus.nextRank.title}</p>
               </div>
             </div>

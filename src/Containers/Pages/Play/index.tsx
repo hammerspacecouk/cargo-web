@@ -33,7 +33,7 @@ export default () => (
               exact={true}
             />
             <Route
-              path="/play/:shipId/upgrades"
+              path="/play/upgrades"
               component={UpgradesContainer}
               exact={true}
             />

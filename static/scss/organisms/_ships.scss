@@ -1,0 +1,29 @@
+.o-ships {
+  width: 100%;
+
+  &__list {
+    width: 100%;
+    display: block;
+    > tbody {
+      display: block;
+    }
+  }
+  &__more {
+    @extend .d;
+    display: flex;
+    margin: $grid-unit;
+    justify-content: center;
+    a {
+      color: $color-white;
+      font-weight: bold;
+      padding: $grid-unit;
+      border-bottom: solid 4px transparent;
+      &:hover, &:active, &:focus {
+        background: rgba(255,255,255,0.3);
+        border-bottom-color: rgba(255,255,255,0.5);
+        text-decoration: none;
+        border-radius: 8px;
+      }
+    }
+  }
+}

@@ -2,31 +2,18 @@
   position: sticky;
   top: 0;
   width: 100%;
+  background: fixed linear-gradient(45deg, hsl(276, 51%, 47%) 0%, hsl(0, 98%, 55%) 50%, hsl(35, 97%, 63%) 100%);
 }
 
 
 .masthead {
   $root: &;
-  $masthead-background-color: #353535;
-  $masthead-background-color-hover: #272727;
+  $masthead-background-color: rgba(0,0,0,0.2);
   $masthead-text-color: #fff;
   $masthead-link-padding: 8px;
 
-  @keyframes pulse-play-icon {
-    0% {
-      color: $masthead-text-color;
-      transform: translateX(-2px);
-    }
-    70% {
-      color: $masthead-text-color;
-    }
-    100% {
-      color: $color-primary;
-      transform: translateX(2px);
-    }
-  }
-
   background: $masthead-background-color;
+
   color: $masthead-text-color;
   display: flex;
   justify-content: space-between;
@@ -54,17 +41,6 @@
   }
   &__actions {
     display: flex;
-  }
-
-  &__play-text {
-    display: inline-block;
-  }
-  &__play-icon {
-    display: inline-block;
-    margin-left: $grid-unit / 2;
-    width: 28px;
-    height: 28px;
-    animation: 2s pulse-play-icon infinite alternate ease-in;
   }
 
   &__score {

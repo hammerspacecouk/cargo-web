@@ -1,7 +1,6 @@
 import PlayerInterface from "../DomainInterfaces/PlayerInterface";
 import ShipInterface from "../DomainInterfaces/ShipInterface";
 import API from "../Data/API";
-import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 
 export interface SessionResponseInterface {
   readonly loggedIn: boolean;

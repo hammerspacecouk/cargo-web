@@ -1,0 +1,47 @@
+.m-fleet-ship {
+  display: flex;
+  align-items: center;
+  padding: $grid-unit;
+  background: $color-main-black;
+  border-radius: 8px;
+  &:not(:last-child) {
+    margin-bottom: $grid-unit;
+  }
+  &:nth-child(2n) {
+    background: $color-off-black;
+  }
+
+  &__cell {
+    display: block;
+
+    &--icon {
+      width: 48px;
+    }
+    &--name {
+      flex: 1;
+    }
+    &--location {
+      padding: 0 $grid-unit;
+    }
+    &--capacity {
+      width: 64px;
+    }
+    &--actions {
+      width: 32px;
+    }
+  }
+
+  &__meta {
+    display: block;
+    padding-left: $grid-unit;
+    color: inherit;
+  }
+
+  &__name {
+    @extend .d;
+  }
+  &__class {
+    @extend .f;
+    text-transform: uppercase;
+  }
+}

@@ -21,7 +21,7 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
     return (
       <div className="t-home">
         <div className="t-home__hero">
-          <div className="t-home_hero-contents home-hero">
+          <div className="t-home__hero-contents home-hero">
             <h1>Planet Cargo</h1>
           </div>
         </div>

@@ -5,6 +5,7 @@ import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import ScoreContainer from "../Containers/Common/ScoreContainer";
 import ProfileIcon from "./Icons/ProfileIcon";
 import ChevronRightIcon from "./Icons/ChevronRightIcon";
+import ActionLink from "./ActionLink";
 
 interface Props {
   score: ScoreInterface;
@@ -12,10 +13,9 @@ interface Props {
 
 const GuestActions = () => (
   <div className="masthead__play masthead__link-box">
-    <Link to="/play" className="masthead__link">
-        <span className="masthead__play-text">Play now</span>
-        <span className="masthead__play-icon"><ChevronRightIcon /></span>
-    </Link>
+    <ActionLink to="/play" className="masthead__link">
+      Play now
+    </ActionLink>
   </div>
 );
 

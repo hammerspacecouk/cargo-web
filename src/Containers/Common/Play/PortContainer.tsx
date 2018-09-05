@@ -13,6 +13,7 @@ import { moveShip } from "../../../Models/Ship";
 import ShieldIcon from "../../../Components/Icons/ShieldIcon";
 import { MessageInfo } from "../../../Components/Messages";
 import CreditsIcon from "../../../Components/Icons/CreditsIcon";
+import PortInterface from "../../../DomainInterfaces/PortInterface";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -26,6 +27,25 @@ interface LocalProps extends Props {
 interface StateInterface {
   departingPort: boolean;
 }
+
+// todo - abstract this and use it lots
+// todo - (with the proper interface - combined with fleetships)
+const inlinePortName = (port: PortInterface) => {
+  let safe = null;
+  if (port.safeHaven) {
+    safe = (
+      <abbr title="Safe Haven" className="m-icon-suffix__icon">
+        <ShieldIcon/>
+      </abbr>
+    );
+  }
+  return (
+    <span className="m-icon-suffix">
+      <span className="m-icon-suffix__text">{port.name}</span>
+      {safe}
+    </span>
+  );
+};
 
 class PortContainer extends React.Component<LocalProps, StateInterface> {
   constructor(props: LocalProps) {
@@ -75,8 +95,8 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     return (
       <tr className="destinations__row">
         <td className="destinations__direction">{directionTitle}</td>
-        <td className="destinations__destination">
-          {direction.destination.name} {safe}
+        <td className="destinations__destination d">
+          {inlinePortName(direction.destination)}
         </td>
         <td className="destinations__distance">
           <span className="d">{direction.distanceUnit}</span>
