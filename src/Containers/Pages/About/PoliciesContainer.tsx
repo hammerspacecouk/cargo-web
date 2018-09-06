@@ -60,6 +60,7 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
             <a
               href="https://en.wikipedia.org/wiki/The_Entire_History_of_You"
               target="_blank"
+              rel="noopener"
             >
               entire history of you
             </a>{" "}

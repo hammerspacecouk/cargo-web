@@ -2,6 +2,7 @@ import * as React from "react";
 import MessageInterface from "../DomainInterfaces/MessageInterface";
 import Messages from "./Messages";
 import Environment from "../Data/Environment";
+import { Link } from "react-router-dom";
 
 export interface LoginFormProps {
   messages?: MessageInterface[];
@@ -142,7 +143,7 @@ export default (props: LoginFormProps) => {
         </li>
       </ul>
       <form action={loginPathEmail} method="post">
-        <h3 className="d">
+        <h3 className="d unit">
           <label htmlFor="login-email">Login via e-mail</label>
         </h3>
         <p>
@@ -165,7 +166,7 @@ export default (props: LoginFormProps) => {
         </div>
       </form>
       <p>
-        <a href="#">More info on our login policies</a>
+        <Link to="/about/policies">More info on our login policies</Link>
       </p>
     </div>
   );

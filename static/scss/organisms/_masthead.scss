@@ -53,6 +53,7 @@
 
   &__profile {
     display: flex;
+    position: relative;
     > a {
       padding: 0 $grid-unit 0 0;
       display: flex;
@@ -64,5 +65,30 @@
         border-left: solid 1px shade($masthead-text-color, 50%);
       }
     }
+  }
+
+  // todo - probably want to abstract this
+  @keyframes pulse-notification {
+    0% {
+      background-color: $color-1;
+    }
+    70% {
+      background-color: $color-1;
+    }
+    100% {
+      background-color: $color-white;
+    }
+  }
+
+  &__notify {
+    display: block;
+    width: $grid-unit * 0.75;
+    height: $grid-unit * 0.75;
+    position: absolute;
+    top: $grid-unit / 2;
+    right: $grid-unit / 2;
+    border-radius: 100%;
+    background-color: $color-1;
+    animation: 1s pulse-notification infinite alternate ease-in;
   }
 }

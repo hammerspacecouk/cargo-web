@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 
 import { PATH_LIST as portsPath } from "../../../DomainInterfaces/PortInterface";
 import PlayerInterface from "../../../DomainInterfaces/PlayerInterface";
+import LoginForm from "../../../Components/LoginForm";
+import { SessionContext } from "../../../Context/SessionContext";
+import ActionLink from "../../../Components/ActionLink";
 
 interface Props {
   sessionPlayer?: PlayerInterface;
@@ -10,14 +13,42 @@ interface Props {
 }
 
 class HomeIndexContainer extends React.Component<undefined, undefined> {
+
+  renderPlayPanel(playerFetched: boolean, player?: PlayerInterface) {
+    if (playerFetched && !player) {
+      return (
+        <React.Fragment>
+          <p className="e unit">
+            Start playing immediately without logging in:
+          </p>
+          <div className="text--center unit">
+            <div className="align--inline">
+              <ActionLink
+                to={`/play`}
+                className="button m-icon-suffix--animated">
+                New game
+              </ActionLink>
+            </div>
+          </div>
+          <h3 className="d unit">Or login to resume a previous game:</h3>
+          <LoginForm/>
+        </React.Fragment>
+      );
+    }
+    return (
+      <div className="text--center unit">
+        <div className="align--inline">
+          <ActionLink
+            to={`/play/fleet`}
+            className="button m-icon-suffix--animated">
+            To My Fleet
+          </ActionLink>
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    let playPanel = <Link to="/play">Go to the islands >>></Link>;
-
-    // todo - check this differently on the homepage so it doesn't create a new player immediately
-    // if (this.props.sessionChecked && !this.props.sessionPlayer) {
-    //   playPanel = <LoginForm />;
-    // }
-
     return (
       <div className="t-home">
         <div className="t-home__hero">
@@ -26,10 +57,11 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
           </div>
         </div>
         <div className="t-home__play panel">
-          <h2>Play now</h2>
-          <p>Start playing immediately without logging in</p>
-          {playPanel}
-          <p>Or login to resume a previous game:</p>
+          <h2 className="panel__title">Play now</h2>
+          <SessionContext.Consumer>
+            {({ playerFetched, player }) =>
+              this.renderPlayPanel(playerFetched, player)}
+          </SessionContext.Consumer>
         </div>
         <main className="t-home__main">
           <h1>Welcome welcome welcome</h1>

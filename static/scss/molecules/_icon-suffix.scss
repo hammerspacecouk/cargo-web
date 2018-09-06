@@ -1,4 +1,6 @@
 .m-icon-suffix {
+  $root: &;
+
   display: flex;
   align-items: center;
 
@@ -27,7 +29,7 @@
   }
 
   &--animated {
-    &__icon {
+    #{$root}__icon {
       animation: 1s pulse-play-icon infinite alternate ease-in;
     }
   }

@@ -1,25 +1,19 @@
 import { Link } from "react-router-dom";
-import { SessionContext } from "../Context/SessionContext";
+import { SessionContext, SessionContextInterface } from "../Context/SessionContext";
 import * as React from "react";
-import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import ScoreContainer from "../Containers/Common/ScoreContainer";
 import ProfileIcon from "./Icons/ProfileIcon";
-import ChevronRightIcon from "./Icons/ChevronRightIcon";
 import ActionLink from "./ActionLink";
-
-interface Props {
-  score: ScoreInterface;
-}
 
 const GuestActions = () => (
   <div className="masthead__play masthead__link-box">
-    <ActionLink to="/play" className="masthead__link">
+    <ActionLink to="/play" className="masthead__link m-icon-suffix--animated">
       Play now
     </ActionLink>
   </div>
 );
 
-const PlayerActions = (props: Props) => (
+const PlayerActions = (props: SessionContextInterface) => (
   <React.Fragment>
     <div className="masthead__score">
       <Link to="/play" className="masthead__link">
@@ -27,9 +21,16 @@ const PlayerActions = (props: Props) => (
       </Link>
     </div>
     <div className="masthead__profile">
-      <Link to="/profile" title="My Profile" className="masthead__link">
+      <Link
+        to="/profile"
+        title="My Profile"
+        className="masthead__link"
+      >
         <span className="hidden">Profile</span>
-        <ProfileIcon />
+        <ProfileIcon/>
+        {!props.hasSetEmail ? <abbr
+          className="masthead__notify"
+          title="Notification to view" /> : ''}
       </Link>
     </div>
   </React.Fragment>
@@ -45,7 +46,7 @@ export default () => (
         <SessionContext.Consumer>
           {sessionContext => (
             sessionContext.player ?
-              <PlayerActions score={sessionContext.score}/> :
+              <PlayerActions {...sessionContext} /> :
               <GuestActions/>
           )}
         </SessionContext.Consumer>

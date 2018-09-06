@@ -17,12 +17,13 @@ interface SessionPropertiesInterface {
   score?: ScoreInterface;
   ships?: ShipInterface[];
   playerFetched: boolean;
-  playerFetching: boolean;
+  hasSetEmail: boolean;
 }
 
 export interface SessionContextInterface extends SessionPropertiesInterface {
   updateScore: (newScore: ScoreInterface) => void;
   updateRankStatus: (newRankStatus: RankStatusInterface) => void;
+  createNewPlayer: () => void;
 }
 
 export const initialSession: SessionPropertiesInterface = {
@@ -30,13 +31,14 @@ export const initialSession: SessionPropertiesInterface = {
   score: null,
   ships: null,
   playerFetched: false,
-  playerFetching: false
+  hasSetEmail: false,
 };
 
 export const SessionContext = createContext({
   ...initialSession,
   updateScore: (newScore: ScoreInterface) => {},
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {}
+  updateRankStatus: (newRankStatus: RankStatusInterface) => {},
+  createNewPlayer: () => {}
 });
 
 class SessionContextComponent extends React.Component<
@@ -49,10 +51,15 @@ class SessionContextComponent extends React.Component<
   constructor(props: any) {
     super(props);
 
+    this.updateScore = this.updateScore.bind(this);
+    this.updateRankStatus = this.updateRankStatus.bind(this);
+    this.createNewPlayer = this.createNewPlayer.bind(this);
+
     this.state = {
       ...initialSession,
-      updateScore: this.updateScore.bind(this),
-      updateRankStatus: this.updateRankStatus.bind(this)
+      updateScore: this.updateScore,
+      updateRankStatus: this.updateRankStatus,
+      createNewPlayer: this.createNewPlayer
     };
   }
 
@@ -65,29 +72,34 @@ class SessionContextComponent extends React.Component<
     this.allowUpdate = false;
   }
 
-  async refreshSession() {
-    if (!this.allowUpdate) {
+  async createNewPlayer() {
+    this.allowUpdate = false;
+    this.setState({
+      playerFetched: false,
+    });
+    await this.refreshSession(true);
+    this.allowUpdate = true;
+  }
+
+  async refreshSession(allowNewPlayer?: boolean) {
+    if (!this.allowUpdate && !allowNewPlayer) {
       return;
     }
 
     // todo - store an update time in the session prop and don't bother refetching if it is recent
-    this.setState({
-      playerFetching: true
-    });
     try {
-      const session: SessionResponseInterface = await getSession();
+      const session: SessionResponseInterface = await getSession(allowNewPlayer);
       if (session.loggedIn) {
         this.setState({
-          playerFetching: false,
           playerFetched: true,
           player: session.player,
-          rankStatus: session.player.rankStatus,
+          rankStatus: session.rankStatus,
           score: session.player.score,
-          ships: session.ships
+          ships: session.ships,
+          hasSetEmail: session.hasSetEmail,
         });
       } else {
         this.setState({
-          playerFetching: false,
           playerFetched: true,
           player: null,
           rankStatus: null,
@@ -97,9 +109,6 @@ class SessionContextComponent extends React.Component<
       }
       window.setTimeout(() => this.refreshSession(), this.sessionRefreshTime);
     } catch (e) {
-      this.setState({
-        playerFetching: false
-      });
       // todo - error handling
     }
   }

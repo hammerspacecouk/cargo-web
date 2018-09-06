@@ -1,8 +1,13 @@
 .panel {
   padding: $grid-unit;
+  border-radius: $corner-radius-standard;
   background: $color-panel-bg;
   color: $color-panel-text;
   a {
     color: $color-tertiary-dark
+  }
+
+  &__title {
+    margin-bottom: $grid-unit;
   }
 }
