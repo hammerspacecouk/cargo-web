@@ -1,13 +1,13 @@
 import * as React from "react";
-import { SessionContext, SessionContextInterface } from "../../../Context/SessionContext";
+import {
+  SessionContext,
+  SessionContextInterface
+} from "../../../Context/SessionContext";
 import PlayerFlag from "../../../Components/PlayerFlag";
 import ProgressBar from "../../../Components/ProgressBar";
 import FleetShips from "../../../Components/FleetShips";
 
-
-
 class FleetContainer extends React.Component<undefined, undefined> {
-
   render() {
     return (
       <SessionContext.Consumer>
@@ -23,7 +23,7 @@ class FleetContainer extends React.Component<undefined, undefined> {
           <div className="t-fleet__title-bar">
             <h1 className="t-fleet__title">My Fleet</h1>
             <div className="t-fleet__flag">
-              <PlayerFlag player={sessionContext.player}/>
+              <PlayerFlag player={sessionContext.player} />
             </div>
           </div>
           <div className="t-fleet__main">
@@ -32,11 +32,32 @@ class FleetContainer extends React.Component<undefined, undefined> {
             </div>
             <div className="t-fleet__rank panel">
               <h2>{sessionContext.rankStatus.currentRank.title}</h2>
-              <br /><br /><br /><br /><br /><br /><br /><br />
-              <br /><br /><br /><br /><br /><br /><br /><br />
-              <br /><br /><br /><br /><br /><br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
               <div>
-                <ProgressBar percent={sessionContext.rankStatus.levelProgress}/>
+                <ProgressBar
+                  percent={sessionContext.rankStatus.levelProgress}
+                />
                 <p className="f">{sessionContext.rankStatus.nextRank.title}</p>
               </div>
             </div>

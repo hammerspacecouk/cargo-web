@@ -34,13 +34,12 @@ class PlayIndexContainer extends React.Component<Props, undefined> {
 
   componentDidUpdate(prevProps: Props) {
     if (
-      this.props.createNewPlayer !== prevProps.createNewPlayer
-      && this.props.createNewPlayer
+      this.props.createNewPlayer !== prevProps.createNewPlayer &&
+      this.props.createNewPlayer
     ) {
       this.props.createNewPlayer();
     }
   }
-
 
   render() {
     return (
@@ -64,13 +63,17 @@ class PlayIndexContainer extends React.Component<Props, undefined> {
                   component={EditContainer}
                   exact={true}
                 />
-                <Route path="/play/:shipId" component={PlayContainer} exact={true}/>
-                <Route path="/play" component={WelcomeContainer} exact={true}/>
-                <Route component={NotFound}/>
+                <Route
+                  path="/play/:shipId"
+                  component={PlayContainer}
+                  exact={true}
+                />
+                <Route path="/play" component={WelcomeContainer} exact={true} />
+                <Route component={NotFound} />
               </Switch>
             </div>
             <div className="t-play__navigation">
-              <PlayBar/>
+              <PlayBar />
             </div>
           </div>
         </CurrentShipContextComponent>
@@ -83,7 +86,7 @@ export default () => (
   <SessionContext.Consumer>
     {({ createNewPlayer, player, playerFetched }) => (
       <PlayIndexContainer
-        createNewPlayer={(playerFetched && !player) ? createNewPlayer : null}
+        createNewPlayer={playerFetched && !player ? createNewPlayer : null}
       />
     )}
   </SessionContext.Consumer>

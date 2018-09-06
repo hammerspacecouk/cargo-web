@@ -22,8 +22,8 @@ class ProfileContainer extends React.Component<undefined, undefined> {
       noEmailWarning = (
         <MessageWarning>
           You have not yet linked your game to an e-mail address. <br />
-          If you clear your cookies or switch browsers you will never be able
-          to recover your game. <br />
+          If you clear your cookies or switch browsers you will never be able to
+          recover your game. <br />
           Link your game to an e-mail address now to make sure it is saved
         </MessageWarning>
       );
@@ -58,12 +58,12 @@ class ProfileContainer extends React.Component<undefined, undefined> {
                 </tr>
                 <tr>
                   <th>PIN</th>
-                  <td>abed5432</td>{/* todo */}
+                  <td>abed5432</td>
+                  {/* todo */}
                 </tr>
               </tbody>
             </table>
           </div>
-
 
           <ul>
             <li>

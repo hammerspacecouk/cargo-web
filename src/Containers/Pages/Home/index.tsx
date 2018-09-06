@@ -13,7 +13,6 @@ interface Props {
 }
 
 class HomeIndexContainer extends React.Component<undefined, undefined> {
-
   renderPlayPanel(playerFetched: boolean, player?: PlayerInterface) {
     if (playerFetched && !player) {
       return (
@@ -25,13 +24,14 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
             <div className="align--inline">
               <ActionLink
                 to={`/play`}
-                className="button m-icon-suffix--animated">
+                className="button m-icon-suffix--animated"
+              >
                 New game
               </ActionLink>
             </div>
           </div>
           <h3 className="d unit">Or login to resume a previous game:</h3>
-          <LoginForm/>
+          <LoginForm />
         </React.Fragment>
       );
     }
@@ -40,7 +40,8 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
         <div className="align--inline">
           <ActionLink
             to={`/play/fleet`}
-            className="button m-icon-suffix--animated">
+            className="button m-icon-suffix--animated"
+          >
             To My Fleet
           </ActionLink>
         </div>
@@ -60,7 +61,8 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
           <h2 className="panel__title">Play now</h2>
           <SessionContext.Consumer>
             {({ playerFetched, player }) =>
-              this.renderPlayPanel(playerFetched, player)}
+              this.renderPlayPanel(playerFetched, player)
+            }
           </SessionContext.Consumer>
         </div>
         <main className="t-home__main">

@@ -85,7 +85,8 @@ class ScoreContainer extends React.Component<Props, LocalState> {
     return (
       <ScoreValue
         score={this.state.scoreText}
-        effectClass={this.state.effectClass} />
+        effectClass={this.state.effectClass}
+      />
     );
   }
 }

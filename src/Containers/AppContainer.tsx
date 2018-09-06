@@ -15,22 +15,22 @@ import Masthead from "../Components/Masthead";
 
 export default () => (
   <SessionContextComponent>
-      <Masthead />
-      <main>
-        <div className="main">
-          <Switch>
-            <Route path="/about" component={About} />
-            <Route path="/play" component={Play} />
-            <Route path="/ports" component={Ports} />
-            <Route path="/profile" component={Profile} />
+    <Masthead />
+    <main>
+      <div className="main">
+        <Switch>
+          <Route path="/about" component={About} />
+          <Route path="/play" component={Play} />
+          <Route path="/ports" component={Ports} />
+          <Route path="/profile" component={Profile} />
 
-            <Route path="/login/email" component={LoginEmail} exact={true} />
-            <Route path="/login" component={Login} exact={true} />
-            <Route path="/" component={Home} exact={true} />
+          <Route path="/login/email" component={LoginEmail} exact={true} />
+          <Route path="/login" component={Login} exact={true} />
+          <Route path="/" component={Home} exact={true} />
 
-            <Route component={NotFound} />
-          </Switch>
-        </div>
-      </main>
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </main>
   </SessionContextComponent>
 );

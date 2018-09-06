@@ -88,7 +88,7 @@ export default class implements APIClientInterface {
 
       if (response.status === 409) {
         // you tried to perform an action you weren't allowed to perform. CHEAT!
-        window.location.href = '/about/cheating';
+        window.location.href = "/about/cheating";
         return null;
       }
       if (response.status === 403) {

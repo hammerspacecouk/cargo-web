@@ -11,7 +11,9 @@ export interface SessionResponseInterface {
   readonly rankStatus?: RankStatusInterface;
 }
 
-export const getSession = (allowNewPlayer: boolean): Promise<SessionResponseInterface> => {
-  const path = allowNewPlayer ? '/play' : '/login/check';
+export const getSession = (
+  allowNewPlayer: boolean
+): Promise<SessionResponseInterface> => {
+  const path = allowNewPlayer ? "/play" : "/login/check";
   return API.fetch(path);
 };

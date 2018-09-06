@@ -31,7 +31,7 @@ export const initialSession: SessionPropertiesInterface = {
   score: null,
   ships: null,
   playerFetched: false,
-  hasSetEmail: false,
+  hasSetEmail: false
 };
 
 export const SessionContext = createContext({
@@ -75,7 +75,7 @@ class SessionContextComponent extends React.Component<
   async createNewPlayer() {
     this.allowUpdate = false;
     this.setState({
-      playerFetched: false,
+      playerFetched: false
     });
     await this.refreshSession(true);
     this.allowUpdate = true;
@@ -88,7 +88,9 @@ class SessionContextComponent extends React.Component<
 
     // todo - store an update time in the session prop and don't bother refetching if it is recent
     try {
-      const session: SessionResponseInterface = await getSession(allowNewPlayer);
+      const session: SessionResponseInterface = await getSession(
+        allowNewPlayer
+      );
       if (session.loggedIn) {
         this.setState({
           playerFetched: true,
@@ -96,7 +98,7 @@ class SessionContextComponent extends React.Component<
           rankStatus: session.rankStatus,
           score: session.player.score,
           ships: session.ships,
-          hasSetEmail: session.hasSetEmail,
+          hasSetEmail: session.hasSetEmail
         });
       } else {
         this.setState({

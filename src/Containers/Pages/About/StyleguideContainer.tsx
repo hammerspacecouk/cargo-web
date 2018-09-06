@@ -22,20 +22,20 @@ import ShieldIcon from "../../../Components/Icons/ShieldIcon";
 const colourTable = (colourNames: string[]) => (
   <table className="table">
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Example</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Example</th>
+      </tr>
     </thead>
     <tbody>
-    {colourNames.map(color => (
-      <tr key={color}>
-        <th>
-          <code>$color-{color}</code>
-        </th>
-        <td className={`color-${color}`}/>
-      </tr>
-    ))}
+      {colourNames.map(color => (
+        <tr key={color}>
+          <th>
+            <code>$color-{color}</code>
+          </th>
+          <td className={`color-${color}`} />
+        </tr>
+      ))}
     </tbody>
   </table>
 );
@@ -97,7 +97,6 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
             <h3>Meaningful Colours</h3>
             <p>These are colours that imply a meaning</p>
             {colourTable(["info", "ok", "danger", "warning"])}
-
           </div>
 
           <h2 className="unit">Icons</h2>
@@ -105,79 +104,78 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
             <li>
               <h3 className="m-box-list__title">ChevronLeftIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <ChevronLeftIcon/>
+                <ChevronLeftIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">ChevronRightIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <ChevronRightIcon/>
+                <ChevronRightIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">CreditsIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <CreditsIcon/>
+                <CreditsIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">EditIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <EditIcon/>
+                <EditIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">ErrorIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <ErrorIcon/>
+                <ErrorIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">HomeIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <HomeIcon/>
+                <HomeIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">InfoIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <InfoIcon/>
+                <InfoIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">MenuIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <MenuIcon/>
+                <MenuIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">ProfileIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <ProfileIcon/>
+                <ProfileIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">ShieldIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <ShieldIcon/>
+                <ShieldIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">TickIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <TickIcon/>
+                <TickIcon />
               </div>
             </li>
             <li>
               <h3 className="m-box-list__title">WarningIcon</h3>
               <div className="m-box-list__item m-box-list__item--icon">
-                <WarningIcon/>
+                <WarningIcon />
               </div>
             </li>
           </ul>
 
           <div className="text--prose">
-
             <h2>Core</h2>
             <h2>Atoms</h2>
 
@@ -193,7 +191,9 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
               <button className="button button--danger">Reject</button>
             </p>
             <p>
-              <button className="button button--soft-danger">Soft Reject</button>
+              <button className="button button--soft-danger">
+                Soft Reject
+              </button>
             </p>
 
             <h2>Molecules</h2>
@@ -210,7 +210,7 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
               Warning message (<code>warning</code>)
             </MessageWarning>
             <MessageError>
-              Error message (<code>error</code>). <br/>
+              Error message (<code>error</code>). <br />
               This one has a lot of text to demo some lines. Lorem ipsum dolor
               sit amet, consectetur adipiscing elit. Sed feugiat ligula id enim
               feugiat posuere. Vestibulum feugiat dui eget lorem dictum
