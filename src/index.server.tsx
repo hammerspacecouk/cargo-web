@@ -3,8 +3,8 @@ import * as Express from "express";
 import * as ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 
-import { getForClient, injectUserCookiesFromRequest } from "./Data/Environment";
-import Logger from "./Data/Logger";
+import { getForClient, injectUserCookiesFromRequest } from "./Infrastructure/Environment";
+import Logger from "./Infrastructure/Logger";
 import AppContainer from "./Containers/AppContainer";
 import Assets from "./Utils/Assets";
 

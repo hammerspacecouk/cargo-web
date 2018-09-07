@@ -1,5 +1,5 @@
 import * as React from "react";
-import Status from "../Status";
+import Status from "../Navigation/Status";
 
 export interface ErrorProps {
   code?: number;
