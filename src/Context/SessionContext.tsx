@@ -1,11 +1,11 @@
-import { createContext } from "react";
+import * as React from "react";
 
 import PlayerInterface from "../DomainInterfaces/PlayerInterface";
 import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import ShipInterface from "../DomainInterfaces/ShipInterface";
-import * as React from "react";
 import { getSession, SessionResponseInterface } from "../Models/Session";
+import Modal from "../Components/Panel/Modal";
 
 interface PropsInterface {
   children: any;
@@ -34,17 +34,18 @@ export const initialSession: SessionPropertiesInterface = {
   hasSetEmail: false
 };
 
-export const SessionContext = createContext({
+export const SessionContext = React.createContext({
   ...initialSession,
-  updateScore: (newScore: ScoreInterface) => {},
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {},
-  createNewPlayer: () => {}
+  updateScore: (newScore: ScoreInterface) => {
+  },
+  updateRankStatus: (newRankStatus: RankStatusInterface) => {
+  },
+  createNewPlayer: () => {
+  }
 });
 
-class SessionContextComponent extends React.Component<
-  PropsInterface,
-  SessionContextInterface
-> {
+class SessionContextComponent extends React.Component<PropsInterface,
+  SessionContextInterface> {
   private sessionRefreshTime: number = 1000 * 60 * 2;
   private allowUpdate: boolean = false;
 
@@ -118,14 +119,29 @@ class SessionContextComponent extends React.Component<
   updateScore(score: ScoreInterface) {
     this.setState({ score });
   }
+
   updateRankStatus(rankStatus: RankStatusInterface) {
     this.setState({ rankStatus });
+  }
+
+  getPromotionModal(): JSX.Element {
+    if (!this.state.rankStatus || !this.state.rankStatus.acknowledgeToken) {
+      return null;
+    }
+    return (
+      <Modal
+        isOpen={true}
+        onClose={() => {
+        }}
+      >PROMOTION TIME</Modal>
+    );
   }
 
   render() {
     return (
       <SessionContext.Provider value={this.state}>
         {this.props.children}
+        {this.getPromotionModal()}
       </SessionContext.Provider>
     );
   }

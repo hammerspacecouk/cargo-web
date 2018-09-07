@@ -14,7 +14,7 @@ class WelcomeContainer extends React.Component<undefined, undefined> {
         {({ ships, rankStatus, player }) => {
           const firstShip = ships[0];
 
-          if (rankStatus.portsVisited > 0) {
+          if (rankStatus.portsVisited > 1) {
             return <Redirect to={PLAY_PATH_SHOW(firstShip.id)} />;
           }
 
@@ -62,6 +62,10 @@ class WelcomeContainer extends React.Component<undefined, undefined> {
                     <Link to={PLAY_PATH_SHOW(firstShip.id)} className="button">
                       Begin
                     </Link>
+                  </p>
+
+                  <p className="text--center">
+                    I DIDN'T MEAN TO START A NEW GAME.>>> (button to delete again)
                   </p>
                 </td>
               </tr>
