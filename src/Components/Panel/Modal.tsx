@@ -5,7 +5,7 @@ interface Props {
   children: any;
   title?: string;
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export default (props: Props) => {
@@ -17,11 +17,21 @@ export default (props: Props) => {
   const title = props.title || "";
   const appElement = (window as any).document.getElementById("root");
 
+  let closeButton = null;
+  if (props.onClose) {
+    closeButton = (
+      <button className="modal__close" onClick={props.onClose}>
+        X
+      </button>
+    );
+  }
+
   return (
     <ModalHandler
       appElement={appElement}
       isOpen={props.isOpen}
       onRequestClose={props.onClose}
+      closeTimeoutMS={300}
       contentLabel={title}
       className={{
         base: "modal",
@@ -36,9 +46,7 @@ export default (props: Props) => {
     >
       <div className="modal__header">
         <h2 className="modal__title">{title}</h2>
-        <button className="modal__close" onClick={props.onClose}>
-          X
-        </button>
+        {closeButton}
       </div>
       <div className="modal__body">
         <div className="modal__content">{props.children}</div>

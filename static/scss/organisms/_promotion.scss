@@ -1,0 +1,55 @@
+.o-promotion {
+  margin-bottom: $grid-unit;
+  width: calc(100vw - #{$grid-unit * 5});
+  @media (min-width: 26em) {
+    width: auto;
+    min-width: 22em;
+  }
+
+  &__rank-box {
+    @extend .b;
+    padding: $grid-unit 0;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  &__progress {
+    padding: $grid-unit 0;
+    margin-bottom: $grid-unit;
+  }
+
+  &__previous {
+    will-change: transform, opacity;
+    &--go {
+      animation: 1.5s zoom-away linear forwards;
+    }
+  }
+
+  &__current {
+    will-change: transform;
+    transform: scale(0);
+    animation: 1s zoom-in cubic-bezier(0.13, 0.76, 0.82, 1.9) forwards;
+  }
+
+  @keyframes zoom-away {
+    0%, 20% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
+  @keyframes zoom-in {
+    0% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}

@@ -6,6 +6,13 @@ import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import ShipInterface from "../DomainInterfaces/ShipInterface";
 import { getSession, SessionResponseInterface } from "../Models/Session";
 import Modal from "../Components/Panel/Modal";
+import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
+import TokenButton from "../Containers/Button/TokenButton";
+import PromotionContainer from "../Containers/Player/PromotionContainer";
+import ShipNameTokenInterface from "../DomainInterfaces/ShipNameTokenInterface";
+import { requestShipName } from "../Models/Ship";
+import Loading from "../Components/Navigation/Loading";
+import { acknowledgePromotion } from "../Models/Player";
 
 interface PropsInterface {
   children: any;
@@ -18,6 +25,7 @@ interface SessionPropertiesInterface {
   ships?: ShipInterface[];
   playerFetched: boolean;
   hasSetEmail: boolean;
+  acknowledgingPromotion: boolean;
 }
 
 export interface SessionContextInterface extends SessionPropertiesInterface {
@@ -31,21 +39,21 @@ export const initialSession: SessionPropertiesInterface = {
   score: null,
   ships: null,
   playerFetched: false,
-  hasSetEmail: false
+  hasSetEmail: false,
+  acknowledgingPromotion: false
 };
 
 export const SessionContext = React.createContext({
   ...initialSession,
-  updateScore: (newScore: ScoreInterface) => {
-  },
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {
-  },
-  createNewPlayer: () => {
-  }
+  updateScore: (newScore: ScoreInterface) => {},
+  updateRankStatus: (newRankStatus: RankStatusInterface) => {},
+  createNewPlayer: () => {}
 });
 
-class SessionContextComponent extends React.Component<PropsInterface,
-  SessionContextInterface> {
+class SessionContextComponent extends React.Component<
+  PropsInterface,
+  SessionContextInterface
+> {
   private sessionRefreshTime: number = 1000 * 60 * 2;
   private allowUpdate: boolean = false;
 
@@ -55,6 +63,7 @@ class SessionContextComponent extends React.Component<PropsInterface,
     this.updateScore = this.updateScore.bind(this);
     this.updateRankStatus = this.updateRankStatus.bind(this);
     this.createNewPlayer = this.createNewPlayer.bind(this);
+    this.acknowledgePromotion = this.acknowledgePromotion.bind(this);
 
     this.state = {
       ...initialSession,
@@ -124,16 +133,57 @@ class SessionContextComponent extends React.Component<PropsInterface,
     this.setState({ rankStatus });
   }
 
+  async acknowledgePromotion(token: ActionTokenInterface) {
+    this.setState({
+      acknowledgingPromotion: true
+    });
+
+    //make the API call
+    try {
+      const data = await acknowledgePromotion(token);
+      this.setState({
+        acknowledgingPromotion: false
+      });
+      // Updating rankStatus should remove the token and thus close the modal
+      this.updateRankStatus(data.rankStatus);
+    } catch (e) {
+      this.setState({
+        acknowledgingPromotion: true
+      });
+    }
+  }
+
   getPromotionModal(): JSX.Element {
     if (!this.state.rankStatus || !this.state.rankStatus.acknowledgeToken) {
       return null;
     }
+    let button;
+    if (this.state.acknowledgingPromotion) {
+      button = (
+        <button className="button" type="submit" disabled>
+          <Loading />
+        </button>
+      );
+    } else {
+      button = (
+        <button className="button" type="submit">
+          Ok
+        </button>
+      );
+    }
+
     return (
-      <Modal
-        isOpen={true}
-        onClose={() => {
-        }}
-      >PROMOTION TIME</Modal>
+      <Modal isOpen={true} title="Promotion">
+        <PromotionContainer rankStatus={this.state.rankStatus} />
+        <div className="text--center">
+          <TokenButton
+            token={this.state.rankStatus.acknowledgeToken}
+            handler={this.acknowledgePromotion}
+          >
+            {button}
+          </TokenButton>
+        </div>
+      </Modal>
     );
   }
 

@@ -31,6 +31,8 @@ class FleetContainer extends React.Component<undefined, undefined> {
               <FleetShips ships={sessionContext.ships} />
             </div>
             <div className="t-fleet__rank panel">
+              <p>todo - above this - activity log</p>
+
               <h2>{sessionContext.rankStatus.currentRank.title}</h2>
               <br />
               <br />

@@ -55,9 +55,7 @@ class WelcomeContainer extends React.Component<undefined, undefined> {
                     placed in a safe port where you can pick up some cargo to
                     transport.
                   </p>
-                  <p className="text--center">
-                    SHOW MINI RANK BOX
-                  </p>
+                  <p className="text--center">SHOW MINI RANK BOX</p>
                   <p className="text--center">
                     <Link to={PLAY_PATH_SHOW(firstShip.id)} className="button">
                       Begin
@@ -65,7 +63,8 @@ class WelcomeContainer extends React.Component<undefined, undefined> {
                   </p>
 
                   <p className="text--center">
-                    I DIDN'T MEAN TO START A NEW GAME.>>> (button to delete again)
+                    I DIDN'T MEAN TO START A NEW GAME.>>> (button to delete
+                    again)
                   </p>
                 </td>
               </tr>

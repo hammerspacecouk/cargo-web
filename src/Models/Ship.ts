@@ -1,4 +1,4 @@
-import API, { APIClientInterface } from "../Infrastructure/API";
+import API from "../Infrastructure/API";
 import ShipInterface from "../DomainInterfaces/ShipInterface";
 import PortInterface from "../DomainInterfaces/PortInterface";
 import ChannelInterface from "../DomainInterfaces/ChannelInterface";
