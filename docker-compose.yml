@@ -3,7 +3,7 @@ version: "3"
 
 services:
   cargo-web-node:
-    image: node:latest
+    image: node:alpine
     volumes:
       - .:/var/www
     ports:
@@ -41,7 +41,7 @@ services:
 #        node server.js
 
   cargo-web-nginx:
-    image: nginx:latest
+    image: nginx:alpine
     links:
       - cargo-web-node
     ports:
