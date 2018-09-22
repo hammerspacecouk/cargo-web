@@ -1,11 +1,18 @@
 import * as React from "react";
 import EventInterface, {
-  ACTION_PLAYER_NEW, ACTION_PLAYER_PROMOTION, ACTION_SHIP_ARRIVAL, ACTION_SHIP_NEW, ACTION_SHIP_RENAME
+  ACTION_PLAYER_NEW,
+  ACTION_PLAYER_PROMOTION,
+  ACTION_SHIP_ARRIVAL,
+  ACTION_SHIP_DEPARTURE,
+  ACTION_SHIP_NEW,
+  ACTION_SHIP_RENAME
 } from "../../DomainInterfaces/EventInterface";
 import PlayerNew from "../../Components/Events/PlayerNew";
 import ShipNew from "../../Components/Events/ShipNew";
 import ShipArrival from "../../Components/Events/ShipArrival";
+import ShipDeparture from "../../Components/Events/ShipDeparture";
 import ShipRename from "../../Components/Events/ShipRename";
+import PlayerPromotion from "../../Components/Events/PlayerPromotion";
 
 interface Props {
   readonly events: EventInterface[];
@@ -25,11 +32,19 @@ export default class EventsContainer extends React.Component<Props, LocalState> 
           <PlayerNew event={event} firstPerson={this.props.firstPerson} />
         );
         break;
+      case ACTION_PLAYER_PROMOTION:
+        eventComponent = (
+          <PlayerPromotion event={event} firstPerson={this.props.firstPerson} />
+        );
+        break;
       case ACTION_SHIP_NEW:
         eventComponent = <ShipNew event={event} />;
         break;
       case ACTION_SHIP_ARRIVAL:
         eventComponent = <ShipArrival event={event} />;
+        break;
+      case ACTION_SHIP_DEPARTURE:
+        eventComponent = <ShipDeparture event={event} />;
         break;
       case ACTION_SHIP_RENAME:
         eventComponent = <ShipRename event={event} />;
@@ -40,7 +55,7 @@ export default class EventsContainer extends React.Component<Props, LocalState> 
     }
 
     return (
-      <li key={`event-${event.action}-${event.time}`}>{eventComponent}</li>
+      <li key={`event-${event.id}`}>{eventComponent}</li>
     )
   };
 

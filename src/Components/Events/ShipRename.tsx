@@ -8,6 +8,15 @@ interface Props {
 }
 
 export default (props: Props) => {
+
+  if (!props.event.ship) {
+    return (
+      <Event time={props.event.time}>
+        A ship was renamed (but has since been deleted)
+      </Event>
+    )
+  }
+
   return (
     <Event time={props.event.time}>
       <em>{props.event.value}</em> was renamed to{' '}

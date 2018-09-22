@@ -7,6 +7,6 @@
   }
 
   &__content-contain {
-    margin: 0 auto $play-bar-height;
+    margin: 0 auto ($play-bar-height + $grid-unit);
   }
 }

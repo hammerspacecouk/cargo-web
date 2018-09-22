@@ -19,8 +19,8 @@ export default (props: Props) => {
 
   return (
     <Event time={props.event.time}>
-      <em>{name}</em> arrived safely at{' '}
-      <a href={`/ports/${port.id}`}>{port.name}</a>
+      <em>{name}</em> departed {' '}
+      <a href={`/ports/${port.id}`}>{port.name}</a> headed for the open seas
     </Event>
   );
 };

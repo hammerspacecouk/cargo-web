@@ -8,9 +8,17 @@ interface Props {
 }
 
 export default (props: Props) => {
+
+  let name;
+  if (props.event.ship) {
+    name = props.event.ship.name;
+  } else {
+    name = '[deleted] ';
+  }
+
   return (
     <Event time={props.event.time}>
-      <em>{props.event.ship.name}</em> was launched
+      <em>{name}</em> was launched
     </Event>
   );
 };

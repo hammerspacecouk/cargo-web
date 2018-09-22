@@ -13,6 +13,7 @@ export const ACTION_SHIP_DEPARTURE = 'ship_departure';
 export const ACTION_SHIP_RENAME = 'ship_rename';
 
 export default interface EventInterface {
+  id: string;
   action: string;
   time: string;
   value: string;

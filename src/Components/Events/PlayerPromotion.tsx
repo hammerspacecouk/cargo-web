@@ -9,25 +9,26 @@ interface Props {
 }
 
 export default (props: Props) => {
-
   let name;
   if (props.firstPerson) {
-    name = "You ";
+    name = "You were ";
   } else if (props.event.actioningPlayer) {
     name = (
-      <span className="events__flag">
-        <PlayerFlag player={props.event.actioningPlayer} />
-      </span>
+      <React.Fragment>
+        <span className="events__flag">
+          <PlayerFlag player={props.event.actioningPlayer}/>
+        </span> was{" "}
+      </React.Fragment>
     );
   } else {
-    name = "[deleted] ";
+    name = '[deleted] was ';
   }
 
   const port = props.event.port;
 
   return (
     <Event time={props.event.time}>
-      {name} started a new game at <a href={`/ports/${port.id}`}>{port.name}</a>
+      {name} promoted to <strong>{props.event.rank.title}</strong>
     </Event>
   );
 };
