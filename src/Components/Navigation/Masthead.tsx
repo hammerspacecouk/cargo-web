@@ -27,7 +27,7 @@ const PlayerActions = (props: SessionContextInterface) => (
       <Link to="/profile" title="My Profile" className="masthead__link">
         <span className="hidden">Profile</span>
         <ProfileIcon />
-        {!props.hasSetEmail ? (
+        {!props.hasProfileNotification ? (
           <abbr className="masthead__notify" title="Notification to view" />
         ) : (
           ""

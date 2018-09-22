@@ -12,6 +12,7 @@ import ShieldIcon from "../../Components/Icons/ShieldIcon";
 import { MessageInfo } from "../../Components/Panel/Messages";
 import CreditsIcon from "../../Components/Icons/CreditsIcon";
 import PortInterface from "../../DomainInterfaces/PortInterface";
+import EventsContainer from "./EventsContainer";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -191,6 +192,8 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
 
         <h2>Players</h2>
         <ShipList ships={this.props.shipContext.shipsInLocation} />
+
+        <EventsContainer events={this.props.shipContext.events}/>
       </div>
     );
   }

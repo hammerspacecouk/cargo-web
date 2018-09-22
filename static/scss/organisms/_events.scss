@@ -1,0 +1,22 @@
+.events {
+  @extend .list--unstyled;
+  > li:not(:last-child) {
+      margin-bottom: $grid-unit / 2;
+  }
+
+  &__event {
+    display: flex;
+    align-items: center;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__flag {
+    display: inline-block;
+    width: 36px;
+    vertical-align: middle;
+    margin-right: $grid-unit / 2;
+  }
+}

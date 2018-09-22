@@ -9,7 +9,7 @@ import {
   CurrentShipContextInterface
 } from "../../Context/CurrentShipContext";
 
-class PlayContainer extends React.Component<ShipParamsInterface, undefined> {
+class ShipContainer extends React.Component<ShipParamsInterface, undefined> {
   render() {
     return (
       <EnsureShipContainer shipId={this.props.match.params.shipId}>
@@ -37,4 +37,4 @@ class PlayContainer extends React.Component<ShipParamsInterface, undefined> {
   }
 }
 
-export default PlayContainer;
+export default ShipContainer;

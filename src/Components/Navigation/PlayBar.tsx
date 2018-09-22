@@ -54,7 +54,7 @@ export default () => {
       <ul className="play-bar__list">
         {getShipLink()}
         <li className="play-bar__item">
-          <Link to="/play/fleet" className="play-bar__link">
+          <Link to="/play" className="play-bar__link">
             {iconStuff}
             Fleet{" "}
             {/* todo - add a notification icon if any ships are in port */}

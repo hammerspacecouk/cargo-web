@@ -1,6 +1,6 @@
 import ActionTokenInterface from "./ActionTokenInterface";
 
-interface RankInterface {
+export interface RankInterface {
   title: string;
 }
 

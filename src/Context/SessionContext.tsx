@@ -3,14 +3,11 @@ import * as React from "react";
 import PlayerInterface from "../DomainInterfaces/PlayerInterface";
 import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 import ScoreInterface from "../DomainInterfaces/ScoreInterface";
-import ShipInterface from "../DomainInterfaces/ShipInterface";
 import { getSession, SessionResponseInterface } from "../Models/Session";
 import Modal from "../Components/Panel/Modal";
 import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 import TokenButton from "../Containers/Button/TokenButton";
 import PromotionContainer from "../Containers/Player/PromotionContainer";
-import ShipNameTokenInterface from "../DomainInterfaces/ShipNameTokenInterface";
-import { requestShipName } from "../Models/Ship";
 import Loading from "../Components/Navigation/Loading";
 import { acknowledgePromotion } from "../Models/Player";
 
@@ -22,24 +19,22 @@ interface SessionPropertiesInterface {
   player?: PlayerInterface;
   rankStatus?: RankStatusInterface;
   score?: ScoreInterface;
-  ships?: ShipInterface[];
   playerFetched: boolean;
-  hasSetEmail: boolean;
+  hasProfileNotification: boolean;
   acknowledgingPromotion: boolean;
 }
 
 export interface SessionContextInterface extends SessionPropertiesInterface {
   updateScore: (newScore: ScoreInterface) => void;
   updateRankStatus: (newRankStatus: RankStatusInterface) => void;
-  createNewPlayer: () => void;
+  setSession: (session: SessionResponseInterface) => void;
 }
 
 export const initialSession: SessionPropertiesInterface = {
   player: null,
   score: null,
-  ships: null,
   playerFetched: false,
-  hasSetEmail: false,
+  hasProfileNotification: false,
   acknowledgingPromotion: false
 };
 
@@ -47,7 +42,7 @@ export const SessionContext = React.createContext({
   ...initialSession,
   updateScore: (newScore: ScoreInterface) => {},
   updateRankStatus: (newRankStatus: RankStatusInterface) => {},
-  createNewPlayer: () => {}
+  setSession: (session: SessionResponseInterface) => {}
 });
 
 class SessionContextComponent extends React.Component<
@@ -59,17 +54,11 @@ class SessionContextComponent extends React.Component<
 
   constructor(props: any) {
     super(props);
-
-    this.updateScore = this.updateScore.bind(this);
-    this.updateRankStatus = this.updateRankStatus.bind(this);
-    this.createNewPlayer = this.createNewPlayer.bind(this);
-    this.acknowledgePromotion = this.acknowledgePromotion.bind(this);
-
     this.state = {
       ...initialSession,
       updateScore: this.updateScore,
       updateRankStatus: this.updateRankStatus,
-      createNewPlayer: this.createNewPlayer
+      setSession: this.setSession
     };
   }
 
@@ -82,58 +71,48 @@ class SessionContextComponent extends React.Component<
     this.allowUpdate = false;
   }
 
-  async createNewPlayer() {
-    this.allowUpdate = false;
-    this.setState({
-      playerFetched: false
-    });
-    await this.refreshSession(true);
-    this.allowUpdate = true;
-  }
+  setSession = (session: SessionResponseInterface) => {
+    if (session.isLoggedIn) {
+      this.setState({
+        playerFetched: true,
+        player: session.player,
+        rankStatus: session.rankStatus,
+        score: session.player.score,
+        hasProfileNotification: session.hasProfileNotification
+      });
+    } else {
+      this.setState({
+        playerFetched: true,
+        player: null,
+        rankStatus: null,
+        score: null
+      });
+    }
+  };
 
-  async refreshSession(allowNewPlayer?: boolean) {
+  refreshSession = async (allowNewPlayer?: boolean) => {
     if (!this.allowUpdate && !allowNewPlayer) {
       return;
     }
 
     // todo - store an update time in the session prop and don't bother refetching if it is recent
     try {
-      const session: SessionResponseInterface = await getSession(
-        allowNewPlayer
-      );
-      if (session.loggedIn) {
-        this.setState({
-          playerFetched: true,
-          player: session.player,
-          rankStatus: session.rankStatus,
-          score: session.player.score,
-          ships: session.ships,
-          hasSetEmail: session.hasSetEmail
-        });
-      } else {
-        this.setState({
-          playerFetched: true,
-          player: null,
-          rankStatus: null,
-          score: null,
-          ships: []
-        });
-      }
+      this.setSession(await getSession());
       window.setTimeout(() => this.refreshSession(), this.sessionRefreshTime);
     } catch (e) {
       // todo - error handling
     }
-  }
+  };
 
-  updateScore(score: ScoreInterface) {
+  updateScore = (score: ScoreInterface) => {
     this.setState({ score });
-  }
+  };
 
-  updateRankStatus(rankStatus: RankStatusInterface) {
+  updateRankStatus = (rankStatus: RankStatusInterface) => {
     this.setState({ rankStatus });
-  }
+  };
 
-  async acknowledgePromotion(token: ActionTokenInterface) {
+  acknowledgePromotion = async (token: ActionTokenInterface) => {
     this.setState({
       acknowledgingPromotion: true
     });
@@ -151,9 +130,9 @@ class SessionContextComponent extends React.Component<
         acknowledgingPromotion: true
       });
     }
-  }
+  };
 
-  getPromotionModal(): JSX.Element {
+  getPromotionModal = (): JSX.Element => {
     if (!this.state.rankStatus || !this.state.rankStatus.acknowledgeToken) {
       return null;
     }
@@ -185,9 +164,9 @@ class SessionContextComponent extends React.Component<
         </div>
       </Modal>
     );
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <SessionContext.Provider value={this.state}>
         {this.props.children}

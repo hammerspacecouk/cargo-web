@@ -7,6 +7,7 @@ import PortInterface from "../DomainInterfaces/PortInterface";
 import ChannelInterface from "../DomainInterfaces/ChannelInterface";
 import DirectionsInterface from "../DomainInterfaces/DirectionsInterface";
 import ShipNameTokenInterface from "../DomainInterfaces/ShipNameTokenInterface";
+import EventInterface from "../DomainInterfaces/EventInterface";
 
 interface PropsInterface {
   children: any;
@@ -20,6 +21,7 @@ interface CurrentShipPropertiesInterface {
   channel?: ChannelInterface;
   directions?: DirectionsInterface;
   shipsInLocation?: ShipInterface[];
+  events?: EventInterface[];
 }
 
 export interface CurrentShipContextInterface
@@ -88,7 +90,8 @@ class CurrentShipContextComponent extends React.Component<
       port: data.port,
       channel: data.channel,
       directions: data.directions,
-      shipsInLocation: data.shipsInLocation
+      shipsInLocation: data.shipsInLocation,
+      events: data.events,
     });
   }
 

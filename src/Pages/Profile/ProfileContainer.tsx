@@ -8,10 +8,14 @@ import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
 import { MessageWarning } from "../../Components/Panel/Messages";
 
 class ProfileContainer extends React.Component<undefined, undefined> {
+
+  // todo - fetch full profile information so hasSetEmail can be checked proper
+
   render() {
     return (
       <SessionContext.Consumer>
-        {({ player, hasSetEmail }) => this.renderPage(player, hasSetEmail)}
+        {({ player, hasProfileNotification }) =>
+          this.renderPage(player, hasProfileNotification)}
       </SessionContext.Consumer>
     );
   }

@@ -1,6 +1,4 @@
 import PlayerInterface from "./PlayerInterface";
-import PortInterface from "./PortInterface";
-import ChannelInterface from "./ChannelInterface";
 import ShipClassInterface from "./ShipClassInterface";
 
 export const PATH_LIST = "/ships";

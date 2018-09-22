@@ -6,6 +6,9 @@
   a {
     color: $color-tertiary-dark
   }
+  &:not(:last-child) {
+    margin-bottom: $grid-unit;
+  }
 
   &__title {
     margin-bottom: $grid-unit;

@@ -2,9 +2,8 @@ import * as React from "react";
 import { Route, Switch } from "react-router";
 
 import EditContainer from "./EditContainer";
-import PlayContainer from "./PlayContainer";
+import ShipContainer from "./ShipContainer";
 import FleetContainer from "./FleetContainer";
-import WelcomeContainer from "./WelcomeContainer";
 
 import NotFound from "../../Components/Error/NotFound";
 import PlayBar from "../../Components/Navigation/PlayBar";
@@ -25,7 +24,7 @@ interface Props {
   createNewPlayer?: () => void;
 }
 
-class PlayIndexContainer extends React.Component<Props, undefined> {
+export default class PlayIndexContainer extends React.Component<Props, undefined> {
   componentDidMount() {
     if (this.props.createNewPlayer) {
       this.props.createNewPlayer();
@@ -49,11 +48,6 @@ class PlayIndexContainer extends React.Component<Props, undefined> {
             <div className="t-play__board">
               <Switch>
                 <Route
-                  path="/play/fleet"
-                  component={FleetContainer}
-                  exact={true}
-                />
-                <Route
                   path="/play/upgrades"
                   component={UpgradesContainer}
                   exact={true}
@@ -65,10 +59,10 @@ class PlayIndexContainer extends React.Component<Props, undefined> {
                 />
                 <Route
                   path="/play/:shipId"
-                  component={PlayContainer}
+                  component={ShipContainer}
                   exact={true}
                 />
-                <Route path="/play" component={WelcomeContainer} exact={true} />
+                <Route path="/play" component={FleetContainer} exact={true} />
                 <Route component={NotFound} />
               </Switch>
             </div>
@@ -81,13 +75,3 @@ class PlayIndexContainer extends React.Component<Props, undefined> {
     );
   }
 }
-
-export default () => (
-  <SessionContext.Consumer>
-    {({ createNewPlayer, player, playerFetched }) => (
-      <PlayIndexContainer
-        createNewPlayer={playerFetched && !player ? createNewPlayer : null}
-      />
-    )}
-  </SessionContext.Consumer>
-);

@@ -7,6 +7,7 @@ import ShipNameTokenInterface from "../DomainInterfaces/ShipNameTokenInterface";
 import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
+import EventInterface from "../DomainInterfaces/EventInterface";
 
 export interface PlayShipResponse {
   readonly ship: ShipInterface;
@@ -17,6 +18,7 @@ export interface PlayShipResponse {
   readonly shipsInLocation?: ShipInterface[];
   readonly playerScore?: ScoreInterface;
   readonly playerRankStatus?: RankStatusInterface;
+  readonly events: EventInterface[];
 }
 
 export interface RequestShipNameResponse {

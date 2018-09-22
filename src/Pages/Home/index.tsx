@@ -6,14 +6,32 @@ import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
 import LoginForm from "../../Components/Login/LoginForm";
 import { SessionContext } from "../../Context/SessionContext";
 import ActionLink from "../../Components/Link/ActionLink";
+import EventsContainer from "../../Containers/Play/EventsContainer";
+import EventInterface from "../../DomainInterfaces/EventInterface";
+import { getHomeData } from "../../Models/Home";
 
-interface Props {
-  sessionPlayer?: PlayerInterface;
-  sessionChecked: boolean;
+interface State {
+  events: EventInterface[];
 }
 
-class HomeIndexContainer extends React.Component<undefined, undefined> {
-  renderPlayPanel(playerFetched: boolean, player?: PlayerInterface) {
+class HomeIndexContainer extends React.Component<undefined, State> {
+  constructor(props: undefined) {
+    super(props);
+    this.state = {
+      events: [],
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const data = await getHomeData();
+      this.setState({ events: data.events });
+    } catch (e) {
+      // todo - error handling
+    }
+  }
+
+  renderPlayPanel = (playerFetched: boolean, player?: PlayerInterface) => {
     if (playerFetched && !player) {
       return (
         <React.Fragment>
@@ -39,7 +57,7 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
       <div className="text--center unit">
         <div className="align--inline">
           <ActionLink
-            to={`/play/fleet`}
+            to={`/play`}
             className="button m-icon-suffix--animated"
           >
             To My Fleet
@@ -47,7 +65,7 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
         </div>
       </div>
     );
-  }
+  };
 
   render() {
     return (
@@ -91,6 +109,11 @@ class HomeIndexContainer extends React.Component<undefined, undefined> {
               faster by getting more ships. Get more ships by transporting cargo
               and owning ports.
             </p>
+          </div>
+
+          <div>
+            <h2>What's happening right now?</h2>
+            <EventsContainer events={this.state.events}/>
           </div>
         </main>
         <aside className="t-home__aside">
