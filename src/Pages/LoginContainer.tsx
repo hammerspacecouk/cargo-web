@@ -4,25 +4,23 @@ import { RouteProps, withRouter } from "react-router";
 import LoginForm from "../Components/Login/LoginForm";
 
 import messageQueryString from "../Utils/MessageQueryString";
-import EnsureLoggedOut from "../Containers/Login/EnsureLoggedOut";
+import withGuestUser from "../Components/withGuestUser";
 
 class LoginContainer extends React.Component<RouteProps, undefined> {
   render() {
     return (
-      <EnsureLoggedOut>
-        <div className="t-doc">
-          <div className="t-doc__title">
-            <h1>Login</h1>
-          </div>
-          <div className="t-doc__main">
-            <LoginForm
-              messages={messageQueryString(this.props.location.search)}
-            />
-          </div>
+      <div className="t-doc">
+        <div className="t-doc__title">
+          <h1>Login</h1>
         </div>
-      </EnsureLoggedOut>
+        <div className="t-doc__main">
+          <LoginForm
+            messages={messageQueryString(this.props.location.search)}
+          />
+        </div>
+      </div>
     );
   }
 }
 
-export default withRouter(LoginContainer as any);
+export default withGuestUser(withRouter(LoginContainer as any));

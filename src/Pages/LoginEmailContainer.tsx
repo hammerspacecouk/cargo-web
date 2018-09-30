@@ -4,13 +4,8 @@ import { parse as parseQueryString } from "query-string";
 import TokenButton from "../Containers/Button/TokenButton";
 import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 import Error from "../Components/Error/Error";
-import PlayerInterface from "../DomainInterfaces/PlayerInterface";
-import EnsureLoggedOut from "../Containers/Login/EnsureLoggedOut";
-
-export interface Props {
-  player?: PlayerInterface;
-  token?: string;
-}
+import withGuestUser from "../Components/withGuestUser";
+import { getEmailLoginToken } from "../Models/Session";
 
 class LoginEmailContainer extends React.Component<RouteProps, undefined> {
   getResponse() {
@@ -18,17 +13,11 @@ class LoginEmailContainer extends React.Component<RouteProps, undefined> {
     if (!query.token) {
       return <Error code={400} message="Bad request (Missing token)" />;
     }
-
-    const token: ActionTokenInterface = {
-      path: "/login/email",
-      token: query.token
-    };
-
-    return this.renderPage(token);
+    return this.renderPage(getEmailLoginToken(query.token));
   }
 
   render() {
-    return <EnsureLoggedOut>{this.getResponse()}</EnsureLoggedOut>;
+    return this.getResponse();
   }
 
   renderPage(token: ActionTokenInterface) {
@@ -52,4 +41,4 @@ class LoginEmailContainer extends React.Component<RouteProps, undefined> {
   }
 }
 
-export default withRouter(LoginEmailContainer as any);
+export default withGuestUser(withRouter(LoginEmailContainer as any));

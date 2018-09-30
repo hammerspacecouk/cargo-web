@@ -1,35 +1,32 @@
 import * as React from "react";
-import { Route, Switch } from "react-router";
+import CrumbTitle, { Crumb } from "../../Components/Navigation/CrumbTitle";
+import routes from "../../routes";
+import AboutLayout from "../../Components/Layout/AboutLayout";
 
-import AboutContainer from "./AboutContainer";
-import CheatingContainer from "./CheatingContainer";
-import PoliciesContainer from "./PoliciesContainer";
-import StyleguideContainer from "./StyleguideContainer";
-import StatusContainer from "./StatusContainer";
+export default class extends React.Component<undefined, undefined> {
+  static getCrumb = (): Crumb => ({
+    link: routes.getAbout(),
+    title: "About Planet Cargo"
+  });
 
-import NotFound from "../../Components/Error/NotFound";
+  render() {
+    return (
+      <AboutLayout>
+          <p>More stuff. Twitter etc</p>
 
-export default () => (
-  <div>
-    <Switch>
-      <Route
-        path="/about/policies"
-        component={PoliciesContainer}
-        exact={true}
-      />
-      <Route
-        path="/about/cheating"
-        component={CheatingContainer}
-        exact={true}
-      />
-      <Route path="/about/status" component={StatusContainer} exact={true} />
-      <Route
-        path="/about/styleguide"
-        component={StyleguideContainer}
-        exact={true}
-      />
-      <Route path="/about" component={AboutContainer} exact={true} />
-      <Route component={NotFound} />
-    </Switch>
-  </div>
-);
+          <h2>More pages</h2>
+          <ul>
+            <li>
+              <a href={routes.getAboutPolicies()}>Policies</a>
+            </li>
+            <li>
+              <a href={routes.getAboutStatus()}>Application Status</a>
+            </li>
+            <li>
+              <a href={routes.getAboutStyleGuide()}>Styleguide</a>
+            </li>
+          </ul>
+      </AboutLayout>
+    );
+  }
+}

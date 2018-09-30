@@ -16,11 +16,12 @@ const settings = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loaders: ['ts-loader']
+        loader: 'ts-loader',
+        sideEffects: false,
       }
     ]
   },
@@ -32,6 +33,9 @@ const settings = {
       'fetch': require.resolve('node-fetch')
     }),
   ],
+  optimization: {
+    minimize: false
+  }
 };
 
 module.exports = settings;

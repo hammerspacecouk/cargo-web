@@ -1,21 +1,12 @@
 import * as React from "react";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
+import AboutLayout from "../../Components/Layout/AboutLayout";
 
 class CheatingContainer extends React.Component<undefined, undefined> {
   render() {
     return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <CrumbTitle
-            crumbs={[{ link: "/about", title: "About Planet Cargo" }]}
-          >
-            Cheating
-          </CrumbTitle>
-        </div>
-        <div className="t-doc__main text--prose">
-          <p>Not cool dawg...</p>
-        </div>
-      </div>
+      <AboutLayout title="Cheating">
+        <div>Not cool dawg...</div>
+      </AboutLayout>
     );
   }
 }

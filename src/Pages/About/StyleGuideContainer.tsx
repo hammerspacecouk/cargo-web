@@ -1,5 +1,4 @@
 import * as React from "react";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
 import {
   MessageError,
   MessageInfo,
@@ -18,6 +17,7 @@ import EditIcon from "../../Components/Icons/EditIcon";
 import ChevronLeftIcon from "../../Components/Icons/ChevronLeftIcon";
 import ChevronRightIcon from "../../Components/Icons/ChevronRightIcon";
 import ShieldIcon from "../../Components/Icons/ShieldIcon";
+import AboutLayout from "../../Components/Layout/AboutLayout";
 
 const colourTable = (colourNames: string[]) => (
   <table className="table">
@@ -40,18 +40,11 @@ const colourTable = (colourNames: string[]) => (
   </table>
 );
 
-class StyleguideContainer extends React.Component<undefined, undefined> {
+class StyleGuideContainer extends React.Component<undefined, undefined> {
   render() {
     return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <CrumbTitle
-            crumbs={[{ link: "/about", title: "About Planet Cargo" }]}
-          >
-            Styleguide
-          </CrumbTitle>
-        </div>
-        <div className="t-doc__main">
+      <AboutLayout title="Style Guide">
+
           <div className="text--prose">
             <p>
               This is a collection of elements to demonstrate the overall design
@@ -226,10 +219,9 @@ class StyleguideContainer extends React.Component<undefined, undefined> {
 
             <h2>Organisms</h2>
           </div>
-        </div>
-      </div>
+      </AboutLayout>
     );
   }
 }
 
-export default StyleguideContainer;
+export default StyleGuideContainer;

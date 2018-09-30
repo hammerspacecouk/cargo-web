@@ -1,19 +1,12 @@
 import * as React from "react";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
 import { MessageOk } from "../../Components/Panel/Messages";
+import AboutLayout from "../../Components/Layout/AboutLayout";
 
 class PoliciesContainer extends React.Component<undefined, undefined> {
   render() {
     return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <CrumbTitle
-            crumbs={[{ link: "/about", title: "About Planet Cargo" }]}
-          >
-            Policies
-          </CrumbTitle>
-        </div>
-        <div className="t-doc__main text--prose">
+      <AboutLayout title="Policies">
+        <div className="text--prose">
           <h2>Human readable</h2>
           <div className="unit">
             <MessageOk>We store NO personal data</MessageOk>
@@ -143,7 +136,7 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
             language
           </p>
         </div>
-      </div>
+      </AboutLayout>
     );
   }
 }

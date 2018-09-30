@@ -3,14 +3,11 @@ import TokenButton from "../../Containers/Button/TokenButton";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 import { parse as parseQueryString } from "query-string";
 import { RouteProps, withRouter } from "react-router";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
 import Error from "../../Components/Error/Error";
-
-interface Props {
-  apiHostname: string;
-  token: string;
-  stage: number;
-}
+import routes from "../../routes";
+import withPlayer from "../../Components/withPlayer";
+import { getDeleteProfileToken } from "../../Models/Session";
+import ProfileLayout from "../../Components/Layout/ProfileLayout";
 
 class DeleteContainer extends React.Component<RouteProps, undefined> {
   private stageTexts = [
@@ -25,16 +22,16 @@ class DeleteContainer extends React.Component<RouteProps, undefined> {
 
   render() {
     const query = parseQueryString(this.props.location.search);
-    const token: ActionTokenInterface = {
-      path: "/profile/delete",
-      token: query.token || ""
-    };
     const stage = parseInt(query.stage || 1);
     if (stage < 1 || stage > 3) {
       return <Error code={400} message="Invalid stage provided" />;
     }
 
-    return this.renderPage(stage, this.stageTexts[stage], token);
+    return this.renderPage(
+      stage,
+      this.stageTexts[stage],
+      getDeleteProfileToken(query.token || "")
+    );
   }
 
   renderPage(
@@ -43,20 +40,14 @@ class DeleteContainer extends React.Component<RouteProps, undefined> {
     token: ActionTokenInterface
   ) {
     return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <CrumbTitle crumbs={[{ link: "/profile", title: "Profile" }]}>
-            Delete account
-          </CrumbTitle>
-        </div>
-        <div className="t-doc__main">
+      <ProfileLayout title="Delete account">
           <div className="text--prose">
             <h2>{stageNumber}/3</h2>
             <p>{stageText}</p>
           </div>
 
           <div className="text--center">
-            <a className="button button--confirm" href="/profile">
+            <a className="button button--confirm" href={routes.getProfile()}>
               Cancel
             </a>
             <TokenButton token={token}>
@@ -65,10 +56,9 @@ class DeleteContainer extends React.Component<RouteProps, undefined> {
               </button>
             </TokenButton>
           </div>
-        </div>
-      </div>
+      </ProfileLayout>
     );
   }
 }
 
-export default withRouter(DeleteContainer as any);
+export default withPlayer(withRouter(DeleteContainer as any));

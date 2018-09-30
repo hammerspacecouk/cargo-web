@@ -13,12 +13,6 @@ const settings = {
   devtool: 'source-map',
   entry: {
     app: path.resolve(__dirname, '../src/index.client.tsx'),
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'react-modal',
-    ]
   },
   output: {
     path: path.resolve(__dirname, '../build/static'),
@@ -37,9 +31,11 @@ const settings = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
+        sideEffects: false,
       },
       {
         test: /\.s?css$/,
+        sideEffects: false,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -85,7 +81,18 @@ const settings = {
         "../build/assets-manifest.json"
       )
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  }
 };
 
 module.exports = settings;

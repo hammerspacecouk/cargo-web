@@ -1,27 +1,37 @@
-import { APIClientInterface, UserCookieInterface } from "./index";
+import { APIClientInterface } from "./index";
 import Environment from "../Environment";
 import Logger from "../Logger";
+
+const passThroughCookies = (cookies?: any) => {
+  if (!cookies) {
+    return null;
+  }
+
+  const cookieItems = [];
+  for (let property in cookies) {
+    if (cookies.hasOwnProperty(property)) {
+      cookieItems.push(
+        encodeURIComponent(property) +
+        "=" +
+        encodeURIComponent(cookies[property])
+      );
+    }
+  }
+  return cookieItems.join(";");
+};
 
 export default class implements APIClientInterface {
   getUrl(path: string): string {
     return Environment.apiHostname + path;
   }
 
-  async fetch(path: string): Promise<any> {
+  async fetch(path: string, payload?: object, cookies?: object): Promise<any> {
     const url = this.getUrl(path);
     try {
       const start = Date.now();
 
       const headers = {
-        cookie: Environment.cookies
-          .map((cookie: UserCookieInterface): string => {
-            return (
-              encodeURIComponent(cookie.name) +
-              "=" +
-              encodeURIComponent(cookie.value)
-            );
-          })
-          .join(";")
+        cookie: passThroughCookies(cookies)
       };
 
       const response = await fetch(url, { headers });

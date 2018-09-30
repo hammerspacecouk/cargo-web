@@ -1,4 +1,5 @@
 import { parse as parseQueryString } from "query-string";
+import b64u from 'b64u';
 
 export default (queryString: string) => {
   const query = parseQueryString(queryString);
@@ -7,5 +8,5 @@ export default (queryString: string) => {
   }
 
   // query should be base 64 encoded json array
-  return JSON.parse(atob(query.messages));
+  return JSON.parse(b64u.decode(query.messages));
 };

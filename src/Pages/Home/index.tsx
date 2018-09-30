@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { PATH_LIST as portsPath } from "../../DomainInterfaces/PortInterface";
+import withInitialData from "../../Components/withInitialData";
+
 import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
 import LoginForm from "../../Components/Login/LoginForm";
 import { SessionContext } from "../../Context/SessionContext";
@@ -9,26 +10,21 @@ import ActionLink from "../../Components/Link/ActionLink";
 import EventsContainer from "../../Containers/Play/EventsContainer";
 import EventInterface from "../../DomainInterfaces/EventInterface";
 import { getHomeData } from "../../Models/Home";
+import routes from "../../routes";
 
-interface State {
+interface Props {
+  isLoading: boolean;
   events: EventInterface[];
 }
 
-class HomeIndexContainer extends React.Component<undefined, State> {
-  constructor(props: undefined) {
-    super(props);
-    this.state = {
-      events: [],
-    };
-  }
+class HomeIndexContainer extends React.Component<Props, undefined> {
+  static getCrumb = () => ({
+    link: routes.getHome(),
+    title: "Home"
+  });
 
-  async componentDidMount() {
-    try {
-      const data = await getHomeData();
-      this.setState({ events: data.events });
-    } catch (e) {
-      // todo - error handling
-    }
+  static async getInitialData() {
+    return getHomeData();
   }
 
   renderPlayPanel = (playerFetched: boolean, player?: PlayerInterface) => {
@@ -87,19 +83,16 @@ class HomeIndexContainer extends React.Component<undefined, State> {
           <h1>Welcome welcome welcome</h1>
           <ul>
             <li>
-              <Link to="/play">Play</Link>
+              <a href={routes.getPlay()} rel="nofollow">Play</a>
             </li>
             <li>
-              <Link to={portsPath}>Ports</Link>
+              <a href={routes.getPortsList()}>Ports</a>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
             </li>
             <li>
-              <Link to="/about/styleguide">Styleguide</Link>
-            </li>
-            <li>
-              <Link to="/about/status">Status</Link>
+              <a href={routes.getAbout()}>About</a>
             </li>
           </ul>
           <div className="text--prose">
@@ -113,7 +106,7 @@ class HomeIndexContainer extends React.Component<undefined, State> {
 
           <div>
             <h2>What's happening right now?</h2>
-            <EventsContainer events={this.state.events}/>
+            <EventsContainer events={this.props.events}/>
           </div>
         </main>
         <aside className="t-home__aside">
@@ -124,4 +117,4 @@ class HomeIndexContainer extends React.Component<undefined, State> {
   }
 }
 
-export default HomeIndexContainer;
+export default withInitialData(HomeIndexContainer);

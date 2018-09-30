@@ -7,10 +7,11 @@ import FleetContainer from "./FleetContainer";
 
 import NotFound from "../../Components/Error/NotFound";
 import PlayBar from "../../Components/Navigation/PlayBar";
-import EnsureLoggedIn from "../../Containers/Login/EnsureLoggedIn";
 import CurrentShipContextComponent from "../../Context/CurrentShipContext";
 import UpgradesContainer from "./UpgradesContainer";
+import Loading from "../../Components/Navigation/Loading";
 import { SessionContext } from "../../Context/SessionContext";
+import RequireLogin from "../../Components/Login/RequireLogin";
 
 export interface ShipParamsInterface {
   match: {
@@ -20,27 +21,49 @@ export interface ShipParamsInterface {
   };
 }
 
-interface Props {
-  createNewPlayer?: () => void;
+interface StateInterface {
+  ready: boolean;
 }
 
-export default class PlayIndexContainer extends React.Component<Props, undefined> {
-  componentDidMount() {
-    if (this.props.createNewPlayer) {
-      this.props.createNewPlayer();
-    }
-  }
+export interface PropsInterface {
+  readonly children: any;
+}
 
-  componentDidUpdate(prevProps: Props) {
-    if (
-      this.props.createNewPlayer !== prevProps.createNewPlayer &&
-      this.props.createNewPlayer
-    ) {
-      this.props.createNewPlayer();
-    }
+// Client-side login check
+const EnsureLoggedIn = (props: PropsInterface) => (
+  <SessionContext.Consumer>
+    {({ player, playerFetched }) => {
+      if (!player) {
+        return playerFetched ? <RequireLogin /> : <Loading />;
+      }
+      return props.children;
+    }}
+  </SessionContext.Consumer>
+);
+
+export default class PlayIndexContainer extends React.Component<undefined, StateInterface> {
+
+  state = {
+    ready: false
+  };
+
+  componentDidMount() {
+    // to force the game itself to be client side only
+    this.setState({ready: true});
   }
 
   render() {
+    if (!this.state.ready) {
+      return (
+        <div>
+          <div><Loading /></div>
+          <div className="text--center">
+            To play will require JavaScript to be running successfully
+          </div>
+        </div>
+      ); // todo - nice game loading state for before JS kicks in
+    }
+
     return (
       <EnsureLoggedIn>
         <CurrentShipContextComponent>

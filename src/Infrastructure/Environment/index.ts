@@ -1,4 +1,3 @@
-import { UserCookieInterface } from "../API";
 import { isClient, isServer } from "../../Utils/Runtime";
 
 export interface EnvironmentInterface {
@@ -9,17 +8,15 @@ export interface EnvironmentInterface {
   nodeEnv: string;
   isClient: boolean;
   isServer: boolean;
-  cookies: UserCookieInterface[];
 }
 
 let environment: EnvironmentInterface;
 
 if (isClient) {
   environment = {
-    ...(window as any).__CONFIG,
+    ...(window as any)._CONFIG_,
     isClient: true,
-    isServer: false,
-    cookies: []
+    isServer: false
   };
 } else if (isServer) {
   environment = {
@@ -29,29 +26,13 @@ if (isClient) {
     host: process.env.HOSTNAME,
     nodeEnv: process.env.NODE_ENV,
     isClient: false,
-    isServer: true,
-    cookies: []
+    isServer: true
   };
 }
 
 if (!environment) {
   throw "Unknown Runtime";
 }
-
-export const injectUserCookiesFromRequest = (input: any) => {
-  const cookies = [];
-  for (let property in input) {
-    if (input.hasOwnProperty(property)) {
-      const userCookie: UserCookieInterface = {
-        name: property,
-        value: input[property]
-      };
-
-      cookies.push(userCookie);
-    }
-  }
-  return cookies;
-};
 
 export const getForClient = (): object => ({
   apiHostname: environment.apiHostname,

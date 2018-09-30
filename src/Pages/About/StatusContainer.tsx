@@ -1,19 +1,11 @@
 import * as React from "react";
 import Environment from "../../Infrastructure/Environment/index";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
+import AboutLayout from "../../Components/Layout/AboutLayout";
 
 class StatusContainer extends React.Component<undefined, undefined> {
   render() {
     return (
-      <div className="t-doc">
-        <div className="t-doc__title">
-          <CrumbTitle
-            crumbs={[{ link: "/about", title: "About Planet Cargo" }]}
-          >
-            Status
-          </CrumbTitle>
-        </div>
-        <div className="t-doc__main">
+      <AboutLayout title="Status">
           <p className="right">
             <a
               href={`${Environment.apiHostname}/status`}
@@ -62,8 +54,7 @@ class StatusContainer extends React.Component<undefined, undefined> {
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
+      </AboutLayout>
     );
   }
 }

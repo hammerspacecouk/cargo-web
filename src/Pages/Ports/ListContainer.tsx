@@ -1,59 +1,34 @@
 import * as React from "react";
 
-import Loading from "../../Components/Navigation/Loading";
-import { Link } from "react-router-dom";
-import Error from "../../Components/Error/Error";
-import PortInterface, { PATH_SHOW } from "../../DomainInterfaces/PortInterface";
+import PortInterface from "../../DomainInterfaces/PortInterface";
 import CrumbTitle from "../../Components/Navigation/CrumbTitle";
 import { fetchList } from "../../Models/Port";
+import withInitialData from "../../Components/withInitialData";
+import routes from "../../routes";
 
-interface StateInterface {
+interface PropsInterface {
+  isLoading: boolean;
   ports?: PortInterface[];
-  listLoaded: boolean;
 }
 
-class ListContainer extends React.Component<undefined, StateInterface> {
-  constructor(props: undefined) {
-    super(props);
-    this.state = {
-      ports: null,
-      listLoaded: false
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      const ports = await fetchList();
-      this.setState({
-        ports: ports.items,
-        listLoaded: true
-      });
-    } catch (e) {
-      this.setState({
-        ports: null,
-        listLoaded: true
-      });
-    }
+class ListContainer extends React.Component<PropsInterface, undefined> {
+  static async getInitialData() {
+    const ports = await fetchList();
+    return { ports: ports.items };
   }
 
   render() {
-    let ports = null;
-
-    if (this.state.ports) {
-      ports = (
-        <ul>
-          {this.state.ports.map((port: PortInterface, index: number) => {
-            return (
-              <li key={index}>
-                <Link to={PATH_SHOW(port.id)}>{port.name}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      );
-    } else {
-      ports = this.state.listLoaded ? <Error /> : <Loading />;
-    }
+    const ports = (
+      <ul>
+        {this.props.ports.map((port: PortInterface, index: number) => {
+          return (
+            <li key={index}>
+              <a href={routes.getPortShow(port.id)}>{port.name}</a>
+            </li>
+          );
+        })}
+      </ul>
+    );
 
     return (
       <div className="t-doc">
@@ -66,4 +41,4 @@ class ListContainer extends React.Component<undefined, StateInterface> {
   }
 }
 
-export default ListContainer;
+export default withInitialData(ListContainer);

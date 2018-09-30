@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 
-interface Crumb {
+export interface Crumb {
   link: string;
   title: string;
 }
@@ -25,9 +24,9 @@ export default (props: Props) => {
       <ul className="crumb-title__crumbs">
         {crumbs.map((crumb: Crumb) => (
           <li key={crumb.link}>
-            <Link to={crumb.link} className="crumb-title__link">
+            <a href={crumb.link} className="crumb-title__link">
               {crumb.title}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>

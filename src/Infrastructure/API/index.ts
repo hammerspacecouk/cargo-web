@@ -4,12 +4,7 @@ import { isClient, isServer } from "../../Utils/Runtime";
 
 export interface APIClientInterface {
   getUrl(path: string): string;
-  fetch(path: string, payload?: object): Promise<any>;
-}
-
-export interface UserCookieInterface {
-  name: string;
-  value: string;
+  fetch(path: string, payload?: object, cookies?: object): Promise<any>;
 }
 
 let httpClient: APIClientInterface;
