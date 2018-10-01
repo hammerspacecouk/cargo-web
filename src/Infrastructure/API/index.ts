@@ -7,6 +7,11 @@ export interface APIClientInterface {
   fetch(path: string, payload?: object, cookies?: object): Promise<any>;
 }
 
+export interface ErrorResponseInterface {
+  statusCode: number;
+  message: string;
+}
+
 let httpClient: APIClientInterface;
 
 if (isClient) {

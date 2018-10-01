@@ -19,10 +19,7 @@ interface Props {
   readonly firstPerson?: boolean;
 }
 
-interface LocalState {
-}
-
-export default class EventsContainer extends React.Component<Props, LocalState> {
+export default class EventsContainer extends React.Component<Props, undefined> {
 
   mapEvent = (event: EventInterface) => {
     let eventComponent;
@@ -61,7 +58,7 @@ export default class EventsContainer extends React.Component<Props, LocalState> 
 
   render = () => {
     let events = null;
-    if (this.props.events.length) {
+    if (this.props.events && this.props.events.length) {
       events = (
         <ul className="events">{this.props.events.map(this.mapEvent)}</ul>
       );

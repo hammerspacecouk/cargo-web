@@ -10,8 +10,6 @@ import PlayBar from "../../Components/Navigation/PlayBar";
 import CurrentShipContextComponent from "../../Context/CurrentShipContext";
 import UpgradesContainer from "./UpgradesContainer";
 import Loading from "../../Components/Navigation/Loading";
-import { SessionContext } from "../../Context/SessionContext";
-import RequireLogin from "../../Components/Login/RequireLogin";
 
 export interface ShipParamsInterface {
   match: {
@@ -25,22 +23,6 @@ interface StateInterface {
   ready: boolean;
 }
 
-export interface PropsInterface {
-  readonly children: any;
-}
-
-// Client-side login check
-const EnsureLoggedIn = (props: PropsInterface) => (
-  <SessionContext.Consumer>
-    {({ player, playerFetched }) => {
-      if (!player) {
-        return playerFetched ? <RequireLogin /> : <Loading />;
-      }
-      return props.children;
-    }}
-  </SessionContext.Consumer>
-);
-
 export default class PlayIndexContainer extends React.Component<undefined, StateInterface> {
 
   state = {
@@ -49,14 +31,14 @@ export default class PlayIndexContainer extends React.Component<undefined, State
 
   componentDidMount() {
     // to force the game itself to be client side only
-    this.setState({ready: true});
+    this.setState({ ready: true });
   }
 
   render() {
     if (!this.state.ready) {
       return (
         <div>
-          <div><Loading /></div>
+          <div><Loading/></div>
           <div className="text--center">
             To play will require JavaScript to be running successfully
           </div>
@@ -65,36 +47,34 @@ export default class PlayIndexContainer extends React.Component<undefined, State
     }
 
     return (
-      <EnsureLoggedIn>
-        <CurrentShipContextComponent>
-          <div className="t-play">
-            <div className="t-play__board">
-              <Switch>
-                <Route
-                  path="/play/upgrades"
-                  component={UpgradesContainer}
-                  exact={true}
-                />
-                <Route
-                  path="/play/:shipId/edit"
-                  component={EditContainer}
-                  exact={true}
-                />
-                <Route
-                  path="/play/:shipId"
-                  component={ShipContainer}
-                  exact={true}
-                />
-                <Route path="/play" component={FleetContainer} exact={true} />
-                <Route component={NotFound} />
-              </Switch>
-            </div>
-            <div className="t-play__navigation">
-              <PlayBar />
-            </div>
+      <CurrentShipContextComponent>
+        <div className="t-play">
+          <div className="t-play__board">
+            <Switch>
+              <Route
+                path="/play/upgrades"
+                component={UpgradesContainer}
+                exact={true}
+              />
+              <Route
+                path="/play/:shipId/edit"
+                component={EditContainer}
+                exact={true}
+              />
+              <Route
+                path="/play/:shipId"
+                component={ShipContainer}
+                exact={true}
+              />
+              <Route path="/play" component={FleetContainer} exact={true}/>
+              <Route component={NotFound}/>
+            </Switch>
           </div>
-        </CurrentShipContextComponent>
-      </EnsureLoggedIn>
+          <div className="t-play__navigation">
+            <PlayBar/>
+          </div>
+        </div>
+      </CurrentShipContextComponent>
     );
   }
 }

@@ -6,11 +6,12 @@
 
   &__event {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   &__content {
     flex: 1;
+    margin-right: $grid-unit;
   }
 
   &__flag {

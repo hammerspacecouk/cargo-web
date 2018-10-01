@@ -1,5 +1,5 @@
 import CacheControl from "./CacheControlHelper";
-import { APIClientInterface } from "./index";
+import { APIClientInterface, ErrorResponseInterface } from "./index";
 import Logger from "../Logger";
 import Environment from "../Environment";
 
@@ -91,17 +91,15 @@ export default class implements APIClientInterface {
         window.location.href = "/about/cheating";
         return null;
       }
-      if (response.status === 403) {
-        // you don't have access to this. might need to login or not allowed
-        return null;
-      }
       if (response.status === 404) {
-        // didn't exist - todo - differentiate from 403
         return null;
       }
       if (response.status !== 200) {
-        // todo - all other errors (perhaps split by 4xx/5xx)
-        return null;
+        const text = await response.text();
+        throw {
+          statusCode: response.status,
+          message: text
+        };
       }
 
       const data = await response.json();

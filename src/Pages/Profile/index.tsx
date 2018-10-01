@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
 import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
 import { MessageWarning } from "../../Components/Panel/Messages";
 import withPlayer from "../../Components/withPlayer";
@@ -9,6 +8,7 @@ import { getSession } from "../../Models/Session";
 import { Request } from "express";
 import routes from "../../routes";
 import ProfileLayout from "../../Components/Layout/ProfileLayout";
+import Loading from "../../Components/Navigation/Loading";
 
 interface PropsInterface {
   readonly hasProfileNotification: boolean;
@@ -19,7 +19,7 @@ class Profile extends React.Component<PropsInterface, undefined> {
 
   static async getInitialData(_: match, request: Request) {
     // todo - fetch full profile information so hasSetEmail can be checked proper
-    const sessionData = await getSession(request.cookies);
+    const sessionData = await getSession(request && request.cookies);
     return {
       player: sessionData.player,
       hasProfileNotification: sessionData.hasProfileNotification
@@ -27,6 +27,10 @@ class Profile extends React.Component<PropsInterface, undefined> {
   }
 
   render() {
+    if (!this.props.player) {
+      return <Loading />;
+    }
+
     let noEmailWarning = null;
     if (!this.props.hasProfileNotification) {
       noEmailWarning = (

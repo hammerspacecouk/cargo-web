@@ -10,12 +10,17 @@ import ShipInterface from "../../DomainInterfaces/ShipInterface";
 import { getFleetData } from "../../Models/Player";
 import EventInterface from "../../DomainInterfaces/EventInterface";
 import EventsContainer from "../../Containers/Play/EventsContainer";
+import Loading from "../../Components/Navigation/Loading";
+import Error from "../../Components/Error/Error";
+import { ErrorResponseInterface } from "../../Infrastructure/API";
+import LoginForm from "../../Components/Login/LoginForm";
 
 interface Props {
   sessionCallback: SessionContextInterface["setSession"];
 }
 
 interface State {
+  error?: ErrorResponseInterface;
   ships: ShipInterface[];
   events: EventInterface[];
 }
@@ -25,8 +30,9 @@ class FleetContainer extends React.Component<Props, State> {
   constructor(props: undefined) {
     super(props);
     this.state = {
+      error: null,
       ships: [],
-      events: [],
+      events: []
     };
   }
 
@@ -36,14 +42,35 @@ class FleetContainer extends React.Component<Props, State> {
     try {
       const data = await getFleetData();
       this.setState({ ships: data.ships, events: data.events });
-      this.props.sessionCallback(data.session);
+      this.props.sessionCallback(data.sessionState);
     } catch (e) {
-      // todo - error handling
+      console.error(e);
+      this.setState({ error: e });
     }
   }
 
-
   render() {
+    if (this.state.error) {
+      let loginForm = null;
+      if (this.state.error.statusCode === 429) {
+        loginForm = (
+          <div>
+            <h2>Login</h2>
+            <LoginForm />
+          </div>
+        );
+      }
+      return (
+        <>
+          <Error
+            code={this.state.error.statusCode}
+            message={this.state.error.message}
+          />
+          {loginForm}
+        </>
+      );
+    }
+
     return (
       <SessionContext.Consumer>
         {this.renderPage.bind(this)}
@@ -54,6 +81,10 @@ class FleetContainer extends React.Component<Props, State> {
   // todo - loading state for list of ships
 
   renderPage(sessionContext: SessionContextInterface) {
+    if (!sessionContext.player) {
+      return <Loading/>;
+    }
+
     return (
       <main className="t-play__content-contain">
         <div className="t-fleet">
@@ -68,7 +99,7 @@ class FleetContainer extends React.Component<Props, State> {
               <FleetShips ships={this.state.ships}/>
             </div>
             <div className="t-fleet__aside">
-              <EventsContainer events={this.state.events} firstPerson />
+              <EventsContainer events={this.state.events} firstPerson/>
               <div className="panel">
                 <h2>{sessionContext.rankStatus.currentRank.title}</h2>
                 <div>

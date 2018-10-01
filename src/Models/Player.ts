@@ -12,7 +12,7 @@ export interface AcknowledgePromotionResponse {
 export interface FleetResponseInterface {
   readonly ships: ShipInterface[];
   readonly events: EventInterface[];
-  readonly session: SessionResponseInterface;
+  readonly sessionState: SessionResponseInterface;
 }
 
 export const acknowledgePromotion = (

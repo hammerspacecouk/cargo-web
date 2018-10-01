@@ -12,7 +12,7 @@ interface Props {
 export default (Page: InitialDataComponent) => {
   class WithPlayer extends React.Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
-      if (!request.cookies.AUTHENTICATION_TOKEN) {
+      if (request && !request.cookies.AUTHENTICATION_TOKEN) {
         return { isLoggedOut: true }
       }
       // Need to call the wrapped components getInitialData if it exists

@@ -7,6 +7,7 @@ import {
 import Loading from "../../Components/Navigation/Loading";
 import NotFound from "../../Components/Error/NotFound";
 import { getPlayDataByShipId } from "../../Models/Ship";
+import EnsureLoggedIn from "../../Containers/Login/EnsureLoggedIn";
 
 interface Props {
   shipId: string;
@@ -38,11 +39,12 @@ class EnsureShipState extends React.Component<LocalProps, undefined> {
   }
 
   render() {
+    // todo - check it is your ship (403)
     if (!this.props.currentShipContext.ship) {
       return this.props.currentShipContext.loaded ? (
-        <NotFound message="You be making ship up" />
+        <NotFound message="You be making ship up"/>
       ) : (
-        <Loading />
+        <Loading/>
       );
     }
     return this.props.children;
@@ -52,14 +54,16 @@ class EnsureShipState extends React.Component<LocalProps, undefined> {
 export default class extends React.Component<Props, undefined> {
   render() {
     return (
-      <CurrentShipContext.Consumer>
-        {currentShipContext => (
-          <EnsureShipState
-            {...this.props}
-            currentShipContext={currentShipContext}
-          />
-        )}
-      </CurrentShipContext.Consumer>
+      <EnsureLoggedIn>
+        <CurrentShipContext.Consumer>
+          {currentShipContext => (
+            <EnsureShipState
+              {...this.props}
+              currentShipContext={currentShipContext}
+            />
+          )}
+        </CurrentShipContext.Consumer>
+      </EnsureLoggedIn>
     );
   }
 }

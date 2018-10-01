@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Planet Cargo: Node, React",
   "dependencies": {
+    "b64u": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "date-fns": "^1.29.0",
     "express": "^4.15.5",

@@ -19,26 +19,26 @@ services:
       api.dev.planetcargo.live: 172.21.0.1
     command:
 #### For development ###########
-#      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
-#      - "--config=webpack/client.config.js"
-#      - "--mode=development"
-#      - "--host=0.0.0.0"
-#      - "--watch"
-#      - "--watch-aggregate-timeout=300"
-#      - "--port=3000"
-#      - "--watch-poll=1000"
-#      - "--allowed-hosts=dev.planetcargo.live"
-#      - "--content-base=webpack/"
-#      - "--history-api-fallback"
+      - "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+      - "--config=webpack/client.config.js"
+      - "--mode=development"
+      - "--host=0.0.0.0"
+      - "--watch"
+      - "--watch-aggregate-timeout=300"
+      - "--port=3000"
+      - "--watch-poll=1000"
+      - "--allowed-hosts=dev.planetcargo.live"
+      - "--content-base=webpack/"
+      - "--history-api-fallback"
 
 
 #### For Testing prod server
 #        node_modules/webpack/bin/webpack.js --config=webpack/client.config.js &&
-      - "sh"
-      - "-c"
-      - >
-        yarn server &&
-        node server.js
+#      - "sh"
+#      - "-c"
+#      - >
+#        yarn server &&
+#        node server.js
 
   cargo-web-nginx:
     image: nginx:alpine

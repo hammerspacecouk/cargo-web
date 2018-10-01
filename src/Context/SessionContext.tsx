@@ -28,6 +28,7 @@ export interface SessionContextInterface extends SessionPropertiesInterface {
   updateScore: (newScore: ScoreInterface) => void;
   updateRankStatus: (newRankStatus: RankStatusInterface) => void;
   setSession: (session: SessionResponseInterface) => void;
+  refreshSession: () => void;
 }
 
 export const initialSession: SessionPropertiesInterface = {
@@ -40,17 +41,22 @@ export const initialSession: SessionPropertiesInterface = {
 
 export const SessionContext = React.createContext({
   ...initialSession,
-  updateScore: (newScore: ScoreInterface) => {},
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {},
-  setSession: (session: SessionResponseInterface) => {}
+  updateScore: (newScore: ScoreInterface) => {
+  },
+  updateRankStatus: (newRankStatus: RankStatusInterface) => {
+  },
+  setSession: (session: SessionResponseInterface) => {
+  },
+  refreshSession: () => {
+  }
 });
 
-class SessionContextComponent extends React.Component<
-  PropsInterface,
-  SessionContextInterface
-> {
+class SessionContextComponent extends React.Component<PropsInterface,
+  SessionContextInterface> {
+  private localStorageKey = "CARGO_SESSION_CONTEXT";
   private sessionRefreshTime: number = 1000 * 60 * 2;
   private allowUpdate: boolean = false;
+  private lastFetched?: number = null;
 
   constructor(props: any) {
     super(props);
@@ -58,20 +64,40 @@ class SessionContextComponent extends React.Component<
       ...initialSession,
       updateScore: this.updateScore,
       updateRankStatus: this.updateRankStatus,
-      setSession: this.setSession
+      setSession: this.setSession,
+      refreshSession: this.refreshSession
     };
   }
 
   componentDidMount() {
     this.allowUpdate = true;
-    this.refreshSession();
+    if (window.location.hash === "#logout") {
+      window.localStorage.removeItem(this.localStorageKey);
+    }
+    const data = window.localStorage.getItem(this.localStorageKey);
+    if (data) {
+      this.setState({ ...JSON.parse(data) });
+    } else {
+      this.setEmpty(false);
+    }
+    window.setTimeout(this.refreshTick, this.sessionRefreshTime);
   }
 
   componentWillUnmount() {
     this.allowUpdate = false;
   }
 
+  setEmpty = (fetched: boolean = true) => {
+    this.setState({
+      playerFetched: fetched,
+      player: null,
+      rankStatus: null,
+      score: null
+    });
+  };
+
   setSession = (session: SessionResponseInterface) => {
+    this.lastFetched = Date.now();
     if (session.isLoggedIn) {
       this.setState({
         playerFetched: true,
@@ -81,35 +107,58 @@ class SessionContextComponent extends React.Component<
         hasProfileNotification: session.hasProfileNotification
       });
     } else {
-      this.setState({
-        playerFetched: true,
-        player: null,
-        rankStatus: null,
-        score: null
-      });
+      this.setEmpty();
+    }
+    window.localStorage.setItem(
+      this.localStorageKey,
+      JSON.stringify({
+        playerFetched: this.state.playerFetched,
+        player: this.state.player,
+        rankStatus: this.state.rankStatus,
+        score: this.state.score,
+        hasProfileNotification: this.state.hasProfileNotification
+      })
+    );
+  };
+
+  refreshSession = async () => {
+    try {
+      this.setSession(await getSession());
+    } catch (e) {
+      // if we failed to fetch a session, perform one reload
+      console.error(e);
+      const hashCheck = "#err";
+      if (window.location.hash !== hashCheck) {
+        window.location.hash = hashCheck;
+        window.location.reload();
+      } else {
+        // todo - throw again
+      }
     }
   };
 
-  refreshSession = async (allowNewPlayer?: boolean) => {
-    if (!this.allowUpdate && !allowNewPlayer) {
+  refreshTick = () => {
+    if (!this.allowUpdate) {
       return;
     }
-
-    // todo - store an update time in the session prop and don't bother refetching if it is recent
-    try {
-      this.setSession(await getSession());
-      window.setTimeout(() => this.refreshSession(), this.sessionRefreshTime);
-    } catch (e) {
-      // todo - error handling
+    // don't fetch if we recently fetched
+    if (!this.lastFetched || this.lastFetched < (Date.now() - (30 * 1000))) {
+      // don't fetch if we're in a background tab
+      if (!document.hidden) {
+        this.refreshSession();
+      }
     }
+    window.setTimeout(this.refreshTick, this.sessionRefreshTime);
   };
 
   updateScore = (score: ScoreInterface) => {
     this.setState({ score });
+    this.lastFetched = Date.now();
   };
 
   updateRankStatus = (rankStatus: RankStatusInterface) => {
     this.setState({ rankStatus });
+    this.lastFetched = Date.now();
   };
 
   acknowledgePromotion = async (token: ActionTokenInterface) => {
@@ -140,7 +189,7 @@ class SessionContextComponent extends React.Component<
     if (this.state.acknowledgingPromotion) {
       button = (
         <button className="button" type="submit" disabled>
-          <Loading />
+          <Loading/>
         </button>
       );
     } else {
@@ -153,7 +202,7 @@ class SessionContextComponent extends React.Component<
 
     return (
       <Modal isOpen={true} title="Promotion">
-        <PromotionContainer rankStatus={this.state.rankStatus} />
+        <PromotionContainer rankStatus={this.state.rankStatus}/>
         <div className="text--center">
           <TokenButton
             token={this.state.rankStatus.acknowledgeToken}
@@ -173,7 +222,7 @@ class SessionContextComponent extends React.Component<
         {this.getPromotionModal()}
       </SessionContext.Provider>
     );
-  }
+  };
 }
 
 export default SessionContextComponent;
