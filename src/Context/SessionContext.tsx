@@ -10,6 +10,7 @@ import TokenButton from "../Containers/Button/TokenButton";
 import PromotionContainer from "../Containers/Player/PromotionContainer";
 import Loading from "../Components/Navigation/Loading";
 import { acknowledgePromotion } from "../Models/Player";
+import { cacheGet, cacheSet, cacheRemove } from "../Utils/StorageCache";
 
 interface PropsInterface {
   children: any;
@@ -72,11 +73,11 @@ class SessionContextComponent extends React.Component<PropsInterface,
   componentDidMount() {
     this.allowUpdate = true;
     if (window.location.hash === "#logout") {
-      window.localStorage.removeItem(this.localStorageKey);
+      cacheRemove(this.localStorageKey);
     }
-    const data = window.localStorage.getItem(this.localStorageKey);
+    const data = cacheGet(this.localStorageKey);
     if (data) {
-      this.setState({ ...JSON.parse(data) });
+      this.setState({ ...data });
     } else {
       this.setEmpty(false);
     }
@@ -109,15 +110,15 @@ class SessionContextComponent extends React.Component<PropsInterface,
     } else {
       this.setEmpty();
     }
-    window.localStorage.setItem(
+    cacheSet(
       this.localStorageKey,
-      JSON.stringify({
+      {
         playerFetched: this.state.playerFetched,
         player: this.state.player,
         rankStatus: this.state.rankStatus,
         score: this.state.score,
         hasProfileNotification: this.state.hasProfileNotification
-      })
+      }
     );
   };
 

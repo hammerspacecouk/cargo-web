@@ -1,4 +1,5 @@
 const Webpack = require("webpack");
+const rimraf = require("rimraf");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 
@@ -8,6 +9,9 @@ const autoprefixer = require("autoprefixer");
 const IS_DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') >= 0;
 const chunkHashFormat = IS_DEV_SERVER ? '' : "[chunkhash:10].";
 const hashFormat = IS_DEV_SERVER ? '' : "[hash:10].";
+const outputPath = path.resolve(__dirname, '../build/static');
+
+rimraf.sync(outputPath);
 
 const settings = {
   devtool: 'source-map',
@@ -15,7 +19,7 @@ const settings = {
     app: path.resolve(__dirname, '../src/index.client.tsx'),
   },
   output: {
-    path: path.resolve(__dirname, '../build/static'),
+    path: outputPath,
     publicPath: '/',
     filename: `${chunkHashFormat}[name].js`
   },

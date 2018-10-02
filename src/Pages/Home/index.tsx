@@ -28,38 +28,38 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
   }
 
   renderPlayPanel = (playerFetched: boolean, player?: PlayerInterface) => {
-    if (playerFetched && !player) {
+    if (player) {
       return (
-        <React.Fragment>
-          <p className="e unit">
-            Start playing immediately without logging in:
-          </p>
-          <div className="text--center unit">
-            <div className="align--inline">
-              <ActionLink
-                to={`/play`}
-                className="button m-icon-suffix--animated"
-              >
-                New game
-              </ActionLink>
-            </div>
+        <div className="text--center unit">
+          <div className="align--inline">
+            <ActionLink
+              to={`/play`}
+              className="button m-icon-suffix--animated"
+            >
+              To My Fleet
+            </ActionLink>
           </div>
-          <h3 className="d unit">Or login to resume a previous game:</h3>
-          <LoginForm />
-        </React.Fragment>
+        </div>
       );
     }
     return (
-      <div className="text--center unit">
-        <div className="align--inline">
-          <ActionLink
-            to={`/play`}
-            className="button m-icon-suffix--animated"
-          >
-            To My Fleet
-          </ActionLink>
+      <>
+        <p className="e unit">
+          Start playing immediately without logging in:
+        </p>
+        <div className="text--center unit">
+          <div className="align--inline">
+            <ActionLink
+              to={`/play`}
+              className="button m-icon-suffix--animated"
+            >
+              New game
+            </ActionLink>
+          </div>
         </div>
-      </div>
+        <h3 className="d unit">Or login to resume a previous game:</h3>
+        <LoginForm/>
+      </>
     );
   };
 

@@ -17,7 +17,7 @@ import Environment from "./Infrastructure/Environment";
 export enum CacheType {
   None = "no-cache, no-store",
   Private = "private",
-  Public = "public"
+  Public = "public",
 }
 
 export interface RouteItem extends RouteProps {
