@@ -31,10 +31,8 @@ const PlayerActions = (props: SessionContextInterface) => (
       <a href="/profile" rel="nofollow" title="My Profile" className="masthead__link">
         <span className="hidden">Profile</span>
         <ProfileIcon />
-        {!props.hasProfileNotification ? (
+        {props.hasProfileNotification && (
           <abbr className="masthead__notify" title="Notification to view" />
-        ) : (
-          ""
         )}
       </a>
     </div>
