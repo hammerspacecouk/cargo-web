@@ -41,21 +41,21 @@ class DeleteContainer extends React.Component<RouteProps, undefined> {
   ) {
     return (
       <ProfileLayout title="Delete account">
-          <div className="text--prose">
-            <h2>{stageNumber}/3</h2>
-            <p>{stageText}</p>
-          </div>
+        <div className="text--prose">
+          <h2>{stageNumber}/3</h2>
+          <p>{stageText}</p>
+        </div>
 
-          <div className="text--center">
-            <a className="button button--confirm" href={routes.getProfile()}>
-              Cancel
-            </a>
-            <TokenButton token={token}>
-              <button type="submit" className="button button--danger">
-                Yes
-              </button>
-            </TokenButton>
-          </div>
+        <div className="text--center">
+          <a className="button button--confirm" href={routes.getProfile()}>
+            Cancel
+          </a>
+          <TokenButton token={token}>
+            <button type="submit" className="button button--danger">
+              Yes
+            </button>
+          </TokenButton>
+        </div>
       </ProfileLayout>
     );
   }

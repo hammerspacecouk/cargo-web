@@ -24,7 +24,7 @@ class LoginEmailContainer extends React.Component<RouteProps, undefined> {
     return (
       <div className="t-doc">
         <div className="t-doc__title">
-          <h1>Login using e-mail</h1>
+          <h1>Log in using e-mail</h1>
         </div>
         <div className="t-doc__main">
           <p>

@@ -42,9 +42,9 @@ class EnsureShipState extends React.Component<LocalProps, undefined> {
     // todo - check it is your ship (403)
     if (!this.props.currentShipContext.ship) {
       return this.props.currentShipContext.loaded ? (
-        <NotFound message="You be making ship up"/>
+        <NotFound message="You be making ship up" />
       ) : (
-        <Loading/>
+        <Loading />
       );
     }
     return this.props.children;

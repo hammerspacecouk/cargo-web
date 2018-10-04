@@ -6,12 +6,12 @@ export default (
   content: any,
   data?: any,
   title: string = null
-) => (`<!doctype html>
+) => `<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title ? `${title} | ` : ''}Planet Cargo</title>
+    <title>${title ? `${title} | ` : ""}Planet Cargo</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
     <link rel="stylesheet" href="${assets.get("app.css")}" />
 </head>
@@ -38,4 +38,4 @@ export default (
 </script>
 </body>
 </html>
-`);
+`;

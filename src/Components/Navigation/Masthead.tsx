@@ -14,7 +14,8 @@ const GuestActions = () => (
     <ActionLink
       to={routes.getPlay()}
       rel="nofollow"
-      className="masthead__link m-icon-suffix--animated">
+      className="masthead__link m-icon-suffix--animated"
+    >
       Play now
     </ActionLink>
   </div>
@@ -28,7 +29,12 @@ const PlayerActions = (props: SessionContextInterface) => (
       </Link>
     </div>
     <div className="masthead__profile">
-      <a href="/profile" rel="nofollow" title="My Profile" className="masthead__link">
+      <a
+        href="/profile"
+        rel="nofollow"
+        title="My Profile"
+        className="masthead__link"
+      >
         <span className="hidden">Profile</span>
         <ProfileIcon />
         {props.hasProfileNotification && (

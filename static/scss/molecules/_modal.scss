@@ -1,5 +1,4 @@
 .modal {
-  $header-height: $cta-size;
   $border-width: 1px;
 
   &__overlay {
@@ -29,7 +28,9 @@
 
   margin: $grid-unit;
   max-height: calc(100vh - #{(2 * $grid-unit)});
+  max-width: 800px;
   border: $border-width solid rgb(204, 204, 204);
+  box-shadow: 0 0 32px rgba(0,0,0,0.6);
   background: $color-body-bg;
   color: $color-body-text;
   border-radius: 4px;
@@ -37,37 +38,43 @@
   z-index: $z-modal-panel;
 
   &__header {
-    height: $header-height;
     display: flex;
+    align-items: flex-start;
+    padding: $grid-unit;
     border-bottom: solid 1px $color-keyline;
   }
 
   &__title {
     @extend .c;
-    padding: $grid-unit;
-    line-height: ($header-height - (2*$grid-unit));
+    line-height: 32px;
     flex: 1;
   }
 
   &__close {
-    line-height: $cta-size;
-    width: $cta-size;
+    height: 32px;
+    width: 32px;
     background: none;
     border: none;
+    padding: 0;
   }
 
   &__body {
-    max-height: calc(100vh - (#{(2 * $grid-unit) + $header-height + (2 * $border-width)}));
+    max-height: 80vh;
     overflow: auto;
   }
   &__content {
     padding: $grid-unit;
   }
+  &__action {
+    text-align: center;
+    margin-top: $grid-unit;
+  }
 
   // animate coming in and going out
   will-change: transform;
   transform: scale(0);
-  transition: .3s cubic-bezier(0.13, 0.76, 0.82, 1.6);
+  //transition: .3s cubic-bezier(0.13, 0.76, 0.82, 1.6);
+  transition: .3s cubic-bezier(0.13, 0.76, 0.49, 1.65);
   &--after-open {
     transform: scale(1);
   }

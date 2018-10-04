@@ -17,7 +17,7 @@ import Environment from "./Infrastructure/Environment";
 export enum CacheType {
   None = "no-cache, no-store",
   Private = "private",
-  Public = "public",
+  Public = "public"
 }
 
 export interface RouteItem extends RouteProps {
@@ -26,20 +26,20 @@ export interface RouteItem extends RouteProps {
 }
 
 const routes = {
-  getAbout: () => '/about',
-  getAboutCheating: () => '/about/cheating',
-  getAboutPolicies: () => '/about/policies',
-  getAboutStatus: () => '/about/status',
-  getAboutStyleGuide: () => '/about/styleguide',
-  getLogin: () => '/login',
-  getLoginEmail: () => '/login/email',
+  getAbout: () => "/about",
+  getAboutCheating: () => "/about/cheating",
+  getAboutPolicies: () => "/about/policies",
+  getAboutStatus: () => "/about/status",
+  getAboutStyleGuide: () => "/about/styleguide",
+  getLogin: () => "/login",
+  getLoginEmail: () => "/login/email",
   getLogout: () => `${Environment.apiHostname}/logout`,
-  getPortShow : (id: string = ':portId') => `/ports/${id}`,
-  getPortsList : () => '/ports',
-  getPlay : () => '/play',
-  getProfile : () => '/profile',
-  getProfileDelete : () => '/profile/delete',
-  getHome : () => '/',
+  getPortShow: (id: string = ":portId") => `/ports/${id}`,
+  getPortsList: () => "/ports",
+  getPlay: () => "/play",
+  getProfile: () => "/profile",
+  getProfileDelete: () => "/profile/delete",
+  getHome: () => "/"
 };
 
 export const matches = [
@@ -101,13 +101,13 @@ export const matches = [
     path: routes.getLoginEmail(),
     exact: true,
     component: LoginEmail,
-    cacheType: CacheType.None,
+    cacheType: CacheType.None
   },
   {
     path: routes.getLogin(),
     exact: true,
     component: Login,
-    cacheType: CacheType.None,
+    cacheType: CacheType.None
   },
 
   // profile
@@ -115,7 +115,7 @@ export const matches = [
     path: routes.getProfileDelete(),
     exact: true,
     component: ProfileDelete,
-    cacheType: CacheType.None,
+    cacheType: CacheType.None
   },
   {
     path: routes.getProfile(),

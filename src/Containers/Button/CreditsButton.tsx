@@ -2,8 +2,6 @@ import * as React from "react";
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 import { getValue } from "../Player/ScoreContainer";
 import { SessionContext } from "../../Context/SessionContext";
-import IconButton from "../../Components/Button/IconButton";
-import CreditsIcon from "../../Components/Icons/CreditsIcon";
 import ScoreValue from "../../Components/Player/ScoreValue";
 
 interface Props {

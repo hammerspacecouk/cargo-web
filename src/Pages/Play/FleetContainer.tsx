@@ -26,7 +26,6 @@ interface State {
 }
 
 class FleetContainer extends React.Component<Props, State> {
-
   constructor(props: undefined) {
     super(props);
     this.state = {
@@ -82,7 +81,7 @@ class FleetContainer extends React.Component<Props, State> {
 
   renderPage(sessionContext: SessionContextInterface) {
     if (!sessionContext.player) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     return (
@@ -91,22 +90,24 @@ class FleetContainer extends React.Component<Props, State> {
           <div className="t-fleet__title-bar">
             <h1 className="t-fleet__title">My Fleet</h1>
             <div className="t-fleet__flag">
-              <PlayerFlag player={sessionContext.player}/>
+              <PlayerFlag player={sessionContext.player} />
             </div>
           </div>
           <div className="t-fleet__main">
             <div className="t-fleet__ships">
-              <FleetShips ships={this.state.ships}/>
+              <FleetShips ships={this.state.ships} />
             </div>
             <div className="t-fleet__aside">
-              <EventsContainer events={this.state.events} firstPerson/>
+              <EventsContainer events={this.state.events} firstPerson />
               <div className="panel">
                 <h2>{sessionContext.rankStatus.currentRank.title}</h2>
                 <div>
                   <ProgressBar
                     percent={sessionContext.rankStatus.levelProgress}
                   />
-                  <p className="f">{sessionContext.rankStatus.nextRank.title}</p>
+                  <p className="f">
+                    {sessionContext.rankStatus.nextRank.title}
+                  </p>
                 </div>
               </div>
             </div>
@@ -117,12 +118,8 @@ class FleetContainer extends React.Component<Props, State> {
   }
 }
 
-
 export default () => (
   <SessionContext.Consumer>
-    {({ setSession }) => (
-      <FleetContainer sessionCallback={setSession}/>
-    )}
+    {({ setSession }) => <FleetContainer sessionCallback={setSession} />}
   </SessionContext.Consumer>
 );
-

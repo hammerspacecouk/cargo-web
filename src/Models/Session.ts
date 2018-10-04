@@ -18,22 +18,28 @@ export interface ProfileResponseInterface {
   readonly homePort: PortInterface;
 }
 
-export const getSession = (cookies?: any): Promise<SessionResponseInterface> => {
-  return API.fetch('/login/check', null, cookies);
+export const getSession = (
+  cookies?: any
+): Promise<SessionResponseInterface> => {
+  return API.fetch("/login/check", null, cookies);
 };
 
 export const getEmailLoginToken = (token: string): ActionTokenInterface => {
   return {
-    path: '/login/email',
+    path: "/login/email",
     token
   };
 };
 
-export const getProfileData = (cookies?: any): Promise<ProfileResponseInterface> => {
-  return API.fetch('/profile', null, cookies);
+export const getProfileData = (
+  cookies?: any
+): Promise<ProfileResponseInterface> => {
+  return API.fetch("/profile", null, cookies);
 };
 
-export const getDeleteProfileToken = (token: string = ""): ActionTokenInterface => {
+export const getDeleteProfileToken = (
+  token: string = ""
+): ActionTokenInterface => {
   return {
     path: "/profile/delete",
     token

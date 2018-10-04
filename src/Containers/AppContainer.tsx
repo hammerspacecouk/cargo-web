@@ -17,16 +17,17 @@ export default ({ routes, initialData }: Props) => (
       <div className="main">
         <Switch>
           {routes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                render={props =>
-                  React.createElement(route.component, {
-                    ...props,
-                    initialData,
-                  })}
-              />
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              render={props =>
+                React.createElement(route.component, {
+                  ...props,
+                  initialData
+                })
+              }
+            />
           ))}
           <Route component={NotFound} />
         </Switch>

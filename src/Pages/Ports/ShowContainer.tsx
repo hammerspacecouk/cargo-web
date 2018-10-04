@@ -30,7 +30,7 @@ class ShowContainer extends React.Component<PropsInterface, undefined> {
 
   render() {
     if (!this.props.port) {
-      return <NotFound message="You need a new map. There is no port here" />
+      return <NotFound message="You need a new map. There is no port here" />;
     }
 
     return (

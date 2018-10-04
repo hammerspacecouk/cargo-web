@@ -10,12 +10,8 @@ interface PropsInterface {
 export default (props: PropsInterface) => (
   <div className="t-doc">
     <div className="t-doc__title">
-      <CrumbTitle crumbs={props.crumbs}>
-        {props.title}
-      </CrumbTitle>
+      <CrumbTitle crumbs={props.crumbs}>{props.title}</CrumbTitle>
     </div>
-    <div className="t-doc__main">
-      {props.children}
-    </div>
+    <div className="t-doc__main">{props.children}</div>
   </div>
 );

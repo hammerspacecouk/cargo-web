@@ -12,8 +12,8 @@ const passThroughCookies = (cookies?: any) => {
     if (cookies.hasOwnProperty(property)) {
       cookieItems.push(
         encodeURIComponent(property) +
-        "=" +
-        encodeURIComponent(cookies[property])
+          "=" +
+          encodeURIComponent(cookies[property])
       );
     }
   }

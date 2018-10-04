@@ -12,7 +12,7 @@ interface PropsInterface extends InitialPropsInterface {
   readonly player?: PlayerInterface;
   readonly playerFetched?: boolean;
   readonly children: any;
-  readonly refreshSession: () => void
+  readonly refreshSession: () => void;
 }
 
 // Client-side login check
@@ -25,7 +25,7 @@ class EnsureLoggedIn extends React.Component<PropsInterface, undefined> {
 
   render() {
     if (!this.props.player) {
-      return this.props.playerFetched ? <RequireLogin/> : <Loading/>;
+      return this.props.playerFetched ? <RequireLogin /> : <Loading />;
     }
     return this.props.children;
   }
@@ -39,7 +39,7 @@ export default (props: InitialPropsInterface) => (
         playerFetched={playerFetched}
         refreshSession={refreshSession}
         {...props}
-        />
+      />
     )}
   </SessionContext.Consumer>
 );

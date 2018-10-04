@@ -12,20 +12,20 @@ export default class extends React.Component<undefined, undefined> {
   render() {
     return (
       <AboutLayout>
-          <p>More stuff. Twitter etc</p>
+        <p>More stuff. Twitter etc</p>
 
-          <h2>More pages</h2>
-          <ul>
-            <li>
-              <a href={routes.getAboutPolicies()}>Policies</a>
-            </li>
-            <li>
-              <a href={routes.getAboutStatus()}>Application Status</a>
-            </li>
-            <li>
-              <a href={routes.getAboutStyleGuide()}>Styleguide</a>
-            </li>
-          </ul>
+        <h2>More pages</h2>
+        <ul>
+          <li>
+            <a href={routes.getAboutPolicies()}>Policies</a>
+          </li>
+          <li>
+            <a href={routes.getAboutStatus()}>Application Status</a>
+          </li>
+          <li>
+            <a href={routes.getAboutStyleGuide()}>Styleguide</a>
+          </li>
+        </ul>
       </AboutLayout>
     );
   }

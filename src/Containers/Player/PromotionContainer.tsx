@@ -21,10 +21,10 @@ class PromotionContainer extends React.Component<Props, LocalState> {
     super(props);
     this.allowAnimationUpdate = false;
     this.state = {
-      previousClass: '',
+      previousClass: "",
       previousActive: true,
       nextActive: false,
-      progress: 80,
+      progress: 80
     };
 
     this.animate = this.animate.bind(this);
@@ -58,9 +58,9 @@ class PromotionContainer extends React.Component<Props, LocalState> {
     // todo - *ping* on new rank
 
     this.setState({
-      previousClass: (diff > 1000) ? 'o-promotion__previous--go' : '',
-      previousActive: (diff < 2500),
-      nextActive: (diff >= 2500),
+      previousClass: diff > 1000 ? "o-promotion__previous--go" : "",
+      previousActive: diff < 2500,
+      nextActive: diff >= 2500,
       progress
     });
     window.requestAnimationFrame(this.animate);
@@ -92,7 +92,6 @@ class PromotionContainer extends React.Component<Props, LocalState> {
 
     return (
       <div className="o-promotion">
-
         <div className="o-promotion__rank-box">
           {previous}
           {next}

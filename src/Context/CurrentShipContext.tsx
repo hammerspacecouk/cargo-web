@@ -91,7 +91,7 @@ class CurrentShipContextComponent extends React.Component<
       channel: data.channel,
       directions: data.directions,
       shipsInLocation: data.shipsInLocation,
-      events: data.events,
+      events: data.events
     });
   }
 

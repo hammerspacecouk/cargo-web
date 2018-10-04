@@ -9,12 +9,14 @@ interface PropsInterface {
 
 export default (props: PropsInterface) => {
   let crumbs = null;
-  let title = 'About Planet Cargo';
+  let title = "About Planet Cargo";
   if (props.title) {
-    crumbs = [{
-      link: routes.getAbout(),
-      title
-    }];
+    crumbs = [
+      {
+        link: routes.getAbout(),
+        title
+      }
+    ];
     title = props.title;
   }
 

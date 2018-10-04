@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ModalHandler from "react-modal";
+import CloseIcon from "../Icons/CloseIcon";
 
 interface Props {
   children: any;
@@ -21,7 +22,7 @@ export default (props: Props) => {
   if (props.onClose) {
     closeButton = (
       <button className="modal__close" onClick={props.onClose}>
-        X
+        <CloseIcon />
       </button>
     );
   }

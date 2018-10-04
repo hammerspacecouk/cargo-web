@@ -14,12 +14,12 @@ export default (props: Props) => {
   if (props.event.actioningShip) {
     name = props.event.actioningShip.name;
   } else {
-    name = '[deleted] ';
+    name = "[deleted] ";
   }
 
   return (
     <Event time={props.event.time}>
-      <em>{name}</em> arrived safely at{' '}
+      <em>{name}</em> arrived safely at{" "}
       <a href={`/ports/${port.id}`}>{port.name}</a>
     </Event>
   );

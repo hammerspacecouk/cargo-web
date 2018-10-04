@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default (props: Props) => {
-
   let name;
   if (props.firstPerson) {
     name = "You ";

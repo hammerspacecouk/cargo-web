@@ -6,5 +6,5 @@ export interface HomeResponseInterface {
 }
 
 export const getHomeData = (): Promise<HomeResponseInterface> => {
-  return API.fetch('/');
+  return API.fetch("/");
 };

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { match } from "react-router";
 import withInitialData, { InitialDataComponent } from "./withInitialData";
 import { Request } from "express";
@@ -13,7 +13,7 @@ export default (Page: InitialDataComponent) => {
   class WithPlayer extends React.Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
       if (request && !request.cookies.AUTHENTICATION_TOKEN) {
-        return { isLoggedOut: true }
+        return { isLoggedOut: true };
       }
       // Need to call the wrapped components getInitialData if it exists
       if (Page.getInitialData) {
@@ -29,9 +29,7 @@ export default (Page: InitialDataComponent) => {
 
       // Flatten out all the props.
       const { isLoggedOut, ...rest } = this.props;
-      return (
-        <Page{...rest}/>
-      );
+      return <Page {...rest} />;
     }
   }
   return withInitialData(WithPlayer);

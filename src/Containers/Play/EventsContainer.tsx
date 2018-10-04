@@ -20,7 +20,6 @@ interface Props {
 }
 
 export default class EventsContainer extends React.Component<Props, undefined> {
-
   mapEvent = (event: EventInterface) => {
     let eventComponent;
     switch (event.action) {
@@ -51,9 +50,7 @@ export default class EventsContainer extends React.Component<Props, undefined> {
         break;
     }
 
-    return (
-      <li key={`event-${event.id}`}>{eventComponent}</li>
-    )
+    return <li key={`event-${event.id}`}>{eventComponent}</li>;
   };
 
   render = () => {

@@ -30,7 +30,7 @@ const assets = new Assets(
 );
 
 const buildCacheControl = (matched: MatchedRoute) => {
-  let cache:string = CacheType.None;
+  let cache: string = CacheType.None;
 
   if (matched && matched.route) {
     const route = matched.route;
@@ -71,16 +71,20 @@ export default (app: Express.Application) => {
     let data;
 
     try {
-      if (matchedRoute &&
+      if (
+        matchedRoute &&
         (matchedRoute.route.component as InitialDataComponent).getInitialData
       ) {
-        data = await (matchedRoute.route.component as InitialDataComponent)
-          .getInitialData(matchedRoute.match, req);
+        data = await (matchedRoute.route
+          .component as InitialDataComponent).getInitialData(
+          matchedRoute.match,
+          req
+        );
       }
 
       appElement = ReactDOMServer.renderToString(
         <StaticRouter context={context} location={path}>
-          <AppContainer routes={routes} initialData={data}/>
+          <AppContainer routes={routes} initialData={data} />
         </StaticRouter>
       );
 
@@ -113,21 +117,16 @@ export default (app: Express.Application) => {
       Logger.info(`[RESPONSE] [${code}] [${finish}ms] ${path}`);
 
       next();
-
     } catch (error) {
       res.status(500);
       res.set({
         "content-type": "text/html",
-        "cache-control": CacheType.None,
+        "cache-control": CacheType.None
       });
-      res.end(
-        `Sorry, an error occurred. Please <a href=".">try again</a>`
-      );
+      res.end(`Sorry, an error occurred. Please <a href=".">try again</a>`);
       const finish = Date.now() - start;
       Logger.error(error);
-      Logger.info(
-        `[RESPONSE] [500] [${finish}ms] ${path} [ERROR] ${path}`
-      );
+      Logger.info(`[RESPONSE] [500] [${finish}ms] ${path} [ERROR] ${path}`);
       next();
       return;
     }
