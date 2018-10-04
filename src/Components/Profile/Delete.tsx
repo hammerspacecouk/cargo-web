@@ -9,7 +9,6 @@ interface PropsInterface extends EnabledPropsInterface {
   canDelete: boolean;
 }
 
-
 const Enabled = ({ route }: EnabledPropsInterface) => (
   <a className="button button--soft-danger" href={route}>
     Delete account
@@ -31,7 +30,7 @@ const Disabled = () => (
 export default (props: PropsInterface) => {
   return (
     <div>
-      {props.canDelete ? <Enabled route={props.route}/> : <Disabled/>}
+      {props.canDelete ? <Enabled route={props.route} /> : <Disabled />}
     </div>
   );
 };

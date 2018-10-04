@@ -16,12 +16,13 @@ export default (props: Props) => {
     name = (
       <React.Fragment>
         <span className="events__flag">
-          <PlayerFlag player={props.event.actioningPlayer}/>
-        </span> was{" "}
+          <PlayerFlag player={props.event.actioningPlayer} />
+        </span>{" "}
+        was{" "}
       </React.Fragment>
     );
   } else {
-    name = '[deleted] was ';
+    name = "[deleted] was ";
   }
 
   const port = props.event.port;

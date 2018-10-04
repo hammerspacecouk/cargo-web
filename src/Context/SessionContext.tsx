@@ -42,18 +42,16 @@ export const initialSession: SessionPropertiesInterface = {
 
 export const SessionContext = React.createContext({
   ...initialSession,
-  updateScore: (newScore: ScoreInterface) => {
-  },
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {
-  },
-  setSession: (session: SessionResponseInterface) => {
-  },
-  refreshSession: () => {
-  }
+  updateScore: (newScore: ScoreInterface) => {},
+  updateRankStatus: (newRankStatus: RankStatusInterface) => {},
+  setSession: (session: SessionResponseInterface) => {},
+  refreshSession: () => {}
 });
 
-class SessionContextComponent extends React.Component<PropsInterface,
-  SessionContextInterface> {
+class SessionContextComponent extends React.Component<
+  PropsInterface,
+  SessionContextInterface
+> {
   private localStorageKey = "CARGO_SESSION_CONTEXT";
   private sessionRefreshTime: number = 1000 * 60 * 2;
   private allowUpdate: boolean = false;
@@ -110,16 +108,13 @@ class SessionContextComponent extends React.Component<PropsInterface,
     } else {
       this.setEmpty();
     }
-    cacheSet(
-      this.localStorageKey,
-      {
-        playerFetched: this.state.playerFetched,
-        player: this.state.player,
-        rankStatus: this.state.rankStatus,
-        score: this.state.score,
-        hasProfileNotification: this.state.hasProfileNotification
-      }
-    );
+    cacheSet(this.localStorageKey, {
+      playerFetched: this.state.playerFetched,
+      player: this.state.player,
+      rankStatus: this.state.rankStatus,
+      score: this.state.score,
+      hasProfileNotification: this.state.hasProfileNotification
+    });
   };
 
   refreshSession = async () => {
@@ -143,7 +138,7 @@ class SessionContextComponent extends React.Component<PropsInterface,
       return;
     }
     // don't fetch if we recently fetched
-    if (!this.lastFetched || this.lastFetched < (Date.now() - (30 * 1000))) {
+    if (!this.lastFetched || this.lastFetched < Date.now() - 30 * 1000) {
       // don't fetch if we're in a background tab
       if (!document.hidden) {
         this.refreshSession();
@@ -190,7 +185,7 @@ class SessionContextComponent extends React.Component<PropsInterface,
     if (this.state.acknowledgingPromotion) {
       button = (
         <button className="button" type="submit" disabled>
-          <Loading/>
+          <Loading />
         </button>
       );
     } else {
@@ -203,7 +198,7 @@ class SessionContextComponent extends React.Component<PropsInterface,
 
     return (
       <Modal isOpen={true} title="Promotion">
-        <PromotionContainer rankStatus={this.state.rankStatus}/>
+        <PromotionContainer rankStatus={this.state.rankStatus} />
         <div className="text--center">
           <TokenButton
             token={this.state.rankStatus.acknowledgeToken}

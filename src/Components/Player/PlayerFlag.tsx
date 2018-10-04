@@ -8,9 +8,7 @@ export interface Props {
 export default (props: Props) => {
   return (
     <div title={props.player.colour}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 101.79 76.37">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101.79 76.37">
         <path
           fill={`#${props.player.colour}`}
           d="M101.52 62.25a84.47 84.47 0 0 1-24.52 6c-15.34 1.38-22.44-2.35-36.27-1.48-7.26.46-18.1 2.3-31.21 9.2Q4.9 45 .27 14.08a88.11 88.11 0 0 1 29.36-8.16C44 4.6 51.06 7.76 66.53 6.34a97.1 97.1 0 0 0 25.75-6z"

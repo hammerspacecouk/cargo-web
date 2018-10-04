@@ -23,8 +23,10 @@ interface StateInterface {
   ready: boolean;
 }
 
-export default class PlayIndexContainer extends React.Component<undefined, StateInterface> {
-
+export default class PlayIndexContainer extends React.Component<
+  undefined,
+  StateInterface
+> {
   state = {
     ready: false
   };
@@ -38,7 +40,9 @@ export default class PlayIndexContainer extends React.Component<undefined, State
     if (!this.state.ready) {
       return (
         <div>
-          <div><Loading/></div>
+          <div>
+            <Loading />
+          </div>
           <div className="text--center">
             To play will require JavaScript to be running successfully
           </div>
@@ -66,12 +70,12 @@ export default class PlayIndexContainer extends React.Component<undefined, State
                 component={ShipContainer}
                 exact={true}
               />
-              <Route path="/play" component={FleetContainer} exact={true}/>
-              <Route component={NotFound}/>
+              <Route path="/play" component={FleetContainer} exact={true} />
+              <Route component={NotFound} />
             </Switch>
           </div>
           <div className="t-play__navigation">
-            <PlayBar/>
+            <PlayBar />
           </div>
         </div>
       </CurrentShipContextComponent>

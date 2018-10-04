@@ -20,7 +20,7 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
           <h3>Your data</h3>
           <p>
             It is necessary to have a piece of information unique to you in
-            order to allow you to login and keep playing the same game. We use
+            order to allow you to log in and keep playing the same game. We use
             your e-mail address. However we don't store the e-mail address
             itself. We scramble it through a one-way process to get an
             unpredictable code, and we store that instead.
@@ -45,7 +45,7 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
             If somebody sends you an invite we will email you once, and not
             store your address. We will not be able to contact you again even if
             we wanted to.<br />
-            When you request to login via e-mail we send to the e-mail address
+            When you request to log in via e-mail we send to the e-mail address
             you provide. It is not stored once sent.
           </p>
           <p>
@@ -84,14 +84,14 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
                   <code>AUTHENTICATION_TOKEN</code>
                 </td>
                 <td>
-                  This cookie saves you having to login every time you come
+                  This cookie saves you having to log in every time you come
                   back. That's all it does. You can delete it, and you'll just
-                  have to login again.
+                  have to log in again.
                 </td>
                 <td>
                   It lasts for three months since last use. Therefore if you
                   don't visit for three months it will naturally disappear and
-                  you will have to login again.
+                  you will have to log in again.
                 </td>
               </tr>
               <tr>

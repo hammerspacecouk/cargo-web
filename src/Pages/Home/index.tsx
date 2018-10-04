@@ -32,10 +32,7 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
       return (
         <div className="text--center unit">
           <div className="align--inline">
-            <ActionLink
-              to={`/play`}
-              className="button m-icon-suffix--animated"
-            >
+            <ActionLink to={`/play`} className="button m-icon-suffix--animated">
               To My Fleet
             </ActionLink>
           </div>
@@ -44,21 +41,16 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
     }
     return (
       <>
-        <p className="e unit">
-          Start playing immediately without logging in:
-        </p>
+        <p className="e unit">Start playing immediately without logging in:</p>
         <div className="text--center unit">
           <div className="align--inline">
-            <ActionLink
-              to={`/play`}
-              className="button m-icon-suffix--animated"
-            >
+            <ActionLink to={`/play`} className="button m-icon-suffix--animated">
               New game
             </ActionLink>
           </div>
         </div>
-        <h3 className="d unit">Or login to resume a previous game:</h3>
-        <LoginForm/>
+        <h3 className="d unit">Or log in to resume a previous game:</h3>
+        <LoginForm />
       </>
     );
   };
@@ -83,7 +75,9 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
           <h1>Welcome welcome welcome</h1>
           <ul>
             <li>
-              <a href={routes.getPlay()} rel="nofollow">Play</a>
+              <a href={routes.getPlay()} rel="nofollow">
+                Play
+              </a>
             </li>
             <li>
               <a href={routes.getPortsList()}>Ports</a>
@@ -106,7 +100,7 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
 
           <div>
             <h2>What's happening right now?</h2>
-            <EventsContainer events={this.props.events}/>
+            <EventsContainer events={this.props.events} />
           </div>
         </main>
         <aside className="t-home__aside">

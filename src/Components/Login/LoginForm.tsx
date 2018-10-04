@@ -144,11 +144,11 @@ export default (props: LoginFormProps) => {
       </ul>
       <form action={loginPathEmail} method="post">
         <h3 className="d unit">
-          <label htmlFor="login-email">Login via e-mail</label>
+          <label htmlFor="login-email">Log in via e-mail</label>
         </h3>
         <p>
           If you'd rather use your e-mail directly enter your e-mail address and
-          we'll send you a link that lets you login immediately. The link is
+          we'll send you a link that lets you log in immediately. The link is
           valid for one hour and there are no passwords required.
         </p>
         <div className="form__group form__group--inline">

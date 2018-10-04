@@ -193,7 +193,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         <h2>Players</h2>
         <ShipList ships={this.props.shipContext.shipsInLocation} />
 
-        <EventsContainer events={this.props.shipContext.events}/>
+        <EventsContainer events={this.props.shipContext.events} />
       </div>
     );
   }

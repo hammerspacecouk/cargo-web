@@ -11,7 +11,7 @@ interface LocalState {
 const getValue = (datetime: Date, now: Date): string => {
   const seconds = Math.floor((now.getTime() - datetime.getTime()) / 1000);
 
-  if (seconds > (60*60*24*28)) {
+  if (seconds > 60 * 60 * 24 * 28) {
     return datetime.toLocaleString();
   }
   let interval = Math.floor(seconds / 86400);
@@ -28,13 +28,15 @@ const getValue = (datetime: Date, now: Date): string => {
   }
 
   if (Math.floor(seconds) <= 1) {
-    return 'Just now'
+    return "Just now";
   }
   return Math.floor(seconds) + " seconds ago";
 };
 
-
-export default class TimeAgoContainer extends React.Component<Props, LocalState> {
+export default class TimeAgoContainer extends React.Component<
+  Props,
+  LocalState
+> {
   private allowAnimationUpdate: boolean;
 
   constructor(props: Props) {
@@ -70,7 +72,8 @@ export default class TimeAgoContainer extends React.Component<Props, LocalState>
     return (
       <time
         dateTime={this.props.datetime.toISOString()}
-        title={this.props.datetime.toISOString()}>
+        title={this.props.datetime.toISOString()}
+      >
         {this.state.text}
       </time>
     );

@@ -1,10 +1,10 @@
-import * as React from 'react';
+import * as React from "react";
 import { ComponentClass } from "react";
 import { match } from "react-router";
 import { Request } from "express";
 
 export interface InitialDataComponent extends ComponentClass {
-  getInitialData?: (match: match, request?: Request) => any
+  getInitialData?: (match: match, request?: Request) => any;
 }
 
 interface State {
@@ -35,7 +35,7 @@ export default (Page: InitialDataComponent) => {
       super(props);
       this.state = {
         data: props.initialData,
-        isLoading: false,
+        isLoading: false
       };
     }
 
@@ -56,14 +56,12 @@ export default (Page: InitialDataComponent) => {
         this.setState({ isLoading: true });
 
         try {
-          const data = await WithInitialData.getInitialData(
-            this.props.match
-          );
+          const data = await WithInitialData.getInitialData(this.props.match);
           this.setState({ data, isLoading: false });
         } catch (error) {
           this.setState(state => ({
             data: { error },
-            isLoading: false,
+            isLoading: false
           }));
         }
       }
@@ -84,12 +82,8 @@ export default (Page: InitialDataComponent) => {
       // }
 
       return (
-        <Page
-          {...rest}
-          isLoading={this.state.isLoading}
-          {...this.state.data}
-        />
+        <Page {...rest} isLoading={this.state.isLoading} {...this.state.data} />
       );
     }
-  }
-}
+  };
+};

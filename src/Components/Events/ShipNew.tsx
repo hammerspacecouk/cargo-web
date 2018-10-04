@@ -8,12 +8,11 @@ interface Props {
 }
 
 export default (props: Props) => {
-
   let name;
   if (props.event.ship) {
     name = props.event.ship.name;
   } else {
-    name = '[deleted] ';
+    name = "[deleted] ";
   }
 
   return (

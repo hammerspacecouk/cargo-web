@@ -2,7 +2,7 @@ import * as React from "react";
 import { hydrate as ReactDomRender } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
-import { matches as routes } from './routes';
+import { matches as routes } from "./routes";
 import AppContainer from "./Containers/AppContainer";
 
 // static assets

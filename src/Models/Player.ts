@@ -22,5 +22,5 @@ export const acknowledgePromotion = (
 };
 
 export const getFleetData = (): Promise<FleetResponseInterface> => {
-  return API.fetch('/play');
+  return API.fetch("/play");
 };
