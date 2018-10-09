@@ -3,7 +3,7 @@
     @extend %template-title-header;
     display: flex;
     align-items: center;
-    padding: ($grid-unit * 2) ($grid-unit * 2) ($grid-unit * 2) $grid-unit;
+    padding: ($grid-unit * 2) $grid-unit;
     color: $color-white;
   }
   &__title {
@@ -11,7 +11,8 @@
     line-height: 1;
   }
   &__flag {
-    width: 60px;
+    width: 112px;
+    border: solid 2px $color-white;
     margin-left: $grid-unit;
   }
 
