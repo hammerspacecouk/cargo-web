@@ -1,26 +1,19 @@
 import * as React from "react";
 import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
+import Environment from "../../Infrastructure/Environment/index";
 
 export interface Props {
   player: PlayerInterface;
 }
 
-export default (props: Props) => {
+export default ({player}: Props) => {
   return (
-    <div title={props.player.colour}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101.79 76.37">
-        <path
-          fill={`#${props.player.colour}`}
-          d="M101.52 62.25a84.47 84.47 0 0 1-24.52 6c-15.34 1.38-22.44-2.35-36.27-1.48-7.26.46-18.1 2.3-31.21 9.2Q4.9 45 .27 14.08a88.11 88.11 0 0 1 29.36-8.16C44 4.6 51.06 7.76 66.53 6.34a97.1 97.1 0 0 0 25.75-6z"
-          stroke="#fff"
-          strokeMiterlimit="10"
-          strokeWidth="2"
-        />
-        <path
-          fill="#fff"
-          d="M50.58 22.79l5.06 7.55 9.08.11-5.62 7.14 2.7 8.68-8.53-3.14-7.41 5.24.34-9.07-7.27-5.44 8.74-2.47 2.91-8.6z"
-        />
-      </svg>
+    <div
+      className="emblem"
+    >
+      <img src={`${Environment.apiHostname}${player.emblem}`} alt="" />
+      {/*<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 250"><circle fill={`#${player.colour}`} cx="219.5" cy="128.5" r="80.5"/><path fill={`#${player.colour}`} d="M253.5 48a80.49 80.49 0 0 0-10 .64 80.48 80.48 0 0 1 0 159.72A80.49 80.49 0 1 0 253.5 48z"/></svg>*/}
+      {/*<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 250"><path d="M270.68 93.56V207.2h-47.42V93.56h-36.32V47.78h119.94v45.78z" fill={`#${player.colour}`}/></svg>*/}
     </div>
   );
 };

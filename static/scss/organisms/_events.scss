@@ -16,8 +16,10 @@
 
   &__flag {
     display: inline-block;
-    width: 36px;
+    width: 48px;
     vertical-align: middle;
-    margin-right: $grid-unit / 2;
+    line-height: 0;
+    position: relative;
+    top: -1px;
   }
 }
