@@ -2,6 +2,6 @@ import * as React from "react";
 
 export default () => (
   <svg viewBox="0 0 24 24">
-    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
+    <path d="M8.5,18.31L5.69,15.5L12.06,9.12H7.11V5.69H18.31V16.89H14.89V11.94L8.5,18.31Z"/>
   </svg>
 );

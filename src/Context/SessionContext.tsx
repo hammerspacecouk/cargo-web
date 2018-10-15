@@ -108,6 +108,10 @@ class SessionContextComponent extends React.Component<
     } else {
       this.setEmpty();
     }
+    this.updateCacheFromState();
+  };
+
+  updateCacheFromState = () => {
     cacheSet(this.localStorageKey, {
       playerFetched: this.state.playerFetched,
       player: this.state.player,
@@ -150,11 +154,13 @@ class SessionContextComponent extends React.Component<
   updateScore = (score: ScoreInterface) => {
     this.setState({ score });
     this.lastFetched = Date.now();
+    this.updateCacheFromState();
   };
 
   updateRankStatus = (rankStatus: RankStatusInterface) => {
     this.setState({ rankStatus });
     this.lastFetched = Date.now();
+    this.updateCacheFromState();
   };
 
   acknowledgePromotion = async (token: ActionTokenInterface) => {

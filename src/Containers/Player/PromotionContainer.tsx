@@ -41,6 +41,10 @@ class PromotionContainer extends React.Component<Props, LocalState> {
   }
 
   animate(stamp: number) {
+    if (!this.allowAnimationUpdate) {
+      return;
+    }
+
     if (!this.startTime) {
       this.startTime = stamp;
     }

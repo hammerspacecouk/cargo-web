@@ -17,10 +17,11 @@ export default (props: Props) => {
     name = "[deleted] ";
   }
 
+  // todo - new event type if you are headed for the void - and achievement
   return (
     <Event time={props.event.time}>
       <em>{name}</em> departed <a href={`/ports/${port.id}`}>{port.name}</a>{" "}
-      headed for the open seas
+      headed into open space
     </Event>
   );
 };

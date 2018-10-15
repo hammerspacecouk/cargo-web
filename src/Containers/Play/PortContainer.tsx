@@ -13,6 +13,12 @@ import { MessageInfo } from "../../Components/Panel/Messages";
 import CreditsIcon from "../../Components/Icons/CreditsIcon";
 import PortInterface from "../../DomainInterfaces/PortInterface";
 import EventsContainer from "./EventsContainer";
+import DirectionNW from "../../Components/Icons/DirectionNW";
+import DirectionNE from "../../Components/Icons/DirectionNE";
+import DirectionW from "../../Components/Icons/DirectionW";
+import DirectionE from "../../Components/Icons/DirectionE";
+import DirectionSW from "../../Components/Icons/DirectionSW";
+import DirectionSE from "../../Components/Icons/DirectionSE";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -68,18 +74,9 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     }
   }
 
-  renderDirection(directionTitle: string, direction?: DirectionInterface) {
+  renderDirection(directionIcon: JSX.Element, direction?: DirectionInterface) {
     if (!direction) {
-      return (
-        <tr className="destinations__row destinations__row--inactive">
-          <td className="destinations__direction">{directionTitle}</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-        </tr>
-      );
+      return null;
     }
 
     let safe = null;
@@ -93,7 +90,6 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
 
     return (
       <tr className="destinations__row">
-        <td className="destinations__direction">{directionTitle}</td>
         <td className="destinations__destination d">
           {inlinePortName(direction.destination)}
         </td>
@@ -110,8 +106,8 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             token={direction.action}
             handler={this.moveShip.bind(this)}
           >
-            <button className="button" type="submit">
-              Go
+            <button className="button button--icon" type="submit" title="Go">
+              {directionIcon}
             </button>
           </TokenButton>
         </td>
@@ -181,12 +177,12 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             </tr>
           </thead>
           <tbody>
-            {this.renderDirection("NW", this.props.shipContext.directions.NW)}
-            {this.renderDirection("NE", this.props.shipContext.directions.NE)}
-            {this.renderDirection("W", this.props.shipContext.directions.W)}
-            {this.renderDirection("E", this.props.shipContext.directions.E)}
-            {this.renderDirection("SW", this.props.shipContext.directions.SW)}
-            {this.renderDirection("SE", this.props.shipContext.directions.SE)}
+            {this.renderDirection(<DirectionNW />, this.props.shipContext.directions.NW)}
+            {this.renderDirection(<DirectionNE />, this.props.shipContext.directions.NE)}
+            {this.renderDirection(<DirectionW />, this.props.shipContext.directions.W)}
+            {this.renderDirection(<DirectionE />, this.props.shipContext.directions.E)}
+            {this.renderDirection(<DirectionSW />, this.props.shipContext.directions.SW)}
+            {this.renderDirection(<DirectionSE />, this.props.shipContext.directions.SE)}
           </tbody>
         </table>
 

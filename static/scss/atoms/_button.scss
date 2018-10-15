@@ -38,4 +38,10 @@
   &--soft-danger {
     color: darken(saturate($color-danger, 30%), 50%);
   }
+
+  &--icon {
+    padding: $grid-unit / 4;
+    width: 40px;
+    height: 40px
+  }
 }
