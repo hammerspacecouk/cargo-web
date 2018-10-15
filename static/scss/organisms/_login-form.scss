@@ -31,10 +31,9 @@
     &:after {
       content: "•";
       position: absolute;
-      top: 2px;
-      right: 2px;
+      top: 0;
+      right: 0;
       color: $bg-color;
-      line-height: 6px;
       font-size: 2rem;
       text-decoration: none;
     }
