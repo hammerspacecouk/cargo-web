@@ -91,10 +91,15 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
           </ul>
           <div className="text--prose">
             <p>
-              Colonisation of space has begun, and interstellar shipping is big business. You've got to get in on this. Who else is going to transport those vital supplies of saxophones 🎷 to the other side of the galaxy?
+              Colonisation of space has begun, and interstellar shipping is big
+              business. You've got to get in on this. Who else is going to
+              transport those vital supplies of saxophones 🎷 to the other side
+              of the galaxy?
             </p>
             <p>
-              But it's a wild west out there. Can you survive, thrive and exploit all <strong>1,000</strong> known planets before someone else does.
+              But it's a wild west out there. Can you survive, thrive and
+              exploit all <strong>1,000</strong> known planets before someone
+              else does.
             </p>
           </div>
 
