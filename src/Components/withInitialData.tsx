@@ -31,7 +31,7 @@ export default (Page: InitialDataComponent) => {
       return null;
     }
 
-    constructor(props: any) {
+    constructor(props: Props) {
       super(props);
       this.state = {
         data: props.initialData,
@@ -57,12 +57,16 @@ export default (Page: InitialDataComponent) => {
 
         try {
           const data = await WithInitialData.getInitialData(this.props.match);
-          this.setState({ data, isLoading: false });
+          if (!this.ignoreLastFetch) {
+            this.setState({ data, isLoading: false });
+          }
         } catch (error) {
-          this.setState(state => ({
-            data: { error },
-            isLoading: false
-          }));
+          if (!this.ignoreLastFetch) {
+            this.setState(state => ({
+              data: { error },
+              isLoading: false
+            }));
+          }
         }
       }
     };
@@ -71,6 +75,7 @@ export default (Page: InitialDataComponent) => {
       // Flatten out all the props.
       const { initialData, ...rest } = this.props;
 
+      //  todo - what about this
       //  if we wanted to create an app-wide error component,
       //  we could also do that here using <HTTPStatus />. However, it is
       //  more flexible to leave this up to the Routes themselves.

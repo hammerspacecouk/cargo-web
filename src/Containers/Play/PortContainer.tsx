@@ -177,12 +177,30 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             </tr>
           </thead>
           <tbody>
-            {this.renderDirection(<DirectionNW />, this.props.shipContext.directions.NW)}
-            {this.renderDirection(<DirectionNE />, this.props.shipContext.directions.NE)}
-            {this.renderDirection(<DirectionW />, this.props.shipContext.directions.W)}
-            {this.renderDirection(<DirectionE />, this.props.shipContext.directions.E)}
-            {this.renderDirection(<DirectionSW />, this.props.shipContext.directions.SW)}
-            {this.renderDirection(<DirectionSE />, this.props.shipContext.directions.SE)}
+            {this.renderDirection(
+              <DirectionNW />,
+              this.props.shipContext.directions.NW
+            )}
+            {this.renderDirection(
+              <DirectionNE />,
+              this.props.shipContext.directions.NE
+            )}
+            {this.renderDirection(
+              <DirectionW />,
+              this.props.shipContext.directions.W
+            )}
+            {this.renderDirection(
+              <DirectionE />,
+              this.props.shipContext.directions.E
+            )}
+            {this.renderDirection(
+              <DirectionSW />,
+              this.props.shipContext.directions.SW
+            )}
+            {this.renderDirection(
+              <DirectionSE />,
+              this.props.shipContext.directions.SE
+            )}
           </tbody>
         </table>
 

@@ -1,5 +1,6 @@
 import About from "./Pages/About";
 import AboutCheating from "./Pages/About/CheatingContainer";
+import AboutDuplicate from "./Pages/About/DuplicateContainer";
 import AboutPolicies from "./Pages/About/PoliciesContainer";
 import AboutStatus from "./Pages/About/StatusContainer";
 import AboutStyleGuide from "./Pages/About/StyleGuideContainer";
@@ -28,6 +29,7 @@ export interface RouteItem extends RouteProps {
 const routes = {
   getAbout: () => "/about",
   getAboutCheating: () => "/about/cheating",
+  getAboutDuplicate: () => "/about/duplicate",
   getAboutPolicies: () => "/about/policies",
   getAboutStatus: () => "/about/status",
   getAboutStyleGuide: () => "/about/styleguide",
@@ -52,6 +54,13 @@ export const matches = [
     maxAge: 3600 * 2
   },
   {
+    path: routes.getAboutDuplicate(),
+    exact: true,
+    component: AboutDuplicate,
+    cacheType: CacheType.Public,
+    maxAge: 3600 * 2
+  },
+  {
     path: routes.getAboutPolicies(),
     exact: true,
     component: AboutPolicies,
@@ -63,7 +72,7 @@ export const matches = [
     exact: true,
     component: AboutStatus,
     cacheType: CacheType.Public,
-    maxAge: 3600 * 2
+    maxAge: 30
   },
   {
     path: routes.getAboutStyleGuide(),

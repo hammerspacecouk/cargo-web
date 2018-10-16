@@ -12,7 +12,7 @@ export interface SessionResponseInterface {
 }
 
 export interface ProfileResponseInterface {
-  readonly player: PlayerInterface;
+  readonly session: SessionResponseInterface;
   readonly isAnonymous: boolean;
   readonly canDelete: boolean;
   readonly homePort: PortInterface;

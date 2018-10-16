@@ -35,13 +35,13 @@ const genericMessage = (icon: any, type: string, children: any) => (
 );
 
 export const MessageError = (props: SingleProps) =>
-  genericMessage(<ErrorIcon/>, TYPE_ERROR, props.children);
+  genericMessage(<ErrorIcon />, TYPE_ERROR, props.children);
 export const MessageWarning = (props: SingleProps) =>
-  genericMessage(<WarningIcon/>, TYPE_WARNING, props.children);
+  genericMessage(<WarningIcon />, TYPE_WARNING, props.children);
 export const MessageOk = (props: SingleProps) =>
-  genericMessage(<TickIcon/>, TYPE_OK, props.children);
+  genericMessage(<TickIcon />, TYPE_OK, props.children);
 export const MessageInfo = (props: SingleProps) =>
-  genericMessage(<InfoIcon/>, TYPE_INFO, props.children);
+  genericMessage(<InfoIcon />, TYPE_INFO, props.children);
 
 export const Message = ({ message }: GenericMessageProps) => {
   switch (message.type) {
@@ -66,7 +66,7 @@ export default ({ messages }: ListsProps) => {
   messages.forEach((message: MessageInterface, index) => {
     items.push(
       <li key={index} className="m-message-wrap">
-        <Message message={message}/>
+        <Message message={message} />
       </li>
     );
   });

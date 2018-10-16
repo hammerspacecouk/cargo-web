@@ -8,16 +8,37 @@ import { Request } from "express";
 import routes from "../../routes";
 import ProfileLayout from "../../Components/Layout/ProfileLayout";
 import Loading from "../../Components/Navigation/Loading";
+import Error from "../../Components/Error/Error";
 import { fullDate } from "../../Utils/Format";
 import LoginForm from "../../Components/Login/LoginForm";
 import Delete from "../../Components/Profile/Delete";
 import LogOutButtonContainer from "../../Containers/Profile/LogOutButtonContainer";
+import {
+  SessionContext,
+  SessionContextInterface
+} from "../../Context/SessionContext";
 
-interface PropsInterface extends ProfileResponseInterface {}
+interface PropsInterface extends ProfileResponseInterface {
+  isLoading: boolean;
+  sessionContext?: SessionContextInterface;
+}
 
 class Profile extends React.Component<PropsInterface, undefined> {
   static async getInitialData(_: match, request: Request) {
-    return getProfileData(request && request.cookies);
+    try {
+      return await getProfileData(request && request.cookies);
+    } catch (e) {
+      if (e.statusCode && e.statusCode === 403) {
+        return { isLoggedOut: true };
+      }
+      throw e;
+    }
+  }
+
+  componentWillReceiveProps(nextProps: PropsInterface) {
+    if (this.props.session !== nextProps.session && nextProps.sessionContext) {
+      nextProps.sessionContext.setSession(nextProps.session);
+    }
   }
 
   getAttachEmailForm = () => {
@@ -40,11 +61,16 @@ class Profile extends React.Component<PropsInterface, undefined> {
   };
 
   render() {
-    if (!this.props.player) {
+    if (this.props.isLoading || !this.props.session) {
       return <Loading />;
     }
+    if (!this.props.session) {
+      return <Error />;
+    }
 
-    const playingSinceDate: Date = new Date(this.props.player.startedAt);
+    const playingSinceDate: Date = new Date(
+      this.props.session.player.startedAt
+    );
 
     return (
       <ProfileLayout>
@@ -68,7 +94,7 @@ class Profile extends React.Component<PropsInterface, undefined> {
           <tbody>
             <tr>
               <th>Player ID:</th>
-              <td>{this.props.player.id}</td>
+              <td>{this.props.session.player.id}</td>
             </tr>
             <tr>
               <th>Playing since:</th>
@@ -81,4 +107,14 @@ class Profile extends React.Component<PropsInterface, undefined> {
   }
 }
 
-export default withPlayer(Profile);
+class SessionProfile extends Profile {
+  render() {
+    return (
+      <SessionContext.Consumer>
+        {context => <Profile {...this.props} sessionContext={context} />}
+      </SessionContext.Consumer>
+    );
+  }
+}
+
+export default withPlayer(SessionProfile);

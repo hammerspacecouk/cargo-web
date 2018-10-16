@@ -36,8 +36,10 @@ class PoliciesContainer extends React.Component<undefined, undefined> {
             We cannot e-mail you from this data so you will not hear from us.
             There is no personally identifying data in our system. We also do
             not store which third-party account you used to tell us your e-mail
-            address. We do not have any further access to those third party
-            accounts and we cannot post as you.
+            address. This means you can mix and match which services you login
+            with, as long as they use the same e-mail address. We do not have
+            any further access to those third party accounts and we cannot post
+            as you.
           </p>
           <p>
             Any e-mails we send rely on the e-mail address being provided at

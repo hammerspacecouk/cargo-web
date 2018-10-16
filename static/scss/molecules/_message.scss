@@ -12,6 +12,7 @@
 
   @include message($color-info);
   border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: $grid-unit;
   padding: 0;
   display: flex;
 

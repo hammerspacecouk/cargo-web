@@ -41,7 +41,9 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
     }
     return (
       <>
-        <p className="e unit">Start playing immediately without logging in:</p>
+        <p className="e unit">
+          Start playing an anonymous game immediately without logging in:
+        </p>
         <div className="text--center unit">
           <div className="align--inline">
             <ActionLink to={`/play`} className="button m-icon-suffix--animated">
@@ -49,7 +51,7 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
             </ActionLink>
           </div>
         </div>
-        <h3 className="d unit">Or log in to resume a previous game:</h3>
+        <h3 className="d unit">Or create/resume a logged in game:</h3>
         <LoginForm />
       </>
     );

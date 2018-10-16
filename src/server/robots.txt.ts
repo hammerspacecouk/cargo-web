@@ -14,6 +14,5 @@ export const handler = async (
 User-agent: *
 Disallow: /play
 Disallow: /profile
-`
-  );
+`);
 };
