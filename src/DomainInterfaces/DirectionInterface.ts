@@ -4,6 +4,6 @@ import ActionTokenInterface from "./ActionTokenInterface";
 export default interface DirectionInterface {
   destination: PortInterface;
   distanceUnit: number;
-  journeyTimeMinutes: number;
+  journeyTimeSeconds: number;
   action: ActionTokenInterface;
 };

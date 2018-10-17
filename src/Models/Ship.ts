@@ -9,16 +9,19 @@ import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 import EventInterface from "../DomainInterfaces/EventInterface";
 
-export interface PlayShipResponse {
-  readonly ship: ShipInterface;
-  readonly requestShipName: ShipNameTokenInterface;
+export interface ShipLocationResponse {
   readonly port?: PortInterface;
   readonly channel?: ChannelInterface;
   readonly directions?: DirectionsInterface;
   readonly shipsInLocation?: ShipInterface[];
-  readonly playerScore?: ScoreInterface;
-  readonly playerRankStatus?: RankStatusInterface;
   readonly events: EventInterface[];
+  readonly playerScore?: ScoreInterface;
+}
+
+export interface PlayShipResponse extends ShipLocationResponse {
+  readonly ship: ShipInterface;
+  readonly requestShipName: ShipNameTokenInterface;
+  readonly playerRankStatus?: RankStatusInterface;
 }
 
 export interface RequestShipNameResponse {
@@ -49,6 +52,6 @@ export const acceptShipName = async (
 
 export const moveShip = async (
   token: ActionTokenInterface
-): Promise<PlayShipResponse> => {
+): Promise<ShipLocationResponse> => {
   return API.fetch(token.path, { token: token.token });
 };

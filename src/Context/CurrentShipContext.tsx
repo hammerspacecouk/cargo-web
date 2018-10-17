@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 import ShipInterface from "../DomainInterfaces/ShipInterface";
 import * as React from "react";
-import { PlayShipResponse } from "../Models/Ship";
+import { PlayShipResponse, ShipLocationResponse } from "../Models/Ship";
 import PortInterface from "../DomainInterfaces/PortInterface";
 import ChannelInterface from "../DomainInterfaces/ChannelInterface";
 import DirectionsInterface from "../DomainInterfaces/DirectionsInterface";
@@ -29,6 +29,7 @@ export interface CurrentShipContextInterface
   loadingNewShip: () => void;
   updateCurrentShip: (ship?: ShipInterface) => void;
   updateFullResponse: (data?: PlayShipResponse) => void;
+  updateShipLocation: (data?: ShipLocationResponse) => void;
   updateRenameToken: (newToken: ShipNameTokenInterface) => void;
 }
 
@@ -42,6 +43,7 @@ export const CurrentShipContext = createContext({
   loadingNewShip: () => {},
   updateCurrentShip: () => {},
   updateFullResponse: () => {},
+  updateShipLocation: () => {},
   updateRenameToken: (newToken: ShipNameTokenInterface) => {}
 });
 
@@ -54,28 +56,29 @@ class CurrentShipContextComponent extends React.Component<
 
     this.state = {
       ...initial,
-      loadingNewShip: this.loadingNewShip.bind(this),
-      updateCurrentShip: this.updateCurrentShip.bind(this),
-      updateFullResponse: this.updateFullResponse.bind(this),
-      updateRenameToken: this.updateRenameToken.bind(this)
+      loadingNewShip: this.loadingNewShip,
+      updateCurrentShip: this.updateCurrentShip,
+      updateFullResponse: this.updateFullResponse,
+      updateShipLocation: this.updateShipLocation,
+      updateRenameToken: this.updateRenameToken
     };
   }
 
-  loadingNewShip(): void {
+  loadingNewShip = (): void => {
     this.setState({
       ship: null,
       loaded: false
     });
-  }
+  };
 
-  updateCurrentShip(ship?: ShipInterface) {
+  updateCurrentShip = (ship?: ShipInterface) => {
     this.setState({
       ship,
       loaded: true
     });
-  }
+  };
 
-  updateFullResponse(data?: PlayShipResponse) {
+  updateFullResponse = (data?: PlayShipResponse) => {
     if (!data) {
       this.setState({
         ...initial,
@@ -93,13 +96,23 @@ class CurrentShipContextComponent extends React.Component<
       shipsInLocation: data.shipsInLocation,
       events: data.events
     });
-  }
+  };
 
-  updateRenameToken(requestShipNameToken: ShipNameTokenInterface) {
+  updateShipLocation = (data: ShipLocationResponse) => {
+    this.setState({
+      port: data.port,
+      channel: data.channel,
+      directions: data.directions,
+      shipsInLocation: data.shipsInLocation,
+      events: data.events
+    });
+  };
+
+  updateRenameToken = (requestShipNameToken: ShipNameTokenInterface) => {
     this.setState({
       requestShipNameToken
     });
-  }
+  };
 
   render() {
     return (

@@ -19,6 +19,7 @@ import DirectionW from "../../Components/Icons/DirectionW";
 import DirectionE from "../../Components/Icons/DirectionE";
 import DirectionSW from "../../Components/Icons/DirectionSW";
 import DirectionSE from "../../Components/Icons/DirectionSE";
+import IntervalFormat from "../../Components/Formatting/IntervalFormat";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -68,7 +69,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     try {
       const data = await moveShip(token);
       this.props.updateScore(data.playerScore);
-      this.props.shipContext.updateFullResponse(data);
+      this.props.shipContext.updateShipLocation(data);
     } catch (e) {
       // todo - error handling
     }
@@ -95,9 +96,11 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         </td>
         <td className="destinations__distance">
           <span className="d">{direction.distanceUnit}</span>
-          <span className="f">km</span>
+          <span className="f">ly</span>
         </td>
-        <td className="destinations__time">2m 4s</td>
+        <td className="destinations__time">
+          <IntervalFormat seconds={direction.journeyTimeSeconds} />
+        </td>
         {/* todo - real value */}
         <td className="destinations__earnings">-</td>
         {/* todo - set this based on current cargo stocked in ship */}
@@ -127,11 +130,12 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     }
 
     let welcome = null;
-    if (this.props.playerRankStatus.portsVisited === 0) {
+    if (this.props.playerRankStatus.portsVisited === 1) {
+      // todo - tooltip tour
       welcome = (
         <MessageInfo>
           <p>
-            Welcome to {this.props.shipContext.port.name}. It is a{" "}
+            Welcome to {this.props.shipContext.port.name} spaceport. It is a{" "}
             <strong>Safe Haven</strong>
             <abbr title="Safe Haven" className="icon icon--mini">
               <ShieldIcon />
@@ -139,11 +143,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             harmed while it is here.
           </p>
           <p>
-            This is your home port. Should you run out of{" "}
-            <abbr title="Credits" className="icon icon--mini">
-              <CreditsIcon />
-            </abbr>{" "}
-            on the high seas, your ships will be returned to here
+            This is your home spaceport. Any newly launched ships will set off from here
           </p>
         </MessageInfo>
       );

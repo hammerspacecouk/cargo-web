@@ -35,7 +35,7 @@ class TravellingContainerState extends React.Component<LocalProps, LocalState> {
     this.state = this.calculateState(props.shipContext.channel);
   }
 
-  calculateState(channel: ChannelInterface): LocalState {
+  calculateState = (channel: ChannelInterface): LocalState => {
     const now = new Date();
     const start = new Date(channel.startTime);
     const arrival = new Date(channel.arrival);
@@ -62,9 +62,9 @@ class TravellingContainerState extends React.Component<LocalProps, LocalState> {
       percent,
       isArriving: !secondsRemaining
     };
-  }
+  };
 
-  async handleArrival() {
+  handleArrival = async () => {
     if (!this.allowArrivalCheck) {
       return;
     }
@@ -76,11 +76,21 @@ class TravellingContainerState extends React.Component<LocalProps, LocalState> {
       return;
     } catch (e) {
       // do nothing. we'll try again in a moment
+    } finally {
+      window.setTimeout(() => {
+        this.handleArrival();
+      }, 3500);
     }
-    window.setTimeout(() => {
-      this.handleArrival();
-    }, 3500);
-  }
+  };
+
+  updateValue = () => {
+    if (!this.allowAnimationUpdate) {
+      return;
+    }
+
+    this.setState(this.calculateState(this.props.shipContext.channel));
+    window.requestAnimationFrame(() => this.updateValue());
+  };
 
   componentDidMount() {
     this.allowAnimationUpdate = true;
@@ -90,15 +100,6 @@ class TravellingContainerState extends React.Component<LocalProps, LocalState> {
   componentWillUnmount() {
     this.allowAnimationUpdate = false;
     this.allowArrivalCheck = false;
-  }
-
-  updateValue() {
-    if (!this.allowAnimationUpdate) {
-      return;
-    }
-
-    this.setState(this.calculateState(this.props.shipContext.channel));
-    window.requestAnimationFrame(() => this.updateValue());
   }
 
   render() {
