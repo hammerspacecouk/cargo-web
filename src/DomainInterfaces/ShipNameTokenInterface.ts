@@ -1,6 +1,3 @@
-import ActionTokenInterface from "./ActionTokenInterface";
+import TransactionInterface from "./TransactionInterface";
 
-export default interface ShipNameTokenInterface {
-  actionToken: ActionTokenInterface;
-  cost: number;
-};
+export default interface ShipNameTokenInterface extends TransactionInterface {};

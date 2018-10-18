@@ -52,9 +52,7 @@ const tempIcon = (
 
 const ship = (ship: ShipInterface) => (
   <tr key={ship.id} className="m-fleet-ship">
-    <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">
-      {tempIcon}
-    </td>
+    <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">{tempIcon}</td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--name">
       <Link to={routes.getPlayShip(ship.id)} className="m-fleet-ship__meta">
         <div className="m-fleet-ship__name">{ship.name}</div>

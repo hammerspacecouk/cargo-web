@@ -7,9 +7,7 @@ export interface Props {
 
 const ship = (ship: ShipInterface) => (
   <tr key={ship.id} className="m-fleet-ship">
-    <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">
-      I
-    </td>
+    <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">I</td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--name">
       <div className="m-fleet-ship__meta">
         <div className="m-fleet-ship__name">{ship.name}</div>

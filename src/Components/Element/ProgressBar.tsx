@@ -5,17 +5,17 @@ export interface Props {
   readonly isHealth?: boolean;
 }
 
-export default ({percent, isHealth = false}: Props) => {
+export default ({ percent, isHealth = false }: Props) => {
   const percentValue = Math.max(percent, 2); // to show that it is a bar that will fill up
 
-  let healthClass = '';
+  let healthClass = "";
   if (isHealth) {
-    healthClass = 'progress__bar--ok';
+    healthClass = "progress__bar--ok";
     if (percent < 60) {
-      healthClass = 'progress__bar--warning';
+      healthClass = "progress__bar--warning";
     }
     if (percent < 20) {
-      healthClass = 'progress__bar--danger';
+      healthClass = "progress__bar--danger";
     }
   }
 
