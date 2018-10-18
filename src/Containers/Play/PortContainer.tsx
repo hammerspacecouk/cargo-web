@@ -40,7 +40,7 @@ const inlinePortName = (port: PortInterface) => {
   if (port.safeHaven) {
     safe = (
       <abbr title="Safe Haven" className="m-icon-suffix__icon">
-        <ShieldIcon/>
+        <ShieldIcon />
       </abbr>
     );
   }
@@ -97,7 +97,9 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         <TokenButton
           token={direction.action}
           handler={this.moveShip.bind(this)}
-        >{actionButton}</TokenButton>
+        >
+          {actionButton}
+        </TokenButton>
       );
     }
 
@@ -124,16 +126,16 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         </td>
         <td className="destinations__distance">
           <span className="d">{direction.distanceUnit}</span>
-          <abbr className="f" title="light year">ly</abbr>
+          <abbr className="f" title="light year">
+            ly
+          </abbr>
         </td>
         <td className="destinations__time">
-          <IntervalFormat seconds={direction.journeyTimeSeconds}/>
+          <IntervalFormat seconds={direction.journeyTimeSeconds} />
         </td>
         <td className="destinations__earnings">-</td>
         {/* todo - set this based on current cargo stocked in ship */}
-        <td className="destinations__action">
-          {actionButton}
-        </td>
+        <td className="destinations__action">{actionButton}</td>
       </tr>
     );
   }
@@ -158,12 +160,13 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             Welcome to {this.props.shipContext.port.name} spaceport. It is a{" "}
             <strong>Safe Haven</strong>
             <abbr title="Safe Haven" className="icon icon--mini">
-              <ShieldIcon/>
+              <ShieldIcon />
             </abbr>. It costs you nothing to be here and your ship cannot be
             harmed while it is here.
           </p>
           <p>
-            This is your home spaceport. Any newly launched ships will set off from here
+            This is your home spaceport. Any newly launched ships will set off
+            from here
           </p>
         </MessageInfo>
       );
@@ -173,7 +176,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     if (this.props.shipContext.port.safeHaven) {
       safe = (
         <abbr title="Safe Haven" className="icon icon--mid">
-          <ShieldIcon/>
+          <ShieldIcon />
         </abbr>
       );
     }
@@ -187,47 +190,47 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         <h2 className="table-head">Where next?</h2>
         <table className="destinations">
           <thead>
-          <tr>
-            <th>Direction</th>
-            <th>Destination Port</th>
-            <th>Distance</th>
-            <th>Time</th>
-            <th>Earnings</th>
-            <th>Go?</th>
-          </tr>
+            <tr>
+              <th>Direction</th>
+              <th>Destination Port</th>
+              <th>Distance</th>
+              <th>Time</th>
+              <th>Earnings</th>
+              <th>Go?</th>
+            </tr>
           </thead>
           <tbody>
-          {this.renderDirection(
-            <DirectionNW/>,
-            this.props.shipContext.directions.NW
-          )}
-          {this.renderDirection(
-            <DirectionNE/>,
-            this.props.shipContext.directions.NE
-          )}
-          {this.renderDirection(
-            <DirectionW/>,
-            this.props.shipContext.directions.W
-          )}
-          {this.renderDirection(
-            <DirectionE/>,
-            this.props.shipContext.directions.E
-          )}
-          {this.renderDirection(
-            <DirectionSW/>,
-            this.props.shipContext.directions.SW
-          )}
-          {this.renderDirection(
-            <DirectionSE/>,
-            this.props.shipContext.directions.SE
-          )}
+            {this.renderDirection(
+              <DirectionNW />,
+              this.props.shipContext.directions.NW
+            )}
+            {this.renderDirection(
+              <DirectionNE />,
+              this.props.shipContext.directions.NE
+            )}
+            {this.renderDirection(
+              <DirectionW />,
+              this.props.shipContext.directions.W
+            )}
+            {this.renderDirection(
+              <DirectionE />,
+              this.props.shipContext.directions.E
+            )}
+            {this.renderDirection(
+              <DirectionSW />,
+              this.props.shipContext.directions.SW
+            )}
+            {this.renderDirection(
+              <DirectionSE />,
+              this.props.shipContext.directions.SE
+            )}
           </tbody>
         </table>
 
         <h2>Players</h2>
-        <ShipList ships={this.props.shipContext.shipsInLocation}/>
+        <ShipList ships={this.props.shipContext.shipsInLocation} />
 
-        <EventsContainer events={this.props.shipContext.events}/>
+        <EventsContainer events={this.props.shipContext.events} />
       </div>
     );
   }
