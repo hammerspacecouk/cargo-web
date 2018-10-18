@@ -81,6 +81,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
 
     const buttonDisabled = direction.action === null;
     let minimumRank = null;
+    let minimumStrength = null;
     let actionButton = (
       <button
         className="button button--icon"
@@ -97,12 +98,20 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
           token={direction.action}
           handler={this.moveShip.bind(this)}
         >{actionButton}</TokenButton>
-      )
+      );
     }
 
     if (buttonDisabled && direction.minimumRank) {
       minimumRank = (
         <div className="f">Minimum rank: {direction.minimumRank.title}</div>
+      );
+    }
+    if (buttonDisabled && direction.minimumStrength) {
+      minimumStrength = (
+        <div className="f">
+          This ship is not strong enough for this journey. Minimum:
+          {direction.minimumStrength}
+        </div>
       );
     }
 
@@ -111,6 +120,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         <td className="destinations__destination d">
           {inlinePortName(direction.destination)}
           {minimumRank}
+          {minimumStrength}
         </td>
         <td className="destinations__distance">
           <span className="d">{direction.distanceUnit}</span>

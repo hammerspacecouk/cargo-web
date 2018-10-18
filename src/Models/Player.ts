@@ -10,7 +10,8 @@ export interface AcknowledgePromotionResponse {
 }
 
 export interface FleetResponseInterface {
-  readonly ships: ShipInterface[];
+  readonly activeShips: ShipInterface[];
+  readonly destroyedShips: ShipInterface[];
   readonly events: EventInterface[];
   readonly sessionState: SessionResponseInterface;
 }

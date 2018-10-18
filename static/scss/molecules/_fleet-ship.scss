@@ -23,11 +23,12 @@
     &--location {
       padding: 0 $grid-unit;
     }
-    &--capacity {
+    &--health {
       width: 64px;
     }
     &--actions {
-      width: 32px;
+      padding-left: $grid-unit;
+      width: 48px;
     }
   }
 

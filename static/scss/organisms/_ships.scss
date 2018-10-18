@@ -7,6 +7,9 @@
     > tbody {
       display: block;
     }
+    &--destroyed {
+      opacity: 0.7;
+    }
   }
   &__more {
     @extend .d;

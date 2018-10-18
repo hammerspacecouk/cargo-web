@@ -14,6 +14,7 @@ import Loading from "../../Components/Navigation/Loading";
 import Error from "../../Components/Error/Error";
 import { ErrorResponseInterface } from "../../Infrastructure/API";
 import LoginForm from "../../Components/Login/LoginForm";
+import DestroyedShips from "../../Components/Ship/DestroyedShips";
 
 interface Props {
   sessionCallback: SessionContextInterface["setSession"];
@@ -21,7 +22,8 @@ interface Props {
 
 interface State {
   error?: ErrorResponseInterface;
-  ships: ShipInterface[];
+  activeShips: ShipInterface[];
+  destroyedShips: ShipInterface[];
   events: EventInterface[];
 }
 
@@ -30,7 +32,8 @@ class FleetContainer extends React.Component<Props, State> {
     super(props);
     this.state = {
       error: null,
-      ships: [],
+      activeShips: [],
+      destroyedShips: [],
       events: []
     };
   }
@@ -40,7 +43,11 @@ class FleetContainer extends React.Component<Props, State> {
   async componentDidMount() {
     try {
       const data = await getFleetData();
-      this.setState({ ships: data.ships, events: data.events });
+      this.setState({
+        activeShips: data.activeShips,
+        destroyedShips: data.destroyedShips,
+        events: data.events
+      });
       this.props.sessionCallback(data.sessionState);
     } catch (e) {
       console.error(e);
@@ -95,7 +102,8 @@ class FleetContainer extends React.Component<Props, State> {
           </div>
           <div className="t-fleet__main">
             <div className="t-fleet__ships">
-              <FleetShips ships={this.state.ships} />
+              <FleetShips ships={this.state.activeShips} />
+              <DestroyedShips ships={this.state.destroyedShips} />
             </div>
             <div className="t-fleet__aside">
               <EventsContainer events={this.state.events} firstPerson />

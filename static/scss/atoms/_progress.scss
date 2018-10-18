@@ -11,5 +11,14 @@
     background: #2ca7cc;
     will-change: width;
     transition: width .5s linear;
+    &--ok {
+      background: $color-ok;
+    }
+    &--warning {
+      background: $color-warning;
+    }
+    &--danger {
+      background: $color-danger;
+    }
   }
 }

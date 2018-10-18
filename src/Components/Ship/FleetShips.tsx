@@ -1,12 +1,11 @@
 import * as React from "react";
-import ShipInterface, {
-  PLAY_PATH_EDIT,
-  PLAY_PATH_SHOW
-} from "../../DomainInterfaces/ShipInterface";
+import ShipInterface from "../../DomainInterfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import EditIcon from "../Icons/EditIcon";
 import ActionLink from "../Link/ActionLink";
 import ShieldIcon from "../Icons/ShieldIcon";
+import ProgressBar from "../Element/ProgressBar";
+import routes from "../../routes";
 
 export interface Props {
   ships: ShipInterface[];
@@ -53,26 +52,24 @@ const tempIcon = (
 
 const ship = (ship: ShipInterface) => (
   <tr key={ship.id} className="m-fleet-ship">
-    <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">{tempIcon}</td>
+    <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">
+      {tempIcon}
+    </td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--name">
-      <Link to={PLAY_PATH_SHOW(ship.id)} className="m-fleet-ship__meta">
+      <Link to={routes.getPlayShip(ship.id)} className="m-fleet-ship__meta">
         <div className="m-fleet-ship__name">{ship.name}</div>
         <div className="m-fleet-ship__class">{ship.shipClass.name}</div>
       </Link>
     </td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--location">
-      {ship.location.name ? inlinePortName(ship) : "Sailing"}
+      {ship.location.name ? inlinePortName(ship) : "Travelling..."}
     </td>
-    <td className="m-fleet-ship__cell m-fleet-ship__cell--capacity c">
-      <sup title={`This ship is carrying 0 crates`}>0</sup>/<sub
-        title={`This ship can carry ${ship.shipClass.capacity} crates`}
-      >
-        {ship.shipClass.capacity}
-      </sub>
+    <td className="m-fleet-ship__cell m-fleet-ship__cell--health">
+      <ProgressBar percent={ship.strengthPercent} isHealth={true} />
     </td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--actions">
       <Link
-        to={PLAY_PATH_EDIT(ship.id)}
+        to={routes.getPlayShipEdit(ship.id)}
         title="Edit"
         className="m-fleet-ship__action"
       >

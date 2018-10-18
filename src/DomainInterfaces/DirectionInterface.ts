@@ -8,4 +8,5 @@ export default interface DirectionInterface {
   journeyTimeSeconds: number;
   action: ActionTokenInterface;
   minimumRank?: RankInterface;
+  minimumStrength?: number;
 };
