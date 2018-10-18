@@ -17,6 +17,7 @@ import {
   SessionContext,
   SessionContextInterface
 } from "../../Context/SessionContext";
+import ErrorIcon from "../../Components/Icons/ErrorIcon";
 
 interface PropsInterface extends ProfileResponseInterface {
   isLoading: boolean;
@@ -47,61 +48,83 @@ class Profile extends React.Component<PropsInterface, undefined> {
     }
 
     return (
-      <div>
+      <div className="panel">
         <MessageWarning>
-          You have not yet linked your game to an e-mail address. <br />
+          You have not yet linked your game to an e-mail address. <br/>
           If you clear your cookies or switch browsers you will never be able to
-          recover your game. <br />
+          recover your game. <br/>
           Link your game to an e-mail address now to make sure it is saved
         </MessageWarning>
         <h2>Log in to save your game</h2>
-        <LoginForm />
+        <LoginForm/>
       </div>
     );
   };
 
   render() {
     if (this.props.isLoading || !this.props.session) {
-      return <Loading />;
+      return <Loading/>;
     }
     if (!this.props.session) {
-      return <Error />;
+      return <Error/>;
     }
 
     const playingSinceDate: Date = new Date(
       this.props.session.player.startedAt
     );
 
+    let mode;
+    if (this.props.isAnonymous) {
+      mode = (
+        <>
+          <span className="icon icon--mini icon--prefix color-danger-text">
+            <ErrorIcon/>
+          </span>
+          Anonymous
+        </>
+      );
+    } else {
+      mode = (
+        <>Trial (<a href="#">change</a>)</>
+      );
+      // todo - other game modes
+    }
+
     return (
       <ProfileLayout>
-        {this.getAttachEmailForm()}
-        <h2>
-          Home port:{" "}
-          <a href={routes.getPortShow(this.props.homePort.id)}>
-            {this.props.homePort.name}
-          </a>
-        </h2>
-
-        <LogOutButtonContainer isAnonymous={this.props.isAnonymous} />
-
-        <Delete
-          route={routes.getProfileDelete()}
-          canDelete={this.props.canDelete}
-        />
-
-        <h2>Data</h2>
-        <table className="table table--striped">
-          <tbody>
+        <div>
+          <table className="table">
+            <tbody>
             <tr>
               <th>Player ID:</th>
               <td>{this.props.session.player.id}</td>
             </tr>
             <tr>
+              <th>Game mode:</th>
+              <td>{mode}</td>
+            </tr>
+            <tr>
               <th>Playing since:</th>
               <td>{fullDate(playingSinceDate)}</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+
+          <div className="panel">
+            <LogOutButtonContainer isAnonymous={this.props.isAnonymous}/>
+            <Delete
+              route={routes.getProfileDelete()}
+              canDelete={this.props.canDelete}
+            />
+          </div>
+        </div>
+
+        {this.getAttachEmailForm()}
+        <h2>Home port:{" "}
+          <a href={routes.getPortShow(this.props.homePort.id)}>
+            {this.props.homePort.name}
+          </a>
+        </h2>
       </ProfileLayout>
     );
   }
@@ -111,7 +134,7 @@ class SessionProfile extends Profile {
   render() {
     return (
       <SessionContext.Consumer>
-        {context => <Profile {...this.props} sessionContext={context} />}
+        {context => <Profile {...this.props} sessionContext={context}/>}
       </SessionContext.Consumer>
     );
   }

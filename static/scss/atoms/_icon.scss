@@ -2,6 +2,11 @@
   // todo - convert all icon usages to this class, and make it better
   display: inline-block;
 
+  &--prefix {
+    margin-right: $grid-unit / 2;
+    vertical-align: middle;
+  }
+
   &--mini {
     width: 24px;
     height: 24px;

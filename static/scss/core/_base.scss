@@ -25,6 +25,10 @@ a {
   }
 }
 
+abbr {
+  text-decoration: none;
+}
+
 .base-width-limit {
   width: 100%;
   max-width: $max-content-width;

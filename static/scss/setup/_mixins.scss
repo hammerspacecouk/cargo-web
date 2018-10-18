@@ -2,6 +2,9 @@
   .#{$name} {
     background: $color;
   }
+  .#{$name}-text {
+    color: $color;
+  }
 }
 
 @function tint(
