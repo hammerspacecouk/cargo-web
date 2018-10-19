@@ -74,23 +74,6 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
           </SessionContext.Consumer>
         </div>
         <main className="t-home__main">
-          <h1>Welcome welcome welcome</h1>
-          <ul>
-            <li>
-              <a href={routes.getPlay()} rel="nofollow">
-                Play
-              </a>
-            </li>
-            <li>
-              <a href={routes.getPortsList()}>Ports</a>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <a href={routes.getAbout()}>About</a>
-            </li>
-          </ul>
           <div className="text--prose">
             <p>
               Colonisation of space has begun, and interstellar shipping is big
@@ -103,6 +86,23 @@ class HomeIndexContainer extends React.Component<Props, undefined> {
               exploit all <strong>1,000</strong> known planets before someone
               else does.
             </p>
+
+            <ul>
+              <li>
+                <a href={routes.getPlay()} rel="nofollow">
+                  Play
+                </a>
+              </li>
+              <li>
+                <a href={routes.getPortsList()}>Ports</a>
+              </li>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <a href={routes.getAbout()}>About</a>
+              </li>
+            </ul>
           </div>
 
           <div>

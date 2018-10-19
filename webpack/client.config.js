@@ -65,7 +65,7 @@ const settings = {
         ]
       },
       {
-        test: /\.(png|svg|ico)$/,
+        test: /\.(png|svg|ico|woff|woff2)$/,
         loader: "file-loader",
         options: {
           name: `${hashFormat}[name].[ext]`,

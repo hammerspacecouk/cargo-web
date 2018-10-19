@@ -8,7 +8,8 @@ $play-bar-height: 80px; // todo - can I work without this
 $corner-radius-standard: 8px;
 
 // Fonts
-$font-body: "Nanum Gothic Coding", monospace;
+$font-body: 'share_tech_monoregular', monospace;
+$font-body-monospace: $font-body;
 
 $font-heading: inherit;
 

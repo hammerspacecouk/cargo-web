@@ -8,6 +8,7 @@ import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
 import ScoreInterface from "../DomainInterfaces/ScoreInterface";
 import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 import EventInterface from "../DomainInterfaces/EventInterface";
+import { CrateActionInterface } from "../DomainInterfaces/CrateInterface";
 
 export interface ShipLocationResponse {
   readonly port?: PortInterface;
@@ -16,6 +17,8 @@ export interface ShipLocationResponse {
   readonly shipsInLocation?: ShipInterface[];
   readonly events: EventInterface[];
   readonly playerScore?: ScoreInterface;
+  readonly cratesOnShip: CrateActionInterface[];
+  readonly cratesInPort?: CrateActionInterface[];
 }
 
 export interface PlayShipResponse extends ShipLocationResponse {

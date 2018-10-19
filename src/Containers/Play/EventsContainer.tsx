@@ -1,5 +1,6 @@
 import * as React from "react";
 import EventInterface, {
+  ACTION_CRATE_NEW,
   ACTION_PLAYER_NEW,
   ACTION_PLAYER_PROMOTION,
   ACTION_SHIP_ARRIVAL,
@@ -13,6 +14,7 @@ import ShipArrival from "../../Components/Events/ShipArrival";
 import ShipDeparture from "../../Components/Events/ShipDeparture";
 import ShipRename from "../../Components/Events/ShipRename";
 import PlayerPromotion from "../../Components/Events/PlayerPromotion";
+import CrateNew from "../../Components/Events/CrateNew";
 
 interface Props {
   readonly events: EventInterface[];
@@ -23,6 +25,11 @@ export default class EventsContainer extends React.Component<Props, undefined> {
   mapEvent = (event: EventInterface) => {
     let eventComponent;
     switch (event.action) {
+      case ACTION_CRATE_NEW:
+        eventComponent = (
+          <CrateNew event={event} firstPerson={this.props.firstPerson} />
+        );
+        break;
       case ACTION_PLAYER_NEW:
         eventComponent = (
           <PlayerNew event={event} firstPerson={this.props.firstPerson} />

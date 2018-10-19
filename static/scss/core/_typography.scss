@@ -1,5 +1,5 @@
-.monospace, .score { // todo - better namespace
-  font-family: 'Nanum Gothic Coding', monospace;
+.monospace, .score {
+  font-family: $font-body-monospace;
 }
 
 .a {

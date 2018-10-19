@@ -4,6 +4,8 @@ import PortInterface from "./PortInterface";
 import { RankInterface } from "./RankStatusInterface";
 
 // same as constants from Event.php, with 'public' swapped for 'export'
+export const ACTION_CRATE_NEW = 'crate_new';
+
 export const ACTION_PLAYER_NEW = "player_new";
 export const ACTION_PLAYER_PROMOTION = "player_promotion";
 
