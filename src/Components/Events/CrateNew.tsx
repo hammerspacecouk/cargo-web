@@ -15,7 +15,7 @@ export default ({firstPerson, event}: Props) => {
 
   return (
     <Event time={event.time}>
-      A new crate containing {event.value} is ready {you} to transport
+      A new crate containing {event.crate.contents} is ready {you} to transport
     </Event>
   );
 };

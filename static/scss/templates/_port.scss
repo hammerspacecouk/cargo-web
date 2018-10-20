@@ -1,0 +1,11 @@
+.t-port {
+  &-shipping {
+    margin-bottom: $grid-unit;
+    display: flex;
+    margin-left: -$grid-unit;
+  }
+  &-crates, &-ship {
+    padding-left: $grid-unit;
+    flex: 1;
+  }
+}

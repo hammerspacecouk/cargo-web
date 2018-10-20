@@ -10,7 +10,7 @@ import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 import EventInterface from "../DomainInterfaces/EventInterface";
 import { CrateActionInterface } from "../DomainInterfaces/CrateInterface";
 
-export interface ShipLocationResponse {
+export interface ShipLocationResponse { // todo - merge with PlayShipResponse
   readonly port?: PortInterface;
   readonly channel?: ChannelInterface;
   readonly directions?: DirectionsInterface;
@@ -23,7 +23,6 @@ export interface ShipLocationResponse {
 
 export interface PlayShipResponse extends ShipLocationResponse {
   readonly ship: ShipInterface;
-  readonly requestShipName: ShipNameTokenInterface;
   readonly playerRankStatus?: RankStatusInterface;
 }
 
@@ -53,8 +52,8 @@ export const acceptShipName = async (
   return data.ship;
 };
 
-export const moveShip = async (
+export const doPortAction = async (
   token: ActionTokenInterface
-): Promise<ShipLocationResponse> => {
+): Promise<PlayShipResponse> => {
   return API.fetch(token.path, { token: token.token });
 };

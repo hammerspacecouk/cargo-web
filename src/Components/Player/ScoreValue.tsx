@@ -6,13 +6,13 @@ interface PropsInterface {
   effectClass?: string;
 }
 
-export default (props: PropsInterface) => (
-  <div className={`score ${props.effectClass}`}>
+export default ({score, effectClass}: PropsInterface) => (
+  <div className={`score ${effectClass}`}>
     <span className="score__icon">
       <CreditsIcon />
     </span>
     <span className="score__digits">
-      {props.score.split("").map((digit, i) => {
+      {score.split("").map((digit, i) => {
         return (
           <span className="score__digit" key={i}>
             {digit}

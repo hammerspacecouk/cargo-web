@@ -1,6 +1,6 @@
 import * as React from "react";
 import EventInterface, {
-  ACTION_CRATE_NEW,
+  ACTION_CRATE_NEW, ACTION_CRATE_PICKUP,
   ACTION_PLAYER_NEW,
   ACTION_PLAYER_PROMOTION,
   ACTION_SHIP_ARRIVAL,
@@ -15,6 +15,7 @@ import ShipDeparture from "../../Components/Events/ShipDeparture";
 import ShipRename from "../../Components/Events/ShipRename";
 import PlayerPromotion from "../../Components/Events/PlayerPromotion";
 import CrateNew from "../../Components/Events/CrateNew";
+import CratePickup from "../../Components/Events/CratePickup";
 
 interface Props {
   readonly events: EventInterface[];
@@ -27,30 +28,35 @@ export default class EventsContainer extends React.Component<Props, undefined> {
     switch (event.action) {
       case ACTION_CRATE_NEW:
         eventComponent = (
-          <CrateNew event={event} firstPerson={this.props.firstPerson} />
+          <CrateNew event={event} firstPerson={this.props.firstPerson}/>
+        );
+        break;
+      case ACTION_CRATE_PICKUP:
+        eventComponent = (
+          <CratePickup event={event}/>
         );
         break;
       case ACTION_PLAYER_NEW:
         eventComponent = (
-          <PlayerNew event={event} firstPerson={this.props.firstPerson} />
+          <PlayerNew event={event} firstPerson={this.props.firstPerson}/>
         );
         break;
       case ACTION_PLAYER_PROMOTION:
         eventComponent = (
-          <PlayerPromotion event={event} firstPerson={this.props.firstPerson} />
+          <PlayerPromotion event={event} firstPerson={this.props.firstPerson}/>
         );
         break;
       case ACTION_SHIP_NEW:
-        eventComponent = <ShipNew event={event} />;
+        eventComponent = <ShipNew event={event}/>;
         break;
       case ACTION_SHIP_ARRIVAL:
-        eventComponent = <ShipArrival event={event} />;
+        eventComponent = <ShipArrival event={event}/>;
         break;
       case ACTION_SHIP_DEPARTURE:
-        eventComponent = <ShipDeparture event={event} />;
+        eventComponent = <ShipDeparture event={event}/>;
         break;
       case ACTION_SHIP_RENAME:
-        eventComponent = <ShipRename event={event} />;
+        eventComponent = <ShipRename event={event}/>;
         break;
       default:
         eventComponent = `Unknown event: ${event.action}`;

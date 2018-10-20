@@ -26,6 +26,8 @@ interface State {
   offeredShipNameToken?: ActionTokenInterface;
 }
 
+
+// todo - this page is going away as it'll be inline
 class EditContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -116,6 +118,7 @@ class EditContainer extends React.Component<Props, State> {
             A new name will be selected at random. You don't have to take it,
             but no refunds
           </p>
+          {/*
           <SessionContext.Consumer>
             {({ updateScore }) => (
               <TokenButton
@@ -135,6 +138,7 @@ class EditContainer extends React.Component<Props, State> {
               </TokenButton>
             )}
           </SessionContext.Consumer>
+          */}
           {shipName}
           <h2>Upgrades</h2>
           <p>todo</p>

@@ -17,7 +17,6 @@ interface PropsInterface {
 interface CurrentShipPropertiesInterface {
   loaded: boolean;
   ship?: ShipInterface;
-  requestShipNameToken?: ShipNameTokenInterface;
   port?: PortInterface;
   channel?: ChannelInterface;
   directions?: DirectionsInterface;
@@ -33,7 +32,6 @@ export interface CurrentShipContextInterface
   updateCurrentShip: (ship?: ShipInterface) => void;
   updateFullResponse: (data?: PlayShipResponse) => void;
   updateShipLocation: (data?: ShipLocationResponse) => void;
-  updateRenameToken: (newToken: ShipNameTokenInterface) => void;
 }
 
 export const initial: CurrentShipPropertiesInterface = {
@@ -46,8 +44,7 @@ export const CurrentShipContext = createContext({
   loadingNewShip: () => {},
   updateCurrentShip: () => {},
   updateFullResponse: () => {},
-  updateShipLocation: () => {},
-  updateRenameToken: (newToken: ShipNameTokenInterface) => {}
+  updateShipLocation: () => {}
 });
 
 class CurrentShipContextComponent extends React.Component<
@@ -63,7 +60,6 @@ class CurrentShipContextComponent extends React.Component<
       updateCurrentShip: this.updateCurrentShip,
       updateFullResponse: this.updateFullResponse,
       updateShipLocation: this.updateShipLocation,
-      updateRenameToken: this.updateRenameToken
     };
   }
 
@@ -81,7 +77,7 @@ class CurrentShipContextComponent extends React.Component<
     });
   };
 
-  updateFullResponse = (data?: PlayShipResponse) => {
+  updateFullResponse = (data?: PlayShipResponse) => { // todo - rename updateFullContext?
     if (!data) {
       this.setState({
         ...initial,
@@ -92,7 +88,6 @@ class CurrentShipContextComponent extends React.Component<
 
     this.setState({
       ship: data.ship,
-      requestShipNameToken: data.requestShipName,
       port: data.port,
       channel: data.channel,
       directions: data.directions,
@@ -110,12 +105,6 @@ class CurrentShipContextComponent extends React.Component<
       directions: data.directions,
       shipsInLocation: data.shipsInLocation,
       events: data.events
-    });
-  };
-
-  updateRenameToken = (requestShipNameToken: ShipNameTokenInterface) => {
-    this.setState({
-      requestShipNameToken
     });
   };
 
