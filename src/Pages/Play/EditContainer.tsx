@@ -26,7 +26,6 @@ interface State {
   offeredShipNameToken?: ActionTokenInterface;
 }
 
-
 // todo - this page is going away as it'll be inline
 class EditContainer extends React.Component<Props, State> {
   constructor(props: Props) {

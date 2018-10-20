@@ -6,7 +6,7 @@ interface PropsInterface {
   effectClass?: string;
 }
 
-export default ({score, effectClass}: PropsInterface) => (
+export default ({ score, effectClass }: PropsInterface) => (
   <div className={`score ${effectClass}`}>
     <span className="score__icon">
       <CreditsIcon />

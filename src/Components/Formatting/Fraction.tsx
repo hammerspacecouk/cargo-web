@@ -5,8 +5,7 @@ interface Props {
   den: number;
 }
 
-
-export default ({num, den}: Props) => (
+export default ({ num, den }: Props) => (
   <>
     <sup>{num}</sup>&#8260;<sub>{den}</sub>
   </>

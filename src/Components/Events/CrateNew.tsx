@@ -7,8 +7,8 @@ interface Props {
   readonly firstPerson?: boolean;
 }
 
-export default ({firstPerson, event}: Props) => {
-  let you = '';
+export default ({ firstPerson, event }: Props) => {
+  let you = "";
   if (firstPerson) {
     you = " for you ";
   }

@@ -6,7 +6,7 @@ interface Props {
   readonly event: EventInterface;
 }
 
-export default ({event}: Props) => (
+export default ({ event }: Props) => (
   <Event time={event.time}>
     {event.actioningShip.name} picked up {event.crate.contents} for transport
   </Event>

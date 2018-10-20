@@ -10,7 +10,8 @@ import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
 import EventInterface from "../DomainInterfaces/EventInterface";
 import { CrateActionInterface } from "../DomainInterfaces/CrateInterface";
 
-export interface ShipLocationResponse { // todo - merge with PlayShipResponse
+export interface ShipLocationResponse {
+  // todo - merge with PlayShipResponse
   readonly port?: PortInterface;
   readonly channel?: ChannelInterface;
   readonly directions?: DirectionsInterface;

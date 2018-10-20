@@ -59,7 +59,7 @@ class CurrentShipContextComponent extends React.Component<
       loadingNewShip: this.loadingNewShip,
       updateCurrentShip: this.updateCurrentShip,
       updateFullResponse: this.updateFullResponse,
-      updateShipLocation: this.updateShipLocation,
+      updateShipLocation: this.updateShipLocation
     };
   }
 
@@ -77,7 +77,8 @@ class CurrentShipContextComponent extends React.Component<
     });
   };
 
-  updateFullResponse = (data?: PlayShipResponse) => { // todo - rename updateFullContext?
+  updateFullResponse = (data?: PlayShipResponse) => {
+    // todo - rename updateFullContext?
     if (!data) {
       this.setState({
         ...initial,
@@ -94,7 +95,7 @@ class CurrentShipContextComponent extends React.Component<
       shipsInLocation: data.shipsInLocation,
       events: data.events,
       cratesInPort: data.cratesInPort,
-      cratesOnShip: data.cratesOnShip,
+      cratesOnShip: data.cratesOnShip
     });
   };
 
