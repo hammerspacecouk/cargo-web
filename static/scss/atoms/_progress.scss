@@ -10,7 +10,7 @@
     height: 100%;
     background: #2ca7cc;
     will-change: width;
-    transition: width .5s linear;
+    transition: width 1s linear;
     &--ok {
       background: $color-ok;
     }

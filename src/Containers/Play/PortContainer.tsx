@@ -9,7 +9,7 @@ import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 import { doPortAction } from "../../Models/Ship";
 import ShieldIcon from "../../Components/Icons/ShieldIcon";
-import { MessageInfo } from "../../Components/Panel/Messages";
+import { MessageError, MessageInfo } from "../../Components/Panel/Messages";
 import PortInterface from "../../DomainInterfaces/PortInterface";
 import EventsContainer from "./EventsContainer";
 import DirectionNW from "../../Components/Icons/DirectionNW";
@@ -22,6 +22,9 @@ import IntervalFormat from "../../Components/Formatting/IntervalFormat";
 import CreditsIcon from "../../Components/Icons/CreditsIcon";
 import Fraction from "../../Components/Formatting/Fraction";
 import ScoreValue from "../../Components/Player/ScoreValue";
+import Modal from "../../Components/Panel/Modal";
+import CountdownLink from "../Button/CountdownLink";
+import routes from "../../routes";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -35,6 +38,8 @@ interface LocalProps extends Props {
 interface StateInterface {
   departingPort: boolean;
   buttonsDisabled: boolean;
+  confirmMoveButton?: JSX.Element;
+  modalOpen: boolean;
 }
 
 // todo - abstract this and use it lots
@@ -44,7 +49,7 @@ const inlinePortName = (port: PortInterface) => {
   if (port.safeHaven) {
     safe = (
       <abbr title="Safe Haven" className="m-icon-suffix__icon">
-        <ShieldIcon />
+        <ShieldIcon/>
       </abbr>
     );
   }
@@ -61,7 +66,9 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     super(props);
     this.state = {
       departingPort: false,
-      buttonsDisabled: false
+      buttonsDisabled: false,
+      confirmMoveButton: null,
+      modalOpen: false
     };
   }
 
@@ -132,6 +139,39 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
       );
     }
 
+    let goButton = actionButton;
+    if (
+      this.props.shipContext.cratesOnShip.length === 0 &&
+      this.props.shipContext.ship.shipClass.capacity > 0 &&
+      this.props.shipContext.cratesInPort.length > 0
+    ) {
+      goButton = (
+        <button
+          className="button button--icon"
+          type="submit"
+          disabled={buttonDisabled}
+          title="Go"
+          onClick={() => {
+            this.setState({
+              confirmMoveButton: (
+                <TokenButton token={direction.action} handler={this.moveShip}>
+                  <button
+                    className="button button--confirm"
+                    type="submit"
+                  >
+                    Yes
+                  </button>
+                </TokenButton>
+              ),
+              modalOpen: true
+            });
+          }}
+        >
+          {directionIcon}
+        </button>
+      );
+    }
+
     if (buttonDisabled && direction.minimumRank) {
       minimumRank = (
         <div className="f">Minimum rank: {direction.minimumRank.title}</div>
@@ -148,7 +188,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
 
     let distance = <span className="d">{direction.distanceUnit}</span>;
     if (direction.distanceUnit === 0) {
-      distance = <Fraction num={1} den={100} />;
+      distance = <Fraction num={1} den={100}/>;
     }
 
     return (
@@ -165,14 +205,21 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
           </abbr>
         </td>
         <td className="destinations__time">
-          <IntervalFormat seconds={direction.journeyTimeSeconds} />
+          <IntervalFormat seconds={direction.journeyTimeSeconds}/>
         </td>
         <td className="destinations__earnings">
-          <ScoreValue score={direction.earnings.toString()} />
+          <ScoreValue score={direction.earnings.toString()}/>
         </td>
-        <td className="destinations__action">{actionButton}</td>
+        <td className="destinations__action">{goButton}</td>
       </tr>
     );
+  };
+
+  closeModal = () => {
+    this.setState({
+      modalOpen: false,
+      confirmMoveButton: null
+    });
   };
 
   // todo - break out into components
@@ -186,6 +233,25 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
       );
     }
 
+    const modal = (
+      <Modal
+        isOpen={this.state.modalOpen}
+        onClose={this.closeModal}
+        title="Are you sure?"
+      >
+        <p>You have not picked up any crates. Are you sure you want to take off?</p>
+        <div className="modal__action">
+          {this.state.confirmMoveButton}
+          <button
+            className="button button--soft-danger"
+            onClick={this.closeModal}
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
+    );
+
     let welcome = null;
     if (this.props.playerRankStatus.portsVisited === 1) {
       // todo - tooltip tour
@@ -195,7 +261,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             Welcome to {this.props.shipContext.port.name} spaceport. It is a{" "}
             <strong>Safe Haven</strong>
             <abbr title="Safe Haven" className="icon icon--mini">
-              <ShieldIcon />
+              <ShieldIcon/>
             </abbr>. It costs you nothing to be here and your ship cannot be
             harmed while it is here.
           </p>
@@ -211,7 +277,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
     if (this.props.shipContext.port.safeHaven) {
       safe = (
         <abbr title="Safe Haven" className="icon icon--mid">
-          <ShieldIcon />
+          <ShieldIcon/>
         </abbr>
       );
     }
@@ -223,7 +289,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
           <td>
             <span className="c">+{crateAction.valuePerLY}</span>{" "}
             <span className="icon icon--mini">
-              <CreditsIcon />
+              <CreditsIcon/>
             </span>/ly
           </td>
           <td>
@@ -264,11 +330,11 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             <h2 className="table-head">Crates on Ship</h2>
             <table className="table">
               <thead>
-                <tr>
-                  <th>Contents</th>
-                  <th>Value</th>
-                  <th>Drop</th>
-                </tr>
+              <tr>
+                <th>Contents</th>
+                <th>Value</th>
+                <th>Drop</th>
+              </tr>
               </thead>
               <tbody>{cratesOnShip}</tbody>
             </table>
@@ -277,49 +343,49 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
             <h2 className="table-head">Crates at Port</h2>
             <table className="table">
               <thead>
-                <tr>
-                  <th>Contents</th>
-                  <th>Value</th>
-                  <th>Pickup</th>
-                </tr>
+              <tr>
+                <th>Contents</th>
+                <th>Value</th>
+                <th>Pickup</th>
+              </tr>
               </thead>
               <tbody>
-                {this.props.shipContext.cratesInPort.map(crateAction => {
-                  let tokenButton = (
-                    <button className="button" disabled={true}>
-                      Pickup
-                    </button>
-                  );
-                  if (crateAction.token) {
-                    tokenButton = (
-                      <TokenButton
-                        token={crateAction.token}
-                        handler={this.moveCrate}
+              {this.props.shipContext.cratesInPort.map(crateAction => {
+                let tokenButton = (
+                  <button className="button" disabled={true}>
+                    Pickup
+                  </button>
+                );
+                if (crateAction.token) {
+                  tokenButton = (
+                    <TokenButton
+                      token={crateAction.token}
+                      handler={this.moveCrate}
+                    >
+                      <button
+                        className="button"
+                        type="submit"
+                        disabled={this.state.buttonsDisabled}
                       >
-                        <button
-                          className="button"
-                          type="submit"
-                          disabled={this.state.buttonsDisabled}
-                        >
-                          Pickup
-                        </button>
-                      </TokenButton>
-                    );
-                  }
-
-                  return (
-                    <tr key={crateAction.crate.id}>
-                      <td>{crateAction.crate.contents}</td>
-                      <td>
-                        <span className="c">+{crateAction.valuePerLY}</span>{" "}
-                        <span className="icon icon--mini">
-                          <CreditsIcon />
-                        </span>/ly
-                      </td>
-                      <td>{tokenButton}</td>
-                    </tr>
+                        Pickup
+                      </button>
+                    </TokenButton>
                   );
-                })}
+                }
+
+                return (
+                  <tr key={crateAction.crate.id}>
+                    <td>{crateAction.crate.contents}</td>
+                    <td>
+                      <span className="c">+{crateAction.valuePerLY}</span>{" "}
+                      <span className="icon icon--mini">
+                          <CreditsIcon/>
+                        </span>/ly
+                    </td>
+                    <td>{tokenButton}</td>
+                  </tr>
+                );
+              })}
               </tbody>
             </table>
           </div>
@@ -327,47 +393,48 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         <h2 className="table-head">Where next?</h2>
         <table className="destinations">
           <thead>
-            <tr>
-              <th>Direction</th>
-              <th>Destination Port</th>
-              <th>Distance</th>
-              <th>Travel Time</th>
-              <th>Earnings</th>
-              <th>Go?</th>
-            </tr>
+          <tr>
+            <th>Direction</th>
+            <th>Destination Port</th>
+            <th>Distance</th>
+            <th>Travel Time</th>
+            <th>Earnings</th>
+            <th>Go?</th>
+          </tr>
           </thead>
           <tbody>
-            {this.renderDirection(
-              <DirectionNW />,
-              this.props.shipContext.directions.NW
-            )}
-            {this.renderDirection(
-              <DirectionNE />,
-              this.props.shipContext.directions.NE
-            )}
-            {this.renderDirection(
-              <DirectionW />,
-              this.props.shipContext.directions.W
-            )}
-            {this.renderDirection(
-              <DirectionE />,
-              this.props.shipContext.directions.E
-            )}
-            {this.renderDirection(
-              <DirectionSW />,
-              this.props.shipContext.directions.SW
-            )}
-            {this.renderDirection(
-              <DirectionSE />,
-              this.props.shipContext.directions.SE
-            )}
+          {this.renderDirection(
+            <DirectionNW/>,
+            this.props.shipContext.directions.NW
+          )}
+          {this.renderDirection(
+            <DirectionNE/>,
+            this.props.shipContext.directions.NE
+          )}
+          {this.renderDirection(
+            <DirectionW/>,
+            this.props.shipContext.directions.W
+          )}
+          {this.renderDirection(
+            <DirectionE/>,
+            this.props.shipContext.directions.E
+          )}
+          {this.renderDirection(
+            <DirectionSW/>,
+            this.props.shipContext.directions.SW
+          )}
+          {this.renderDirection(
+            <DirectionSE/>,
+            this.props.shipContext.directions.SE
+          )}
           </tbody>
         </table>
 
         <h2>Players</h2>
-        <ShipList ships={this.props.shipContext.shipsInLocation} />
+        <ShipList ships={this.props.shipContext.shipsInLocation}/>
 
-        <EventsContainer events={this.props.shipContext.events} />
+        <EventsContainer events={this.props.shipContext.events}/>
+        {modal}
       </div>
     );
   }

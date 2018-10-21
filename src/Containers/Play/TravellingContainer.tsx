@@ -8,6 +8,7 @@ import { getPlayDataByShipId } from "../../Models/Ship";
 import { SessionContext } from "../../Context/SessionContext";
 import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
 import RankStatusInterface from "../../DomainInterfaces/RankStatusInterface";
+import ProgressBar from "../../Components/Element/ProgressBar";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -112,25 +113,7 @@ class TravellingContainerState extends React.Component<LocalProps, LocalState> {
       <div>
         <h2>Destination: {this.props.shipContext.channel.destination.name}</h2>
         <h3 className="text--center">{remaining}</h3>
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "600px",
-            margin: "16px auto",
-            background: "#666",
-            height: "32px",
-            borderRadius: "64px",
-            overflow: "hidden"
-          }}
-        >
-          <div
-            style={{
-              height: "32px",
-              background: "#6c6",
-              width: `${this.state.percent}%`
-            }}
-          />
-        </div>
+        <ProgressBar percent={this.state.percent} />
       </div>
     );
   }
