@@ -6,52 +6,29 @@ interface Props {
   rankStatus?: RankStatusInterface;
 }
 
-interface LocalState {
-  previousClass: string;
-  previousActive: boolean;
-  nextActive: boolean;
-  progress: number;
-}
+export default function PromotionContainer({ rankStatus }: Props) {
+  let allowAnimationUpdate: boolean = false;
+  let startTime: number = null;
 
-class PromotionContainer extends React.Component<Props, LocalState> {
-  private allowAnimationUpdate: boolean;
-  private startTime: number = null;
+  const [displayState, setDisplayState] = React.useState({
+    previousClass: "",
+    previousActive: true,
+    nextActive: false,
+    progress: 80
+  });
 
-  constructor(props: Props) {
-    super(props);
-    this.allowAnimationUpdate = false;
-    this.state = {
-      previousClass: "",
-      previousActive: true,
-      nextActive: false,
-      progress: 80
-    };
-
-    this.animate = this.animate.bind(this);
-  }
-
-  componentDidMount() {
-    this.allowAnimationUpdate = true;
-    window.requestAnimationFrame(this.animate);
-  }
-
-  componentWillUnmount() {
-    this.allowAnimationUpdate = false;
-    this.startTime = null;
-  }
-
-  animate(stamp: number) {
-    if (!this.allowAnimationUpdate) {
+  function animate(stamp: number) {
+    if (!allowAnimationUpdate) {
       return;
     }
 
-    if (!this.startTime) {
-      this.startTime = stamp;
+    if (!startTime) {
+      startTime = stamp;
     }
 
-    const diff = stamp - this.startTime;
+    const diff = stamp - startTime;
 
-    let progress = this.state.progress;
+    let progress = displayState.progress;
     // todo - numbers as constants
     if (diff > 500 && diff < 2500) {
       progress = 100;
@@ -61,57 +38,63 @@ class PromotionContainer extends React.Component<Props, LocalState> {
 
     // todo - *ping* on new rank
 
-    this.setState({
+    setDisplayState({
       previousClass: diff > 1000 ? "o-promotion__previous--go" : "",
       previousActive: diff < 2500,
       nextActive: diff >= 2500,
       progress
     });
-    window.requestAnimationFrame(this.animate);
+    window.requestAnimationFrame(animate);
   }
 
-  render() {
-    if (!this.props.rankStatus) {
-      return null;
-    }
+  React.useEffect(() => {
+    allowAnimationUpdate = true;
+    window.requestAnimationFrame(animate);
+    return () => {
+      allowAnimationUpdate = false;
+      startTime = null;
+    };
+  }, [rankStatus]);
 
-    let previous = null;
-    let next = null;
 
-    if (this.state.previousActive) {
-      previous = (
-        <div className={`o-promotion__previous ${this.state.previousClass}`}>
-          {this.props.rankStatus.previousRank.title}
-        </div>
-      );
-    }
+  if (!rankStatus) {
+    return null;
+  }
 
-    if (this.state.nextActive) {
-      previous = (
-        <div className="o-promotion__current">
-          {this.props.rankStatus.currentRank.title}
-        </div>
-      );
-    }
+  let previous = null;
+  let next = null;
 
-    return (
-      <div className="o-promotion">
-        <div className="o-promotion__rank-box">
-          {previous}
-          {next}
-        </div>
-
-        <div className="o-promotion__progress">
-          <ProgressBar percent={this.state.progress} />
-        </div>
-
-        <p>Share this:</p>
-        {/* todo - links to this users public page */}
-        <p>Facebook</p>
-        <p>Twitter</p>
+  if (displayState.previousActive) {
+    previous = (
+      <div className={`o-promotion__previous ${displayState.previousClass}`}>
+        {rankStatus.previousRank.title}
       </div>
     );
   }
-}
 
-export default PromotionContainer;
+  if (displayState.nextActive) {
+    previous = (
+      <div className="o-promotion__current">
+        {rankStatus.currentRank.title}
+      </div>
+    );
+  }
+
+  return (
+    <div className="o-promotion">
+      <div className="o-promotion__rank-box">
+        {previous}
+        {next}
+      </div>
+
+      <div className="o-promotion__progress">
+        <ProgressBar percent={displayState.progress}/>
+      </div>
+
+      <p>Share this:</p>
+      {/* todo - links to this users public page */}
+      <p>Facebook</p>
+      <p>Twitter</p>
+    </div>
+  );
+}

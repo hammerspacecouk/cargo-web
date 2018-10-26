@@ -8,12 +8,6 @@ interface Props {
   score: ScoreInterface;
 }
 
-interface LocalState {
-  scoreText: string;
-  rate: string;
-  effectClass: string;
-}
-
 export const getValue = (score: ScoreInterface, now: Date) => {
   const calculationDate = new Date(score.datetime);
   const millisecondsDiff = differenceInMilliseconds(now, calculationDate);
@@ -29,66 +23,44 @@ export const getValue = (score: ScoreInterface, now: Date) => {
   return current;
 };
 
-class ScoreContainer extends React.Component<Props, LocalState> {
-  private allowAnimationUpdate: boolean;
+const formatNumber = (input: number): string => {
+  let output = input.toFixed(0);
 
-  constructor(props: Props) {
-    super(props);
-    this.allowAnimationUpdate = false;
-    this.state = this.calculateScoreState(props.score);
-  }
+  // minimum 5 digits
+  return output.padStart(5, "0");
+};
 
-  formatNumber(input: number): string {
-    let output = input.toFixed(0);
+const scoreState = (score: ScoreInterface): string => {
+  return formatNumber(getValue(score, new Date()));
+};
 
-    // minimum 5 digits
-    return output.padStart(5, "0");
-  }
+export default function ScoreContainer(props: Props) {
 
-  calculateScoreState(score: ScoreInterface): LocalState {
-    const value = getValue(score, new Date());
-    let effectClass = "";
+  const [score, setScore] = React.useState(scoreState(props.score));
 
-    if (score.rate < 0 && value <= 0) {
-      effectClass = "score--dead";
-    }
+  let allowAnimationUpdate: boolean = true;
 
-    return {
-      scoreText: this.formatNumber(value),
-      rate: score.rate.toString(),
-      effectClass
-    };
-  }
-
-  componentDidMount() {
-    this.allowAnimationUpdate = true;
-    this.updateScore();
-  }
-
-  componentWillUnmount() {
-    this.allowAnimationUpdate = false;
-  }
-
-  updateScore() {
-    if (!this.allowAnimationUpdate) {
+  function updateScore() {
+    if (!allowAnimationUpdate) {
       return;
     }
 
     // @todo - special effects when it gets low
     // @todo - handle what happens when you hit zero to "kill" the player
 
-    this.setState(this.calculateScoreState(this.props.score));
-    window.requestAnimationFrame(() => this.updateScore());
+    setScore(scoreState(props.score));
+    window.requestAnimationFrame(updateScore);
   }
 
-  render() {
-    return (
-      <ScoreValue
-        score={this.state.scoreText}
-        effectClass={this.state.effectClass}
-      />
-    );
-  }
+  React.useEffect(() => {
+    allowAnimationUpdate = true;
+    updateScore();
+    return () => {
+      allowAnimationUpdate = false;
+    };
+  }, [props.score]);
+
+  return (
+    <ScoreValue score={score}/>
+  );
 }
-
-export default ScoreContainer;

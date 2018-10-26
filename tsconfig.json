@@ -9,7 +9,6 @@
     "target": "ES2017"
   },
   "include": [
-    "src/*.ts",
-    "src/*.tsx"
+    "./src/**/*"
   ]
 }

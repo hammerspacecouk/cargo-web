@@ -9,8 +9,8 @@
     "express": "^4.15.5",
     "node-fetch": "^1.7.3",
     "query-string": "^5.0.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
     "react-modal": "^3.0.0",
     "react-router-dom": "^4.2.2"
   },
