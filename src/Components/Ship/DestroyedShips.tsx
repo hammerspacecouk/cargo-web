@@ -1,5 +1,5 @@
 import * as React from "react";
-import ShipInterface from "../../DomainInterfaces/ShipInterface";
+import ShipInterface from "../../interfaces/ShipInterface";
 
 export interface Props {
   ships: ShipInterface[];
@@ -20,8 +20,8 @@ const ship = (ship: ShipInterface) => (
   </tr>
 );
 
-export default (props: Props) => {
-  if (props.ships.length === 0) {
+export default ({ships}: Props) => {
+  if (!ships || ships.length === 0) {
     return null;
   }
 
@@ -36,7 +36,7 @@ export default (props: Props) => {
             <th>Destroyed at</th>
           </tr>
         </thead>
-        <tbody>{props.ships.map(ship)}</tbody>
+        <tbody>{ships.map(ship)}</tbody>
       </table>
     </div>
   );

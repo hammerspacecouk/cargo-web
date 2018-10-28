@@ -1,6 +1,7 @@
 import * as React from "react";
-import RankStatusInterface from "../../DomainInterfaces/RankStatusInterface";
-import ProgressBar from "../../Components/Element/ProgressBar";
+import { useState } from "react";
+import RankStatusInterface from "../../interfaces/RankStatusInterface";
+import ProgressBar from "../../components/Element/ProgressBar";
 
 interface Props {
   rankStatus?: RankStatusInterface;
@@ -10,7 +11,7 @@ export default function PromotionContainer({ rankStatus }: Props) {
   let allowAnimationUpdate: boolean = false;
   let startTime: number = null;
 
-  const [displayState, setDisplayState] = React.useState({
+  const [displayState, setDisplayState] = useState({
     previousClass: "",
     previousActive: true,
     nextActive: false,

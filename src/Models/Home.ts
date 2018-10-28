@@ -1,5 +1,5 @@
-import API from "../Infrastructure/API";
-import EventInterface from "../DomainInterfaces/EventInterface";
+import API from "../util/HttpClient";
+import EventInterface from "../interfaces/EventInterface";
 
 export interface HomeResponseInterface {
   readonly events: EventInterface[];

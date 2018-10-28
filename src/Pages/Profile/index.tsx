@@ -1,23 +1,23 @@
 import * as React from "react";
 
-import { MessageWarning } from "../../Components/Panel/Messages";
-import withPlayer from "../../Components/withPlayer";
+import { MessageWarning } from "../../components/Panel/Messages";
+import withPlayer from "../../components/withPlayer";
 import { match } from "react-router";
 import { getProfileData, ProfileResponseInterface } from "../../Models/Session";
 import { Request } from "express";
 import routes from "../../routes";
-import ProfileLayout from "../../Components/Layout/ProfileLayout";
-import Loading from "../../Components/Navigation/Loading";
-import Error from "../../Components/Error/Error";
-import { fullDate } from "../../Utils/Format";
-import LoginForm from "../../Components/Login/LoginForm";
-import Delete from "../../Components/Profile/Delete";
+import ProfileLayout from "../../components/Layout/ProfileLayout";
+import Loading from "../../components/Navigation/Loading";
+import Error from "../../components/Error/Error";
+import { fullDate } from "../../util/Format";
+import LoginForm from "../../components/Login/LoginForm";
+import Delete from "../../components/Profile/Delete";
 import LogOutButtonContainer from "../../Containers/Profile/LogOutButtonContainer";
 import {
   SessionContext,
   SessionContextInterface
-} from "../../Context/SessionContext";
-import ErrorIcon from "../../Components/Icons/ErrorIcon";
+} from "../../context/SessionContext";
+import ErrorIcon from "../../components/Icons/ErrorIcon";
 
 interface PropsInterface extends ProfileResponseInterface {
   isLoading: boolean;

@@ -1,19 +1,18 @@
-import About from "./Pages/About";
-import AboutCheating from "./Pages/About/CheatingContainer";
-import AboutDuplicate from "./Pages/About/DuplicateContainer";
-import AboutPolicies from "./Pages/About/PoliciesContainer";
-import AboutStatus from "./Pages/About/StatusContainer";
-import AboutStyleGuide from "./Pages/About/StyleGuideContainer";
-import Home from "./Pages/Home";
-import Login from "./Pages/LoginContainer";
-import LoginEmail from "./Pages/LoginEmailContainer";
-import Play from "./Pages/Play";
-import PortsList from "./Pages/Ports/ListContainer";
-import PortShow from "./Pages/Ports/ShowContainer";
-import Profile from "./Pages/Profile";
-import ProfileDelete from "./Pages/Profile/DeleteContainer";
+import * as About from "./sections/About";
+// import AboutCheating from "./Pages/About/CheatingContainer";
+// import AboutDuplicate from "./Pages/About/DuplicateContainer";
+// import AboutPolicies from "./Pages/About/PoliciesContainer";
+// import AboutStatus from "./Pages/About/StatusContainer";
+// import AboutStyleGuide from "./Pages/About/StyleGuideContainer";
+import * as Home from "./sections/Home";
+import * as Login from "./sections/Login";
+// import Play from "./Pages/Play";
+// import PortsList from "./Pages/Ports/ListContainer";
+// import PortShow from "./Pages/Ports/ShowContainer";
+// import Profile from "./Pages/Profile";
+// import ProfileDelete from "./Pages/Profile/DeleteContainer";
 import { RouteProps } from "react-router";
-import Environment from "./Infrastructure/Environment";
+import {Environment} from "./util/Environment";
 
 export enum CacheType {
   None = "no-cache, no-store",
@@ -51,45 +50,45 @@ export const matches = [
   {
     path: routes.getAboutCheating(),
     exact: true,
-    component: AboutCheating,
+    component: About.Cheating,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAboutDuplicate(),
     exact: true,
-    component: AboutDuplicate,
+    component: About.Duplicate,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAboutPolicies(),
     exact: true,
-    component: AboutPolicies,
+    component: About.Policies,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAboutStatus(),
     exact: true,
-    component: AboutStatus,
+    component: About.Status,
     cacheType: CacheType.Public,
     maxAge: 30
   },
   {
     path: routes.getAboutStyleGuide(),
     exact: true,
-    component: AboutStyleGuide,
+    component: About.StyleGuide,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAbout(),
     exact: true,
-    component: About,
+    component: About.default,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
-  },
+  },/*
 
   // ports
   {
@@ -107,20 +106,22 @@ export const matches = [
     maxAge: 600
   },
 
+  */
+
   // login
   {
     path: routes.getLoginEmail(),
     exact: true,
-    component: LoginEmail,
+    component: Login.Email,
     cacheType: CacheType.None
   },
   {
     path: routes.getLogin(),
     exact: true,
-    component: Login,
+    component: Login.default,
     cacheType: CacheType.None
   },
-
+/*
   // profile
   {
     path: routes.getProfileDelete(),
@@ -144,12 +145,12 @@ export const matches = [
     cacheType: CacheType.Public,
     maxAge: 3600
   },
-
+*/
   // home
   {
     path: routes.getHome(),
     exact: true,
-    component: Home,
+    component: Home.default,
     cacheType: CacheType.Public,
     maxAge: 600
   }

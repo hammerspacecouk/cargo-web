@@ -6,16 +6,16 @@ import {
   UpgradesResponseInterface,
   makeUpgradePurchase
 } from "../../Models/Player";
-import Error from "../../Components/Error/Error";
-import { ErrorResponseInterface } from "../../Infrastructure/API";
-import Loading from "../../Components/Navigation/Loading";
+import Error from "../../components/Error/Error";
+import { ErrorResponseInterface } from "../../util/HttpClient";
+import Loading from "../../components/Navigation/Loading";
 import TokenButton from "../../Containers/Button/TokenButton";
 import CreditsButton from "../../Containers/Button/CreditsButton";
-import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
-import { SessionContext } from "../../Context/SessionContext";
-import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
-import MessageInterface from "../../DomainInterfaces/MessageInterface";
-import { Message } from "../../Components/Panel/Messages";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
+import { SessionContext } from "../../context/SessionContext";
+import ScoreInterface from "../../interfaces/ScoreInterface";
+import MessageInterface from "../../interfaces/MessageInterface";
+import { Message } from "../../components/Panel/Messages";
 
 interface StateInterface {
   data?: UpgradesResponseInterface;

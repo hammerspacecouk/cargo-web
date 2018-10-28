@@ -1,40 +1,26 @@
 import * as React from "react";
-
-import PortContainer from "../../Containers/Play/PortContainer";
-import TravellingContainer from "../../Containers/Play/TravellingContainer";
-import EnsureShipContainer from "./EnsureShipContainer";
 import { ShipParamsInterface } from "./index";
-import {
-  CurrentShipContext,
-  CurrentShipContextInterface
-} from "../../Context/CurrentShipContext";
+import { useShipInLocation } from "../../hooks/Ship";
+import Loading from "../../components/Navigation/Loading";
 
-class ShipContainer extends React.Component<ShipParamsInterface, undefined> {
-  render() {
-    return (
-      <EnsureShipContainer shipId={this.props.match.params.shipId}>
-        <CurrentShipContext.Consumer>
-          {this.renderPage.bind(this)}
-        </CurrentShipContext.Consumer>
-      </EnsureShipContainer>
-    );
+export default function ShipContainer({match}: ShipParamsInterface) {
+
+  const {port, channel, ship} = useShipInLocation(match);
+  if (!ship) {
+    return <Loading />; // todo - error state, and ensure login?
   }
 
-  renderPage(shipContext: CurrentShipContextInterface) {
-    let main = null;
-    if (shipContext.port) {
-      main = <PortContainer shipContext={shipContext} />;
-    } else if (shipContext.channel) {
-      main = <TravellingContainer shipContext={shipContext} />;
-    }
+  let main = null;
+  // if (port) {
+  //   main = <PortContainer />;
+  // } else if (channel) {
+  //   main = <TravellingContainer />;
+  // }
 
-    return (
-      <main className="t-play__content-contain">
-        <h1 style={{ display: "none" }}>{shipContext.ship.name}</h1>
-        {main}
-      </main>
-    ); // todo - visually hidden css for the H1
-  }
+  return (
+    <main className="t-play__content-contain">
+      <h1 style={{ display: "none" }}>{ship.name}</h1>
+      {main}
+    </main>
+  );
 }
-
-export default ShipContainer;

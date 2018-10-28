@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import PortInterface from "../../DomainInterfaces/PortInterface";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
+import PortInterface from "../../interfaces/PortInterface";
+import CrumbTitle from "../../components/Navigation/CrumbTitle";
 import { fetchList } from "../../Models/Port";
-import withInitialData from "../../Components/withInitialData";
+import withInitialData from "../../sections/withInitialData";
 import routes from "../../routes";
 
 interface PropsInterface {

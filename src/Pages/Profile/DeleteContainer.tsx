@@ -1,13 +1,13 @@
 import * as React from "react";
 import TokenButton from "../../Containers/Button/TokenButton";
-import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 import { parse as parseQueryString } from "query-string";
 import { RouteProps, withRouter } from "react-router";
-import Error from "../../Components/Error/Error";
+import Error from "../../components/Error/Error";
 import routes from "../../routes";
-import withPlayer from "../../Components/withPlayer";
+import withPlayer from "../../components/withPlayer";
 import { getDeleteProfileToken } from "../../Models/Session";
-import ProfileLayout from "../../Components/Layout/ProfileLayout";
+import ProfileLayout from "../../components/Layout/ProfileLayout";
 
 class DeleteContainer extends React.Component<RouteProps, undefined> {
   private stageTexts = [

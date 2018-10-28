@@ -1,28 +1,28 @@
 import * as React from "react";
-import DirectionInterface from "../../DomainInterfaces/DirectionInterface";
+import DirectionInterface from "../../interfaces/DirectionInterface";
 import TokenButton from "../Button/TokenButton";
-import RankStatusInterface from "../../DomainInterfaces/RankStatusInterface";
-import ShipList from "../../Components/Ship/ShipList";
-import { SessionContext } from "../../Context/SessionContext";
-import { CurrentShipContextInterface } from "../../Context/CurrentShipContext";
-import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
-import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
+import RankStatusInterface from "../../interfaces/RankStatusInterface";
+import ShipList from "../../components/Ship/ShipList";
+import { SessionContext } from "../../context/SessionContext";
+import { CurrentShipContextInterface } from "../../context/CurrentShipContext";
+import ScoreInterface from "../../interfaces/ScoreInterface";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 import { doPortAction } from "../../Models/Ship";
-import ShieldIcon from "../../Components/Icons/ShieldIcon";
-import { MessageInfo } from "../../Components/Panel/Messages";
-import PortInterface from "../../DomainInterfaces/PortInterface";
-import EventsContainer from "./EventsContainer";
-import DirectionNW from "../../Components/Icons/DirectionNW";
-import DirectionNE from "../../Components/Icons/DirectionNE";
-import DirectionW from "../../Components/Icons/DirectionW";
-import DirectionE from "../../Components/Icons/DirectionE";
-import DirectionSW from "../../Components/Icons/DirectionSW";
-import DirectionSE from "../../Components/Icons/DirectionSE";
-import IntervalFormat from "../../Components/Formatting/IntervalFormat";
-import CreditsIcon from "../../Components/Icons/CreditsIcon";
-import Fraction from "../../Components/Formatting/Fraction";
-import ScoreValue from "../../Components/Player/ScoreValue";
-import Modal from "../../Components/Panel/Modal";
+import ShieldIcon from "../../components/Icons/ShieldIcon";
+import { MessageInfo } from "../../components/Panel/Messages";
+import PortInterface from "../../interfaces/PortInterface";
+import EventsList from "../../components/Events/EventsList";
+import DirectionNW from "../../components/Icons/DirectionNW";
+import DirectionNE from "../../components/Icons/DirectionNE";
+import DirectionW from "../../components/Icons/DirectionW";
+import DirectionE from "../../components/Icons/DirectionE";
+import DirectionSW from "../../components/Icons/DirectionSW";
+import DirectionSE from "../../components/Icons/DirectionSE";
+import IntervalFormat from "../../components/Formatting/IntervalFormat";
+import CreditsIcon from "../../components/Icons/CreditsIcon";
+import Fraction from "../../components/Formatting/Fraction";
+import ScoreValue from "../../components/Player/ScoreValue";
+import Modal from "../../components/Panel/Modal";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;
@@ -430,7 +430,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
         <h2>Players</h2>
         <ShipList ships={this.props.shipContext.shipsInLocation} />
 
-        <EventsContainer events={this.props.shipContext.events} />
+        <EventsList events={this.props.shipContext.events} />
         {modal}
       </div>
     );

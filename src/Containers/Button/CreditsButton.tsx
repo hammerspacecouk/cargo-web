@@ -1,8 +1,8 @@
 import * as React from "react";
-import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
+import ScoreInterface from "../../interfaces/ScoreInterface";
 import { getValue } from "../Player/ScoreContainer";
-import { SessionContext } from "../../Context/SessionContext";
-import ScoreValue from "../../Components/Player/ScoreValue";
+import { SessionContext } from "../../context/SessionContext";
+import ScoreValue from "../../components/Player/ScoreValue";
 
 interface Props {
   readonly amount: number;

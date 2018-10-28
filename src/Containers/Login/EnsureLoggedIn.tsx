@@ -1,8 +1,8 @@
 import * as React from "react";
-import RequireLogin from "../../Components/Login/RequireLogin";
-import Loading from "../../Components/Navigation/Loading";
-import { SessionContext } from "../../Context/SessionContext";
-import PlayerInterface from "../../DomainInterfaces/PlayerInterface";
+import RequireLogin from "../../components/Login/RequireLogin";
+import Loading from "../../components/Navigation/Loading";
+import { SessionContext } from "../../context/SessionContext";
+import PlayerInterface from "../../interfaces/PlayerInterface";
 
 interface InitialPropsInterface {
   readonly children: any;
@@ -10,7 +10,6 @@ interface InitialPropsInterface {
 
 interface PropsInterface extends InitialPropsInterface {
   readonly player?: PlayerInterface;
-  readonly playerFetched?: boolean;
   readonly children: any;
   readonly refreshSession: () => void;
 }
@@ -18,14 +17,17 @@ interface PropsInterface extends InitialPropsInterface {
 // Client-side login check
 class EnsureLoggedIn extends React.Component<PropsInterface, undefined> {
   componentDidMount() {
-    if (!this.props.playerFetched) {
+    if (this.props.player === undefined) {
       this.props.refreshSession();
     }
   }
 
   render() {
+    if (this.props.player === undefined) {
+      return <Loading />
+    }
     if (!this.props.player) {
-      return this.props.playerFetched ? <RequireLogin /> : <Loading />;
+      return <RequireLogin />;
     }
     return this.props.children;
   }
@@ -33,10 +35,9 @@ class EnsureLoggedIn extends React.Component<PropsInterface, undefined> {
 
 export default (props: InitialPropsInterface) => (
   <SessionContext.Consumer>
-    {({ player, playerFetched, refreshSession }) => (
+    {({ player, refreshSession }) => (
       <EnsureLoggedIn
         player={player}
-        playerFetched={playerFetched}
         refreshSession={refreshSession}
         {...props}
       />

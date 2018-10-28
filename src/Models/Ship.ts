@@ -1,14 +1,14 @@
-import API from "../Infrastructure/API";
-import ShipInterface from "../DomainInterfaces/ShipInterface";
-import PortInterface from "../DomainInterfaces/PortInterface";
-import ChannelInterface from "../DomainInterfaces/ChannelInterface";
-import DirectionsInterface from "../DomainInterfaces/DirectionsInterface";
-import ShipNameTokenInterface from "../DomainInterfaces/ShipNameTokenInterface";
-import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
-import ScoreInterface from "../DomainInterfaces/ScoreInterface";
-import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
-import EventInterface from "../DomainInterfaces/EventInterface";
-import { CrateActionInterface } from "../DomainInterfaces/CrateInterface";
+import API from "../util/HttpClient";
+import ShipInterface from "../interfaces/ShipInterface";
+import PortInterface from "../interfaces/PortInterface";
+import ChannelInterface from "../interfaces/ChannelInterface";
+import DirectionsInterface from "../interfaces/DirectionsInterface";
+import ShipNameTokenInterface from "../interfaces/ShipNameTokenInterface";
+import ActionTokenInterface from "../interfaces/ActionTokenInterface";
+import ScoreInterface from "../interfaces/ScoreInterface";
+import RankStatusInterface from "../interfaces/RankStatusInterface";
+import EventInterface from "../interfaces/EventInterface";
+import { CrateActionInterface } from "../interfaces/CrateInterface";
 
 export interface ShipLocationResponse {
   // todo - merge with PlayShipResponse

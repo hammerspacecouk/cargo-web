@@ -1,6 +1,6 @@
 import * as React from "react";
-import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
-import API, { APIClientInterface } from "../../Infrastructure/API/index";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
+import { ApiClient } from "../../util/ApiClient";
 
 interface Props {
   readonly token: ActionTokenInterface;
@@ -21,7 +21,7 @@ class TokenButton extends React.Component<Props, undefined> {
       <form
         method="post"
         className="form form--inline"
-        action={API.getUrl(this.props.token.path)}
+        action={ApiClient.getUrl(this.props.token.path)}
         onSubmit={this.onSubmit.bind(this)}
       >
         <input type="hidden" name="token" value={this.props.token.token} />

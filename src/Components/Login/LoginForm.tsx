@@ -1,14 +1,14 @@
 import * as React from "react";
-import MessageInterface from "../../DomainInterfaces/MessageInterface";
+import MessageInterface from "../../interfaces/MessageInterface";
 import Messages from "../Panel/Messages";
-import Environment from "../../Infrastructure/Environment/index";
+import {Environment} from "../../util/Environment";
 import { Link } from "react-router-dom";
 
-export interface LoginFormProps {
+interface PropsInterface {
   messages?: MessageInterface[];
 }
 
-export default (props: LoginFormProps) => {
+export default (props: PropsInterface) => {
   const loginPathEmail = `${Environment.apiHostname}/login/email`;
   const loginPathFacebook = `${Environment.apiHostname}/login/facebook`;
   const loginPathGoogle = `${Environment.apiHostname}/login/google`;

@@ -1,8 +1,8 @@
 import * as React from "react";
 import routes from "../../routes";
-import { MessageError, MessageWarning } from "../../Components/Panel/Messages";
+import { MessageError, MessageWarning } from "../../components/Panel/Messages";
 import CountdownLink from "../Button/CountdownLink";
-import Modal from "../../Components/Panel/Modal";
+import Modal from "../../components/Panel/Modal";
 
 interface Props {
   readonly isAnonymous: boolean;

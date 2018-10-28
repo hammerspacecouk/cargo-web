@@ -1,5 +1,5 @@
 import * as React from "react";
-import ShipInterface from "../../DomainInterfaces/ShipInterface";
+import ShipInterface from "../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import EditIcon from "../Icons/EditIcon";
 import ActionLink from "../Link/ActionLink";
@@ -77,7 +77,12 @@ const ship = (ship: ShipInterface) => (
   </tr>
 );
 
-export default (props: Props) => {
+export default ({ships}: Props) => {
+  let shipRows;
+  if (ships !== undefined) {
+    shipRows = ships.map(ship);
+  }
+
   return (
     <div className="o-ships">
       <table className="o-ships__list">
@@ -90,7 +95,7 @@ export default (props: Props) => {
             <th>Edit</th>
           </tr>
         </thead>
-        <tbody>{props.ships.map(ship)}</tbody>
+        <tbody>{shipRows}</tbody>
       </table>
       <div className="o-ships__more">
         <ActionLink to={`/play/upgrades`}>Get more ships</ActionLink>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { match } from "react-router";
-import withInitialData, { InitialDataComponent } from "./withInitialData";
+import withInitialData, { InitialDataComponent } from "../sections/withInitialData";
 import { Request } from "express";
 import RequireLogin from "./Login/RequireLogin";
 
@@ -8,7 +8,7 @@ interface Props {
   isLoggedOut?: boolean;
 }
 
-// This is a HOC that ensures the user is NOT already logged in
+// This is a HOC that ensures the user is already logged in
 export default (Page: InitialDataComponent) => {
   class WithPlayer extends React.Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {

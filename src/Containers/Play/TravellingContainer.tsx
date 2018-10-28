@@ -1,14 +1,14 @@
 import * as React from "react";
-import ChannelInterface from "../../DomainInterfaces/ChannelInterface";
-import IntervalFormat from "../../Components/Formatting/IntervalFormat";
+import ChannelInterface from "../../interfaces/ChannelInterface";
+import IntervalFormat from "../../components/Formatting/IntervalFormat";
 import * as differenceInSeconds from "date-fns/difference_in_seconds";
 
-import { CurrentShipContextInterface } from "../../Context/CurrentShipContext";
+import { CurrentShipContextInterface } from "../../context/CurrentShipContext";
 import { getPlayDataByShipId } from "../../Models/Ship";
-import { SessionContext } from "../../Context/SessionContext";
-import ScoreInterface from "../../DomainInterfaces/ScoreInterface";
-import RankStatusInterface from "../../DomainInterfaces/RankStatusInterface";
-import ProgressBar from "../../Components/Element/ProgressBar";
+import { SessionContext } from "../../context/SessionContext";
+import ScoreInterface from "../../interfaces/ScoreInterface";
+import RankStatusInterface from "../../interfaces/RankStatusInterface";
+import ProgressBar from "../../components/Element/ProgressBar";
 
 interface Props {
   readonly shipContext: CurrentShipContextInterface;

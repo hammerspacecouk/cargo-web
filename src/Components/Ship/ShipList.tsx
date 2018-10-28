@@ -1,5 +1,5 @@
 import * as React from "react";
-import ShipInterface from "../../DomainInterfaces/ShipInterface";
+import ShipInterface from "../../interfaces/ShipInterface";
 import ScoreContainer from "../../Containers/Player/ScoreContainer";
 import PlayerFlag from "../Player/PlayerFlag";
 import ProgressBar from "../Element/ProgressBar";

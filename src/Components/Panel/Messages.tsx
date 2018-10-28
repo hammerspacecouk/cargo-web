@@ -1,5 +1,5 @@
 import * as React from "react";
-import MessageInterface from "../../DomainInterfaces/MessageInterface";
+import MessageInterface from "../../interfaces/MessageInterface";
 import TickIcon from "../Icons/TickIcon";
 import WarningIcon from "../Icons/WarningIcon";
 import InfoIcon from "../Icons/InfoIcon";

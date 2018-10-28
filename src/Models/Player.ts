@@ -1,14 +1,14 @@
-import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
-import API from "../Infrastructure/API";
-import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
-import ShipInterface from "../DomainInterfaces/ShipInterface";
+import ActionTokenInterface from "../interfaces/ActionTokenInterface";
+import API from "../util/HttpClient";
+import RankStatusInterface from "../interfaces/RankStatusInterface";
+import ShipInterface from "../interfaces/ShipInterface";
 import { SessionResponseInterface } from "./Session";
-import EventInterface from "../DomainInterfaces/EventInterface";
-import ShipClassInterface from "../DomainInterfaces/ShipClassInterface";
-import TransactionInterface from "../DomainInterfaces/TransactionInterface";
+import EventInterface from "../interfaces/EventInterface";
+import ShipClassInterface from "../interfaces/ShipClassInterface";
+import TransactionInterface from "../interfaces/TransactionInterface";
 import { RequestShipNameResponse } from "./Ship";
-import ScoreInterface from "../DomainInterfaces/ScoreInterface";
-import MessageInterface from "../DomainInterfaces/MessageInterface";
+import ScoreInterface from "../interfaces/ScoreInterface";
+import MessageInterface from "../interfaces/MessageInterface";
 
 export interface AcknowledgePromotionResponse {
   readonly rankStatus: RankStatusInterface;

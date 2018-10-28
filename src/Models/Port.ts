@@ -1,5 +1,5 @@
-import API from "../Infrastructure/API";
-import PortInterface from "../DomainInterfaces/PortInterface";
+import API from "../util/HttpClient";
+import PortInterface from "../interfaces/PortInterface";
 
 export interface PortsResponse {
   // readonly pagination: PaginationInterface; // todo

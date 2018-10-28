@@ -3,9 +3,9 @@ import * as React from "react";
 import {
   CurrentShipContext,
   CurrentShipContextInterface
-} from "../../Context/CurrentShipContext";
-import Loading from "../../Components/Navigation/Loading";
-import NotFound from "../../Components/Error/NotFound";
+} from "../../context/CurrentShipContext";
+import Loading from "../../components/Navigation/Loading";
+import NotFound from "../../components/Error/NotFound";
 import { getPlayDataByShipId } from "../../Models/Ship";
 import EnsureLoggedIn from "../../Containers/Login/EnsureLoggedIn";
 

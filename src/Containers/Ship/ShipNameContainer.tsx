@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 import TokenButton from "../Button/TokenButton";
-import ShipInterface from "../../DomainInterfaces/ShipInterface";
-import { CurrentShipContext } from "../../Context/CurrentShipContext";
+import ShipInterface from "../../interfaces/ShipInterface";
+import { CurrentShipContext } from "../../context/CurrentShipContext";
 import { acceptShipName } from "../../Models/Ship";
-import { SlowedAnimationFrame } from "../../Utils/Animate";
+import { SlowedAnimationFrame } from "../../util/Animate";
 
 interface State {
   nameGuess: string;

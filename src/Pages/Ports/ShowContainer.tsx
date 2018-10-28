@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import NotFound from "../../Components/Error/NotFound";
-import PortInterface from "../../DomainInterfaces/PortInterface";
-import CrumbTitle from "../../Components/Navigation/CrumbTitle";
+import NotFound from "../../components/Error/NotFound";
+import PortInterface from "../../interfaces/PortInterface";
+import CrumbTitle from "../../components/Navigation/CrumbTitle";
 import { getPort } from "../../Models/Port";
 import { match } from "react-router";
-import withInitialData from "../../Components/withInitialData";
+import withInitialData from "../../sections/withInitialData";
 
 interface PropsInterface {
   isLoading: boolean;

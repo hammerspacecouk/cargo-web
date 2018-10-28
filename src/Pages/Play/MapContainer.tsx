@@ -1,7 +1,7 @@
 // todo - delete me once no longer needed as a reference
 
 import * as React from "react";
-import { calculateHexPoints, Point } from "../../Utils/Hexagons";
+import { calculateHexPoints, Point } from "../../util/Hexagons";
 
 class MapContainer extends React.Component<undefined, undefined> {
   renderHexagons() {

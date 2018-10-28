@@ -1,8 +1,8 @@
-import PlayerInterface from "../DomainInterfaces/PlayerInterface";
-import RankStatusInterface from "../DomainInterfaces/RankStatusInterface";
-import API from "../Infrastructure/API";
-import ActionTokenInterface from "../DomainInterfaces/ActionTokenInterface";
-import PortInterface from "../DomainInterfaces/PortInterface";
+import PlayerInterface from "../interfaces/PlayerInterface";
+import RankStatusInterface from "../interfaces/RankStatusInterface";
+import API from "../util/HttpClient";
+import ActionTokenInterface from "../interfaces/ActionTokenInterface";
+import PortInterface from "../interfaces/PortInterface";
 
 export interface SessionResponseInterface {
   readonly isLoggedIn: boolean;
