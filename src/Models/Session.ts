@@ -1,6 +1,5 @@
 import PlayerInterface from "../interfaces/PlayerInterface";
 import RankStatusInterface from "../interfaces/RankStatusInterface";
-import API from "../util/HttpClient";
 import ActionTokenInterface from "../interfaces/ActionTokenInterface";
 import PortInterface from "../interfaces/PortInterface";
 

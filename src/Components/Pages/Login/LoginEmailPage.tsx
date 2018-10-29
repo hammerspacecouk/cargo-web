@@ -8,14 +8,14 @@ interface PropsInterface {
 }
 
 export default function LoginEmailPage({query}: PropsInterface) {
-  const query = parseQueryString(query);
-  if (!query.token) {
+  const queryData = parseQueryString(query);
+  if (!queryData.token) {
     return <Error code={400} message="Bad request (Missing token)" />;
   }
 
   const token = {
     path: "/login/email",
-    token: query.token
+    token: queryData.token
   };
 
   return (

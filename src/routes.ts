@@ -1,16 +1,10 @@
 import * as About from "./sections/About";
-// import AboutCheating from "./Pages/About/CheatingContainer";
-// import AboutDuplicate from "./Pages/About/DuplicateContainer";
-// import AboutPolicies from "./Pages/About/PoliciesContainer";
-// import AboutStatus from "./Pages/About/StatusContainer";
-// import AboutStyleGuide from "./Pages/About/StyleGuideContainer";
 import * as Home from "./sections/Home";
 import * as Login from "./sections/Login";
+import * as Profile from "./sections/Profile";
 // import Play from "./Pages/Play";
 // import PortsList from "./Pages/Ports/ListContainer";
 // import PortShow from "./Pages/Ports/ShowContainer";
-// import Profile from "./Pages/Profile";
-// import ProfileDelete from "./Pages/Profile/DeleteContainer";
 import { RouteProps } from "react-router";
 import {Environment} from "./util/Environment";
 
@@ -121,22 +115,22 @@ export const matches = [
     component: Login.default,
     cacheType: CacheType.None
   },
-/*
+
   // profile
   {
     path: routes.getProfileDelete(),
     exact: true,
-    component: ProfileDelete,
+    component: Profile.Delete,
     cacheType: CacheType.None
   },
   {
     path: routes.getProfile(),
     exact: true,
-    component: Profile,
+    component: Profile.default,
     cacheType: CacheType.Private,
     maxAge: 5
   },
-
+/*
   // play
   {
     path: routes.getPlay(),

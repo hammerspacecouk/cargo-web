@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createElement, Component } from "react";
 import { match, Redirect } from "react-router";
 import routes from "../routes";
 import withInitialData, { InitialDataComponent } from "./withInitialData";
@@ -10,7 +10,7 @@ interface Props {
 
 // This is a HOC that ensures the user is NOT already logged in
 export default (Page: InitialDataComponent) => {
-  class WithGuestUser extends React.Component<Props, undefined> {
+  class WithGuestUser extends Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
       if (request.cookies && request.cookies.AUTHENTICATION_TOKEN) {
         return { isLoggedIn: true };
@@ -24,12 +24,16 @@ export default (Page: InitialDataComponent) => {
 
     render() {
       if (this.props.isLoggedIn) {
-        return <Redirect to={routes.getPlay()} />;
+        return createElement(Redirect, {
+          to: routes.getPlay()
+        });
       }
 
       // Flatten out all the props.
       const { isLoggedIn, ...rest } = this.props;
-      return <Page {...rest} />;
+      return createElement(Page, {
+        ...rest
+      });
     }
   }
   return withInitialData(WithGuestUser);
