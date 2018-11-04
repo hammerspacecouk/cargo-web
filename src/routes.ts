@@ -1,10 +1,9 @@
 import * as About from "./sections/About";
 import * as Home from "./sections/Home";
 import * as Login from "./sections/Login";
+import * as Play from "./sections/Play";
 import * as Profile from "./sections/Profile";
-// import Play from "./Pages/Play";
-// import PortsList from "./Pages/Ports/ListContainer";
-// import PortShow from "./Pages/Ports/ShowContainer";
+import Ports from "./sections/Ports";
 import { RouteProps } from "react-router";
 import {Environment} from "./util/Environment";
 
@@ -27,6 +26,7 @@ const routes = {
   getAboutStatus: () => "/about/status",
   getAboutStyleGuide: () => "/about/styleguide",
   getLogin: () => "/login",
+  getLoginAnonymous: () => `${Environment.apiHostname}/login/anonymous`,
   getLoginEmail: () => "/login/email",
   getLogout: () => `${Environment.apiHostname}/logout`,
   getPortShow: (id: string = ":portId") => `/ports/${id}`,
@@ -82,25 +82,23 @@ export const matches = [
     component: About.default,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
-  },/*
+  },
 
   // ports
   {
     path: routes.getPortShow(),
     exact: true,
-    component: PortShow,
+    component: Ports.Port,
     cacheType: CacheType.Public,
     maxAge: 600
   },
   {
     path: routes.getPortsList(),
     exact: true,
-    component: PortsList,
+    component: Ports.default,
     cacheType: CacheType.Public,
     maxAge: 600
   },
-
-  */
 
   // login
   {
@@ -130,16 +128,16 @@ export const matches = [
     cacheType: CacheType.Private,
     maxAge: 5
   },
-/*
+
   // play
   {
     path: routes.getPlay(),
     exact: false, // play is the client side app that'll have sub-routes
-    component: Play,
+    component: Play.default,
     cacheType: CacheType.Public,
     maxAge: 3600
   },
-*/
+
   // home
   {
     path: routes.getHome(),

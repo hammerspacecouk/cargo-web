@@ -1,5 +1,4 @@
 import * as React from "react";
-import ShipInterface from "../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import { CurrentShipContext } from "../../context/CurrentShipContext";
 import { useContext } from "react";

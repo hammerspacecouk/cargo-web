@@ -3,18 +3,17 @@ import { useSessionContext } from "../../context/SessionContext";
 import * as React from "react";
 import ScoreContainer from "../../Containers/Player/ScoreContainer";
 import ProfileIcon from "../Icons/ProfileIcon";
-import ActionLink from "../Link/ActionLink";
 import routes from "../../routes";
 
 const GuestActions = () => (
   <div className="masthead__play masthead__link-box">
-    <ActionLink
-      to={routes.getPlay()}
-      rel="nofollow"
+    <form action={routes.getLoginAnonymous()} method="post">
+    <button
       className="masthead__link m-icon-suffix--animated"
     >
       Play now
-    </ActionLink>
+    </button>
+    </form>
   </div>
 );
 

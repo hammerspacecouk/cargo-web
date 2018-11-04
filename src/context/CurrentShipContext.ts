@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createContext } from "react";
+import { createContext, createElement } from "react";
 
 import ShipInterface from "../interfaces/ShipInterface";
 import { PlayShipResponse, ShipLocationResponse } from "../Models/Ship";
@@ -8,6 +8,7 @@ import ChannelInterface from "../interfaces/ChannelInterface";
 import DirectionsInterface from "../interfaces/DirectionsInterface";
 import EventInterface from "../interfaces/EventInterface";
 import { CrateActionInterface } from "../interfaces/CrateInterface";
+import PromotionModal from "../components/Player/PromotionModal";
 
 interface PropsInterface {
   children: any;
@@ -109,10 +110,12 @@ class CurrentShipContextComponent extends React.Component<
   };
 
   render() {
-    return (
-      <CurrentShipContext.Provider value={this.state}>
-        {this.props.children}
-      </CurrentShipContext.Provider>
+    return createElement(
+      CurrentShipContext.Provider,
+      {
+        value: this.state
+      },
+      this.props.children
     );
   }
 }

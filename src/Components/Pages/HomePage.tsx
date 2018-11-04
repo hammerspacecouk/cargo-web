@@ -24,6 +24,8 @@ const renderPlayPanel = (player?: PlayerInterface) => {
       </div>
     );
   }
+
+  // todo - session needs a CSRF token, and the anon login form should use it
   return (
     <>
       <p className="e unit">
@@ -31,9 +33,11 @@ const renderPlayPanel = (player?: PlayerInterface) => {
       </p>
       <div className="text--center unit">
         <div className="align--inline">
-          <ActionLink to={`/play`} className="button m-icon-suffix--animated">
+          <form action={routes.getLoginAnonymous()} method="post">
+          <button className="button m-icon-suffix--animated">
             New game
-          </ActionLink>
+          </button>
+          </form>
         </div>
       </div>
       <h3 className="d unit">Or create/resume a logged in game:</h3>

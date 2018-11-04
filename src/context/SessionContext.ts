@@ -1,15 +1,11 @@
-import * as React from "react";
-import { useContext, useEffect, useState, useRef } from "react";
+import { createElement, createContext, useContext, useEffect, useState, useRef } from "react";
 
 import PlayerInterface from "../interfaces/PlayerInterface";
 import RankStatusInterface from "../interfaces/RankStatusInterface";
 import ScoreInterface from "../interfaces/ScoreInterface";
 import PromotionModal from "../components/Player/PromotionModal";
 import { ApiClient } from "../util/ApiClient";
-
-interface PropsInterface {
-  children: any;
-}
+import { ChildrenPropsInterface } from "../interfaces/PropsInterface";
 
 interface SessionResponseInterface {
   readonly isLoggedIn: boolean;
@@ -38,7 +34,7 @@ export const initialSession: SessionPropertiesInterface = {
   hasProfileNotification: false
 };
 
-const SessionContext = React.createContext({
+const SessionContext = createContext({
   ...initialSession,
   updateScore: (newScore: ScoreInterface) => {},
   updateRankStatus: (newRankStatus: RankStatusInterface) => {},
@@ -69,7 +65,7 @@ function useRankStatus(): [RankStatusInterface, (newRanksStatus: RankStatusInter
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
 
-export function SessionContextComponent({ children }: PropsInterface) {
+export function SessionContextComponent({ children }: ChildrenPropsInterface) {
   const [score, updateScore] = useScore();
   const [rankStatus, updateRankStatus] = useRankStatus();
   const [player, setPlayer] = useState(initialSession.player);
@@ -111,20 +107,22 @@ export function SessionContextComponent({ children }: PropsInterface) {
     setSession(await getSession());
   }
 
-  return (
-    <SessionContext.Provider value={{
-      player,
-      score,
-      rankStatus,
-      hasProfileNotification,
-      updateScore,
-      updateRankStatus,
-      setSession,
-      refreshSession
-    }}>
-      {children}
-      <PromotionModal/>
-    </SessionContext.Provider>
+  return createElement(
+    SessionContext.Provider,
+    {
+      value: {
+        player,
+        score,
+        rankStatus,
+        hasProfileNotification,
+        updateScore,
+        updateRankStatus,
+        setSession,
+        refreshSession
+      }
+    },
+    children,
+    PromotionModal
   );
 }
 

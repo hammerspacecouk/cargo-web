@@ -1,46 +1,28 @@
 import * as React from "react";
+import { useEffect } from "react";
 import RequireLogin from "../../components/Login/RequireLogin";
 import Loading from "../../components/Navigation/Loading";
-import { SessionContext } from "../../context/SessionContext";
-import PlayerInterface from "../../interfaces/PlayerInterface";
+import { useSessionContext } from "../../context/SessionContext";
 
 interface InitialPropsInterface {
   readonly children: any;
 }
 
-interface PropsInterface extends InitialPropsInterface {
-  readonly player?: PlayerInterface;
-  readonly children: any;
-  readonly refreshSession: () => void;
-}
-
 // Client-side login check
-class EnsureLoggedIn extends React.Component<PropsInterface, undefined> {
-  componentDidMount() {
-    if (this.props.player === undefined) {
-      this.props.refreshSession();
-    }
-  }
+export default ({children}: InitialPropsInterface) => {
+  const {player, refreshSession} = useSessionContext();
 
-  render() {
-    if (this.props.player === undefined) {
-      return <Loading />
+  useEffect(() => {
+    if (player === undefined) {
+      refreshSession();
     }
-    if (!this.props.player) {
-      return <RequireLogin />;
-    }
-    return this.props.children;
-  }
-}
+  }, player);
 
-export default (props: InitialPropsInterface) => (
-  <SessionContext.Consumer>
-    {({ player, refreshSession }) => (
-      <EnsureLoggedIn
-        player={player}
-        refreshSession={refreshSession}
-        {...props}
-      />
-    )}
-  </SessionContext.Consumer>
-);
+  if (player === undefined) {
+    return <Loading />
+  }
+  if (!player) {
+    return <RequireLogin />;
+  }
+  return children;
+};

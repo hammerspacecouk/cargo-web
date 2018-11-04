@@ -1,9 +1,8 @@
 import { createElement, Component } from "react";
-import { match, Redirect } from "react-router";
+import { match } from "react-router";
 import withInitialData, { InitialDataComponent } from "./withInitialData";
 import { Request } from "express";
 import RequireLogin from "../components/Login/RequireLogin";
-import routes from "../routes";
 
 interface Props {
   isLoggedOut?: boolean;

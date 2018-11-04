@@ -1,14 +1,13 @@
-import * as React from "react";
-import { useFleetState } from "../../hooks/useFleetState";
-import { useSessionContext } from "../../context/SessionContext";
+import * as React from "react"
+import { useFleetState } from "../../../hooks/useFleetState";
+import { useSessionContext } from "../../../context/SessionContext";
+import PlayerFlag from "../../Player/PlayerFlag";
+import FleetShips from "../../Ship/FleetShips";
+import DestroyedShips from "../../Ship/DestroyedShips";
+import EventsList from "../../Events/EventsList";
+import Rank from "../../Player/Rank";
 
-import PlayerFlag from "../../components/Player/PlayerFlag";
-import FleetShips from "../../components/Ship/FleetShips";
-import EventsList from "../../components/Events/EventsList";
-import DestroyedShips from "../../components/Ship/DestroyedShips";
-import Rank from "../../components/Player/Rank";
-
-export default function FleetContainer() {
+export default function FleetPage() {
   const { activeShips, destroyedShips, events } = useFleetState();
   const { player, rankStatus } = useSessionContext();
 
@@ -34,4 +33,4 @@ export default function FleetContainer() {
       </div>
     </main>
   );
-}
+};
