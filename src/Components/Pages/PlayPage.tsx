@@ -7,8 +7,10 @@ import FleetContainer from "./Play/FleetPage";
 import NotFound from "../../components/Error/NotFound";
 import PlayBar from "../../components/Navigation/PlayBar";
 import CurrentShipContextComponent from "../../context/CurrentShipContext";
-import UpgradesContainer from "./Play/UpgradesPage";
 import EnsureLoggedIn from "../../Containers/Login/EnsureLoggedIn";
+import UpgradesPage from "./Play/UpgradesPage";
+import ShipPage from "./Play/ShipPage";
+import FleetPage from "./Play/FleetPage";
 
 export default function PlayPage() {
   return (
@@ -19,15 +21,15 @@ export default function PlayPage() {
             <Switch>
               <Route
                 path="/play/upgrades"
-                component={UpgradesContainer}
+                component={UpgradesPage}
                 exact={true}
               />
               <Route
                 path="/play/:shipId"
-                component={ShipContainer}
+                component={ShipPage}
                 exact={true}
               />
-              <Route path="/play" component={FleetContainer} exact={true}/>
+              <Route path="/play" component={FleetPage} exact={true}/>
               <Route component={NotFound}/>
             </Switch>
           </div>

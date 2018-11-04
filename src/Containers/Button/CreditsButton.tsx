@@ -1,7 +1,8 @@
 import * as React from "react";
 import ScoreInterface from "../../interfaces/ScoreInterface";
+import { useFrameEffect } from "../../hooks/useFrameEffect";
 import { getValue } from "../Player/ScoreContainer";
-import { SessionContext } from "../../context/SessionContext";
+import { useSessionContext } from "../../context/SessionContext";
 import ScoreValue from "../../components/Player/ScoreValue";
 
 interface Props {
@@ -9,76 +10,34 @@ interface Props {
   readonly disabled?: boolean;
 }
 
-interface LocalProps extends Props {
-  readonly playerScore: ScoreInterface;
-}
-
-interface LocalState {
-  disabled: boolean;
-}
-
-class CreditsButtonState extends React.Component<LocalProps, LocalState> {
-  private allowAnimationUpdate: boolean;
-
-  constructor(props: LocalProps) {
-    super(props);
-    this.allowAnimationUpdate = false;
-    this.state = {
-      disabled: this.isDisabled(props.amount, props.playerScore, props.disabled)
-    };
+const isDisabled = (
+  amount: number,
+  playerScore: ScoreInterface,
+  disabledOverride: boolean
+): boolean => {
+  if (disabledOverride) {
+    return true;
   }
-
-  isDisabled(
-    amount: number,
-    playerScore: ScoreInterface,
-    disabledOverride: boolean
-  ): boolean {
-    if (disabledOverride) {
-      return true;
-    }
-    if (amount === 0) {
-      return false;
-    }
-    const scoreValue = getValue(playerScore, new Date());
-    return scoreValue < amount;
+  if (amount === 0) {
+    return false;
   }
+  const scoreValue = getValue(playerScore, new Date());
+  return scoreValue < amount;
+};
 
-  componentDidMount() {
-    this.allowAnimationUpdate = true;
-    this.update();
-  }
+export default ({ amount, disabledOverride }: Props) => {
+  const { score } = useSessionContext();
+  const [disabled, setDisabled] = useState(
+    isDisabled(amount, score, disabledOverride)
+  );
 
-  componentWillUnmount() {
-    this.allowAnimationUpdate = false;
-  }
+  useFrameEffect(() => {
+    setDisabled(isDisabled(amount, score, disabledOverride));
+  }, [amount, disabledOverride]);
 
-  update() {
-    if (!this.allowAnimationUpdate) {
-      return;
-    }
-    this.setState({
-      disabled: this.isDisabled(
-        this.props.amount,
-        this.props.playerScore,
-        this.props.disabled
-      )
-    });
-    window.requestAnimationFrame(() => this.update());
-  }
-
-  render() {
-    return (
-      <button className="button" type="submit" disabled={this.state.disabled}>
-        <ScoreValue score={this.props.amount.toString(10)} />
-      </button>
-    );
-  }
-}
-
-const CreditsButton = (props: Props) => (
-  <SessionContext.Consumer>
-    {({ score }) => <CreditsButtonState {...props} playerScore={score} />}
-  </SessionContext.Consumer>
-);
-
-export default CreditsButton;
+  return (
+    <button className="button" type="submit" disabled={disabled}>
+      <ScoreValue score={amount.toString(10)}/>
+    </button>
+  );
+};

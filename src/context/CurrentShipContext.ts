@@ -9,6 +9,7 @@ import DirectionsInterface from "../interfaces/DirectionsInterface";
 import EventInterface from "../interfaces/EventInterface";
 import { CrateActionInterface } from "../interfaces/CrateInterface";
 import PromotionModal from "../components/Player/PromotionModal";
+import { useContext } from "react";
 
 interface PropsInterface {
   children: any;
@@ -47,6 +48,7 @@ export const CurrentShipContext = createContext({
   updateShipLocation: () => {}
 });
 
+// todo - convert to useEffect and useReouter to get the ship details
 class CurrentShipContextComponent extends React.Component<
   PropsInterface,
   CurrentShipContextInterface
@@ -121,3 +123,7 @@ class CurrentShipContextComponent extends React.Component<
 }
 
 export default CurrentShipContextComponent;
+
+export function useCurrentShipContext(): CurrentShipContextInterface {
+  return useContext(CurrentShipContext);
+}

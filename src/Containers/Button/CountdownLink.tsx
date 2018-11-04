@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useFrameEffect } from "../../hooks/useFrameEffect";
 
 interface Props {
   readonly time: number;
@@ -7,65 +8,33 @@ interface Props {
   readonly className: string;
 }
 
-interface LocalState {
-  disabled: boolean;
-  time: number;
-}
+const formatTime = (msTime: number) => {
+  return Math.ceil(msTime / 1000);
+};
 
-export default class CountdownLink extends React.Component<Props, LocalState> {
-  private allowAnimationUpdate: boolean;
-  private start: number = null;
+export default ({ time, children, href, className }: Props) => {
+  const [timeLeft, setTimeLeft] = useState(formatTime(time));
+  const [disabled, setDisabled] = useState(false);
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      time: this.formatTime(props.time),
-      disabled: true
-    };
-  }
-
-  formatTime = (msTime: number) => {
-    return Math.ceil(msTime / 1000);
-  };
-
-  frame = (frameTime: number) => {
-    if (!this.start) {
-      this.start = frameTime;
-    }
-    const timePassed = frameTime - this.start;
-    const timeRemaining = Math.max(0, this.props.time - timePassed);
+  useFrameEffect((timePassed) => {
+    const timeRemaining = Math.max(0, time - timePassed);
     const finished = timeRemaining <= 0;
-    this.setState({
-      time: this.formatTime(timeRemaining),
-      disabled: !finished
-    });
-    if (!finished) {
-      window.requestAnimationFrame(this.frame);
-    }
-  };
+    setTimeLeft(formatTime(timeRemaining));
+    setDisabled(!finished);
+    return !finished;
+  });
 
-  componentDidMount() {
-    this.allowAnimationUpdate = true;
-    window.requestAnimationFrame(this.frame);
-  }
-
-  componentWillUnmount() {
-    this.allowAnimationUpdate = false;
-  }
-
-  render() {
-    if (this.state.disabled) {
-      return (
-        <button className={this.props.className} disabled={this.state.disabled}>
-          {this.props.children} ({this.state.time})
-        </button>
-      );
-    }
-
+  if (disabled) {
     return (
-      <a href={this.props.href} className={this.props.className}>
-        {this.props.children}
-      </a>
+      <button className={className} disabled={disabled}>
+        {children} ({timeLeft})
+      </button>
     );
   }
-}
+
+  return (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  );
+};

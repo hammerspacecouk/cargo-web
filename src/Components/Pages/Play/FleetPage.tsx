@@ -7,7 +7,7 @@ import DestroyedShips from "../../Ship/DestroyedShips";
 import EventsList from "../../Events/EventsList";
 import Rank from "../../Player/Rank";
 
-export default function FleetPage() {
+export default () => {
   const { activeShips, destroyedShips, events } = useFleetState();
   const { player, rankStatus } = useSessionContext();
 
