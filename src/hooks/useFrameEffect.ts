@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 
-export const useFrameEffect = (frameCallback: () => boolean, watch = []) => {
+export const useFrameEffect = (frameCallback: (frameTime: number) => boolean, watch: any[] = []) => {
   // to prevent attempts to update state once unmounted
   const allowUpdate = useRef(false);
   const startTime = useRef(null);
 
-  const frame = (frameTime) => {
+  const frame = (frameTime: number) => {
     if (!allowUpdate.current) {
       return;
     }
