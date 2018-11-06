@@ -279,42 +279,7 @@ class PortContainer extends React.Component<LocalProps, StateInterface> {
       );
     }
 
-    const cratesOnShip = this.props.shipContext.cratesOnShip.map(
-      crateAction => (
-        <tr key={crateAction.crate.id}>
-          <td>{crateAction.crate.contents}</td>
-          <td>
-            <span className="c">+{crateAction.valuePerLY}</span>{" "}
-            <span className="icon icon--mini">
-              <CreditsIcon />
-            </span>/ly
-          </td>
-          <td>
-            <TokenButton token={crateAction.token} handler={this.moveCrate}>
-              <button
-                className="button"
-                type="submit"
-                disabled={this.state.buttonsDisabled}
-              >
-                Drop
-              </button>
-            </TokenButton>
-          </td>
-        </tr>
-      )
-    );
-    let remaining =
-      this.props.shipContext.ship.shipClass.capacity - cratesOnShip.length;
-    while (remaining > 0) {
-      cratesOnShip.push(
-        <tr key={`remaining-${remaining}`}>
-          <td colSpan={3}>
-            <p className="text--center f">Empty Slot</p>
-          </td>
-        </tr>
-      );
-      remaining--;
-    }
+
 
     return (
       <div>

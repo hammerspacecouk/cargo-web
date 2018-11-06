@@ -1,5 +1,4 @@
-import * as React from "react";
-import { createContext, createElement } from "react";
+import { useContext, useState, createContext, createElement } from "react";
 
 import ShipInterface from "../interfaces/ShipInterface";
 import { PlayShipResponse, ShipLocationResponse } from "../Models/Ship";
@@ -8,8 +7,7 @@ import ChannelInterface from "../interfaces/ChannelInterface";
 import DirectionsInterface from "../interfaces/DirectionsInterface";
 import EventInterface from "../interfaces/EventInterface";
 import { CrateActionInterface } from "../interfaces/CrateInterface";
-import PromotionModal from "../components/Player/PromotionModal";
-import { useContext } from "react";
+import { ApiClient } from "../util/ApiClient";
 
 interface PropsInterface {
   children: any;
@@ -33,6 +31,7 @@ export interface CurrentShipContextInterface
   updateCurrentShip: (ship?: ShipInterface) => void;
   updateFullResponse: (data?: PlayShipResponse) => void;
   updateShipLocation: (data?: ShipLocationResponse) => void;
+  refreshState: () => Promise<PlayShipResponse>;
 }
 
 export const initial: CurrentShipPropertiesInterface = {
@@ -42,87 +41,103 @@ export const initial: CurrentShipPropertiesInterface = {
 
 export const CurrentShipContext = createContext({
   ...initial,
-  loadingNewShip: () => {},
-  updateCurrentShip: () => {},
-  updateFullResponse: () => {},
-  updateShipLocation: () => {}
+  loadingNewShip: () => {
+  },
+  updateCurrentShip: (ship?: ShipInterface) => {
+  },
+  updateFullResponse: (data?: PlayShipResponse) => {
+  },
+  updateShipLocation: (data?: ShipLocationResponse) => {
+  },
+  refreshState: () => {
+  }
 });
 
-// todo - convert to useEffect and useReouter to get the ship details
-class CurrentShipContextComponent extends React.Component<
-  PropsInterface,
-  CurrentShipContextInterface
-> {
-  constructor(props: any) {
-    super(props);
+// todo - convert to useRouter once ready
+export default ({ children }: PropsInterface) => {
+  const [loaded, setLoaded] = useState(false);
+  const [ship, setShip] = useState(undefined);
+  const [port, setPort] = useState(undefined);
+  const [channel, setChannel] = useState(undefined);
+  const [directions, setDirections] = useState(undefined);
+  const [shipsInLocation, setShipsInLocation] = useState(undefined);
+  const [events, setEvents] = useState(undefined);
+  const [cratesInPort, setCratesInPort] = useState(undefined);
+  const [cratesOnShip, setCratesOnShip] = useState(undefined);
 
-    this.state = {
-      ...initial,
-      loadingNewShip: this.loadingNewShip,
-      updateCurrentShip: this.updateCurrentShip,
-      updateFullResponse: this.updateFullResponse,
-      updateShipLocation: this.updateShipLocation
-    };
-  }
-
-  loadingNewShip = (): void => {
-    this.setState({
-      ship: null,
-      loaded: false
-    });
-  };
-
-  updateCurrentShip = (ship?: ShipInterface) => {
-    this.setState({
-      ship,
-      loaded: true
-    });
-  };
-
-  updateFullResponse = (data?: PlayShipResponse) => {
-    // todo - rename updateFullContext?
+  const updateFullResponse = (data?: PlayShipResponse) => {
     if (!data) {
-      this.setState({
-        ...initial,
-        loaded: true
-      });
+      setLoaded(true);
+      setShip(undefined);
+      setPort(undefined);
+      setChannel(undefined);
+      setDirections(undefined);
+      setShipsInLocation(undefined);
+      setEvents(undefined);
+      setCratesInPort(undefined);
+      setCratesOnShip(undefined);
       return;
     }
 
-    this.setState({
-      ship: data.ship,
-      port: data.port,
-      channel: data.channel,
-      directions: data.directions,
-      shipsInLocation: data.shipsInLocation,
-      events: data.events,
-      cratesInPort: data.cratesInPort,
-      cratesOnShip: data.cratesOnShip
-    });
+    setLoaded(true);
+    setShip(data.ship);
+    setPort(data.port);
+    setChannel(data.channel);
+    setDirections(data.directions);
+    setShipsInLocation(data.shipsInLocation);
+    setEvents(data.events);
+    setCratesInPort(data.cratesInPort);
+    setCratesOnShip(data.cratesOnShip);
   };
 
-  updateShipLocation = (data: ShipLocationResponse) => {
-    this.setState({
-      port: data.port,
-      channel: data.channel,
-      directions: data.directions,
-      shipsInLocation: data.shipsInLocation,
-      events: data.events
-    });
+  const refreshState = async (): Promise<PlayShipResponse> => {
+    const data = await ApiClient.fetch(`/play/${ship.id}`);
+    updateFullResponse(data);
+    return data;
   };
 
-  render() {
-    return createElement(
-      CurrentShipContext.Provider,
-      {
-        value: this.state
-      },
-      this.props.children
-    );
-  }
-}
+  const loadingNewShip = (): void => {
+    setShip(undefined);
+    setLoaded(false);
+  };
 
-export default CurrentShipContextComponent;
+  const updateCurrentShip = (ship?: ShipInterface) => {
+    setShip(ship);
+    setLoaded(false);
+  };
+
+
+  const updateShipLocation = (data: ShipLocationResponse) => {
+    setPort(data.port);
+    setChannel(data.channel);
+    setDirections(data.directions);
+    setShipsInLocation(data.shipsInLocation);
+    setEvents(data.events);
+  };
+
+  return createElement(
+    CurrentShipContext.Provider,
+    {
+      value: {
+        loaded,
+        ship,
+        port,
+        channel,
+        directions,
+        shipsInLocation,
+        events,
+        cratesInPort,
+        cratesOnShip,
+        loadingNewShip,
+        updateCurrentShip,
+        updateFullResponse,
+        updateShipLocation,
+        refreshState
+      }
+    },
+    children
+  );
+};
 
 export function useCurrentShipContext(): CurrentShipContextInterface {
   return useContext(CurrentShipContext);
