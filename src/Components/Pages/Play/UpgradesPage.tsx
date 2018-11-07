@@ -1,14 +1,15 @@
 import * as React from "react";
 import { Message } from "../../Panel/Messages";
-import { UpgradesContextComponent, useUpgradesContext } from "../../../context/UpgradesContext";
+import {
+  UpgradesContextProvider,
+  useUpgradesContext
+} from "../../../context/Page/UpgradesContext";
 import ShipUpgrades from "./Upgrades/ShipUpgrades";
 
 const UpgradesPage = () => {
   const { message } = useUpgradesContext();
 
-  const messageItem = message && (
-    <Message message={message}/>
-  );
+  const messageItem = message && <Message message={message} />;
 
   return (
     <main className="t-play__content-contain">
@@ -20,8 +21,8 @@ const UpgradesPage = () => {
   );
 };
 
-export default (
-  <UpgradesContextComponent>
+export default () => (
+  <UpgradesContextProvider>
     <UpgradesPage />
-  </UpgradesContextComponent>
+  </UpgradesContextProvider>
 );

@@ -5,7 +5,7 @@ export default function AppLoading() {
   return (
     <div>
       <div>
-        <Loading/>
+        <Loading />
       </div>
       <div className="text--center">
         To play will require JavaScript to be running successfully

@@ -26,25 +26,21 @@ interface Props {
 const mapEvent = (event: EventInterface, firstPerson: boolean) => {
   switch (event.action) {
     case ACTION_CRATE_NEW:
-      return (
-        <CrateNew event={event} firstPerson={firstPerson}/>
-      );
+      return <CrateNew event={event} firstPerson={firstPerson} />;
     case ACTION_CRATE_PICKUP:
-      return <CratePickup event={event}/>;
+      return <CratePickup event={event} />;
     case ACTION_PLAYER_NEW:
-      return (
-        <PlayerNew event={event} firstPerson={firstPerson}/>
-      );
+      return <PlayerNew event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_PROMOTION:
-      return <PlayerPromotion event={event} firstPerson={firstPerson}/>;
+      return <PlayerPromotion event={event} firstPerson={firstPerson} />;
     case ACTION_SHIP_NEW:
-      return <ShipNew event={event}/>;
+      return <ShipNew event={event} />;
     case ACTION_SHIP_ARRIVAL:
-      return <ShipArrival event={event}/>;
+      return <ShipArrival event={event} />;
     case ACTION_SHIP_DEPARTURE:
-      return <ShipDeparture event={event}/>;
+      return <ShipDeparture event={event} />;
     case ACTION_SHIP_RENAME:
-      return <ShipRename event={event}/>;
+      return <ShipRename event={event} />;
     default:
       return `Unknown event: ${event.action}`;
   }
@@ -58,9 +54,11 @@ export default function EventsList({ events, firstPerson }: Props) {
   return (
     <div className="panel">
       <h2 className="panel__title">Captain's log</h2>
-      <ul className="events">{events.map((event) => (
-        <li key={`event-${event.id}`}>{mapEvent(event, firstPerson)}</li>
-      ))}</ul>
+      <ul className="events">
+        {events.map(event => (
+          <li key={`event-${event.id}`}>{mapEvent(event, firstPerson)}</li>
+        ))}
+      </ul>
     </div>
   );
 }

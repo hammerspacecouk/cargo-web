@@ -7,10 +7,10 @@ interface Props {
 }
 
 export default ({ event }: Props) => {
-  const contents = event.crate ? event.crate.contents : '[deleted]';
+  const contents = event.crate ? event.crate.contents : "[deleted]";
   return (
     <Event time={event.time}>
       {event.actioningShip.name} picked up {contents} for transport
     </Event>
   );
-}
+};

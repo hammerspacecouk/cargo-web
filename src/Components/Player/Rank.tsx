@@ -8,21 +8,16 @@ export interface Props {
 }
 
 export default ({ rankStatus }: Props) => {
-
   if (!rankStatus) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
     <div className="panel">
       <h2>{rankStatus.currentRank.title}</h2>
       <div>
-        <ProgressBar
-          percent={rankStatus.levelProgress}
-        />
-        <p className="f">
-          {rankStatus.nextRank.title}
-        </p>
+        <ProgressBar percent={rankStatus.levelProgress} />
+        <p className="f">{rankStatus.nextRank.title}</p>
       </div>
     </div>
   );

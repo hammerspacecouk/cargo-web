@@ -13,10 +13,10 @@ const formatTime = (msTime: number) => {
 };
 
 export default ({ time, children, href, className }: Props) => {
-  const [timeLeft, setTimeLeft] = useState(formatTime(time));
-  const [disabled, setDisabled] = useState(false);
+  const [timeLeft, setTimeLeft] = React.useState(formatTime(time));
+  const [disabled, setDisabled] = React.useState(false);
 
-  useFrameEffect((timePassed) => {
+  useFrameEffect(timePassed => {
     const timeRemaining = Math.max(0, time - timePassed);
     const finished = timeRemaining <= 0;
     setTimeLeft(formatTime(timeRemaining));

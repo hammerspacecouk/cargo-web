@@ -5,7 +5,7 @@ import * as Play from "./sections/Play";
 import * as Profile from "./sections/Profile";
 import Ports from "./sections/Ports";
 import { RouteProps } from "react-router";
-import {Environment} from "./util/Environment";
+import { Environment } from "./util/Environment";
 
 export enum CacheType {
   None = "no-cache, no-store",

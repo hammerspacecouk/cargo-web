@@ -1,13 +1,13 @@
 import * as React from "react";
 import { parse as parseQueryString } from "query-string";
 import Error from "../../Error/Error";
-import TokenButton from "../../../Containers/Button/TokenButton";
+import TokenButton from "../../Button/TokenButton";
 
 interface PropsInterface {
   query?: string;
 }
 
-export default function LoginEmailPage({query}: PropsInterface) {
+export default function LoginEmailPage({ query }: PropsInterface) {
   const queryData = parseQueryString(query);
   if (!queryData.token) {
     return <Error code={400} message="Bad request (Missing token)" />;
@@ -25,8 +25,8 @@ export default function LoginEmailPage({query}: PropsInterface) {
       </div>
       <div className="t-doc__main">
         <p>
-          Thank you for clicking the link in your e-mail. If you didn't mean
-          to, don't worry; Nothing has happened yet. To perform the login and
+          Thank you for clicking the link in your e-mail. If you didn't mean to,
+          don't worry; Nothing has happened yet. To perform the login and
           continue to your game click below.
         </p>
         <TokenButton token={token}>

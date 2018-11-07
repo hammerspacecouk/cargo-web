@@ -13,7 +13,7 @@ interface PropsInterface {
   children: any;
 }
 
-interface CurrentShipPropertiesInterface {
+interface CurrentShipContextInterface {
   loaded: boolean;
   ship?: ShipInterface;
   port?: PortInterface;
@@ -23,10 +23,6 @@ interface CurrentShipPropertiesInterface {
   events?: EventInterface[];
   cratesInPort?: CrateActionInterface[];
   cratesOnShip?: CrateActionInterface[];
-}
-
-export interface CurrentShipContextInterface
-  extends CurrentShipPropertiesInterface {
   loadingNewShip: () => void;
   updateCurrentShip: (ship?: ShipInterface) => void;
   updateFullResponse: (data?: PlayShipResponse) => void;
@@ -34,24 +30,7 @@ export interface CurrentShipContextInterface
   refreshState: () => Promise<PlayShipResponse>;
 }
 
-export const initial: CurrentShipPropertiesInterface = {
-  loaded: false,
-  shipsInLocation: []
-};
-
-export const CurrentShipContext = createContext({
-  ...initial,
-  loadingNewShip: () => {
-  },
-  updateCurrentShip: (ship?: ShipInterface) => {
-  },
-  updateFullResponse: (data?: PlayShipResponse) => {
-  },
-  updateShipLocation: (data?: ShipLocationResponse) => {
-  },
-  refreshState: () => {
-  }
-});
+export const CurrentShipContext = createContext({});
 
 // todo - convert to useRouter once ready
 export default ({ children }: PropsInterface) => {
@@ -105,7 +84,6 @@ export default ({ children }: PropsInterface) => {
     setShip(ship);
     setLoaded(false);
   };
-
 
   const updateShipLocation = (data: ShipLocationResponse) => {
     setPort(data.port);

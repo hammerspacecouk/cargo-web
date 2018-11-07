@@ -4,6 +4,7 @@ import { ApiClient, ErrorResponseInterface } from "../util/ApiClient";
 import ShipInterface from "../interfaces/ShipInterface";
 import EventInterface from "../interfaces/EventInterface";
 
+// todo - move to a context
 interface State {
   error?: ErrorResponseInterface;
   activeShips: ShipInterface[];
@@ -15,7 +16,7 @@ export function useFleetState(): State {
   const [fleetState, setFleetState] = useState({
     activeShips: undefined,
     destroyedShips: undefined,
-    events: undefined,
+    events: undefined
   });
   const { setSession } = useSessionContext();
 
@@ -39,6 +40,6 @@ export function useFleetState(): State {
   return {
     activeShips: fleetState.activeShips,
     destroyedShips: fleetState.destroyedShips,
-    events: fleetState.events,
+    events: fleetState.events
   };
 }

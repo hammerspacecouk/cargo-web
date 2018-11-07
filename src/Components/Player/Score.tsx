@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 
 import ScoreInterface from "../../interfaces/ScoreInterface";
-import ScoreValue from "../../components/Player/ScoreValue";
+import ScoreValue from "./ScoreValue";
 
 interface Props {
   score: ScoreInterface;
@@ -35,8 +35,7 @@ const scoreState = (score: ScoreInterface): string => {
   return formatNumber(getValue(score, new Date()));
 };
 
-export default function ScoreContainer(props: Props) {
-
+export default (props: Props) => {
   const [score, setScore] = useState(scoreState(props.score));
 
   let allowAnimationUpdate: boolean = true;
@@ -53,15 +52,16 @@ export default function ScoreContainer(props: Props) {
     window.requestAnimationFrame(updateScore);
   }
 
-  useEffect(() => {
-    allowAnimationUpdate = true;
-    updateScore();
-    return () => {
-      allowAnimationUpdate = false;
-    };
-  }, [props.score]);
-
-  return (
-    <ScoreValue score={score}/>
+  useEffect(
+    () => {
+      allowAnimationUpdate = true;
+      updateScore();
+      return () => {
+        allowAnimationUpdate = false;
+      };
+    },
+    [props.score]
   );
+
+  return <ScoreValue score={score} />;
 }

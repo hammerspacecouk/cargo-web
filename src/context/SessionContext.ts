@@ -1,4 +1,11 @@
-import { createElement, createContext, useContext, useEffect, useState, useRef } from "react";
+import {
+  createElement,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useRef
+} from "react";
 
 import PlayerInterface from "../interfaces/PlayerInterface";
 import RankStatusInterface from "../interfaces/RankStatusInterface";
@@ -42,25 +49,31 @@ const SessionContext = createContext({
   refreshSession: () => {}
 });
 
-const getSession = (
-  cookies?: any
-): Promise<SessionResponseInterface> => {
+const getSession = (cookies?: any): Promise<SessionResponseInterface> => {
   return ApiClient.fetch("/login/check", null, cookies);
 };
 
-
 function useScore(): [ScoreInterface, (newScore: ScoreInterface) => void] {
   const [score, setScore] = useState(initialSession.score);
-  return [score, (newScore: ScoreInterface) => {
-    setScore(newScore);
-  }];
+  return [
+    score,
+    (newScore: ScoreInterface) => {
+      setScore(newScore);
+    }
+  ];
 }
 
-function useRankStatus(): [RankStatusInterface, (newRanksStatus: RankStatusInterface) => void] {
+function useRankStatus(): [
+  RankStatusInterface,
+  (newRanksStatus: RankStatusInterface) => void
+] {
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
-  return [rankStatus, (newRanksStatus: RankStatusInterface) => {
-    setRanksStatus(newRanksStatus);
-  }];
+  return [
+    rankStatus,
+    (newRanksStatus: RankStatusInterface) => {
+      setRanksStatus(newRanksStatus);
+    }
+  ];
 }
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
@@ -69,7 +82,9 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
   const [score, updateScore] = useScore();
   const [rankStatus, updateRankStatus] = useRankStatus();
   const [player, setPlayer] = useState(initialSession.player);
-  const [hasProfileNotification, setHasProfileNotification] = useState(initialSession.hasProfileNotification);
+  const [hasProfileNotification, setHasProfileNotification] = useState(
+    initialSession.hasProfileNotification
+  );
   const allowUpdate = useRef(true);
 
   function updateSession() {
@@ -125,7 +140,6 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
     PromotionModal
   );
 }
-
 
 export function useSessionContext(): SessionContextInterface {
   return useContext(SessionContext);

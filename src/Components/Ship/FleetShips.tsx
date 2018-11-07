@@ -77,7 +77,7 @@ const ship = (ship: ShipInterface) => (
   </tr>
 );
 
-export default ({ships}: Props) => {
+export default ({ ships }: Props) => {
   let shipRows;
   if (ships !== undefined) {
     shipRows = ships.map(ship);

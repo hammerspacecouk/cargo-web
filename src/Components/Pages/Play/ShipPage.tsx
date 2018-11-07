@@ -1,14 +1,42 @@
 import * as React from "react";
-import Loading from "../../Navigation/Loading";
+import { withRouter } from "react-router";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import Port from "./Ship/Port";
-import Travelling from "./Ship/Travelling";
+import Loading from "../../Navigation/Loading";
+import Port from "./Port";
+import Travelling from "./Travelling";
+import NotFound from "../../Error/NotFound";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { ApiClient } from "../../../util/ApiClient";
 
+export interface ShipParamsInterface {
+  match: {
+    params: {
+      shipId: string;
+    };
+  };
+}
 
-export default () => {
-  const { port, channel, ship } = useCurrentShipContext();
+export default withRouter(({match}: ShipParamsInterface) => {
+  const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
+
+  const allowUpdate = useRef(true);
+  useEffect(async () => {
+    const response = await ApiClient.fetch(`/play/${match.params.shipId}`);
+    const data = await response.json();
+    if (allowUpdate.current) {
+      updateFullResponse(data);
+    }
+    return () => {
+      allowUpdate.current = false;
+    };
+  }, [match.params.shipId]);
+
+  if (ship === undefined) {
+    return <Loading />; // todo - error state, and ensure login?
+  }
   if (!ship) {
-    return <Loading/>; // todo - error state, and ensure login?
+    return <NotFound message="You be making ship up" />;
   }
 
   let main = null;
@@ -24,4 +52,4 @@ export default () => {
       {main}
     </main>
   );
-};
+});

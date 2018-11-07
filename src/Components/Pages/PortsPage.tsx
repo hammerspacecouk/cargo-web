@@ -7,7 +7,7 @@ interface PropsInterface {
   ports?: PortInterface[];
 }
 
-export default function PortsPage({ports}: PropsInterface) {
+export default function PortsPage({ ports }: PropsInterface) {
   const portsList = (
     <ul>
       {ports.map((port: PortInterface, index: number) => {

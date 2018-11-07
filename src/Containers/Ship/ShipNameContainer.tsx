@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
-import TokenButton from "../Button/TokenButton";
+import TokenButton from "../../components/Button/TokenButton";
 import ShipInterface from "../../interfaces/ShipInterface";
 import { CurrentShipContext } from "../../context/CurrentShipContext";
 import { acceptShipName } from "../../Models/Ship";

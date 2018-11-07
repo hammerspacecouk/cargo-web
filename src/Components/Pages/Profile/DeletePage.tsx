@@ -3,7 +3,7 @@ import { parse as parseQueryString } from "query-string";
 import Error from "../../Error/Error";
 import ProfileLayout from "../../Layout/ProfileLayout";
 import routes from "../../../routes";
-import TokenButton from "../../../Containers/Button/TokenButton";
+import TokenButton from "../../Button/TokenButton";
 
 interface PropsInterface {
   query?: string;
@@ -19,8 +19,7 @@ const stageTexts = [
       Press ‘Yes’ to proceed.`
 ];
 
-export default function DeletePage({query}: PropsInterface) {
-
+export default function DeletePage({ query }: PropsInterface) {
   const queryData = parseQueryString(query);
   const stage = parseInt(queryData.stage || 1);
   if (stage < 1 || stage > 3) {

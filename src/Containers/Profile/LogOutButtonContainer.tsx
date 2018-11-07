@@ -1,7 +1,7 @@
 import * as React from "react";
 import routes from "../../routes";
 import { MessageError, MessageWarning } from "../../components/Panel/Messages";
-import CountdownLink from "../Button/CountdownLink";
+import CountdownLink from "../../components/Button/CountdownLink";
 import Modal from "../../components/Panel/Modal";
 
 interface Props {

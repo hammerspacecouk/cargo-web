@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import { useFleetState } from "../../../hooks/useFleetState";
 import { useSessionContext } from "../../../context/SessionContext";
 import PlayerFlag from "../../Player/PlayerFlag";
@@ -17,16 +17,16 @@ export default () => {
         <div className="t-fleet__title-bar">
           <h1 className="t-fleet__title">My Fleet</h1>
           <div className="t-fleet__flag">
-            <PlayerFlag player={player}/>
+            <PlayerFlag player={player} />
           </div>
         </div>
         <div className="t-fleet__main">
           <div className="t-fleet__ships">
-            <FleetShips ships={activeShips}/>
-            <DestroyedShips ships={destroyedShips}/>
+            <FleetShips ships={activeShips} />
+            <DestroyedShips ships={destroyedShips} />
           </div>
           <div className="t-fleet__aside">
-            <EventsList events={events} firstPerson/>
+            <EventsList events={events} firstPerson />
             <Rank rankStatus={rankStatus} />
           </div>
         </div>

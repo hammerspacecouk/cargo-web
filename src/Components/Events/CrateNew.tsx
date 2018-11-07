@@ -13,7 +13,7 @@ export default ({ firstPerson, event }: Props) => {
     you = " for you ";
   }
 
-  const contents = event.crate ? event.crate.contents : '[deleted]';
+  const contents = event.crate ? event.crate.contents : "[deleted]";
 
   return (
     <Event time={event.time}>

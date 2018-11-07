@@ -7,7 +7,7 @@ interface PropsInterface {
   port?: PortInterface;
 }
 
-export default function PortPage({port} : PropsInterface) {
+export default function PortPage({ port }: PropsInterface) {
   if (!port) {
     return <NotFound message="You need a new map. There is no port here" />;
   }

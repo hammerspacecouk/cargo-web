@@ -13,19 +13,18 @@ interface Props {
 }
 
 interface State {
-  errorMessage: string|undefined;
+  errorMessage: string | undefined;
 }
 
 // componentDidCatch not yet available via hooks
 export default class App extends React.Component<Props, State> {
-
   constructor(props: Props) {
     super(props);
     this.state = { errorMessage: undefined };
   }
 
   catchMessage = (error: PromiseRejectionEvent) => {
-    console.log('I caught something via listener');
+    console.log("I caught something via listener");
     this.setState({
       errorMessage: error.reason.message
     });
@@ -33,7 +32,7 @@ export default class App extends React.Component<Props, State> {
   };
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.log('I caught something');
+    console.log("I caught something");
     this.setState({
       errorMessage: error.toString()
     });
@@ -49,18 +48,14 @@ export default class App extends React.Component<Props, State> {
   }
 
   render() {
-    const {routes, initialData} = this.props;
+    const { routes, initialData } = this.props;
 
     let errorModal = null;
     if (this.state.errorMessage) {
       errorModal = (
-        <Modal
-          isOpen={true}
-          title="An error occurred"
-        >
+        <Modal isOpen={true} title="An error occurred">
           <p>
-            There was an error loading data.
-            Please reload the page to try again
+            There was an error loading data. Please reload the page to try again
           </p>
           <p>Detail: {this.state.errorMessage}</p>
           <div className="modal__action">
@@ -72,7 +67,7 @@ export default class App extends React.Component<Props, State> {
 
     return (
       <SessionContextComponent>
-        <Masthead/>
+        <Masthead />
         <main>
           <div className="main">
             <Switch>
@@ -89,7 +84,7 @@ export default class App extends React.Component<Props, State> {
                   }
                 />
               ))}
-              <Route component={NotFound}/>
+              <Route component={NotFound} />
             </Switch>
           </div>
         </main>

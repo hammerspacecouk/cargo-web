@@ -3,7 +3,7 @@ import { Component, createElement } from "react";
 import AppLoading from "../components/Pages/Play/AppLoading";
 
 interface StateInterface {
-  appReady: boolean
+  appReady: boolean;
 }
 
 // The server rendered game just shows a "JavaScript" required view
@@ -14,7 +14,7 @@ class PlayComponent extends Component<undefined, StateInterface> {
 
   componentDidMount() {
     this.setState({
-      appReady: true,
+      appReady: true
     });
   }
 
@@ -26,4 +26,4 @@ class PlayComponent extends Component<undefined, StateInterface> {
   }
 }
 
-export default (PlayComponent);
+export default PlayComponent;

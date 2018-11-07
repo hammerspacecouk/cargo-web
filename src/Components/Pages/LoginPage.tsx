@@ -6,16 +6,14 @@ interface PropsInterface {
   query?: string;
 }
 
-export default function LoginPage({query}: PropsInterface) {
+export default function LoginPage({ query }: PropsInterface) {
   return (
     <div className="t-doc">
       <div className="t-doc__title">
         <h1>Login</h1>
       </div>
       <div className="t-doc__main">
-        <LoginForm
-          messages={messageQueryString(query)}
-        />
+        <LoginForm messages={messageQueryString(query)} />
       </div>
     </div>
   );

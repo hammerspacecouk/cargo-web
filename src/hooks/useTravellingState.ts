@@ -10,7 +10,7 @@ const secondsRemaining = (arrival: Date) => {
 };
 
 const useTravellingCountdown = () => {
-  const {channel} = useCurrentShipContext();
+  const { channel } = useCurrentShipContext();
 
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
@@ -38,7 +38,7 @@ const useTravellingCountdown = () => {
 export const useTravellingState = () => {
   const { updateScore, updateRankStatus } = useSessionContext();
   const { refreshState } = useCurrentShipContext();
-  const {percent, secondsRemaining, isArriving} = useTravellingCountdown();
+  const { percent, secondsRemaining, isArriving } = useTravellingCountdown();
   const allowArrivalCheck = useRef(true);
 
   const handleArrival = async () => {
@@ -57,17 +57,20 @@ export const useTravellingState = () => {
     }
   };
 
-  useEffect(() => {
-    if (isArriving && allowArrivalCheck.current) {
-      handleArrival();
-    }
-    return () => {
-      allowArrivalCheck.current = false;
-    };
-  }, [isArriving]);
+  useEffect(
+    () => {
+      if (isArriving && allowArrivalCheck.current) {
+        handleArrival();
+      }
+      return () => {
+        allowArrivalCheck.current = false;
+      };
+    },
+    [isArriving]
+  );
 
   return {
     secondsRemaining,
     percent
-  }
+  };
 };

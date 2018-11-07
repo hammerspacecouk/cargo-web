@@ -1,17 +1,16 @@
 import * as React from "react";
-import { useState } from "react";
 import RankStatusInterface from "../../interfaces/RankStatusInterface";
-import ProgressBar from "../../components/Element/ProgressBar";
+import ProgressBar from "../Element/ProgressBar";
 
 interface Props {
   rankStatus?: RankStatusInterface;
 }
 
-export default function PromotionContainer({ rankStatus }: Props) {
+export default ({ rankStatus }: Props) => {
   let allowAnimationUpdate: boolean = false;
   let startTime: number = null;
 
-  const [displayState, setDisplayState] = useState({
+  const [displayState, setDisplayState] = React.useState({
     previousClass: "",
     previousActive: true,
     nextActive: false,
@@ -48,15 +47,17 @@ export default function PromotionContainer({ rankStatus }: Props) {
     window.requestAnimationFrame(animate);
   }
 
-  React.useEffect(() => {
-    allowAnimationUpdate = true;
-    window.requestAnimationFrame(animate);
-    return () => {
-      allowAnimationUpdate = false;
-      startTime = null;
-    };
-  }, [rankStatus]);
-
+  React.useEffect(
+    () => {
+      allowAnimationUpdate = true;
+      window.requestAnimationFrame(animate);
+      return () => {
+        allowAnimationUpdate = false;
+        startTime = null;
+      };
+    },
+    [rankStatus]
+  );
 
   if (!rankStatus) {
     return null;
@@ -75,9 +76,7 @@ export default function PromotionContainer({ rankStatus }: Props) {
 
   if (displayState.nextActive) {
     previous = (
-      <div className="o-promotion__current">
-        {rankStatus.currentRank.title}
-      </div>
+      <div className="o-promotion__current">{rankStatus.currentRank.title}</div>
     );
   }
 
@@ -89,7 +88,7 @@ export default function PromotionContainer({ rankStatus }: Props) {
       </div>
 
       <div className="o-promotion__progress">
-        <ProgressBar percent={displayState.progress}/>
+        <ProgressBar percent={displayState.progress} />
       </div>
 
       <p>Share this:</p>

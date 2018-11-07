@@ -1,4 +1,4 @@
-import {Component, createElement} from "react";
+import { Component, createElement } from "react";
 import withInitialData from "./withInitialData";
 
 import AboutPage from "../components/Pages/AboutPage";
@@ -7,7 +7,6 @@ import DuplicatePage from "../components/Pages/About/DuplicatePage";
 import PoliciesPage from "../components/Pages/About/PoliciesPage";
 import StatusPage from "../components/Pages/About/StatusPage";
 import StyleGuidePage from "../components/Pages/About/StyleGuidePage";
-
 
 class AboutIndex extends Component<undefined, undefined> {
   render() {

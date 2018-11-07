@@ -1,5 +1,5 @@
 // temporary patch for react hooks types
-// update index.d.ts line 560
+// update index.d.ts line 566
 
 
 declare namespace React {
@@ -16,4 +16,6 @@ declare namespace React {
   function useContext<T>(component: any): any;
 
   function useRef<T>(initialState: T): { current: any };
+
+  function memo(component: (props?: any) => any, compare?: (prev: any, next: any) => any): {};
 }

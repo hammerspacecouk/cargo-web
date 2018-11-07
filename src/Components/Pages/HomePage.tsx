@@ -34,18 +34,15 @@ const renderPlayPanel = (player?: PlayerInterface) => {
       <div className="text--center unit">
         <div className="align--inline">
           <form action={routes.getLoginAnonymous()} method="post">
-          <button className="button m-icon-suffix--animated">
-            New game
-          </button>
+            <button className="button m-icon-suffix--animated">New game</button>
           </form>
         </div>
       </div>
       <h3 className="d unit">Or create/resume a logged in game:</h3>
-      <LoginForm/>
+      <LoginForm />
     </>
   );
 };
-
 
 export default function HomePage({ events }: Props) {
   return (
@@ -58,9 +55,7 @@ export default function HomePage({ events }: Props) {
       <div className="t-home__play panel">
         <h2 className="panel__title">Play now</h2>
         <SessionContext.Consumer>
-          {({ player }) =>
-            renderPlayPanel(player)
-          }
+          {({ player }) => renderPlayPanel(player)}
         </SessionContext.Consumer>
       </div>
       <main className="t-home__main">
@@ -68,13 +63,12 @@ export default function HomePage({ events }: Props) {
           <p>
             Colonisation of space has begun, and interstellar shipping is big
             business. You've got to get in on this. Who else is going to
-            transport those vital supplies of saxophones 🎷 to the other side
-            of the galaxy?
+            transport those vital supplies of saxophones 🎷 to the other side of
+            the galaxy?
           </p>
           <p>
-            But it's a wild west out there. Can you survive, thrive and
-            exploit all <strong>1,000</strong> known planets before someone
-            else does.
+            But it's a wild west out there. Can you survive, thrive and exploit
+            all <strong>1,000</strong> known planets before someone else does.
           </p>
 
           <ul>
@@ -97,7 +91,7 @@ export default function HomePage({ events }: Props) {
 
         <div>
           <h2>What's happening right now?</h2>
-          <EventsList events={events}/>
+          <EventsList events={events} />
         </div>
       </main>
       <aside className="t-home__aside">
@@ -105,4 +99,4 @@ export default function HomePage({ events }: Props) {
       </aside>
     </div>
   );
-};
+}

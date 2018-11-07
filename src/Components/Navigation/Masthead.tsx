@@ -8,11 +8,9 @@ import routes from "../../routes";
 const GuestActions = () => (
   <div className="masthead__play masthead__link-box">
     <form action={routes.getLoginAnonymous()} method="post">
-    <button
-      className="masthead__link m-icon-suffix--animated"
-    >
-      Play now
-    </button>
+      <button className="masthead__link m-icon-suffix--animated">
+        Play now
+      </button>
     </form>
   </div>
 );
@@ -24,7 +22,7 @@ const PlayerActions = () => {
     <>
       <div className="masthead__score">
         <Link to={routes.getPlay()} rel="nofollow" className="masthead__link">
-          <ScoreContainer score={score}/>
+          <ScoreContainer score={score} />
         </Link>
       </div>
       <div className="masthead__profile">
@@ -35,9 +33,9 @@ const PlayerActions = () => {
           className="masthead__link"
         >
           <span className="hidden">Profile</span>
-          <ProfileIcon/>
+          <ProfileIcon />
           {hasProfileNotification && (
-            <abbr className="masthead__notify" title="Notification to view"/>
+            <abbr className="masthead__notify" title="Notification to view" />
           )}
         </a>
       </div>
@@ -57,9 +55,9 @@ export default () => {
           </a>
         </div>
         <div className="masthead__actions">
-          {player ? <PlayerActions/> : <GuestActions/>}
+          {player ? <PlayerActions /> : <GuestActions />}
         </div>
       </div>
     </header>
   );
-}
+};

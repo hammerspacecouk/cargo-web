@@ -5,10 +5,10 @@ import Error from "./Error";
 import Loading from "../Navigation/Loading";
 
 export interface Props {
-  error: ErrorResponseInterface|null;
+  error: ErrorResponseInterface | null;
 }
 
-export default ({error}: Props) => {
+export default ({ error }: Props) => {
   if (error) {
     let loginForm = null;
     if (error.statusCode === 429) {
@@ -21,10 +21,7 @@ export default ({error}: Props) => {
     }
     return (
       <>
-        <Error
-          code={error.statusCode}
-          message={error.message}
-        />
+        <Error code={error.statusCode} message={error.message} />
         {loginForm}
       </>
     );

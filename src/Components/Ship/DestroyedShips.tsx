@@ -20,7 +20,7 @@ const ship = (ship: ShipInterface) => (
   </tr>
 );
 
-export default ({ships}: Props) => {
+export default ({ ships }: Props) => {
   if (!ships || ships.length === 0) {
     return null;
   }

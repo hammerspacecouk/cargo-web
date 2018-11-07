@@ -10,7 +10,11 @@ import { Request } from "express";
 class ProfileComponent extends Component<RouteProps, undefined> {
   static async getInitialData(_: match, request: Request) {
     try {
-      return await ApiClient.fetch("/profile", null, request && request.cookies);
+      return await ApiClient.fetch(
+        "/profile",
+        null,
+        request && request.cookies
+      );
     } catch (e) {
       if (e.statusCode && e.statusCode === 403) {
         return { isLoggedOut: true };
@@ -31,4 +35,4 @@ class DeleteComponent extends Component<RouteProps, undefined> {
 }
 
 export default withPlayer(ProfileComponent);
-export const Delete =  withPlayer(withRouter(DeleteComponent as any));
+export const Delete = withPlayer(withRouter(DeleteComponent as any));

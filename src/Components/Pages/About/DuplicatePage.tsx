@@ -16,28 +16,28 @@ export default function DuplicatePage() {
         <p>
           To use <strong>this</strong> account as your preferred account, you
           will first need to delete your previous account which is linked to
-          that e-mail address. To do this, login to the other account and
-          visit the <a href="/profile/delete">Delete</a> page.
+          that e-mail address. To do this, login to the other account and visit
+          the <a href="/profile/delete">Delete</a> page.
         </p>
         <MessageInfo>
           You should use an Incognito/Private window to login to your other
           account so that you do not lose this anonymous account.
         </MessageInfo>
         <p>
-          Once the other account has been deleted, you will be able to
-          register this account to that e-mail address on your{" "}
+          Once the other account has been deleted, you will be able to register
+          this account to that e-mail address on your{" "}
           <a href="/profile">Profile</a> page.
         </p>
 
         <h2>2. Use your already registered account</h2>
         <p>
           To use your other account, you will first have to log out of this
-          anonymous account. You will then be able to log in to your
-          registered account using the standard methods on the{" "}
-          <a href="/login">Login</a> page
+          anonymous account. You will then be able to log in to your registered
+          account using the standard methods on the <a href="/login">Login</a>{" "}
+          page
         </p>
       </div>
-      <LogOutButtonContainer isAnonymous={true}/>
+      <LogOutButtonContainer isAnonymous={true} />
     </AboutLayout>
   );
 }

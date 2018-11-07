@@ -1,13 +1,13 @@
 import * as React from "react";
 import ScoreInterface from "../../interfaces/ScoreInterface";
 import { useFrameEffect } from "../../hooks/useFrameEffect";
-import { getValue } from "../Player/ScoreContainer";
+import { getValue } from "../../Containers/Player/ScoreContainer";
 import { useSessionContext } from "../../context/SessionContext";
-import ScoreValue from "../../components/Player/ScoreValue";
+import ScoreValue from "../Player/ScoreValue";
 
 interface Props {
   readonly amount: number;
-  readonly disabled?: boolean;
+  readonly disabledOverride?: boolean;
 }
 
 const isDisabled = (
@@ -27,17 +27,21 @@ const isDisabled = (
 
 export default ({ amount, disabledOverride }: Props) => {
   const { score } = useSessionContext();
-  const [disabled, setDisabled] = useState(
+  const [disabled, setDisabled] = React.useState(
     isDisabled(amount, score, disabledOverride)
   );
 
-  useFrameEffect(() => {
-    setDisabled(isDisabled(amount, score, disabledOverride));
-  }, [amount, disabledOverride]);
+  useFrameEffect(
+    () => {
+      setDisabled(isDisabled(amount, score, disabledOverride));
+      return true;
+    },
+    [amount, disabledOverride]
+  );
 
   return (
     <button className="button" type="submit" disabled={disabled}>
-      <ScoreValue score={amount.toString(10)}/>
+      <ScoreValue score={amount.toString(10)} />
     </button>
   );
 };

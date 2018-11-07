@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
-import RequireLogin from "../../components/Login/RequireLogin";
-import Loading from "../../components/Navigation/Loading";
+import RequireLogin from "./RequireLogin";
+import Loading from "../Navigation/Loading";
 import { useSessionContext } from "../../context/SessionContext";
 
 interface InitialPropsInterface {
@@ -9,17 +9,17 @@ interface InitialPropsInterface {
 }
 
 // Client-side login check
-export default ({children}: InitialPropsInterface) => {
-  const {player, refreshSession} = useSessionContext();
+export default ({ children }: InitialPropsInterface) => {
+  const { player, refreshSession } = useSessionContext();
 
   useEffect(() => {
     if (player === undefined) {
       refreshSession();
     }
-  }, player);
+  }, [player]);
 
   if (player === undefined) {
-    return <Loading />
+    return <Loading />;
   }
   if (!player) {
     return <RequireLogin />;

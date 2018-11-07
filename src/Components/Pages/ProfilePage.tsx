@@ -36,12 +36,20 @@ const getAttachEmailForm = () => {
   );
 };
 
-export default function ProfilePage({session, isAnonymous, canDelete, homePort}: Props) {
-  const {setSession} = useSessionContext();
+export default function ProfilePage({
+  session,
+  isAnonymous,
+  canDelete,
+  homePort
+}: Props) {
+  const { setSession } = useSessionContext();
 
-  useEffect(() => {
-    setSession(session);
-  }, [session]);
+  useEffect(
+    () => {
+      setSession(session);
+    },
+    [session]
+  );
 
   if (session === undefined) {
     return <Loading />;
@@ -50,17 +58,15 @@ export default function ProfilePage({session, isAnonymous, canDelete, homePort}:
     return <Error />;
   }
 
-  const playingSinceDate: Date = new Date(
-    session.player.startedAt
-  );
+  const playingSinceDate: Date = new Date(session.player.startedAt);
 
   let mode;
   if (isAnonymous) {
     mode = (
       <>
         <span className="icon icon--mini icon--prefix color-danger-text">
-            <ErrorIcon />
-          </span>
+          <ErrorIcon />
+        </span>
         Anonymous
       </>
     );
@@ -78,36 +84,30 @@ export default function ProfilePage({session, isAnonymous, canDelete, homePort}:
       <div>
         <table className="table">
           <tbody>
-          <tr>
-            <th>Player ID:</th>
-            <td>{session.player.id}</td>
-          </tr>
-          <tr>
-            <th>Game mode:</th>
-            <td>{mode}</td>
-          </tr>
-          <tr>
-            <th>Playing since:</th>
-            <td>{fullDate(playingSinceDate)}</td>
-          </tr>
+            <tr>
+              <th>Player ID:</th>
+              <td>{session.player.id}</td>
+            </tr>
+            <tr>
+              <th>Game mode:</th>
+              <td>{mode}</td>
+            </tr>
+            <tr>
+              <th>Playing since:</th>
+              <td>{fullDate(playingSinceDate)}</td>
+            </tr>
           </tbody>
         </table>
 
         <div className="panel">
           <LogOutButtonContainer isAnonymous={isAnonymous} />
-          <Delete
-            route={routes.getProfileDelete()}
-            canDelete={canDelete}
-          />
+          <Delete route={routes.getProfileDelete()} canDelete={canDelete} />
         </div>
       </div>
 
       {isAnonymous && getAttachEmailForm()}
       <h2>
-        Home port:{" "}
-        <a href={routes.getPortShow(homePort.id)}>
-          {homePort.name}
-        </a>
+        Home port: <a href={routes.getPortShow(homePort.id)}>{homePort.name}</a>
       </h2>
     </ProfileLayout>
   );

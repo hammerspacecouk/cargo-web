@@ -1,6 +1,6 @@
 import { APIClientInterface } from "../ApiClient";
-import {Environment} from "../Environment";
-import {Logger} from "../Logger";
+import { Environment } from "../Environment";
+import { Logger } from "../Logger";
 
 const passThroughCookies = (cookies?: any) => {
   if (!cookies) {

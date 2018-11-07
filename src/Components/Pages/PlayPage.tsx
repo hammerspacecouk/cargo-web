@@ -7,7 +7,7 @@ import FleetContainer from "./Play/FleetPage";
 import NotFound from "../../components/Error/NotFound";
 import PlayBar from "../../components/Navigation/PlayBar";
 import CurrentShipContextComponent from "../../context/CurrentShipContext";
-import EnsureLoggedIn from "../../Containers/Login/EnsureLoggedIn";
+import EnsureLoggedIn from "../Login/EnsureLoggedIn";
 import UpgradesPage from "./Play/UpgradesPage";
 import ShipPage from "./Play/ShipPage";
 import FleetPage from "./Play/FleetPage";
@@ -24,17 +24,13 @@ export default function PlayPage() {
                 component={UpgradesPage}
                 exact={true}
               />
-              <Route
-                path="/play/:shipId"
-                component={ShipPage}
-                exact={true}
-              />
-              <Route path="/play" component={FleetPage} exact={true}/>
-              <Route component={NotFound}/>
+              <Route path="/play/:shipId" component={ShipPage} exact={true} />
+              <Route path="/play" component={FleetPage} exact={true} />
+              <Route component={NotFound} />
             </Switch>
           </div>
           <div className="t-play__navigation">
-            <PlayBar/>
+            <PlayBar />
           </div>
         </div>
       </CurrentShipContextComponent>

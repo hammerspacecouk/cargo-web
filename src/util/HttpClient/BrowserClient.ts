@@ -1,7 +1,7 @@
 import CacheControl from "./CacheControlHelper";
 import { APIClientInterface } from "../ApiClient";
-import {Logger} from "../Logger";
-import {Environment} from "../Environment";
+import { Logger } from "../Logger";
+import { Environment } from "../Environment";
 
 interface StoredUrlData {
   expires: any;
@@ -81,9 +81,7 @@ export default class implements APIClientInterface {
     const response = await fetch(url, options);
 
     const time = Date.now() - start;
-    Logger.info(
-      `[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`
-    );
+    Logger.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);
 
     if (response.status === 409) {
       // you tried to perform an action you weren't allowed to perform. CHEAT!

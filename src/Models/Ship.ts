@@ -34,12 +34,6 @@ export interface RequestShipNameResponse {
   readonly action: ActionTokenInterface;
 }
 
-export const getPlayDataByShipId = (
-  shipId: string
-): Promise<PlayShipResponse> => {
-  return API.fetch(`/play/${shipId}`);
-};
-
 export const requestShipName = (
   token: ActionTokenInterface
 ): Promise<RequestShipNameResponse> => {
@@ -51,10 +45,4 @@ export const acceptShipName = async (
 ): Promise<ShipInterface> => {
   const data = await API.fetch(token.path, { token: token.token });
   return data.ship;
-};
-
-export const doPortAction = async (
-  token: ActionTokenInterface
-): Promise<PlayShipResponse> => {
-  return API.fetch(token.path, { token: token.token });
 };
