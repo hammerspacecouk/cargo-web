@@ -1,6 +1,7 @@
 import { APIClientInterface } from "../ApiClient";
 import { Environment } from "../Environment";
 import { Logger } from "../Logger";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 
 const passThroughCookies = (cookies?: any) => {
   if (!cookies) {
@@ -23,6 +24,10 @@ const passThroughCookies = (cookies?: any) => {
 export default class implements APIClientInterface {
   getUrl(path: string): string {
     return Environment.apiHostname + path;
+  }
+
+  tokenFetch(token: ActionTokenInterface): Promise<any> {
+    return this.fetch(token.path, { token: token.token })
   }
 
   async fetch(path: string, payload?: object, cookies?: object): Promise<any> {

@@ -3,7 +3,7 @@ import * as React from "react";
 import ActionTokenInterface from "../../DomainInterfaces/ActionTokenInterface";
 import TokenButton from "../../Containers/Button/TokenButton";
 import CreditsButton from "../../Containers/Button/CreditsButton";
-import ShipNameContainer from "../../Containers/Ship/ShipNameContainer";
+import ShipNameGenerator from "../../Containers/Ship/ShipNameGenerator";
 import EnsureShipContainer from "./EnsureShipContainer";
 import { ShipParamsInterface } from "./index";
 import {
@@ -81,7 +81,7 @@ class EditContainer extends React.Component<Props, State> {
     let shipName = null;
     if (this.state.requestingShipName || this.state.offeredShipName) {
       shipName = (
-        <ShipNameContainer
+        <ShipNameGenerator
           offeredShipName={this.state.offeredShipName}
           offeredShipNameToken={this.state.offeredShipNameToken}
           resetOffer={() => {

@@ -31,7 +31,7 @@ export const PlayPortContextProvider = ({
 
   const doPortAction = async (token: ActionTokenInterface) => {
     try {
-      const data = await ApiClient.fetch(token.path, { token: token.token });
+      const data = await ApiClient.tokenFetch(token);
       updateScore(data.playerScore);
       updateFullResponse(data);
     } catch (e) {

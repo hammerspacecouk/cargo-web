@@ -1,8 +1,8 @@
 import * as React from "react";
 import routes from "../../routes";
-import { MessageError, MessageWarning } from "../../components/Panel/Messages";
-import CountdownLink from "../../components/Button/CountdownLink";
-import Modal from "../../components/Panel/Modal";
+import { MessageError, MessageWarning } from "../Panel/Messages";
+import CountdownLink from "../Button/CountdownLink";
+import Modal from "../Panel/Modal";
 
 interface Props {
   readonly isAnonymous: boolean;
@@ -12,7 +12,7 @@ interface LocalState {
   modalIsOpen: boolean;
 }
 
-export default class LogOutButtonContainer extends React.Component<
+export default class LogOutButton extends React.Component<
   Props,
   LocalState
 > {

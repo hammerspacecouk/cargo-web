@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import AboutLayout from "../../Layout/AboutLayout";
-import LogOutButtonContainer from "../../../Containers/Profile/LogOutButtonContainer";
+import LogOutButton from "../../Login/LogOutButton";
 import { MessageInfo } from "../../Panel/Messages";
 
 export default function DuplicatePage() {
@@ -37,7 +37,7 @@ export default function DuplicatePage() {
           page
         </p>
       </div>
-      <LogOutButtonContainer isAnonymous={true} />
+      <LogOutButton isAnonymous={true} />
     </AboutLayout>
   );
 }

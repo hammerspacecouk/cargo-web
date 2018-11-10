@@ -4,7 +4,7 @@ import Error from "../Error/Error";
 import ErrorIcon from "../Icons/ErrorIcon";
 import ProfileLayout from "../Layout/ProfileLayout";
 import { fullDate } from "../../util/Format";
-import LogOutButtonContainer from "../../Containers/Profile/LogOutButtonContainer";
+import LogOutButton from "../Login/LogOutButton";
 import Delete from "../Profile/Delete";
 import routes from "../../routes";
 import PortInterface from "../../interfaces/PortInterface";
@@ -100,7 +100,7 @@ export default function ProfilePage({
         </table>
 
         <div className="panel">
-          <LogOutButtonContainer isAnonymous={isAnonymous} />
+          <LogOutButton isAnonymous={isAnonymous} />
           <Delete route={routes.getProfileDelete()} canDelete={canDelete} />
         </div>
       </div>

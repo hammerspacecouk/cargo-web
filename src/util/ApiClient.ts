@@ -1,10 +1,12 @@
 import BrowserClient from "./HttpClient/BrowserClient";
 import ServerClient from "./HttpClient/ServerClient";
 import { isClient, isServer } from "./Runtime";
+import ActionTokenInterface from "../interfaces/ActionTokenInterface";
 
 export interface APIClientInterface {
   getUrl(path: string): string;
   fetch(path: string, payload?: object, cookies?: object): Promise<any>;
+  tokenFetch(token: ActionTokenInterface): Promise<any>;
 }
 
 export interface ErrorResponseInterface {

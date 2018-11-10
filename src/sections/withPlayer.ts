@@ -12,6 +12,7 @@ interface Props {
 export default (Page: InitialDataComponent) => {
   class WithPlayer extends Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
+      // request & cookies will only be available on the server
       if (request && !request.cookies.AUTHENTICATION_TOKEN) {
         return { isLoggedOut: true };
       }

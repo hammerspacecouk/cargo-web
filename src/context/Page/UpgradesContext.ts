@@ -37,7 +37,7 @@ export const UpgradesContextProvider = ({
 
     //make the API call
     try {
-      const data = await ApiClient.fetch(token.path, { token: token.token });
+      const data = await ApiClient.tokenFetch(token);
       setShips(data.ships);
       setMessage(data.message);
 

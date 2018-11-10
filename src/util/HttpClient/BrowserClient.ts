@@ -1,7 +1,8 @@
 import CacheControl from "./CacheControlHelper";
-import { APIClientInterface } from "../ApiClient";
+import { ApiClient, APIClientInterface } from "../ApiClient";
 import { Logger } from "../Logger";
 import { Environment } from "../Environment";
+import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 
 interface StoredUrlData {
   expires: any;
@@ -53,6 +54,10 @@ export default class implements APIClientInterface {
 
   getUrl(path: string): string {
     return Environment.apiHostname + path;
+  }
+
+  tokenFetch(token: ActionTokenInterface): Promise<any> {
+    return this.fetch(token.path, { token: token.token })
   }
 
   async fetch(path: string, payload?: object): Promise<any> {
