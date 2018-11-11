@@ -8,10 +8,9 @@ import LogOutButton from "../Login/LogOutButton";
 import Delete from "../Profile/Delete";
 import routes from "../../routes";
 import PortInterface from "../../interfaces/PortInterface";
-import { SessionResponseInterface } from "../../Models/Session";
 import { MessageWarning } from "../Panel/Messages";
 import LoginForm from "../Login/LoginForm";
-import { useSessionContext } from "../../context/SessionContext";
+import { SessionResponseInterface, useSessionContext } from "../../context/SessionContext";
 import { useEffect } from "react";
 
 export interface Props {

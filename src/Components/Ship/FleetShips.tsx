@@ -6,9 +6,11 @@ import ActionLink from "../Link/ActionLink";
 import ShieldIcon from "../Icons/ShieldIcon";
 import ProgressBar from "../Element/ProgressBar";
 import routes from "../../routes";
+import EditShip from "./EditShip";
+import FleetShipInterface from "../../interfaces/ShipInterface";
 
 export interface Props {
-  ships: ShipInterface[];
+  ships: FleetShipInterface[];
 }
 
 // todo - abstract this and use it lots (with the proper interface)
@@ -50,7 +52,10 @@ const tempIcon = (
   </svg>
 );
 
-const ship = (ship: ShipInterface) => (
+const ship = (fleetShip: FleetShipInterface) => {
+  const ship = fleetShip.ship;
+  return (
+  <>
   <tr key={ship.id} className="m-fleet-ship">
     <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">{tempIcon}</td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--name">
@@ -75,7 +80,14 @@ const ship = (ship: ShipInterface) => (
       </Link>
     </td>
   </tr>
+    <tr>
+      <td colSpan={5}>
+        <EditShip fleetShip={fleetShip} />
+      </td>
+    </tr>
+  </>
 );
+};
 
 export default ({ ships }: Props) => {
   let shipRows;

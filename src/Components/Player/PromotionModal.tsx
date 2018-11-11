@@ -1,37 +1,32 @@
+import * as React from "react";
+import { ApiClient } from "../../util/ApiClient";
 import Loading from "../Navigation/Loading";
 import Modal from "../Panel/Modal";
-import PromotionContainer from "../../Containers/Player/PromotionContainer";
 import TokenButton from "../Button/TokenButton";
-import * as React from "react";
 import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
-import { acknowledgePromotion } from "../../Models/Player";
+import Promotion from "./Promotion";
+import { useSessionContext } from "../../context/SessionContext";
 
 export default () => {
-  acknowledgePromotion = async (token: ActionTokenInterface) => {
-    this.setState({
-      acknowledgingPromotion: true
-    });
+  const {rankStatus, updateRankStatus} = useSessionContext();
+  const [acknowledging, setAcknowleging] = React.useState(false);
+
+  const acknowledgePromotion = async (token: ActionTokenInterface) => {
+    setAcknowleging(true);
 
     //make the API call
-    try {
-      const data = await acknowledgePromotion(token);
-      this.setState({
-        acknowledgingPromotion: false
-      });
-      // Updating rankStatus should remove the token and thus close the modal
-      this.updateRankStatus(data.rankStatus);
-    } catch (e) {
-      this.setState({
-        acknowledgingPromotion: true
-      });
-    }
+    const data = await ApiClient.tokenFetch(token);
+    setAcknowleging(false);
+    // Updating rankStatus should remove the token and thus close the modal
+    updateRankStatus(data.rankStatus);
   };
 
-  if (!this.state.rankStatus || !this.state.rankStatus.acknowledgeToken) {
+  if (!rankStatus || !rankStatus.acknowledgeToken) {
     return null;
   }
+
   let button;
-  if (this.state.acknowledgingPromotion) {
+  if (acknowledging) {
     button = (
       <button className="button" type="submit" disabled>
         <Loading />
@@ -47,11 +42,11 @@ export default () => {
 
   return (
     <Modal isOpen={true} title="Promotion">
-      <PromotionContainer rankStatus={this.state.rankStatus} />
+      <Promotion rankStatus={rankStatus} />
       <div className="text--center">
         <TokenButton
-          token={this.state.rankStatus.acknowledgeToken}
-          handler={this.acknowledgePromotion}
+          token={rankStatus.acknowledgeToken}
+          handler={acknowledgePromotion}
         >
           {button}
         </TokenButton>

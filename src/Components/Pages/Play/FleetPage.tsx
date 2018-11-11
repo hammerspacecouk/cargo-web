@@ -1,15 +1,20 @@
 import * as React from "react";
-import { useFleetState } from "../../../hooks/useFleetState";
 import { useSessionContext } from "../../../context/SessionContext";
 import PlayerFlag from "../../Player/PlayerFlag";
 import FleetShips from "../../Ship/FleetShips";
 import DestroyedShips from "../../Ship/DestroyedShips";
 import EventsList from "../../Events/EventsList";
 import Rank from "../../Player/Rank";
+import { FleetContextProvider, useFleetContext } from "../../../context/Page/FleetContext";
+import { useEffect } from "react";
 
-export default () => {
-  const { activeShips, destroyedShips, events } = useFleetState();
+const FleetPage = () => {
+  const { activeShips, destroyedShips, events, refresh } = useFleetContext();
   const { player, rankStatus } = useSessionContext();
+
+  useEffect(() => {
+    refresh();
+  }, []);
 
   return (
     <main className="t-play__content-contain">
@@ -17,20 +22,26 @@ export default () => {
         <div className="t-fleet__title-bar">
           <h1 className="t-fleet__title">My Fleet</h1>
           <div className="t-fleet__flag">
-            <PlayerFlag player={player} />
+            <PlayerFlag player={player}/>
           </div>
         </div>
         <div className="t-fleet__main">
           <div className="t-fleet__ships">
-            <FleetShips ships={activeShips} />
-            <DestroyedShips ships={destroyedShips} />
+            <FleetShips ships={activeShips}/>
+            <DestroyedShips ships={destroyedShips}/>
           </div>
           <div className="t-fleet__aside">
-            <EventsList events={events} firstPerson />
-            <Rank rankStatus={rankStatus} />
+            <EventsList events={events} firstPerson/>
+            <Rank rankStatus={rankStatus}/>
           </div>
         </div>
       </div>
     </main>
   );
 };
+
+export default () => (
+  <FleetContextProvider>
+    <FleetPage/>
+  </FleetContextProvider>
+);

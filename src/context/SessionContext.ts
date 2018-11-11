@@ -14,7 +14,7 @@ import PromotionModal from "../components/Player/PromotionModal";
 import { ApiClient } from "../util/ApiClient";
 import { ChildrenPropsInterface } from "../interfaces/PropsInterface";
 
-interface SessionResponseInterface {
+export interface SessionResponseInterface {
   readonly isLoggedIn: boolean;
   readonly hasProfileNotification: boolean;
   readonly player?: PlayerInterface;

@@ -1,11 +1,12 @@
 import * as React from "react";
 
 import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
-import TokenButton from "../../components/Button/TokenButton";
+import TokenButton from "../Button/TokenButton";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import { ApiClient } from "../../util/ApiClient";
 import { useAllowUpdate } from "../../hooks/useAllowUpdate";
 import { useShipNameGenerator } from "../../hooks/useShipNameGenerator";
+import { useFleetContext } from "../../context/Page/FleetContext";
 
 interface PropsInterface {
   offeredShipName?: string;
@@ -15,7 +16,7 @@ interface PropsInterface {
 
 export default ({offeredShipName, offeredShipNameToken, resetOffer}: PropsInterface) => {
 
-  const {updateCurrentShip} = useCurrentShipContext();
+  const {setData} = useFleetContext();
   const {matched, nameGuess} = useShipNameGenerator(offeredShipName);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
   const allowUpdate = useAllowUpdate();
@@ -27,7 +28,7 @@ export default ({offeredShipName, offeredShipNameToken, resetOffer}: PropsInterf
     const data = await ApiClient.tokenFetch(token);
     if (allowUpdate) {
       setAcceptingShipName(false);
-      updateCurrentShip(data.ship);
+      setData(data); // todo - response doesn't match this yet
       resetOffer();
     }
   };
