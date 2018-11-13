@@ -6,22 +6,28 @@ import { ApiClient } from "../../util/ApiClient";
 import { useAllowUpdate } from "../../hooks/useAllowUpdate";
 import { useSessionContext } from "../SessionContext";
 import FleetShipInterface from "../../interfaces/ShipInterface";
+import ShipNameTokenInterface from "../../interfaces/ShipNameTokenInterface";
 
+interface FleetResponseInterface {
+  activeShips: FleetShipInterface[];
+  destroyedShips: ShipInterface[];
+  events: EventInterface[];
+}
 
 interface FleetContextInterface {
   activeShips: ShipInterface[];
   destroyedShips: ShipInterface[];
   events: EventInterface[];
-  setData: (data: FleetShipInterface) => void;
+  updateRenameToken: (id: string, token: ShipNameTokenInterface) => void;
+  setFleetData: (data: FleetShipInterface) => void;
   refresh: () => void;
 }
 
 const FleetContext = createContext({});
 
-export const FleetContextProvider = () => ({
+export const FleetContextProvider = ({
   children
-}: ChildrenPropsInterface
-) => {
+}: ChildrenPropsInterface) => {
 
   const {setSession} = useSessionContext();
   const [activeShips, setActiveShips] = useState(undefined);
@@ -29,7 +35,18 @@ export const FleetContextProvider = () => ({
   const [events, setEvents] = useState(undefined);
   const allowUpdate = useAllowUpdate();
 
-  const setData = (data: FleetShipInterface) => {
+  const updateRenameToken = (id: string, token: ShipNameTokenInterface) => {
+    const ships = activeShips.slice(0);
+    const len = ships.length;
+    for (let i = 0; i < len; i++) {
+      if (ships[i].ship.id === id) {
+        ships[i].renameToken = token;
+      }
+    }
+    setActiveShips(ships);
+  };
+
+  const setFleetData = (data: FleetResponseInterface) => {
     setActiveShips(data.activeShips);
     setDestroyedShips(data.destroyedShips);
     setEvents(data.events);
@@ -38,7 +55,7 @@ export const FleetContextProvider = () => ({
   const refresh = async () => {
     const data = await ApiClient.fetch("/play");
     if (allowUpdate) {
-      setData(data);
+      setFleetData(data.fleet);
     }
     setSession(data.sessionState);
   };
@@ -50,7 +67,8 @@ export const FleetContextProvider = () => ({
         activeShips,
         destroyedShips,
         events,
-        setData,
+        setFleetData,
+        updateRenameToken,
         refresh
       }
     },

@@ -2,11 +2,11 @@ import * as React from "react";
 import PlayerInterface from "../../interfaces/PlayerInterface";
 import ActionLink from "../Link/ActionLink";
 import LoginForm from "../Login/LoginForm";
-import { SessionContext } from "../../context/SessionContext";
 import routes from "../../routes";
 import { Link } from "react-router-dom";
 import EventsList from "../Events/EventsList";
 import EventInterface from "../../interfaces/EventInterface";
+import { useSessionContext } from "../../context/SessionContext";
 
 interface Props {
   events: EventInterface[];
@@ -44,7 +44,9 @@ const renderPlayPanel = (player?: PlayerInterface) => {
   );
 };
 
-export default function HomePage({ events }: Props) {
+export default ({ events }: Props) => {
+  const {player} = useSessionContext();
+
   return (
     <div className="t-home">
       <div className="t-home__hero">
@@ -54,9 +56,7 @@ export default function HomePage({ events }: Props) {
       </div>
       <div className="t-home__play panel">
         <h2 className="panel__title">Play now</h2>
-        <SessionContext.Consumer>
-          {({ player }) => renderPlayPanel(player)}
-        </SessionContext.Consumer>
+        {renderPlayPanel(player)}
       </div>
       <main className="t-home__main">
         <div className="text--prose">

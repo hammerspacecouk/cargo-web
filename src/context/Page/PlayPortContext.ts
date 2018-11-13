@@ -41,7 +41,7 @@ export const PlayPortContextProvider = ({
     }
   };
 
-  const moveCrate = (token: ActionTokenInterface) => {
+  const moveCrate = (token: ActionTokenInterface): Promise<void> => {
     setButtonsDisabled(true);
     return doPortAction(token);
   };

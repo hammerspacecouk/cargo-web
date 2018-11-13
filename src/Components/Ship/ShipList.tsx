@@ -1,8 +1,8 @@
 import * as React from "react";
 import ShipInterface from "../../interfaces/ShipInterface";
-import ScoreContainer from "../../Containers/Player/ScoreContainer";
 import PlayerFlag from "../Player/PlayerFlag";
 import ProgressBar from "../Element/ProgressBar";
+import Score from "../Player/Score";
 
 export interface Props {
   ships: ShipInterface[];
@@ -23,7 +23,7 @@ export default (props: Props) => {
         </div>
         <div className="player-list__detail">
           <h4>{ship.name}</h4>
-          <ScoreContainer score={ship.owner.score} />
+          <Score score={ship.owner.score} />
         </div>
       </li>
     );

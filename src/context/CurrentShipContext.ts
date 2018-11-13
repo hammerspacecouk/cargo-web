@@ -100,7 +100,7 @@ export default ({ children }: PropsInterface) => {
 
   const updateCurrentShip = (ship?: ShipInterface) => {
     setShip(ship);
-    setLoaded(false);
+    setLoaded(true);
   };
 
   const updateShipLocation = (data: ShipLocationResponse) => {

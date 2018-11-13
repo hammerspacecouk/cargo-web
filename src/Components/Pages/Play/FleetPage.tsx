@@ -6,13 +6,12 @@ import DestroyedShips from "../../Ship/DestroyedShips";
 import EventsList from "../../Events/EventsList";
 import Rank from "../../Player/Rank";
 import { FleetContextProvider, useFleetContext } from "../../../context/Page/FleetContext";
-import { useEffect } from "react";
 
 const FleetPage = () => {
   const { activeShips, destroyedShips, events, refresh } = useFleetContext();
   const { player, rankStatus } = useSessionContext();
 
-  useEffect(() => {
+  React.useEffect(() => {
     refresh();
   }, []);
 

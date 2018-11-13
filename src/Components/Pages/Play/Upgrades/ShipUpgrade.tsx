@@ -23,7 +23,7 @@ export default ({ship}: PropsInterface) => {
       <p>{ship.detail.description}</p>
       <p>Capacity: {ship.detail.capacity}</p>
       <TokenButton token={ship.actionToken} handler={makePurchase}>
-        <CreditsButton amount={ship.cost} disabled={buttonsDisabled} />
+        <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled} />
       </TokenButton>
     </div>
   );

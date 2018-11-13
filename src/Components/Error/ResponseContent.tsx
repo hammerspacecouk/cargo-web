@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ErrorResponseInterface } from "../../util/HttpClient";
+import { ErrorResponseInterface } from "../../util/ApiClient";
 import LoginForm from "../Login/LoginForm";
 import Error from "./Error";
 import Loading from "../Navigation/Loading";
@@ -8,6 +8,7 @@ export interface Props {
   error: ErrorResponseInterface | null;
 }
 
+// todo - should this be used somewhere?
 export default ({ error }: Props) => {
   if (error) {
     let loginForm = null;

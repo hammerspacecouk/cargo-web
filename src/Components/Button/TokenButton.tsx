@@ -6,7 +6,7 @@ import { FormEvent } from "react";
 interface Props {
   readonly token: ActionTokenInterface;
   readonly children: any;
-  readonly handler?: (token: ActionTokenInterface) => Promise<void> | null;
+  readonly handler?: (token: ActionTokenInterface) => Promise<void> | null | void;
 }
 
 export default ({ token, children, handler }: Props) => {

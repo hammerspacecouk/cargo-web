@@ -14,14 +14,14 @@ interface PropsInterface {
 
 export default ({ fleetShip }: PropsInterface) => {
   const { updateScore } = useSessionContext();
-  const { setData } = useFleetContext();
+  const { updateRenameToken } = useFleetContext();
   const [requestingShipName, setRequestingShipName] = React.useState(false);
   const [offeredShipName, setOfferedShipName] = React.useState(null);
   const [offeredShipNameToken, setOfferedShipNameToken] = React.useState(null);
 
   const requestShipName = async (
     token: ActionTokenInterface
-) => {
+  ) => {
     setRequestingShipName(true);
     setOfferedShipName(null);
     setOfferedShipNameToken(null);
@@ -32,8 +32,8 @@ export default ({ fleetShip }: PropsInterface) => {
     setOfferedShipName(data.nameOffered);
     setOfferedShipNameToken(data.action);
 
+    updateRenameToken(data.shipId, data.newRequestShipNameToken);
     updateScore(data.newScore);
-    setData(data.ships); // todo - only update active ships
   };
 
   let shipName = null;

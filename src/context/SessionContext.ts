@@ -43,10 +43,14 @@ export const initialSession: SessionPropertiesInterface = {
 
 const SessionContext = createContext({
   ...initialSession,
-  updateScore: (newScore: ScoreInterface) => {},
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {},
-  setSession: (session: SessionResponseInterface) => {},
-  refreshSession: () => {}
+  updateScore: (newScore: ScoreInterface) => {
+  },
+  updateRankStatus: (newRankStatus: RankStatusInterface) => {
+  },
+  setSession: (session: SessionResponseInterface) => {
+  },
+  refreshSession: () => {
+  }
 });
 
 const getSession = (cookies?: any): Promise<SessionResponseInterface> => {
@@ -66,7 +70,7 @@ function useScore(): [ScoreInterface, (newScore: ScoreInterface) => void] {
 function useRankStatus(): [
   RankStatusInterface,
   (newRanksStatus: RankStatusInterface) => void
-] {
+  ] {
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   return [
     rankStatus,
@@ -136,8 +140,10 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
         refreshSession
       }
     },
-    children,
-    PromotionModal
+    [
+      children,
+      PromotionModal
+    ]
   );
 }
 

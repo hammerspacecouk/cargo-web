@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import { useSessionContext } from "../../context/SessionContext";
 import * as React from "react";
-import ScoreContainer from "../../Containers/Player/ScoreContainer";
-import ProfileIcon from "../Icons/ProfileIcon";
+import { Link } from "react-router-dom";
 import routes from "../../routes";
+import { useSessionContext } from "../../context/SessionContext";
+import ProfileIcon from "../Icons/ProfileIcon";
+import Score from "../Player/Score";
 
 const GuestActions = () => (
   <div className="masthead__play masthead__link-box">
@@ -22,7 +22,7 @@ const PlayerActions = () => {
     <>
       <div className="masthead__score">
         <Link to={routes.getPlay()} rel="nofollow" className="masthead__link">
-          <ScoreContainer score={score} />
+          <Score score={score} />
         </Link>
       </div>
       <div className="masthead__profile">

@@ -30,10 +30,10 @@ export default (Page: InitialDataComponent) => {
       }
 
       // Flatten out all the props.
-      const { isLoggedIn, ...rest } = this.props;
+      const { isLoggedIn, children, ...rest } = this.props;
       return createElement(Page, {
         ...rest
-      });
+      }, children);
     }
   }
   return withInitialData(WithGuestUser);
