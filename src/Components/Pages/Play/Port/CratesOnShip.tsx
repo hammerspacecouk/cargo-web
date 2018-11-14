@@ -1,9 +1,14 @@
 import * as React from "react";
 import { useCurrentShipContext } from "../../../../context/CurrentShipContext";
 import { CrateOnShip, CrateOnShipPlaceholder } from "./CrateOnShip";
+import Loading from "../../../Navigation/Loading";
 
 export default () => {
   const { ship, cratesOnShip } = useCurrentShipContext();
+
+  if (cratesOnShip === undefined) {
+    return <Loading />
+  } // todo - pretty loader
 
   const placeholderSlots = new Array(
     ship.shipClass.capacity - cratesOnShip.length

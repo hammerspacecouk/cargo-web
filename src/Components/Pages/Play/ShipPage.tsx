@@ -21,8 +21,7 @@ export default withRouter(({match}: ShipParamsInterface) => {
 
   let allowUpdate = true;
   useEffect(async () => {
-    const response = await ApiClient.fetch(`/play/${match.params.shipId}`);
-    const data = await response.json();
+    const data = await ApiClient.fetch(`/play/${match.params.shipId}`);
     if (allowUpdate) {
       updateFullResponse(data);
     }

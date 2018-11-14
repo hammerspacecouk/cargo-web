@@ -7,9 +7,15 @@ import DirectionSW from "../../../Icons/DirectionSW";
 import DirectionSE from "../../../Icons/DirectionSE";
 import { useCurrentShipContext } from "../../../../context/CurrentShipContext";
 import Direction from "./Direction";
+import Loading from "../../../Navigation/Loading";
 
 export default () => {
   const { directions } = useCurrentShipContext();
+
+  if (directions === undefined) {
+    return <Loading />
+  } // todo - pretty loader
+
   const { NW, NE, W, E, SW, SE } = directions;
 
   return (

@@ -15,6 +15,10 @@ export default ({ direction, children }: PropsInterface) => {
   const icon = children;
   const buttonDisabled = direction.action === null || buttonsDisabled;
 
+  if (cratesOnShip === undefined) {
+    return null;
+  }
+
   let actionButton = (
     <button
       className="button button--icon"
