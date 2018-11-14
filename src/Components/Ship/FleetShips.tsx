@@ -55,8 +55,8 @@ const tempIcon = (
 const ship = (fleetShip: FleetShipInterface) => {
   const ship = fleetShip.ship;
   return (
-  <>
-  <tr key={ship.id} className="m-fleet-ship">
+  <React.Fragment key={ship.id}>
+  <tr className="m-fleet-ship">
     <td className="m-fleet-ship__cell m-fleet-ship__cell--icon">{tempIcon}</td>
     <td className="m-fleet-ship__cell m-fleet-ship__cell--name">
       <Link to={routes.getPlayShip(ship.id)} className="m-fleet-ship__meta">
@@ -85,7 +85,7 @@ const ship = (fleetShip: FleetShipInterface) => {
         <EditShip fleetShip={fleetShip} />
       </td>
     </tr>
-  </>
+  </React.Fragment>
 );
 };
 

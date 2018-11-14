@@ -3,8 +3,7 @@ import {
   createContext,
   useContext,
   useEffect,
-  useState,
-  useRef
+  useState
 } from "react";
 
 import PlayerInterface from "../interfaces/PlayerInterface";
@@ -41,17 +40,7 @@ export const initialSession: SessionPropertiesInterface = {
   hasProfileNotification: false
 };
 
-const SessionContext = createContext({
-  ...initialSession,
-  updateScore: (newScore: ScoreInterface) => {
-  },
-  updateRankStatus: (newRankStatus: RankStatusInterface) => {
-  },
-  setSession: (session: SessionResponseInterface) => {
-  },
-  refreshSession: () => {
-  }
-});
+const SessionContext = createContext({});
 
 const getSession = (cookies?: any): Promise<SessionResponseInterface> => {
   return ApiClient.fetch("/login/check", null, cookies);
@@ -89,10 +78,10 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
   const [hasProfileNotification, setHasProfileNotification] = useState(
     initialSession.hasProfileNotification
   );
-  const allowUpdate = useRef(true);
+  let allowUpdate = true;
 
   function updateSession() {
-    if (!allowUpdate.current) {
+    if (!allowUpdate) {
       return;
     }
     // don't fetch if we're in a background tab, but carry on for the next time
@@ -105,7 +94,7 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
   useEffect(() => {
     updateSession();
     return () => {
-      allowUpdate.current = false;
+      allowUpdate = false;
     };
   }, []);
 
@@ -140,10 +129,8 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
         refreshSession
       }
     },
-    [
-      children,
-      PromotionModal
-    ]
+    children,
+    createElement(PromotionModal)
   );
 }
 

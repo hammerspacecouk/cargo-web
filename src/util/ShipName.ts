@@ -18,8 +18,8 @@ const getInitial = () => {
   return guessArray;
 };
 
-export const makeRandom = (previous?: string, toMatch?: string): string => {
-  const guessArray = previous ? previous.split("") : getInitial();
+export const makeRandom = (previous: string, toMatch?: string): string => {
+  const guessArray = previous.length > 0 ? previous.split("") : getInitial();
 
   let toMatchArray = null;
   if (toMatch) {
@@ -28,9 +28,9 @@ export const makeRandom = (previous?: string, toMatch?: string): string => {
 
   const charactersLength = characters.length;
   const guessLength = guessArray.length;
-  const toMatchLength = toMatchArray.length;
+  const toMatchLength = toMatchArray ? toMatchArray.length : null;
 
-  if (toMatchArray && guessLength < toMatchArray.length) {
+  if (toMatchArray && guessLength < toMatchLength) {
     for (let i = guessLength; i < toMatchLength; i++) {
       guessArray.push(getRandomCharacter());
     }
@@ -54,5 +54,5 @@ export const makeRandom = (previous?: string, toMatch?: string): string => {
     guessArray[i] = characters[newIndex];
   }
 
-  return guessArray.join();
+  return guessArray.join('');
 };

@@ -37,7 +37,7 @@ export default ({ fleetShip }: PropsInterface) => {
   };
 
   let shipName = null;
-  if (this.state.requestingShipName || this.state.offeredShipName) {
+  if (requestingShipName || offeredShipName) {
     shipName = (
       <ShipNameGenerator
         offeredShipName={offeredShipName}

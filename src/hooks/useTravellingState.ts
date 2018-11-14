@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import * as differenceInSeconds from "date-fns/difference_in_seconds";
 import { useCurrentShipContext } from "../context/CurrentShipContext";
 import { useFrameEffect } from "./useFrameEffect";
@@ -39,10 +39,10 @@ export const useTravellingState = () => {
   const { updateScore, updateRankStatus } = useSessionContext();
   const { refreshState } = useCurrentShipContext();
   const { percent, secondsRemaining, isArriving } = useTravellingCountdown();
-  const allowArrivalCheck = useRef(true);
+  let allowArrivalCheck = true;
 
   const handleArrival = async () => {
-    if (!allowArrivalCheck.current) {
+    if (!allowArrivalCheck) {
       return;
     }
     try {
@@ -59,11 +59,11 @@ export const useTravellingState = () => {
 
   useEffect(
     () => {
-      if (isArriving && allowArrivalCheck.current) {
+      if (isArriving && allowArrivalCheck) {
         handleArrival();
       }
       return () => {
-        allowArrivalCheck.current = false;
+        allowArrivalCheck = false;
       };
     },
     [isArriving]

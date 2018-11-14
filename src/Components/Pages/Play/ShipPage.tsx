@@ -6,7 +6,6 @@ import Port from "./Port";
 import Travelling from "./Travelling";
 import NotFound from "../../Error/NotFound";
 import { useEffect } from "react";
-import { useRef } from "react";
 import { ApiClient } from "../../../util/ApiClient";
 
 export interface ShipParamsInterface {
@@ -20,15 +19,15 @@ export interface ShipParamsInterface {
 export default withRouter(({match}: ShipParamsInterface) => {
   const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
 
-  const allowUpdate = useRef(true);
+  let allowUpdate = true;
   useEffect(async () => {
     const response = await ApiClient.fetch(`/play/${match.params.shipId}`);
     const data = await response.json();
-    if (allowUpdate.current) {
+    if (allowUpdate) {
       updateFullResponse(data);
     }
     return () => {
-      allowUpdate.current = false;
+      allowUpdate = false;
     };
   }, [match.params.shipId]);
 
@@ -47,9 +46,9 @@ export default withRouter(({match}: ShipParamsInterface) => {
   }
 
   return (
-    <main className="t-play__content-contain">
+    <section className="t-play__content-contain">
       <h1 style={{ display: "none" }}>{ship.name}</h1>
       {main}
-    </main>
+    </section>
   );
 });

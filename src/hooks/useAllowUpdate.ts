@@ -1,16 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export const useAllowUpdate = () => {
 
   // to prevent attempts to update state once unmounted
-  const allowUpdate = useRef(false);
+  let allowUpdate = true;
 
   useEffect(() => {
-    allowUpdate.current = true;
     return () => {
-      allowUpdate.current = false;
+      allowUpdate = false;
     };
   }, []);
 
-  return allowUpdate.current;
+  return allowUpdate;
 };

@@ -16,7 +16,7 @@ const FleetPage = () => {
   }, []);
 
   return (
-    <main className="t-play__content-contain">
+    <section className="t-play__content-contain">
       <div className="t-fleet">
         <div className="t-fleet__title-bar">
           <h1 className="t-fleet__title">My Fleet</h1>
@@ -35,7 +35,7 @@ const FleetPage = () => {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 };
 

@@ -58,7 +58,7 @@ export default ({ events }: Props) => {
         <h2 className="panel__title">Play now</h2>
         {renderPlayPanel(player)}
       </div>
-      <main className="t-home__main">
+      <section className="t-home__main">
         <div className="text--prose">
           <p>
             Colonisation of space has begun, and interstellar shipping is big
@@ -93,7 +93,7 @@ export default ({ events }: Props) => {
           <h2>What's happening right now?</h2>
           <EventsList events={events} />
         </div>
-      </main>
+      </section>
       <aside className="t-home__aside">
         <p>More side stuff</p>
       </aside>

@@ -10,7 +10,9 @@ export default (): JSX.Element => {
   }
   return (
     <ul>
-      {ships.map((ship) => <li><ShipUpgrade ship={ship} /></li>)}
+      {ships.map((ship, index) => (
+        <li key={index}><ShipUpgrade ship={ship} /></li>
+      ))}
     </ul>
   );
 };

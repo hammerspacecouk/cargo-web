@@ -24,7 +24,6 @@ export default class App extends React.Component<Props, State> {
   }
 
   catchMessage = (error: PromiseRejectionEvent) => {
-    console.log("I caught something via listener");
     this.setState({
       errorMessage: error.reason.message
     });
@@ -32,7 +31,6 @@ export default class App extends React.Component<Props, State> {
   };
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.log("I caught something");
     this.setState({
       errorMessage: error.toString()
     });
@@ -71,9 +69,9 @@ export default class App extends React.Component<Props, State> {
         <main>
           <div className="main">
             <Switch>
-              {routes.map((route, index) => (
+              {routes.map(route => (
                 <Route
-                  key={index}
+                  key={route.path}
                   path={route.path}
                   exact={route.exact}
                   render={props =>

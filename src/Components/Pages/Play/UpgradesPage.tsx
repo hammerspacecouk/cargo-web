@@ -12,12 +12,12 @@ const UpgradesPage = () => {
   const messageItem = message && <Message message={message} />;
 
   return (
-    <main className="t-play__content-contain">
+    <section className="t-play__content-contain">
       <h1>The Yard</h1>
       {messageItem}
       <h2>Ships</h2>
       <ShipUpgrades />
-    </main>
+    </section>
   );
 };
 
