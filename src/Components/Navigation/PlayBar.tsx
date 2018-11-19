@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { CurrentShipContext } from "../../context/CurrentShipContext";
-import { useContext } from "react";
+import { useCurrentShipContext } from "../../context/CurrentShipContext";
 
 // todo - move icons
 const iconLocation = (
@@ -23,7 +22,7 @@ const iconMoney = (
 );
 
 const getShipLink = () => {
-  const { ship } = useContext(CurrentShipContext);
+  const { ship } = useCurrentShipContext();
   if (ship) {
     return (
       <li className="play-bar__item">

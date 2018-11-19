@@ -2,8 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 import { useSessionContext } from "../../context/SessionContext";
-import ProfileIcon from "../Icons/ProfileIcon";
-import Score from "../Player/Score";
+import ProfileIcon from "../Icons/ProfileIcon/ProfileIcon";
+import Score from "../../containers/Player/Score";
 
 const GuestActions = () => (
   <div className="masthead__play masthead__link-box">

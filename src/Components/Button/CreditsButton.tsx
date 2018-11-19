@@ -2,8 +2,8 @@ import * as React from "react";
 import ScoreInterface from "../../interfaces/ScoreInterface";
 import { useFrameEffect } from "../../hooks/useFrameEffect";
 import { useSessionContext } from "../../context/SessionContext";
-import ScoreValue from "../Player/ScoreValue";
-import { getValue } from "../Player/Score";
+import ScoreValue from "../Molecules/ScoreValue/ScoreValue";
+import { getValue } from "../../containers/Player/Score";
 
 interface Props {
   readonly amount: number;

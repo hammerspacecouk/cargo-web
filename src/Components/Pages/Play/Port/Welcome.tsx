@@ -1,8 +1,8 @@
 import * as React from "react";
-import { MessageInfo } from "../../../Panel/Messages";
-import ShieldIcon from "../../../Icons/ShieldIcon";
+import ShieldIcon from "../../../Icons/ShieldIcon/ShieldIcon";
 import { useSessionContext } from "../../../../context/SessionContext";
 import { useCurrentShipContext } from "../../../../context/CurrentShipContext";
+import MessageInfo from "../../../Molecules/Messages/MessageInfo/MessageInfo";
 
 export default () => {
   const { rankStatus } = useSessionContext();

@@ -3,7 +3,7 @@ import { renderToString } from "react-dom/server";
 import { match, matchPath, StaticRouter } from "react-router";
 
 import { CacheType, matches as routes, RouteItem } from "../routes";
-import { InitialDataComponent } from "../sections/withInitialData";
+import { InitialDataComponent } from "./withInitialData";
 import App from "../App";
 import { Logger } from "../util/Logger";
 import { getForClient } from "../util/Environment";

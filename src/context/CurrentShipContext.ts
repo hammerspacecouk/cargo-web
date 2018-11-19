@@ -136,5 +136,5 @@ export default ({ children }: PropsInterface) => {
 };
 
 export function useCurrentShipContext(): CurrentShipContextInterface {
-  return useContext(CurrentShipContext);
+  return useContext(CurrentShipContext) as CurrentShipContextInterface;
 }

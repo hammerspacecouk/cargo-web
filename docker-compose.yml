@@ -3,7 +3,7 @@ version: "3"
 
 services:
   cargo-web-node:
-    image: node:alpine
+    image: node:10-alpine
     volumes:
       - .:/var/www
     ports:

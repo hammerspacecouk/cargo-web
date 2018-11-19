@@ -20,11 +20,15 @@ export default withRouter(({match}: ShipParamsInterface) => {
   const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
 
   let allowUpdate = true;
-  useEffect(async () => {
+  const getData = async () => {
     const data = await ApiClient.fetch(`/play/${match.params.shipId}`);
     if (allowUpdate) {
       updateFullResponse(data);
     }
+  };
+
+  useEffect(() => {
+    getData();
     return () => {
       allowUpdate = false;
     };

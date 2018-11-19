@@ -1,5 +1,5 @@
 import * as React from "react";
-import TimeAgoContainer from "../Time/TimeAgoContainer";
+import TimeAgoContainer from "../Atoms/TimeAgo/TimeAgo";
 
 interface Props {
   time: string;

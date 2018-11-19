@@ -8,7 +8,7 @@ import App from "./App";
 // static assets
 import "../static/scss/app.scss";
 import "../static/imgs";
-import "../static/fonts";
+// import "./fonts";
 
 const data = (window as any)._INITIAL_DATA_;
 

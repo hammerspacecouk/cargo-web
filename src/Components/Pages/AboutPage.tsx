@@ -16,7 +16,7 @@ export default function AboutPage() {
           <a href={routes.getAboutStatus()}>Application Status</a>
         </li>
         <li>
-          <a href={routes.getAboutStyleGuide()}>Styleguide</a>
+          <a href="/todo">Styleguide</a>
         </li>
       </ul>
     </AboutLayout>

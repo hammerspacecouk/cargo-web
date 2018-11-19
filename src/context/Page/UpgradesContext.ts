@@ -65,5 +65,5 @@ export const UpgradesContextProvider = ({
 };
 
 export function useUpgradesContext(): UpgradesContextInterface {
-  return useContext(UpgradesContext);
+  return useContext(UpgradesContext) as UpgradesContextInterface;
 }

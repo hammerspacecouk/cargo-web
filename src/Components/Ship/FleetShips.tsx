@@ -1,9 +1,9 @@
 import * as React from "react";
 import ShipInterface from "../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
-import EditIcon from "../Icons/EditIcon";
+import EditIcon from "../Icons/EditIcon/EditIcon";
 import ActionLink from "../Link/ActionLink";
-import ShieldIcon from "../Icons/ShieldIcon";
+import ShieldIcon from "../Icons/ShieldIcon/ShieldIcon";
 import ProgressBar from "../Element/ProgressBar";
 import routes from "../../routes";
 import EditShip from "./EditShip";

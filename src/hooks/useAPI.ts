@@ -7,13 +7,16 @@ export const useApi = (url: string) => {
 
   // to prevent attempts to update state once unmounted
   let allowUpdate = true;
-
-  useEffect(async () => {
+  const getData = async () => {
     const data = await ApiClient.fetch(url);
     if (allowUpdate) {
       setData(data);
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    getData();
     return () => {
       allowUpdate = false;
     };

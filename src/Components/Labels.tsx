@@ -1,6 +1,6 @@
 import * as React from "react";
 import PortInterface from "../interfaces/PortInterface";
-import ShieldIcon from "./Icons/ShieldIcon";
+import ShieldIcon from "./Icons/ShieldIcon/ShieldIcon";
 
 interface InlinePortNameProps {
   port: PortInterface;

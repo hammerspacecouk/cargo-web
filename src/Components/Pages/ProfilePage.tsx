@@ -1,17 +1,17 @@
 import * as React from "react";
 import Loading from "../Navigation/Loading";
 import Error from "../Error/Error";
-import ErrorIcon from "../Icons/ErrorIcon";
+import ErrorIcon from "../Icons/ErrorIcon/ErrorIcon";
 import ProfileLayout from "../Layout/ProfileLayout";
 import { fullDate } from "../../util/Format";
 import LogOutButton from "../Login/LogOutButton";
 import Delete from "../Profile/Delete";
 import routes from "../../routes";
 import PortInterface from "../../interfaces/PortInterface";
-import { MessageWarning } from "../Panel/Messages";
 import LoginForm from "../Login/LoginForm";
 import { SessionResponseInterface, useSessionContext } from "../../context/SessionContext";
 import { useEffect } from "react";
+import MessageWarning from "../Molecules/Messages/MessageWarning/MessageWarning";
 
 export interface Props {
   readonly session: SessionResponseInterface;

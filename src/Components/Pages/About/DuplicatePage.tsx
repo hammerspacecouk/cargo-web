@@ -2,7 +2,7 @@ import * as React from "react";
 
 import AboutLayout from "../../Layout/AboutLayout";
 import LogOutButton from "../../Login/LogOutButton";
-import { MessageInfo } from "../../Panel/Messages";
+import MessageInfo from "../../Molecules/Messages/MessageInfo/MessageInfo";
 
 export default function DuplicatePage() {
   return (

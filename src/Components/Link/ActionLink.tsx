@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, LinkProps } from "react-router-dom";
-import ChevronRightIcon from "../Icons/ChevronRightIcon";
+import ChevronRightIcon from "../Icons/ChevronRightIcon/ChevronRightIcon";
 
 export default (props: LinkProps) => (
   <Link {...props} className={`${props.className || ""} m-icon-suffix`}>

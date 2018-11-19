@@ -1,9 +1,9 @@
-import * as About from "./sections/About";
-import * as Home from "./sections/Home";
-import * as Login from "./sections/Login";
-import * as Play from "./sections/Play";
-import * as Profile from "./sections/Profile";
-import * as Ports from "./sections/Ports";
+import * as About from "./server/About";
+import * as Home from "./server/Home";
+import * as Login from "./server/Login";
+import * as Play from "./server/Play";
+import * as Profile from "./server/Profile";
+import * as Ports from "./server/Ports";
 import { RouteProps } from "react-router";
 import { Environment } from "./util/Environment";
 
@@ -24,7 +24,6 @@ const routes = {
   getAboutDuplicate: () => "/about/duplicate",
   getAboutPolicies: () => "/about/policies",
   getAboutStatus: () => "/about/status",
-  getAboutStyleGuide: () => "/about/styleguide",
   getLogin: () => "/login",
   getLoginAnonymous: () => `${Environment.apiHostname}/login/anonymous`,
   getLoginEmail: () => "/login/email",
@@ -68,13 +67,6 @@ export const matches = [
     component: About.Status,
     cacheType: CacheType.Public,
     maxAge: 30
-  },
-  {
-    path: routes.getAboutStyleGuide(),
-    exact: true,
-    component: About.StyleGuide,
-    cacheType: CacheType.Public,
-    maxAge: 3600 * 2
   },
   {
     path: routes.getAbout(),

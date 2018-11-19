@@ -2,7 +2,7 @@ import * as React from "react";
 import ShipInterface from "../../interfaces/ShipInterface";
 import PlayerFlag from "../Player/PlayerFlag";
 import ProgressBar from "../Element/ProgressBar";
-import Score from "../Player/Score";
+import Score from "../../containers/Player/Score";
 import Loading from "../Navigation/Loading";
 
 export interface Props {

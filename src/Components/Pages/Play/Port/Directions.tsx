@@ -1,10 +1,10 @@
 import * as React from "react";
-import DirectionNW from "../../../Icons/DirectionNW";
-import DirectionNE from "../../../Icons/DirectionNE";
-import DirectionW from "../../../Icons/DirectionW";
-import DirectionE from "../../../Icons/DirectionE";
-import DirectionSW from "../../../Icons/DirectionSW";
-import DirectionSE from "../../../Icons/DirectionSE";
+import DirectionNW from "../../../Icons/DirectionNW/DirectionNW";
+import DirectionNE from "../../../Icons/DirectionNE/DirectionNE";
+import DirectionW from "../../../Icons/DirectionW/DirectionW";
+import DirectionE from "../../../Icons/DirectionE/DirectionE";
+import DirectionSW from "../../../Icons/DirectionSW/DirectionSW";
+import DirectionSE from "../../../Icons/DirectionSE/DirectionSE";
 import { useCurrentShipContext } from "../../../../context/CurrentShipContext";
 import Direction from "./Direction";
 import Loading from "../../../Navigation/Loading";

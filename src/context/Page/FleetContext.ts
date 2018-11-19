@@ -78,5 +78,5 @@ export const FleetContextProvider = ({
 
 
 export const useFleetContext = (): FleetContextInterface => {
-  return useContext(FleetContext);
+  return useContext(FleetContext) as FleetContextInterface;
 };

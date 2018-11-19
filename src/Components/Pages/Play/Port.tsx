@@ -9,7 +9,7 @@ import EventsList from "../../Events/EventsList";
 import Welcome from "./Port/Welcome";
 import Crates from "./Port/Crates";
 import Directions from "./Port/Directions";
-import ShieldIcon from "../../Icons/ShieldIcon";
+import ShieldIcon from "../../Icons/ShieldIcon/ShieldIcon";
 import CrateModal from "./Port/CrateModal";
 
 const PortComponent = () => {

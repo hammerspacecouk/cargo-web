@@ -1,4 +1,4 @@
-import CreditsIcon from "../../../Icons/CreditsIcon";
+import CreditsIcon from "../../../Icons/CreditsIcon/CreditsIcon";
 import TokenButton from "../../../Button/TokenButton";
 import * as React from "react";
 import { CrateActionInterface } from "../../../../interfaces/CrateInterface";

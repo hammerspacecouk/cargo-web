@@ -77,5 +77,5 @@ export const PlayPortContextProvider = ({
 };
 
 export const usePlayPortContext = (): PlayPortContextInterface => {
-  return useContext(PlayPortContext);
+  return useContext(PlayPortContext) as PlayPortContextInterface;
 };

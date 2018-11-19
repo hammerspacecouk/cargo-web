@@ -1,6 +1,6 @@
 import * as React from "react";
-import { MessageOk } from "../../Panel/Messages";
 import AboutLayout from "../../Layout/AboutLayout";
+import MessageOk from "../../Molecules/Messages/MessageOk/MessageOk";
 
 export default function PoliciesPage() {
   return (

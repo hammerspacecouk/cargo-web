@@ -6,6 +6,7 @@ import Masthead from "./components/Navigation/Masthead";
 import NotFound from "./components/Error/NotFound";
 import { ErrorInfo } from "react";
 import Modal from "./components/Panel/Modal";
+import { GlobalStyle } from "./GlobalStyle";
 
 interface Props {
   routes: RouteProps[];
@@ -65,13 +66,14 @@ export default class App extends React.Component<Props, State> {
 
     return (
       <SessionContextComponent>
+        <GlobalStyle />
         <Masthead />
         <main>
           <div className="main">
             <Switch>
               {routes.map(route => (
                 <Route
-                  key={route.path}
+                  key={`${route.path}`}
                   path={route.path}
                   exact={route.exact}
                   render={props =>

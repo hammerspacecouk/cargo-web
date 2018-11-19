@@ -135,7 +135,7 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
 }
 
 export function useSessionContext(): SessionContextInterface {
-  return useContext(SessionContext);
+  return useContext(SessionContext) as SessionContextInterface;
 }
 
 export default SessionContextComponent;

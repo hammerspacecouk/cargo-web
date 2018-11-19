@@ -2,7 +2,7 @@ import * as React from "react";
 import DirectionInterface from "../../../../interfaces/DirectionInterface";
 import Fraction from "../../../Formatting/Fraction";
 import IntervalFormat from "../../../Formatting/IntervalFormat";
-import ScoreValue from "../../../Player/ScoreValue";
+import ScoreValue from "../../../Molecules/ScoreValue/ScoreValue";
 import GoButton from "./GoButton";
 import { InlinePortName } from "../../../Labels";
 
