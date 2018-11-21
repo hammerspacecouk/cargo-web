@@ -17,6 +17,11 @@ import ShipRename from "./ShipRename";
 import PlayerPromotion from "./PlayerPromotion";
 import CrateNew from "./CrateNew";
 import CratePickup from "./CratePickup";
+import styled, { keyframes } from "styled-components";
+import ListUnstyled from "../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { colours, grid } from "../../GlobalStyle";
+import TextCursor from "../Atoms/TextCursor/TextCursor";
+import { eventsMinimisedHeight } from "../Pages/PlayPage";
 
 interface Props {
   readonly events: EventInterface[];
@@ -46,19 +51,36 @@ const mapEvent = (event: EventInterface, firstPerson: boolean) => {
   }
 };
 
+const StyledList = styled(ListUnstyled)`
+  padding: ${grid.unit}px;
+  background: ${colours.black};
+  min-height: ${eventsMinimisedHeight}px;
+`;
+
+const StyledListItem = styled.li`
+  display: flex;
+  align-items: flex-start;
+  &:not(:last-child) {
+    margin-bottom: ${grid.unit / 2}px;
+  }
+`;
+
 export default function EventsList({ events, firstPerson }: Props) {
   if (!events || events.length < 1) {
-    return null;
+    return (
+      <StyledList as="ol">
+        <li><TextCursor/></li>
+      </StyledList>
+    ); // todo - nicer
   }
 
   return (
-    <div className="panel">
-      <h2 className="panel__title">Captain's log</h2>
-      <ul className="events">
-        {events.map(event => (
-          <li key={`event-${event.id}`}>{mapEvent(event, firstPerson)}</li>
-        ))}
-      </ul>
-    </div>
+    <StyledList as="ol">
+      {events.map(event => (
+        <StyledListItem key={`event-${event.id}`}>
+          {mapEvent(event, firstPerson)}
+        </StyledListItem>
+      ))}
+    </StyledList>
   );
 }

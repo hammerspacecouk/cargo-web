@@ -14,7 +14,7 @@ export default (props: Props) => {
     name = "You ";
   } else if (props.event.actioningPlayer) {
     name = (
-      <span className="events__flag">
+      <span className="flag">
         <PlayerFlag player={props.event.actioningPlayer} />
       </span>
     );

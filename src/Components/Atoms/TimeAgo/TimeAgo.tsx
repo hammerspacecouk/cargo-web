@@ -1,12 +1,15 @@
 import * as React from "react";
-import { useFrameEffect } from "../../../hooks/useFrameEffect";
 
 interface Props {
   datetime: Date;
 }
 
-const getValue = (datetime: Date, now: Date): string => {
-  const seconds = Math.floor((now.getTime() - datetime.getTime()) / 1000);
+const getSeconds = (datetime: Date): number => {
+  const now = new Date();
+  return Math.floor((now.getTime() - datetime.getTime()) / 1000);
+};
+
+const getValue = (seconds: number, datetime: Date): string => {
 
   if (seconds > 60 * 60 * 24 * 28) {
     return datetime.toLocaleString();
@@ -34,11 +37,38 @@ const getValue = (datetime: Date, now: Date): string => {
  * Show dynamically updating time since an event
  */
 export default function TimeAgo({datetime}: Props) {
-  const [text, setText] = React.useState(getValue(datetime, new Date()));
+  const [text, setText] = React.useState(
+    getValue(getSeconds(datetime), datetime)
+  );
 
-  useFrameEffect(() => {
-    setText(getValue(datetime, new Date()));
-    return true;
+  let frameHandler: number = null;
+  let timeout: number = null;
+
+  const loop = () => {
+    const newSeconds = getSeconds(datetime);
+    setText(getValue(newSeconds, datetime));
+
+    if (newSeconds < 120) {
+      frameHandler = window.requestAnimationFrame(loop);
+      return;
+    }
+    if (newSeconds < (60 * 300)) {
+      timeout = window.setTimeout(loop, (30 * 1000));
+      return;
+    }
+    timeout = window.setTimeout(loop, (30 * 60 * 1000));
+  };
+
+  React.useEffect(() => {
+    loop();
+    return () => {
+      if (frameHandler) {
+        window.cancelAnimationFrame(frameHandler);
+      }
+      if (timeout) {
+        window.clearTimeout(timeout);
+      }
+    };
   }, [datetime]);
 
   return (

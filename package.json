@@ -49,7 +49,7 @@
     "client": "webpack --config webpack/client.config.js --mode=production",
     "start": "node server.js",
     "pretty": "prettier --write --no-config '{src,tests}/**/*.{ts,tsx}'",
-    "styleguide": "styleguidist build",
+    "styleguide": "styleguidist build --production",
     "styleguide:server": "styleguidist server"
   },
   "browserslist": [

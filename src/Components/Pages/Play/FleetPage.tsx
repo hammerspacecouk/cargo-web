@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 import { useSessionContext } from "../../../context/SessionContext";
 import PlayerFlag from "../../Player/PlayerFlag";
 import FleetShips from "../../Ship/FleetShips";
@@ -6,8 +7,26 @@ import DestroyedShips from "../../Ship/DestroyedShips";
 import EventsList from "../../Events/EventsList";
 import Rank from "../../Player/Rank";
 import { FleetContextProvider, useFleetContext } from "../../../context/Page/FleetContext";
+import { EventsArea } from "../PlayPage";
+import { colours, grid } from "../../../GlobalStyle";
 
-const FleetPage = () => {
+const StyledFleetPage = styled.div`
+  padding: ${grid.unit}px;
+`;
+
+const StyledFlagWrapper = styled.div`
+  display: block;
+  margin: ${grid.unit}px auto;
+  width: 100%;
+  border: solid 2px ${colours.white}
+  max-width: 320px;
+`;
+const Title = styled.h1`
+  text-align: center;
+  margin-bottom: ${grid.unit}px;
+`;
+
+const FleetPageContent = () => {
   const { activeShips, destroyedShips, events, refresh } = useFleetContext();
   const { player, rankStatus } = useSessionContext();
 
@@ -16,31 +35,25 @@ const FleetPage = () => {
   }, []);
 
   return (
-    <section className="t-play__content-contain">
-      <div className="t-fleet">
-        <div className="t-fleet__title-bar">
-          <h1 className="t-fleet__title">My Fleet</h1>
-          <div className="t-fleet__flag">
-            <PlayerFlag player={player}/>
-          </div>
-        </div>
-        <div className="t-fleet__main">
-          <div className="t-fleet__ships">
-            <FleetShips ships={activeShips}/>
-            <DestroyedShips ships={destroyedShips}/>
-          </div>
-          <div className="t-fleet__aside">
-            <EventsList events={events} firstPerson/>
-            <Rank rankStatus={rankStatus}/>
-          </div>
-        </div>
-      </div>
-    </section>
+    <StyledFleetPage>
+      <StyledFlagWrapper>
+        <PlayerFlag player={player}/>
+      </StyledFlagWrapper>
+      <Title>My Fleet</Title>
+      <FleetShips ships={activeShips}/>
+      <DestroyedShips ships={destroyedShips}/>
+      <Rank rankStatus={rankStatus}/>
+      <EventsArea>
+        <EventsList events={events} firstPerson/>
+      </EventsArea>
+    </StyledFleetPage>
   );
 };
 
-export default () => (
-  <FleetContextProvider>
-    <FleetPage/>
-  </FleetContextProvider>
-);
+export default function FleetPage() {
+  return (
+    <FleetContextProvider>
+      <FleetPageContent/>
+    </FleetContextProvider>
+  )
+}
