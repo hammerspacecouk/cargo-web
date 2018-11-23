@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useUpgradesContext } from "../../../../context/Page/UpgradesContext";
 import TokenButton from "../../../Button/TokenButton";
-import CreditsButton from "../../../Button/CreditsButton";
+import CreditsButton from "../../../Atoms/CreditsButton/CreditsButton";
 import { ShipUpgradeInterface } from "../../../../interfaces/TransactionInterface";
 
 interface PropsInterface {

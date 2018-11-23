@@ -19,7 +19,7 @@ const getInitial = () => {
 };
 
 export const makeRandom = (previous: string, toMatch?: string): string => {
-  const guessArray = previous.length > 0 ? previous.split("") : getInitial();
+  const guessArray = previous.length > 1 ? previous.split("") : getInitial();
 
   let toMatchArray = null;
   if (toMatch) {

@@ -1,36 +1,36 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAllowUpdate } from "./useAllowUpdate";
 import { useFrameEffect } from "./useFrameEffect";
 import { makeRandom } from "../util/ShipName";
 
 export const useShipNameGenerator = (offeredShipName?: string) => {
-  const [nameGuess, setNameGuess] = useState('');
-  const [matched, setMatched] = useState(false);
+  const [nameGuess, setNameGuess] = useState('_');
   const allowUpdate = useAllowUpdate();
 
-  let overrideTimer: number = null;
+  let overrideTimer = useRef(null);
+  let found = useRef(false);
 
   useFrameEffect(() => {
     if (nameGuess.trim() === offeredShipName) {
       setNameGuess(offeredShipName);
-      setMatched(true);
       return false;
     }
 
-    setNameGuess(makeRandom(nameGuess, offeredShipName));
-    if (offeredShipName && !overrideTimer) {
-      overrideTimer = window.setTimeout(() => {
+    if (!found.current) {
+      setNameGuess(makeRandom(nameGuess, offeredShipName));
+    }
+    if (offeredShipName && !overrideTimer.current) {
+      overrideTimer.current = window.setTimeout(() => {
         if (allowUpdate) {
+          found.current = true;
           setNameGuess(offeredShipName);
-          setMatched(true);
         }
       }, 3000);
     }
     return true;
-  }, [offeredShipName], 35);
+  }, [offeredShipName, nameGuess], 35);
 
   return {
-    matched,
     nameGuess: nameGuess.trim(),
   };
 };

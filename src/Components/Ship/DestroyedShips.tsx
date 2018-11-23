@@ -25,6 +25,7 @@ export default ({ ships }: Props) => {
     return null;
   }
 
+  // todo, merge with the main array with adjustments (at end of array)
   return (
     <div className="o-ships">
       <h2>Destroyed ships</h2>

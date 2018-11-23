@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import MedicIcon from "../../Icons/MedicIcon/MedicIcon";
-import FleetShipInterface from "../../../interfaces/ShipInterface";
+import {FleetShipInterface} from "../../../interfaces/ShipInterface";
 import HealthBar from "../../Molecules/HealthBar/HealthBar";
 import { grid } from "../../../GlobalStyle";
 import PurchaseItemButton from "../../Molecules/PurchaseItemButton/PurchaseItemButton";
@@ -33,7 +33,7 @@ export default function FleetShipHealth({ ship }: PropsInterface) {
   return (
     <Styled>
       <HealthBarContainer>
-        <HealthBar percent={ship.strengthPercent}/>
+        <HealthBar percent={ship.ship.strengthPercent}/>
       </HealthBarContainer>
       <Actions>
         <Action>

@@ -5,7 +5,7 @@ import EventInterface from "../../interfaces/EventInterface";
 import { ApiClient } from "../../util/ApiClient";
 import { useAllowUpdate } from "../../hooks/useAllowUpdate";
 import { useSessionContext } from "../SessionContext";
-import FleetShipInterface from "../../interfaces/ShipInterface";
+import {FleetShipInterface} from "../../interfaces/ShipInterface";
 import ShipNameTokenInterface from "../../interfaces/ShipNameTokenInterface";
 
 interface FleetResponseInterface {
@@ -15,7 +15,7 @@ interface FleetResponseInterface {
 }
 
 interface FleetContextInterface {
-  activeShips: ShipInterface[];
+  activeShips: FleetShipInterface[];
   destroyedShips: ShipInterface[];
   events: EventInterface[];
   updateRenameToken: (id: string, token: ShipNameTokenInterface) => void;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import FleetShipInterface from "../../../interfaces/ShipInterface";
+import {FleetShipInterface} from "../../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import ChevronRightIcon from "../../Icons/ChevronRightIcon/ChevronRightIcon";
 import routes from "../../../routes";
@@ -27,9 +27,9 @@ export default function FleetShipLocation({ship}: PropsInterface) {
   return (
     <Styled>
       <Location>
-        <PortName name={ship.location.name} safe={ship.location.safeHaven} />
+        <PortName name={ship.ship.location.name} safe={ship.ship.location.safeHaven} />
       </Location>
-      <Go to={routes.getPlayShip(ship.id)}>
+      <Go to={routes.getPlayShip(ship.ship.id)}>
         <ChevronRightIcon/>
       </Go>
     </Styled>

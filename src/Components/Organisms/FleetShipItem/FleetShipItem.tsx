@@ -1,5 +1,5 @@
 import * as React from "react";
-import FleetShipInterface from "../../../interfaces/ShipInterface";
+import {FleetShipInterface} from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import { colours, grid } from "../../../GlobalStyle";
 import ChevronDownIcon from "../../Icons/ChevronDownIcon/ChevronDownIcon";
@@ -56,7 +56,7 @@ export default function FleetShipItem({ship}: PropsInterface) {
   // todo - - health is low
   // todo - - sitting in an unsafe port
   return (
-    <StyledItem >
+    <StyledItem>
       <ShipIntro>
         <ShipName>
           <FleetShipName ship={ship} />

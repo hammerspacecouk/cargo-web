@@ -1,9 +1,10 @@
 import * as React from "react";
-import FleetShipInterface from "../../../interfaces/ShipInterface";
+import {FleetShipInterface} from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import { colours, grid } from "../../../GlobalStyle";
 import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
 import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
+import EditShipName from "../EditShipName/EditShipName";
 
 interface PropsInterface {
   ship: FleetShipInterface;
@@ -11,7 +12,7 @@ interface PropsInterface {
 
 // todo - responsive margins
 const StyledDetail = styled.div`
-    margin: ${grid.unit}px 0 0 ${48 + grid.unit}px;
+    margin: ${grid.unit}px 0 ${grid.unit * 4}px ${48 + grid.unit}px;
 `;
 const DetailRow = styled.div`
     display: flex;
@@ -22,6 +23,7 @@ const DetailRow = styled.div`
     border-bottom: solid 1px ${colours.gray[9]};
     &:last-child {
         border-bottom: none;
+        margin-bottom: 0;
     }
 `;
 const DetailRowLabel = styled.div`
@@ -55,7 +57,9 @@ export default function FleetShipDetail({ship}: PropsInterface) {
       </DetailRow>
       <DetailRow>
         <DetailRowLabel>Ship name</DetailRowLabel>
-        <DetailRowContent>EDIT SOON</DetailRowContent>
+        <DetailRowContent>
+          <EditShipName fleetShip={ship}/>
+        </DetailRowContent>
       </DetailRow>
 
     </StyledDetail>

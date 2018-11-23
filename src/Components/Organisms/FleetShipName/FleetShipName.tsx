@@ -1,4 +1,4 @@
-import FleetShipInterface from "../../../interfaces/ShipInterface";
+import {FleetShipInterface} from "../../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import * as React from "react";
 import routes from "../../../routes";
@@ -39,7 +39,10 @@ const StyledLink = styled(Link)`
 `;
 
 const Title = styled.div`
-    font-size: 2rem;
+    font-size: 1.2rem;
+    @media (min-width: 30em) {
+        font-size: 2rem;
+    }
 `;
 
 const Subtitle = styled.div`
@@ -51,9 +54,9 @@ export default function FleetShipName({ ship }: PropsInterface) {
   let detail;
   if (ship) {
     detail = (
-      <StyledLink to={routes.getPlayShip(ship.id)}>
-        <Title>{ship.name}</Title>
-        <Subtitle>{ship.shipClass.name}</Subtitle>
+      <StyledLink to={routes.getPlayShip(ship.ship.id)}>
+        <Title>{ship.ship.name}</Title>
+        <Subtitle>{ship.ship.shipClass.name}</Subtitle>
       </StyledLink>
     );
   } else {

@@ -2,6 +2,11 @@ import PlayerInterface from "./PlayerInterface";
 import ShipClassInterface from "./ShipClassInterface";
 import TransactionInterface from "./TransactionInterface";
 
+export interface FleetShipInterface {
+  renameToken: TransactionInterface;
+  ship: ShipInterface;
+}
+
 export default interface ShipInterface {
   id: string;
   name: string;
@@ -12,9 +17,4 @@ export default interface ShipInterface {
     name?: string; // todo - use a location interface
     safeHaven?: boolean;
   };
-};
-
-export default interface FleetShipInterface {
-  renameToken: TransactionInterface;
-  ship: ShipInterface;
-};
+}
