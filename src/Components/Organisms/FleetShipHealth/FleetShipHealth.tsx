@@ -1,14 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import MedicIcon from "../../Icons/MedicIcon/MedicIcon";
-import {FleetShipInterface} from "../../../interfaces/ShipInterface";
+import ShipInterface from "../../../interfaces/ShipInterface";
 import HealthBar from "../../Molecules/HealthBar/HealthBar";
 import { grid } from "../../../GlobalStyle";
-import PurchaseItemButton from "../../Molecules/PurchaseItemButton/PurchaseItemButton";
-
+import CreditsButton from "../../Atoms/CreditsButton/CreditsButton";
+import TokenButton from "../../Button/TokenButton";
+import { HealthIncreaseInterface } from "../../../interfaces/TransactionInterface";
 
 interface PropsInterface {
-  ship: FleetShipInterface;
+  ship: ShipInterface;
+  health: HealthIncreaseInterface[];
 }
 
 const Styled = styled.div`
@@ -21,27 +22,36 @@ const HealthBarContainer = styled.div`
 `;
 
 const Actions = styled.div`
-    margin-left: ${grid.unit * 2}px;
-`;
-const Action = styled.div`
-    display: inline-block;
-    width: 48px;
-    height: 48px;
 `;
 
-export default function FleetShipHealth({ ship }: PropsInterface) {
+const Action = styled.div`
+    display: inline-block;
+    margin-left: ${grid.unit}px;
+`;
+
+export default function FleetShipHealth({ ship, health }: PropsInterface) {
+
+  const applyHealth = () => {
+    alert("oi");
+  };
+
+  let actionButtons = health.map(transaction => (
+    <Action key={transaction.actionToken.token}>
+      <TokenButton token={transaction.actionToken} handler={applyHealth}>
+        <CreditsButton amount={transaction.cost}>
+          +{transaction.detail}%
+        </CreditsButton>
+      </TokenButton>
+    </Action>
+  ));
+
   return (
     <Styled>
       <HealthBarContainer>
-        <HealthBar percent={ship.ship.strengthPercent}/>
+        <HealthBar percent={ship.strengthPercent}/>
       </HealthBarContainer>
       <Actions>
-        <Action>
-          <PurchaseItemButton icon={<MedicIcon/>} cost={500} handler={() => alert("yay")}/>
-        </Action>
-        <Action>
-          <PurchaseItemButton icon={<MedicIcon/>} cost={1500} handler={() => alert("super yay")}/>
-        </Action>
+        {actionButtons}
       </Actions>
     </Styled>
   );

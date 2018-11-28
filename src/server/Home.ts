@@ -3,7 +3,7 @@ import withInitialData from "./withInitialData";
 
 import EventInterface from "../interfaces/EventInterface";
 import { ApiClient } from "../util/ApiClient";
-import HomePage from "../components/Pages/HomePage";
+import HomePage from "../pages/HomePage";
 
 interface Props {
   events: EventInterface[];

@@ -1,11 +1,11 @@
 import { Component, createElement } from "react";
 import withInitialData from "./withInitialData";
 
-import AboutPage from "../components/Pages/AboutPage";
-import CheatingPage from "../components/Pages/About/CheatingPage";
-import DuplicatePage from "../components/Pages/About/DuplicatePage";
-import PoliciesPage from "../components/Pages/About/PoliciesPage";
-import StatusPage from "../components/Pages/About/StatusPage";
+import AboutPage from "../pages/AboutPage";
+import CheatingPage from "../pages/About/CheatingPage";
+import DuplicatePage from "../pages/About/DuplicatePage";
+import PoliciesPage from "../pages/About/PoliciesPage";
+import StatusPage from "../pages/About/StatusPage";
 
 class AboutIndex extends Component<undefined, undefined> {
   render() {

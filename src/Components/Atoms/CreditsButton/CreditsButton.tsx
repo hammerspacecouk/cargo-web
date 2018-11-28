@@ -4,10 +4,13 @@ import { useFrameEffect } from "../../../hooks/useFrameEffect";
 import { useSessionContext } from "../../../context/SessionContext";
 import ScoreValue from "../../Molecules/ScoreValue/ScoreValue";
 import { getValue } from "../../../containers/Player/Score";
+import styled from "styled-components";
+import { grid } from "../../../GlobalStyle";
 
 interface Props {
   readonly amount: number;
   readonly disabledOverride?: boolean;
+  readonly children?: any;
 }
 
 const isDisabled = (
@@ -25,7 +28,13 @@ const isDisabled = (
   return scoreValue < amount;
 };
 
-export default ({ amount, disabledOverride }: Props) => {
+const StyledScoreValue = styled(ScoreValue)`
+    &:not(:first-child) {
+        margin-top: ${grid.unit / 2}px;
+    }
+`;
+
+export default ({ amount, disabledOverride, children }: Props) => {
   const { score } = useSessionContext();
   const [disabled, setDisabled] = React.useState(
     isDisabled(amount, score, disabledOverride)
@@ -41,7 +50,8 @@ export default ({ amount, disabledOverride }: Props) => {
 
   return (
     <button className="button" type="submit" disabled={disabled}>
-      <ScoreValue score={amount.toString(10)} />
+      {children}
+      <StyledScoreValue score={amount.toString(10)} />
     </button>
   );
 };

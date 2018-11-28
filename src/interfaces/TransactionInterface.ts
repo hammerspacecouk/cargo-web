@@ -10,3 +10,7 @@ export default interface TransactionInterface {
 export interface ShipUpgradeInterface extends TransactionInterface {
   detail: ShipClassInterface;
 }
+
+export interface HealthIncreaseInterface extends TransactionInterface {
+  detail: number;
+}

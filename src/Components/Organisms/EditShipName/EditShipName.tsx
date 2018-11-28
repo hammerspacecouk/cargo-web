@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FleetShipInterface} from "../../../interfaces/ShipInterface";
+import ShipInterface from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import { grid } from "../../../GlobalStyle";
 import CreditsButton from "../../Atoms/CreditsButton/CreditsButton";
@@ -12,11 +12,13 @@ import ShipNameGenerator from "../../Ship/ShipNameGenerator";
 import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import TextCursor from "../../Atoms/TextCursor/TextCursor";
+import TransactionInterface from "../../../interfaces/TransactionInterface";
 
 interface PropsInterface {
-  fleetShip: FleetShipInterface;
+  ship: ShipInterface;
+  renameToken: TransactionInterface;
+  setRenameToken: (newToken: any) => void;
 }
-
 
 const Container = styled.div`
     display: flex;
@@ -32,10 +34,10 @@ const Updating = styled.span`
     font-size: 2.35rem;
 `; // todo - share this value?
 
-export default function EditShipName({ fleetShip }: PropsInterface) {
+export default function EditShipName({ ship, renameToken, setRenameToken }: PropsInterface) {
   const { updateScore } = useSessionContext();
-  const { setFleetData, updateRenameToken } = useFleetContext();
-  const { ship, updateCurrentShip } = useCurrentShipContext();
+  const { updateShipName } = useFleetContext();
+  const { ship: currentShip, updateCurrentShip } = useCurrentShipContext();
   const [isActive, setIsActive] = React.useState(false);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
   const [offeredShipName, setOfferedShipName] = React.useState(null);
@@ -52,7 +54,7 @@ export default function EditShipName({ fleetShip }: PropsInterface) {
     setOfferedShipName(data.nameOffered);
     setOfferedShipNameToken(data.action);
 
-    updateRenameToken(data.shipId, data.newRequestShipNameToken);
+    setRenameToken(data.newRequestShipNameToken);
     updateScore(data.newScore);
   };
 
@@ -70,8 +72,8 @@ export default function EditShipName({ fleetShip }: PropsInterface) {
     const data = await ApiClient.tokenFetch(token);
     if (allowUpdate) {
       setAcceptingShipName(false);
-      setFleetData(data.fleet);
-      if (ship && ship.id === data.ship.id) {
+      updateShipName(data.ship.id, data.offeredShipName);
+      if (currentShip && currentShip.id === data.ship.id) {
         updateCurrentShip(data.ship);
       }
     }
@@ -126,7 +128,7 @@ export default function EditShipName({ fleetShip }: PropsInterface) {
         </p>
       );
       buttonContent = (
-        <TokenButton token={fleetShip.renameToken.actionToken} handler={requestShipName}>
+        <TokenButton token={renameToken.actionToken} handler={requestShipName}>
           <CreditsButton amount={500}/>
         </TokenButton>
       );

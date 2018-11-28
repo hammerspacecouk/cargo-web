@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import {FleetShipInterface} from "../../../interfaces/ShipInterface";
+import ShipInterface from "../../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import ChevronRightIcon from "../../Icons/ChevronRightIcon/ChevronRightIcon";
 import routes from "../../../routes";
 import PortName from "../../Molecules/PortName/PortName";
 
 interface PropsInterface {
-  ship: FleetShipInterface;
+  ship: ShipInterface;
 }
 
 const Styled = styled.div`
@@ -27,9 +27,9 @@ export default function FleetShipLocation({ship}: PropsInterface) {
   return (
     <Styled>
       <Location>
-        <PortName name={ship.ship.location.name} safe={ship.ship.location.safeHaven} />
+        <PortName name={ship.location.name} safe={ship.location.safeHaven} />
       </Location>
-      <Go to={routes.getPlayShip(ship.ship.id)}>
+      <Go to={routes.getPlayShip(ship.id)}>
         <ChevronRightIcon/>
       </Go>
     </Styled>

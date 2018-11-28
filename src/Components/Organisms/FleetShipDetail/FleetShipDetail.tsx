@@ -1,13 +1,16 @@
 import * as React from "react";
-import {FleetShipInterface} from "../../../interfaces/ShipInterface";
+import ShipInterface from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import { colours, grid } from "../../../GlobalStyle";
 import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
 import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
 import EditShipName from "../EditShipName/EditShipName";
+import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
+import { ApiClient } from "../../../util/ApiClient";
+import TextCursor from "../../Atoms/TextCursor/TextCursor";
 
 interface PropsInterface {
-  ship: FleetShipInterface;
+  ship: ShipInterface;
 }
 
 // todo - responsive margins
@@ -36,19 +39,59 @@ const DetailRowContent = styled.div`
 `;
 
 // todo - load the data here
-export default function FleetShipDetail({ship}: PropsInterface) {
+export default function FleetShipDetail({ ship }: PropsInterface) {
+  const [shipState, setShipState] = React.useState(ship);
+  const [renameToken, setRenameToken] = React.useState(undefined);
+  const [health, setHealth] = React.useState(undefined);
+  const allowUpdate = useAllowUpdate();
+
+  const getData = async () => {
+    const data = await ApiClient.fetch(`/edit/${ship.id}`);
+    if (allowUpdate) {
+      setRenameToken(data.renameToken);
+      setHealth(data.health);
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+
+  let healthDetail;
+  if (health !== undefined) {
+    healthDetail = (
+      <FleetShipHealth ship={shipState} health={health}/>
+    );
+  } else {
+    healthDetail = <TextCursor/>;
+  }
+
+  let nameDetail;
+  if (renameToken !== undefined) {
+    nameDetail = (
+      <EditShipName
+        ship={shipState}
+        renameToken={renameToken}
+        setRenameToken={setRenameToken}
+      />
+    );
+  } else {
+    nameDetail = <TextCursor/>;
+  }
+
   return (
     <StyledDetail>
       <DetailRow>
         <DetailRowLabel>Location</DetailRowLabel>
         <DetailRowContent>
-          <FleetShipLocation ship={ship} />
+          <FleetShipLocation ship={shipState}/>
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
         <DetailRowLabel>Health</DetailRowLabel>
         <DetailRowContent>
-          <FleetShipHealth ship={ship}/>
+          {healthDetail}
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
@@ -58,7 +101,7 @@ export default function FleetShipDetail({ship}: PropsInterface) {
       <DetailRow>
         <DetailRowLabel>Ship name</DetailRowLabel>
         <DetailRowContent>
-          <EditShipName fleetShip={ship}/>
+          {nameDetail}
         </DetailRowContent>
       </DetailRow>
 

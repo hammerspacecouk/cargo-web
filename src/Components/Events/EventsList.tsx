@@ -21,7 +21,7 @@ import styled, { keyframes } from "styled-components";
 import ListUnstyled from "../Atoms/Lists/ListUnstyled/ListUnstyled";
 import { colours, grid } from "../../GlobalStyle";
 import TextCursor from "../Atoms/TextCursor/TextCursor";
-import { eventsMinimisedHeight } from "../Pages/PlayPage";
+import { eventsMinimisedHeight } from "../../pages/PlayPage";
 
 interface Props {
   readonly events: EventInterface[];

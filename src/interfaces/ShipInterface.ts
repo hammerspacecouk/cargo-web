@@ -1,10 +1,9 @@
 import PlayerInterface from "./PlayerInterface";
 import ShipClassInterface from "./ShipClassInterface";
-import TransactionInterface from "./TransactionInterface";
 
 export interface FleetShipInterface {
-  renameToken: TransactionInterface;
   ship: ShipInterface;
+  needsAttention: boolean;
 }
 
 export default interface ShipInterface {
@@ -12,6 +11,7 @@ export default interface ShipInterface {
   name: string;
   owner?: PlayerInterface;
   shipClass?: ShipClassInterface;
+  isDestroyed: boolean;
   strengthPercent: number;
   location?: {
     name?: string; // todo - use a location interface

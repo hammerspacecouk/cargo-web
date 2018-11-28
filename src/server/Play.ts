@@ -1,6 +1,6 @@
-import PlayPage from "../components/Pages/PlayPage";
+import PlayPage from "../pages/PlayPage";
 import { Component, createElement } from "react";
-import AppLoading from "../components/Pages/Play/AppLoading";
+import AppLoading from "../pages/Play/AppLoading";
 
 interface StateInterface {
   appReady: boolean;

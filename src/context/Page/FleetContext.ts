@@ -1,24 +1,20 @@
 import { createContext, createElement, useContext, useState } from "react";
 import { ChildrenPropsInterface } from "../../interfaces/PropsInterface";
-import ShipInterface from "../../interfaces/ShipInterface";
 import EventInterface from "../../interfaces/EventInterface";
 import { ApiClient } from "../../util/ApiClient";
 import { useAllowUpdate } from "../../hooks/useAllowUpdate";
 import { useSessionContext } from "../SessionContext";
 import {FleetShipInterface} from "../../interfaces/ShipInterface";
-import ShipNameTokenInterface from "../../interfaces/ShipNameTokenInterface";
 
 interface FleetResponseInterface {
-  activeShips: FleetShipInterface[];
-  destroyedShips: ShipInterface[];
+  ships: FleetShipInterface[];
   events: EventInterface[];
 }
 
 interface FleetContextInterface {
-  activeShips: FleetShipInterface[];
-  destroyedShips: ShipInterface[];
+  ships: FleetShipInterface[];
   events: EventInterface[];
-  updateRenameToken: (id: string, token: ShipNameTokenInterface) => void;
+  updateShipName: (id: string, newName: string) => void;
   setFleetData: (data: FleetShipInterface) => void;
   refresh: () => void;
 }
@@ -30,25 +26,23 @@ export const FleetContextProvider = ({
 }: ChildrenPropsInterface) => {
 
   const {setSession} = useSessionContext();
-  const [activeShips, setActiveShips] = useState(undefined);
-  const [destroyedShips, setDestroyedShips] = useState(undefined);
+  const [ships, setShips] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const allowUpdate = useAllowUpdate();
 
-  const updateRenameToken = (id: string, token: ShipNameTokenInterface) => {
-    const ships = activeShips.slice(0);
-    const len = ships.length;
-    for (let i = 0; i < len; i++) {
-      if (ships[i].ship.id === id) {
-        ships[i].renameToken = token;
+  const updateShipName = (id: string, newName: string) => {
+    const allShips = ships.slice(0);
+      const len = allShips.length;
+      for (let i = 0; i < len; i++) {
+        if (allShips[i].ship.id === id) {
+          allShips[i].name = newName;
+        }
       }
-    }
-    setActiveShips(ships);
+      setShips(allShips);
   };
 
   const setFleetData = (data: FleetResponseInterface) => {
-    setActiveShips(data.activeShips);
-    setDestroyedShips(data.destroyedShips);
+    setShips(data.ships);
     setEvents(data.events);
   };
 
@@ -64,11 +58,10 @@ export const FleetContextProvider = ({
     FleetContext.Provider,
     {
       value: {
-        activeShips,
-        destroyedShips,
+        ships,
         events,
         setFleetData,
-        updateRenameToken,
+        updateShipName,
         refresh
       }
     },

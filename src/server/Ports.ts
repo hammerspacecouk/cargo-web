@@ -3,8 +3,8 @@ import { match, RouteProps } from "react-router";
 
 import { ApiClient } from "../util/ApiClient";
 import withInitialData from "./withInitialData";
-import PortsPage from "../components/Pages/PortsPage";
-import PortPage from "../components/Pages/Ports/PortPage";
+import PortsPage from "../pages/PortsPage";
+import PortPage from "../pages/Ports/PortPage";
 import PortInterface from "../interfaces/PortInterface";
 
 interface ParamsMatch extends match {

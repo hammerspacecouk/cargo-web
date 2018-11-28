@@ -1,8 +1,8 @@
 import { Component, createElement } from "react";
 import { match, RouteProps, withRouter } from "react-router";
 
-import ProfilePage from "../components/Pages/ProfilePage";
-import DeletePage from "../components/Pages/Profile/DeletePage";
+import ProfilePage from "../pages/ProfilePage";
+import DeletePage from "../pages/Profile/DeletePage";
 import withPlayer from "./withPlayer";
 import { ApiClient } from "../util/ApiClient";
 import { Request } from "express";

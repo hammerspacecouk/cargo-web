@@ -1,4 +1,4 @@
-import {FleetShipInterface} from "../../../interfaces/ShipInterface";
+import ShipInterface from "../../../interfaces/ShipInterface";
 import { Link } from "react-router-dom";
 import * as React from "react";
 import routes from "../../../routes";
@@ -7,18 +7,8 @@ import { grid } from "../../../GlobalStyle";
 import PlaceHolder from "../../Atoms/Placeholder/PlaceHolder";
 
 interface PropsInterface {
-  ship?: FleetShipInterface;
+  ship?: ShipInterface;
 }
-
-/*
- &__name {
-    @extend .d;
-  }
-  &__class {
-    @extend .f;
-    text-transform: uppercase;
-  }
- */
 
 const StyledWrap = styled.div`
     display: flex;
@@ -54,9 +44,9 @@ export default function FleetShipName({ ship }: PropsInterface) {
   let detail;
   if (ship) {
     detail = (
-      <StyledLink to={routes.getPlayShip(ship.ship.id)}>
-        <Title>{ship.ship.name}</Title>
-        <Subtitle>{ship.ship.shipClass.name}</Subtitle>
+      <StyledLink to={routes.getPlayShip(ship.id)}>
+        <Title>{ship.name}</Title>
+        <Subtitle>{ship.shipClass.name}</Subtitle>
       </StyledLink>
     );
   } else {
