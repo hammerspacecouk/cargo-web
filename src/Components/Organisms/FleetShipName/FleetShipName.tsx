@@ -27,6 +27,9 @@ const Detail = styled.div`
 const StyledLink = styled(Link)`
     color: inherit;
 `;
+const Destroyed = styled.span`
+    text-decoration: line-through;
+`;
 
 const Title = styled.div`
     font-size: 1.2rem;
@@ -43,12 +46,22 @@ const Subtitle = styled.div`
 export default function FleetShipName({ ship }: PropsInterface) {
   let detail;
   if (ship) {
-    detail = (
-      <StyledLink to={routes.getPlayShip(ship.id)}>
-        <Title>{ship.name}</Title>
-        <Subtitle>{ship.shipClass.name}</Subtitle>
-      </StyledLink>
-    );
+
+    if (ship.isDestroyed) {
+      detail = (
+        <Destroyed>
+          <Title>{ship.name}</Title>
+          <Subtitle>{ship.shipClass.name}</Subtitle>
+        </Destroyed>
+      );
+    } else {
+      detail = (
+        <StyledLink to={routes.getPlayShip(ship.id)}>
+          <Title>{ship.name}</Title>
+          <Subtitle>{ship.shipClass.name}</Subtitle>
+        </StyledLink>
+      );
+    }
   } else {
     detail = (
       <>

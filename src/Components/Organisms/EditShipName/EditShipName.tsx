@@ -36,7 +36,7 @@ const Updating = styled.span`
 
 export default function EditShipName({ ship, renameToken, setRenameToken }: PropsInterface) {
   const { updateScore } = useSessionContext();
-  const { updateShipName } = useFleetContext();
+  const { setFleetData } = useFleetContext();
   const { ship: currentShip, updateCurrentShip } = useCurrentShipContext();
   const [isActive, setIsActive] = React.useState(false);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
@@ -72,7 +72,7 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
     const data = await ApiClient.tokenFetch(token);
     if (allowUpdate) {
       setAcceptingShipName(false);
-      updateShipName(data.ship.id, data.offeredShipName);
+      setFleetData(data.fleet);
       if (currentShip && currentShip.id === data.ship.id) {
         updateCurrentShip(data.ship);
       }

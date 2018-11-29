@@ -16,7 +16,10 @@ interface PropsInterface {
 const StyledItem = styled.li<{destroyed: boolean}>`
   border-bottom: dashed 1px ${colours.white};
   min-height: ${grid.unit * 6}px;
-  ${props => props.destroyed ? `opacity: 0.6;`: ``}
+  ${props => props.destroyed ? `
+    opacity: 0.6;
+    font-style: italic;
+  `: ``}
 `;
 
 const ShipIntro = styled.div`
@@ -42,7 +45,8 @@ const Attention = styled.div`
 `;
 
 const Destroyed = styled.div`
-    margin-top: ${grid.unit}px;
+    margin-bottom: ${grid.unit}px;
+    text-align: right;
 `;
 
 export default function FleetShipItem({ ship }: PropsInterface) {

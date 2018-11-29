@@ -89,7 +89,7 @@ export default function FleetShipDetail({ ship }: PropsInterface) {
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
-        <DetailRowLabel>Health</DetailRowLabel>
+        <DetailRowLabel>Shield</DetailRowLabel>
         <DetailRowContent>
           {healthDetail}
         </DetailRowContent>

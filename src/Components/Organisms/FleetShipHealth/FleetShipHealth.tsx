@@ -6,6 +6,10 @@ import { grid } from "../../../GlobalStyle";
 import CreditsButton from "../../Atoms/CreditsButton/CreditsButton";
 import TokenButton from "../../Button/TokenButton";
 import { HealthIncreaseInterface } from "../../../interfaces/TransactionInterface";
+import { ApiClient } from "../../../util/ApiClient";
+import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
+import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
+import { useSessionContext } from "../../../context/SessionContext";
 
 interface PropsInterface {
   ship: ShipInterface;
@@ -30,15 +34,27 @@ const Action = styled.div`
 `;
 
 export default function FleetShipHealth({ ship, health }: PropsInterface) {
+  const [buttonsDisabled, setButtonsDisabled] = React.useState(false);
+  const { updateScore } = useSessionContext();
+  const allowUpdate = useAllowUpdate();
 
-  const applyHealth = () => {
-    alert("oi");
+  const applyHealth = async (token: ActionTokenInterface) => {
+    setButtonsDisabled(true);
+    const data = await ApiClient.tokenFetch(token);
+    if (allowUpdate) {
+      updateScore(data.newScore);
+      // todo - update health (And fleet?)
+      setButtonsDisabled(false);
+    }
   };
 
   let actionButtons = health.map(transaction => (
     <Action key={transaction.actionToken.token}>
       <TokenButton token={transaction.actionToken} handler={applyHealth}>
-        <CreditsButton amount={transaction.cost}>
+        <CreditsButton
+          amount={transaction.cost}
+          disabledOverride={buttonsDisabled}
+        >
           +{transaction.detail}%
         </CreditsButton>
       </TokenButton>

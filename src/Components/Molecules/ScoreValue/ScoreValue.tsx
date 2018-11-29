@@ -5,6 +5,7 @@ import styled from "styled-components";
 interface PropsInterface {
   /** The score value to display. Note it is not an integer */
   score: string;
+  className?: string;
 }
 
 const StyledScore = styled.div`
@@ -34,9 +35,9 @@ const Digit = styled.span`
 /**
  * Standard way to display a score value (with Icon)
  */
-export default function ScoreValue({ score }: PropsInterface) {
+export default function ScoreValue({ score, className }: PropsInterface) {
   return (
-    <StyledScore>
+    <StyledScore className={className}>
       <Icon>
         <CreditsIcon/>
       </Icon>
