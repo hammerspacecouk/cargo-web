@@ -30,6 +30,5 @@ export default function PlayerFlag({ player }: Props) {
   if (player) {
     img = <StyledImg src={`${Environment.apiHostname}${player.emblem}`} alt="" />;
   }
-  // todo - aspect ratio
   return <StyledBox>{img}</StyledBox>;
 };

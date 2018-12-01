@@ -26,11 +26,10 @@ const getValue = (seconds: number, datetime: Date): string => {
   if (interval > 1) {
     return interval + " minutes ago";
   }
-
-  if (Math.floor(seconds) <= 1) {
-    return "Just now";
+  if (interval == 1) {
+    return "1 minute ago";
   }
-  return Math.floor(seconds) + " seconds ago";
+  return "Just now";
 };
 
 /**
@@ -41,17 +40,12 @@ export default function TimeAgo({datetime}: Props) {
     getValue(getSeconds(datetime), datetime)
   );
 
-  let frameHandler: number = null;
   let timeout: number = null;
 
   const loop = () => {
     const newSeconds = getSeconds(datetime);
     setText(getValue(newSeconds, datetime));
 
-    if (newSeconds < 120) {
-      frameHandler = window.requestAnimationFrame(loop);
-      return;
-    }
     if (newSeconds < (60 * 300)) {
       timeout = window.setTimeout(loop, (30 * 1000));
       return;
@@ -62,9 +56,6 @@ export default function TimeAgo({datetime}: Props) {
   React.useEffect(() => {
     loop();
     return () => {
-      if (frameHandler) {
-        window.cancelAnimationFrame(frameHandler);
-      }
       if (timeout) {
         window.clearTimeout(timeout);
       }

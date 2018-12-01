@@ -5,6 +5,7 @@ import routes from "../../../routes";
 import styled from "styled-components";
 import { grid } from "../../../GlobalStyle";
 import PlaceHolder from "../../Atoms/Placeholder/PlaceHolder";
+import ShieldStrength from "../../Molecules/ShieldStrength/ShieldStrength";
 
 interface PropsInterface {
   ship?: ShipInterface;
@@ -17,7 +18,7 @@ const StyledWrap = styled.div`
 `;
 
 const Status = styled.div`
-    width: 48px;
+    width: 60px;
     margin-right: ${grid.unit}px;
 `;
 const Detail = styled.div`
@@ -78,6 +79,7 @@ export default function FleetShipName({ ship }: PropsInterface) {
   return (
     <StyledWrap>
       <Status>
+        <ShieldStrength percent={ship ? ship.strengthPercent : undefined} />
       </Status>
       <Detail>
         {detail}
