@@ -2,7 +2,7 @@ import * as React from "react";
 import ShipInterface from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import { grid } from "../../../GlobalStyle";
-import CreditsButton from "../../Atoms/CreditsButton/CreditsButton";
+import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
 import TokenButton from "../../Button/TokenButton";
 import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
 import { ApiClient } from "../../../util/ApiClient";
@@ -13,6 +13,8 @@ import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import TextCursor from "../../Atoms/TextCursor/TextCursor";
 import TransactionInterface from "../../../interfaces/TransactionInterface";
+import Button, { TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
+import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
 
 interface PropsInterface {
   ship: ShipInterface;
@@ -21,14 +23,17 @@ interface PropsInterface {
 }
 
 const Container = styled.div`
-    display: flex;
-    align-items: start;
+    @media (min-width: 61em) {
+      display: flex;
+      align-items: start;
+    }
 `;
 const Text = styled.div`
-    flex: 1;
-`;
-const Buttons = styled.div`
-    margin-left: ${grid.unit}px;
+    margin: 0 0 ${grid.unit}px;
+    @media (min-width: 61em) {
+        flex: 1;
+        margin: 0 ${grid.unit}px 0 0;
+    }
 `;
 const Updating = styled.span`
     font-size: 2.35rem;
@@ -90,23 +95,23 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
     if (offeredShipNameToken) {
       buttonContent = (
         <>
-          <a
+          <Button as="a"
             href="."
-            className="button button--soft-danger"
+            styleType={TYPE_DANGER}
             onClick={(e) => {
               e.preventDefault();
               resetOffer();
             }}
           >
             Reject
-          </a>
+          </Button>
           <TokenButton
             token={offeredShipNameToken}
             handler={acceptShipName}
           >
-            <button className="button button--confirm" type="submit">
+            <Button styleType={TYPE_CONFIRM} type="submit">
               Accept
-            </button>
+            </Button>
           </TokenButton>
         </>
       );
@@ -138,7 +143,7 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
   return (
     <Container>
       <Text>{textContent}</Text>
-      <Buttons>{buttonContent}</Buttons>
+      <ButtonRow>{buttonContent}</ButtonRow>
     </Container>
   );
 }

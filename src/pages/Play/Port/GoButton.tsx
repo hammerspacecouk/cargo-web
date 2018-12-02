@@ -3,35 +3,40 @@ import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import DirectionInterface from "../../../interfaces/DirectionInterface";
 import TokenButton from "../../../components/Button/TokenButton";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
+import IntervalFormat from "../../../components/Formatting/IntervalFormat";
+import Button, { TYPE_CONFIRM } from "../../../components/Atoms/Button/Button";
+import ComplexButton from "../../../components/Molecules/ComplexButton/ComplexButton";
 
 interface PropsInterface {
   direction: DirectionInterface;
+  journeyTime: number;
   children: JSX.Element;
 }
 
-export default ({ direction, children }: PropsInterface) => {
+export default ({ direction, journeyTime, children }: PropsInterface) => {
   const { cratesOnShip, cratesInPort, ship } = useCurrentShipContext();
   const { buttonsDisabled, moveShip, openModal } = usePlayPortContext();
-  const icon = children;
   const buttonDisabled = direction.action === null || buttonsDisabled;
 
   if (cratesOnShip === undefined) {
     return null;
   }
 
+  const time = <IntervalFormat seconds={journeyTime} />;
+
   let actionButton = (
-    <button
-      className="button button--icon"
+    <ComplexButton
       type="submit"
       disabled={buttonDisabled}
-      title="Go"
+      icon={children}
     >
-      {children}
-    </button>
+      {time}
+    </ComplexButton>
   );
   if (!buttonDisabled) {
     actionButton = (
       <TokenButton token={direction.action} handler={moveShip}>
+
         {actionButton}
       </TokenButton>
     );
@@ -44,23 +49,22 @@ export default ({ direction, children }: PropsInterface) => {
     cratesInPort.length > 0
   ) {
     actionButton = (
-      <button
-        className="button button--icon"
+      <ComplexButton
         type="submit"
         disabled={buttonDisabled}
-        title="Go"
+        icon={children}
         onClick={() => {
           openModal(
             <TokenButton token={direction.action} handler={moveShip}>
-              <button className="button button--confirm" type="submit">
+              <Button styleType={TYPE_CONFIRM} type="submit">
                 Yes
-              </button>
+              </Button>
             </TokenButton>
           );
         }}
       >
-        {icon}
-      </button>
+        {time}
+      </ComplexButton>
     );
   }
   return actionButton;

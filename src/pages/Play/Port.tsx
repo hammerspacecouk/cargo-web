@@ -4,7 +4,7 @@ import {
   PlayPortContextProvider,
   usePlayPortContext
 } from "../../context/Page/PlayPortContext";
-import ShipList from "../../components/Ship/ShipList";
+import ShipList from "../../components/Organisms/PlayerShipList/PlayerShipList";
 import EventsList from "../../components/Events/EventsList";
 import Welcome from "./Port/Welcome";
 import Crates from "./Port/Crates";

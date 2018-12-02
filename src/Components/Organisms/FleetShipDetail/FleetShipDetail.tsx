@@ -61,7 +61,7 @@ export default function FleetShipDetail({ ship }: PropsInterface) {
   let healthDetail;
   if (health !== undefined) {
     healthDetail = (
-      <FleetShipHealth ship={shipState} health={health}/>
+      <FleetShipHealth health={health}/>
     );
   } else {
     healthDetail = <TextCursor/>;
@@ -89,7 +89,7 @@ export default function FleetShipDetail({ ship }: PropsInterface) {
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
-        <DetailRowLabel>Shield</DetailRowLabel>
+        <DetailRowLabel>Shield strength</DetailRowLabel>
         <DetailRowContent>
           {healthDetail}
         </DetailRowContent>

@@ -2,38 +2,24 @@ import * as React from "react";
 import styled from "styled-components";
 import ShipInterface from "../../../interfaces/ShipInterface";
 import HealthBar from "../../Molecules/HealthBar/HealthBar";
-import { grid } from "../../../GlobalStyle";
-import CreditsButton from "../../Atoms/CreditsButton/CreditsButton";
+import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
 import TokenButton from "../../Button/TokenButton";
 import { HealthIncreaseInterface } from "../../../interfaces/TransactionInterface";
 import { ApiClient } from "../../../util/ApiClient";
 import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
 import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
 import { useSessionContext } from "../../../context/SessionContext";
+import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
 
 interface PropsInterface {
-  ship: ShipInterface;
   health: HealthIncreaseInterface[];
 }
 
-const Styled = styled.div`
-    display: flex;
-    align-items: center;
+const StyledContent = styled.div`
+    text-align: right;
 `;
 
-const HealthBarContainer = styled.div`
-    flex: 1;
-`;
-
-const Actions = styled.div`
-`;
-
-const Action = styled.div`
-    display: inline-block;
-    margin-left: ${grid.unit}px;
-`;
-
-export default function FleetShipHealth({ ship, health }: PropsInterface) {
+export default function FleetShipHealth({ health }: PropsInterface) {
   const [buttonsDisabled, setButtonsDisabled] = React.useState(false);
   const { updateScore } = useSessionContext();
   const allowUpdate = useAllowUpdate();
@@ -49,26 +35,21 @@ export default function FleetShipHealth({ ship, health }: PropsInterface) {
   };
 
   let actionButtons = health.map(transaction => (
-    <Action key={transaction.actionToken.token}>
-      <TokenButton token={transaction.actionToken} handler={applyHealth}>
-        <CreditsButton
-          amount={transaction.cost}
-          disabledOverride={buttonsDisabled}
-        >
-          +{transaction.detail}%
-        </CreditsButton>
-      </TokenButton>
-    </Action>
+    <TokenButton key={transaction.actionToken.token} token={transaction.actionToken} handler={applyHealth}>
+      <CreditsButton
+        amount={transaction.cost}
+        disabledOverride={buttonsDisabled}
+      >
+        <span>+{transaction.detail}%</span>
+      </CreditsButton>
+    </TokenButton>
   ));
 
   return (
-    <Styled>
-      <HealthBarContainer>
-        <HealthBar percent={ship.strengthPercent}/>
-      </HealthBarContainer>
-      <Actions>
+    <StyledContent>
+      <ButtonRow>
         {actionButtons}
-      </Actions>
-    </Styled>
+      </ButtonRow>
+    </StyledContent>
   );
 }

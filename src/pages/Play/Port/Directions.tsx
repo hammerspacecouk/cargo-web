@@ -27,7 +27,6 @@ export default () => {
             <th>Direction</th>
             <th>Destination Port</th>
             <th>Distance</th>
-            <th>Travel Time</th>
             <th>Earnings</th>
             <th>Go?</th>
           </tr>

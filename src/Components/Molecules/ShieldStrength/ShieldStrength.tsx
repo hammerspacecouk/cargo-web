@@ -1,10 +1,14 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
 import { colours } from "../../../GlobalStyle";
+import { animate } from "../../Atoms/Placeholder/PlaceHolder";
+import PlayerFlag from "../PlayerFlag/PlayerFlag";
+import PlayerInterface from "../../../interfaces/PlayerInterface";
 
 interface PropsInterface {
   percent?: number;
   className?: string;
+  player?: PlayerInterface;
 }
 
 const radial = keyframes`
@@ -17,21 +21,28 @@ const radial = keyframes`
   }
 `;
 
-const StyledShieldStrength = styled.div`
+const StyledShieldStrength = styled.div<{loading?: boolean}>`
     width: 100%;
     line-height: 0;
     height: 0;
     overflow: hidden;
     padding-top: 100%;
     position: relative;
+    ${props => props.loading ? animate: ``}
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+`;
+
+const StyledFlag = styled(PlayerFlag)`
+    padding: 8px;
 `;
 
 const StyledSvg = styled.svg`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     transform: rotate(-90deg);
 `;
 
@@ -43,7 +54,7 @@ const CircleTrack = styled.circle`
 const CircleBar = styled(CircleTrack)<{colour: string}>`
     opacity: 0;
     stroke: ${props => props.colour};
-    animation-delay: 1.5s;
+    animation-delay: 1s;
     animation-duration: 1.5s;
     animation-fill-mode: forwards;
     animation-name: ${radial};
@@ -53,29 +64,32 @@ const CircleBar = styled(CircleTrack)<{colour: string}>`
 /**
  * Standard way to display a score value (with Icon)
  */
-export default React.memo(function({ percent, className }: PropsInterface) {
+export default React.memo(function({ percent, className, player }: PropsInterface) {
   const size = 100;
   const barWidth = 12;
-  const trackLength = 300;
-  const barLength = (percent / 100) * trackLength;
-  const dash = `${barLength} ${trackLength}`;
 
   const centre = size / 2;
-  const radius = centre - barWidth;
-
-  let colour = colours.blue[7];
-  if (percent <= 75) {
-    colour = colours.yellow[7];
-  }
-  if (percent <= 50) {
-    colour = colours.orange[7];
-  }
-  if (percent <= 25) {
-    colour = colours.red[7];
-  }
+  const radius = centre - (barWidth / 2);
+  const trackLength = 2 * Math.PI * radius;
 
   let bar = null;
   if (percent !== undefined) {
+    const barLength = (percent / 100) * trackLength;
+    const dash = `${barLength} ${trackLength}`;
+    let colour = colours.cyan[3];
+    if (percent < 100) {
+      colour = colours.green[4];
+    }
+    if (percent <= 75) {
+      colour = colours.yellow[3];
+    }
+    if (percent <= 50) {
+      colour = colours.orange[4];
+    }
+    if (percent <= 25) {
+      colour = colours.red[5];
+    }
+
     bar = (
       <CircleBar
         cx={centre}
@@ -88,11 +102,20 @@ export default React.memo(function({ percent, className }: PropsInterface) {
     );
   }
 
+  let emblem;
+  if (player) {
+    emblem = (
+      <StyledFlag player={player} />
+    )
+  }
+
   return (
     <StyledShieldStrength
       title={`${percent}%`}
       className={className}
+      loading={percent === undefined}
     >
+      {emblem}
       <StyledSvg
         viewBox={`0 0 ${size} ${size}`}
       >

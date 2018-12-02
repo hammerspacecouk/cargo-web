@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useSessionContext } from "../../context/SessionContext";
 import PlayerFlag from "../../components/Molecules/PlayerFlag/PlayerFlag";
 import FleetShips from "../../components/Organisms/FleetShips/FleetShips";
-import DestroyedShips from "../../components/Ship/DestroyedShips";
 import EventsList from "../../components/Events/EventsList";
 import Rank from "../../components/Player/Rank";
 import { FleetContextProvider, useFleetContext } from "../../context/Page/FleetContext";
@@ -11,22 +10,24 @@ import { EventsArea } from "../PlayPage";
 import { colours, grid } from "../../GlobalStyle";
 
 const StyledFleetPage = styled.div`
-    padding: ${grid.unit}px;
+  padding: ${grid.unit}px;
 `;
 
 const FleetHeader = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: ${grid.unit * 2}px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: ${grid.unit * 2}px;
 `;
 
 const StyledFlagWrapper = styled.div`
   display: block;
   margin-left: ${grid.unit}px;
   width: 45%;
-  max-width: 240px;
-  border: dashed 2px ${colours.cyan[2]};
+  max-width: 128px;
+  border: solid 2px ${colours.white};
+  border-radius: 50%;
+  line-height: 0;
 `;
 const Title = styled.h1`
   text-align: left;
@@ -51,7 +52,7 @@ const FleetPageContent = () => {
   return (
     <StyledFleetPage>
       <FleetHeader>
-        <Title>My<br />Fleet</Title>
+        <Title>My Fleet</Title>
         <StyledFlagWrapper>
           <PlayerFlag player={player}/>
         </StyledFlagWrapper>

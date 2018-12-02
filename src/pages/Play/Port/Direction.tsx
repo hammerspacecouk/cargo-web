@@ -1,7 +1,6 @@
 import * as React from "react";
 import DirectionInterface from "../../../interfaces/DirectionInterface";
 import Fraction from "../../../components/Formatting/Fraction";
-import IntervalFormat from "../../../components/Formatting/IntervalFormat";
 import ScoreValue from "../../../components/Molecules/ScoreValue/ScoreValue";
 import GoButton from "./GoButton";
 import { InlinePortName } from "../../../components/Labels";
@@ -48,14 +47,16 @@ export default ({ direction, children }: PropsInterface) => {
           ly
         </abbr>
       </td>
-      <td className="destinations__time">
-        <IntervalFormat seconds={direction.journeyTimeSeconds} />
-      </td>
       <td className="destinations__earnings">
         <ScoreValue score={direction.earnings.toString()} />
       </td>
       <td className="destinations__action">
-        <GoButton direction={direction}>{icon}</GoButton>
+        <GoButton
+          direction={direction}
+          journeyTime={direction.journeyTimeSeconds}
+        >
+          {icon}
+        </GoButton>
       </td>
     </tr>
   );

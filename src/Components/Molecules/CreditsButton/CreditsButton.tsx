@@ -2,15 +2,14 @@ import * as React from "react";
 import ScoreInterface from "../../../interfaces/ScoreInterface";
 import { useFrameEffect } from "../../../hooks/useFrameEffect";
 import { useSessionContext } from "../../../context/SessionContext";
-import ScoreValue from "../../Molecules/ScoreValue/ScoreValue";
+import ScoreValue from "../ScoreValue/ScoreValue";
 import { getValue } from "../../../containers/Player/Score";
-import styled from "styled-components";
-import { grid } from "../../../GlobalStyle";
+import ComplexButton from "../ComplexButton/ComplexButton";
 
 interface Props {
   readonly amount: number;
   readonly disabledOverride?: boolean;
-  readonly children?: any;
+  readonly children?: JSX.Element;
 }
 
 const isDisabled = (
@@ -28,13 +27,9 @@ const isDisabled = (
   return scoreValue < amount;
 };
 
-const StyledScoreValue = styled(ScoreValue)`
-    &:not(:first-child) {
-        margin-top: ${grid.unit / 2}px;
-    }
-`;
-
-export default ({ amount, disabledOverride, children }: Props) => {
+export default function CreditsButton(
+  { amount, disabledOverride, children }: Props
+) {
   const { score } = useSessionContext();
   const [disabled, setDisabled] = React.useState(
     isDisabled(amount, score, disabledOverride)
@@ -49,9 +44,12 @@ export default ({ amount, disabledOverride, children }: Props) => {
   );
 
   return (
-    <button className="button" type="submit" disabled={disabled}>
-      {children}
-      <StyledScoreValue score={amount.toString(10)} />
-    </button>
+    <ComplexButton
+      type="submit"
+      disabled={disabled}
+      leading={children}
+    >
+      <ScoreValue score={amount.toString(10)}/>
+    </ComplexButton>
   );
 };

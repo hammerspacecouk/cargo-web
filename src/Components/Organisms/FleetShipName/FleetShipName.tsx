@@ -18,11 +18,12 @@ const StyledWrap = styled.div`
 `;
 
 const Status = styled.div`
-    width: 60px;
+    width: 52px;
     margin-right: ${grid.unit}px;
 `;
 const Detail = styled.div`
     flex: 1;
+    line-height: 1;
 `;
 
 const StyledLink = styled(Link)`
@@ -76,10 +77,18 @@ export default function FleetShipName({ ship }: PropsInterface) {
     );
   }
 
+  let shield = null;
+  if (!ship || ship.strengthPercent) {
+    shield = (
+      <ShieldStrength percent={ship ? ship.strengthPercent : undefined} />
+    );
+  }
+
+
   return (
     <StyledWrap>
       <Status>
-        <ShieldStrength percent={ship ? ship.strengthPercent : undefined} />
+        {shield}
       </Status>
       <Detail>
         {detail}
