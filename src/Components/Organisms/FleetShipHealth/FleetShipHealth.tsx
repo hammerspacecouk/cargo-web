@@ -1,18 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
-import ShipInterface from "../../../interfaces/ShipInterface";
-import HealthBar from "../../Molecules/HealthBar/HealthBar";
 import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
 import TokenButton from "../../Button/TokenButton";
 import { HealthIncreaseInterface } from "../../../interfaces/TransactionInterface";
 import { ApiClient } from "../../../util/ApiClient";
 import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
-import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
 import { useSessionContext } from "../../../context/SessionContext";
 import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
+import { FleetResponseInterface, useFleetContext } from "../../../context/Page/FleetContext";
+import ScoreInterface from "../../../interfaces/ScoreInterface";
 
 interface PropsInterface {
   health: HealthIncreaseInterface[];
+}
+
+interface UpdateResponseInterface {
+  fleet: FleetResponseInterface;
+  newScore: ScoreInterface;
 }
 
 const StyledContent = styled.div`
@@ -22,20 +26,37 @@ const StyledContent = styled.div`
 export default function FleetShipHealth({ health }: PropsInterface) {
   const [buttonsDisabled, setButtonsDisabled] = React.useState(false);
   const { updateScore } = useSessionContext();
-  const allowUpdate = useAllowUpdate();
+  const { setFleetData } = useFleetContext();
+  const mounted = React.useRef(false);
 
   const applyHealth = async (token: ActionTokenInterface) => {
+    if (!mounted.current) {
+      return;
+    }
+
     setButtonsDisabled(true);
-    const data = await ApiClient.tokenFetch(token);
-    if (allowUpdate) {
+    const data: UpdateResponseInterface = await ApiClient.tokenFetch(token);
+    if (mounted.current) {
       updateScore(data.newScore);
-      // todo - update health (And fleet?)
+      setFleetData(data.fleet);
       setButtonsDisabled(false);
     }
   };
 
-  let actionButtons = health.map(transaction => (
-    <TokenButton key={transaction.actionToken.token} token={transaction.actionToken} handler={applyHealth}>
+  React.useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  });
+
+  let actionButtons = health.map(transaction => {
+    return (
+    <TokenButton
+      key={transaction.actionToken.token}
+      token={transaction.actionToken}
+      handler={applyHealth}
+    >
       <CreditsButton
         amount={transaction.cost}
         disabledOverride={buttonsDisabled}
@@ -43,7 +64,7 @@ export default function FleetShipHealth({ health }: PropsInterface) {
         <span>+{transaction.detail}%</span>
       </CreditsButton>
     </TokenButton>
-  ));
+  )});
 
   return (
     <StyledContent>

@@ -32,7 +32,6 @@ const routes = {
   getPortsList: () => "/ports",
   getPlay: () => "/play",
   getPlayShip: (id: string = ":shipId") => `/play/${id}`,
-  getPlayShipEdit: (id: string = ":shipId") => `/play/${id}/edit`,
   getProfile: () => "/profile",
   getProfileDelete: () => "/profile/delete",
   getHome: () => "/"

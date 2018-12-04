@@ -2,11 +2,11 @@ import { createContext, createElement, useContext, useState } from "react";
 import { ChildrenPropsInterface } from "../../interfaces/PropsInterface";
 import EventInterface from "../../interfaces/EventInterface";
 import { ApiClient } from "../../util/ApiClient";
-import { useAllowUpdate } from "../../hooks/useAllowUpdate";
 import { useSessionContext } from "../SessionContext";
 import { FleetShipInterface } from "../../interfaces/ShipInterface";
+import { useMounted } from "../../hooks/useMounted";
 
-interface FleetResponseInterface {
+export interface FleetResponseInterface {
   ships: FleetShipInterface[];
   events: EventInterface[];
 }
@@ -14,7 +14,7 @@ interface FleetResponseInterface {
 interface FleetContextInterface {
   ships: FleetShipInterface[];
   events: EventInterface[];
-  setFleetData: (data: FleetShipInterface) => void;
+  setFleetData: (data: FleetResponseInterface) => void;
   refresh: () => void;
 }
 
@@ -29,7 +29,7 @@ export const FleetContextProvider = (
   const { setSession } = useSessionContext();
   const [ships, setShips] = useState(undefined);
   const [events, setEvents] = useState(undefined);
-  const allowUpdate = useAllowUpdate();
+  const isMounted = useMounted();
 
   const setFleetData = (data: FleetResponseInterface) => {
     setShips(data.ships);
@@ -38,7 +38,7 @@ export const FleetContextProvider = (
 
   const refresh = async () => {
     const data = await ApiClient.fetch("/play");
-    if (allowUpdate) {
+    if (isMounted()) {
       setFleetData(data.fleet);
     }
     setSession(data.sessionState);

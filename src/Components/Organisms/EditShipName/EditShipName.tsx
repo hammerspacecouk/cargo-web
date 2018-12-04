@@ -9,17 +9,16 @@ import { ApiClient } from "../../../util/ApiClient";
 import { useSessionContext } from "../../../context/SessionContext";
 import { useFleetContext } from "../../../context/Page/FleetContext";
 import ShipNameGenerator from "../../Ship/ShipNameGenerator";
-import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import TextCursor from "../../Atoms/TextCursor/TextCursor";
 import TransactionInterface from "../../../interfaces/TransactionInterface";
 import Button, { TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
 import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
+import { useMounted } from "../../../hooks/useMounted";
 
 interface PropsInterface {
   ship: ShipInterface;
   renameToken: TransactionInterface;
-  setRenameToken: (newToken: any) => void;
 }
 
 const Container = styled.div`
@@ -39,7 +38,8 @@ const Updating = styled.span`
     font-size: 2.35rem;
 `; // todo - share this value?
 
-export default function EditShipName({ ship, renameToken, setRenameToken }: PropsInterface) {
+export default function EditShipName({ ship, renameToken }: PropsInterface) {
+  const [requestNameToken, setRequestNameToken] = React.useState(renameToken);
   const { updateScore } = useSessionContext();
   const { setFleetData } = useFleetContext();
   const { ship: currentShip, updateCurrentShip } = useCurrentShipContext();
@@ -47,7 +47,7 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
   const [offeredShipName, setOfferedShipName] = React.useState(null);
   const [offeredShipNameToken, setOfferedShipNameToken] = React.useState(null);
-  const allowUpdate = useAllowUpdate();
+  const isMounted = useMounted();
 
   const requestShipName = async (
     token: ActionTokenInterface
@@ -56,11 +56,13 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
 
     //make the API call
     const data = await ApiClient.tokenFetch(token);
-    setOfferedShipName(data.nameOffered);
-    setOfferedShipNameToken(data.action);
-
-    setRenameToken(data.newRequestShipNameToken);
     updateScore(data.newScore);
+    if (isMounted()) {
+      // todo - new token needs to be set on the fleet, in case you closed the panel
+      setRequestNameToken(data.newRequestShipNameToken);
+      setOfferedShipName(data.nameOffered);
+      setOfferedShipNameToken(data.action);
+    }
   };
 
   const resetOffer = () => {
@@ -75,7 +77,7 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
     setAcceptingShipName(true);
     resetOffer();
     const data = await ApiClient.tokenFetch(token);
-    if (allowUpdate) {
+    if (isMounted()) {
       setAcceptingShipName(false);
       setFleetData(data.fleet);
       if (currentShip && currentShip.id === data.ship.id) {
@@ -95,7 +97,16 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
     if (offeredShipNameToken) {
       buttonContent = (
         <>
-          <Button as="a"
+          <TokenButton
+            token={offeredShipNameToken}
+            handler={acceptShipName}
+          >
+            <Button styleType={TYPE_CONFIRM} type="submit">
+              Accept
+            </Button>
+          </TokenButton>
+          <Button
+            as="a"
             href="."
             styleType={TYPE_DANGER}
             onClick={(e) => {
@@ -105,14 +116,6 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
           >
             Reject
           </Button>
-          <TokenButton
-            token={offeredShipNameToken}
-            handler={acceptShipName}
-          >
-            <Button styleType={TYPE_CONFIRM} type="submit">
-              Accept
-            </Button>
-          </TokenButton>
         </>
       );
     } else {
@@ -124,7 +127,7 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
         <Updating>
           Updating<TextCursor/>
         </Updating>
-      )
+      );
     } else {
       textContent = (
         <p>
@@ -133,7 +136,7 @@ export default function EditShipName({ ship, renameToken, setRenameToken }: Prop
         </p>
       );
       buttonContent = (
-        <TokenButton token={renameToken.actionToken} handler={requestShipName}>
+        <TokenButton token={requestNameToken.actionToken} handler={requestShipName}>
           <CreditsButton amount={500}/>
         </TokenButton>
       );

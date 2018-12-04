@@ -1,8 +1,9 @@
-import { createElement, useState, useEffect } from "react";
+import { createElement, useState, useEffect, useRef } from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 
 import ScoreInterface from "../../interfaces/ScoreInterface";
 import ScoreValue from "../../components/Molecules/ScoreValue/ScoreValue";
+import { useFrameEffect } from "../../hooks/useFrameEffect";
 
 interface Props {
   score: ScoreInterface;
@@ -36,11 +37,11 @@ const scoreState = (score: ScoreInterface): string => {
 
 export default (props: Props) => {
   const [score, setScore] = useState(scoreState(props.score));
-
-  let allowAnimationUpdate: boolean = true;
+  const mounted = useRef(false);
 
   function updateScore() {
-    if (!allowAnimationUpdate) {
+    let frameHandler: number = null;
+    if (!mounted.current) {
       return;
     }
 
@@ -51,12 +52,21 @@ export default (props: Props) => {
     window.requestAnimationFrame(updateScore);
   }
 
+  // useFrameEffect(() => {
+  //   setScore(scoreState(props.score));
+  //   return true;
+  // });
+
   useEffect(
     () => {
-      allowAnimationUpdate = true;
-      updateScore();
+      mounted.current = true;
+      // if the score rate is zero, no need to watch it as it won't change
+      // if (props.score.rate !== 0) {
+      //   console.log('updaint from effect');
+        updateScore();
+      // }
       return () => {
-        allowAnimationUpdate = false;
+        mounted.current = false;
       };
     },
     [props.score]

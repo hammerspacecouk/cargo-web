@@ -3,6 +3,7 @@
   top: 0;
   width: 100%;
   background: fixed linear-gradient(45deg, hsl(276, 48%, 25%) 0%, hsl(258, 64%, 20%) 50%, hsl(242, 93%, 6%) 100%);
+  z-index: $z-high-gold;
 }
 
 
@@ -17,7 +18,6 @@
   color: $masthead-text-color;
   display: flex;
   justify-content: space-between;
-  z-index: $z-high-gold;
 
   &__link {
     color: inherit;

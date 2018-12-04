@@ -10,7 +10,7 @@ import FleetShipDetail from "../FleetShipDetail/FleetShipDetail";
 import WarningIcon from "../../Icons/WarningIcon/WarningIcon";
 
 interface PropsInterface {
-  ship?: FleetShipInterface;
+  fleetShip?: FleetShipInterface;
 }
 
 const StyledItem = styled.li<{destroyed: boolean}>`
@@ -49,15 +49,15 @@ const Destroyed = styled.div`
     text-align: right;
 `;
 
-export default function FleetShipItem({ ship }: PropsInterface) {
+export default function FleetShipItem({ fleetShip }: PropsInterface) {
   const [showDetail, setShowDetail] = React.useState(false);
 
   let attention = null;
   let moreButton = null;
   let detail = null;
-  if (ship) {
-    if (ship.ship.isDestroyed) {
-      detail = <Destroyed>Destroyed at {ship.ship.location.name}</Destroyed>
+  if (fleetShip) {
+    if (fleetShip.ship.isDestroyed) {
+      detail = <Destroyed>Destroyed at {fleetShip.ship.location.name}</Destroyed>
     } else {
       const icon = showDetail ? <ChevronUpIcon/> : <ChevronDownIcon/>;
       moreButton = (
@@ -68,21 +68,20 @@ export default function FleetShipItem({ ship }: PropsInterface) {
         </ButtonArea>
       );
       if (showDetail) {
-        detail = <FleetShipDetail ship={ship.ship}/>;
+        detail = <FleetShipDetail fleetShip={fleetShip}/>;
       }
-      if (ship.needsAttention) {
+      if (fleetShip.needsAttention) {
         attention = <Attention><WarningIcon/></Attention>;
       }
     }
   }
 
-  // todo - ship icon and mini health bar
   // todo - optional chaining - babel
   return (
-    <StyledItem destroyed={ship ? ship.ship.isDestroyed : false}>
+    <StyledItem destroyed={fleetShip ? fleetShip.ship.isDestroyed : false}>
       <ShipIntro>
         <ShipName>
-          <FleetShipName ship={ship ? ship.ship : null}/>
+          <FleetShipName ship={fleetShip ? fleetShip.ship : null}/>
         </ShipName>
         {attention}
         {moreButton}

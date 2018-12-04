@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const useFrameEffect = (
   frameCallback: (frameTime: number) => boolean,
   watch: any[] = [],
-  minimumWait: number = 0
+  minimumWait: number = 0,
+  unmount?: () => void
 ) => {
-  // to prevent attempts to update state once unmounted
+  const mounted = useRef(false);
   let startTime: number = null;
   let frameHandler: number = null;
   let lastHandledFrameTime = 0;
@@ -23,15 +24,20 @@ export const useFrameEffect = (
       return;
     }
     lastHandledFrameTime = frameTime;
-    if (frameCallback(totalTimePassword)) {
+    if (mounted.current && frameCallback(totalTimePassword)) {
       frameHandler = window.requestAnimationFrame(frame);
     }
   };
 
   useEffect(() => {
+    mounted.current = true;
     window.requestAnimationFrame(frame);
     return () => {
+      mounted.current = false;
       window.cancelAnimationFrame(frameHandler);
+      if (unmount) {
+        unmount();
+      }
     };
   }, watch);
 };

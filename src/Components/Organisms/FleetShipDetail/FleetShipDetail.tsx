@@ -1,16 +1,13 @@
 import * as React from "react";
-import ShipInterface from "../../../interfaces/ShipInterface";
+import { FleetShipInterface } from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import { colours, grid } from "../../../GlobalStyle";
 import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
 import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
 import EditShipName from "../EditShipName/EditShipName";
-import { useAllowUpdate } from "../../../hooks/useAllowUpdate";
-import { ApiClient } from "../../../util/ApiClient";
-import TextCursor from "../../Atoms/TextCursor/TextCursor";
 
 interface PropsInterface {
-  ship: ShipInterface;
+  fleetShip: FleetShipInterface;
 }
 
 // todo - responsive margins
@@ -38,70 +35,28 @@ const DetailRowContent = styled.div`
     flex: 1;
 `;
 
-// todo - load the data here
-export default function FleetShipDetail({ ship }: PropsInterface) {
-  const [shipState, setShipState] = React.useState(ship);
-  const [renameToken, setRenameToken] = React.useState(undefined);
-  const [health, setHealth] = React.useState(undefined);
-  const allowUpdate = useAllowUpdate();
-
-  const getData = async () => {
-    const data = await ApiClient.fetch(`/edit/${ship.id}`);
-    if (allowUpdate) {
-      setRenameToken(data.renameToken);
-      setHealth(data.health);
-    }
-  };
-
-  React.useEffect(() => {
-    getData();
-  }, []);
-
-
-  let healthDetail;
-  if (health !== undefined) {
-    healthDetail = (
-      <FleetShipHealth health={health}/>
-    );
-  } else {
-    healthDetail = <TextCursor/>;
-  }
-
-  let nameDetail;
-  if (renameToken !== undefined) {
-    nameDetail = (
-      <EditShipName
-        ship={shipState}
-        renameToken={renameToken}
-        setRenameToken={setRenameToken}
-      />
-    );
-  } else {
-    nameDetail = <TextCursor/>;
-  }
-
+export default function FleetShipDetail({ fleetShip }: PropsInterface) {
   return (
     <StyledDetail>
       <DetailRow>
         <DetailRowLabel>Location</DetailRowLabel>
         <DetailRowContent>
-          <FleetShipLocation ship={shipState}/>
+          <FleetShipLocation ship={fleetShip.ship}/>
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
         <DetailRowLabel>Shield strength</DetailRowLabel>
         <DetailRowContent>
-          {healthDetail}
+          <FleetShipHealth health={fleetShip.health}/>
         </DetailRowContent>
-      </DetailRow>
-      <DetailRow>
-        <DetailRowLabel>Crates</DetailRowLabel>
-        <DetailRowContent>Stuff</DetailRowContent>
       </DetailRow>
       <DetailRow>
         <DetailRowLabel>Ship name</DetailRowLabel>
         <DetailRowContent>
-          {nameDetail}
+          <EditShipName
+            ship={fleetShip.ship}
+            renameToken={fleetShip.renameToken}
+          />
         </DetailRowContent>
       </DetailRow>
 

@@ -24,7 +24,7 @@ const MoreLink = styled.div`
 export default function FleetShips({ ships }: Props) {
   let shipRows;
   if (ships !== undefined) {
-    shipRows = ships.map((ship) => <FleetShipItem key={ship.ship.id} ship={ship} />);
+    shipRows = ships.map((ship) => <FleetShipItem key={ship.ship.id} fleetShip={ship} />);
   } else {
     shipRows = [
       <FleetShipItem key="loading1" />,

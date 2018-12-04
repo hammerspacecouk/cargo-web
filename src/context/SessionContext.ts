@@ -46,41 +46,26 @@ const getSession = (cookies?: any): Promise<SessionResponseInterface> => {
   return ApiClient.fetch("/login/check", null, cookies);
 };
 
-function useScore(): [ScoreInterface, (newScore: ScoreInterface) => void] {
-  const [score, setScore] = useState(initialSession.score);
-  return [
-    score,
-    (newScore: ScoreInterface) => {
-      setScore(newScore);
-    }
-  ];
-}
-
-function useRankStatus(): [
-  RankStatusInterface,
-  (newRanksStatus: RankStatusInterface) => void
-  ] {
-  const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
-  return [
-    rankStatus,
-    (newRanksStatus: RankStatusInterface) => {
-      setRanksStatus(newRanksStatus);
-    }
-  ];
-}
-
 const sessionRefreshTime: number = 1000 * 60 * 2;
 
 export function SessionContextComponent({ children }: ChildrenPropsInterface) {
-  const [score, updateScore] = useScore();
-  const [rankStatus, updateRankStatus] = useRankStatus();
+  const [score, setScore] = useState(initialSession.score);
+  const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   const [player, setPlayer] = useState(initialSession.player);
   const [hasProfileNotification, setHasProfileNotification] = useState(
     initialSession.hasProfileNotification
   );
   let allowUpdate = true;
 
-  function updateSession() {
+  const updateScore = (newScore: ScoreInterface) => {
+    setScore(newScore);
+  };
+
+  const updateRankStatus = (newRanksStatus: RankStatusInterface) => {
+    setRanksStatus(newRanksStatus);
+  };
+
+  const updateSession = () => {
     if (!allowUpdate) {
       return;
     }
@@ -89,16 +74,9 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
       refreshSession();
     }
     window.setTimeout(updateSession, sessionRefreshTime);
-  }
+  };
 
-  useEffect(() => {
-    updateSession();
-    return () => {
-      allowUpdate = false;
-    };
-  }, []);
-
-  function setSession(session: SessionResponseInterface) {
+  const setSession = (session: SessionResponseInterface) => {
     if (session.isLoggedIn) {
       updateScore(session.player.score);
       updateRankStatus(session.rankStatus);
@@ -109,11 +87,18 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
       updateRankStatus(null);
       setPlayer(null);
     }
-  }
+  };
 
-  async function refreshSession() {
+  const refreshSession = async () => {
     setSession(await getSession());
-  }
+  };
+
+  useEffect(() => {
+    updateSession();
+    return () => {
+      allowUpdate = false;
+    };
+  }, []);
 
   return createElement(
     SessionContext.Provider,
