@@ -1,7 +1,7 @@
 import * as React from "react";
-import EventInterface from "../../DomainInterfaces/EventInterface";
+import EventInterface from "../../interfaces/EventInterface";
 import Event from "./Event";
-import PlayerFlag from "../Player/PlayerFlag";
+import PlayerFlag from "../Molecules/PlayerFlag/PlayerFlag";
 
 interface Props {
   readonly event: EventInterface;

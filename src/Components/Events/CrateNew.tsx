@@ -1,5 +1,5 @@
 import * as React from "react";
-import EventInterface from "../../DomainInterfaces/EventInterface";
+import EventInterface from "../../interfaces/EventInterface";
 import Event from "./Event";
 
 interface Props {
@@ -13,9 +13,11 @@ export default ({ firstPerson, event }: Props) => {
     you = " for you ";
   }
 
+  const contents = event.crate ? event.crate.contents : "[deleted]";
+
   return (
     <Event time={event.time}>
-      A new crate containing {event.crate.contents} is ready {you} to transport
+      A new crate containing {contents} is ready {you} to transport
     </Event>
   );
 };

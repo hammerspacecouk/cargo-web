@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ModalHandler from "react-modal";
-import CloseIcon from "../Icons/CloseIcon";
+import CloseIcon from "../Icons/CloseIcon/CloseIcon";
 
 interface Props {
   children: any;

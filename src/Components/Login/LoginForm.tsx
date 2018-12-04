@@ -1,14 +1,14 @@
 import * as React from "react";
-import MessageInterface from "../../DomainInterfaces/MessageInterface";
+import MessageInterface from "../../interfaces/MessageInterface";
 import Messages from "../Panel/Messages";
-import Environment from "../../Infrastructure/Environment/index";
+import { Environment } from "../../util/Environment";
 import { Link } from "react-router-dom";
 
-export interface LoginFormProps {
+interface PropsInterface {
   messages?: MessageInterface[];
 }
 
-export default (props: LoginFormProps) => {
+export default (props: PropsInterface) => {
   const loginPathEmail = `${Environment.apiHostname}/login/email`;
   const loginPathFacebook = `${Environment.apiHostname}/login/facebook`;
   const loginPathGoogle = `${Environment.apiHostname}/login/google`;
@@ -127,15 +127,15 @@ export default (props: LoginFormProps) => {
               <path
                 fill="#fff"
                 d={`M94.72 243.18c112.46 0 173.96-93.168 173.96-173.96 0-2.646-.054-5.28-.173-7.903
-                                  11.938-8.63 22.314-19.4 30.498-31.66-10.955 4.87-22.744 8.147-35.11 9.625 12.622-7.57
-                                  22.313-19.543 26.885-33.817-11.813 7.004-24.895 12.093-38.824 14.84C240.8 8.423
-                                  224.916.99 207.326.99c-33.763 0-61.143 27.38-61.143 61.13 0 4.8.537 9.466 1.586
-                                  13.942-50.817-2.556-95.876-26.886-126.03-63.88-5.253 9.036-8.28 19.53-8.28 30.73 0
-                                  21.212 10.793 39.938 27.207
-                                  50.893-10.03-.31-19.454-3.063-27.69-7.646-.01.254-.01.504-.01.78 0 29.61 21.076 54.33
-                                  49.052 59.932-5.138 1.4-10.544 2.152-16.123 2.152-3.933 0-7.766-.387-11.49-1.103 7.783
-                                  24.294 30.354 41.97 57.114 42.466-20.925 16.402-47.286 26.17-75.936 26.17-4.93
-                                  0-9.798-.28-14.584-.845 27.06 17.345 59.19 27.465 93.723 27.465`}
+                    11.938-8.63 22.314-19.4 30.498-31.66-10.955 4.87-22.744 8.147-35.11 9.625 12.622-7.57
+                    22.313-19.543 26.885-33.817-11.813 7.004-24.895 12.093-38.824 14.84C240.8 8.423
+                    224.916.99 207.326.99c-33.763 0-61.143 27.38-61.143 61.13 0 4.8.537 9.466 1.586
+                    13.942-50.817-2.556-95.876-26.886-126.03-63.88-5.253 9.036-8.28 19.53-8.28 30.73 0
+                    21.212 10.793 39.938 27.207
+                    50.893-10.03-.31-19.454-3.063-27.69-7.646-.01.254-.01.504-.01.78 0 29.61 21.076 54.33
+                    49.052 59.932-5.138 1.4-10.544 2.152-16.123 2.152-3.933 0-7.766-.387-11.49-1.103 7.783
+                    24.294 30.354 41.97 57.114 42.466-20.925 16.402-47.286 26.17-75.936 26.17-4.93
+                    0-9.798-.28-14.584-.845 27.06 17.345 59.19 27.465 93.723 27.465`}
               />
             </svg>
             <span className="login-form__social-text">Twitter</span>

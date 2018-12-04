@@ -1,19 +1,11 @@
-import About from "./Pages/About";
-import AboutCheating from "./Pages/About/CheatingContainer";
-import AboutDuplicate from "./Pages/About/DuplicateContainer";
-import AboutPolicies from "./Pages/About/PoliciesContainer";
-import AboutStatus from "./Pages/About/StatusContainer";
-import AboutStyleGuide from "./Pages/About/StyleGuideContainer";
-import Home from "./Pages/Home";
-import Login from "./Pages/LoginContainer";
-import LoginEmail from "./Pages/LoginEmailContainer";
-import Play from "./Pages/Play";
-import PortsList from "./Pages/Ports/ListContainer";
-import PortShow from "./Pages/Ports/ShowContainer";
-import Profile from "./Pages/Profile";
-import ProfileDelete from "./Pages/Profile/DeleteContainer";
+import * as About from "./server/About";
+import * as Home from "./server/Home";
+import * as Login from "./server/Login";
+import * as Play from "./server/Play";
+import * as Profile from "./server/Profile";
+import * as Ports from "./server/Ports";
 import { RouteProps } from "react-router";
-import Environment from "./Infrastructure/Environment";
+import { Environment } from "./util/Environment";
 
 export enum CacheType {
   None = "no-cache, no-store",
@@ -32,8 +24,8 @@ const routes = {
   getAboutDuplicate: () => "/about/duplicate",
   getAboutPolicies: () => "/about/policies",
   getAboutStatus: () => "/about/status",
-  getAboutStyleGuide: () => "/about/styleguide",
   getLogin: () => "/login",
+  getLoginAnonymous: () => `${Environment.apiHostname}/login/anonymous`,
   getLoginEmail: () => "/login/email",
   getLogout: () => `${Environment.apiHostname}/logout`,
   getPortShow: (id: string = ":portId") => `/ports/${id}`,
@@ -51,42 +43,35 @@ export const matches = [
   {
     path: routes.getAboutCheating(),
     exact: true,
-    component: AboutCheating,
+    component: About.Cheating,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAboutDuplicate(),
     exact: true,
-    component: AboutDuplicate,
+    component: About.Duplicate,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAboutPolicies(),
     exact: true,
-    component: AboutPolicies,
+    component: About.Policies,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
   {
     path: routes.getAboutStatus(),
     exact: true,
-    component: AboutStatus,
+    component: About.Status,
     cacheType: CacheType.Public,
     maxAge: 30
   },
   {
-    path: routes.getAboutStyleGuide(),
-    exact: true,
-    component: AboutStyleGuide,
-    cacheType: CacheType.Public,
-    maxAge: 3600 * 2
-  },
-  {
     path: routes.getAbout(),
     exact: true,
-    component: About,
+    component: About.default,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
@@ -95,14 +80,14 @@ export const matches = [
   {
     path: routes.getPortShow(),
     exact: true,
-    component: PortShow,
+    component: Ports.Port,
     cacheType: CacheType.Public,
     maxAge: 600
   },
   {
     path: routes.getPortsList(),
     exact: true,
-    component: PortsList,
+    component: Ports.default,
     cacheType: CacheType.Public,
     maxAge: 600
   },
@@ -111,13 +96,13 @@ export const matches = [
   {
     path: routes.getLoginEmail(),
     exact: true,
-    component: LoginEmail,
+    component: Login.Email,
     cacheType: CacheType.None
   },
   {
     path: routes.getLogin(),
     exact: true,
-    component: Login,
+    component: Login.default,
     cacheType: CacheType.None
   },
 
@@ -125,13 +110,13 @@ export const matches = [
   {
     path: routes.getProfileDelete(),
     exact: true,
-    component: ProfileDelete,
+    component: Profile.Delete,
     cacheType: CacheType.None
   },
   {
     path: routes.getProfile(),
     exact: true,
-    component: Profile,
+    component: Profile.default,
     cacheType: CacheType.Private,
     maxAge: 5
   },
@@ -140,7 +125,7 @@ export const matches = [
   {
     path: routes.getPlay(),
     exact: false, // play is the client side app that'll have sub-routes
-    component: Play,
+    component: Play.default,
     cacheType: CacheType.Public,
     maxAge: 3600
   },
@@ -149,7 +134,7 @@ export const matches = [
   {
     path: routes.getHome(),
     exact: true,
-    component: Home,
+    component: Home.default,
     cacheType: CacheType.Public,
     maxAge: 600
   }

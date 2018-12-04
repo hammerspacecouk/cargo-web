@@ -1,7 +1,6 @@
 import * as React from "react";
-import ShipInterface from "../../DomainInterfaces/ShipInterface";
 import { Link } from "react-router-dom";
-import { CurrentShipContext } from "../../Context/CurrentShipContext";
+import { useCurrentShipContext } from "../../context/CurrentShipContext";
 
 // todo - move icons
 const iconLocation = (
@@ -22,33 +21,30 @@ const iconMoney = (
   </svg>
 );
 
-const getShipLink = () => (
-  <CurrentShipContext.Consumer>
-    {({ ship }) => {
-      if (ship) {
-        return (
-          <li className="play-bar__item">
-            <Link to={`/play/${ship.id}`} className="play-bar__link">
-              {iconLocation}
-              Location
-            </Link>
-          </li>
-        );
-      }
+const getShipLink = () => {
+  const { ship } = useCurrentShipContext();
+  if (ship) {
+    return (
+      <li className="play-bar__item">
+        <Link to={`/play/${ship.id}`} className="play-bar__link">
+          {iconLocation}
+          {ship.name}
+        </Link>
+      </li>
+    );
+  }
 
-      return (
-        <li className="play-bar__item">
-          <span className="play-bar__link play-bar__link--disabled">
-            {iconLocation}
-            Location
-          </span>
-        </li>
-      );
-    }}
-  </CurrentShipContext.Consumer>
-);
+  return (
+    <li className="play-bar__item">
+      <span className="play-bar__link play-bar__link--disabled">
+        {iconLocation}
+        Location
+      </span>
+    </li>
+  );
+};
 
-export default () => {
+export default function PlayerBar() {
   return (
     <nav className="play-bar">
       <ul className="play-bar__list">
@@ -69,4 +65,4 @@ export default () => {
       </ul>
     </nav>
   );
-};
+}

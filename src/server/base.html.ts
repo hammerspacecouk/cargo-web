@@ -3,11 +3,11 @@ import { renderToString } from "react-dom/server";
 import { match, matchPath, StaticRouter } from "react-router";
 
 import { CacheType, matches as routes, RouteItem } from "../routes";
-import { InitialDataComponent } from "../Components/withInitialData";
-import AppContainer from "../Containers/AppContainer";
-import Logger from "../Infrastructure/Logger";
-import { getForClient } from "../Infrastructure/Environment";
-import Assets from "../Utils/Assets";
+import { InitialDataComponent } from "./withInitialData";
+import App from "../App";
+import { Logger } from "../util/Logger";
+import { getForClient } from "../util/Environment";
+import Assets from "../util/Assets";
 import { NextFunction, Request, Response } from "express";
 
 interface MatchedRoute {
@@ -87,7 +87,7 @@ export const handler = async (
       createElement(
         StaticRouter,
         { context, location: path },
-        createElement(AppContainer, { routes, initialData: data })
+        createElement(App, { routes, initialData: data })
       )
     );
 

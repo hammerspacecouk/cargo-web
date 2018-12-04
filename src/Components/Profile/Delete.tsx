@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MessageInfo } from "../Panel/Messages";
+import MessageInfo from "../Molecules/Messages/MessageInfo/MessageInfo";
 
 interface EnabledPropsInterface {
   route: string;

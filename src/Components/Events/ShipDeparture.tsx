@@ -1,5 +1,5 @@
 import * as React from "react";
-import EventInterface from "../../DomainInterfaces/EventInterface";
+import EventInterface from "../../interfaces/EventInterface";
 import Event from "./Event";
 
 interface Props {
