@@ -1,7 +1,7 @@
 import * as React from "react";
 import routes from "../../routes";
 import CountdownLink from "../Button/CountdownLink";
-import Modal from "../Panel/Modal";
+import Modal, { ModalActions } from "../Panel/Modal";
 import MessageWarning from "../Molecules/Messages/MessageWarning/MessageWarning";
 import MessageError from "../Molecules/Messages/MessageError/MessageError";
 
@@ -38,7 +38,7 @@ export default ({ isAnonymous }: Props) => {
           <br />
           Are you really sure you want to log out and lose this game forever?
         </MessageError>
-        <div className="modal__action">
+        <ModalActions>
           <CountdownLink
             time={20000}
             href={routes.getLogout()}
@@ -49,7 +49,7 @@ export default ({ isAnonymous }: Props) => {
           <button className="button button--confirm" onClick={closeModal}>
             Cancel
           </button>
-        </div>
+        </ModalActions>
       </Modal>
     );
   }

@@ -48,7 +48,7 @@ const ShipName = styled.div`
 const Attention = styled.div`
   margin-left: ${GRID.UNIT};
   width: ${GRID.DOUBLE};
-  color: ${COLOURS.SEMANTIC.WARNING.FOREGROUND};
+  color: ${COLOURS.SEMANTIC.WARNING.KEY};
 `;
 
 const Destroyed = styled.div`

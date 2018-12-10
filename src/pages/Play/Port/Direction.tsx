@@ -4,6 +4,7 @@ import Fraction from "../../../components/Formatting/Fraction";
 import ScoreValue from "../../../components/Molecules/ScoreValue/ScoreValue";
 import GoButton from "./GoButton";
 import { InlinePortName } from "../../../components/Labels";
+import { TextD, TextF, TextWarning } from "../../../components/Atoms/Text/Text";
 
 interface PropsInterface {
   direction: DirectionInterface;
@@ -17,19 +18,25 @@ export default ({ direction, children }: PropsInterface) => {
   let minimumRank, minimumStrength;
   if (directionDisabled && direction.minimumRank) {
     minimumRank = (
-      <div className="f">Minimum rank: {direction.minimumRank.title}</div>
+      <TextF as="div">
+        <TextWarning>
+          Minimum rank: {direction.minimumRank.title}
+        </TextWarning>
+      </TextF>
     );
   }
   if (directionDisabled && direction.minimumStrength) {
     minimumStrength = (
-      <div className="f">
-        This ship is not strong enough for this journey. Minimum:
-        {direction.minimumStrength}
-      </div>
+      <TextF as="div">
+        <TextWarning>
+          This ship is not strong enough for this journey. Minimum:
+          {direction.minimumStrength}
+        </TextWarning>
+      </TextF>
     );
   }
 
-  let distance = <span className="d">{direction.distanceUnit}</span>;
+  let distance = <TextD>{direction.distanceUnit}</TextD>;
   if (direction.distanceUnit === 0) {
     distance = <Fraction num={1} den={100} />;
   }

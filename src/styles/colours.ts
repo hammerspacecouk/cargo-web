@@ -187,18 +187,22 @@ export const COLOURS = {
   },
   SEMANTIC: {
     DANGER: {
+      KEY: allColours.red[5],
       BACKGROUND: allColours.red[1],
       FOREGROUND: allColours.red[9],
     },
     INFO: {
+      KEY: allColours.blue[4],
       BACKGROUND: allColours.blue[1],
       FOREGROUND: allColours.blue[9],
     },
     OK: {
+      KEY: allColours.green[5],
       BACKGROUND: allColours.green[1],
       FOREGROUND: allColours.green[9],
     },
     WARNING: {
+      KEY: allColours.yellow[4],
       BACKGROUND: allColours.yellow[1],
       FOREGROUND: allColours.yellow[9],
     },

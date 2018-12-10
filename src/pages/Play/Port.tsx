@@ -11,6 +11,7 @@ import Crates from "./Port/Crates";
 import Directions from "./Port/Directions";
 import ShieldIcon from "../../components/Icons/ShieldIcon/ShieldIcon";
 import CrateModal from "./Port/CrateModal";
+import Icon from "../../components/Atoms/Icon/Icon";
 
 const PortComponent = () => {
   const { port, shipsInLocation, events } = useCurrentShipContext();
@@ -19,8 +20,10 @@ const PortComponent = () => {
   let safe = null;
   if (port.safeHaven) {
     safe = (
-      <abbr title="Safe Haven" className="icon icon--mid">
-        <ShieldIcon />
+      <abbr title="Safe Haven">
+        <Icon>
+          <ShieldIcon/>
+        </Icon>
       </abbr>
     );
   }
@@ -31,14 +34,14 @@ const PortComponent = () => {
   } else {
     portContent = (
       <>
-        <Welcome />
-        <Crates />
-        <Directions />
+        <Welcome/>
+        <Crates/>
+        <Directions/>
 
         <h2>Players</h2>
-        <ShipList ships={shipsInLocation} />
-        <EventsList events={events} />
-        <CrateModal />
+        <ShipList ships={shipsInLocation}/>
+        <EventsList events={events}/>
+        <CrateModal/>
       </>
     );
   }
@@ -55,6 +58,6 @@ const PortComponent = () => {
 
 export default () => (
   <PlayPortContextProvider>
-    <PortComponent />
+    <PortComponent/>
   </PlayPortContextProvider>
 );

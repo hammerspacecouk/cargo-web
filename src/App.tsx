@@ -5,7 +5,7 @@ import SessionContextComponent from "./context/SessionContext";
 import {Masthead} from "./components/Organisms/Masthead/Masthead";
 import {NotFound} from "./components/Organisms/Error/NotFound";
 import { ErrorInfo } from "react";
-import Modal from "./components/Panel/Modal";
+import Modal, { ModalActions } from "./components/Panel/Modal";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
 interface Props {
@@ -57,9 +57,9 @@ export default class App extends React.Component<Props, State> {
             There was an error loading data. Please reload the page to try again
           </p>
           <p>Detail: {this.state.errorMessage}</p>
-          <div className="modal__action">
+          <ModalActions>
             <a href={window.location.pathname}>Reload</a>
-          </div>
+          </ModalActions>
         </Modal>
       );
     }
