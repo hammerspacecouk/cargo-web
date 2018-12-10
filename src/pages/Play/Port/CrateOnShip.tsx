@@ -1,5 +1,5 @@
 import CreditsIcon from "../../../components/Icons/CreditsIcon/CreditsIcon";
-import TokenButton from "../../../components/Button/TokenButton";
+import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import * as React from "react";
 import { CrateActionInterface } from "../../../interfaces/CrateInterface";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";

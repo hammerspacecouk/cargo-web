@@ -1,7 +1,7 @@
 import * as React from "react";
 import Modal from "../../../components/Panel/Modal";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import Button, { TYPE_NEGATIVE } from "../../../components/Atoms/Button/Button";
+import {Button, TYPE_ACTION } from "../../../components/Atoms/Button/Button";
 import ButtonRow from "../../../components/Molecules/ButtonRow/ButtonRow";
 
 export default () => {
@@ -13,11 +13,11 @@ export default () => {
       </p>
       <div className="modal__action">
         <ButtonRow>
-        {confirmMoveButton}
+          {confirmMoveButton}
           <Button
-            type={TYPE_NEGATIVE}
+            type={TYPE_ACTION}
             className="button button--soft-danger"
-            onClick={this.closeModal}
+            onClick={closeModal}
           >
             Cancel
           </Button>

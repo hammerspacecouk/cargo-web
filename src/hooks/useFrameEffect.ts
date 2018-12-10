@@ -31,7 +31,7 @@ export const useFrameEffect = (
 
   useEffect(() => {
     mounted.current = true;
-    window.requestAnimationFrame(frame);
+    frameHandler = window.requestAnimationFrame(frame);
     return () => {
       mounted.current = false;
       window.cancelAnimationFrame(frameHandler);

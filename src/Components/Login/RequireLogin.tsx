@@ -1,5 +1,5 @@
 import * as React from "react";
-import LoginForm from "./LoginForm";
+import LoginForm from "../Organisms/LoginForm/LoginForm";
 import Status from "../Navigation/Status";
 
 export default () => (

@@ -2,11 +2,11 @@ import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
 
 import SessionContextComponent from "./context/SessionContext";
-import Masthead from "./components/Navigation/Masthead";
-import NotFound from "./components/Error/NotFound";
+import {Masthead} from "./components/Organisms/Masthead/Masthead";
+import {NotFound} from "./components/Organisms/Error/NotFound";
 import { ErrorInfo } from "react";
 import Modal from "./components/Panel/Modal";
-import { GlobalStyle } from "./GlobalStyle";
+import { GlobalStyle } from "./styles/GlobalStyle";
 
 interface Props {
   routes: RouteProps[];
@@ -69,24 +69,22 @@ export default class App extends React.Component<Props, State> {
         <GlobalStyle />
         <Masthead />
         <main>
-          <div className="main">
-            <Switch>
-              {routes.map(route => (
-                <Route
-                  key={`${route.path}`}
-                  path={route.path}
-                  exact={route.exact}
-                  render={props =>
-                    React.createElement(route.component, {
-                      ...props,
-                      initialData
-                    })
-                  }
-                />
-              ))}
-              <Route component={NotFound} />
-            </Switch>
-          </div>
+          <Switch>
+            {routes.map(route => (
+              <Route
+                key={`${route.path}`}
+                path={route.path}
+                exact={route.exact}
+                render={props =>
+                  React.createElement(route.component, {
+                    ...props,
+                    initialData
+                  })
+                }
+              />
+            ))}
+            <Route component={NotFound} />
+          </Switch>
         </main>
         {errorModal}
       </SessionContextComponent>

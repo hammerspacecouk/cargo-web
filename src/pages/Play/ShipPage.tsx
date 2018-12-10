@@ -4,7 +4,7 @@ import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import Loading from "../../components/Navigation/Loading";
 import Port from "./Port";
 import Travelling from "./Travelling";
-import NotFound from "../../components/Error/NotFound";
+import {NotFound} from "../../components/Organisms/Error/NotFound";
 import { useEffect } from "react";
 import { ApiClient } from "../../util/ApiClient";
 
@@ -16,7 +16,7 @@ export interface ShipParamsInterface {
   };
 }
 
-export default withRouter(({match}: ShipParamsInterface) => {
+export default withRouter(({ match }: ShipParamsInterface) => {
   const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
 
   let allowUpdate = true;
@@ -27,12 +27,15 @@ export default withRouter(({match}: ShipParamsInterface) => {
     }
   };
 
-  useEffect(() => {
-    getData();
-    return () => {
-      allowUpdate = false;
-    };
-  }, [match.params.shipId]);
+  useEffect(
+    () => {
+      getData();
+      return () => {
+        allowUpdate = false;
+      };
+    },
+    [match.params.shipId]
+  );
 
   if (ship === undefined) {
     return <Loading />; // todo - error state, and ensure login?

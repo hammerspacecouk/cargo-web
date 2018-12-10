@@ -1,6 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
+import styled from "styled-components";
+import { COLOURS } from "../../styles/colours";
+import { ListInline } from "../Atoms/Lists/ListInline/ListInline";
+import { GRID } from "../../styles/variables";
+import Icon from "../Atoms/Icon/Icon";
+
+export const playBarHeight = 80;
 
 // todo - move icons
 const iconLocation = (
@@ -21,48 +28,87 @@ const iconMoney = (
   </svg>
 );
 
+const PlayBarItem = styled.li`
+    text-transform: uppercase;
+`;
+
+const PlayBarIcon = styled(Icon)`
+    display: block;
+    margin: 0 auto ${GRID.QUARTER};
+`;
+
 const getShipLink = () => {
   const { ship } = useCurrentShipContext();
   if (ship) {
     return (
-      <li className="play-bar__item">
-        <Link to={`/play/${ship.id}`} className="play-bar__link">
-          {iconLocation}
+      <PlayBarItem>
+        <PlayBarLink to={`/play/${ship.id}`} className="play-bar__link">
+          <PlayBarIcon>
+            {iconLocation}
+          </PlayBarIcon>
           {ship.name}
-        </Link>
-      </li>
+        </PlayBarLink>
+      </PlayBarItem>
     );
   }
 
   return (
-    <li className="play-bar__item">
+    <PlayBarItem>
       <span className="play-bar__link play-bar__link--disabled">
-        {iconLocation}
+        <PlayBarIcon>
+          {iconLocation}
+        </PlayBarIcon>
         Location
       </span>
-    </li>
+    </PlayBarItem>
   );
 };
 
-export default function PlayerBar() {
+const StyledPlayBar = styled.nav`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: ${playBarHeight}px;
+  overflow: hidden;
+  background: ${COLOURS.BLACK.STANDARD};
+  color: ${COLOURS.BODY.TEXT}
+`;
+
+const PlayBarLink = styled(Link)`
+    color: inherit;
+    display: inline-block;
+`;
+
+const List = styled(ListInline)`
+    display: flex;
+    padding: ${GRID.UNIT} 0;
+    text-align: center;
+    justify-content: space-evenly;
+`;
+
+export const PlayBar = () => {
   return (
-    <nav className="play-bar">
-      <ul className="play-bar__list">
+    <StyledPlayBar>
+      <List>
         {getShipLink()}
-        <li className="play-bar__item">
-          <Link to="/play" className="play-bar__link">
-            {iconStuff}
+        <PlayBarItem>
+          <PlayBarLink to="/play" className="play-bar__link">
+            <PlayBarIcon>
+              {iconStuff}
+            </PlayBarIcon>
             Fleet{" "}
             {/* todo - add a notification icon if any ships are in port */}
-          </Link>
-        </li>
-        <li className="play-bar__item">
-          <Link to={`/play/upgrades`} className="play-bar__link">
-            {iconMoney}
+          </PlayBarLink>
+        </PlayBarItem>
+        <PlayBarItem>
+          <PlayBarLink to={`/play/upgrades`} className="play-bar__link">
+            <PlayBarIcon>
+              {iconMoney}
+            </PlayBarIcon>
             Upgrades
-          </Link>
-        </li>
-      </ul>
-    </nav>
+          </PlayBarLink>
+        </PlayBarItem>
+      </List>
+    </StyledPlayBar>
   );
-}
+};

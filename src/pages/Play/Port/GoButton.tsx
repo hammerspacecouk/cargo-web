@@ -1,10 +1,10 @@
 import * as React from "react";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import DirectionInterface from "../../../interfaces/DirectionInterface";
-import TokenButton from "../../../components/Button/TokenButton";
+import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import IntervalFormat from "../../../components/Formatting/IntervalFormat";
-import Button, { TYPE_CONFIRM } from "../../../components/Atoms/Button/Button";
+import {Button, TYPE_CONFIRM } from "../../../components/Atoms/Button/Button";
 import ComplexButton from "../../../components/Molecules/ComplexButton/ComplexButton";
 
 interface PropsInterface {
@@ -25,18 +25,13 @@ export default ({ direction, journeyTime, children }: PropsInterface) => {
   const time = <IntervalFormat seconds={journeyTime} />;
 
   let actionButton = (
-    <ComplexButton
-      type="submit"
-      disabled={buttonDisabled}
-      icon={children}
-    >
+    <ComplexButton type="submit" disabled={buttonDisabled} icon={children}>
       {time}
     </ComplexButton>
   );
   if (!buttonDisabled) {
     actionButton = (
       <TokenButton token={direction.action} handler={moveShip}>
-
         {actionButton}
       </TokenButton>
     );

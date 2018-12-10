@@ -9,7 +9,7 @@ interface Props {
   readonly isAnonymous: boolean;
 }
 
-export default ({isAnonymous}: Props) => {
+export default ({ isAnonymous }: Props) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
   const closeModal = () => {
@@ -26,19 +26,15 @@ export default ({isAnonymous}: Props) => {
       </MessageWarning>
     );
     modal = (
-      <Modal
-        isOpen={modalIsOpen}
-        title="Are you sure?"
-        onClose={closeModal}
-      >
+      <Modal isOpen={modalIsOpen} title="Are you sure?" onClose={closeModal}>
         <MessageError>
           IMPORTANT: READ THIS FIRST <br />
-          Your account is anonymous. If you log out, you will not be able to
-          log in to your game again. It will be lost forever and we cannot
-          recover it for you. <br />
-          There are restrictions in place to remove any advantages in
-          frequently creating new accounts. Don't risk losing your game as you
-          may be blocked from creating another.
+          Your account is anonymous. If you log out, you will not be able to log
+          in to your game again. It will be lost forever and we cannot recover
+          it for you. <br />
+          There are restrictions in place to remove any advantages in frequently
+          creating new accounts. Don't risk losing your game as you may be
+          blocked from creating another.
           <br />
           Are you really sure you want to log out and lose this game forever?
         </MessageError>
@@ -50,10 +46,7 @@ export default ({isAnonymous}: Props) => {
           >
             Yes, Log out
           </CountdownLink>{" "}
-          <button
-            className="button button--confirm"
-            onClick={closeModal}
-          >
+          <button className="button button--confirm" onClick={closeModal}>
             Cancel
           </button>
         </div>
@@ -67,7 +60,7 @@ export default ({isAnonymous}: Props) => {
       <a
         className="button"
         href={routes.getLogout()}
-        onClick={(event) => {
+        onClick={event => {
           if (isAnonymous) {
             event.preventDefault();
             setModalIsOpen(true);

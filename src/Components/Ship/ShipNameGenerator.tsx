@@ -10,14 +10,11 @@ interface PropsInterface {
 }
 
 const Text = styled.span`
-    font-size: 2.35rem;
+  font-size: 2.35rem;
 `; // todo - standardise typography sizes everywhere
 
-export default ({offeredShipName}: PropsInterface) => {
+export default ({ offeredShipName }: PropsInterface) => {
+  const { nameGuess } = useShipNameGenerator(offeredShipName);
 
-  const {nameGuess} = useShipNameGenerator(offeredShipName);
-
-  return (
-    <Text>{nameGuess}</Text>
-  );
+  return <Text>{nameGuess}</Text>;
 };

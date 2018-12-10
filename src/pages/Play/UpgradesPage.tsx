@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-UpgradesContextProvider,
-useUpgradesContext
+  UpgradesContextProvider,
+  useUpgradesContext
 } from "../../context/Page/UpgradesContext";
 import GenericMessage from "../../components/Molecules/Messages/GenericMessage/GenericMessage";
 import ShipUpgrades from "./Upgrades/ShipUpgrades";

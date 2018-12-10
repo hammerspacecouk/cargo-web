@@ -57,7 +57,7 @@ export default class implements APIClientInterface {
   }
 
   tokenFetch(token: ActionTokenInterface): Promise<any> {
-    return this.fetch(token.path, { token: token.token })
+    return this.fetch(token.path, { token: token.token });
   }
 
   async fetch(path: string, payload?: object): Promise<any> {

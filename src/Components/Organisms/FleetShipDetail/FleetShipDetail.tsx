@@ -1,10 +1,13 @@
 import * as React from "react";
 import { FleetShipInterface } from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
-import { colours, grid } from "../../../GlobalStyle";
+import { GRID } from "../../../styles/variables";
 import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
 import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
 import EditShipName from "../EditShipName/EditShipName";
+import { COLOURS } from "../../../styles/colours";
+import { H3 } from "../../Atoms/Heading/Heading";
+import { FlexInline } from "../../Atoms/Flex/Flex";
 
 interface PropsInterface {
   fleetShip: FleetShipInterface;
@@ -12,27 +15,23 @@ interface PropsInterface {
 
 // todo - responsive margins
 const StyledDetail = styled.div`
-    margin: ${grid.unit}px 0 ${grid.unit * 4}px ${48 + grid.unit}px;
+  margin: ${GRID.UNIT} 0 ${GRID.DOUBLE} calc(48px + ${GRID.UNIT});
 `;
-const DetailRow = styled.div`
-    display: flex;
-    width: 100%;
-    align-items: center;
-    margin-bottom: ${grid.unit}px;
-    padding-bottom: ${grid.unit}px;
-    border-bottom: solid 1px ${colours.gray[9]};
-    &:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-    }
+const DetailRow = styled(FlexInline)`
+  margin-bottom: ${GRID.UNIT};
+  padding-bottom: ${GRID.UNIT};
+  border-bottom: solid 1px ${COLOURS.BODY.FADED};
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
 `;
-const DetailRowLabel = styled.div`
-    width: 240px;
-    font-size: 1.4rem;
-    margin-right: ${grid.unit}px;  
+const DetailRowLabel = styled(H3)`
+  width: 240px;
+  margin-right: ${GRID.UNIT};
 `;
 const DetailRowContent = styled.div`
-    flex: 1;
+  flex: 1;
 `;
 
 export default function FleetShipDetail({ fleetShip }: PropsInterface) {
@@ -41,13 +40,13 @@ export default function FleetShipDetail({ fleetShip }: PropsInterface) {
       <DetailRow>
         <DetailRowLabel>Location</DetailRowLabel>
         <DetailRowContent>
-          <FleetShipLocation ship={fleetShip.ship}/>
+          <FleetShipLocation ship={fleetShip.ship} />
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
         <DetailRowLabel>Shield strength</DetailRowLabel>
         <DetailRowContent>
-          <FleetShipHealth health={fleetShip.health}/>
+          <FleetShipHealth health={fleetShip.health} />
         </DetailRowContent>
       </DetailRow>
       <DetailRow>
@@ -59,7 +58,6 @@ export default function FleetShipDetail({ fleetShip }: PropsInterface) {
           />
         </DetailRowContent>
       </DetailRow>
-
     </StyledDetail>
   );
 }

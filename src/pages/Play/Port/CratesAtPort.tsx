@@ -7,7 +7,7 @@ export default () => {
   const { cratesInPort } = useCurrentShipContext();
 
   if (cratesInPort === undefined) {
-    return <Loading />
+    return <Loading />;
   } // todo - pretty loader
 
   return (

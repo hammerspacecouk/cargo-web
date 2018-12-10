@@ -1,9 +1,9 @@
 import * as React from "react";
 import ShipInterface from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
-import { grid } from "../../../GlobalStyle";
+import { GRID } from "../../../styles/variables";
 import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
-import TokenButton from "../../Button/TokenButton";
+import TokenButton from "../../Molecules/TokenButton/TokenButton";
 import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
 import { ApiClient } from "../../../util/ApiClient";
 import { useSessionContext } from "../../../context/SessionContext";
@@ -12,9 +12,10 @@ import ShipNameGenerator from "../../Ship/ShipNameGenerator";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import TextCursor from "../../Atoms/TextCursor/TextCursor";
 import TransactionInterface from "../../../interfaces/TransactionInterface";
-import Button, { TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
+import {Button, TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
 import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
 import { useMounted } from "../../../hooks/useMounted";
+import { BREAKPOINTS } from "../../../styles/media";
 
 interface PropsInterface {
   ship: ShipInterface;
@@ -22,20 +23,20 @@ interface PropsInterface {
 }
 
 const Container = styled.div`
-    @media (min-width: 61em) {
+    ${BREAKPOINTS.XL`
       display: flex;
       align-items: start;
-    }
+    `}
 `;
 const Text = styled.div`
-    margin: 0 0 ${grid.unit}px;
-    @media (min-width: 61em) {
-        flex: 1;
-        margin: 0 ${grid.unit}px 0 0;
-    }
+  margin: 0 0 ${GRID.UNIT};
+  ${BREAKPOINTS.XL`
+    flex: 1;
+    margin: 0 ${GRID.UNIT} 0 0;
+  `}
 `;
 const Updating = styled.span`
-    font-size: 2.35rem;
+  font-size: 2.35rem;
 `; // todo - share this value?
 
 export default function EditShipName({ ship, renameToken }: PropsInterface) {
@@ -49,9 +50,7 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
   const [offeredShipNameToken, setOfferedShipNameToken] = React.useState(null);
   const isMounted = useMounted();
 
-  const requestShipName = async (
-    token: ActionTokenInterface
-  ) => {
+  const requestShipName = async (token: ActionTokenInterface) => {
     setIsActive(true);
 
     //make the API call
@@ -71,9 +70,7 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
     setIsActive(false);
   };
 
-  const acceptShipName = async (
-    token: ActionTokenInterface
-  ) => {
+  const acceptShipName = async (token: ActionTokenInterface) => {
     setAcceptingShipName(true);
     resetOffer();
     const data = await ApiClient.tokenFetch(token);
@@ -97,10 +94,7 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
     if (offeredShipNameToken) {
       buttonContent = (
         <>
-          <TokenButton
-            token={offeredShipNameToken}
-            handler={acceptShipName}
-          >
+          <TokenButton token={offeredShipNameToken} handler={acceptShipName}>
             <Button styleType={TYPE_CONFIRM} type="submit">
               Accept
             </Button>
@@ -109,7 +103,7 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
             as="a"
             href="."
             styleType={TYPE_DANGER}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               resetOffer();
             }}
@@ -125,19 +119,22 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
     if (acceptingShipName) {
       textContent = (
         <Updating>
-          Updating<TextCursor/>
+          Updating<TextCursor />
         </Updating>
       );
     } else {
       textContent = (
         <p>
-          You can request a new name option at random. <br/>
+          You can request a new name option at random. <br />
           You don't have to take it, but no refunds
         </p>
       );
       buttonContent = (
-        <TokenButton token={requestNameToken.actionToken} handler={requestShipName}>
-          <CreditsButton amount={500}/>
+        <TokenButton
+          token={requestNameToken.actionToken}
+          handler={requestShipName}
+        >
+          <CreditsButton amount={500} />
         </TokenButton>
       );
     }

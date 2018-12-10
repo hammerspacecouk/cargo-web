@@ -1,6 +1,8 @@
 import PlayerInterface from "./PlayerInterface";
 import ShipClassInterface from "./ShipClassInterface";
-import TransactionInterface, { HealthIncreaseInterface } from "./TransactionInterface";
+import TransactionInterface, {
+  HealthIncreaseInterface
+} from "./TransactionInterface";
 
 export interface FleetShipInterface {
   ship: ShipInterface;
@@ -20,4 +22,4 @@ export default interface ShipInterface {
     name?: string; // todo - use a location interface
     safeHaven?: boolean;
   };
-}
+};

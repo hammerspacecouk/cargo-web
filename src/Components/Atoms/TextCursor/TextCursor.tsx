@@ -8,8 +8,8 @@ const blink = keyframes`
 `;
 
 const Cursor = styled.span`
-    font-weight: bold;
-    animation: ${blink} 1s step-start infinite;
+  font-weight: bold;
+  animation: ${blink} 1s step-start infinite;
 `;
 
 export default function TextCursor() {

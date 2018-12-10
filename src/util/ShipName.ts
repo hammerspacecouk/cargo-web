@@ -39,20 +39,17 @@ export const makeRandom = (previous: string, toMatch?: string): string => {
   // check each of the guessed characters in turn
   for (let i = 0; i < guessLength; i++) {
     // if this character has arrived at the matching Name character, leave it alone
-    if (
-      toMatchArray && toMatchArray[i] === guessArray[i]
-    ) {
+    if (toMatchArray && toMatchArray[i] === guessArray[i]) {
       continue;
     }
 
     // increment the character (wrapping around if required)
-    let newIndex =
-      characters.indexOf(guessArray[i]) + characterIncrement;
+    let newIndex = characters.indexOf(guessArray[i]) + characterIncrement;
     if (newIndex >= charactersLength) {
       newIndex = newIndex - charactersLength;
     }
     guessArray[i] = characters[newIndex];
   }
 
-  return guessArray.join('');
+  return guessArray.join("");
 };

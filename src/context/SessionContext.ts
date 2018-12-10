@@ -18,6 +18,7 @@ export interface SessionResponseInterface {
   readonly hasProfileNotification: boolean;
   readonly player?: PlayerInterface;
   readonly rankStatus?: RankStatusInterface;
+  readonly loginToken?: string;
 }
 
 interface SessionPropertiesInterface {
@@ -25,6 +26,7 @@ interface SessionPropertiesInterface {
   rankStatus?: RankStatusInterface;
   score?: ScoreInterface;
   hasProfileNotification: boolean;
+  loginToken?: string;
 }
 
 interface SessionContextInterface extends SessionPropertiesInterface {
@@ -37,7 +39,8 @@ interface SessionContextInterface extends SessionPropertiesInterface {
 export const initialSession: SessionPropertiesInterface = {
   player: undefined,
   score: undefined,
-  hasProfileNotification: false
+  hasProfileNotification: false,
+  loginToken: undefined,
 };
 
 const SessionContext = createContext({});
@@ -52,6 +55,7 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
   const [score, setScore] = useState(initialSession.score);
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   const [player, setPlayer] = useState(initialSession.player);
+  const [loginToken, setLoginToken] = useState(initialSession.loginToken);
   const [hasProfileNotification, setHasProfileNotification] = useState(
     initialSession.hasProfileNotification
   );
@@ -87,6 +91,7 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
       updateRankStatus(null);
       setPlayer(null);
     }
+    setLoginToken(session.loginToken);
   };
 
   const refreshSession = async () => {
@@ -105,6 +110,7 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
     {
       value: {
         player,
+        loginToken,
         score,
         rankStatus,
         hasProfileNotification,

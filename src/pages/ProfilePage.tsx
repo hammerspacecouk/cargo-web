@@ -1,6 +1,6 @@
 import * as React from "react";
 import Loading from "../components/Navigation/Loading";
-import Error from "../components/Error/Error";
+import {Error} from "../components/Organisms/Error/Error";
 import ErrorIcon from "../components/Icons/ErrorIcon/ErrorIcon";
 import ProfileLayout from "../components/Layout/ProfileLayout";
 import { fullDate } from "../util/Format";
@@ -8,8 +8,11 @@ import LogOutButton from "../components/Login/LogOutButton";
 import Delete from "../components/Profile/Delete";
 import routes from "../routes";
 import PortInterface from "../interfaces/PortInterface";
-import LoginForm from "../components/Login/LoginForm";
-import { SessionResponseInterface, useSessionContext } from "../context/SessionContext";
+import LoginForm from "../components/Organisms/LoginForm/LoginForm";
+import {
+  SessionResponseInterface,
+  useSessionContext
+} from "../context/SessionContext";
 import { useEffect } from "react";
 import MessageWarning from "../components/Molecules/Messages/MessageWarning/MessageWarning";
 

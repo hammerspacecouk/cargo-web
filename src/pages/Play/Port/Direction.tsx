@@ -48,7 +48,7 @@ export default ({ direction, children }: PropsInterface) => {
         </abbr>
       </td>
       <td className="destinations__earnings">
-        <ScoreValue score={direction.earnings.toString()} />
+        <ScoreValue score={direction.earnings} />
       </td>
       <td className="destinations__action">
         <GoButton

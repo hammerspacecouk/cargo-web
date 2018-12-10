@@ -20,12 +20,7 @@ interface FleetContextInterface {
 
 const FleetContext = createContext({});
 
-export const FleetContextProvider = (
-  {
-    children
-  }: ChildrenPropsInterface
-) => {
-
+export const FleetContextProvider = ({ children }: ChildrenPropsInterface) => {
   const { setSession } = useSessionContext();
   const [ships, setShips] = useState(undefined);
   const [events, setEvents] = useState(undefined);
@@ -57,7 +52,6 @@ export const FleetContextProvider = (
     children
   );
 };
-
 
 export const useFleetContext = (): FleetContextInterface => {
   return useContext(FleetContext) as FleetContextInterface;

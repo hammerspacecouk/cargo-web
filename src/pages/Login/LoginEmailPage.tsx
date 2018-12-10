@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parse as parseQueryString } from "query-string";
-import Error from "../../components/Error/Error";
-import TokenButton from "../../components/Button/TokenButton";
+import {Error} from "../../components/Organisms/Error/Error";
+import TokenButton from "../../components/Molecules/TokenButton/TokenButton";
 
 interface PropsInterface {
   query?: string;

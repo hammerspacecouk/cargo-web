@@ -97,4 +97,4 @@ export default ({ rankStatus }: Props) => {
       <p>Twitter</p>
     </div>
   );
-}
+};

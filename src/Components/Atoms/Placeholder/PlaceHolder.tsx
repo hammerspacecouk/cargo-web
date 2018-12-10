@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import { colours } from "../../../GlobalStyle";
+import { COLOURS } from "../../../styles/colours";
 
 const frames = keyframes`
     0% {
@@ -14,13 +14,13 @@ const frames = keyframes`
 `;
 
 export const animate = css`
-    animation: ${frames} 2s ease-in-out;
+  animation: ${frames} 2s ease-in-out;
 `;
 
 export default styled.div`
-    display: block;
-    background: ${colours.gray[7]};
-    opacity: 0.2;
-    border-radius: 2px;
-    ${animate}
+  display: block;
+  background: ${COLOURS.BODY.FADED};
+  opacity: 0.2;
+  border-radius: 2px;
+  ${animate};
 `;

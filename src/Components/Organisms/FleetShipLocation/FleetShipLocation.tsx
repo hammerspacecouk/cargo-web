@@ -11,26 +11,26 @@ interface PropsInterface {
 }
 
 const Styled = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 `;
 const Location = styled.div`
-    font-size: 1.4rem;
-    flex: 1;
+  font-size: 1.4rem;
+  flex: 1;
 `;
 
 const Go = styled(Link)`
-    width: 48px;
+  width: 48px;
 `;
 
-export default function FleetShipLocation({ship}: PropsInterface) {
+export default function FleetShipLocation({ ship }: PropsInterface) {
   return (
     <Styled>
       <Location>
         <PortName name={ship.location.name} safe={ship.location.safeHaven} />
       </Location>
       <Go to={routes.getPlayShip(ship.id)}>
-        <ChevronRightIcon/>
+        <ChevronRightIcon />
       </Go>
     </Styled>
   );

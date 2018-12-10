@@ -12,11 +12,14 @@ interface InitialPropsInterface {
 export default ({ children }: InitialPropsInterface) => {
   const { player, refreshSession } = useSessionContext();
 
-  useEffect(() => {
-    if (player === undefined) {
-      refreshSession();
-    }
-  }, [player]);
+  useEffect(
+    () => {
+      if (player === undefined) {
+        refreshSession();
+      }
+    },
+    [player]
+  );
 
   if (player === undefined) {
     return <Loading />;

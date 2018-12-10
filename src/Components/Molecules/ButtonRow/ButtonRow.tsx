@@ -1,21 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
 import { ChildrenPropsInterface } from "../../../interfaces/PropsInterface";
-import { grid } from "../../../GlobalStyle";
+import { GRID } from "../../../styles/variables";
 
 const StyledButtonRow = styled.div`
   > * {
     display: inline-block;
     &:not(:first-child) {
-        margin-left: ${grid.unit}px
+      margin-left: ${GRID.UNIT};
     }
   }
 `;
 
-export default function ButtonRow({children}: ChildrenPropsInterface) {
-  return (
-    <StyledButtonRow>
-      {children}
-    </StyledButtonRow>
-  );
+export default function ButtonRow({ children }: ChildrenPropsInterface) {
+  return <StyledButtonRow>{children}</StyledButtonRow>;
 }

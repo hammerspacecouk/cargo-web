@@ -1,13 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
-import TokenButton from "../../Button/TokenButton";
+import TokenButton from "../../Molecules/TokenButton/TokenButton";
 import { HealthIncreaseInterface } from "../../../interfaces/TransactionInterface";
 import { ApiClient } from "../../../util/ApiClient";
 import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
 import { useSessionContext } from "../../../context/SessionContext";
 import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
-import { FleetResponseInterface, useFleetContext } from "../../../context/Page/FleetContext";
+import {
+  FleetResponseInterface,
+  useFleetContext
+} from "../../../context/Page/FleetContext";
 import ScoreInterface from "../../../interfaces/ScoreInterface";
 
 interface PropsInterface {
@@ -20,7 +23,7 @@ interface UpdateResponseInterface {
 }
 
 const StyledContent = styled.div`
-    text-align: right;
+  text-align: right;
 `;
 
 export default function FleetShipHealth({ health }: PropsInterface) {
@@ -52,25 +55,24 @@ export default function FleetShipHealth({ health }: PropsInterface) {
 
   let actionButtons = health.map(transaction => {
     return (
-    <TokenButton
-      key={transaction.actionToken.token}
-      token={transaction.actionToken}
-      handler={applyHealth}
-    >
-      <CreditsButton
-        amount={transaction.cost}
-        disabledOverride={buttonsDisabled}
+      <TokenButton
+        key={transaction.actionToken.token}
+        token={transaction.actionToken}
+        handler={applyHealth}
       >
-        <span>+{transaction.detail}%</span>
-      </CreditsButton>
-    </TokenButton>
-  )});
+        <CreditsButton
+          amount={transaction.cost}
+          disabledOverride={buttonsDisabled}
+        >
+          <span>+{transaction.detail}%</span>
+        </CreditsButton>
+      </TokenButton>
+    );
+  });
 
   return (
     <StyledContent>
-      <ButtonRow>
-        {actionButtons}
-      </ButtonRow>
+      <ButtonRow>{actionButtons}</ButtonRow>
     </StyledContent>
   );
 }

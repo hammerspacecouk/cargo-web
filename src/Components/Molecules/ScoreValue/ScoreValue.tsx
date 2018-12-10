@@ -1,10 +1,10 @@
 import * as React from "react";
 import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
 import styled from "styled-components";
+import { MONOSPACE_FONT } from "../../../styles/typography";
 
 interface PropsInterface {
-  /** The score value to display. Note it is not an integer */
-  score: string;
+  score: number;
   className?: string;
 }
 
@@ -22,14 +22,7 @@ const Icon = styled.span`
 `;
 const Digits = styled.span`
   display: inline-block;
-`;
-const Digit = styled.span`
-  :nth-last-child(3n):before {
-      content: ','
-  }
-  :first-child:before {
-    content: '';
-  }
+  ${MONOSPACE_FONT}
 `;
 
 /**
@@ -39,14 +32,10 @@ export default function ScoreValue({ score, className }: PropsInterface) {
   return (
     <StyledScore className={className}>
       <Icon>
-        <CreditsIcon/>
+        <CreditsIcon />
       </Icon>
       <Digits>
-        {score.split("").map((digit, i) => (
-          <Digit key={i}>
-            {digit}
-          </Digit>
-        ))}
+        {score.toLocaleString()}
       </Digits>
     </StyledScore>
   );

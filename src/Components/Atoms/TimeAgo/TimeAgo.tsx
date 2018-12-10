@@ -10,7 +10,6 @@ const getSeconds = (datetime: Date): number => {
 };
 
 const getValue = (seconds: number, datetime: Date): string => {
-
   if (seconds > 60 * 60 * 24 * 28) {
     return datetime.toLocaleString();
   }
@@ -35,7 +34,7 @@ const getValue = (seconds: number, datetime: Date): string => {
 /**
  * Show dynamically updating time since an event
  */
-export default function TimeAgo({datetime}: Props) {
+export default function TimeAgo({ datetime }: Props) {
   const [text, setText] = React.useState(
     getValue(getSeconds(datetime), datetime)
   );
@@ -46,28 +45,28 @@ export default function TimeAgo({datetime}: Props) {
     const newSeconds = getSeconds(datetime);
     setText(getValue(newSeconds, datetime));
 
-    if (newSeconds < (60 * 300)) {
-      timeout = window.setTimeout(loop, (30 * 1000));
+    if (newSeconds < 60 * 300) {
+      timeout = window.setTimeout(loop, 30 * 1000);
       return;
     }
-    timeout = window.setTimeout(loop, (30 * 60 * 1000));
+    timeout = window.setTimeout(loop, 30 * 60 * 1000);
   };
 
-  React.useEffect(() => {
-    loop();
-    return () => {
-      if (timeout) {
-        window.clearTimeout(timeout);
-      }
-    };
-  }, [datetime]);
+  React.useEffect(
+    () => {
+      loop();
+      return () => {
+        if (timeout) {
+          window.clearTimeout(timeout);
+        }
+      };
+    },
+    [datetime]
+  );
 
   return (
-    <time
-      dateTime={datetime.toISOString()}
-      title={datetime.toISOString()}
-    >
+    <time dateTime={datetime.toISOString()} title={datetime.toISOString()}>
       {text}
     </time>
   );
-};
+}

@@ -5,7 +5,7 @@ import {
   usePlayPortContext
 } from "../../context/Page/PlayPortContext";
 import ShipList from "../../components/Organisms/PlayerShipList/PlayerShipList";
-import EventsList from "../../components/Events/EventsList";
+import EventsList from "../../components/Organisms/EventsList/EventsList";
 import Welcome from "./Port/Welcome";
 import Crates from "./Port/Crates";
 import Directions from "./Port/Directions";
@@ -20,7 +20,7 @@ const PortComponent = () => {
   if (port.safeHaven) {
     safe = (
       <abbr title="Safe Haven" className="icon icon--mid">
-        <ShieldIcon/>
+        <ShieldIcon />
       </abbr>
     );
   }
@@ -31,14 +31,14 @@ const PortComponent = () => {
   } else {
     portContent = (
       <>
-        <Welcome/>
-        <Crates/>
-        <Directions/>
+        <Welcome />
+        <Crates />
+        <Directions />
 
         <h2>Players</h2>
-        <ShipList ships={shipsInLocation}/>
-        <EventsList events={events}/>
-        <CrateModal/>
+        <ShipList ships={shipsInLocation} />
+        <EventsList events={events} />
+        <CrateModal />
       </>
     );
   }
@@ -55,6 +55,6 @@ const PortComponent = () => {
 
 export default () => (
   <PlayPortContextProvider>
-    <PortComponent/>
+    <PortComponent />
   </PlayPortContextProvider>
 );

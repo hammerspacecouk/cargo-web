@@ -2,6 +2,7 @@ const Webpack = require("webpack");
 const rimraf = require("rimraf");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const path = require("path");
 const autoprefixer = require("autoprefixer");
@@ -32,12 +33,19 @@ const settings = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
+        loader: 'babel-loader',
         sideEffects: false,
       },
       {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ],
+      },
+      /*{
         test: /\.s?css$/,
         sideEffects: false,
         use: [
@@ -63,22 +71,23 @@ const settings = {
             }
           }
         ]
-      },
+      },*/
       {
-        test: /\.(png|svg|ico|woff|woff2)$/,
+        exclude: [/\.(js|jsx|mjs|ts|tsx|scss|css|html|json)$/],
         loader: "file-loader",
         options: {
           name: `${hashFormat}[name].[ext]`,
-          sourceMap: true
+          outputPath: '',
         }
       }
     ]
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new Webpack.HashedModuleIdsPlugin(),
-    new MiniCssExtractPlugin({
-      filename: `${hashFormat}[name].css`
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: `${hashFormat}[name].css`
+    // }),
     new ManifestPlugin({
       fileName: path.resolve(
         __dirname,

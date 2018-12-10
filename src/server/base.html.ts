@@ -162,7 +162,6 @@ const html = ({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${title ? `${title} | ` : ""}Planet Cargo</title>
-    <link rel="stylesheet" href="${assets.get("app.css")}" />
 </head>
 <body>
 <div id="root">${content}</div>

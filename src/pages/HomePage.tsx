@@ -1,65 +1,82 @@
 import * as React from "react";
-import PlayerInterface from "../interfaces/PlayerInterface";
-import ActionLink from "../components/Link/ActionLink";
-import LoginForm from "../components/Login/LoginForm";
 import routes from "../routes";
 import { Link } from "react-router-dom";
-import EventsList from "../components/Events/EventsList";
+import EventsList from "../components/Organisms/EventsList/EventsList";
 import EventInterface from "../interfaces/EventInterface";
-import { useSessionContext } from "../context/SessionContext";
+import { PlayPanel } from "../components/Organisms/PlayPanel/PlayPanel";
+import styled from "styled-components";
+import { GRID } from "../styles/variables";
+import { BREAKPOINTS } from "../styles/media";
+import { H1 } from "../components/Atoms/Heading/Heading";
+import { Prose } from "../components/Atoms/Prose/Prose";
 
 interface Props {
   events: EventInterface[];
 }
 
-const renderPlayPanel = (player?: PlayerInterface) => {
-  if (player) {
-    return (
-      <div className="text--center unit">
-        <div className="align--inline">
-          <ActionLink to={`/play`} className="button m-icon-suffix--animated">
-            To My Fleet
-          </ActionLink>
-        </div>
-      </div>
-    );
-  }
+const TemplateHome = styled.div`
+  display: grid;
+  grid-template-columns: [edge-left] 0 [main] calc(100% - (${GRID.UNIT} * 2)) 0 [edge-right];
+  grid-gap: ${GRID.UNIT};
+  ${BREAKPOINTS.M`
+    grid-template-columns: [edge-left] 1fr [main] calc(50% - (${GRID.UNIT} * 2)) [aside] calc(50% - (${GRID.UNIT} * 2)) 1fr [edge-right];
+    grid-template-rows: [hero] auto [content-start] auto [aside-start] auto [end];
+  `}
+  ${BREAKPOINTS.L`
+    grid-template-columns: [edge-left] 1fr [main] calc(60% - (${GRID.UNIT} * 2)) [aside] calc(40% - (${GRID.UNIT} * 2)) 1fr [edge-right];
+  `}
+  ${BREAKPOINTS.XXL`
+   grid-template-columns: [edge-left] 1fr [main] 736px [aside] 480px 1fr [edge-right];
+  `}
+`;
 
-  // todo - session needs a CSRF token, and the anon login form should use it
-  return (
-    <>
-      <p className="e unit">
-        Start playing an anonymous game immediately without logging in:
-      </p>
-      <div className="text--center unit">
-        <div className="align--inline">
-          <form action={routes.getLoginAnonymous()} method="post">
-            <button className="button m-icon-suffix--animated">New game</button>
-          </form>
-        </div>
-      </div>
-      <h3 className="d unit">Or create/resume a logged in game:</h3>
-      <LoginForm />
-    </>
-  );
-};
+const TemplateHero = styled.div`
+  grid-column: main / edge-right;
+  grid-row: 1;
+`;
+
+const Hero = styled.div`
+  padding: ${GRID.UNIT} 0;
+`;
+
+const TemplatePlay = styled.div`
+  grid-column: main;
+  grid-row: 2;
+  ${BREAKPOINTS.M`
+    grid-column: aside;
+    grid-row: content-start;
+  `}
+`;
+
+const TemplateMain = styled.section`
+  grid-column: main;
+  ${BREAKPOINTS.M`
+    grid-column: main;
+    grid-row: content-start / end;
+  `}
+`;
+
+const TemplateAside = styled.aside`
+  grid-column: main;
+  ${BREAKPOINTS.M`
+    grid-column: aside;
+    grid-row: aside-start;
+  `}
+`;
 
 export default ({ events }: Props) => {
-  const {player} = useSessionContext();
-
   return (
-    <div className="t-home">
-      <div className="t-home__hero">
-        <div className="t-home__hero-contents home-hero">
-          <h1>Planet Cargo</h1>
-        </div>
-      </div>
-      <div className="t-home__play panel">
-        <h2 className="panel__title">Play now</h2>
-        {renderPlayPanel(player)}
-      </div>
-      <section className="t-home__main">
-        <div className="text--prose">
+    <TemplateHome>
+      <TemplateHero>
+        <Hero>
+          <H1>Planet Cargo</H1>
+        </Hero>
+      </TemplateHero>
+      <TemplatePlay>
+        <PlayPanel/>
+      </TemplatePlay>
+      <TemplateMain>
+        <Prose>
           <p>
             Colonisation of space has begun, and interstellar shipping is big
             business. You've got to get in on this. Who else is going to
@@ -87,16 +104,17 @@ export default ({ events }: Props) => {
               <a href={routes.getAbout()}>About</a>
             </li>
           </ul>
-        </div>
+        </Prose>
 
         <div>
           <h2>What's happening right now?</h2>
           <EventsList events={events} />
         </div>
-      </section>
-      <aside className="t-home__aside">
+      </TemplateMain>
+      <TemplateAside>
+        { /* todo - how many saxophones */ }
         <p>More side stuff</p>
-      </aside>
-    </div>
+      </TemplateAside>
+    </TemplateHome>
   );
-}
+};

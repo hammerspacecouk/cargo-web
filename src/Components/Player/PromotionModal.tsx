@@ -2,13 +2,13 @@ import * as React from "react";
 import { ApiClient } from "../../util/ApiClient";
 import Loading from "../Navigation/Loading";
 import Modal from "../Panel/Modal";
-import TokenButton from "../Button/TokenButton";
+import TokenButton from "../Molecules/TokenButton/TokenButton";
 import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 import Promotion from "./Promotion";
 import { useSessionContext } from "../../context/SessionContext";
 
 export default () => {
-  const {rankStatus, updateRankStatus} = useSessionContext();
+  const { rankStatus, updateRankStatus } = useSessionContext();
   const [acknowledging, setAcknowleging] = React.useState(false);
 
   const acknowledgePromotion = async (token: ActionTokenInterface) => {

@@ -12,7 +12,7 @@ interface Props {
 export default (Page: InitialDataComponent) => {
   class WithGuestUser extends Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
-      if (request.cookies && request.cookies.AUTHENTICATION_TOKEN) {
+      if (request?.cookies?.AUTHENTICATION_TOKEN) {
         return { isLoggedIn: true };
       }
       // Need to call the wrapped components getInitialData if it exists
@@ -31,9 +31,13 @@ export default (Page: InitialDataComponent) => {
 
       // Flatten out all the props.
       const { isLoggedIn, children, ...rest } = this.props;
-      return createElement(Page, {
-        ...rest
-      }, children);
+      return createElement(
+        Page,
+        {
+          ...rest
+        },
+        children
+      );
     }
   }
   return withInitialData(WithGuestUser);

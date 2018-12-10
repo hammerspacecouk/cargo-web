@@ -57,7 +57,7 @@ export const UpgradesContextProvider = ({
         buttonsDisabled,
         ships,
         message,
-        makePurchase,
+        makePurchase
       }
     },
     children

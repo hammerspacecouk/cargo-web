@@ -1,30 +1,29 @@
 import ShieldStrength from "../ShieldStrength/ShieldStrength";
-import PlayerFlag from "../PlayerFlag/PlayerFlag";
 import Score from "../../../containers/Player/Score";
 import * as React from "react";
 import ShipInterface from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
-import { grid } from "../../../GlobalStyle";
+import { GRID } from "../../../styles/variables";
 
 interface PropsInterface {
   ship: ShipInterface;
 }
 
 const ShipItem = styled.div`
-    display: flex;
+  display: flex;
 `;
 
 const Status = styled.div`
-    width: 52px;
-    margin-right: ${grid.unit}px;
+  width: 52px;
+  margin-right: ${GRID.UNIT};
 `;
 
 const Detail = styled.div`
-    flex: 1;
-    line-height: 1;
+  flex: 1;
+  line-height: 1;
 `;
 
-export default function PlayerShip({ship}: PropsInterface) {
+export default function PlayerShip({ ship }: PropsInterface) {
   return (
     <ShipItem>
       <Status>

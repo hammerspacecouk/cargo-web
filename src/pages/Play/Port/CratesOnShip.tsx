@@ -7,7 +7,7 @@ export default () => {
   const { ship, cratesOnShip } = useCurrentShipContext();
 
   if (cratesOnShip === undefined) {
-    return <Loading />
+    return <Loading />;
   } // todo - pretty loader
 
   const placeholderSlots = new Array(

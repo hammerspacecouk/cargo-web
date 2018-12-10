@@ -1,5 +1,5 @@
 import * as React from "react";
-import LoginForm from "../components/Login/LoginForm";
+import LoginForm from "../components/Organisms/LoginForm/LoginForm";
 import messageQueryString from "../util/MessageQueryString";
 
 interface PropsInterface {

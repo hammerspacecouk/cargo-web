@@ -1,11 +1,9 @@
 import * as React from "react";
 import ScoreInterface from "../../../interfaces/ScoreInterface";
-import { useFrameEffect } from "../../../hooks/useFrameEffect";
 import { useSessionContext } from "../../../context/SessionContext";
 import ScoreValue from "../ScoreValue/ScoreValue";
 import { getValue } from "../../../containers/Player/Score";
 import ComplexButton from "../ComplexButton/ComplexButton";
-import Timeout = NodeJS.Timeout;
 
 interface Props {
   readonly amount: number;
@@ -13,10 +11,7 @@ interface Props {
   readonly children?: JSX.Element;
 }
 
-const isDisabled = (
-  amount: number,
-  playerScore: ScoreInterface
-): boolean => {
+const isDisabled = (amount: number, playerScore: ScoreInterface): boolean => {
   if (amount === 0) {
     return false;
   }
@@ -24,16 +19,16 @@ const isDisabled = (
   return scoreValue < amount;
 };
 
-export default function CreditsButton(
-  { amount, disabledOverride, children }: Props
-) {
+export default function CreditsButton({
+  amount,
+  disabledOverride,
+  children
+}: Props) {
   const { score } = useSessionContext();
-  const [disabled, setDisabled] = React.useState(
-    isDisabled(amount, score)
-  );
+  const [disabled, setDisabled] = React.useState(isDisabled(amount, score));
 
   React.useEffect(() => {
-    let timer: Timeout;
+    let timer: any; // todo - not any
     const unmount = () => {
       if (timer) {
         clearTimeout(timer);
@@ -57,8 +52,8 @@ export default function CreditsButton(
       (isRateNegative && currentScoreValue <= amount) ||
       (!isRateNegative && currentScoreValue > amount)
     ) {
-        // already passed it. state won't change
-        return unmount;
+      // already passed it. state won't change
+      return unmount;
     }
 
     const scoreDiff = amount - currentScoreValue;
@@ -77,7 +72,7 @@ export default function CreditsButton(
       disabled={disabled || disabledOverride}
       leading={children}
     >
-      <ScoreValue score={amount.toString(10)}/>
+      <ScoreValue score={amount} />
     </ComplexButton>
   );
-};
+}

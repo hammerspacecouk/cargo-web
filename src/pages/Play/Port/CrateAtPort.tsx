@@ -1,7 +1,7 @@
 import * as React from "react";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import { CrateActionInterface } from "../../../interfaces/CrateInterface";
-import TokenButton from "../../../components/Button/TokenButton";
+import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import CreditsIcon from "../../../components/Icons/CreditsIcon/CreditsIcon";
 
 interface CrateAtPortPropsInterface {

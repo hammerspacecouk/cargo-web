@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
-import TokenButton from "../../../components/Button/TokenButton";
+import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import CreditsButton from "../../../components/Molecules/CreditsButton/CreditsButton";
 import { ShipUpgradeInterface } from "../../../interfaces/TransactionInterface";
 
 interface PropsInterface {
   ship?: ShipUpgradeInterface;
 }
-export default ({ship}: PropsInterface) => {
+export default ({ ship }: PropsInterface) => {
   const { buttonsDisabled, makePurchase } = useUpgradesContext();
 
   if (!ship) {

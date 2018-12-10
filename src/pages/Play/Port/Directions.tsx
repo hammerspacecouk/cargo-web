@@ -13,7 +13,7 @@ export default () => {
   const { directions } = useCurrentShipContext();
 
   if (directions === undefined) {
-    return <Loading />
+    return <Loading />;
   } // todo - pretty loader
 
   const { NW, NE, W, E, SW, SE } = directions;

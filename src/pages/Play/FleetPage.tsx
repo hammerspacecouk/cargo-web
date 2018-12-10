@@ -3,42 +3,40 @@ import styled from "styled-components";
 import { useSessionContext } from "../../context/SessionContext";
 import PlayerFlag from "../../components/Molecules/PlayerFlag/PlayerFlag";
 import FleetShips from "../../components/Organisms/FleetShips/FleetShips";
-import EventsList from "../../components/Events/EventsList";
+import EventsList from "../../components/Organisms/EventsList/EventsList";
 import Rank from "../../components/Player/Rank";
-import { FleetContextProvider, useFleetContext } from "../../context/Page/FleetContext";
-import { EventsArea } from "../PlayPage";
-import { colours, grid } from "../../GlobalStyle";
+import {
+  FleetContextProvider,
+  useFleetContext
+} from "../../context/Page/FleetContext";
+import { GRID } from "../../styles/variables";
+import { COLOURS } from "../../styles/colours";
+import { H1 } from "../../components/Atoms/Heading/Heading";
+import { Square } from "../../components/Atoms/Ratio/Ratio";
 
 const StyledFleetPage = styled.div`
-  padding: ${grid.unit}px;
+  padding: ${GRID.UNIT};
 `;
 
 const FleetHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: ${grid.unit * 2}px;
+  margin-bottom: ${GRID.DOUBLE};
 `;
 
-const StyledFlagWrapper = styled.div`
+const FlagArea = styled.div`
   display: block;
-  margin-left: ${grid.unit}px;
+  margin-left: ${GRID.UNIT};
   width: 45%;
   max-width: 128px;
-  border: solid 2px ${colours.white};
+  border: solid 2px ${COLOURS.BODY.TEXT};
   border-radius: 50%;
-  line-height: 0;
 `;
-const Title = styled.h1`
+
+const Title = styled(H1)`
   text-align: left;
   flex: 1;
-  font-size: 2rem;
-  @media (min-width: 21em) {
-    font-size: 3rem;
-  }
-  @media (min-width: 48.75em) {
-    font-size: 4rem;
-  }
 `;
 
 const FleetPageContent = () => {
@@ -53,15 +51,15 @@ const FleetPageContent = () => {
     <StyledFleetPage>
       <FleetHeader>
         <Title>My Fleet</Title>
-        <StyledFlagWrapper>
-          <PlayerFlag player={player}/>
-        </StyledFlagWrapper>
+        <FlagArea>
+          <Square>
+            <PlayerFlag player={player} />
+          </Square>
+        </FlagArea>
       </FleetHeader>
-      <FleetShips ships={ships}/>
-      <Rank rankStatus={rankStatus}/>
-      <EventsArea>
-        <EventsList events={events} firstPerson/>
-      </EventsArea>
+      <FleetShips ships={ships} />
+      <Rank rankStatus={rankStatus} />
+      <EventsList events={events} firstPerson />
     </StyledFleetPage>
   );
 };
@@ -69,7 +67,7 @@ const FleetPageContent = () => {
 export default function FleetPage() {
   return (
     <FleetContextProvider>
-      <FleetPageContent/>
+      <FleetPageContent />
     </FleetContextProvider>
-  )
+  );
 }

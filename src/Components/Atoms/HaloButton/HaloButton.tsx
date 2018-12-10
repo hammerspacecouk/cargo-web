@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { grid } from "../../../GlobalStyle";
+import { GRID } from "../../../styles/variables";
 
 export default styled.button`
   outline: none;
@@ -9,11 +9,12 @@ export default styled.button`
   border: none;
   background: none;
   border-radius: 50%;
-  padding: ${grid.half}px;
-  :hover, :focus {
-    background: rgba(255,255,255,0.2);
+  padding: ${GRID.HALF};
+  :hover,
+  :focus {
+    background: rgba(255, 255, 255, 0.2);
   }
   :active {
-    background: rgba(255,255,255,0.4);
+    background: rgba(255, 255, 255, 0.4);
   }
 `;

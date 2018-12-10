@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import Button from "../../Atoms/Button/Button";
-import { grid } from "../../../GlobalStyle";
+import {Button} from "../../Atoms/Button/Button";
+import { GRID } from "../../../styles/variables";
 import Icon from "../../Atoms/Icon/Icon";
 
 interface PropsInterface {
@@ -15,40 +15,40 @@ interface PropsInterface {
 }
 
 const StyledButton = styled(Button)`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledChildren = styled.div`
-    margin-right: ${grid.unit}px;
-    padding-right: ${grid.unit}px;
-    border-right-style: solid;
-    border-right-width: 1px;
+  margin-right: ${GRID.UNIT};
+  padding-right: ${GRID.UNIT};
+  border-right-style: solid;
+  border-right-width: 1px;
 `;
 
 const StyledIcon = styled(StyledChildren)`
-    line-height: 0;
-    padding-right: ${grid.half}px;
-    margin-left: -${grid.half}px;
+  line-height: 0;
+  padding-right: ${GRID.HALF};
+  margin-left: -${GRID.HALF};
 `;
 
-export default function ComplexButton(
-  { leading, icon, children, disabled, type, className, onClick }: PropsInterface
-) {
+export default function ComplexButton({
+  leading,
+  icon,
+  children,
+  disabled,
+  type,
+  className,
+  onClick
+}: PropsInterface) {
   let styledPrefix;
   if (leading) {
-    styledPrefix = (
-      <StyledChildren>
-        {leading}
-      </StyledChildren>
-    );
+    styledPrefix = <StyledChildren>{leading}</StyledChildren>;
   }
   if (icon) {
     styledPrefix = (
       <StyledIcon>
-        <Icon>
-          {icon}
-        </Icon>
+        <Icon>{icon}</Icon>
       </StyledIcon>
     );
   }

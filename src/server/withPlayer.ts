@@ -13,7 +13,7 @@ export default (Page: InitialDataComponent) => {
   class WithPlayer extends Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
       // request & cookies will only be available on the server
-      if (request && !request.cookies.AUTHENTICATION_TOKEN) {
+      if (request?.cookies && !request.cookies.AUTHENTICATION_TOKEN) {
         return { isLoggedOut: true };
       }
       // Need to call the wrapped components getInitialData if it exists
@@ -30,9 +30,13 @@ export default (Page: InitialDataComponent) => {
 
       // Flatten out all the props.
       const { isLoggedOut, children, ...rest } = this.props;
-      return createElement(Page, {
-        ...rest
-      }, children);
+      return createElement(
+        Page,
+        {
+          ...rest
+        },
+        children
+      );
     }
   }
   return withInitialData(WithPlayer);

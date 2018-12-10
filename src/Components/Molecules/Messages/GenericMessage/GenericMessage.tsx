@@ -23,4 +23,4 @@ export default function GenericMessage({ message }: GenericMessageProps) {
     default:
       return <MessageInfo>{message.message}</MessageInfo>;
   }
-};
+}
