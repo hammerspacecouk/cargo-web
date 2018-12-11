@@ -7,7 +7,7 @@ import DirectionSW from "../../../components/Icons/DirectionSW/DirectionSW";
 import DirectionSE from "../../../components/Icons/DirectionSE/DirectionSE";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import Direction from "./Direction";
-import Loading from "../../../components/Navigation/Loading";
+import {Loading} from "../../../components/Atoms/Loading/Loading";
 
 export default () => {
   const { directions } = useCurrentShipContext();
@@ -24,7 +24,6 @@ export default () => {
       <table className="destinations">
         <thead>
           <tr>
-            <th>Direction</th>
             <th>Destination Port</th>
             <th>Distance</th>
             <th>Earnings</th>

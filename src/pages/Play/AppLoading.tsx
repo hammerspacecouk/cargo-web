@@ -1,5 +1,6 @@
 import * as React from "react";
-import Loading from "../../components/Navigation/Loading";
+import {Loading} from "../../components/Atoms/Loading/Loading";
+import { TextCenter } from "../../components/Atoms/Text/Text";
 
 export default function AppLoading() {
   return (
@@ -7,9 +8,9 @@ export default function AppLoading() {
       <div>
         <Loading />
       </div>
-      <div className="text--center">
+      <TextCenter as="div">
         To play will require JavaScript to be running successfully
-      </div>
+      </TextCenter>
     </div>
   );
 }

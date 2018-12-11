@@ -45,3 +45,7 @@ export const TextOk = styled.span`
 export const TextInfo = styled.span`
     color: ${COLOURS.SEMANTIC.INFO.KEY};
 `;
+
+export const TextCenter = styled.span`
+    text-align: center;
+`;

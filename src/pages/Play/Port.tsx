@@ -12,6 +12,15 @@ import Directions from "./Port/Directions";
 import ShieldIcon from "../../components/Icons/ShieldIcon/ShieldIcon";
 import CrateModal from "./Port/CrateModal";
 import Icon from "../../components/Atoms/Icon/Icon";
+import { H1 } from "../../components/Atoms/Heading/Heading";
+import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
+import styled from "styled-components";
+
+const PortTemplate = styled.div`
+    margin: 0 auto;
+    max-width: ${MAX_CONTENT_WIDTH};
+    padding: ${GRID.UNIT};
+`;
 
 const PortComponent = () => {
   const { port, shipsInLocation, events } = useCurrentShipContext();
@@ -47,12 +56,12 @@ const PortComponent = () => {
   }
 
   return (
-    <div>
-      <h1>
+    <PortTemplate>
+      <H1>
         {port.name} {safe}
-      </h1>
+      </H1>
       {portContent}
-    </div>
+    </PortTemplate>
   );
 };
 

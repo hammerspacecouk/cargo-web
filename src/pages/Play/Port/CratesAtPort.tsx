@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { CrateAtPort } from "./CrateAtPort";
-import Loading from "../../../components/Navigation/Loading";
+import {Loading} from "../../../components/Atoms/Loading/Loading";
 
 export default () => {
   const { cratesInPort } = useCurrentShipContext();
@@ -22,9 +22,9 @@ export default () => {
           </tr>
         </thead>
         <tbody>
-          {cratesInPort.map(crateAction => {
-            <CrateAtPort crateAction={crateAction} />;
-          })}
+          {cratesInPort.map(crateAction => (
+            <CrateAtPort key={crateAction.crate.id} crateAction={crateAction} />
+          ))}
         </tbody>
       </table>
     </div>

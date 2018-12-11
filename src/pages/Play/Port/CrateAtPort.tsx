@@ -3,6 +3,9 @@ import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import { CrateActionInterface } from "../../../interfaces/CrateInterface";
 import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import CreditsIcon from "../../../components/Icons/CreditsIcon/CreditsIcon";
+import { Button } from "../../../components/Atoms/Button/Button";
+import Icon, { SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
+import { TextC } from "../../../components/Atoms/Text/Text";
 
 interface CrateAtPortPropsInterface {
   crateAction: CrateActionInterface;
@@ -12,16 +15,16 @@ export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
   const { buttonsDisabled, moveCrate } = usePlayPortContext();
 
   let tokenButton = (
-    <button className="button" disabled={true}>
+    <Button disabled={true}>
       Pickup
-    </button>
+    </Button>
   );
   if (crateAction.token) {
     tokenButton = (
       <TokenButton token={crateAction.token} handler={moveCrate}>
-        <button className="button" type="submit" disabled={buttonsDisabled}>
+        <Button type="submit" disabled={buttonsDisabled}>
           Pickup
-        </button>
+        </Button>
       </TokenButton>
     );
   }
@@ -30,10 +33,10 @@ export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
     <tr key={crateAction.crate.id}>
       <td>{crateAction.crate.contents}</td>
       <td>
-        <span className="c">+{crateAction.valuePerLY}</span>{" "}
-        <span className="icon icon--mini">
+        <TextC>+{crateAction.valuePerLY}</TextC>{" "}
+        <Icon size={SMALL_ICON}>
           <CreditsIcon />
-        </span>/ly
+        </Icon>/ly
       </td>
       <td>{tokenButton}</td>
     </tr>

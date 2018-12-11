@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import RequireLogin from "./RequireLogin";
-import Loading from "../Navigation/Loading";
+import {Loading} from "../Atoms/Loading/Loading";
 import { useSessionContext } from "../../context/SessionContext";
 
 interface InitialPropsInterface {

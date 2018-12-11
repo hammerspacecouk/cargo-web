@@ -3,6 +3,9 @@ import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import * as React from "react";
 import { CrateActionInterface } from "../../../interfaces/CrateInterface";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
+import Icon, { SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
+import { TextC, TextCenter, TextF } from "../../../components/Atoms/Text/Text";
+import { Button } from "../../../components/Atoms/Button/Button";
 
 interface CrateOnShipPropsInterface {
   crateAction: CrateActionInterface;
@@ -14,16 +17,16 @@ export const CrateOnShip = ({ crateAction }: CrateOnShipPropsInterface) => {
     <tr key={crateAction.crate.id}>
       <td>{crateAction.crate.contents}</td>
       <td>
-        <span className="c">+{crateAction.valuePerLY}</span>{" "}
-        <span className="icon icon--mini">
+        <TextC>+{crateAction.valuePerLY}</TextC>{" "}
+        <Icon size={SMALL_ICON}>
           <CreditsIcon />
-        </span>/ly
+        </Icon>/ly
       </td>
       <td>
         <TokenButton token={crateAction.token} handler={moveCrate}>
-          <button className="button" type="submit" disabled={buttonsDisabled}>
+          <Button type="submit" disabled={buttonsDisabled}>
             Drop
-          </button>
+          </Button>
         </TokenButton>
       </td>
     </tr>
@@ -34,7 +37,9 @@ export const CrateOnShipPlaceholder = () => {
   return (
     <tr>
       <td colSpan={3}>
-        <p className="text--center f">Empty Slot</p>
+        <TextCenter><TextF>
+          Empty Slot
+        </TextF></TextCenter>
       </td>
     </tr>
   );

@@ -1,6 +1,6 @@
 import * as React from "react";
 import DirectionInterface from "../../../interfaces/DirectionInterface";
-import Fraction from "../../../components/Formatting/Fraction";
+import {Fraction} from "../../../components/Atoms/Fraction/Fraction";
 import ScoreValue from "../../../components/Molecules/ScoreValue/ScoreValue";
 import GoButton from "./GoButton";
 import { InlinePortName } from "../../../components/Labels";

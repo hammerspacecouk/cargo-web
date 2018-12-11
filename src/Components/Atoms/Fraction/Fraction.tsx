@@ -5,7 +5,7 @@ interface Props {
   den: number;
 }
 
-export default ({ num, den }: Props) => (
+export const Fraction = ({ num, den }: Props) => (
   <>
     <sup>{num}</sup>&#8260;<sub>{den}</sub>
   </>

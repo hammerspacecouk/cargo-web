@@ -1,7 +1,7 @@
 import * as React from "react";
 import ProgressBar from "../Element/ProgressBar";
 import RankStatusInterface from "../../interfaces/RankStatusInterface";
-import Loading from "../Navigation/Loading";
+import {Loading} from "../Atoms/Loading/Loading";
 
 export interface Props {
   rankStatus: RankStatusInterface;

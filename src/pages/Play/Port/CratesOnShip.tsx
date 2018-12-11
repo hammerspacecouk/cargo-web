@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { CrateOnShip, CrateOnShipPlaceholder } from "./CrateOnShip";
-import Loading from "../../../components/Navigation/Loading";
+import {Loading} from "../../../components/Atoms/Loading/Loading";
 
 export default () => {
   const { ship, cratesOnShip } = useCurrentShipContext();

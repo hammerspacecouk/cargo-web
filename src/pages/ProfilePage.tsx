@@ -1,5 +1,5 @@
 import * as React from "react";
-import Loading from "../components/Navigation/Loading";
+import {Loading} from "../components/Atoms/Loading/Loading";
 import {Error} from "../components/Organisms/Error/Error";
 import ErrorIcon from "../components/Icons/ErrorIcon/ErrorIcon";
 import ProfileLayout from "../components/Layout/ProfileLayout";

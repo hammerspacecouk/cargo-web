@@ -162,6 +162,7 @@ const allColours = {
 };
 
 export const COLOURS = {
+  BASE: allColours.base,
   BLACK: {
     STANDARD: allColours.black,
     COLOURISED: allColours.violet[9],
@@ -177,6 +178,9 @@ export const COLOURS = {
     ACTION: allColours.violet[4],
     CONFIRM: allColours.green[4],
     DANGER: allColours.red[5],
+  },
+  GREY: {
+    MID: allColours.gray[7],
   },
   HEALTH: {
     FULL: allColours.violet[4],
