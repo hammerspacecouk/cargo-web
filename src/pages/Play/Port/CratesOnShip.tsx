@@ -2,6 +2,7 @@ import * as React from "react";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { CrateOnShip, CrateOnShipPlaceholder } from "./CrateOnShip";
 import {Loading} from "../../../components/Atoms/Loading/Loading";
+import { Table } from "../../../components/Molecules/Table/Table";
 
 export default () => {
   const { ship, cratesOnShip } = useCurrentShipContext();
@@ -16,7 +17,7 @@ export default () => {
   return (
     <div className="t-port-ship">
       <h2 className="table-head">Crates on Ship</h2>
-      <table className="table">
+      <Table>
         <thead>
           <tr>
             <th>Contents</th>
@@ -28,7 +29,7 @@ export default () => {
           {cratesOnShip.map(crate => <CrateOnShip crateAction={crate} />)}
           {placeholderSlots.map(() => <CrateOnShipPlaceholder />)}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

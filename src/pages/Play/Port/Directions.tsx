@@ -8,6 +8,7 @@ import DirectionSE from "../../../components/Icons/DirectionSE/DirectionSE";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import Direction from "./Direction";
 import {Loading} from "../../../components/Atoms/Loading/Loading";
+import { Destinations } from "../../../components/Organisms/Destinations/Destinations";
 
 export default () => {
   const { directions } = useCurrentShipContext();
@@ -21,7 +22,7 @@ export default () => {
   return (
     <>
       <h2 className="table-head">Where next?</h2>
-      <table className="destinations">
+      <Destinations>
         <thead>
           <tr>
             <th>Destination Port</th>
@@ -62,7 +63,7 @@ export default () => {
             </Direction>
           ) : null}
         </tbody>
-      </table>
+      </Destinations>
     </>
   );
 };

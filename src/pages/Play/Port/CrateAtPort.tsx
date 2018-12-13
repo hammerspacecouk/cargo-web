@@ -6,6 +6,7 @@ import CreditsIcon from "../../../components/Icons/CreditsIcon/CreditsIcon";
 import { Button } from "../../../components/Atoms/Button/Button";
 import Icon, { SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
 import { TextC } from "../../../components/Atoms/Text/Text";
+import { CrateContents } from "../../../components/Atoms/CrateContents/CrateContents";
 
 interface CrateAtPortPropsInterface {
   crateAction: CrateActionInterface;
@@ -31,7 +32,11 @@ export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
 
   return (
     <tr key={crateAction.crate.id}>
-      <td>{crateAction.crate.contents}</td>
+      <td>
+        <CrateContents>
+          {crateAction.crate.contents}
+        </CrateContents>
+      </td>
       <td>
         <TextC>+{crateAction.valuePerLY}</TextC>{" "}
         <Icon size={SMALL_ICON}>
