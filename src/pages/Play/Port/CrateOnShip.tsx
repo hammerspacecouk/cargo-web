@@ -6,6 +6,7 @@ import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import Icon, { SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
 import { TextC, TextCenter, TextF } from "../../../components/Atoms/Text/Text";
 import { Button } from "../../../components/Atoms/Button/Button";
+import { CrateWithContents } from "../../../components/Atoms/CrateContents/CrateContents";
 
 interface CrateOnShipPropsInterface {
   crateAction: CrateActionInterface;
@@ -15,7 +16,9 @@ export const CrateOnShip = ({ crateAction }: CrateOnShipPropsInterface) => {
 
   return (
     <tr key={crateAction.crate.id}>
-      <td>{crateAction.crate.contents}</td>
+      <td>
+        <CrateWithContents crate={crateAction.crate} />
+      </td>
       <td>
         <TextC>+{crateAction.valuePerLY}</TextC>{" "}
         <Icon size={SMALL_ICON}>

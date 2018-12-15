@@ -2,11 +2,16 @@ import * as React from "react";
 import styled from "styled-components";
 import { ChildrenPropsInterface } from "../../../interfaces/PropsInterface";
 import { Crate } from "../../Icons/Crate/Crate";
+import { COLOURS } from "../../../styles/colours";
+import CrateInterface from "../../../interfaces/CrateInterface";
+
+interface PropsInterface {
+  crate: CrateInterface;
+}
 
 const StyledCrateContents = styled.div`
     position: relative;
     width: 60px;
-    perspective: 2000px;
 `;
 
 const StyledCrate = styled.div`
@@ -16,24 +21,60 @@ const StyledCrate = styled.div`
     height: 40px;
 `;
 
-const StyledContent = styled.div`
+const Side = styled.div`
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 0;
-    right: 20px;
+    right: 22px;
     line-height: 40px;
     text-align: center;
     font-size: 1.2rem;
-    transform: rotateY(-42deg);
+    perspective: 100px;
+    perspective-origin: left;
 `;
 
-export const CrateContents = ({children}: ChildrenPropsInterface) => (
+const StyledContent = styled.div`
+    transform: rotateY(-40deg);
+    color: ${COLOURS.BLACK.STANDARD};
+`;
+
+export const CrateContents = styled.span`
+    font-family: "Segoe UI Emoji", sans-serif;
+`;
+
+const getColour = (value: number): string => {
+  if (value >= 12) {
+    return COLOURS.CRATE.LEVEL6;
+  }
+  if (value >= 6) {
+    return COLOURS.CRATE.LEVEL5;
+  }
+  if (value >= 4) {
+    return COLOURS.CRATE.LEVEL4;
+  }
+  if (value >= 3) {
+    return COLOURS.CRATE.LEVEL3;
+  }
+  if (value >= 2) {
+    return COLOURS.CRATE.LEVEL2;
+  }
+  if (value >= 1) {
+    return COLOURS.CRATE.LEVEL1;
+  }
+  return COLOURS.CRATE.LEVEL0;
+};
+
+export const CrateWithContents = ({ crate }: PropsInterface) => (
   <StyledCrateContents>
     <StyledCrate>
-      <Crate />
+      <Crate colour={getColour(crate.value)}/>
     </StyledCrate>
-    <StyledContent>
-      {children}
-    </StyledContent>
+    <Side>
+      <StyledContent>
+        <CrateContents>
+          {crate.contents}
+        </CrateContents>
+      </StyledContent>
+    </Side>
   </StyledCrateContents>
 );

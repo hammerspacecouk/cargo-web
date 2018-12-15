@@ -10,11 +10,18 @@ export default styled.button`
   background: none;
   border-radius: 50%;
   padding: ${GRID.HALF};
-  :hover,
-  :focus {
-    background: rgba(255, 255, 255, 0.2);
+  
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    &:active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0.98);
+    }
   }
-  :active {
-    background: rgba(255, 255, 255, 0.4);
+  &[disabled] {
+    opacity: 0.4;
   }
 `;

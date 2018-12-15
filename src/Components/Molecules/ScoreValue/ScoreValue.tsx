@@ -20,7 +20,7 @@ const Icon = styled.span`
   height: 24px;
   margin-right: 4px;
 `;
-const Digits = styled.span`
+export const Digits = styled.span`
   display: inline-block;
   ${MONOSPACE_FONT}
 `;

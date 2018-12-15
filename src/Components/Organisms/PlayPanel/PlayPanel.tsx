@@ -44,7 +44,7 @@ export const PlayPanel = () => {
       </P>
       <ButtonArea>
         <form action={routes.getLoginAnonymous()} method="post">
-          <input type="hidden" name="loginToken" value={loginToken} />
+          {loginToken && <input type="hidden" name="loginToken" value={loginToken} />}
           <Button styleType={TYPE_ACTION} disabled={!loginToken}>New game</Button>
         </form>
       </ButtonArea>

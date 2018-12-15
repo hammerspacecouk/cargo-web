@@ -26,8 +26,8 @@ export default () => {
           </tr>
         </thead>
         <tbody>
-          {cratesOnShip.map(crate => <CrateOnShip crateAction={crate} />)}
-          {placeholderSlots.map(() => <CrateOnShipPlaceholder />)}
+          {cratesOnShip.map(crate => <CrateOnShip key={`cos-${crate.crate.id}`} crateAction={crate} />)}
+          {placeholderSlots.map((_, i) => <CrateOnShipPlaceholder key={`p-${i}`} />)}
         </tbody>
       </Table>
     </div>

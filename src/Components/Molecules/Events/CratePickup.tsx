@@ -1,6 +1,7 @@
 import * as React from "react";
 import EventInterface from "../../../interfaces/EventInterface";
 import Event from "./Event";
+import { CrateContents } from "../../Atoms/CrateContents/CrateContents";
 
 interface Props {
   readonly event: EventInterface;
@@ -8,9 +9,10 @@ interface Props {
 
 export default ({ event }: Props) => {
   const contents = event.crate ? event.crate.contents : "[deleted]";
+  const name = event.actioningShip ? event.actioningShip.name : "[deleted]";
   return (
     <Event time={event.time}>
-      {event.actioningShip.name} picked up {contents} for transport
+      {name} picked up <CrateContents>{contents}</CrateContents> for transport
     </Event>
   );
 };

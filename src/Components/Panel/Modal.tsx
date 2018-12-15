@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ModalHandler from "react-modal";
 import CloseIcon from "../Icons/CloseIcon/CloseIcon";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { css } from "styled-components";
 import { GRID, Z_INDEX } from "../../styles/variables";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
 import { H3 } from "../Atoms/Heading/Heading";
@@ -13,7 +13,7 @@ interface Props {
   onClose?: () => void;
 }
 
-const ModalStyles = createGlobalStyle`
+export const modalStyles = css`
     .modal {
         margin: ${GRID.UNIT};
         max-height: calc(100vh - ${GRID.DOUBLE});
@@ -112,7 +112,6 @@ export default (props: Props) => {
 
   return (
     <>
-      <ModalStyles />
       <ModalHandler
         appElement={appElement}
         isOpen={props.isOpen}

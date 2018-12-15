@@ -13,7 +13,7 @@ import { Destinations } from "../../../components/Organisms/Destinations/Destina
 export default () => {
   const { directions } = useCurrentShipContext();
 
-  if (directions === undefined) {
+  if (!directions) {
     return <Loading />;
   } // todo - pretty loader
 

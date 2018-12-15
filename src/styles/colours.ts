@@ -179,6 +179,15 @@ export const COLOURS = {
     CONFIRM: allColours.green[4],
     DANGER: allColours.red[5],
   },
+  CRATE: {
+    LEVEL0: allColours.yellow[2],
+    LEVEL1: allColours.cyan[2],
+    LEVEL2: allColours.blue[3],
+    LEVEL3: allColours.indigo[3],
+    LEVEL4: allColours.teal[3],
+    LEVEL5: allColours.lime[4],
+    LEVEL6: allColours.orange[3],
+  },
   GREY: {
     MID: allColours.gray[7],
   },

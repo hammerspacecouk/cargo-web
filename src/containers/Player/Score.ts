@@ -33,7 +33,7 @@ export default (props: Props) => {
   let frameHandler: number = null;
 
   function frame() {
-    if (!mounted.current) {
+    if (!mounted.current || !props.score) {
       return;
     }
     setScore(scoreState(props.score));

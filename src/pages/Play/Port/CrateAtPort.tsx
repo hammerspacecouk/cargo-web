@@ -3,47 +3,74 @@ import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import { CrateActionInterface } from "../../../interfaces/CrateInterface";
 import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import CreditsIcon from "../../../components/Icons/CreditsIcon/CreditsIcon";
-import { Button } from "../../../components/Atoms/Button/Button";
 import Icon, { SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
-import { TextC } from "../../../components/Atoms/Text/Text";
-import { CrateContents } from "../../../components/Atoms/CrateContents/CrateContents";
+import { TextE } from "../../../components/Atoms/Text/Text";
+import { CrateWithContents } from "../../../components/Atoms/CrateContents/CrateContents";
+import styled from "styled-components";
+import HaloButton from "../../../components/Atoms/HaloButton/HaloButton";
+import { GRID } from "../../../styles/variables";
 
 interface CrateAtPortPropsInterface {
   crateAction: CrateActionInterface;
 }
 
+const StyledCrateAtPort = styled.div``;
+
+const CrateButton = styled(HaloButton)`
+    border-radius: ${GRID.HALF};
+`;
+
+const StyledCrate = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
+const StyledCrateValue = styled.div`
+    text-align: center;
+    margin-top: ${GRID.QUARTER};
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+const StyledValue = styled(TextE)`
+    margin-right: ${GRID.QUARTER};
+`;
+
 export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
   const { buttonsDisabled, moveCrate } = usePlayPortContext();
 
+  const CrateContent = (
+    <StyledCrate>
+      <CrateWithContents crate={crateAction.crate} />
+      <StyledCrateValue>
+        <StyledValue>+{crateAction.valuePerLY.toLocaleString()}</StyledValue>
+        <Icon size={SMALL_ICON}>
+          <CreditsIcon />
+        </Icon><abbr title="per light year">/ly</abbr>
+      </StyledCrateValue>
+    </StyledCrate>
+  );
+
   let tokenButton = (
-    <Button disabled={true}>
-      Pickup
-    </Button>
+    <CrateButton disabled={true}>
+      {CrateContent}
+    </CrateButton>
   );
   if (crateAction.token) {
     tokenButton = (
       <TokenButton token={crateAction.token} handler={moveCrate}>
-        <Button type="submit" disabled={buttonsDisabled}>
-          Pickup
-        </Button>
+        <CrateButton type="submit" disabled={buttonsDisabled}>
+          {CrateContent}
+        </CrateButton>
       </TokenButton>
     );
   }
 
   return (
-    <tr key={crateAction.crate.id}>
-      <td>
-        <CrateContents>
-          {crateAction.crate.contents}
-        </CrateContents>
-      </td>
-      <td>
-        <TextC>+{crateAction.valuePerLY}</TextC>{" "}
-        <Icon size={SMALL_ICON}>
-          <CreditsIcon />
-        </Icon>/ly
-      </td>
-      <td>{tokenButton}</td>
-    </tr>
+    <StyledCrateAtPort>
+      {tokenButton}
+    </StyledCrateAtPort>
   );
 };

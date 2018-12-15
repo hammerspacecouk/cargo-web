@@ -6,6 +6,7 @@ import TokenButton from "../Molecules/TokenButton/TokenButton";
 import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 import Promotion from "./Promotion";
 import { useSessionContext } from "../../context/SessionContext";
+import { Button } from "../Atoms/Button/Button";
 
 export default () => {
   const { rankStatus, updateRankStatus } = useSessionContext();
@@ -28,15 +29,15 @@ export default () => {
   let button;
   if (acknowledging) {
     button = (
-      <button className="button" type="submit" disabled>
+      <Button className="button" type="submit" disabled>
         <Loading />
-      </button>
+      </Button>
     );
   } else {
     button = (
-      <button className="button" type="submit">
+      <Button className="button" type="submit">
         Ok
-      </button>
+      </Button>
     );
   }
 

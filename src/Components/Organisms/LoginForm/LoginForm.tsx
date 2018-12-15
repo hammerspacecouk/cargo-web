@@ -92,8 +92,6 @@ const EmailLogin = ({token}: {token: string}) => {
 export default (props: PropsInterface) => {
   const {loginToken} = useSessionContext();
 
-  const emailLogin = loginToken ? <EmailLogin token={loginToken} /> : null;
-
   return (
     <div>
       <Messages messages={props.messages}/>
@@ -116,7 +114,7 @@ export default (props: PropsInterface) => {
           <TwitterButton href={loginPathTwitter}/>
         </Item>
       </List>
-      {emailLogin}
+      {loginToken && <EmailLogin token={loginToken} />}
       <P>
         <Link to="/about/policies">More info on our login policies</Link>
       </P>

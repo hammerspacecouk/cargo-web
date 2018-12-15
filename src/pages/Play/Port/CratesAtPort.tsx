@@ -1,33 +1,36 @@
 import * as React from "react";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { CrateAtPort } from "./CrateAtPort";
-import {Loading} from "../../../components/Atoms/Loading/Loading";
-import { Table } from "../../../components/Molecules/Table/Table";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
+import styled from "styled-components";
+import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
+import { GRID } from "../../../styles/variables";
+
+const List = styled(ListInline)`
+    margin-left: -${GRID.UNIT};
+`;
+
+const ListItem = styled.li`
+    margin: 0 0 ${GRID.UNIT} ${GRID.UNIT};
+`;
 
 export default () => {
   const { cratesInPort } = useCurrentShipContext();
 
   if (cratesInPort === undefined) {
-    return <Loading />;
+    return <Loading/>;
   } // todo - pretty loader
 
   return (
     <div className="t-port-crates">
-      <h2 className="table-head">Crates at Port</h2>
-      <Table>
-        <thead>
-          <tr>
-            <th>Contents</th>
-            <th>Value</th>
-            <th>Pickup</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cratesInPort.map(crateAction => (
-            <CrateAtPort key={crateAction.crate.id} crateAction={crateAction} />
-          ))}
-        </tbody>
-      </Table>
+      <h2>Crates at Port</h2>
+      <List>
+        {cratesInPort.map(crateAction => (
+          <ListItem key={`cap-${crateAction.crate.id}`}>
+            <CrateAtPort crateAction={crateAction}/>
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 };
