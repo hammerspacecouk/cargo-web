@@ -5,6 +5,7 @@ import { Loading } from "../../../components/Atoms/Loading/Loading";
 import styled from "styled-components";
 import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
 import { GRID } from "../../../styles/variables";
+import { H2 } from "../../../components/Atoms/Heading/Heading";
 
 const List = styled(ListInline)`
     margin-left: -${GRID.UNIT};
@@ -23,7 +24,7 @@ export default () => {
 
   return (
     <div className="t-port-crates">
-      <h2>Crates at Port</h2>
+      <H2>Crates at Port</H2>
       <List>
         {cratesInPort.map(crateAction => (
           <ListItem key={`cap-${crateAction.crate.id}`}>

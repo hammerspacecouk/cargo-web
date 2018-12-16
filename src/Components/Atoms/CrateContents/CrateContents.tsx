@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ChildrenPropsInterface } from "../../../interfaces/PropsInterface";
 import { Crate } from "../../Icons/Crate/Crate";
 import { COLOURS } from "../../../styles/colours";
 import CrateInterface from "../../../interfaces/CrateInterface";

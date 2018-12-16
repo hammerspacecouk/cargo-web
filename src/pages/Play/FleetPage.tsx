@@ -9,13 +9,15 @@ import {
   FleetContextProvider,
   useFleetContext
 } from "../../context/Page/FleetContext";
-import { GRID } from "../../styles/variables";
+import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
 import { H1 } from "../../components/Atoms/Heading/Heading";
 import { Square } from "../../components/Atoms/Ratio/Ratio";
 
 const StyledFleetPage = styled.div`
-  padding: ${GRID.UNIT};
+    margin: 0 auto;
+    max-width: ${MAX_CONTENT_WIDTH};
+    padding: ${GRID.UNIT};
 `;
 
 const FleetHeader = styled.div`

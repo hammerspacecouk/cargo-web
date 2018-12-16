@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 
-export default styled.button`
+export const HaloButton = styled.button`
   outline: none;
   display: inline-block;
   width: 100%;
@@ -24,4 +24,8 @@ export default styled.button`
   &[disabled] {
     opacity: 0.4;
   }
+`;
+
+export const CrateButton = styled(HaloButton)`
+    border-radius: 200px;
 `;
