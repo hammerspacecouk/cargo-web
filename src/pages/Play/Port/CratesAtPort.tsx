@@ -4,32 +4,33 @@ import { CrateAtPort } from "./CrateAtPort";
 import { Loading } from "../../../components/Atoms/Loading/Loading";
 import styled from "styled-components";
 import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
-import { GRID } from "../../../styles/variables";
-import { H2 } from "../../../components/Atoms/Heading/Heading";
+import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
+
+interface PropsInterface {
+  className?: string;
+}
 
 const List = styled(ListInline)`
-    margin-left: -${GRID.UNIT};
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
-const ListItem = styled.li`
-    margin: 0 0 ${GRID.UNIT} ${GRID.UNIT};
-`;
-
-export default () => {
+export const CratesAtPort = ({ className }: PropsInterface) => {
   const { cratesInPort } = useCurrentShipContext();
 
   if (cratesInPort === undefined) {
-    return <Loading/>;
+    return <Loading />;
   } // todo - pretty loader
 
   return (
-    <div className="t-port-crates">
-      <H2>Crates at Port</H2>
+    <div className={className}>
+      <Hidden as="h2">Crates at Port</Hidden>
       <List>
         {cratesInPort.map(crateAction => (
-          <ListItem key={`cap-${crateAction.crate.id}`}>
-            <CrateAtPort crateAction={crateAction}/>
-          </ListItem>
+          <li key={`cap-${crateAction.crate.id}`}>
+            <CrateAtPort crateAction={crateAction} />
+          </li>
         ))}
       </List>
     </div>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
-import {Loading} from "../../../components/Atoms/Loading/Loading";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
 import ShipUpgrade from "./ShipUpgrade";
 
 export default (): JSX.Element => {

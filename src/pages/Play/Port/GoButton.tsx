@@ -4,7 +4,7 @@ import DirectionInterface from "../../../interfaces/DirectionInterface";
 import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import IntervalFormat from "../../../components/Formatting/IntervalFormat";
-import {Button, TYPE_CONFIRM } from "../../../components/Atoms/Button/Button";
+import { Button, TYPE_CONFIRM } from "../../../components/Atoms/Button/Button";
 import ComplexButton from "../../../components/Molecules/ComplexButton/ComplexButton";
 
 interface PropsInterface {

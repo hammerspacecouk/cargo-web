@@ -2,8 +2,8 @@ import * as React from "react";
 import styled, { keyframes } from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 
-const loadingSize = '28px';
-const loadingDuration = '1.4s';
+const loadingSize = "28px";
+const loadingDuration = "1.4s";
 const loadingOffset = 54;
 
 const dashFrames = keyframes`
@@ -28,39 +28,33 @@ const rotateFrames = keyframes`
 `;
 
 const StyledLoader = styled.div`
-    width: ${loadingSize};
-    height: ${loadingSize};
-    margin-left: auto;
-    margin-right: auto;
-    transform-origin: center;
-    animation: ${rotateFrames} ${loadingDuration} linear infinite;
+  width: ${loadingSize};
+  height: ${loadingSize};
+  margin-left: auto;
+  margin-right: auto;
+  transform-origin: center;
+  animation: ${rotateFrames} ${loadingDuration} linear infinite;
 `;
 
 const Spinner = styled.svg`
-    width: ${loadingSize};
-    height: ${loadingSize};
+  width: ${loadingSize};
+  height: ${loadingSize};
 `;
 
 const Path = styled.circle`
-    stroke: ${COLOURS.BASE};
-    stroke-dasharray: ${loadingOffset};
-    stroke-dashoffset: 0;
-    stroke-linecap: round;
-    transform-origin: center;
-    animation: ${dashFrames} ${loadingDuration} ease-in-out infinite;
+  stroke: ${COLOURS.BASE};
+  stroke-dasharray: ${loadingOffset};
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  transform-origin: center;
+  animation: ${dashFrames} ${loadingDuration} ease-in-out infinite;
 `;
 
 export const Loading = () => {
   return (
     <StyledLoader>
       <Spinner xmlns="http://www.w3.org/2000/svg">
-        <Path
-          fill="none"
-          strokeWidth="4"
-          cx="14"
-          cy="14"
-          r="10"
-        />
+        <Path fill="none" strokeWidth="4" cx="14" cy="14" r="10" />
       </Spinner>
     </StyledLoader>
   );

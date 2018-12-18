@@ -13,7 +13,7 @@ export const InlinePortName = ({ port }: InlinePortNameProps) => {
     safe = ( // todo - abstract safe haven marker
       <abbr title="Safe Haven">
         <Icon size={SMALL_ICON}>
-          <ShieldIcon/>
+          <ShieldIcon />
         </Icon>
       </abbr>
     );

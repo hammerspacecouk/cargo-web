@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router";
 import styled from "styled-components";
 import { GRID } from "../styles/variables";
 
-import {NotFound} from "../components/Organisms/Error/NotFound";
+import { NotFound } from "../components/Organisms/Error/NotFound";
 import { PlayBar, playBarHeight } from "../components/Navigation/PlayBar";
 import CurrentShipContextComponent from "../context/CurrentShipContext";
 import EnsureLoggedIn from "../components/Login/EnsureLoggedIn";

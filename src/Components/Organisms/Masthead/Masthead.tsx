@@ -28,21 +28,21 @@ const StyledMasthead = styled.div`
 export const LinkBox = styled.div`
   display: flex;
   height: 100%;
-  > a, button {
+  > a,
+  button {
     display: flex;
     align-items: center;
     padding: ${GRID.UNIT};
   }
 `;
 
-
 const MastheadLink = styled(HaloLink)`
-    padding: ${GRID.UNIT};
-    display: flex;
-    align-items: center;
+  padding: ${GRID.UNIT};
+  display: flex;
+  align-items: center;
 `;
 const Logo = styled(MastheadLink)`
-  ${SIZES.D}
+  ${SIZES.D};
 `;
 
 export const Masthead = () => {
@@ -51,9 +51,7 @@ export const Masthead = () => {
   return (
     <MastheadPosition>
       <StyledMasthead>
-        <Logo href="/">
-          Planet Cargo
-        </Logo>
+        <Logo href="/">Planet Cargo</Logo>
         <FlexStretch>
           {player ? <PlayerActions /> : <GuestActions />}
         </FlexStretch>

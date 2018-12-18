@@ -3,49 +3,49 @@ import { ELEMENTS, SIZES } from "../../../styles/typography";
 import { COLOURS } from "../../../styles/colours";
 
 export const P = styled.p`
-    ${ELEMENTS.P}
+  ${ELEMENTS.P};
 `;
 
 export const TextA = styled.span`
-    ${SIZES.A}
+  ${SIZES.A};
 `;
 
 export const TextB = styled.span`
-    ${SIZES.B}
+  ${SIZES.B};
 `;
 
 export const TextC = styled.span`
-    ${SIZES.C}
+  ${SIZES.C};
 `;
 
 export const TextD = styled.span`
-    ${SIZES.D}
+  ${SIZES.D};
 `;
 
 export const TextE = styled.span`
-    ${SIZES.E}
+  ${SIZES.E};
 `;
 
 export const TextF = styled.span`
-    ${SIZES.F}
+  ${SIZES.F};
 `;
 
 export const TextDanger = styled.span`
-    color: ${COLOURS.SEMANTIC.DANGER.KEY};
+  color: ${COLOURS.SEMANTIC.DANGER.KEY};
 `;
 
 export const TextWarning = styled.span`
-    color: ${COLOURS.SEMANTIC.WARNING.KEY};
+  color: ${COLOURS.SEMANTIC.WARNING.KEY};
 `;
 
 export const TextOk = styled.span`
-    color: ${COLOURS.SEMANTIC.OK.KEY};
+  color: ${COLOURS.SEMANTIC.OK.KEY};
 `;
 
 export const TextInfo = styled.span`
-    color: ${COLOURS.SEMANTIC.INFO.KEY};
+  color: ${COLOURS.SEMANTIC.INFO.KEY};
 `;
 
 export const TextCenter = styled.span`
-    text-align: center;
+  text-align: center;
 `;

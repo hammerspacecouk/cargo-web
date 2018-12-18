@@ -17,7 +17,7 @@ interface SizeFunctionsInterface {
 const makeFunction = (size: number): TaggedTemplateFunction => {
   return (...args) => css`
     @media (min-width: ${size / 16}em) {
-      ${css(...args)}
+      ${css(...args)};
     }
   `;
 };
@@ -29,5 +29,5 @@ export const BREAKPOINTS: SizeFunctionsInterface = {
   L: makeFunction(912),
   XL: makeFunction(1008),
   XXL: makeFunction(1280),
-  MAX: makeFunction(1600),
+  MAX: makeFunction(1600)
 };

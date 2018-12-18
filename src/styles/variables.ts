@@ -1,8 +1,8 @@
 export const GRID = {
-  DOUBLE: '32px',
-  UNIT: '16px',
-  HALF: '8px',
-  QUARTER: '4px',
+  DOUBLE: "32px",
+  UNIT: "16px",
+  HALF: "8px",
+  QUARTER: "4px"
 };
 
 export const Z_INDEX = {
@@ -16,7 +16,7 @@ export const Z_INDEX = {
   PAGE_BOTTOM: 1000,
   DEFAULT: 1,
   GROUND: 0,
-  BURIED: -1,
+  BURIED: -1
 };
 
-export const MAX_CONTENT_WIDTH = '1280px';
+export const MAX_CONTENT_WIDTH = "1280px";

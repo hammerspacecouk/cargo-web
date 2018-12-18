@@ -22,8 +22,9 @@ export default () => {
           <Icon size={SMALL_ICON}>
             <ShieldIcon />
           </Icon>
-        </abbr>. It costs you nothing to be here and your ship cannot be harmed
-        while it is here.
+        </abbr>
+        . It costs you nothing to be here and your ship cannot be harmed while
+        it is here.
       </P>
       <P>
         This is your home spaceport. Any newly launched ships will set off from

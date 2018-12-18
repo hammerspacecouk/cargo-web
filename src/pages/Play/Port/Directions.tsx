@@ -7,7 +7,7 @@ import DirectionSW from "../../../components/Icons/DirectionSW/DirectionSW";
 import DirectionSE from "../../../components/Icons/DirectionSE/DirectionSE";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import Direction from "./Direction";
-import {Loading} from "../../../components/Atoms/Loading/Loading";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
 import { Destinations } from "../../../components/Organisms/Destinations/Destinations";
 
 export default () => {

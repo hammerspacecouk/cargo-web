@@ -13,7 +13,7 @@ interface Props {
 }
 
 const StyledForm = styled.form`
-    display: inline;
+  display: inline;
 `;
 
 export default ({ token, children, handler }: Props) => {

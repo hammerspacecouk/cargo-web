@@ -1,7 +1,7 @@
 import * as React from "react";
 import DirectionInterface from "../../../interfaces/DirectionInterface";
-import {Fraction} from "../../../components/Atoms/Fraction/Fraction";
-import ScoreValue from "../../../components/Molecules/ScoreValue/ScoreValue";
+import { Fraction } from "../../../components/Atoms/Fraction/Fraction";
+import { ScoreValue } from "../../../components/Molecules/ScoreValue/ScoreValue";
 import GoButton from "./GoButton";
 import { InlinePortName } from "../../../components/Labels";
 import { TextD, TextF, TextWarning } from "../../../components/Atoms/Text/Text";
@@ -19,9 +19,7 @@ export default ({ direction, children }: PropsInterface) => {
   if (directionDisabled && direction.minimumRank) {
     minimumRank = (
       <TextF as="div">
-        <TextWarning>
-          Minimum rank: {direction.minimumRank.title}
-        </TextWarning>
+        <TextWarning>Minimum rank: {direction.minimumRank.title}</TextWarning>
       </TextF>
     );
   }

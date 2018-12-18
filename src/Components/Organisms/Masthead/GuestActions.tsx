@@ -6,12 +6,12 @@ import styled from "styled-components";
 import { useSessionContext } from "../../../context/SessionContext";
 
 const StyledForm = styled.form`
-   display: flex;
-   align-items: stretch;
+  display: flex;
+  align-items: stretch;
 `;
 
 export const GuestActions = () => {
-  const {loginToken} = useSessionContext();
+  const { loginToken } = useSessionContext();
 
   if (!loginToken) {
     return null;

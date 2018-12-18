@@ -43,7 +43,7 @@
     "mini-css-extract-plugin": "^0.4.2",
     "node-sass": "^4.9.0",
     "postcss-loader": "^2.1.5",
-    "prettier": "1.11.1",
+    "prettier": "^1.11.1",
     "react-docgen-typescript": "^1.12.1",
     "react-styleguidist": "^8.0.5",
     "rimraf": "^2.6.2",

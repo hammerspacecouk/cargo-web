@@ -34,26 +34,27 @@ export const Button = styled.button<PropsInterface>`
   background: none;
   border: solid 2px ${({ styleType }) => getColour(styleType)};
   color: ${({ styleType }) => getColour(styleType)};
-  box-shadow: 0 0 16px ${({ styleType }) => getColour(styleType)}, 
+  box-shadow: 0 0 16px ${({ styleType }) => getColour(styleType)},
     0 0 16px inset ${({ styleType }) => getColour(styleType)};
   border-radius: 4px;
-  transition: all .15s linear;
+  transition: all 0.15s linear;
   text-decoration: none;
-  
+
   &[disabled] {
     opacity: 0.4;
   }
   &:not([disabled]) {
-    &:hover, &:focus {
-      box-shadow: 0 0 32px ${({ styleType }) => getColour(styleType)}, 
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 32px ${({ styleType }) => getColour(styleType)},
         0 0 16px inset ${({ styleType }) => getColour(styleType)};
       text-decoration: none;
     }
     &:active {
-      box-shadow: 0 0 16px ${({ styleType }) => getColour(styleType)}, 
+      box-shadow: 0 0 16px ${({ styleType }) => getColour(styleType)},
         0 0 16px inset ${({ styleType }) => getColour(styleType)};
       transform: scale(0.98);
-        text-decoration: none;
+      text-decoration: none;
     }
   }
 `;

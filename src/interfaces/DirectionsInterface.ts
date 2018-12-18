@@ -7,4 +7,4 @@ export default interface DirectionsInterface {
   SE?: DirectionInterface;
   SW?: DirectionInterface;
   W?: DirectionInterface;
-};
+}

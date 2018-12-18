@@ -25,7 +25,7 @@ const useTravellingCountdown = () => {
   const totalSeconds = differenceInSeconds(arrival, start);
   const percent = Math.max(
     0,
-    Math.min(100, (totalSeconds - seconds) / totalSeconds * 100)
+    Math.min(100, ((totalSeconds - seconds) / totalSeconds) * 100)
   );
 
   return {

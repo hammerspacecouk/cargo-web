@@ -22,21 +22,19 @@ const Icon = styled.span`
 `;
 export const Digits = styled.span`
   display: inline-block;
-  ${MONOSPACE_FONT}
+  ${MONOSPACE_FONT};
 `;
 
 /**
  * Standard way to display a score value (with Icon)
  */
-export default function ScoreValue({ score, className }: PropsInterface) {
+export const ScoreValue = ({ score, className }: PropsInterface) => {
   return (
     <StyledScore className={className}>
       <Icon>
         <CreditsIcon />
       </Icon>
-      <Digits>
-        {score.toLocaleString()}
-      </Digits>
+      <Digits>{score.toLocaleString()}</Digits>
     </StyledScore>
   );
-}
+};

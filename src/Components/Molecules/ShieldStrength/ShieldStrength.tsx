@@ -21,24 +21,21 @@ const radial = keyframes`
   }
 `;
 
-const StyledShieldStrength =
-  styled.div <
-  { loading: boolean } >
-  `
+const StyledShieldStrength = styled.div<{ loading: boolean }>`
+  width: 100%;
+  line-height: 0;
+  height: 0;
+  overflow: hidden;
+  padding-top: 100%;
+  position: relative;
+  ${props => (props.loading ? animate : ``)}
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    line-height: 0;
-    height: 0;
-    overflow: hidden;
-    padding-top: 100%;
-    position: relative;
-    ${props => (props.loading ? animate : ``)}
-    > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+    height: 100%;
+  }
 `;
 
 const StyledFlag = styled(PlayerFlag)`
@@ -54,17 +51,14 @@ const CircleTrack = styled.circle`
   stroke: rgba(255, 255, 255, 0.2);
 `;
 
-const CircleBar =
-  styled(CircleTrack) <
-  { colour: string } >
-  `
-    opacity: 0;
-    stroke: ${props => props.colour};
-    animation-delay: 1s;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-    animation-name: ${radial};
-    stroke-linecap: round;
+const CircleBar = styled(CircleTrack)<{ colour: string }>`
+  opacity: 0;
+  stroke: ${props => props.colour};
+  animation-delay: 1s;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-name: ${radial};
+  stroke-linecap: round;
 `;
 
 /**
@@ -84,7 +78,7 @@ export default React.memo(function({
 
   let bar = null;
   if (percent !== undefined) {
-    const barLength = percent / 100 * trackLength;
+    const barLength = (percent / 100) * trackLength;
     const dash = `${barLength} ${trackLength}`;
     let colour = COLOURS.HEALTH.FULL;
     if (percent < 100) {

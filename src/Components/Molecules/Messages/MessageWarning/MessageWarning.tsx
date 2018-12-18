@@ -4,7 +4,6 @@ import WarningIcon from "../../../Icons/WarningIcon/WarningIcon";
 import { messageContent, SingleProps, StyledMessage } from "../index";
 import { COLOURS } from "../../../../styles/colours";
 
-
 const WarningMessage = styled(StyledMessage)`
   background: ${COLOURS.SEMANTIC.WARNING.BACKGROUND};
   color: ${COLOURS.SEMANTIC.WARNING.FOREGROUND};

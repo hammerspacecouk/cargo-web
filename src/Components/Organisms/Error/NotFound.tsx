@@ -8,7 +8,9 @@ interface PropsInterface {
 export const NotFound = (props: PropsInterface) => (
   <Error
     code={404}
-    message={props.message ||
-    "This page was not found. Please check the address and try again."}
+    message={
+      props.message ||
+      "This page was not found. Please check the address and try again."
+    }
   />
 );

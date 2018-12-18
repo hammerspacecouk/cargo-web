@@ -3,10 +3,13 @@ import styled from "styled-components";
 import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import { CrateActionInterface } from "../../../interfaces/CrateInterface";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import { CratePickup } from "../../../components/Molecules/CratePickup/CratePickup";
+import {
+  CratePickup,
+  StyledCrate
+} from "../../../components/Molecules/CratePickup/CratePickup";
 import { CrateButton } from "../../../components/Atoms/HaloButton/HaloButton";
-import { Crate } from "../../../components/Icons/Crate/Crate";
 import { GRID } from "../../../styles/variables";
+import { PlaceholderContents } from "../../../components/Atoms/CrateContents/CrateContents";
 
 interface CrateOnShipPropsInterface {
   crateAction: CrateActionInterface;
@@ -15,8 +18,7 @@ interface CrateOnShipPropsInterface {
 const StyledCrateOnShip = styled.div``;
 
 const StyledPlaceholder = styled.div`
-    padding: ${GRID.UNIT};
-    width: calc(60px + (${GRID.UNIT} * 2 ));
+  padding: ${GRID.HALF};
 `;
 
 export const CrateOnShip = ({ crateAction }: CrateOnShipPropsInterface) => {
@@ -36,8 +38,9 @@ export const CrateOnShip = ({ crateAction }: CrateOnShipPropsInterface) => {
 export const CrateOnShipPlaceholder = () => {
   return (
     <StyledPlaceholder>
-      <Crate colour="rgba(255,255,255, 0.3)" />
+      <StyledCrate>
+        <PlaceholderContents />
+      </StyledCrate>
     </StyledPlaceholder>
-
   );
 };

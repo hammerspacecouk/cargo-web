@@ -7,7 +7,7 @@ import {
 import ShipList from "../../components/Organisms/PlayerShipList/PlayerShipList";
 import EventsList from "../../components/Organisms/EventsList/EventsList";
 import Welcome from "./Port/Welcome";
-import Crates from "./Port/Crates";
+import { Crates } from "./Port/Crates";
 import Directions from "./Port/Directions";
 import ShieldIcon from "../../components/Icons/ShieldIcon/ShieldIcon";
 import CrateModal from "./Port/CrateModal";
@@ -17,9 +17,9 @@ import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import styled from "styled-components";
 
 const PortTemplate = styled.div`
-    margin: 0 auto;
-    max-width: ${MAX_CONTENT_WIDTH};
-    padding: ${GRID.UNIT};
+  margin: 0 auto;
+  max-width: ${MAX_CONTENT_WIDTH};
+  padding: ${GRID.UNIT};
 `;
 
 const PortComponent = () => {
@@ -31,7 +31,7 @@ const PortComponent = () => {
     safe = (
       <abbr title="Safe Haven">
         <Icon>
-          <ShieldIcon/>
+          <ShieldIcon />
         </Icon>
       </abbr>
     );
@@ -43,14 +43,14 @@ const PortComponent = () => {
   } else {
     portContent = (
       <>
-        <Welcome/>
-        <Crates/>
-        <Directions/>
+        <Welcome />
+        <Crates />
+        <Directions />
 
         <h2>Players</h2>
-        <ShipList ships={shipsInLocation}/>
-        <EventsList events={events}/>
-        <CrateModal/>
+        <ShipList ships={shipsInLocation} />
+        <EventsList events={events} />
+        <CrateModal />
       </>
     );
   }
@@ -67,6 +67,6 @@ const PortComponent = () => {
 
 export default () => (
   <PlayPortContextProvider>
-    <PortComponent/>
+    <PortComponent />
   </PlayPortContextProvider>
 );

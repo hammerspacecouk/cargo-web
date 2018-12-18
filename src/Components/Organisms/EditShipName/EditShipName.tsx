@@ -12,7 +12,7 @@ import ShipNameGenerator from "../../Ship/ShipNameGenerator";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import TextCursor from "../../Atoms/TextCursor/TextCursor";
 import TransactionInterface from "../../../interfaces/TransactionInterface";
-import {Button, TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
+import { Button, TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
 import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
 import { useMounted } from "../../../hooks/useMounted";
 import { BREAKPOINTS } from "../../../styles/media";
@@ -23,17 +23,17 @@ interface PropsInterface {
 }
 
 const Container = styled.div`
-    ${BREAKPOINTS.XL`
+  ${BREAKPOINTS.XL`
       display: flex;
       align-items: start;
-    `}
+    `};
 `;
 const Text = styled.div`
   margin: 0 0 ${GRID.UNIT};
   ${BREAKPOINTS.XL`
     flex: 1;
     margin: 0 ${GRID.UNIT} 0 0;
-  `}
+  `};
 `;
 const Updating = styled.span`
   font-size: 2.35rem;
@@ -119,7 +119,8 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
     if (acceptingShipName) {
       textContent = (
         <Updating>
-          Updating<TextCursor />
+          Updating
+          <TextCursor />
         </Updating>
       );
     } else {

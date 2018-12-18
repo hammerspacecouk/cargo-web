@@ -15,15 +15,9 @@ const StyledCrateAtPort = styled.div``;
 export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
   const { buttonsDisabled, moveCrate } = usePlayPortContext();
 
-  const CrateContent = (
-    <CratePickup crateAction={crateAction} />
-  );
+  const CrateContent = <CratePickup crateAction={crateAction} />;
 
-  let tokenButton = (
-    <CrateButton disabled={true}>
-      {CrateContent}
-    </CrateButton>
-  );
+  let tokenButton = <CrateButton disabled={true}>{CrateContent}</CrateButton>;
   if (crateAction.token) {
     tokenButton = (
       <TokenButton token={crateAction.token} handler={moveCrate}>
@@ -34,9 +28,5 @@ export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
     );
   }
 
-  return (
-    <StyledCrateAtPort>
-      {tokenButton}
-    </StyledCrateAtPort>
-  );
+  return <StyledCrateAtPort>{tokenButton}</StyledCrateAtPort>;
 };

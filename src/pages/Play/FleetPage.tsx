@@ -15,9 +15,9 @@ import { H1 } from "../../components/Atoms/Heading/Heading";
 import { Square } from "../../components/Atoms/Ratio/Ratio";
 
 const StyledFleetPage = styled.div`
-    margin: 0 auto;
-    max-width: ${MAX_CONTENT_WIDTH};
-    padding: ${GRID.UNIT};
+  margin: 0 auto;
+  max-width: ${MAX_CONTENT_WIDTH};
+  padding: ${GRID.UNIT};
 `;
 
 const FleetHeader = styled.div`

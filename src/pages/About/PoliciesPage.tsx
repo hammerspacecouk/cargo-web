@@ -42,10 +42,12 @@ export default function PoliciesPage() {
         </p>
         <p>
           Any e-mails we send rely on the e-mail address being provided at that
-          point.<br />
+          point.
+          <br />
           If somebody sends you an invite we will email you once, and not store
           your address. We will not be able to contact you again even if we
-          wanted to.<br />
+          wanted to.
+          <br />
           When you request to log in via e-mail we send to the e-mail address
           you provide. It is not stored once sent.
         </p>

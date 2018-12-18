@@ -9,36 +9,36 @@ interface PropsInterface {
 }
 
 const StyledCrateContents = styled.div`
-    position: relative;
-    width: 60px;
+  position: relative;
+  width: 60px;
 `;
 
 const StyledCrate = styled.div`
-    display: inline-block;
-    line-height: 0;
-    width: 60px;
-    height: 40px;
+  display: inline-block;
+  line-height: 0;
+  width: 60px;
+  height: 40px;
 `;
 
 const Side = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 22px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 1.2rem;
-    perspective: 100px;
-    perspective-origin: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 22px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 1.2rem;
+  perspective: 100px;
+  perspective-origin: left;
 `;
 
 const StyledContent = styled.div`
-    transform: rotateY(-40deg);
-    color: ${COLOURS.BLACK.STANDARD};
+  transform: rotateY(-40deg);
+  color: ${COLOURS.BLACK.STANDARD};
 `;
 
 export const CrateContents = styled.span`
-    font-family: "Segoe UI Emoji", sans-serif;
+  font-family: "Segoe UI Emoji", sans-serif;
 `;
 
 const getColour = (value: number): string => {
@@ -66,14 +66,20 @@ const getColour = (value: number): string => {
 export const CrateWithContents = ({ crate }: PropsInterface) => (
   <StyledCrateContents>
     <StyledCrate>
-      <Crate colour={getColour(crate.value)}/>
+      <Crate colour={getColour(crate.value)} />
     </StyledCrate>
     <Side>
       <StyledContent>
-        <CrateContents>
-          {crate.contents}
-        </CrateContents>
+        <CrateContents>{crate.contents}</CrateContents>
       </StyledContent>
     </Side>
+  </StyledCrateContents>
+);
+
+export const PlaceholderContents = () => (
+  <StyledCrateContents>
+    <StyledCrate>
+      <Crate colour="rgba(255,255,255, 0.3)" />
+    </StyledCrate>
   </StyledCrateContents>
 );

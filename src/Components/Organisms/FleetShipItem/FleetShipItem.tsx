@@ -2,7 +2,7 @@ import * as React from "react";
 import { FleetShipInterface } from "../../../interfaces/ShipInterface";
 import styled from "styled-components";
 import ChevronDownIcon from "../../Icons/ChevronDownIcon/ChevronDownIcon";
-import {HaloButton} from "../../Atoms/HaloButton/HaloButton";
+import { HaloButton } from "../../Atoms/HaloButton/HaloButton";
 import ChevronUpIcon from "../../Icons/ChevronUpIcon/ChevronUpIcon";
 import FleetShipName from "../FleetShipName/FleetShipName";
 import FleetShipDetail from "../FleetShipDetail/FleetShipDetail";
@@ -14,10 +14,7 @@ interface PropsInterface {
   fleetShip?: FleetShipInterface;
 }
 
-const StyledItem =
-  styled.li <
-  { destroyed: boolean } >
-  `
+const StyledItem = styled.li<{ destroyed: boolean }>`
   border-bottom: dashed 1px ${COLOURS.BODY.TEXT};
   min-height: 96px;
   ${props =>

@@ -29,12 +29,12 @@ const iconMoney = (
 );
 
 const PlayBarItem = styled.li`
-    text-transform: uppercase;
+  text-transform: uppercase;
 `;
 
 const PlayBarIcon = styled(Icon)`
-    display: block;
-    margin: 0 auto ${GRID.QUARTER};
+  display: block;
+  margin: 0 auto ${GRID.QUARTER};
 `;
 
 const getShipLink = () => {
@@ -43,9 +43,7 @@ const getShipLink = () => {
     return (
       <PlayBarItem>
         <PlayBarLink to={`/play/${ship.id}`} className="play-bar__link">
-          <PlayBarIcon>
-            {iconLocation}
-          </PlayBarIcon>
+          <PlayBarIcon>{iconLocation}</PlayBarIcon>
           {ship.name}
         </PlayBarLink>
       </PlayBarItem>
@@ -55,9 +53,7 @@ const getShipLink = () => {
   return (
     <PlayBarItem>
       <span className="play-bar__link play-bar__link--disabled">
-        <PlayBarIcon>
-          {iconLocation}
-        </PlayBarIcon>
+        <PlayBarIcon>{iconLocation}</PlayBarIcon>
         Location
       </span>
     </PlayBarItem>
@@ -71,19 +67,19 @@ const StyledPlayBar = styled.nav`
   height: ${playBarHeight}px;
   overflow: hidden;
   background: ${COLOURS.BLACK.STANDARD};
-  color: ${COLOURS.BODY.TEXT}
+  color: ${COLOURS.BODY.TEXT};
 `;
 
 const PlayBarLink = styled(Link)`
-    color: inherit;
-    display: inline-block;
+  color: inherit;
+  display: inline-block;
 `;
 
 const List = styled(ListInline)`
-    display: flex;
-    padding: ${GRID.UNIT} 0;
-    text-align: center;
-    justify-content: space-evenly;
+  display: flex;
+  padding: ${GRID.UNIT} 0;
+  text-align: center;
+  justify-content: space-evenly;
 `;
 
 export const PlayBar = () => {
@@ -93,18 +89,14 @@ export const PlayBar = () => {
         {getShipLink()}
         <PlayBarItem>
           <PlayBarLink to="/play" className="play-bar__link">
-            <PlayBarIcon>
-              {iconStuff}
-            </PlayBarIcon>
+            <PlayBarIcon>{iconStuff}</PlayBarIcon>
             Fleet{" "}
             {/* todo - add a notification icon if any ships are in port */}
           </PlayBarLink>
         </PlayBarItem>
         <PlayBarItem>
           <PlayBarLink to={`/play/upgrades`} className="play-bar__link">
-            <PlayBarIcon>
-              {iconMoney}
-            </PlayBarIcon>
+            <PlayBarIcon>{iconMoney}</PlayBarIcon>
             Upgrades
           </PlayBarLink>
         </PlayBarItem>

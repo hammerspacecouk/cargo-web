@@ -27,4 +27,4 @@ export default interface EventInterface {
   ship?: ShipInterface;
   port?: PortInterface;
   rank?: RankInterface;
-};
+}

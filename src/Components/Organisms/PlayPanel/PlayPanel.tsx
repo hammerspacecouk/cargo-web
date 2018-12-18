@@ -10,17 +10,17 @@ import { H4 } from "../../Atoms/Heading/Heading";
 import { Panel, PanelTitle } from "../../Molecules/Panel/Panel";
 import { COLOURS } from "../../../styles/colours";
 
-const ButtonArea  = styled.div`
-    text-align: center;
-    margin: ${GRID.UNIT} 0;
+const ButtonArea = styled.div`
+  text-align: center;
+  margin: ${GRID.UNIT} 0;
 `;
 
 const SubHeading = styled(H4)`
-    margin-bottom: ${GRID.UNIT};
+  margin-bottom: ${GRID.UNIT};
 `;
 
 const StyledPanel = styled(Panel)`
-    background: ${COLOURS.BLACK.STANDARD};
+  background: ${COLOURS.BLACK.STANDARD};
 `;
 
 export const PlayPanel = () => {
@@ -29,9 +29,9 @@ export const PlayPanel = () => {
   if (player) {
     return (
       <ButtonArea>
-      <Button as="a" href="/play">
-        To My Fleet
-      </Button>
+        <Button as="a" href="/play">
+          To My Fleet
+        </Button>
       </ButtonArea>
     );
   }
@@ -39,17 +39,19 @@ export const PlayPanel = () => {
   return (
     <StyledPanel>
       <PanelTitle>Play now</PanelTitle>
-      <P>
-        Start playing an anonymous game immediately without logging in:
-      </P>
+      <P>Start playing an anonymous game immediately without logging in:</P>
       <ButtonArea>
         <form action={routes.getLoginAnonymous()} method="post">
-          {loginToken && <input type="hidden" name="loginToken" value={loginToken} />}
-          <Button styleType={TYPE_ACTION} disabled={!loginToken}>New game</Button>
+          {loginToken && (
+            <input type="hidden" name="loginToken" value={loginToken} />
+          )}
+          <Button styleType={TYPE_ACTION} disabled={!loginToken}>
+            New game
+          </Button>
         </form>
       </ButtonArea>
       <SubHeading as="h3">Or create/resume a logged in game:</SubHeading>
-      <LoginForm/>
+      <LoginForm />
     </StyledPanel>
   );
 };

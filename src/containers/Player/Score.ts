@@ -2,7 +2,7 @@ import { createElement, useState, useEffect, useRef } from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 
 import ScoreInterface from "../../interfaces/ScoreInterface";
-import ScoreValue from "../../components/Molecules/ScoreValue/ScoreValue";
+import { ScoreValue } from "../../components/Molecules/ScoreValue/ScoreValue";
 
 interface Props {
   score: ScoreInterface;
@@ -12,7 +12,7 @@ export const getValue = (score: ScoreInterface, now: Date): number => {
   const calculationDate = new Date(score.datetime);
   const millisecondsDiff = differenceInMilliseconds(now, calculationDate);
 
-  const earned = millisecondsDiff / 1000 * score.rate;
+  const earned = (millisecondsDiff / 1000) * score.rate;
 
   const current = score.value + earned;
 
@@ -43,14 +43,17 @@ export default (props: Props) => {
     }
   }
 
-  useEffect(() => {
-    mounted.current = true;
-    frameHandler = window.requestAnimationFrame(frame);
-    return () => {
-      mounted.current = false;
-      window.cancelAnimationFrame(frameHandler);
-    };
-  }, [props.score]);
+  useEffect(
+    () => {
+      mounted.current = true;
+      frameHandler = window.requestAnimationFrame(frame);
+      return () => {
+        mounted.current = false;
+        window.cancelAnimationFrame(frameHandler);
+      };
+    },
+    [props.score]
+  );
 
   return createElement(ScoreValue, { score });
 };

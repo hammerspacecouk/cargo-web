@@ -40,7 +40,7 @@ export const initialSession: SessionPropertiesInterface = {
   player: undefined,
   score: undefined,
   hasProfileNotification: false,
-  loginToken: undefined,
+  loginToken: undefined
 };
 
 const SessionContext = createContext({});

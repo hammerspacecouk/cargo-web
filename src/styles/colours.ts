@@ -165,19 +165,19 @@ export const COLOURS = {
   BASE: allColours.base,
   BLACK: {
     STANDARD: allColours.black,
-    COLOURISED: allColours.violet[9],
+    COLOURISED: allColours.violet[9]
   },
   BODY: {
     BACKGROUND: allColours.black,
     TEXT: allColours.white,
     LINK: allColours.violet[4],
-    FADED: allColours.gray[7],
+    FADED: allColours.gray[7]
   },
   BUTTON: {
     STANDARD: allColours.white,
     ACTION: allColours.violet[4],
     CONFIRM: allColours.green[4],
-    DANGER: allColours.red[5],
+    DANGER: allColours.red[5]
   },
   CRATE: {
     LEVEL0: allColours.yellow[2],
@@ -186,39 +186,39 @@ export const COLOURS = {
     LEVEL3: allColours.indigo[3],
     LEVEL4: allColours.teal[3],
     LEVEL5: allColours.lime[4],
-    LEVEL6: allColours.orange[3],
+    LEVEL6: allColours.orange[3]
   },
   GREY: {
-    MID: allColours.gray[7],
+    MID: allColours.gray[7]
   },
   HEALTH: {
     FULL: allColours.violet[4],
     GOOD: allColours.green[4],
     OK: allColours.yellow[3],
     WARNING: allColours.orange[4],
-    DANGER: allColours.red[5],
+    DANGER: allColours.red[5]
   },
   SEMANTIC: {
     DANGER: {
       KEY: allColours.red[5],
       BACKGROUND: allColours.red[1],
-      FOREGROUND: allColours.red[9],
+      FOREGROUND: allColours.red[9]
     },
     INFO: {
       KEY: allColours.blue[4],
       BACKGROUND: allColours.blue[1],
-      FOREGROUND: allColours.blue[9],
+      FOREGROUND: allColours.blue[9]
     },
     OK: {
       KEY: allColours.green[5],
       BACKGROUND: allColours.green[1],
-      FOREGROUND: allColours.green[9],
+      FOREGROUND: allColours.green[9]
     },
     WARNING: {
       KEY: allColours.yellow[4],
       BACKGROUND: allColours.yellow[1],
-      FOREGROUND: allColours.yellow[9],
-    },
+      FOREGROUND: allColours.yellow[9]
+    }
   }
 };
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Loading} from "../../components/Atoms/Loading/Loading";
+import { Loading } from "../../components/Atoms/Loading/Loading";
 import { TextCenter } from "../../components/Atoms/Text/Text";
 
 export default function AppLoading() {

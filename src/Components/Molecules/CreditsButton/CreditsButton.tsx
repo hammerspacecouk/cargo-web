@@ -1,7 +1,7 @@
 import * as React from "react";
 import ScoreInterface from "../../../interfaces/ScoreInterface";
 import { useSessionContext } from "../../../context/SessionContext";
-import ScoreValue from "../ScoreValue/ScoreValue";
+import { ScoreValue } from "../ScoreValue/ScoreValue";
 import { getValue } from "../../../containers/Player/Score";
 import ComplexButton from "../ComplexButton/ComplexButton";
 

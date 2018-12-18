@@ -1,10 +1,7 @@
 import * as React from "react";
 
 export const FacebookLogo = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 60.734 60.733"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60.734 60.733">
     <path
       fill="#fff"
       d="M57.378 0H3.352C1.502 0 0 1.5 0 3.354V57.38c0 1.852 1.502 3.353 3.352
@@ -34,38 +31,17 @@ export const GoogleLogo = () => (
       <use xlinkHref="#a" overflow="visible" />
     </clipPath>
     <path clipPath="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
-    <path
-      clipPath="url(#b)"
-      fill="#EA4335"
-      d="M0 11l17 13 7-6.1L48 14V0H0z"
-    />
-    <path
-      clipPath="url(#b)"
-      fill="#34A853"
-      d="M0 37l30-23 7.9 1L48 0v48H0z"
-    />
-    <path
-      clipPath="url(#b)"
-      fill="#4285F4"
-      d="M48 48L17 24l-4-3 35-10z"
-    />
+    <path clipPath="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
+    <path clipPath="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
+    <path clipPath="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
   </svg>
 );
 
-
 export const MicrosoftLogo = () => (
-  <svg
-    viewBox="0 0 220 220"
-  >
+  <svg viewBox="0 0 220 220">
     <path fill="#F35325" d="M104.868 104.868H0V0h104.868v104.868z" />
-    <path
-      fill="#81BC06"
-      d="M220.654 104.868H115.788V0h104.866v104.868z"
-    />
-    <path
-      fill="#05A6F0"
-      d="M104.865 220.695H0V115.827h104.865v104.868z"
-    />
+    <path fill="#81BC06" d="M220.654 104.868H115.788V0h104.866v104.868z" />
+    <path fill="#05A6F0" d="M104.865 220.695H0V115.827h104.865v104.868z" />
     <path
       fill="#FFBA08"
       d="M220.654 220.695H115.788V115.827h104.866v104.868z"
@@ -74,10 +50,7 @@ export const MicrosoftLogo = () => (
 );
 
 export const TwitterLogo = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
     <path
       fill="#fff"
       d={`M94.72 243.18c112.46 0 173.96-93.168 173.96-173.96 0-2.646-.054-5.28-.173-7.903

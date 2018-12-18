@@ -2,8 +2,8 @@ import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
 
 import SessionContextComponent from "./context/SessionContext";
-import {Masthead} from "./components/Organisms/Masthead/Masthead";
-import {NotFound} from "./components/Organisms/Error/NotFound";
+import { Masthead } from "./components/Organisms/Masthead/Masthead";
+import { NotFound } from "./components/Organisms/Error/NotFound";
 import { ErrorInfo } from "react";
 import Modal, { ModalActions } from "./components/Panel/Modal";
 import { GlobalStyle } from "./styles/GlobalStyle";

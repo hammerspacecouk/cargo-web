@@ -22,4 +22,4 @@ export default interface ShipInterface {
     name?: string; // todo - use a location interface
     safeHaven?: boolean;
   };
-};
+}

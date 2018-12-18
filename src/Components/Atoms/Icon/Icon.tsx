@@ -10,8 +10,8 @@ interface PropsInterface {
 }
 
 export default styled.span<PropsInterface>`
-    display: inline-block;
-    line-height: 0;
-    height: ${({ size = NORMAL_ICON }) => size};
-    width: ${({ size = NORMAL_ICON }) => size};
+  display: inline-block;
+  line-height: 0;
+  height: ${({ size = NORMAL_ICON }) => size};
+  width: ${({ size = NORMAL_ICON }) => size};
 `;

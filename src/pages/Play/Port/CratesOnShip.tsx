@@ -5,21 +5,23 @@ import { Loading } from "../../../components/Atoms/Loading/Loading";
 import { H2 } from "../../../components/Atoms/Heading/Heading";
 import styled from "styled-components";
 import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
-import { GRID } from "../../../styles/variables";
+import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
+
+interface PropsInterface {
+  className?: string;
+}
 
 const List = styled(ListInline)`
-    margin-left: -${GRID.UNIT};
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
-const ListItem = styled.li`
-    margin: 0 0 ${GRID.UNIT} ${GRID.UNIT};
-`;
-
-export default () => {
+export const CratesOnShip = ({ className }: PropsInterface) => {
   const { ship, cratesOnShip } = useCurrentShipContext();
 
   if (cratesOnShip === undefined) {
-    return <Loading/>;
+    return <Loading />;
   } // todo - pretty loader
 
   const placeholderSlots = new Array(
@@ -27,18 +29,18 @@ export default () => {
   ).fill(undefined);
   const keyStart = cratesOnShip.length;
   return (
-    <div className="t-port-ship">
-      <H2>Crates on Ship</H2>
+    <div className={className}>
+      <Hidden as="h2">Crates on Ship</Hidden>
       <List>
         {cratesOnShip.map(crate => (
-          <ListItem key={`cos-${crate.crate.id}`}>
-            <CrateOnShip crateAction={crate}/>
-          </ListItem>
+          <li key={`cos-${crate.crate.id}`}>
+            <CrateOnShip crateAction={crate} />
+          </li>
         ))}
         {placeholderSlots.map((_, i) => (
-          <ListItem key={`p-${i + keyStart}`}>
-            <CrateOnShipPlaceholder/>
-          </ListItem>
+          <li key={`p-${i + keyStart}`}>
+            <CrateOnShipPlaceholder />
+          </li>
         ))}
       </List>
     </div>

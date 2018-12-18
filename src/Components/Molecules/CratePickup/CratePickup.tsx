@@ -11,22 +11,23 @@ interface PropsInterface {
   crateAction: CrateActionInterface;
 }
 
-const StyledCrate = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+export const StyledCrate = styled.div`
+  width: 144px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 const StyledCrateValue = styled.div`
-    text-align: center;
-    margin-top: ${GRID.QUARTER};
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  text-align: center;
+  margin-top: ${GRID.QUARTER};
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const StyledValue = styled(TextE)`
-    margin-right: ${GRID.QUARTER};
+  margin-right: ${GRID.QUARTER};
 `;
 
 export const CratePickup = ({ crateAction }: PropsInterface) => (
@@ -36,7 +37,8 @@ export const CratePickup = ({ crateAction }: PropsInterface) => (
       <StyledValue>+{crateAction.valuePerLY.toLocaleString()}</StyledValue>
       <Icon size={SMALL_ICON}>
         <CreditsIcon />
-      </Icon><abbr title="per light year">/ly</abbr>
+      </Icon>
+      <abbr title="per light year">/ly</abbr>
     </StyledCrateValue>
   </StyledCrate>
 );

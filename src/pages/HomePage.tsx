@@ -16,14 +16,20 @@ interface Props {
 
 const TemplateHome = styled.div`
   display: grid;
-  grid-template-columns: [edge-left] 0 [main] calc(100% - (${GRID.UNIT} * 2)) 0 [edge-right];
+  grid-template-columns: [edge-left] 0 [main] calc(100% - (${
+    GRID.UNIT
+  } * 2)) 0 [edge-right];
   grid-gap: ${GRID.UNIT};
   ${BREAKPOINTS.M`
-    grid-template-columns: [edge-left] 1fr [main] calc(50% - (${GRID.UNIT} * 2)) [aside] calc(50% - (${GRID.UNIT} * 2)) 1fr [edge-right];
+    grid-template-columns: [edge-left] 1fr [main] calc(50% - (${
+      GRID.UNIT
+    } * 2)) [aside] calc(50% - (${GRID.UNIT} * 2)) 1fr [edge-right];
     grid-template-rows: [hero] auto [content-start] auto [aside-start] auto [end];
   `}
   ${BREAKPOINTS.L`
-    grid-template-columns: [edge-left] 1fr [main] calc(60% - (${GRID.UNIT} * 2)) [aside] calc(40% - (${GRID.UNIT} * 2)) 1fr [edge-right];
+    grid-template-columns: [edge-left] 1fr [main] calc(60% - (${
+      GRID.UNIT
+    } * 2)) [aside] calc(40% - (${GRID.UNIT} * 2)) 1fr [edge-right];
   `}
   ${BREAKPOINTS.XXL`
    grid-template-columns: [edge-left] 1fr [main] 736px [aside] 480px 1fr [edge-right];
@@ -45,7 +51,7 @@ const TemplatePlay = styled.div`
   ${BREAKPOINTS.M`
     grid-column: aside;
     grid-row: content-start;
-  `}
+  `};
 `;
 
 const TemplateMain = styled.section`
@@ -53,7 +59,7 @@ const TemplateMain = styled.section`
   ${BREAKPOINTS.M`
     grid-column: main;
     grid-row: content-start / end;
-  `}
+  `};
 `;
 
 const TemplateAside = styled.aside`
@@ -61,7 +67,7 @@ const TemplateAside = styled.aside`
   ${BREAKPOINTS.M`
     grid-column: aside;
     grid-row: aside-start;
-  `}
+  `};
 `;
 
 export default ({ events }: Props) => {
@@ -73,7 +79,7 @@ export default ({ events }: Props) => {
         </Hero>
       </TemplateHero>
       <TemplatePlay>
-        <PlayPanel/>
+        <PlayPanel />
       </TemplatePlay>
       <TemplateMain>
         <Prose>
@@ -112,7 +118,7 @@ export default ({ events }: Props) => {
         </div>
       </TemplateMain>
       <TemplateAside>
-        { /* todo - how many saxophones */ }
+        {/* todo - how many saxophones */}
         <p>More side stuff</p>
       </TemplateAside>
     </TemplateHome>

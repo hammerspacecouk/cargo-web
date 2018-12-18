@@ -6,7 +6,7 @@ export const Destinations = styled.table`
   thead {
     display: none;
   }
-  
+
   td {
     padding: ${GRID.QUARTER} ${GRID.HALF};
     min-height: 48px;

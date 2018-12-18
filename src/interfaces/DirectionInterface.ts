@@ -10,4 +10,4 @@ export default interface DirectionInterface {
   action: ActionTokenInterface;
   minimumRank?: RankInterface;
   minimumStrength?: number;
-};
+}

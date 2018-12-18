@@ -1,10 +1,10 @@
 import * as React from "react";
 import { withRouter } from "react-router";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
-import {Loading} from "../../components/Atoms/Loading/Loading";
+import { Loading } from "../../components/Atoms/Loading/Loading";
 import Port from "./Port";
 import Travelling from "./Travelling";
-import {NotFound} from "../../components/Organisms/Error/NotFound";
+import { NotFound } from "../../components/Organisms/Error/NotFound";
 import { useEffect } from "react";
 import { ApiClient } from "../../util/ApiClient";
 

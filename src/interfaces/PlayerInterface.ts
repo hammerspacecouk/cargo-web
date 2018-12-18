@@ -6,4 +6,4 @@ export default interface PlayerInterface {
   emblem: string;
   startedAt: string;
   score?: ScoreInterface;
-};
+}

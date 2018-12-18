@@ -11,4 +11,4 @@ export default interface RankStatusInterface {
   currentRank: RankInterface;
   previousRank: RankInterface;
   nextRank: RankInterface;
-};
+}

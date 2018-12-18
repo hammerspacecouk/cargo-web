@@ -1,6 +1,6 @@
 import * as React from "react";
 import { parse as parseQueryString } from "query-string";
-import {Error} from "../../components/Organisms/Error/Error";
+import { Error } from "../../components/Organisms/Error/Error";
 import ProfileLayout from "../../components/Layout/ProfileLayout";
 import routes from "../../routes";
 import TokenButton from "../../components/Molecules/TokenButton/TokenButton";

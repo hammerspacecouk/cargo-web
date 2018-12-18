@@ -10,7 +10,7 @@ export const HaloButton = styled.button`
   background: none;
   border-radius: 50%;
   padding: ${GRID.HALF};
-  
+
   &:not([disabled]) {
     &:hover,
     &:focus {
@@ -27,5 +27,5 @@ export const HaloButton = styled.button`
 `;
 
 export const CrateButton = styled(HaloButton)`
-    border-radius: 200px;
+  border-radius: 8px;
 `;

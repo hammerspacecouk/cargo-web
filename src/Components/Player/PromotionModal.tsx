@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ApiClient } from "../../util/ApiClient";
-import {Loading} from "../Atoms/Loading/Loading";
+import { Loading } from "../Atoms/Loading/Loading";
 import Modal from "../Panel/Modal";
 import TokenButton from "../Molecules/TokenButton/TokenButton";
 import ActionTokenInterface from "../../interfaces/ActionTokenInterface";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import {Button} from "../../Atoms/Button/Button";
+import { Button } from "../../Atoms/Button/Button";
 import { GRID } from "../../../styles/variables";
 import Icon from "../../Atoms/Icon/Icon";
 

@@ -14,82 +14,82 @@ interface Props {
 }
 
 export const modalStyles = css`
-    .modal {
-        margin: ${GRID.UNIT};
-        max-height: calc(100vh - ${GRID.DOUBLE});
-        max-width: 800px;
-        border: 1px solid ${COLOURS.BODY.TEXT};
-        box-shadow: 0 0 32px ${hexToRGBa(COLOURS.BODY.TEXT,0.6)};
-        background: ${COLOURS.BODY.BACKGROUND};
-        color: ${COLOURS.BODY.TEXT};
-        border-radius: 4px;
-        outline: none;
-        z-index: ${Z_INDEX.MODAL_PANEL};
-        will-change: transform;
-        transform: scale(0);
-        transition: .3s cubic-bezier(0.13, 0.76, 0.49, 1.65);
-    }
-    .modal__overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: ${Z_INDEX.MODAL_BLANKING};
-      will-change: opacity;
-      opacity: 0;
-      transition: .2s linear;
-    }
-    .modal--after-open {
-      transform: scale(1);
-    }
-    .modal--before-close {
-      transform: scale(0);
-    }
-    .modal__overlay--after-open {
-      opacity: 1;
-    }
-    .modal__overlay--before-close {
-      opacity: 0;
-    }
+  .modal {
+    margin: ${GRID.UNIT};
+    max-height: calc(100vh - ${GRID.DOUBLE});
+    max-width: 800px;
+    border: 1px solid ${COLOURS.BODY.TEXT};
+    box-shadow: 0 0 32px ${hexToRGBa(COLOURS.BODY.TEXT, 0.6)};
+    background: ${COLOURS.BODY.BACKGROUND};
+    color: ${COLOURS.BODY.TEXT};
+    border-radius: 4px;
+    outline: none;
+    z-index: ${Z_INDEX.MODAL_PANEL};
+    will-change: transform;
+    transform: scale(0);
+    transition: 0.3s cubic-bezier(0.13, 0.76, 0.49, 1.65);
+  }
+  .modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: ${Z_INDEX.MODAL_BLANKING};
+    will-change: opacity;
+    opacity: 0;
+    transition: 0.2s linear;
+  }
+  .modal--after-open {
+    transform: scale(1);
+  }
+  .modal--before-close {
+    transform: scale(0);
+  }
+  .modal__overlay--after-open {
+    opacity: 1;
+  }
+  .modal__overlay--before-close {
+    opacity: 0;
+  }
 `;
 
 const ModalClose = styled.button`
-    height: 32px;
-    width: 32px;
-    background: none;
-    border: none;
-    padding: 0;
+  height: 32px;
+  width: 32px;
+  background: none;
+  border: none;
+  padding: 0;
 `;
 
 const ModalHeader = styled.div`
-    display: flex;
-    align-items: flex-start;
-    padding: ${GRID.UNIT};
-    border-bottom: solid 1px;
+  display: flex;
+  align-items: flex-start;
+  padding: ${GRID.UNIT};
+  border-bottom: solid 1px;
 `;
 
 const ModalTitle = styled(H3)`
-    line-height: 32px;
-    flex: 1;
+  line-height: 32px;
+  flex: 1;
 `;
 
 const ModalBody = styled.div`
-    max-height: 80vh;
-    overflow: auto;
+  max-height: 80vh;
+  overflow: auto;
 `;
 
 const ModalContent = styled.div`
-    padding: ${GRID.UNIT};
+  padding: ${GRID.UNIT};
 `;
 
 export const ModalActions = styled.div`
-    text-align: center;
-    margin-top: ${GRID.UNIT};
+  text-align: center;
+  margin-top: ${GRID.UNIT};
 `;
 
 export default (props: Props) => {
