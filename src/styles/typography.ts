@@ -45,18 +45,22 @@ export const SIZES = {
 export const ELEMENTS = {
   H1: css`
     margin: 0;
+    font-weight: normal;
     ${SIZES.A} ${HEADING_FONT};
   `,
   H2: css`
     margin: 0;
+    font-weight: normal;
     ${SIZES.B} ${HEADING_FONT};
   `,
   H3: css`
     margin: 0;
+    font-weight: normal;
     ${SIZES.C} ${HEADING_FONT};
   `,
   H4: css`
     margin: 0;
+    font-weight: normal;
     ${SIZES.D} ${HEADING_FONT};
   `,
   H5: css`
@@ -66,11 +70,13 @@ export const ELEMENTS = {
   `,
   H6: css`
     margin: 0;
+    font-weight: normal;
     text-transform: uppercase;
     ${SIZES.F} ${HEADING_FONT};
   `,
   P: css`
     margin: 0;
+    font-weight: normal;
     ${SIZES.E};
   `
 };

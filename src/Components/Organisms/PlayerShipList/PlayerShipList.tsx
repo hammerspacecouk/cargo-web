@@ -14,7 +14,7 @@ const Item = styled.li`
   margin-bottom: ${GRID.UNIT};
 `;
 
-export default function PlayerShipList({ ships }: Props) {
+export const PlayerShipList = ({ ships }: Props) => {
   if (ships === undefined) {
     return <Loading />;
   } // todo - pretty loader
@@ -32,4 +32,4 @@ export default function PlayerShipList({ ships }: Props) {
       ))}
     </ListUnstyled>
   );
-}
+};

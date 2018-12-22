@@ -3,10 +3,17 @@ import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
 import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
 import CreditsButton from "../../../components/Molecules/CreditsButton/CreditsButton";
 import { ShipUpgradeInterface } from "../../../interfaces/TransactionInterface";
+import styled from "styled-components";
+import { Environment } from "../../../util/Environment";
 
 interface PropsInterface {
   ship?: ShipUpgradeInterface;
 }
+
+const ShipImage = styled.div`
+    max-width: 160px;
+`;
+
 export default ({ ship }: PropsInterface) => {
   const { buttonsDisabled, makePurchase } = useUpgradesContext();
 
@@ -14,12 +21,18 @@ export default ({ ship }: PropsInterface) => {
     return <div>LOCKED</div>; // todo - design this
   }
 
-  // todo - show the ship strengths. show the svg
+  // todo - show the ship strengths
   return (
     <div className="text--center">
       <h3>
         {ship.detail.name} ({ship.currentCount})
       </h3>
+      <ShipImage>
+        <img
+          src={`${Environment.apiHostname}${ship.detail.image}`}
+          alt=""
+        />
+      </ShipImage>
       <p>{ship.detail.description}</p>
       <p>Capacity: {ship.detail.capacity}</p>
       <TokenButton token={ship.actionToken} handler={makePurchase}>

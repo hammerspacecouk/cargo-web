@@ -8,7 +8,7 @@ export default function AppLoading() {
       <div>
         <Loading />
       </div>
-      <TextCenter as="div">
+      <TextCenter>
         To play will require JavaScript to be running successfully
       </TextCenter>
     </div>

@@ -4,12 +4,16 @@ import { CratesOnShip } from "./CratesOnShip";
 import { CratesAtPort } from "./CratesAtPort";
 import { BREAKPOINTS } from "../../../styles/media";
 import { GRID } from "../../../styles/variables";
+import { COLOURS } from "../../../styles/colours";
 
 const CratesLayout = styled.div`
   ${BREAKPOINTS.M`
       display: flex;
       justify-content: center;
-      align-items: start;
+      align-items: center;
+      padding-bottom: ${GRID.UNIT};
+      margin-bottom: ${GRID.UNIT};
+      border-bottom: solid 1px ${COLOURS.GREY.MID};
     `};
 `;
 
