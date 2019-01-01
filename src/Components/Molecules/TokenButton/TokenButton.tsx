@@ -1,8 +1,8 @@
 import * as React from "react";
-import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
+import styled from "styled-components";
+import { ActionTokenInterface } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
 import { FormEvent } from "react";
-import styled from "styled-components";
 
 interface Props {
   readonly token: ActionTokenInterface;
@@ -16,7 +16,7 @@ const StyledForm = styled.form`
   display: inline;
 `;
 
-export default ({ token, children, handler }: Props) => {
+export const TokenButton = ({ token, children, handler }: Props) => {
   return (
     <StyledForm
       method="post"

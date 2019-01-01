@@ -1,13 +1,14 @@
 import * as React from "react";
 
-import AboutLayout from "../../components/Layout/AboutLayout";
-import LogOutButton from "../../components/Login/LogOutButton";
-import MessageInfo from "../../components/Molecules/Messages/MessageInfo/MessageInfo";
+import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
+import { LogOutButton } from "../../components/Organisms/LogoutButton/LogOutButton";
+import { MessageInfo } from "../../components/Molecules/Message/Message";
+import { Prose } from "../../components/Atoms/Prose/Prose";
 
 export default function DuplicatePage() {
   return (
     <AboutLayout title="Duplicate account">
-      <div className="text--prose">
+      <Prose>
         <p>
           You have tried to associate your anonymous account with an e-mail
           address which has already been registered. You have two options:
@@ -36,7 +37,7 @@ export default function DuplicatePage() {
           account using the standard methods on the <a href="/login">Login</a>{" "}
           page
         </p>
-      </div>
+      </Prose>
       <LogOutButton isAnonymous={true} />
     </AboutLayout>
   );

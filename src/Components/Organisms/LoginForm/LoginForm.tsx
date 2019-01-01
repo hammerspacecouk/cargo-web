@@ -1,16 +1,16 @@
 import * as React from "react";
-import MessageInterface from "../../../interfaces/MessageInterface";
-import Messages from "../../Panel/Messages";
+import styled from "styled-components";
+import { MessageInterface } from "../../../Interfaces";
+import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
 import { Environment } from "../../../util/Environment";
 import { Link } from "react-router-dom";
-import { H3, H4 } from "../../Atoms/Heading/Heading";
+import { H4 } from "../../Atoms/Heading/Heading";
 import {
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
   TwitterButton
 } from "../../Molecules/SocialButton/SocialButton";
-import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 import { Button } from "../../Atoms/Button/Button";
@@ -87,12 +87,12 @@ const EmailLogin = ({ token }: { token: string }) => {
   );
 };
 
-export default (props: PropsInterface) => {
+export const LoginForm = (props: PropsInterface) => {
   const { loginToken } = useSessionContext();
 
   return (
     <div>
-      <Messages messages={props.messages} />
+      <MessagesPanel messages={props.messages} />
       <P>
         We identify which player you are by confirming your unique e-mail
         address. Use any one of the following methods. We don't get access to

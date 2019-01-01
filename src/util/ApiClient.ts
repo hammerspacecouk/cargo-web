@@ -1,7 +1,7 @@
-import BrowserClient from "./HttpClient/BrowserClient";
-import ServerClient from "./HttpClient/ServerClient";
+import { BrowserClient } from "./HttpClient/BrowserClient";
+import { ServerClient } from "./HttpClient/ServerClient";
 import { isClient, isServer } from "./Runtime";
-import ActionTokenInterface from "../interfaces/ActionTokenInterface";
+import { ActionTokenInterface } from "../Interfaces";
 
 export interface APIClientInterface {
   getUrl(path: string): string;

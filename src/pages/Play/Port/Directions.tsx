@@ -6,9 +6,10 @@ import DirectionE from "../../../components/Icons/DirectionE/DirectionE";
 import DirectionSW from "../../../components/Icons/DirectionSW/DirectionSW";
 import DirectionSE from "../../../components/Icons/DirectionSE/DirectionSE";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import Direction from "./Direction";
+import { Direction } from "./Direction";
 import { Loading } from "../../../components/Atoms/Loading/Loading";
 import { Destinations } from "../../../components/Organisms/Destinations/Destinations";
+import { H2 } from "../../../components/Atoms/Heading/Heading";
 
 export default () => {
   const { directions } = useCurrentShipContext();
@@ -21,7 +22,7 @@ export default () => {
 
   return (
     <>
-      <h2 className="table-head">Where next?</h2>
+      <H2>Where next?</H2>
       <Destinations>
         <thead>
           <tr>

@@ -1,17 +1,17 @@
 import * as React from "react";
-import DirectionInterface from "../../../interfaces/DirectionInterface";
+import { DirectionInterface } from "../../../Interfaces";
 import { Fraction } from "../../../components/Atoms/Fraction/Fraction";
 import { ScoreValue } from "../../../components/Molecules/ScoreValue/ScoreValue";
 import GoButton from "./GoButton";
-import { InlinePortName } from "../../../components/Labels";
 import { TextD, TextF, TextWarning } from "../../../components/Atoms/Text/Text";
+import PortName from "../../../components/Molecules/PortName/PortName";
 
 interface PropsInterface {
   direction: DirectionInterface;
   children: any;
 }
 
-export default ({ direction, children }: PropsInterface) => {
+export const Direction = ({ direction, children }: PropsInterface) => {
   const icon = children;
   const directionDisabled = direction.action === null;
 
@@ -42,14 +42,14 @@ export default ({ direction, children }: PropsInterface) => {
   return (
     <tr className="destinations__row">
       <td className="destinations__destination d">
-        <InlinePortName port={direction.destination} />
+        <PortName port={direction.destination} />
         {minimumRank}
         {minimumStrength}
       </td>
       <td className="destinations__distance">
         {distance}
-        <abbr className="f" title="light year">
-          ly
+        <abbr title="light year">
+          <TextF>ly</TextF>
         </abbr>
       </td>
       <td className="destinations__earnings">

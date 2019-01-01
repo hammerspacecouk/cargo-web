@@ -2,10 +2,10 @@ import { Component, createElement } from "react";
 import { match, RouteProps } from "react-router";
 
 import { ApiClient } from "../util/ApiClient";
-import withInitialData from "./withInitialData";
-import PortsPage from "../pages/PortsPage";
-import PortPage from "../pages/Ports/PortPage";
-import PortInterface from "../interfaces/PortInterface";
+import { withInitialData } from "./withInitialData";
+import { PortsPage } from "../pages/PortsPage";
+import { PortPage } from "../pages/Ports/PortPage";
+import { PortInterface } from "../Interfaces";
 
 interface ParamsMatch extends match {
   params: {
@@ -27,6 +27,7 @@ class ListComponent extends Component<RouteProps, undefined> {
 interface ShowComponentProps {
   port?: PortInterface;
 }
+
 class ShowComponent extends Component<ShowComponentProps, undefined> {
   static async getInitialData(match: ParamsMatch) {
     const port = await ApiClient.fetch(`/ports/${match.params.portId}`);
@@ -38,5 +39,5 @@ class ShowComponent extends Component<ShowComponentProps, undefined> {
   }
 }
 
-export default withInitialData(ListComponent);
+export const Ports = withInitialData(ListComponent);
 export const Port = withInitialData(ShowComponent);

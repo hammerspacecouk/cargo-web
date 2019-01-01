@@ -1,6 +1,6 @@
 import * as React from "react";
-import EventInterface from "../../../interfaces/EventInterface";
-import Event from "./Event";
+import { EventInterface } from "../../../Interfaces";
+import Event, { EventFlag } from "./Event";
 import PlayerFlag from "../PlayerFlag/PlayerFlag";
 
 interface Props {
@@ -8,15 +8,15 @@ interface Props {
   readonly firstPerson?: boolean;
 }
 
-export default (props: Props) => {
+export const PlayerNew = (props: Props) => {
   let name;
   if (props.firstPerson) {
     name = "You ";
   } else if (props.event.actioningPlayer) {
     name = (
-      <span className="flag">
+      <EventFlag>
         <PlayerFlag player={props.event.actioningPlayer} />
-      </span>
+      </EventFlag>
     );
   } else {
     name = "[deleted] ";

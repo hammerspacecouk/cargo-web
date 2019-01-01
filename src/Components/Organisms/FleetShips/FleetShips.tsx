@@ -1,11 +1,11 @@
 import * as React from "react";
-import ActionLink from "../../Link/ActionLink";
-import { FleetShipInterface } from "../../../interfaces/ShipInterface";
+import { FleetShipInterface } from "../../../Interfaces";
 import styled from "styled-components";
 import FleetShipItem from "../FleetShipItem/FleetShipItem";
 import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
 import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
+import { Link } from "react-router-dom";
 
 export interface Props {
   ships: FleetShipInterface[];
@@ -39,7 +39,7 @@ export default function FleetShips({ ships }: Props) {
     <>
       <StyledShipsList>{shipRows}</StyledShipsList>
       <MoreLink>
-        <ActionLink to={`/play/upgrades`}>Get more ships</ActionLink>
+        <Link to={`/play/upgrades`}>Get more ships</Link>
       </MoreLink>
     </>
   );

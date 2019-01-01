@@ -167,6 +167,9 @@ export const COLOURS = {
     STANDARD: allColours.black,
     COLOURISED: allColours.violet[9]
   },
+  WHITE: {
+    STANDARD: allColours.white
+  },
   BODY: {
     BACKGROUND: allColours.black,
     TEXT: allColours.white,

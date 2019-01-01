@@ -1,15 +1,15 @@
-import CacheControl from "./CacheControlHelper";
-import { ApiClient, APIClientInterface } from "../ApiClient";
+import { CacheControlHelper } from "./CacheControlHelper";
+import { APIClientInterface } from "../ApiClient";
 import { Logger } from "../Logger";
 import { Environment } from "../Environment";
-import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
+import { ActionTokenInterface } from "../../Interfaces";
 
 interface StoredUrlData {
   expires: any;
   data: object;
 }
 
-export default class implements APIClientInterface {
+export class BrowserClient implements APIClientInterface {
   private readonly cachePrefix: string = "cargo-data-";
   private readonly canStore: boolean;
 
@@ -41,7 +41,11 @@ export default class implements APIClientInterface {
     }
   }
 
-  setInCache(key: string, value: object, cacheControl: CacheControl): void {
+  setInCache(
+    key: string,
+    value: object,
+    cacheControl: CacheControlHelper
+  ): void {
     if (!this.canStore || !cacheControl.isCacheable()) {
       return null;
     }
@@ -109,7 +113,7 @@ export default class implements APIClientInterface {
 
     const cacheControl = response.headers.get("cache-control");
 
-    this.setInCache(key, data, new CacheControl(cacheControl));
+    this.setInCache(key, data, new CacheControlHelper(cacheControl));
     return data;
   }
 }

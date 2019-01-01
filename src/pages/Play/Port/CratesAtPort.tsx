@@ -6,9 +6,8 @@ import { Loading } from "../../../components/Atoms/Loading/Loading";
 import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
 import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
 import { H1 } from "../../../components/Atoms/Heading/Heading";
-import Icon from "../../../components/Atoms/Icon/Icon";
-import ShieldIcon from "../../../components/Icons/ShieldIcon/ShieldIcon";
 import { TextCenter } from "../../../components/Atoms/Text/Text";
+import PortName from "../../../components/Molecules/PortName/PortName";
 
 interface PropsInterface {
   className?: string;
@@ -27,23 +26,11 @@ export const CratesAtPort = ({ className }: PropsInterface) => {
     return <Loading />;
   } // todo - pretty loader
 
-  // todo - abstract
-  let safe = null;
-  if (port.safeHaven) {
-    safe = (
-      <abbr title="Safe Haven">
-        <Icon>
-          <ShieldIcon />
-        </Icon>
-      </abbr>
-    );
-  }
-
   return (
     <div className={className}>
-      <H1 as="p">
+      <H1 as="div">
         <TextCenter>
-        {port.name} {safe}
+          <PortName port={port} />
         </TextCenter>
       </H1>
       <Hidden as="h2">Crates at Port</Hidden>

@@ -7,6 +7,7 @@ import Travelling from "./Travelling";
 import { NotFound } from "../../components/Organisms/Error/NotFound";
 import { useEffect } from "react";
 import { ApiClient } from "../../util/ApiClient";
+import { H1 } from "../../components/Atoms/Heading/Heading";
 
 export interface ShipParamsInterface {
   match: {
@@ -52,8 +53,8 @@ export default withRouter(({ match }: ShipParamsInterface) => {
   }
 
   return (
-    <section className="t-play__content-contain">
-      <h1 style={{ display: "none" }}>{ship.name}</h1>
+    <section>
+      <H1 style={{ display: "none" }}>{ship.name}</H1>
       {main}
     </section>
   );

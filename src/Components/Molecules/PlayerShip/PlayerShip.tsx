@@ -1,8 +1,8 @@
+import * as React from "react";
+import styled from "styled-components";
 import ShieldStrength from "../ShieldStrength/ShieldStrength";
 import Score from "../../../containers/Player/Score";
-import * as React from "react";
-import ShipInterface from "../../../interfaces/ShipInterface";
-import styled from "styled-components";
+import { ShipInterface } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
 
 interface PropsInterface {

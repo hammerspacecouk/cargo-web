@@ -5,7 +5,7 @@ import SessionContextComponent from "./context/SessionContext";
 import { Masthead } from "./components/Organisms/Masthead/Masthead";
 import { NotFound } from "./components/Organisms/Error/NotFound";
 import { ErrorInfo } from "react";
-import Modal, { ModalActions } from "./components/Panel/Modal";
+import { Modal, ModalActions } from "./components/Molecules/Modal/Modal";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
 interface Props {
@@ -18,7 +18,7 @@ interface State {
 }
 
 // componentDidCatch not yet available via hooks
-export default class App extends React.Component<Props, State> {
+export class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { errorMessage: undefined };

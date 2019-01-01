@@ -1,5 +1,5 @@
 import * as React from "react";
-import ShipInterface from "../../../interfaces/ShipInterface";
+import { ShipInterface } from "../../../Interfaces";
 import { Loading } from "../../Atoms/Loading/Loading";
 import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
 import PlayerShip from "../../Molecules/PlayerShip/PlayerShip";

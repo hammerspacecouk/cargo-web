@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ChildrenPropsInterface } from "../../../interfaces/PropsInterface";
+import { ChildrenPropsInterface } from "../../../Interfaces";
 
 const Wrap = styled.div`
   display: block;

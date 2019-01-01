@@ -1,11 +1,43 @@
 import * as React from "react";
-import AboutLayout from "../../components/Layout/AboutLayout";
-import MessageOk from "../../components/Molecules/Messages/MessageOk/MessageOk";
+import styled from "styled-components";
+import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
+import { MessageOk } from "../../components/Molecules/Message/Message";
+import { Prose } from "../../components/Atoms/Prose/Prose";
+import { GRID } from "../../styles/variables";
+import { COLOURS } from "../../styles/colours";
+import { SIZES } from "../../styles/typography";
+import { TableStriped } from "../../components/Molecules/Table/Table";
 
-export default function PoliciesPage() {
+const HashDemo = styled.div`
+    font-size: ${SIZES.C};
+    font-family: monospace;
+    display: block;
+    padding: ${GRID.HALF};
+    background: ${COLOURS.BLACK.COLOURISED};
+    color: ${COLOURS.WHITE.STANDARD};
+    margin-bottom: ${GRID.UNIT};
+`;
+
+const HashDemoEmail = styled.div`
+    text-align: center;
+    &:after {
+        font-size: ${SIZES.B};
+        content: "⬇";
+        display: block;
+        margin: ${GRID.HALF} 0;
+    }
+`;
+
+const HashDemoCode = styled.div`
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+`;
+
+export const PoliciesPage = () => {
   return (
     <AboutLayout title="Policies">
-      <div className="text--prose">
+      <Prose>
         <h2>Human readable</h2>
         <div className="unit">
           <MessageOk>We store NO personal data</MessageOk>
@@ -24,12 +56,12 @@ export default function PoliciesPage() {
           scramble it through a one-way process to get an unpredictable code,
           and we store that instead.
         </p>
-        <div className="m-hash-demo">
-          <div className="m-hash-demo__email">name@example.com</div>
-          <div className="m-hash-demo__code">
+        <HashDemo as="div">
+          <HashDemoEmail>name@example.com</HashDemoEmail>
+          <HashDemoCode>
             a96b5a8bf6bacf4e56e5091eafb8607f483617eb690ea52c827c93cde4e09173
-          </div>
-        </div>
+          </HashDemoCode>
+        </HashDemo>
         <p>
           We have no way of restoring your e-mail address back from this code.
           We cannot e-mail you from this data so you will not hear from us.
@@ -72,7 +104,7 @@ export default function PoliciesPage() {
           you're <strong>only</strong> using this website. TODO - What about
           payments? This site <strong>only</strong> uses two cookies. These are
         </p>
-        <table className="table table--striped">
+        <TableStriped>
           <thead>
             <tr>
               <th>Cookie Name</th>
@@ -112,7 +144,7 @@ export default function PoliciesPage() {
               </td>
             </tr>
           </tbody>
-        </table>
+        </TableStriped>
         <p>
           Since both these Cookies are functional parts of the website and don't
           contain more data than they need to, we don't have to show you that{" "}
@@ -123,7 +155,7 @@ export default function PoliciesPage() {
           data stored on your computer and read by your browser. They are never
           sent back to the server. These are:
         </p>
-        <table className="table table--striped">
+        <TableStriped>
           <thead>
             <tr>
               <th>Name</th>
@@ -147,7 +179,7 @@ export default function PoliciesPage() {
               </td>
             </tr>
           </tbody>
-        </table>
+        </TableStriped>
 
         <h3>Trust</h3>
         <p>
@@ -164,7 +196,7 @@ export default function PoliciesPage() {
           This is the same basic principles as above, but in the correct legal
           language
         </p>
-      </div>
+      </Prose>
     </AboutLayout>
   );
-}
+};

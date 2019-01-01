@@ -34,7 +34,7 @@ const getValue = (seconds: number, datetime: Date): string => {
 /**
  * Show dynamically updating time since an event
  */
-export default function TimeAgo({ datetime }: Props) {
+export const TimeAgo = ({ datetime }: Props) => {
   const [text, setText] = React.useState(
     getValue(getSeconds(datetime), datetime)
   );
@@ -69,4 +69,4 @@ export default function TimeAgo({ datetime }: Props) {
       {text}
     </time>
   );
-}
+};

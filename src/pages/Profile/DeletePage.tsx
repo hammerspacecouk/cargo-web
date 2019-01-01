@@ -1,9 +1,12 @@
 import * as React from "react";
 import { parse as parseQueryString } from "query-string";
-import { Error } from "../../components/Organisms/Error/Error";
-import ProfileLayout from "../../components/Layout/ProfileLayout";
 import routes from "../../routes";
-import TokenButton from "../../components/Molecules/TokenButton/TokenButton";
+import { Error } from "../../components/Organisms/Error/Error";
+import { ProfileLayout } from "../../components/Templates/ProfileLayout/ProfileLayout";
+import { TokenButton } from "../../components/Molecules/TokenButton/TokenButton";
+import { ConfirmButton, DangerButton } from "../../components/Atoms/Button/Button";
+import { TextCenter } from "../../components/Atoms/Text/Text";
+import { Prose } from "../../components/Atoms/Prose/Prose";
 
 interface PropsInterface {
   query?: string;
@@ -33,21 +36,21 @@ export default function DeletePage({ query }: PropsInterface) {
 
   return (
     <ProfileLayout title="Delete account">
-      <div className="text--prose">
+      <Prose>
         <h2>{stage}/3</h2>
         <p>{stageText}</p>
-      </div>
+      </Prose>
 
-      <div className="text--center">
-        <a className="button button--confirm" href={routes.getProfile()}>
+      <TextCenter>
+        <ConfirmButton as="a" href={routes.getProfile()}>
           Cancel
-        </a>
+        </ConfirmButton>
         <TokenButton token={token}>
-          <button type="submit" className="button button--danger">
+          <DangerButton type="submit">
             Yes
-          </button>
+          </DangerButton>
         </TokenButton>
-      </div>
+      </TextCenter>
     </ProfileLayout>
   );
 }

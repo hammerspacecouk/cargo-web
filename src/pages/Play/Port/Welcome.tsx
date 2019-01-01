@@ -2,9 +2,9 @@ import * as React from "react";
 import ShieldIcon from "../../../components/Icons/ShieldIcon/ShieldIcon";
 import { useSessionContext } from "../../../context/SessionContext";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import MessageInfo from "../../../components/Molecules/Messages/MessageInfo/MessageInfo";
+import { MessageInfo } from "../../../components/Molecules/Message/Message";
 import { P } from "../../../components/Atoms/Text/Text";
-import Icon, { SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
+import { Icon, SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
 
 export default () => {
   const { rankStatus } = useSessionContext();

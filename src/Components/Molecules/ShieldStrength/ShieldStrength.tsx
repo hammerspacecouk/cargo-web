@@ -2,7 +2,7 @@ import * as React from "react";
 import styled, { keyframes } from "styled-components";
 import { animate } from "../../Atoms/Placeholder/PlaceHolder";
 import PlayerFlag from "../PlayerFlag/PlayerFlag";
-import PlayerInterface from "../../../interfaces/PlayerInterface";
+import { PlayerInterface } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 
 interface PropsInterface {

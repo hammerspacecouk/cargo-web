@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useSessionContext } from "../../../context/SessionContext";
-import { Button, TYPE_ACTION } from "../../Atoms/Button/Button";
-import routes from "../../../routes";
-import LoginForm from "../LoginForm/LoginForm";
 import styled from "styled-components";
+import routes from "../../../routes";
+import { useSessionContext } from "../../../context/SessionContext";
+import { ActionButton, Button } from "../../Atoms/Button/Button";
+import { LoginForm } from "../LoginForm/LoginForm";
 import { GRID } from "../../../styles/variables";
 import { P } from "../../Atoms/Text/Text";
 import { H4 } from "../../Atoms/Heading/Heading";
@@ -45,9 +45,9 @@ export const PlayPanel = () => {
           {loginToken && (
             <input type="hidden" name="loginToken" value={loginToken} />
           )}
-          <Button styleType={TYPE_ACTION} disabled={!loginToken}>
+          <ActionButton disabled={!loginToken}>
             New game
-          </Button>
+          </ActionButton>
         </form>
       </ButtonArea>
       <SubHeading as="h3">Or create/resume a logged in game:</SubHeading>

@@ -4,10 +4,10 @@ import { match, matchPath, StaticRouter } from "react-router";
 
 import { CacheType, matches as routes, RouteItem } from "../routes";
 import { InitialDataComponent } from "./withInitialData";
-import App from "../App";
+import { App } from "../App";
 import { Logger } from "../util/Logger";
 import { getForClient } from "../util/Environment";
-import Assets from "../util/Assets";
+import { Assets } from "../util/Assets";
 import { NextFunction, Request, Response } from "express";
 
 interface MatchedRoute {

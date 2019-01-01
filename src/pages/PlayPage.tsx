@@ -4,9 +4,12 @@ import styled from "styled-components";
 import { GRID } from "../styles/variables";
 
 import { NotFound } from "../components/Organisms/Error/NotFound";
-import { PlayBar, playBarHeight } from "../components/Navigation/PlayBar";
+import {
+  PlayBar,
+  playBarHeight
+} from "../components/Organisms/PlayBar/PlayBar";
 import CurrentShipContextComponent from "../context/CurrentShipContext";
-import EnsureLoggedIn from "../components/Login/EnsureLoggedIn";
+import { EnsureLoggedIn } from "../containers/Player/EnsureLoggedIn";
 import UpgradesPage from "./Play/UpgradesPage";
 import ShipPage from "./Play/ShipPage";
 import FleetPage from "./Play/FleetPage";

@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
-import withInitialData from "./withInitialData";
+import { withInitialData } from "./withInitialData";
 
-import EventInterface from "../interfaces/EventInterface";
+import { EventInterface } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 import HomePage from "../pages/HomePage";
 

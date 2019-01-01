@@ -1,5 +1,5 @@
 import * as React from "react";
-import PlayerInterface from "../../../interfaces/PlayerInterface";
+import { PlayerInterface } from "../../../Interfaces";
 import { Environment } from "../../../util/Environment";
 import styled from "styled-components";
 import { COLOURS } from "../../../styles/colours";

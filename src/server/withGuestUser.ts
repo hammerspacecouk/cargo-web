@@ -1,7 +1,7 @@
 import { createElement, Component } from "react";
 import { match, Redirect } from "react-router";
 import routes from "../routes";
-import withInitialData, { InitialDataComponent } from "./withInitialData";
+import { withInitialData, InitialDataComponent } from "./withInitialData";
 import { Request } from "express";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 // This is a HOC that ensures the user is NOT already logged in
-export default (Page: InitialDataComponent) => {
+export const withGuestUser = (Page: InitialDataComponent) => {
   class WithGuestUser extends Component<Props, undefined> {
     static async getInitialData(match: match, request: Request) {
       if (request?.cookies?.AUTHENTICATION_TOKEN) {

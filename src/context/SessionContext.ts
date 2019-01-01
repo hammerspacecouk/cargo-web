@@ -6,12 +6,14 @@ import {
   useState
 } from "react";
 
-import PlayerInterface from "../interfaces/PlayerInterface";
-import RankStatusInterface from "../interfaces/RankStatusInterface";
-import ScoreInterface from "../interfaces/ScoreInterface";
-import PromotionModal from "../components/Player/PromotionModal";
+import {
+  ChildrenPropsInterface,
+  PlayerInterface,
+  RankStatusInterface,
+  ScoreInterface
+} from "../Interfaces";
+import { PromotionModal } from "../components/Organisms/PromotionModal/PromotionModal";
 import { ApiClient } from "../util/ApiClient";
-import { ChildrenPropsInterface } from "../interfaces/PropsInterface";
 
 export interface SessionResponseInterface {
   readonly isLoggedIn: boolean;

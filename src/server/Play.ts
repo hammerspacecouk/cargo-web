@@ -7,7 +7,7 @@ interface StateInterface {
 }
 
 // The server rendered game just shows a "JavaScript required" view
-class PlayComponent extends Component<undefined, StateInterface> {
+export class Play extends Component<undefined, StateInterface> {
   state = {
     appReady: false
   };
@@ -25,5 +25,3 @@ class PlayComponent extends Component<undefined, StateInterface> {
     return createElement(PlayPage);
   }
 }
-
-export default PlayComponent;

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Button } from "../../Atoms/Button/Button";
 import { GRID } from "../../../styles/variables";
-import Icon from "../../Atoms/Icon/Icon";
+import { Icon } from "../../Atoms/Icon/Icon";
 
 interface PropsInterface {
   readonly leading?: JSX.Element;
@@ -32,15 +32,13 @@ const StyledIcon = styled(StyledChildren)`
   margin-left: -${GRID.HALF};
 `;
 
-export default function ComplexButton({
+export const ComplexButton = ({
   leading,
   icon,
   children,
-  disabled,
-  type,
   className,
-  onClick
-}: PropsInterface) {
+  ...props
+}: PropsInterface) => {
   let styledPrefix;
   if (leading) {
     styledPrefix = <StyledChildren>{leading}</StyledChildren>;
@@ -55,13 +53,11 @@ export default function ComplexButton({
 
   return (
     <StyledButton
-      type={type}
-      disabled={disabled}
       className={className}
-      onClick={onClick}
+      {...props}
     >
       {styledPrefix}
       {children}
     </StyledButton>
   );
-}
+};

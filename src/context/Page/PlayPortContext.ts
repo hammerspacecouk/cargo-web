@@ -1,6 +1,5 @@
 import { createElement, createContext, useContext, useState } from "react";
-import { ChildrenPropsInterface } from "../../interfaces/PropsInterface";
-import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
+import { ActionTokenInterface, ChildrenPropsInterface } from "../../Interfaces";
 import { useSessionContext } from "../SessionContext";
 import { useCurrentShipContext } from "../CurrentShipContext";
 import { ApiClient } from "../../util/ApiClient";

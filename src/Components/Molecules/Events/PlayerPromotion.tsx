@@ -1,5 +1,5 @@
 import * as React from "react";
-import EventInterface from "../../../interfaces/EventInterface";
+import { EventInterface } from "../../../Interfaces";
 import Event from "./Event";
 import PlayerFlag from "../PlayerFlag/PlayerFlag";
 

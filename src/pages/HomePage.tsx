@@ -1,10 +1,10 @@
 import * as React from "react";
+import styled from "styled-components";
 import routes from "../routes";
 import { Link } from "react-router-dom";
-import EventsList from "../components/Organisms/EventsList/EventsList";
-import EventInterface from "../interfaces/EventInterface";
+import { EventsList } from "../components/Organisms/EventsList/EventsList";
+import { EventInterface } from "../Interfaces";
 import { PlayPanel } from "../components/Organisms/PlayPanel/PlayPanel";
-import styled from "styled-components";
 import { GRID } from "../styles/variables";
 import { BREAKPOINTS } from "../styles/media";
 import { H1 } from "../components/Atoms/Heading/Heading";

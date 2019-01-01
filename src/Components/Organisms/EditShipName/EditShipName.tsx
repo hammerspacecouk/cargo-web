@@ -1,19 +1,21 @@
 import * as React from "react";
-import ShipInterface from "../../../interfaces/ShipInterface";
+import {
+  ActionTokenInterface,
+  ShipInterface,
+  TransactionInterface
+} from "../../../Interfaces";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
-import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
-import TokenButton from "../../Molecules/TokenButton/TokenButton";
-import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
+import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
+import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 import { ApiClient } from "../../../util/ApiClient";
 import { useSessionContext } from "../../../context/SessionContext";
 import { useFleetContext } from "../../../context/Page/FleetContext";
-import ShipNameGenerator from "../../Ship/ShipNameGenerator";
+import { ShipNameGenerator } from "../../../containers/Ship/ShipNameGenerator";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import TextCursor from "../../Atoms/TextCursor/TextCursor";
-import TransactionInterface from "../../../interfaces/TransactionInterface";
-import { Button, TYPE_CONFIRM, TYPE_DANGER } from "../../Atoms/Button/Button";
-import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
+import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
+import { ConfirmButton, DangerButton } from "../../Atoms/Button/Button";
+import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
 import { useMounted } from "../../../hooks/useMounted";
 import { BREAKPOINTS } from "../../../styles/media";
 
@@ -95,21 +97,20 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
       buttonContent = (
         <>
           <TokenButton token={offeredShipNameToken} handler={acceptShipName}>
-            <Button styleType={TYPE_CONFIRM} type="submit">
+            <ConfirmButton type="submit">
               Accept
-            </Button>
+            </ConfirmButton>
           </TokenButton>
-          <Button
+          <DangerButton
             as="a"
             href="."
-            styleType={TYPE_DANGER}
-            onClick={e => {
+            onClick={(e: Event) => {
               e.preventDefault();
               resetOffer();
             }}
           >
             Reject
-          </Button>
+          </DangerButton>
         </>
       );
     } else {

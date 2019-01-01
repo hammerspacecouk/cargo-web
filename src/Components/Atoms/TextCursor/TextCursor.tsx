@@ -12,6 +12,6 @@ const Cursor = styled.span`
   animation: ${blink} 1s step-start infinite;
 `;
 
-export default function TextCursor() {
+export const TextCursor = () => {
   return <Cursor>_</Cursor>;
-}
+};

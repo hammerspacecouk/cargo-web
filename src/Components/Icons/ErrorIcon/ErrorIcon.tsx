@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NoPropsInterface } from "../../../interfaces/PropsInterface";
+import { NoPropsInterface } from "../../../Interfaces";
 
 export default function ErrorIcon({  }: NoPropsInterface) {
   return (

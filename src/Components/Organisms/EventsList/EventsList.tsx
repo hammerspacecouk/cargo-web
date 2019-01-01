@@ -1,15 +1,5 @@
 import * as React from "react";
-import EventInterface, {
-  ACTION_CRATE_NEW,
-  ACTION_CRATE_PICKUP,
-  ACTION_PLAYER_NEW,
-  ACTION_PLAYER_PROMOTION,
-  ACTION_SHIP_ARRIVAL,
-  ACTION_SHIP_DEPARTURE,
-  ACTION_SHIP_NEW,
-  ACTION_SHIP_RENAME
-} from "../../../interfaces/EventInterface";
-import PlayerNew from "../../Molecules/Events/PlayerNew";
+import {PlayerNew} from "../../Molecules/Events/PlayerNew";
 import ShipNew from "../../Molecules/Events/ShipNew";
 import ShipArrival from "../../Molecules/Events/ShipArrival";
 import ShipDeparture from "../../Molecules/Events/ShipDeparture";
@@ -19,10 +9,21 @@ import CrateNew from "../../Molecules/Events/CrateNew";
 import CratePickup from "../../Molecules/Events/CratePickup";
 import styled from "styled-components";
 import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
-import TextCursor from "../../Atoms/TextCursor/TextCursor";
+import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
 import { GRID } from "../../../styles/variables";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
+import {
+  ACTION_CRATE_NEW,
+  ACTION_CRATE_PICKUP,
+  ACTION_PLAYER_NEW,
+  ACTION_PLAYER_PROMOTION,
+  ACTION_SHIP_ARRIVAL,
+  ACTION_SHIP_DEPARTURE,
+  ACTION_SHIP_NEW,
+  ACTION_SHIP_RENAME,
+  EventInterface
+} from "../../../Interfaces";
 
 interface Props {
   readonly events: EventInterface[];
@@ -84,7 +85,7 @@ const StyledListItem = styled.li`
   }
 `;
 
-export default function EventsList({ events, firstPerson }: Props) {
+export const EventsList = ({ events, firstPerson }: Props) => {
   if (!events || events.length < 1) {
     return (
       <StyledList as="ol">
@@ -104,4 +105,4 @@ export default function EventsList({ events, firstPerson }: Props) {
       ))}
     </StyledList>
   );
-}
+};

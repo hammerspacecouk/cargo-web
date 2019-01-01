@@ -34,5 +34,5 @@ class DeleteComponent extends Component<RouteProps, undefined> {
   }
 }
 
-export default withPlayer(ProfileComponent);
+export const Profile = withPlayer(ProfileComponent);
 export const Delete = withPlayer(withRouter(DeleteComponent as any));

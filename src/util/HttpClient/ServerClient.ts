@@ -1,7 +1,7 @@
 import { APIClientInterface } from "../ApiClient";
 import { Environment } from "../Environment";
 import { Logger } from "../Logger";
-import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
+import { ActionTokenInterface } from "../../Interfaces";
 
 const passThroughCookies = (cookies?: any) => {
   if (!cookies) {
@@ -21,7 +21,7 @@ const passThroughCookies = (cookies?: any) => {
   return cookieItems.join(";");
 };
 
-export default class implements APIClientInterface {
+export class ServerClient implements APIClientInterface {
   getUrl(path: string): string {
     return Environment.apiHostname + path;
   }

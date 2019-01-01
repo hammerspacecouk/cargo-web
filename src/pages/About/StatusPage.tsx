@@ -1,21 +1,23 @@
 import * as React from "react";
 import { Environment } from "../../util/Environment";
-import AboutLayout from "../../components/Layout/AboutLayout";
+import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
+import { Button } from "../../components/Atoms/Button/Button";
+import { TableStriped } from "../../components/Molecules/Table/Table";
 
 export default function StatusPage() {
   return (
     <AboutLayout title="Status">
       <p className="right">
-        <a
+        <Button
+          as="a"
           href={`${Environment.apiHostname}/status`}
-          className="button"
           target="_blank"
         >
           API Status
-        </a>
+        </Button>
       </p>
       <h2>App</h2>
-      <table className="table table--striped">
+      <TableStriped>
         <tbody>
           <tr>
             <th>Environment</th>
@@ -34,10 +36,10 @@ export default function StatusPage() {
             <td>{Environment.nodeEnv}</td>
           </tr>
         </tbody>
-      </table>
+      </TableStriped>
 
       <h2>Request</h2>
-      <table className="table table--striped">
+      <TableStriped>
         <tbody>
           <tr>
             <th>Host</th>
@@ -52,7 +54,7 @@ export default function StatusPage() {
             <td>{Environment.isClient ? "yes" : "no"}</td>
           </tr>
         </tbody>
-      </table>
+      </TableStriped>
     </AboutLayout>
   );
 }

@@ -1,17 +1,19 @@
 import * as React from "react";
 import styled from "styled-components";
-import CreditsButton from "../../Molecules/CreditsButton/CreditsButton";
-import TokenButton from "../../Molecules/TokenButton/TokenButton";
-import { HealthIncreaseInterface } from "../../../interfaces/TransactionInterface";
+import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
+import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
+import {
+  ActionTokenInterface,
+  HealthIncreaseInterface,
+  ScoreInterface
+} from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
-import ActionTokenInterface from "../../../interfaces/ActionTokenInterface";
 import { useSessionContext } from "../../../context/SessionContext";
-import ButtonRow from "../../Molecules/ButtonRow/ButtonRow";
+import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
 import {
   FleetResponseInterface,
   useFleetContext
 } from "../../../context/Page/FleetContext";
-import ScoreInterface from "../../../interfaces/ScoreInterface";
 
 interface PropsInterface {
   health: HealthIncreaseInterface[];

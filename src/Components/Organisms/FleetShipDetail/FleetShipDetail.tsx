@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FleetShipInterface } from "../../../interfaces/ShipInterface";
+import { FleetShipInterface } from "../../../Interfaces";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";

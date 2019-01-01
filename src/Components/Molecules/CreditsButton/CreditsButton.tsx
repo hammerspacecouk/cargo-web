@@ -1,9 +1,9 @@
 import * as React from "react";
-import ScoreInterface from "../../../interfaces/ScoreInterface";
+import { ScoreInterface } from "../../../Interfaces";
 import { useSessionContext } from "../../../context/SessionContext";
 import { ScoreValue } from "../ScoreValue/ScoreValue";
 import { getValue } from "../../../containers/Player/Score";
-import ComplexButton from "../ComplexButton/ComplexButton";
+import { ComplexButton } from "../ComplexButton/ComplexButton";
 
 interface Props {
   readonly amount: number;
@@ -19,11 +19,11 @@ const isDisabled = (amount: number, playerScore: ScoreInterface): boolean => {
   return scoreValue < amount;
 };
 
-export default function CreditsButton({
+export const CreditsButton = ({
   amount,
   disabledOverride,
   children
-}: Props) {
+}: Props) => {
   const { score } = useSessionContext();
   const [disabled, setDisabled] = React.useState(isDisabled(amount, score));
 
@@ -75,4 +75,4 @@ export default function CreditsButton({
       <ScoreValue score={amount} />
     </ComplexButton>
   );
-}
+};

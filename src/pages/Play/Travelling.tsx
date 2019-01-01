@@ -1,8 +1,10 @@
 import * as React from "react";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
-import IntervalFormat from "../../components/Formatting/IntervalFormat";
-import ProgressBar from "../../components/Element/ProgressBar";
+import { IntervalFormat } from "../../components/Atoms/IntervalFormat/IntervalFormat";
+import { ProgressBar } from "../../components/Atoms/ProgressBar/ProgressBar";
 import { useTravellingState } from "../../hooks/useTravellingState";
+import { TextCenter } from "../../components/Atoms/Text/Text";
+import { H2 } from "../../components/Atoms/Heading/Heading";
 
 export default () => {
   const { channel } = useCurrentShipContext();
@@ -15,8 +17,8 @@ export default () => {
 
   return (
     <div>
-      <h2>Destination: {channel.destination.name}</h2>
-      <h3 className="text--center">{remaining}</h3>
+      <H2>Destination: {channel.destination.name}</H2>
+      <TextCenter as="h3">{remaining}</TextCenter>
       <ProgressBar percent={percent} />
     </div>
   );

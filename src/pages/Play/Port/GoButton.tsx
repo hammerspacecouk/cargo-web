@@ -1,11 +1,11 @@
 import * as React from "react";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import DirectionInterface from "../../../interfaces/DirectionInterface";
-import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
+import { DirectionInterface } from "../../../Interfaces";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import IntervalFormat from "../../../components/Formatting/IntervalFormat";
-import { Button, TYPE_CONFIRM } from "../../../components/Atoms/Button/Button";
-import ComplexButton from "../../../components/Molecules/ComplexButton/ComplexButton";
+import { IntervalFormat } from "../../../components/Atoms/IntervalFormat/IntervalFormat";
+import { ConfirmButton } from "../../../components/Atoms/Button/Button";
+import { ComplexButton } from "../../../components/Molecules/ComplexButton/ComplexButton";
 
 interface PropsInterface {
   direction: DirectionInterface;
@@ -51,9 +51,9 @@ export default ({ direction, journeyTime, children }: PropsInterface) => {
         onClick={() => {
           openModal(
             <TokenButton token={direction.action} handler={moveShip}>
-              <Button styleType={TYPE_CONFIRM} type="submit">
+              <ConfirmButton type="submit">
                 Yes
-              </Button>
+              </ConfirmButton>
             </TokenButton>
           );
         }}

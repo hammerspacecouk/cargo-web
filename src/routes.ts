@@ -70,7 +70,7 @@ export const matches = [
   {
     path: routes.getAbout(),
     exact: true,
-    component: About.default,
+    component: About.About,
     cacheType: CacheType.Public,
     maxAge: 3600 * 2
   },
@@ -86,7 +86,7 @@ export const matches = [
   {
     path: routes.getPortsList(),
     exact: true,
-    component: Ports.default,
+    component: Ports.Ports,
     cacheType: CacheType.Public,
     maxAge: 600
   },
@@ -101,7 +101,7 @@ export const matches = [
   {
     path: routes.getLogin(),
     exact: true,
-    component: Login.default,
+    component: Login.Login,
     cacheType: CacheType.None
   },
 
@@ -115,7 +115,7 @@ export const matches = [
   {
     path: routes.getProfile(),
     exact: true,
-    component: Profile.default,
+    component: Profile.Profile,
     cacheType: CacheType.Private,
     maxAge: 5
   },
@@ -124,7 +124,7 @@ export const matches = [
   {
     path: routes.getPlay(),
     exact: false, // play is the client side app that'll have sub-routes
-    component: Play.default,
+    component: Play.Play,
     cacheType: CacheType.Public,
     maxAge: 3600
   },

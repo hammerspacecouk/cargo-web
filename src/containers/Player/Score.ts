@@ -1,7 +1,7 @@
 import { createElement, useState, useEffect, useRef } from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 
-import ScoreInterface from "../../interfaces/ScoreInterface";
+import { ScoreInterface } from "../../Interfaces";
 import { ScoreValue } from "../../components/Molecules/ScoreValue/ScoreValue";
 
 interface Props {

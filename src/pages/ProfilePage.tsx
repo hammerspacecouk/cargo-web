@@ -2,19 +2,23 @@ import * as React from "react";
 import { Loading } from "../components/Atoms/Loading/Loading";
 import { Error } from "../components/Organisms/Error/Error";
 import ErrorIcon from "../components/Icons/ErrorIcon/ErrorIcon";
-import ProfileLayout from "../components/Layout/ProfileLayout";
+import { ProfileLayout } from "../components/Templates/ProfileLayout/ProfileLayout";
 import { fullDate } from "../util/Format";
-import LogOutButton from "../components/Login/LogOutButton";
-import Delete from "../components/Profile/Delete";
+import { LogOutButton } from "../components/Organisms/LogoutButton/LogOutButton";
+import { DeleteAccountButton } from "../components/Molecules/DeleteAccountButton/DeleteAccountButton";
 import routes from "../routes";
-import PortInterface from "../interfaces/PortInterface";
-import LoginForm from "../components/Organisms/LoginForm/LoginForm";
+import { PortInterface } from "../Interfaces";
+import { LoginForm } from "../components/Organisms/LoginForm/LoginForm";
 import {
   SessionResponseInterface,
   useSessionContext
 } from "../context/SessionContext";
 import { useEffect } from "react";
-import MessageWarning from "../components/Molecules/Messages/MessageWarning/MessageWarning";
+import { MessageWarning } from "../components/Molecules/Message/Message";
+import { Icon, SMALL_ICON } from "../components/Atoms/Icon/Icon";
+import { H2 } from "../components/Atoms/Heading/Heading";
+import { Panel } from "../components/Molecules/Panel/Panel";
+import { Table } from "../components/Molecules/Table/Table";
 
 export interface Props {
   readonly session: SessionResponseInterface;
@@ -25,7 +29,7 @@ export interface Props {
 
 const getAttachEmailForm = () => {
   return (
-    <div className="panel">
+    <Panel>
       <MessageWarning>
         You have not yet linked your game to an e-mail address. <br />
         If you clear your cookies or switch browsers you will never be able to
@@ -34,7 +38,7 @@ const getAttachEmailForm = () => {
       </MessageWarning>
       <h2>Log in to save your game</h2>
       <LoginForm />
-    </div>
+    </Panel>
   );
 };
 
@@ -68,9 +72,9 @@ export default function ProfilePage({
   if (isAnonymous) {
     mode = (
       <>
-        <span className="icon icon--mini icon--prefix color-danger-text">
+        <Icon size={SMALL_ICON}>
           <ErrorIcon />
-        </span>
+        </Icon>
         Anonymous
       </>
     );
@@ -86,7 +90,7 @@ export default function ProfilePage({
   return (
     <ProfileLayout>
       <div>
-        <table className="table">
+        <Table>
           <tbody>
             <tr>
               <th>Player ID:</th>
@@ -101,18 +105,21 @@ export default function ProfilePage({
               <td>{fullDate(playingSinceDate)}</td>
             </tr>
           </tbody>
-        </table>
+        </Table>
 
-        <div className="panel">
+        <Panel>
           <LogOutButton isAnonymous={isAnonymous} />
-          <Delete route={routes.getProfileDelete()} canDelete={canDelete} />
-        </div>
+          <DeleteAccountButton
+            route={routes.getProfileDelete()}
+            canDelete={canDelete}
+          />
+        </Panel>
       </div>
 
       {isAnonymous && getAttachEmailForm()}
-      <h2>
+      <H2>
         Home port: <a href={routes.getPortShow(homePort.id)}>{homePort.name}</a>
-      </h2>
+      </H2>
     </ProfileLayout>
   );
 }

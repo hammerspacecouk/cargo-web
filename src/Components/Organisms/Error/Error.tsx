@@ -1,6 +1,6 @@
 import * as React from "react";
-import Status from "../../Navigation/Status";
 import styled, { keyframes } from "styled-components";
+import { Status } from "../Status/Status";
 import { GRID } from "../../../styles/variables";
 import { H1 } from "../../Atoms/Heading/Heading";
 import { P } from "../../Atoms/Text/Text";

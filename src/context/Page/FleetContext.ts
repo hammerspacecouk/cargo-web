@@ -1,9 +1,11 @@
 import { createContext, createElement, useContext, useState } from "react";
-import { ChildrenPropsInterface } from "../../interfaces/PropsInterface";
-import EventInterface from "../../interfaces/EventInterface";
+import {
+  ChildrenPropsInterface,
+  EventInterface,
+  FleetShipInterface
+} from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
-import { FleetShipInterface } from "../../interfaces/ShipInterface";
 import { useMounted } from "../../hooks/useMounted";
 
 export interface FleetResponseInterface {

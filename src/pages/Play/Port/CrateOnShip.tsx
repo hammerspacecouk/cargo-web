@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import TokenButton from "../../../components/Molecules/TokenButton/TokenButton";
-import { CrateActionInterface } from "../../../interfaces/CrateInterface";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
+import { CrateActionInterface } from "../../../Interfaces";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import {
   CratePickup,

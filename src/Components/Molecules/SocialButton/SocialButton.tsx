@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import Icon, { SMALL_ICON } from "../../Atoms/Icon/Icon";
+import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
 import {
   FacebookLogo,
   GoogleLogo,

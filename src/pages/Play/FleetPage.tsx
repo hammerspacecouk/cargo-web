@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useSessionContext } from "../../context/SessionContext";
 import PlayerFlag from "../../components/Molecules/PlayerFlag/PlayerFlag";
 import FleetShips from "../../components/Organisms/FleetShips/FleetShips";
-import EventsList from "../../components/Organisms/EventsList/EventsList";
-import Rank from "../../components/Player/Rank";
+import { EventsList } from "../../components/Organisms/EventsList/EventsList";
+import { PlayerRank } from "../../components/Organisms/PlayerRank/PlayerRank";
 import {
   FleetContextProvider,
   useFleetContext
@@ -60,7 +60,7 @@ const FleetPageContent = () => {
         </FlagArea>
       </FleetHeader>
       <FleetShips ships={ships} />
-      <Rank rankStatus={rankStatus} />
+      <PlayerRank rankStatus={rankStatus} />
       <EventsList events={events} firstPerson />
     </StyledFleetPage>
   );

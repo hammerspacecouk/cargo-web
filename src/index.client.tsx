@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "typeface-share-tech-mono";
 
 import { matches as routes } from "./routes";
-import App from "./App";
+import { App } from "./App";
 
 const data = (window as any)._INITIAL_DATA_;
 

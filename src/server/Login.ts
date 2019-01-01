@@ -1,9 +1,9 @@
 import { Component, createElement } from "react";
 import { RouteProps, withRouter } from "react-router";
-import withGuestUser from "./withGuestUser";
+import { withGuestUser } from "./withGuestUser";
 
-import LoginPage from "../pages/LoginPage";
-import LoginEmailPage from "../pages/Login/LoginEmailPage";
+import { LoginPage } from "../pages/LoginPage";
+import { LoginEmailPage } from "../pages/Login/LoginEmailPage";
 
 class LoginComponent extends Component<RouteProps, undefined> {
   render() {
@@ -17,5 +17,5 @@ class EmailComponent extends Component<RouteProps, undefined> {
   }
 }
 
-export default withGuestUser(withRouter(LoginComponent as any));
+export const Login = withGuestUser(withRouter(LoginComponent as any));
 export const Email = withGuestUser(withRouter(EmailComponent as any));

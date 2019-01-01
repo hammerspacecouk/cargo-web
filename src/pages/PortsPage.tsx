@@ -1,13 +1,13 @@
 import * as React from "react";
 import routes from "../routes";
-import PortInterface from "../interfaces/PortInterface";
-import CrumbTitle from "../components/Navigation/CrumbTitle";
+import { PortInterface } from "../Interfaces";
+import { SimplePage } from "../components/Templates/SimplePage/SimplePage";
 
 interface PropsInterface {
   ports?: PortInterface[];
 }
 
-export default function PortsPage({ ports }: PropsInterface) {
+export const PortsPage = ({ ports }: PropsInterface) => {
   const portsList = (
     <ul>
       {ports.map((port: PortInterface, index: number) => {
@@ -21,11 +21,8 @@ export default function PortsPage({ ports }: PropsInterface) {
   );
 
   return (
-    <div className="t-doc">
-      <div className="t-doc__title">
-        <CrumbTitle>Ports</CrumbTitle>
-      </div>
-      <div className="t-doc__main">{portsList}</div>
-    </div>
+    <SimplePage title="Ports">
+      {portsList}
+    </SimplePage>
   );
-}
+};

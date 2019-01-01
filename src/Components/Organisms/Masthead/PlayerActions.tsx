@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
 import { Hidden } from "../../Atoms/Hidden/Hidden";
-import Icon from "../../Atoms/Icon/Icon";
+import { Icon } from "../../Atoms/Icon/Icon";
 import { Notification } from "../../Atoms/Notification/Notification";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 

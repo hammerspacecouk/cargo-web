@@ -17,7 +17,7 @@ interface Props {
 
 // This is a Higher Order Component that abstracts duplicated data fetching
 // on the server and client.
-export default (Page: InitialDataComponent) => {
+export const withInitialData = (Page: InitialDataComponent) => {
   return class WithInitialData extends Component<Props, State> {
     ignoreLastFetch = false;
 

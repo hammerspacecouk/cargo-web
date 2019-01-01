@@ -1,3 +1,4 @@
+import * as React from "react";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
@@ -22,6 +23,7 @@ const getColour = (styleType: string): string => {
 interface PropsInterface {
   styleType?: string;
   href?: string;
+  target?: string;
 }
 
 export const Button = styled.button<PropsInterface>`
@@ -58,3 +60,15 @@ export const Button = styled.button<PropsInterface>`
     }
   }
 `;
+
+export const ConfirmButton = (props: any) => (
+  <Button {...props} styleType={TYPE_CONFIRM} />
+);
+
+export const DangerButton = (props: any) => (
+  <Button {...props} styleType={TYPE_DANGER} />
+);
+
+export const ActionButton = (props: any) => (
+  <Button {...props} styleType={TYPE_ACTION} />
+);

@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { CrateWithContents } from "../../Atoms/CrateContents/CrateContents";
-import Icon, { SMALL_ICON } from "../../Atoms/Icon/Icon";
+import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
 import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
-import { CrateActionInterface } from "../../../interfaces/CrateInterface";
+import { CrateActionInterface } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
 import { TextE } from "../../Atoms/Text/Text";
 

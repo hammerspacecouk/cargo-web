@@ -1,5 +1,5 @@
 import * as React from "react";
-import TimeAgoContainer from "../../Atoms/TimeAgo/TimeAgo";
+import { TimeAgo } from "../../Atoms/TimeAgo/TimeAgo";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 
@@ -12,15 +12,16 @@ const StyledEvent = styled.div`
   display: flex;
   width: 100%;
   align-items: flex-start;
-  .flag {
+`;
+
+export const EventFlag = styled.span`
     display: inline-block;
     width: 48px;
     vertical-align: middle;
     line-height: 0;
     position: relative;
     top: -1px;
-  }
-`; // todo - "flag" declaration should be handled differently
+`;
 
 const Content = styled.span`
   flex: 1;
@@ -30,6 +31,6 @@ const Content = styled.span`
 export default (props: Props) => (
   <StyledEvent>
     <Content>{props.children}</Content>
-    <TimeAgoContainer datetime={new Date(props.time)} />
+    <TimeAgo datetime={new Date(props.time)} />
   </StyledEvent>
 );

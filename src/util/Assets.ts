@@ -1,8 +1,8 @@
-import { KeyValueInterface } from "../interfaces/KeyValueInterface";
+import { KeyValueInterface } from "../Interfaces";
 
-export default class {
-  private assets?: KeyValueInterface;
-  private staticPrefix: string;
+export class Assets {
+  private readonly assets?: KeyValueInterface;
+  private readonly staticPrefix: string;
 
   constructor(assets: KeyValueInterface, staticPrefix: string) {
     this.assets = assets;

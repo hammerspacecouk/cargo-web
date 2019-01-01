@@ -9,7 +9,7 @@ interface PropsInterface {
   size?: string;
 }
 
-export default styled.span<PropsInterface>`
+export const Icon = styled.span<PropsInterface>`
   display: inline-block;
   line-height: 0;
   height: ${({ size = NORMAL_ICON }) => size};

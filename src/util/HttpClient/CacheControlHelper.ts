@@ -2,8 +2,8 @@ interface CacheControl {
   [key: string]: any;
 }
 
-export default class {
-  private parsed: CacheControl;
+export class CacheControlHelper {
+  private readonly parsed: CacheControl;
 
   constructor(field: string) {
     /*

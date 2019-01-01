@@ -1,11 +1,13 @@
 import { createContext, createElement, useContext, useState } from "react";
-import { ChildrenPropsInterface } from "../../interfaces/PropsInterface";
+import {
+  ActionTokenInterface,
+  ChildrenPropsInterface,
+  MessageInterface,
+  ShipUpgradeInterface
+} from "../../Interfaces";
 import { useApi } from "../../hooks/useAPI";
-import MessageInterface from "../../interfaces/MessageInterface";
-import ActionTokenInterface from "../../interfaces/ActionTokenInterface";
 import { useSessionContext } from "../SessionContext";
 import { ApiClient } from "../../util/ApiClient";
-import { ShipUpgradeInterface } from "../../interfaces/TransactionInterface";
 
 interface UpgradesContextInterface {
   buttonsDisabled: boolean;

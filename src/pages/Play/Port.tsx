@@ -2,11 +2,11 @@ import * as React from "react";
 import styled from "styled-components";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import {
-PlayPortContextProvider,
-usePlayPortContext
+  PlayPortContextProvider,
+  usePlayPortContext
 } from "../../context/Page/PlayPortContext";
-import {PlayerShipList} from "../../components/Organisms/PlayerShipList/PlayerShipList";
-import EventsList from "../../components/Organisms/EventsList/EventsList";
+import { PlayerShipList } from "../../components/Organisms/PlayerShipList/PlayerShipList";
+import { EventsList } from "../../components/Organisms/EventsList/EventsList";
 import Welcome from "./Port/Welcome";
 import { Crates } from "./Port/Crates";
 import Directions from "./Port/Directions";
@@ -41,11 +41,7 @@ const PortComponent = () => {
     );
   }
 
-  return (
-    <PortTemplate>
-      {portContent}
-    </PortTemplate>
-  );
+  return <PortTemplate>{portContent}</PortTemplate>;
 };
 
 export default () => (

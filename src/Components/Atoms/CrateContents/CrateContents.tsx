@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Crate } from "../../Icons/Crate/Crate";
 import { COLOURS } from "../../../styles/colours";
-import CrateInterface from "../../../interfaces/CrateInterface";
+import { CrateInterface } from "../../../Interfaces";
 
 interface PropsInterface {
   crate: CrateInterface;

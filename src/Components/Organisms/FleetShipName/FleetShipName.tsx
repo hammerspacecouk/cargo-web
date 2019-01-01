@@ -1,10 +1,10 @@
-import ShipInterface from "../../../interfaces/ShipInterface";
+import { ShipInterface } from "../../../Interfaces";
 import { Link } from "react-router-dom";
 import * as React from "react";
 import routes from "../../../routes";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
-import PlaceHolder from "../../Atoms/Placeholder/PlaceHolder";
+import { PlaceHolder } from "../../Atoms/Placeholder/PlaceHolder";
 import ShieldStrength from "../../Molecules/ShieldStrength/ShieldStrength";
 import { H2, H6 } from "../../Atoms/Heading/Heading";
 

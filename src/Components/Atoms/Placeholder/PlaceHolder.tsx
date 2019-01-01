@@ -17,7 +17,7 @@ export const animate = css`
   animation: ${frames} 2s ease-in-out;
 `;
 
-export default styled.div`
+export const PlaceHolder = styled.div`
   display: block;
   background: ${COLOURS.BODY.FADED};
   opacity: 0.2;
