@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
 
-import SessionContextComponent from "./context/SessionContext";
-import { Masthead } from "./components/Organisms/Masthead/Masthead";
-import { NotFound } from "./components/Organisms/Error/NotFound";
 import { ErrorInfo } from "react";
 import { Modal, ModalActions } from "./components/Molecules/Modal/Modal";
+import { NotFound } from "./components/Organisms/Error/NotFound";
+import { Masthead } from "./components/Organisms/Masthead/Masthead";
+import SessionContextComponent from "./context/SessionContext";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
-interface Props {
+interface IProps {
   routes: RouteProps[];
   initialData?: any;
 }
@@ -19,34 +19,34 @@ interface State {
 
 // componentDidCatch not yet available via hooks
 export class App extends React.Component<Props, State> {
-  constructor(props: Props) {
+  constructor(props: IProps) {
     super(props);
     this.state = { errorMessage: undefined };
   }
 
-  catchMessage = (error: PromiseRejectionEvent) => {
+  public catchMessage = (error: PromiseRejectionEvent) => {
     this.setState({
-      errorMessage: error.reason.message
+      errorMessage: error.reason.message,
     });
     console.error(error);
   };
 
-  componentDidCatch(error: Error, info: ErrorInfo) {
+  public componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({
-      errorMessage: error.toString()
+      errorMessage: error.toString(),
     });
     console.error(info);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     window.addEventListener("unhandledrejection", this.catchMessage);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener("unhandledrejection", this.catchMessage);
   }
 
-  render() {
+  public render() {
     const { routes, initialData } = this.props;
 
     let errorModal = null;
@@ -78,7 +78,7 @@ export class App extends React.Component<Props, State> {
                 render={props =>
                   React.createElement(route.component, {
                     ...props,
-                    initialData
+                    initialData,
                   })
                 }
               />

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
 
 const frames = keyframes`
     0% {

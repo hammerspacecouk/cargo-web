@@ -1,13 +1,13 @@
 import * as React from "react";
-import { useSessionContext } from "../../../context/SessionContext";
-import { PlayerActions } from "./PlayerActions";
-import { GuestActions } from "./GuestActions";
 import styled from "styled-components";
-import { GRID, Z_INDEX } from "../../../styles/variables";
+import { useSessionContext } from "../../../context/SessionContext";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { SIZES } from "../../../styles/typography";
-import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
+import { GRID, Z_INDEX } from "../../../styles/variables";
 import { FlexStretch } from "../../Atoms/Flex/Flex";
+import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
+import { GuestActions } from "./GuestActions";
+import { PlayerActions } from "./PlayerActions";
 
 const MastheadPosition = styled.header`
   position: sticky;

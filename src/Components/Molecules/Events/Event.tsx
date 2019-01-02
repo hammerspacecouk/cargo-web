@@ -1,9 +1,9 @@
 import * as React from "react";
-import { TimeAgo } from "../../Atoms/TimeAgo/TimeAgo";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
+import { TimeAgo } from "../../Atoms/TimeAgo/TimeAgo";
 
-interface Props {
+interface IProps {
   time: string;
   children: any;
 }
@@ -15,12 +15,12 @@ const StyledEvent = styled.div`
 `;
 
 export const EventFlag = styled.span`
-    display: inline-block;
-    width: 48px;
-    vertical-align: middle;
-    line-height: 0;
-    position: relative;
-    top: -1px;
+  display: inline-block;
+  width: 48px;
+  vertical-align: middle;
+  line-height: 0;
+  position: relative;
+  top: -1px;
 `;
 
 const Content = styled.span`
@@ -28,7 +28,7 @@ const Content = styled.span`
   margin-right: ${GRID.UNIT};
 `;
 
-export default (props: Props) => (
+export default (props: IProps) => (
   <StyledEvent>
     <Content>{props.children}</Content>
     <TimeAgo datetime={new Date(props.time)} />

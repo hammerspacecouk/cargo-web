@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import ShieldStrength from "../ShieldStrength/ShieldStrength";
 import Score from "../../../containers/Player/Score";
-import { ShipInterface } from "../../../Interfaces";
+import { IShip } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
+import ShieldStrength from "../ShieldStrength/ShieldStrength";
 
-interface PropsInterface {
-  ship: ShipInterface;
+interface IProps {
+  ship: IShip;
 }
 
 const ShipItem = styled.div`
@@ -23,7 +23,7 @@ const Detail = styled.div`
   line-height: 1;
 `;
 
-export default function PlayerShip({ ship }: PropsInterface) {
+export default function PlayerShip({ ship }: IProps) {
   return (
     <ShipItem>
       <Status>

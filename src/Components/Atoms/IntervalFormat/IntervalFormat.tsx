@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface Props {
+interface IProps {
   seconds: number;
 }
 
@@ -18,10 +18,10 @@ const secondsToFormat = (seconds: number): string => {
   return [
     hours.toString().padStart(2, "0"),
     minutes.toString().padStart(2, "0"),
-    remainingSeconds.toString().padStart(2, "0")
+    remainingSeconds.toString().padStart(2, "0"),
   ].join(":");
 };
 
-export const IntervalFormat = (props: Props) => (
+export const IntervalFormat = (props: IProps) => (
   <span>{secondsToFormat(props.seconds)}</span>
 );

@@ -1,10 +1,10 @@
 import * as React from "react";
 
-interface PropsInterface {
+interface IProps {
   colour?: string;
 }
 
-export const Crate = ({ colour = "#ffffff" }: PropsInterface) => {
+export const Crate = ({ colour = "#ffffff" }: IProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970.2 647.23">
       <path

@@ -1,22 +1,22 @@
 import * as React from "react";
+import { useSessionContext } from "../../../context/SessionContext";
+import { IActionToken } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
+import { Button } from "../../Atoms/Button/Button";
 import { Loading } from "../../Atoms/Loading/Loading";
+import { TextCenter } from "../../Atoms/Text/Text";
 import { Modal } from "../../Molecules/Modal/Modal";
 import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
-import { ActionTokenInterface } from "../../../Interfaces";
 import { Promotion } from "../Promotion/Promotion";
-import { useSessionContext } from "../../../context/SessionContext";
-import { Button } from "../../Atoms/Button/Button";
-import { TextCenter } from "../../Atoms/Text/Text";
 
 export const PromotionModal = () => {
   const { rankStatus, updateRankStatus } = useSessionContext();
   const [acknowledging, setAcknowledging] = React.useState(false);
 
-  const acknowledgePromotion = async (token: ActionTokenInterface) => {
+  const acknowledgePromotion = async (token: IActionToken) => {
     setAcknowledging(true);
 
-    //make the API call
+    // make the API call
     const data = await ApiClient.tokenFetch(token);
     setAcknowledging(false);
     // Updating rankStatus should remove the token and thus close the modal
@@ -30,16 +30,12 @@ export const PromotionModal = () => {
   let button;
   if (acknowledging) {
     button = (
-      <Button type="submit" disabled>
+      <Button type="submit" disabled={true}>
         <Loading />
       </Button>
     );
   } else {
-    button = (
-      <Button type="submit">
-        Ok
-      </Button>
-    );
+    button = <Button type="submit">Ok</Button>;
   }
 
   return (

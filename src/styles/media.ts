@@ -1,10 +1,8 @@
 import { css } from "styled-components";
 
-interface TaggedTemplateFunction {
-  (literals: TemplateStringsArray, ...placeholders: string[]): any;
-}
+type TaggedTemplateFunction = (literals: TemplateStringsArray, ...placeholders: string[]) => any;
 
-interface SizeFunctionsInterface {
+interface ISizeFunctions {
   XS: TaggedTemplateFunction;
   S: TaggedTemplateFunction;
   M: TaggedTemplateFunction;
@@ -22,12 +20,14 @@ const makeFunction = (size: number): TaggedTemplateFunction => {
   `;
 };
 
-export const BREAKPOINTS: SizeFunctionsInterface = {
+// tslint:disable:object-literal-sort-keys
+export const BREAKPOINTS: ISizeFunctions = {
   XS: makeFunction(480),
   S: makeFunction(600),
   M: makeFunction(768),
   L: makeFunction(912),
   XL: makeFunction(1008),
   XXL: makeFunction(1280),
-  MAX: makeFunction(1600)
+  MAX: makeFunction(1600),
 };
+// tslint:enable:object-literal-sort-keys

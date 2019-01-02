@@ -1,17 +1,17 @@
 import * as React from "react";
-import styled from "styled-components";
-import routes from "../routes";
 import { Link } from "react-router-dom";
-import { EventsList } from "../components/Organisms/EventsList/EventsList";
-import { EventInterface } from "../Interfaces";
-import { PlayPanel } from "../components/Organisms/PlayPanel/PlayPanel";
-import { GRID } from "../styles/variables";
-import { BREAKPOINTS } from "../styles/media";
+import styled from "styled-components";
 import { H1 } from "../components/Atoms/Heading/Heading";
 import { Prose } from "../components/Atoms/Prose/Prose";
+import { EventsList } from "../components/Organisms/EventsList/EventsList";
+import { PlayPanel } from "../components/Organisms/PlayPanel/PlayPanel";
+import { IEvent } from "../Interfaces";
+import { routes } from "../routes";
+import { BREAKPOINTS } from "../styles/media";
+import { GRID } from "../styles/variables";
 
-interface Props {
-  events: EventInterface[];
+interface IProps {
+  events: IEvent[];
 }
 
 const TemplateHome = styled.div`
@@ -70,7 +70,7 @@ const TemplateAside = styled.aside`
   `};
 `;
 
-export default ({ events }: Props) => {
+export default ({ events }: IProps) => {
   return (
     <TemplateHome>
       <TemplateHero>

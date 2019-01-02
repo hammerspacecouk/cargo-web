@@ -1,11 +1,11 @@
 import * as React from "react";
 
-interface Props {
+interface IProps {
   num: number;
   den: number;
 }
 
-export const Fraction = ({ num, den }: Props) => (
+export const Fraction = ({ num, den }: IProps) => (
   <>
     <sup>{num}</sup>&#8260;<sub>{den}</sub>
   </>

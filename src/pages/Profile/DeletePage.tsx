@@ -1,14 +1,17 @@
-import * as React from "react";
 import { parse as parseQueryString } from "query-string";
-import routes from "../../routes";
+import * as React from "react";
+import {
+  ConfirmButton,
+  DangerButton,
+} from "../../components/Atoms/Button/Button";
+import { Prose } from "../../components/Atoms/Prose/Prose";
+import { TextCenter } from "../../components/Atoms/Text/Text";
+import { TokenButton } from "../../components/Molecules/TokenButton/TokenButton";
 import { Error } from "../../components/Organisms/Error/Error";
 import { ProfileLayout } from "../../components/Templates/ProfileLayout/ProfileLayout";
-import { TokenButton } from "../../components/Molecules/TokenButton/TokenButton";
-import { ConfirmButton, DangerButton } from "../../components/Atoms/Button/Button";
-import { TextCenter } from "../../components/Atoms/Text/Text";
-import { Prose } from "../../components/Atoms/Prose/Prose";
+import { routes } from "../../routes";
 
-interface PropsInterface {
+interface IProps {
   query?: string;
 }
 
@@ -19,19 +22,19 @@ const stageTexts = [
   `Are you certain you understand that if you proceed and press the ‘Yes’
       button on the next screen that you will lose your game and it cannot be recovered?`,
   `All data will now be deleted and you will be signed out.
-      Press ‘Yes’ to proceed.`
+      Press ‘Yes’ to proceed.`,
 ];
 
-export default function DeletePage({ query }: PropsInterface) {
+export const DeletePage = ({ query }: IProps) => {
   const queryData = parseQueryString(query);
-  const stage = parseInt(queryData.stage || 1);
+  const stage = parseInt(queryData.stage || 1, 10);
   if (stage < 1 || stage > 3) {
     return <Error code={400} message="Invalid stage provided" />;
   }
   const stageText = stageTexts[stage];
   const token = {
     path: "/profile/delete",
-    token: queryData.token || ""
+    token: queryData.token || "",
   };
 
   return (
@@ -46,11 +49,9 @@ export default function DeletePage({ query }: PropsInterface) {
           Cancel
         </ConfirmButton>
         <TokenButton token={token}>
-          <DangerButton type="submit">
-            Yes
-          </DangerButton>
+          <DangerButton type="submit">Yes</DangerButton>
         </TokenButton>
       </TextCenter>
     </ProfileLayout>
   );
-}
+};

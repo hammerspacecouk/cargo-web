@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Error } from "./Error";
 
-interface PropsInterface {
+interface IProps {
   message?: string;
 }
 
-export const NotFound = (props: PropsInterface) => (
+export const NotFound = (props: IProps) => (
   <Error
     code={404}
     message={

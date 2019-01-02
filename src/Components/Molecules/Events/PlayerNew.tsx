@@ -1,14 +1,14 @@
 import * as React from "react";
-import { EventInterface } from "../../../Interfaces";
-import Event, { EventFlag } from "./Event";
+import { IEvent } from "../../../Interfaces";
 import PlayerFlag from "../PlayerFlag/PlayerFlag";
+import Event, { EventFlag } from "./Event";
 
-interface Props {
-  readonly event: EventInterface;
+interface IProps {
+  readonly event: IEvent;
   readonly firstPerson?: boolean;
 }
 
-export const PlayerNew = (props: Props) => {
+export const PlayerNew = (props: IProps) => {
   let name;
   if (props.firstPerson) {
     name = "You ";

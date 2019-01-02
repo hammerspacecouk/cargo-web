@@ -1,15 +1,15 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { RequireLogin } from "../../components/Organisms/RequireLogin/RequireLogin";
 import { Loading } from "../../components/Atoms/Loading/Loading";
+import { RequireLogin } from "../../components/Organisms/RequireLogin/RequireLogin";
 import { useSessionContext } from "../../context/SessionContext";
 
-interface InitialPropsInterface {
+interface IInitialProps {
   readonly children: any;
 }
 
 // Client-side login check
-export const EnsureLoggedIn = ({ children }: InitialPropsInterface) => {
+export const EnsureLoggedIn = ({ children }: IInitialProps) => {
   const { player, refreshSession } = useSessionContext();
 
   useEffect(

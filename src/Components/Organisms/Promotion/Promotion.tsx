@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { RankStatusInterface } from "../../../Interfaces";
+import { IRankStatus } from "../../../Interfaces";
 import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
 
-interface Props {
-  rankStatus?: RankStatusInterface;
+interface IProps {
+  rankStatus?: IRankStatus;
 }
 
-/**
+/*
  todo - style this how I want it
 
  .o-promotion {
@@ -71,7 +71,7 @@ const StyledPromotion = styled.div``;
 const RankBox = styled.div``;
 const PromotionProgress = styled.div``;
 
-export const Promotion = ({ rankStatus }: Props) => {
+export const Promotion = ({ rankStatus }: IProps) => {
   let allowAnimationUpdate: boolean = false;
   let startTime: number = null;
 
@@ -79,7 +79,7 @@ export const Promotion = ({ rankStatus }: Props) => {
     previousClass: "",
     previousActive: true,
     nextActive: false,
-    progress: 80
+    progress: 80,
   });
 
   const animate = (stamp: number) => {
@@ -107,7 +107,7 @@ export const Promotion = ({ rankStatus }: Props) => {
       previousClass: diff > 1000 ? "o-promotion__previous--go" : "",
       previousActive: diff < 2500,
       nextActive: diff >= 2500,
-      progress
+      progress,
     });
     window.requestAnimationFrame(animate);
   };
@@ -133,18 +133,12 @@ export const Promotion = ({ rankStatus }: Props) => {
 
   if (displayState.previousActive) {
     // todo - {`o-promotion__previous ${displayState.previousClass}`}
-    previous = (
-      <div>
-        {rankStatus.previousRank.title}
-      </div>
-    );
+    previous = <div>{rankStatus.previousRank.title}</div>;
   }
 
   if (displayState.nextActive) {
     // todo - {`o-promotion__current `}
-    previous = (
-      <div>{rankStatus.currentRank.title}</div>
-    );
+    next = <div>{rankStatus.currentRank.title}</div>;
   }
 
   return (

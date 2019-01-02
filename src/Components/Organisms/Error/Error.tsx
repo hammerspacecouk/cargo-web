@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { Status } from "../Status/Status";
 import { GRID } from "../../../styles/variables";
 import { H1 } from "../../Atoms/Heading/Heading";
 import { P } from "../../Atoms/Text/Text";
+import { Status } from "../Status/Status";
 
 export interface ErrorProps {
   code?: number;

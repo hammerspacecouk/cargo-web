@@ -1,11 +1,11 @@
 import * as React from "react";
+import { H1, H2 } from "../../components/Atoms/Heading/Heading";
+import { Message } from "../../components/Molecules/Message/Message";
 import {
   UpgradesContextProvider,
-  useUpgradesContext
+  useUpgradesContext,
 } from "../../context/Page/UpgradesContext";
-import { Message } from "../../components/Molecules/Message/Message";
-import ShipUpgrades from "./Upgrades/ShipUpgrades";
-import { H1, H2 } from "../../components/Atoms/Heading/Heading";
+import { ShipUpgrades } from "./Upgrades/ShipUpgrades";
 
 const UpgradesPage = () => {
   const { message } = useUpgradesContext();
@@ -20,7 +20,7 @@ const UpgradesPage = () => {
   );
 };
 
-export default () => (
+export const UpgradesPage = () => (
   <UpgradesContextProvider>
     <UpgradesPage />
   </UpgradesContextProvider>

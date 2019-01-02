@@ -1,19 +1,26 @@
-import * as About from "./server/About";
-import * as Home from "./server/Home";
-import * as Login from "./server/Login";
-import * as Play from "./server/Play";
-import * as Profile from "./server/Profile";
-import * as Ports from "./server/Ports";
-import { RouteProps } from "react-router";
+import { RouteProps } from "react-router-dom";
+import { About } from "./server/About";
+import { Cheating } from "./server/About/Cheating";
+import { Duplicate } from "./server/About/Duplicate";
+import { Policies } from "./server/About/Policies";
+import { Status } from "./server/About/Status";
+import { Home } from "./server/Home";
+import { Login } from "./server/Login";
+import { Email } from "./server/Login/Email";
+import { Play } from "./server/Play";
+import { Ports } from "./server/Ports";
+import { Port } from "./server/Ports/Port";
+import { Profile } from "./server/Profile";
+import { Delete } from "./server/Profile/Delete";
 import { Environment } from "./util/Environment";
 
 export enum CacheType {
   None = "no-cache, no-store",
   Private = "private",
-  Public = "public"
+  Public = "public",
 }
 
-export interface RouteItem extends RouteProps {
+export interface IRouteItem extends RouteProps {
   cacheType?: CacheType;
   maxAge?: number;
 }
@@ -24,119 +31,119 @@ const routes = {
   getAboutDuplicate: () => "/about/duplicate",
   getAboutPolicies: () => "/about/policies",
   getAboutStatus: () => "/about/status",
+  getHome: () => "/",
   getLogin: () => "/login",
   getLoginAnonymous: () => `${Environment.apiHostname}/login/anonymous`,
   getLoginEmail: () => "/login/email",
   getLogout: () => `${Environment.apiHostname}/logout`,
-  getPortShow: (id: string = ":portId") => `/ports/${id}`,
-  getPortsList: () => "/ports",
   getPlay: () => "/play",
   getPlayShip: (id: string = ":shipId") => `/play/${id}`,
+  getPortShow: (id: string = ":portId") => `/ports/${id}`,
+  getPortsList: () => "/ports",
   getProfile: () => "/profile",
   getProfileDelete: () => "/profile/delete",
-  getHome: () => "/"
 };
 
 export const matches = [
   // about
   {
+    cacheType: CacheType.Public,
+    component: Cheating,
+    exact: true,
+    maxAge: 3600 * 2,
     path: routes.getAboutCheating(),
-    exact: true,
-    component: About.Cheating,
-    cacheType: CacheType.Public,
-    maxAge: 3600 * 2
   },
   {
+    cacheType: CacheType.Public,
+    component: Duplicate,
+    exact: true,
+    maxAge: 3600 * 2,
     path: routes.getAboutDuplicate(),
-    exact: true,
-    component: About.Duplicate,
-    cacheType: CacheType.Public,
-    maxAge: 3600 * 2
   },
   {
+    cacheType: CacheType.Public,
+    component: Policies,
+    exact: true,
+    maxAge: 3600 * 2,
     path: routes.getAboutPolicies(),
-    exact: true,
-    component: About.Policies,
-    cacheType: CacheType.Public,
-    maxAge: 3600 * 2
   },
   {
+    cacheType: CacheType.Public,
+    component: Status,
+    exact: true,
+    maxAge: 30,
     path: routes.getAboutStatus(),
-    exact: true,
-    component: About.Status,
-    cacheType: CacheType.Public,
-    maxAge: 30
   },
   {
-    path: routes.getAbout(),
-    exact: true,
-    component: About.About,
     cacheType: CacheType.Public,
-    maxAge: 3600 * 2
+    component: About,
+    exact: true,
+    maxAge: 3600 * 2,
+    path: routes.getAbout(),
   },
 
   // ports
   {
-    path: routes.getPortShow(),
-    exact: true,
-    component: Ports.Port,
     cacheType: CacheType.Public,
-    maxAge: 600
+    component: Port,
+    exact: true,
+    maxAge: 600,
+    path: routes.getPortShow(),
   },
   {
-    path: routes.getPortsList(),
-    exact: true,
-    component: Ports.Ports,
     cacheType: CacheType.Public,
-    maxAge: 600
+    component: Ports,
+    exact: true,
+    maxAge: 600,
+    path: routes.getPortsList(),
   },
 
   // login
   {
-    path: routes.getLoginEmail(),
+    cacheType: CacheType.None,
+    component: Email,
     exact: true,
-    component: Login.Email,
-    cacheType: CacheType.None
+    path: routes.getLoginEmail(),
   },
   {
-    path: routes.getLogin(),
+    cacheType: CacheType.None,
+    component: Login,
     exact: true,
-    component: Login.Login,
-    cacheType: CacheType.None
+    path: routes.getLogin(),
   },
 
   // profile
   {
-    path: routes.getProfileDelete(),
+    cacheType: CacheType.None,
+    component: Delete,
     exact: true,
-    component: Profile.Delete,
-    cacheType: CacheType.None
+    path: routes.getProfileDelete(),
   },
   {
-    path: routes.getProfile(),
-    exact: true,
-    component: Profile.Profile,
     cacheType: CacheType.Private,
-    maxAge: 5
+    component: Profile,
+    exact: true,
+    maxAge: 5,
+    path: routes.getProfile(),
   },
 
   // play
   {
-    path: routes.getPlay(),
-    exact: false, // play is the client side app that'll have sub-routes
-    component: Play.Play,
     cacheType: CacheType.Public,
-    maxAge: 3600
+    component: Play,
+    exact: false, // play is the client side app that'll have sub-routes
+    maxAge: 3600,
+    path: routes.getPlay(),
   },
 
   // home
   {
-    path: routes.getHome(),
-    exact: true,
-    component: Home.default,
     cacheType: CacheType.Public,
-    maxAge: 600
-  }
-] as RouteItem[];
+    component: Home,
+    exact: true,
+    maxAge: 600,
+    path: routes.getHome(),
+  },
+] as IRouteItem[];
 
-export default routes;
+export const routes;

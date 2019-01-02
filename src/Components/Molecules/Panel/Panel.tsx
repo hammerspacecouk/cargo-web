@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { H2 } from "../../Atoms/Heading/Heading";
 import { GRID } from "../../../styles/variables";
+import { H2 } from "../../Atoms/Heading/Heading";
 
 export const Panel = styled.div`
   padding: ${GRID.UNIT};

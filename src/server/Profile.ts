@@ -1,14 +1,12 @@
 import { Component, createElement } from "react";
-import { match, RouteProps, withRouter } from "react-router";
-
-import ProfilePage from "../pages/ProfilePage";
-import DeletePage from "../pages/Profile/DeletePage";
-import withPlayer from "./withPlayer";
-import { ApiClient } from "../util/ApiClient";
+import { match, RouteProps } from "react-router-dom";
 import { Request } from "express";
+import { withPlayer } from "./withPlayer";
+import { ProfilePage } from "../pages/ProfilePage";
+import { ApiClient } from "../util/ApiClient";
 
 class ProfileComponent extends Component<RouteProps, undefined> {
-  static async getInitialData(_: match, request: Request) {
+  public static async getInitialData(_: match, request: Request) {
     try {
       return await ApiClient.fetch(
         "/profile",
@@ -23,16 +21,9 @@ class ProfileComponent extends Component<RouteProps, undefined> {
     }
   }
 
-  render() {
+  public render() {
     return createElement(ProfilePage);
   }
 }
 
-class DeleteComponent extends Component<RouteProps, undefined> {
-  render() {
-    return createElement(DeletePage, { query: this.props.location.search });
-  }
-}
-
 export const Profile = withPlayer(ProfileComponent);
-export const Delete = withPlayer(withRouter(DeleteComponent as any));

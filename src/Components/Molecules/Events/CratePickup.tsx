@@ -1,13 +1,13 @@
 import * as React from "react";
-import { EventInterface } from "../../../Interfaces";
-import Event from "./Event";
+import { IEvent } from "../../../Interfaces";
 import { CrateContents } from "../../Atoms/CrateContents/CrateContents";
+import Event from "./Event";
 
-interface Props {
-  readonly event: EventInterface;
+interface IProps {
+  readonly event: IEvent;
 }
 
-export default ({ event }: Props) => {
+export default ({ event }: IProps) => {
   const contents = event.crate ? event.crate.contents : "[deleted]";
   const name = event.actioningShip ? event.actioningShip.name : "[deleted]";
   return (

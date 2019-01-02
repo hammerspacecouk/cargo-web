@@ -1,13 +1,13 @@
 import * as React from "react";
-import { EventInterface } from "../../../Interfaces";
+import { IEvent } from "../../../Interfaces";
 import Event from "./Event";
 
-interface Props {
-  readonly event: EventInterface;
+interface IProps {
+  readonly event: IEvent;
   readonly firstPerson?: boolean;
 }
 
-export default (props: Props) => {
+export default (props: IProps) => {
   const port = props.event.port;
 
   let name;

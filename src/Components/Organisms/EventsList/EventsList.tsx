@@ -1,18 +1,5 @@
 import * as React from "react";
-import {PlayerNew} from "../../Molecules/Events/PlayerNew";
-import ShipNew from "../../Molecules/Events/ShipNew";
-import ShipArrival from "../../Molecules/Events/ShipArrival";
-import ShipDeparture from "../../Molecules/Events/ShipDeparture";
-import ShipRename from "../../Molecules/Events/ShipRename";
-import PlayerPromotion from "../../Molecules/Events/PlayerPromotion";
-import CrateNew from "../../Molecules/Events/CrateNew";
-import CratePickup from "../../Molecules/Events/CratePickup";
 import styled from "styled-components";
-import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
-import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
-import { GRID } from "../../../styles/variables";
-import { COLOURS, hexToRGBa } from "../../../styles/colours";
-import { MONOSPACE_FONT } from "../../../styles/typography";
 import {
   ACTION_CRATE_NEW,
   ACTION_CRATE_PICKUP,
@@ -22,15 +9,28 @@ import {
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  EventInterface
+  IEvent,
 } from "../../../Interfaces";
+import { COLOURS, hexToRGBa } from "../../../styles/colours";
+import { MONOSPACE_FONT } from "../../../styles/typography";
+import { GRID } from "../../../styles/variables";
+import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
+import CrateNew from "../../Molecules/Events/CrateNew";
+import CratePickup from "../../Molecules/Events/CratePickup";
+import { PlayerNew } from "../../Molecules/Events/PlayerNew";
+import PlayerPromotion from "../../Molecules/Events/PlayerPromotion";
+import ShipArrival from "../../Molecules/Events/ShipArrival";
+import ShipDeparture from "../../Molecules/Events/ShipDeparture";
+import ShipNew from "../../Molecules/Events/ShipNew";
+import ShipRename from "../../Molecules/Events/ShipRename";
 
-interface Props {
-  readonly events: EventInterface[];
+interface IProps {
+  readonly events: IEvent[];
   readonly firstPerson?: boolean;
 }
 
-const mapEvent = (event: EventInterface, firstPerson: boolean) => {
+const mapEvent = (event: IEvent, firstPerson: boolean) => {
   switch (event.action) {
     case ACTION_CRATE_NEW:
       return <CrateNew event={event} firstPerson={firstPerson} />;
@@ -85,7 +85,7 @@ const StyledListItem = styled.li`
   }
 `;
 
-export const EventsList = ({ events, firstPerson }: Props) => {
+export const EventsList = ({ events, firstPerson }: IProps) => {
   if (!events || events.length < 1) {
     return (
       <StyledList as="ol">

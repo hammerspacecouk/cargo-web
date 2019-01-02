@@ -1,46 +1,46 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
-import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 import {
-  ActionTokenInterface,
-  HealthIncreaseInterface,
-  ScoreInterface
+  IFleetResponse,
+  useFleetContext,
+} from "../../../context/Page/FleetContext";
+import { useSessionContext } from "../../../context/SessionContext";
+import {
+  IActionToken,
+  IHealthIncrease,
+  IScore,
 } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
-import { useSessionContext } from "../../../context/SessionContext";
 import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
-import {
-  FleetResponseInterface,
-  useFleetContext
-} from "../../../context/Page/FleetContext";
+import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
+import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 
-interface PropsInterface {
-  health: HealthIncreaseInterface[];
+interface IProps {
+  health: IHealthIncrease[];
 }
 
-interface UpdateResponseInterface {
-  fleet: FleetResponseInterface;
-  newScore: ScoreInterface;
+interface IUpdateResponse {
+  fleet: IFleetResponse;
+  newScore: IScore;
 }
 
 const StyledContent = styled.div`
   text-align: right;
 `;
 
-export default function FleetShipHealth({ health }: PropsInterface) {
+export default function FleetShipHealth({ health }: IProps) {
   const [buttonsDisabled, setButtonsDisabled] = React.useState(false);
   const { updateScore } = useSessionContext();
   const { setFleetData } = useFleetContext();
   const mounted = React.useRef(false);
 
-  const applyHealth = async (token: ActionTokenInterface) => {
+  const applyHealth = async (token: IActionToken) => {
     if (!mounted.current) {
       return;
     }
 
     setButtonsDisabled(true);
-    const data: UpdateResponseInterface = await ApiClient.tokenFetch(token);
+    const data: IUpdateResponse = await ApiClient.tokenFetch(token);
     if (mounted.current) {
       updateScore(data.newScore);
       setFleetData(data.fleet);
@@ -55,7 +55,7 @@ export default function FleetShipHealth({ health }: PropsInterface) {
     };
   });
 
-  let actionButtons = health.map(transaction => {
+  const actionButtons = health.map(transaction => {
     return (
       <TokenButton
         key={transaction.actionToken.token}

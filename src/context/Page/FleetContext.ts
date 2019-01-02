@@ -1,34 +1,34 @@
 import { createContext, createElement, useContext, useState } from "react";
+import { useMounted } from "../../hooks/useMounted";
 import {
-  ChildrenPropsInterface,
-  EventInterface,
-  FleetShipInterface
+  IChildrenProps,
+  IEvent,
+  IFleetShip,
 } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
-import { useMounted } from "../../hooks/useMounted";
 
-export interface FleetResponseInterface {
-  ships: FleetShipInterface[];
-  events: EventInterface[];
+export interface IFleetResponse {
+  ships: IFleetShip[];
+  events: IEvent[];
 }
 
-interface FleetContextInterface {
-  ships: FleetShipInterface[];
-  events: EventInterface[];
-  setFleetData: (data: FleetResponseInterface) => void;
+interface IFleetContext {
+  ships: IFleetShip[];
+  events: IEvent[];
+  setFleetData: (data: IFleetResponse) => void;
   refresh: () => void;
 }
 
 const FleetContext = createContext({});
 
-export const FleetContextProvider = ({ children }: ChildrenPropsInterface) => {
+export const FleetContextProvider = ({ children }: IChildrenProps) => {
   const { setSession } = useSessionContext();
   const [ships, setShips] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const isMounted = useMounted();
 
-  const setFleetData = (data: FleetResponseInterface) => {
+  const setFleetData = (data: IFleetResponse) => {
     setShips(data.ships);
     setEvents(data.events);
   };
@@ -48,13 +48,13 @@ export const FleetContextProvider = ({ children }: ChildrenPropsInterface) => {
         ships,
         events,
         setFleetData,
-        refresh
-      }
+        refresh,
+      },
     },
     children
   );
 };
 
-export const useFleetContext = (): FleetContextInterface => {
-  return useContext(FleetContext) as FleetContextInterface;
+export const useFleetContext = (): IFleetContext => {
+  return useContext(FleetContext) as IFleetContext;
 };

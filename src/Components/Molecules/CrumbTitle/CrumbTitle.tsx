@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 import { GRID } from "../../../styles/variables";
 import { H1 } from "../../Atoms/Heading/Heading";
+import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 
 export interface Crumb {
   link: string;
   title: string;
 }
 
-interface Props {
+interface IProps {
   crumbs?: Crumb[];
   children: any;
 }
@@ -41,13 +41,13 @@ const CrumbTitleH1 = styled(H1)`
   margin-top: ${GRID.HALF};
 `;
 
-export const CrumbTitle = (props: Props) => {
-  let crumbs = [
+export const CrumbTitle = (props: IProps) => {
+  const crumbs = [
     {
       link: "/",
-      title: "Home"
+      title: "Home",
     },
-    ...(props.crumbs || [])
+    ...(props.crumbs || []),
   ];
 
   return (

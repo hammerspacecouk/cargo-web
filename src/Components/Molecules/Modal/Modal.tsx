@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as ModalHandler from "react-modal";
 import styled, { css } from "styled-components";
-import CloseIcon from "../../Icons/CloseIcon/CloseIcon";
-import { GRID, Z_INDEX } from "../../../styles/variables";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
+import { GRID, Z_INDEX } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading/Heading";
+import CloseIcon from "../../Icons/CloseIcon/CloseIcon";
 
-interface Props {
+interface IProps {
   children: any;
   title?: string;
   isOpen: boolean;
@@ -92,7 +92,7 @@ export const ModalActions = styled.div`
   margin-top: ${GRID.UNIT};
 `;
 
-export const Modal = (props: Props) => {
+export const Modal = (props: IProps) => {
   // on server just render nothing (as you can't open modals on server)
   if (typeof window === "undefined") {
     return null;
@@ -121,12 +121,12 @@ export const Modal = (props: Props) => {
         className={{
           base: "modal",
           afterOpen: "modal--after-open",
-          beforeClose: "modal--before-close"
+          beforeClose: "modal--before-close",
         }}
         overlayClassName={{
           base: "modal__overlay",
           afterOpen: "modal__overlay--after-open",
-          beforeClose: "modal__overlay--before-close"
+          beforeClose: "modal__overlay--before-close",
         }}
       >
         <ModalHeader>

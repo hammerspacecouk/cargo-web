@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import * as differenceInSeconds from "date-fns/difference_in_seconds";
+import { useEffect, useState } from "react";
 import { useCurrentShipContext } from "../context/CurrentShipContext";
-import { useFrameEffect } from "./useFrameEffect";
 import { useSessionContext } from "../context/SessionContext";
+import { useFrameEffect } from "./useFrameEffect";
 
 const secondsRemaining = (arrival: Date) => {
   const now = new Date();
@@ -31,7 +31,7 @@ const useTravellingCountdown = () => {
   return {
     secondsRemaining: seconds,
     percent,
-    isArriving: seconds <= 0
+    isArriving: seconds <= 0,
   };
 };
 
@@ -71,6 +71,6 @@ export const useTravellingState = () => {
 
   return {
     secondsRemaining,
-    percent
+    percent,
   };
 };

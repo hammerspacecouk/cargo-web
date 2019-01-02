@@ -1,4 +1,5 @@
 // https://palx.jxnblk.com/5700d2
+// tslint:disable:object-literal-sort-keys
 const allColours = {
   base: "#5700d2",
   black: "#1c1a23",
@@ -13,7 +14,7 @@ const allColours = {
     "#a39dac",
     "#8d8599",
     "#72677f",
-    "#433c4d"
+    "#433c4d",
   ],
   violet: [
     "#f0e9fb",
@@ -25,7 +26,7 @@ const allColours = {
     "#4b00bd",
     "#4200a5",
     "#360089",
-    "#270061"
+    "#270061",
   ],
   fuschia: [
     "#f9e9fb",
@@ -37,7 +38,7 @@ const allColours = {
     "#ab00be",
     "#9600a6",
     "#7c008a",
-    "#5a0064"
+    "#5a0064",
   ],
   pink: [
     "#fbe9f4",
@@ -49,7 +50,7 @@ const allColours = {
     "#be0072",
     "#a60064",
     "#8a0053",
-    "#64003c"
+    "#64003c",
   ],
   red: [
     "#fbeaeb",
@@ -61,7 +62,7 @@ const allColours = {
     "#be0013",
     "#a60010",
     "#8a000d",
-    "#64000a"
+    "#64000a",
   ],
   orange: [
     "#faede4",
@@ -73,7 +74,7 @@ const allColours = {
     "#bd4b00",
     "#a54200",
     "#883600",
-    "#612600"
+    "#612600",
   ],
   yellow: [
     "#f9f6de",
@@ -85,7 +86,7 @@ const allColours = {
     "#beab00",
     "#a69600",
     "#8a7c00",
-    "#635900"
+    "#635900",
   ],
   lime: [
     "#eff9df",
@@ -97,7 +98,7 @@ const allColours = {
     "#72be00",
     "#64a600",
     "#538a00",
-    "#3c6400"
+    "#3c6400",
   ],
   green: [
     "#e6fae4",
@@ -109,7 +110,7 @@ const allColours = {
     "#13be00",
     "#10a600",
     "#0d8a00",
-    "#0a6400"
+    "#0a6400",
   ],
   teal: [
     "#e4faec",
@@ -121,7 +122,7 @@ const allColours = {
     "#00be4c",
     "#00a642",
     "#008a37",
-    "#006428"
+    "#006428",
   ],
   cyan: [
     "#e3faf7",
@@ -133,7 +134,7 @@ const allColours = {
     "#00beab",
     "#00a796",
     "#008a7c",
-    "#00645a"
+    "#00645a",
   ],
   blue: [
     "#e4f1fa",
@@ -145,7 +146,7 @@ const allColours = {
     "#0071bd",
     "#0063a5",
     "#005188",
-    "#003a61"
+    "#003a61",
   ],
   indigo: [
     "#e9ebfb",
@@ -157,30 +158,31 @@ const allColours = {
     "#0012bd",
     "#0010a5",
     "#000d87",
-    "#00095f"
-  ]
+    "#00095f",
+  ],
 };
 
+// tslint:disable-next-line:object-literal-sort-keys
 export const COLOURS = {
   BASE: allColours.base,
   BLACK: {
     STANDARD: allColours.black,
-    COLOURISED: allColours.violet[9]
+    COLOURISED: allColours.violet[9],
   },
   WHITE: {
-    STANDARD: allColours.white
+    STANDARD: allColours.white,
   },
   BODY: {
     BACKGROUND: allColours.black,
     TEXT: allColours.white,
     LINK: allColours.violet[4],
-    FADED: allColours.gray[7]
+    FADED: allColours.gray[7],
   },
   BUTTON: {
     STANDARD: allColours.white,
     ACTION: allColours.violet[4],
     CONFIRM: allColours.green[4],
-    DANGER: allColours.red[5]
+    DANGER: allColours.red[5],
   },
   CRATE: {
     LEVEL0: allColours.yellow[2],
@@ -189,46 +191,46 @@ export const COLOURS = {
     LEVEL3: allColours.indigo[3],
     LEVEL4: allColours.teal[3],
     LEVEL5: allColours.lime[4],
-    LEVEL6: allColours.orange[3]
+    LEVEL6: allColours.orange[3],
   },
   GREY: {
-    MID: allColours.gray[7]
+    MID: allColours.gray[7],
   },
   HEALTH: {
     FULL: allColours.violet[4],
     GOOD: allColours.green[4],
     OK: allColours.yellow[3],
     WARNING: allColours.orange[4],
-    DANGER: allColours.red[5]
+    DANGER: allColours.red[5],
   },
   SEMANTIC: {
     DANGER: {
       KEY: allColours.red[5],
       BACKGROUND: allColours.red[1],
-      FOREGROUND: allColours.red[9]
+      FOREGROUND: allColours.red[9],
     },
     INFO: {
       KEY: allColours.blue[4],
       BACKGROUND: allColours.blue[1],
-      FOREGROUND: allColours.blue[9]
+      FOREGROUND: allColours.blue[9],
     },
     OK: {
       KEY: allColours.green[5],
       BACKGROUND: allColours.green[1],
-      FOREGROUND: allColours.green[9]
+      FOREGROUND: allColours.green[9],
     },
     WARNING: {
       KEY: allColours.yellow[4],
       BACKGROUND: allColours.yellow[1],
-      FOREGROUND: allColours.yellow[9]
-    }
-  }
+      FOREGROUND: allColours.yellow[9],
+    },
+  },
 };
 
 export const hexToRGBa = (hex: string, alpha?: number): string => {
-  const r = parseInt(hex.slice(1, 3), 16),
-    g = parseInt(hex.slice(3, 5), 16),
-    b = parseInt(hex.slice(5, 7), 16);
+  const r = parseInt(hex.slice(1, 3), 16);
+  const  g = parseInt(hex.slice(3, 5), 16);
+  const  b = parseInt(hex.slice(5, 7), 16);
 
   if (alpha !== undefined) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;

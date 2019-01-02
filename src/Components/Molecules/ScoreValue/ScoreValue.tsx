@@ -1,9 +1,9 @@
 import * as React from "react";
-import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
 import styled from "styled-components";
 import { MONOSPACE_FONT } from "../../../styles/typography";
+import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
 
-interface PropsInterface {
+interface IProps {
   score: number;
   className?: string;
 }
@@ -28,7 +28,7 @@ export const Digits = styled.span`
 /**
  * Standard way to display a score value (with Icon)
  */
-export const ScoreValue = ({ score, className }: PropsInterface) => {
+export const ScoreValue = ({ score, className }: IProps) => {
   return (
     <StyledScore className={className}>
       <Icon>

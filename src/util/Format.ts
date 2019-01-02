@@ -32,13 +32,13 @@ const getTimeZone = (): string => {
 
 export const fullDate = (date: Date) =>
   date.toLocaleString(getLocale(), {
-    timeZone: getTimeZone(),
-    weekday: "long",
-    year: "numeric",
-    month: "long",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    month: "long",
     second: "2-digit",
-    timeZoneName: "short"
+    timeZone: getTimeZone(),
+    timeZoneName: "short",
+    weekday: "long",
+    year: "numeric",
   });

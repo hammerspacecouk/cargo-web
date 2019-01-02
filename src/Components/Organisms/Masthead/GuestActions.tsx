@@ -1,9 +1,9 @@
-import routes from "../../../routes";
 import * as React from "react";
-import { LinkBox } from "./Masthead";
-import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
 import styled from "styled-components";
 import { useSessionContext } from "../../../context/SessionContext";
+import { routes } from "../../../routes";
+import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
+import { LinkBox } from "./Masthead";
 
 const StyledForm = styled.form`
   display: flex;

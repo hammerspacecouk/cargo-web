@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
+import { H1 } from "../../../components/Atoms/Heading/Heading";
+import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
+import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
+import { TextCenter } from "../../../components/Atoms/Text/Text";
+import { PortName } from "../../../components/Molecules/PortName/PortName";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { CrateAtPort } from "./CrateAtPort";
-import { Loading } from "../../../components/Atoms/Loading/Loading";
-import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
-import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
-import { H1 } from "../../../components/Atoms/Heading/Heading";
-import { TextCenter } from "../../../components/Atoms/Text/Text";
-import PortName from "../../../components/Molecules/PortName/PortName";
 
-interface PropsInterface {
+interface IProps {
   className?: string;
 }
 
@@ -19,7 +19,7 @@ const List = styled(ListInline)`
   flex-wrap: wrap;
 `;
 
-export const CratesAtPort = ({ className }: PropsInterface) => {
+export const CratesAtPort = ({ className }: IProps) => {
   const { port, cratesInPort } = useCurrentShipContext();
 
   if (cratesInPort === undefined) {

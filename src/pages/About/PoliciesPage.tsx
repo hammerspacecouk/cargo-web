@@ -1,37 +1,37 @@
 import * as React from "react";
 import styled from "styled-components";
-import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
-import { MessageOk } from "../../components/Molecules/Message/Message";
 import { Prose } from "../../components/Atoms/Prose/Prose";
-import { GRID } from "../../styles/variables";
+import { MessageOk } from "../../components/Molecules/Message/Message";
+import { TableStriped } from "../../components/Molecules/Table/Table";
+import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
 import { COLOURS } from "../../styles/colours";
 import { SIZES } from "../../styles/typography";
-import { TableStriped } from "../../components/Molecules/Table/Table";
+import { GRID } from "../../styles/variables";
 
 const HashDemo = styled.div`
-    font-size: ${SIZES.C};
-    font-family: monospace;
-    display: block;
-    padding: ${GRID.HALF};
-    background: ${COLOURS.BLACK.COLOURISED};
-    color: ${COLOURS.WHITE.STANDARD};
-    margin-bottom: ${GRID.UNIT};
+  font-size: ${SIZES.C};
+  font-family: monospace;
+  display: block;
+  padding: ${GRID.HALF};
+  background: ${COLOURS.BLACK.COLOURISED};
+  color: ${COLOURS.WHITE.STANDARD};
+  margin-bottom: ${GRID.UNIT};
 `;
 
 const HashDemoEmail = styled.div`
-    text-align: center;
-    &:after {
-        font-size: ${SIZES.B};
-        content: "⬇";
-        display: block;
-        margin: ${GRID.HALF} 0;
-    }
+  text-align: center;
+  &:after {
+    font-size: ${SIZES.B};
+    content: "⬇";
+    display: block;
+    margin: ${GRID.HALF} 0;
+  }
 `;
 
 const HashDemoCode = styled.div`
-    text-align: center;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 export const PoliciesPage = () => {

@@ -1,11 +1,11 @@
 import * as React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { COLOURS } from "../../../styles/colours";
-import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 import { GRID } from "../../../styles/variables";
 import { Icon } from "../../Atoms/Icon/Icon";
+import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 
 export const playBarHeight = 80;
 

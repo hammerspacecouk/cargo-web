@@ -1,17 +1,17 @@
 import * as React from "react";
-import { ScoreInterface } from "../../../Interfaces";
-import { useSessionContext } from "../../../context/SessionContext";
-import { ScoreValue } from "../ScoreValue/ScoreValue";
 import { getValue } from "../../../containers/Player/Score";
+import { useSessionContext } from "../../../context/SessionContext";
+import { IScore } from "../../../Interfaces";
 import { ComplexButton } from "../ComplexButton/ComplexButton";
+import { ScoreValue } from "../ScoreValue/ScoreValue";
 
-interface Props {
+interface IProps {
   readonly amount: number;
   readonly disabledOverride?: boolean;
   readonly children?: JSX.Element;
 }
 
-const isDisabled = (amount: number, playerScore: ScoreInterface): boolean => {
+const isDisabled = (amount: number, playerScore: IScore): boolean => {
   if (amount === 0) {
     return false;
   }
@@ -22,8 +22,8 @@ const isDisabled = (amount: number, playerScore: ScoreInterface): boolean => {
 export const CreditsButton = ({
   amount,
   disabledOverride,
-  children
-}: Props) => {
+  children,
+}: IProps) => {
   const { score } = useSessionContext();
   const [disabled, setDisabled] = React.useState(isDisabled(amount, score));
 

@@ -1,31 +1,31 @@
-import { createElement, Component } from "react";
-import { match, Redirect } from "react-router";
-import routes from "../routes";
-import { withInitialData, InitialDataComponent } from "./withInitialData";
 import { Request } from "express";
+import { Component, createElement } from "react";
+import { match, Redirect } from "react-router-dom";
+import { routes } from "../routes";
+import { IInitialDataComponent, withInitialData } from "./withInitialData";
 
-interface Props {
+interface IProps {
   isLoggedIn?: boolean;
 }
 
 // This is a HOC that ensures the user is NOT already logged in
-export const withGuestUser = (Page: InitialDataComponent) => {
-  class WithGuestUser extends Component<Props, undefined> {
-    static async getInitialData(match: match, request: Request) {
-      if (request?.cookies?.AUTHENTICATION_TOKEN) {
+export const withGuestUser = (Page: IInitialDataComponent) => {
+  class WithGuestUser extends Component<IProps, undefined> {
+    public static async getInitialData(routeMatch: match, request: Request) {
+      if (request && request.cookies && request.cookies.AUTHENTICATION_TOKEN) {
         return { isLoggedIn: true };
       }
       // Need to call the wrapped components getInitialData if it exists
       if (Page.getInitialData) {
-        return Page.getInitialData(match, request);
+        return Page.getInitialData(routeMatch, request);
       }
       return null;
     }
 
-    render() {
+    public render() {
       if (this.props.isLoggedIn) {
         return createElement(Redirect, {
-          to: routes.getPlay()
+          to: routes.getPlay(),
         });
       }
 
@@ -34,7 +34,7 @@ export const withGuestUser = (Page: InitialDataComponent) => {
       return createElement(
         Page,
         {
-          ...rest
+          ...rest,
         },
         children
       );

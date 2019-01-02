@@ -1,12 +1,12 @@
 import * as React from "react";
-import { useCurrentShipContext } from "../../context/CurrentShipContext";
+import { H2 } from "../../components/Atoms/Heading/Heading";
 import { IntervalFormat } from "../../components/Atoms/IntervalFormat/IntervalFormat";
 import { ProgressBar } from "../../components/Atoms/ProgressBar/ProgressBar";
-import { useTravellingState } from "../../hooks/useTravellingState";
 import { TextCenter } from "../../components/Atoms/Text/Text";
-import { H2 } from "../../components/Atoms/Heading/Heading";
+import { useCurrentShipContext } from "../../context/CurrentShipContext";
+import { useTravellingState } from "../../hooks/useTravellingState";
 
-export default () => {
+export const Travelling = () => {
   const { channel } = useCurrentShipContext();
   const { secondsRemaining, percent } = useTravellingState();
 

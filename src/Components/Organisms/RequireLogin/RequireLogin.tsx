@@ -1,7 +1,7 @@
 import * as React from "react";
+import { SimplePage } from "../../Templates/SimplePage/SimplePage";
 import { LoginForm } from "../LoginForm/LoginForm";
 import { Status } from "../Status/Status";
-import { SimplePage } from "../../Templates/SimplePage/SimplePage";
 
 export const RequireLogin = () => (
   <Status code={403}>

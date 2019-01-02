@@ -1,18 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
-import { CrateActionInterface } from "../../../Interfaces";
-import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
+import { PlaceholderContents } from "../../../components/Atoms/CrateContents/CrateContents";
+import { CrateButton } from "../../../components/Atoms/HaloButton/HaloButton";
 import {
   CratePickup,
-  StyledCrate
+  StyledCrate,
 } from "../../../components/Molecules/CratePickup/CratePickup";
-import { CrateButton } from "../../../components/Atoms/HaloButton/HaloButton";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
+import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
+import { ICrateAction } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
-import { PlaceholderContents } from "../../../components/Atoms/CrateContents/CrateContents";
 
-interface CrateOnShipPropsInterface {
-  crateAction: CrateActionInterface;
+interface ICrateOnShipProps {
+  crateAction: ICrateAction;
 }
 
 const StyledCrateOnShip = styled.div``;
@@ -21,7 +21,7 @@ const StyledPlaceholder = styled.div`
   padding: ${GRID.HALF};
 `;
 
-export const CrateOnShip = ({ crateAction }: CrateOnShipPropsInterface) => {
+export const CrateOnShip = ({ crateAction }: ICrateOnShipProps) => {
   const { buttonsDisabled, moveCrate } = usePlayPortContext();
 
   return (

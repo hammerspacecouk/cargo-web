@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "jsx-no-lambda": false,
+    "no-console": [true, "log"],
+    "no-default-export": true,
+    "no-shadowed-variable": [
+      true,
+      {
+        "temporalDeadZone": false
+      }
+    ],
+    "no-submodule-imports": [
+      true,
+      "react-dom/server",
+      "date-fns"
+    ],
+    "only-arrow-functions": true
+  }
+}

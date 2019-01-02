@@ -1,13 +1,13 @@
 import * as React from "react";
-import styled from "styled-components";
-import { PortInterface, ShipInterface } from "../../../Interfaces";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { IPort, IShip } from "../../../Interfaces";
+import { routes } from "../../../routes";
 import ChevronRightIcon from "../../Icons/ChevronRightIcon/ChevronRightIcon";
-import routes from "../../../routes";
-import PortName from "../../Molecules/PortName/PortName";
+import { PortName } from "../../Molecules/PortName/PortName";
 
-interface PropsInterface {
-  ship: ShipInterface;
+interface IProps {
+  ship: IShip;
 }
 
 const Styled = styled.div`
@@ -23,11 +23,11 @@ const Go = styled(Link)`
   width: 48px;
 `;
 
-export default function FleetShipLocation({ ship }: PropsInterface) {
+export default function FleetShipLocation({ ship }: IProps) {
   return (
     <Styled>
       <Location>
-        <PortName port={ship.location as PortInterface} />
+        <PortName port={ship.location as IPort} />
       </Location>
       <Go to={routes.getPlayShip(ship.id)}>
         <ChevronRightIcon />

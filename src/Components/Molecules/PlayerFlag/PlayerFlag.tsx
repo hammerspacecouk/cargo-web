@@ -1,11 +1,11 @@
 import * as React from "react";
-import { PlayerInterface } from "../../../Interfaces";
-import { Environment } from "../../../util/Environment";
 import styled from "styled-components";
+import { IPlayer } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
+import { Environment } from "../../../util/Environment";
 
-export interface Props {
-  player: PlayerInterface;
+export interface IProps {
+  player: IPlayer;
   className?: string;
 }
 
@@ -19,7 +19,7 @@ const StyledImg = styled.img`
   background: ${COLOURS.BLACK.STANDARD};
 `;
 
-export default function PlayerFlag({ player, className }: Props) {
+export default function PlayerFlag({ player, className }: IProps) {
   if (player) {
     return (
       <StyledImg

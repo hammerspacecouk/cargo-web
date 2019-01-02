@@ -1,16 +1,16 @@
 import * as React from "react";
+import { StaticContext } from "react-router-dom";
 import { Route, RouteComponentProps } from "react-router-dom";
-import { StaticContext } from "react-router";
 
-interface Props {
+interface IProps {
   code: number;
   children: any;
 }
 
-export const Status = (props: Props) => (
+export const Status = (props: IProps) => (
   <Route
     render={({
-      staticContext
+      staticContext,
     }: RouteComponentProps<any, StaticContext, any>) => {
       if (staticContext) {
         staticContext.statusCode = props.code;

@@ -1,15 +1,14 @@
 import * as React from "react";
-import { withRouter } from "react-router";
-import { useCurrentShipContext } from "../../context/CurrentShipContext";
-import { Loading } from "../../components/Atoms/Loading/Loading";
-import Port from "./Port";
-import Travelling from "./Travelling";
-import { NotFound } from "../../components/Organisms/Error/NotFound";
-import { useEffect } from "react";
-import { ApiClient } from "../../util/ApiClient";
+import { withRouter } from "react-router-dom";
 import { H1 } from "../../components/Atoms/Heading/Heading";
+import { Loading } from "../../components/Atoms/Loading/Loading";
+import { NotFound } from "../../components/Organisms/Error/NotFound";
+import { useCurrentShipContext } from "../../context/CurrentShipContext";
+import { ApiClient } from "../../util/ApiClient";
+import { Port } from "./Port";
+import { Travelling } from "./Travelling";
 
-export interface ShipParamsInterface {
+export interface IShipParams {
   match: {
     params: {
       shipId: string;
@@ -17,7 +16,7 @@ export interface ShipParamsInterface {
   };
 }
 
-export default withRouter(({ match }: ShipParamsInterface) => {
+export default withRouter(({ match }: IShipParams) => {
   const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
 
   let allowUpdate = true;
@@ -28,7 +27,7 @@ export default withRouter(({ match }: ShipParamsInterface) => {
     }
   };
 
-  useEffect(
+  React.useEffect(
     () => {
       getData();
       return () => {

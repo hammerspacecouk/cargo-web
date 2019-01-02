@@ -1,15 +1,15 @@
 import * as React from "react";
 import { NotFound } from "../../components/Organisms/Error/NotFound";
-import { PortInterface } from "../../Interfaces";
 import { SimplePage } from "../../components/Templates/SimplePage/SimplePage";
+import { IPort } from "../../Interfaces";
 
-interface PropsInterface {
-  port?: PortInterface;
+interface IProps {
+  port?: IPort;
 }
 
-export const PortPage = ({ port }: PropsInterface) => {
+export const PortPage = ({ port }: IProps) => {
   if (!port) {
-    return <NotFound message="You need a new map. There is no port here"/>;
+    return <NotFound message="You need a new map. There is no port here" />;
   }
 
   return (

@@ -1,20 +1,20 @@
 import * as React from "react";
-import { ShipInterface } from "../../../Interfaces";
-import { Loading } from "../../Atoms/Loading/Loading";
-import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
-import PlayerShip from "../../Molecules/PlayerShip/PlayerShip";
 import styled from "styled-components";
+import { IShip } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
+import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { Loading } from "../../Atoms/Loading/Loading";
+import PlayerShip from "../../Molecules/PlayerShip/PlayerShip";
 
-interface Props {
-  ships: ShipInterface[];
+interface IProps {
+  ships: IShip[];
 }
 
 const Item = styled.li`
   margin-bottom: ${GRID.UNIT};
 `;
 
-export const PlayerShipList = ({ ships }: Props) => {
+export const PlayerShipList = ({ ships }: IProps) => {
   if (ships === undefined) {
     return <Loading />;
   } // todo - pretty loader

@@ -1,14 +1,14 @@
 import * as React from "react";
-import styled from "styled-components";
-import { ActionTokenInterface } from "../../../Interfaces";
-import { ApiClient } from "../../../util/ApiClient";
 import { FormEvent } from "react";
+import styled from "styled-components";
+import { IActionToken } from "../../../Interfaces";
+import { ApiClient } from "../../../util/ApiClient";
 
-interface Props {
-  readonly token: ActionTokenInterface;
+interface IProps {
+  readonly token: IActionToken;
   readonly children: any;
   readonly handler?: (
-    token: ActionTokenInterface
+    token: IActionToken
   ) => Promise<void> | null | void;
 }
 
@@ -16,7 +16,7 @@ const StyledForm = styled.form`
   display: inline;
 `;
 
-export const TokenButton = ({ token, children, handler }: Props) => {
+export const TokenButton = ({ token, children, handler }: IProps) => {
   return (
     <StyledForm
       method="post"

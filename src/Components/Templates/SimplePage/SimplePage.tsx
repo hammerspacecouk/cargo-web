@@ -1,10 +1,10 @@
 import * as React from "react";
-import { CrumbTitle, Crumb } from "../../Molecules/CrumbTitle/CrumbTitle";
 import styled from "styled-components";
-import { GRID, MAX_CONTENT_WIDTH } from "../../../styles/variables";
 import { BREAKPOINTS } from "../../../styles/media";
+import { GRID, MAX_CONTENT_WIDTH } from "../../../styles/variables";
+import { Crumb, CrumbTitle } from "../../Molecules/CrumbTitle/CrumbTitle";
 
-interface PropsInterface {
+interface IProps {
   readonly title: string;
   readonly children: any;
   readonly crumbs?: Crumb[];
@@ -34,7 +34,7 @@ const StyledMain = styled.div`
   grid-column: main;
 `;
 
-export const SimplePage = (props: PropsInterface) => (
+export const SimplePage = (props: IProps) => (
   <StyledPage>
     <StyledTitle>
       <CrumbTitle crumbs={props.crumbs}>{props.title}</CrumbTitle>

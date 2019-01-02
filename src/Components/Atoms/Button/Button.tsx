@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
 
 export const TYPE_CONFIRM = "confirm";
 export const TYPE_DANGER = "danger";
@@ -20,7 +20,7 @@ const getColour = (styleType: string): string => {
   }
 };
 
-interface PropsInterface {
+interface IProps {
   styleType?: string;
   href?: string;
   target?: string;

@@ -1,33 +1,33 @@
 import * as React from "react";
 import styled from "styled-components";
+import { hexToRGBa } from "../../../styles/colours";
+import { SIZES } from "../../../styles/typography";
+import { GRID } from "../../../styles/variables";
 import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
 import {
   FacebookLogo,
   GoogleLogo,
   MicrosoftLogo,
-  TwitterLogo
+  TwitterLogo,
 } from "../../Atoms/Logos/Logos";
-import { SIZES } from "../../../styles/typography";
-import { GRID } from "../../../styles/variables";
-import { hexToRGBa } from "../../../styles/colours";
 
-interface PropsInterface {
+interface IProps {
   href: string;
 }
 
-interface ButtonPropsInterface {
+interface IButtonProps {
   href: string;
   icon: JSX.Element;
   text: string;
-  colour: ColourInterface;
+  colour: IColour;
 }
 
-interface ColourInterface {
+interface IColour {
   bg: string;
   fg: string;
 }
 
-const StyledLink = styled.a<{ colour: ColourInterface }>`
+const StyledLink = styled.a<{ colour: IColour }>`
   display: flex;
   align-items: center;
   padding: 12px ${GRID.UNIT};
@@ -67,57 +67,57 @@ const StyledText = styled.span`
   margin-left: ${GRID.UNIT};
 `;
 
-const SocialButton = ({ href, icon, text, colour }: ButtonPropsInterface) => (
+const SocialButton = ({ href, icon, text, colour }: IButtonProps) => (
   <StyledLink colour={colour} href={href}>
     <Icon size={SMALL_ICON}>{icon}</Icon>
     <StyledText>{text}</StyledText>
   </StyledLink>
 );
 
-export const FacebookButton = ({ href }: PropsInterface) => (
+export const FacebookButton = ({ href }: IProps) => (
   <SocialButton
     href={href}
     icon={<FacebookLogo />}
     text="Facebook"
     colour={{
       bg: "#3b5998",
-      fg: "#ffffff"
+      fg: "#ffffff",
     }}
   />
 );
 
-export const GoogleButton = ({ href }: PropsInterface) => (
+export const GoogleButton = ({ href }: IProps) => (
   <SocialButton
     href={href}
     icon={<GoogleLogo />}
     text="Google"
     colour={{
       bg: "#ffffff",
-      fg: "#121212"
+      fg: "#121212",
     }}
   />
 );
 
-export const MicrosoftButton = ({ href }: PropsInterface) => (
+export const MicrosoftButton = ({ href }: IProps) => (
   <SocialButton
     href={href}
     icon={<MicrosoftLogo />}
     text="Microsoft"
     colour={{
       bg: "#4f4f4f",
-      fg: "#ffffff"
+      fg: "#ffffff",
     }}
   />
 );
 
-export const TwitterButton = ({ href }: PropsInterface) => (
+export const TwitterButton = ({ href }: IProps) => (
   <SocialButton
     href={href}
     icon={<TwitterLogo />}
     text="Twitter"
     colour={{
       bg: "#1da1f2",
-      fg: "#ffffff"
+      fg: "#ffffff",
     }}
   />
 );

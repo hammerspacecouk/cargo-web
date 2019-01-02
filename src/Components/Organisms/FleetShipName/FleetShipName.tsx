@@ -1,15 +1,15 @@
-import { ShipInterface } from "../../../Interfaces";
-import { Link } from "react-router-dom";
 import * as React from "react";
-import routes from "../../../routes";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { IShip } from "../../../Interfaces";
+import { routes } from "../../../routes";
 import { GRID } from "../../../styles/variables";
+import { H2, H6 } from "../../Atoms/Heading/Heading";
 import { PlaceHolder } from "../../Atoms/Placeholder/PlaceHolder";
 import ShieldStrength from "../../Molecules/ShieldStrength/ShieldStrength";
-import { H2, H6 } from "../../Atoms/Heading/Heading";
 
-interface PropsInterface {
-  ship?: ShipInterface;
+interface IProps {
+  ship?: IShip;
 }
 
 const StyledWrap = styled.div`
@@ -34,7 +34,7 @@ const Destroyed = styled.span`
   text-decoration: line-through;
 `;
 
-export default function FleetShipName({ ship }: PropsInterface) {
+export default function FleetShipName({ ship }: IProps) {
   let detail;
   if (ship) {
     if (ship.isDestroyed) {

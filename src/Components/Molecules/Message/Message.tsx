@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
+import { IChildrenProps, IMessage } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
+import ErrorIcon from "../../Icons/ErrorIcon/ErrorIcon";
+import InfoIcon from "../../Icons/InfoIcon/InfoIcon";
 import TickIcon from "../../Icons/TickIcon/TickIcon";
 import WarningIcon from "../../Icons/WarningIcon/WarningIcon";
-import InfoIcon from "../../Icons/InfoIcon/InfoIcon";
-import ErrorIcon from "../../Icons/ErrorIcon/ErrorIcon";
-import { ChildrenPropsInterface, MessageInterface } from "../../../Interfaces";
 
 // these are not using Symbol() because messages can come from the server
 export const TYPE_OK = "ok";
@@ -18,10 +18,10 @@ const iconSize = 32;
 
 interface GenericMessageProps {
   /** The message object to render */
-  readonly message: MessageInterface;
+  readonly message: IMessage;
 }
 
-interface StyledPropsInterface {
+interface IStyledProps {
   fill: string;
   text: string;
 }
@@ -69,13 +69,13 @@ const messageContent = (
   </StyledMessage>
 );
 
-export const MessageOk = ({ children }: ChildrenPropsInterface) =>
+export const MessageOk = ({ children }: IChildrenProps) =>
   messageContent(<TickIcon />, children, COLOURS.SEMANTIC.OK);
-export const MessageWarning = ({ children }: ChildrenPropsInterface) =>
+export const MessageWarning = ({ children }: IChildrenProps) =>
   messageContent(<WarningIcon />, children, COLOURS.SEMANTIC.WARNING);
-export const MessageInfo = ({ children }: ChildrenPropsInterface) =>
+export const MessageInfo = ({ children }: IChildrenProps) =>
   messageContent(<InfoIcon />, children, COLOURS.SEMANTIC.INFO);
-export const MessageError = ({ children }: ChildrenPropsInterface) =>
+export const MessageError = ({ children }: IChildrenProps) =>
   messageContent(<ErrorIcon />, children, COLOURS.SEMANTIC.DANGER);
 
 export const Message = ({ message }: GenericMessageProps) => {

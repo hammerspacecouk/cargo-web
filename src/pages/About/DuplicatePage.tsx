@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
-import { LogOutButton } from "../../components/Organisms/LogoutButton/LogOutButton";
-import { MessageInfo } from "../../components/Molecules/Message/Message";
 import { Prose } from "../../components/Atoms/Prose/Prose";
+import { MessageInfo } from "../../components/Molecules/Message/Message";
+import { LogOutButton } from "../../components/Organisms/LogoutButton/LogOutButton";
+import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
 
 export default function DuplicatePage() {
   return (

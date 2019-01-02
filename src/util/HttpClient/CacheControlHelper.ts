@@ -1,9 +1,9 @@
-interface CacheControl {
+interface ICacheControl {
   [key: string]: any;
 }
 
 export class CacheControlHelper {
-  private readonly parsed: CacheControl;
+  private readonly parsed: ICacheControl;
 
   constructor(field: string) {
     /*
@@ -27,28 +27,26 @@ export class CacheControlHelper {
     );
 
     if (header["max-age"]) {
-      try {
-        const maxAge = parseInt(header["max-age"], 10);
-        if (isNaN(maxAge)) {
-          return null;
-        }
+      const maxAge = parseInt(header["max-age"], 10);
+      if (isNaN(maxAge)) {
+        return null;
+      }
 
-        header["max-age"] = maxAge;
-      } catch (err) {}
+      header["max-age"] = maxAge;
     }
 
     this.parsed = header;
   }
 
-  getMaxAge() {
+  public getMaxAge() {
     return this.parsed["max-age"];
   }
 
-  getExpires(now: number) {
+  public getExpires(now: number) {
     return now + this.getMaxAge() * 1000;
   }
 
-  isCacheable() {
+  public isCacheable() {
     return !this.parsed["no-cache"];
   }
 }

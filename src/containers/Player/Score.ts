@@ -1,14 +1,14 @@
-import { createElement, useState, useEffect, useRef } from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
+import { createElement, useEffect, useRef, useState } from "react";
 
-import { ScoreInterface } from "../../Interfaces";
 import { ScoreValue } from "../../components/Molecules/ScoreValue/ScoreValue";
+import { IScore } from "../../Interfaces";
 
-interface Props {
-  score: ScoreInterface;
+interface IProps {
+  score: IScore;
 }
 
-export const getValue = (score: ScoreInterface, now: Date): number => {
+export const getValue = (score: IScore, now: Date): number => {
   const calculationDate = new Date(score.datetime);
   const millisecondsDiff = differenceInMilliseconds(now, calculationDate);
 
@@ -23,11 +23,11 @@ export const getValue = (score: ScoreInterface, now: Date): number => {
   return Math.floor(current);
 };
 
-const scoreState = (score: ScoreInterface): number => {
+const scoreState = (score: IScore): number => {
   return getValue(score, new Date());
 };
 
-export default (props: Props) => {
+export default (props: IProps) => {
   const [score, setScore] = useState(scoreState(props.score));
   const mounted = useRef(false);
   let frameHandler: number = null;

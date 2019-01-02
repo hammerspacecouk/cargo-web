@@ -1,14 +1,14 @@
 import * as React from "react";
-import { FleetShipInterface } from "../../../Interfaces";
-import styled from "styled-components";
-import FleetShipItem from "../FleetShipItem/FleetShipItem";
-import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
-import { GRID } from "../../../styles/variables";
-import { COLOURS } from "../../../styles/colours";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { IFleetShip } from "../../../Interfaces";
+import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
+import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import FleetShipItem from "../FleetShipItem/FleetShipItem";
 
-export interface Props {
-  ships: FleetShipInterface[];
+export interface IProps {
+  ships: IFleetShip[];
 }
 
 const StyledShipsList = styled(ListUnstyled)`
@@ -22,7 +22,7 @@ const MoreLink = styled.div`
   justify-content: center;
 `;
 
-export default function FleetShips({ ships }: Props) {
+export default function FleetShips({ ships }: IProps) {
   let shipRows;
   if (ships !== undefined) {
     shipRows = ships.map(ship => (
@@ -31,7 +31,7 @@ export default function FleetShips({ ships }: Props) {
   } else {
     shipRows = [
       <FleetShipItem key="loading1" />,
-      <FleetShipItem key="loading2" />
+      <FleetShipItem key="loading2" />,
     ];
   }
 

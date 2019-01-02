@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CratesOnShip } from "./CratesOnShip";
-import { CratesAtPort } from "./CratesAtPort";
+import { COLOURS } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
 import { GRID } from "../../../styles/variables";
-import { COLOURS } from "../../../styles/colours";
+import { CratesAtPort } from "./CratesAtPort";
+import { CratesOnShip } from "./CratesOnShip";
 
 const CratesLayout = styled.div`
   ${BREAKPOINTS.M`
@@ -18,7 +18,7 @@ const CratesLayout = styled.div`
 `;
 
 const StyledCratesOnShip = styled(CratesOnShip).attrs({
-  suppressClassNameWarning: true
+  suppressClassNameWarning: true,
 })`
   margin-bottom: ${GRID.UNIT};
   ${BREAKPOINTS.M`
@@ -28,7 +28,7 @@ const StyledCratesOnShip = styled(CratesOnShip).attrs({
 `;
 
 const StyledCratesAtPort = styled(CratesAtPort).attrs({
-  suppressClassNameWarning: true
+  suppressClassNameWarning: true,
 })`
   ${BREAKPOINTS.M`
       flex: 1;

@@ -1,33 +1,33 @@
-import { KeyValueInterface } from "../Interfaces";
+import { IKeyValue } from "../Interfaces";
 
 export class Assets {
-  private readonly assets?: KeyValueInterface;
+  private readonly assets?: IKeyValue;
   private readonly staticPrefix: string;
 
-  constructor(assets: KeyValueInterface, staticPrefix: string) {
+  constructor(assets: IKeyValue, staticPrefix: string) {
     this.assets = assets;
     this.staticPrefix = staticPrefix;
   }
 
-  get(asset: string): string {
+  public get(asset: string): string {
     if (this.assets && asset in this.assets) {
       return this.staticPrefix + this.assets[asset];
     }
     return "/" + asset;
   }
 
-  getKeys(): string[] {
+  public getKeys(): string[] {
     if (this.assets) {
       return Object.keys(this.assets);
     }
     return [];
   }
 
-  getAll(): KeyValueInterface {
+  public getAll(): IKeyValue {
     return this.assets;
   }
 
-  getJSON(): string {
+  public getJSON(): string {
     return JSON.stringify(this.assets);
   }
 }

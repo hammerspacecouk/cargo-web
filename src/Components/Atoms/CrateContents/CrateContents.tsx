@@ -1,11 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Crate } from "../../Icons/Crate/Crate";
+import { ICrate } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
-import { CrateInterface } from "../../../Interfaces";
+import { Crate } from "../../Icons/Crate/Crate";
 
-interface PropsInterface {
-  crate: CrateInterface;
+interface IProps {
+  crate: ICrate;
 }
 
 const StyledCrateContents = styled.div`
@@ -63,7 +63,7 @@ const getColour = (value: number): string => {
   return COLOURS.CRATE.LEVEL0;
 };
 
-export const CrateWithContents = ({ crate }: PropsInterface) => (
+export const CrateWithContents = ({ crate }: IProps) => (
   <StyledCrateContents>
     <StyledCrate>
       <Crate colour={getColour(crate.value)} />

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ChildrenPropsInterface } from "../../../Interfaces";
+import { IChildrenProps } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
 
 const StyledButtonRow = styled.div`
@@ -12,6 +12,6 @@ const StyledButtonRow = styled.div`
   }
 `;
 
-export const ButtonRow = ({ children }: ChildrenPropsInterface) => {
+export const ButtonRow = ({ children }: IChildrenProps) => {
   return <StyledButtonRow>{children}</StyledButtonRow>;
 };

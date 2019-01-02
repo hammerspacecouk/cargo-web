@@ -1,21 +1,21 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
-import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
-import { CreditsButton } from "../../../components/Molecules/CreditsButton/CreditsButton";
-import { ShipUpgradeInterface } from "../../../Interfaces";
-import { Environment } from "../../../util/Environment";
 import { TextCenter } from "../../../components/Atoms/Text/Text";
+import { CreditsButton } from "../../../components/Molecules/CreditsButton/CreditsButton";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
+import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
+import { IShipUpgrade } from "../../../Interfaces";
+import { Environment } from "../../../util/Environment";
 
-interface PropsInterface {
-  ship?: ShipUpgradeInterface;
+interface IProps {
+  ship?: IShipUpgrade;
 }
 
 const ShipImage = styled.div`
   max-width: 160px;
 `;
 
-export default ({ ship }: PropsInterface) => {
+export default ({ ship }: IProps) => {
   const { buttonsDisabled, makePurchase } = useUpgradesContext();
 
   if (!ship) {

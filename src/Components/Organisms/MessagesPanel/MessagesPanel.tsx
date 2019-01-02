@@ -1,11 +1,11 @@
 import * as React from "react";
-import { MessageInterface } from "../../../Interfaces";
-import { Message } from "../../Molecules/Message/Message";
+import { IMessage } from "../../../Interfaces";
 import { Hidden } from "../../Atoms/Hidden/Hidden";
 import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { Message } from "../../Molecules/Message/Message";
 
 export interface ListsProps {
-  readonly messages?: MessageInterface[];
+  readonly messages?: IMessage[];
 }
 
 export const MessagesPanel = ({ messages }: ListsProps) => {
@@ -13,8 +13,8 @@ export const MessagesPanel = ({ messages }: ListsProps) => {
     return null;
   }
 
-  const items: React.ReactElement<HTMLLIElement>[] = [];
-  messages.forEach((message: MessageInterface, index) => {
+  const items: Array<React.ReactElement<HTMLLIElement>> = [];
+  messages.forEach((message: IMessage, index) => {
     items.push(
       <li key={index} className="m-message-wrap">
         <Message message={message} />

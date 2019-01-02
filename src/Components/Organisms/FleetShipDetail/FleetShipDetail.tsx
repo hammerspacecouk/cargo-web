@@ -1,16 +1,16 @@
 import * as React from "react";
-import { FleetShipInterface } from "../../../Interfaces";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
-import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
-import EditShipName from "../EditShipName/EditShipName";
+import { IFleetShip } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
-import { H3 } from "../../Atoms/Heading/Heading";
+import { GRID } from "../../../styles/variables";
 import { FlexInline } from "../../Atoms/Flex/Flex";
+import { H3 } from "../../Atoms/Heading/Heading";
+import EditShipName from "../EditShipName/EditShipName";
+import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
+import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
 
-interface PropsInterface {
-  fleetShip: FleetShipInterface;
+interface IProps {
+  fleetShip: IFleetShip;
 }
 
 // todo - responsive margins
@@ -34,7 +34,7 @@ const DetailRowContent = styled.div`
   flex: 1;
 `;
 
-export default function FleetShipDetail({ fleetShip }: PropsInterface) {
+export default function FleetShipDetail({ fleetShip }: IProps) {
   return (
     <StyledDetail>
       <DetailRow>

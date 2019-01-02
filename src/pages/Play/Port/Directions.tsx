@@ -1,15 +1,15 @@
 import * as React from "react";
-import DirectionNW from "../../../components/Icons/DirectionNW/DirectionNW";
-import DirectionNE from "../../../components/Icons/DirectionNE/DirectionNE";
-import DirectionW from "../../../components/Icons/DirectionW/DirectionW";
+import { H2 } from "../../../components/Atoms/Heading/Heading";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
 import DirectionE from "../../../components/Icons/DirectionE/DirectionE";
-import DirectionSW from "../../../components/Icons/DirectionSW/DirectionSW";
+import DirectionNE from "../../../components/Icons/DirectionNE/DirectionNE";
+import DirectionNW from "../../../components/Icons/DirectionNW/DirectionNW";
 import DirectionSE from "../../../components/Icons/DirectionSE/DirectionSE";
+import DirectionSW from "../../../components/Icons/DirectionSW/DirectionSW";
+import DirectionW from "../../../components/Icons/DirectionW/DirectionW";
+import { Destinations } from "../../../components/Organisms/Destinations/Destinations";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { Direction } from "./Direction";
-import { Loading } from "../../../components/Atoms/Loading/Loading";
-import { Destinations } from "../../../components/Organisms/Destinations/Destinations";
-import { H2 } from "../../../components/Atoms/Heading/Heading";
 
 export default () => {
   const { directions } = useCurrentShipContext();

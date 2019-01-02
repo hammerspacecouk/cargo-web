@@ -1,17 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
+import { EventsList } from "../../components/Organisms/EventsList/EventsList";
+import { PlayerShipList } from "../../components/Organisms/PlayerShipList/PlayerShipList";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import {
   PlayPortContextProvider,
-  usePlayPortContext
+  usePlayPortContext,
 } from "../../context/Page/PlayPortContext";
-import { PlayerShipList } from "../../components/Organisms/PlayerShipList/PlayerShipList";
-import { EventsList } from "../../components/Organisms/EventsList/EventsList";
-import Welcome from "./Port/Welcome";
+import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
+import CrateModal from "./Port/CrateModal";
 import { Crates } from "./Port/Crates";
 import Directions from "./Port/Directions";
-import CrateModal from "./Port/CrateModal";
-import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
+import { Welcome } from "./Port/Welcome";
 
 const PortTemplate = styled.div`
   margin: 0 auto;
@@ -44,7 +44,7 @@ const PortComponent = () => {
   return <PortTemplate>{portContent}</PortTemplate>;
 };
 
-export default () => (
+export const Port = () => (
   <PlayPortContextProvider>
     <PortComponent />
   </PlayPortContextProvider>

@@ -1,30 +1,29 @@
 import * as React from "react";
-import { Loading } from "../components/Atoms/Loading/Loading";
-import { Error } from "../components/Organisms/Error/Error";
-import ErrorIcon from "../components/Icons/ErrorIcon/ErrorIcon";
-import { ProfileLayout } from "../components/Templates/ProfileLayout/ProfileLayout";
-import { fullDate } from "../util/Format";
-import { LogOutButton } from "../components/Organisms/LogoutButton/LogOutButton";
-import { DeleteAccountButton } from "../components/Molecules/DeleteAccountButton/DeleteAccountButton";
-import routes from "../routes";
-import { PortInterface } from "../Interfaces";
-import { LoginForm } from "../components/Organisms/LoginForm/LoginForm";
-import {
-  SessionResponseInterface,
-  useSessionContext
-} from "../context/SessionContext";
-import { useEffect } from "react";
-import { MessageWarning } from "../components/Molecules/Message/Message";
-import { Icon, SMALL_ICON } from "../components/Atoms/Icon/Icon";
 import { H2 } from "../components/Atoms/Heading/Heading";
+import { Icon, SMALL_ICON } from "../components/Atoms/Icon/Icon";
+import { Loading } from "../components/Atoms/Loading/Loading";
+import ErrorIcon from "../components/Icons/ErrorIcon/ErrorIcon";
+import { DeleteAccountButton } from "../components/Molecules/DeleteAccountButton/DeleteAccountButton";
+import { MessageWarning } from "../components/Molecules/Message/Message";
 import { Panel } from "../components/Molecules/Panel/Panel";
 import { Table } from "../components/Molecules/Table/Table";
+import { Error } from "../components/Organisms/Error/Error";
+import { LoginForm } from "../components/Organisms/LoginForm/LoginForm";
+import { LogOutButton } from "../components/Organisms/LogoutButton/LogOutButton";
+import { ProfileLayout } from "../components/Templates/ProfileLayout/ProfileLayout";
+import {
+  ISessionResponse,
+  useSessionContext,
+} from "../context/SessionContext";
+import { IPort } from "../Interfaces";
+import { routes } from "../routes";
+import { fullDate } from "../util/Format";
 
-export interface Props {
-  readonly session: SessionResponseInterface;
+export interface IProps {
+  readonly session: ISessionResponse;
   readonly isAnonymous: boolean;
   readonly canDelete: boolean;
-  readonly homePort: PortInterface;
+  readonly homePort: IPort;
 }
 
 const getAttachEmailForm = () => {
@@ -42,15 +41,15 @@ const getAttachEmailForm = () => {
   );
 };
 
-export default function ProfilePage({
+export const ProfilePage = ({
   session,
   isAnonymous,
   canDelete,
-  homePort
-}: Props) {
+  homePort,
+}: IProps) => {
   const { setSession } = useSessionContext();
 
-  useEffect(
+  React.useEffect(
     () => {
       if (session) {
         setSession(session);
@@ -122,4 +121,4 @@ export default function ProfilePage({
       </H2>
     </ProfileLayout>
   );
-}
+};

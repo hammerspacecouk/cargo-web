@@ -1,28 +1,28 @@
 import { createContext, createElement, useContext, useState } from "react";
-import {
-  ActionTokenInterface,
-  ChildrenPropsInterface,
-  MessageInterface,
-  ShipUpgradeInterface
-} from "../../Interfaces";
 import { useApi } from "../../hooks/useAPI";
-import { useSessionContext } from "../SessionContext";
+import {
+  IActionToken,
+  IChildrenProps,
+  IMessage,
+  IShipUpgrade,
+} from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
+import { useSessionContext } from "../SessionContext";
 
-interface UpgradesContextInterface {
+interface IUpgradesContext {
   buttonsDisabled: boolean;
-  ships?: ShipUpgradeInterface[];
-  message?: MessageInterface;
-  makePurchase: (token: ActionTokenInterface) => void;
+  ships?: IShipUpgrade[];
+  message?: IMessage;
+  makePurchase: (token: IActionToken) => void;
 }
 
 const UpgradesContext = createContext({
-  buttonsDisabled: false
+  buttonsDisabled: false,
 });
 
 export const UpgradesContextProvider = ({
-  children
-}: ChildrenPropsInterface) => {
+  children,
+}: IChildrenProps) => {
   const { updateScore } = useSessionContext();
 
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
@@ -34,10 +34,10 @@ export const UpgradesContextProvider = ({
     setShips(data.ships);
   }
 
-  const makePurchase = async (token: ActionTokenInterface) => {
+  const makePurchase = async (token: IActionToken) => {
     setButtonsDisabled(true);
 
-    //make the API call
+    // make the API call
     try {
       const data = await ApiClient.tokenFetch(token);
       setShips(data.ships);
@@ -59,13 +59,13 @@ export const UpgradesContextProvider = ({
         buttonsDisabled,
         ships,
         message,
-        makePurchase
-      }
+        makePurchase,
+      },
     },
     children
   );
 };
 
-export function useUpgradesContext(): UpgradesContextInterface {
-  return useContext(UpgradesContext) as UpgradesContextInterface;
+export function useUpgradesContext(): IUpgradesContext {
+  return useContext(UpgradesContext) as IUpgradesContext;
 }

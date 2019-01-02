@@ -5,7 +5,7 @@ export const SMALL_ICON = "24px";
 export const TINY_ICON = "16px";
 export const NORMAL_ICON = "32px";
 
-interface PropsInterface {
+interface IProps {
   size?: string;
 }
 

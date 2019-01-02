@@ -7,7 +7,7 @@ export class Point {
     this.y = y;
   }
 
-  getString() {
+  public getString() {
     return `${this.x},${this.y}`;
   }
 }

@@ -1,20 +1,15 @@
+import { IActionToken } from "../Interfaces";
 import { BrowserClient } from "./HttpClient/BrowserClient";
 import { ServerClient } from "./HttpClient/ServerClient";
 import { isClient, isServer } from "./Runtime";
-import { ActionTokenInterface } from "../Interfaces";
 
-export interface APIClientInterface {
+export interface IAPIClient {
   getUrl(path: string): string;
   fetch(path: string, payload?: object, cookies?: object): Promise<any>;
-  tokenFetch(token: ActionTokenInterface): Promise<any>;
+  tokenFetch(token: IActionToken): Promise<any>;
 }
 
-export interface ErrorResponseInterface {
-  statusCode: number;
-  message: string;
-}
-
-let httpClient: APIClientInterface;
+let httpClient: IAPIClient;
 
 if (isClient) {
   httpClient = new BrowserClient();
@@ -23,7 +18,7 @@ if (isClient) {
 }
 
 if (!httpClient) {
-  throw "Unknown Runtime";
+  throw new Error("Unknown Runtime");
 }
 
 export const ApiClient = httpClient;

@@ -1,10 +1,11 @@
 export const GRID = {
   DOUBLE: "32px",
-  UNIT: "16px",
   HALF: "8px",
-  QUARTER: "4px"
+  QUARTER: "4px",
+  UNIT: "16px",
 };
 
+// tslint:disable:object-literal-sort-keys
 export const Z_INDEX = {
   MODAL_PANEL: 3100,
   MODAL_BLANKING: 3000,
@@ -16,7 +17,8 @@ export const Z_INDEX = {
   PAGE_BOTTOM: 1000,
   DEFAULT: 1,
   GROUND: 0,
-  BURIED: -1
+  BURIED: -1,
 };
+// tslint:enable:object-literal-sort-keys
 
 export const MAX_CONTENT_WIDTH = "1280px";

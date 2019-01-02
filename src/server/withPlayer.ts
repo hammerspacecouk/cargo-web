@@ -1,29 +1,29 @@
-import { createElement, Component } from "react";
-import { match } from "react-router";
-import { withInitialData, InitialDataComponent } from "./withInitialData";
 import { Request } from "express";
-import {RequireLogin} from "../components/Organisms/RequireLogin/RequireLogin";
+import { Component, createElement } from "react";
+import { match } from "react-router-dom";
+import { RequireLogin } from "../components/Organisms/RequireLogin/RequireLogin";
+import { IInitialDataComponent, withInitialData } from "./withInitialData";
 
-interface Props {
+interface IProps {
   isLoggedOut?: boolean;
 }
 
 // This is a HOC that ensures the user is already logged in
-export default (Page: InitialDataComponent) => {
-  class WithPlayer extends Component<Props, undefined> {
-    static async getInitialData(match: match, request: Request) {
+export const withPlayer = (Page: IInitialDataComponent) => {
+  class WithPlayer extends Component<IProps, undefined> {
+    public static async getInitialData(routeMatch: match, request: Request) {
       // request & cookies will only be available on the server
-      if (request?.cookies && !request.cookies.AUTHENTICATION_TOKEN) {
+      if (request && request.cookies && !request.cookies.AUTHENTICATION_TOKEN) {
         return { isLoggedOut: true };
       }
       // Need to call the wrapped components getInitialData if it exists
       if (Page.getInitialData) {
-        return Page.getInitialData(match, request);
+        return Page.getInitialData(routeMatch, request);
       }
       return null;
     }
 
-    render() {
+    public render() {
       if (this.props.isLoggedOut) {
         return createElement(RequireLogin);
       }
@@ -33,7 +33,7 @@ export default (Page: InitialDataComponent) => {
       return createElement(
         Page,
         {
-          ...rest
+          ...rest,
         },
         children
       );

@@ -1,16 +1,16 @@
 import * as React from "react";
 import { LoginForm } from "../components/Organisms/LoginForm/LoginForm";
-import { messageQueryString } from "../util/MessageQueryString";
 import { SimplePage } from "../components/Templates/SimplePage/SimplePage";
+import { messageQueryString } from "../util/MessageQueryString";
 
-interface PropsInterface {
+interface IProps {
   query?: string;
 }
 
-export const LoginPage = ({ query }: PropsInterface) => {
+export const LoginPage = ({ query }: IProps) => {
   return (
     <SimplePage title="Login">
-      <LoginForm messages={messageQueryString(query)}/>
+      <LoginForm messages={messageQueryString(query)} />
     </SimplePage>
   );
 };

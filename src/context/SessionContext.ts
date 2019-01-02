@@ -1,59 +1,59 @@
 import {
-  createElement,
   createContext,
+  createElement,
   useContext,
   useEffect,
-  useState
+  useState,
 } from "react";
 
-import {
-  ChildrenPropsInterface,
-  PlayerInterface,
-  RankStatusInterface,
-  ScoreInterface
-} from "../Interfaces";
 import { PromotionModal } from "../components/Organisms/PromotionModal/PromotionModal";
+import {
+  IChildrenProps,
+  IPlayer,
+  IRankStatus,
+  IScore,
+} from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
-export interface SessionResponseInterface {
+export interface ISessionResponse {
   readonly isLoggedIn: boolean;
   readonly hasProfileNotification: boolean;
-  readonly player?: PlayerInterface;
-  readonly rankStatus?: RankStatusInterface;
+  readonly player?: IPlayer;
+  readonly rankStatus?: IRankStatus;
   readonly loginToken?: string;
 }
 
-interface SessionPropertiesInterface {
-  player?: PlayerInterface;
-  rankStatus?: RankStatusInterface;
-  score?: ScoreInterface;
+interface ISessionProperties {
+  player?: IPlayer;
+  rankStatus?: IRankStatus;
+  score?: IScore;
   hasProfileNotification: boolean;
   loginToken?: string;
 }
 
-interface SessionContextInterface extends SessionPropertiesInterface {
-  updateScore: (newScore: ScoreInterface) => void;
-  updateRankStatus: (newRankStatus: RankStatusInterface) => void;
-  setSession: (session: SessionResponseInterface) => void;
+interface ISessionContext extends ISessionProperties {
+  updateScore: (newScore: IScore) => void;
+  updateRankStatus: (newRankStatus: IRankStatus) => void;
+  setSession: (session: ISessionResponse) => void;
   refreshSession: () => void;
 }
 
-export const initialSession: SessionPropertiesInterface = {
+export const initialSession: ISessionProperties = {
   player: undefined,
   score: undefined,
   hasProfileNotification: false,
-  loginToken: undefined
+  loginToken: undefined,
 };
 
 const SessionContext = createContext({});
 
-const getSession = (cookies?: any): Promise<SessionResponseInterface> => {
+const getSession = (cookies?: any): Promise<ISessionResponse> => {
   return ApiClient.fetch("/login/check", null, cookies);
 };
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
 
-export function SessionContextComponent({ children }: ChildrenPropsInterface) {
+export function SessionContextComponent({ children }: IChildrenProps) {
   const [score, setScore] = useState(initialSession.score);
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   const [player, setPlayer] = useState(initialSession.player);
@@ -63,11 +63,11 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
   );
   let allowUpdate = true;
 
-  const updateScore = (newScore: ScoreInterface) => {
+  const updateScore = (newScore: IScore) => {
     setScore(newScore);
   };
 
-  const updateRankStatus = (newRanksStatus: RankStatusInterface) => {
+  const updateRankStatus = (newRanksStatus: IRankStatus) => {
     setRanksStatus(newRanksStatus);
   };
 
@@ -82,7 +82,7 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
     window.setTimeout(updateSession, sessionRefreshTime);
   };
 
-  const setSession = (session: SessionResponseInterface) => {
+  const setSession = (session: ISessionResponse) => {
     if (session.isLoggedIn) {
       updateScore(session.player.score);
       updateRankStatus(session.rankStatus);
@@ -119,16 +119,16 @@ export function SessionContextComponent({ children }: ChildrenPropsInterface) {
         updateScore,
         updateRankStatus,
         setSession,
-        refreshSession
-      }
+        refreshSession,
+      },
     },
     children,
     createElement(PromotionModal)
   );
 }
 
-export function useSessionContext(): SessionContextInterface {
-  return useContext(SessionContext) as SessionContextInterface;
+export function useSessionContext(): ISessionContext {
+  return useContext(SessionContext) as ISessionContext;
 }
 
 export default SessionContextComponent;

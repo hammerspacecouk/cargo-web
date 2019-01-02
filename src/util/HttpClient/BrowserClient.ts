@@ -1,15 +1,15 @@
-import { CacheControlHelper } from "./CacheControlHelper";
-import { APIClientInterface } from "../ApiClient";
-import { Logger } from "../Logger";
+import { IActionToken } from "../../Interfaces";
+import { IAPIClient } from "../ApiClient";
 import { Environment } from "../Environment";
-import { ActionTokenInterface } from "../../Interfaces";
+import { Logger } from "../Logger";
+import { CacheControlHelper } from "./CacheControlHelper";
 
-interface StoredUrlData {
+interface IStoredUrlData {
   expires: any;
   data: object;
 }
 
-export class BrowserClient implements APIClientInterface {
+export class BrowserClient implements IAPIClient {
   private readonly cachePrefix: string = "cargo-data-";
   private readonly canStore: boolean;
 
@@ -18,17 +18,17 @@ export class BrowserClient implements APIClientInterface {
     this.canStore = "sessionStorage" in window;
   }
 
-  getCacheKey(path: string): string {
+  public getCacheKey(path: string): string {
     return this.cachePrefix + path;
   }
 
-  getFromCache(key: string): object {
+  public getFromCache(key: string): object {
     if (!this.canStore) {
       return null;
     }
     const storedData: string = window.sessionStorage.getItem(key);
     if (storedData) {
-      const result: StoredUrlData = JSON.parse(storedData);
+      const result: IStoredUrlData = JSON.parse(storedData);
 
       const now = Date.now(); // todo - use date-fns and centralise application time for client-side?
       if (result.expires > now) {
@@ -41,7 +41,7 @@ export class BrowserClient implements APIClientInterface {
     }
   }
 
-  setInCache(
+  public setInCache(
     key: string,
     value: object,
     cacheControl: CacheControlHelper
@@ -49,22 +49,22 @@ export class BrowserClient implements APIClientInterface {
     if (!this.canStore || !cacheControl.isCacheable()) {
       return null;
     }
-    const stored: StoredUrlData = {
+    const stored: IStoredUrlData = {
+      data: value,
       expires: cacheControl.getExpires(Date.now()),
-      data: value
     };
     sessionStorage.setItem(key, JSON.stringify(stored));
   }
 
-  getUrl(path: string): string {
+  public getUrl(path: string): string {
     return Environment.apiHostname + path;
   }
 
-  tokenFetch(token: ActionTokenInterface): Promise<any> {
+  public tokenFetch(token: IActionToken): Promise<any> {
     return this.fetch(token.path, { token: token.token });
   }
 
-  async fetch(path: string, payload?: object): Promise<any> {
+  public async fetch(path: string, payload?: object): Promise<any> {
     const key: string = this.getCacheKey(path);
 
     const stored = !payload ? this.getFromCache(key) : null; // bypass the cache for POST requests
@@ -75,10 +75,10 @@ export class BrowserClient implements APIClientInterface {
     const url = this.getUrl(path);
     const start = Date.now();
 
-    let options: any = {
+    const options: any = {
       credentials: "include",
+      headers: { accept: "application/json" },
       method: "GET",
-      headers: { accept: "application/json" }
     };
 
     if (payload) {
@@ -104,8 +104,8 @@ export class BrowserClient implements APIClientInterface {
       const text = await response.text();
       Logger.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
       throw {
+        message: text,
         statusCode: response.status,
-        message: text
       };
     }
 

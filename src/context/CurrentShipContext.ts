@@ -1,50 +1,50 @@
-import { useContext, useState, createContext, createElement } from "react";
+import { createContext, createElement, useContext, useState } from "react";
 
 import {
-  ShipInterface,
-  PortInterface,
-  ChannelInterface,
-  DirectionsInterface,
-  EventInterface,
-  CrateActionInterface,
-  ScoreInterface,
-  RankStatusInterface
+  IChannel,
+  ICrateAction,
+  IDirections,
+  IEvent,
+  IPort,
+  IRankStatus,
+  IScore,
+  IShip,
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
-interface PropsInterface {
+interface IProps {
   children: any;
 }
 
 interface ShipLocationResponse {
   // todo - merge with PlayShipResponse
-  readonly port?: PortInterface;
-  readonly channel?: ChannelInterface;
-  readonly directions?: DirectionsInterface;
-  readonly shipsInLocation?: ShipInterface[];
-  readonly events: EventInterface[];
-  readonly playerScore?: ScoreInterface;
-  readonly cratesOnShip: CrateActionInterface[];
-  readonly cratesInPort?: CrateActionInterface[];
+  readonly port?: IPort;
+  readonly channel?: IChannel;
+  readonly directions?: IDirections;
+  readonly shipsInLocation?: IShip[];
+  readonly events: IEvent[];
+  readonly playerScore?: IScore;
+  readonly cratesOnShip: ICrateAction[];
+  readonly cratesInPort?: ICrateAction[];
 }
 
 interface PlayShipResponse extends ShipLocationResponse {
-  readonly ship: ShipInterface;
-  readonly playerRankStatus?: RankStatusInterface;
+  readonly ship: IShip;
+  readonly playerRankStatus?: IRankStatus;
 }
 
-interface CurrentShipContextInterface {
+interface ICurrentShipContext {
   loaded: boolean;
-  ship?: ShipInterface;
-  port?: PortInterface;
-  channel?: ChannelInterface;
-  directions?: DirectionsInterface;
-  shipsInLocation?: ShipInterface[];
-  events?: EventInterface[];
-  cratesInPort?: CrateActionInterface[];
-  cratesOnShip?: CrateActionInterface[];
+  ship?: IShip;
+  port?: IPort;
+  channel?: IChannel;
+  directions?: IDirections;
+  shipsInLocation?: IShip[];
+  events?: IEvent[];
+  cratesInPort?: ICrateAction[];
+  cratesOnShip?: ICrateAction[];
   loadingNewShip: () => void;
-  updateCurrentShip: (ship?: ShipInterface) => void;
+  updateCurrentShip: (ship?: IShip) => void;
   updateFullResponse: (data?: PlayShipResponse) => void;
   updateShipLocation: (data?: ShipLocationResponse) => void;
   refreshState: () => Promise<PlayShipResponse>;
@@ -53,7 +53,7 @@ interface CurrentShipContextInterface {
 export const CurrentShipContext = createContext({});
 
 // todo - convert to useRouter once ready
-export default ({ children }: PropsInterface) => {
+export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [loaded, setLoaded] = useState(false);
   const [ship, setShip] = useState(undefined);
   const [port, setPort] = useState(undefined);
@@ -100,7 +100,7 @@ export default ({ children }: PropsInterface) => {
     setLoaded(false);
   };
 
-  const updateCurrentShip = (ship?: ShipInterface) => {
+  const updateCurrentShip = (ship?: IShip) => {
     setShip(ship);
     setLoaded(true);
   };
@@ -130,13 +130,13 @@ export default ({ children }: PropsInterface) => {
         updateCurrentShip,
         updateFullResponse,
         updateShipLocation,
-        refreshState
-      }
+        refreshState,
+      },
     },
     children
   );
 };
 
-export function useCurrentShipContext(): CurrentShipContextInterface {
-  return useContext(CurrentShipContext) as CurrentShipContextInterface;
-}
+export const useCurrentShipContext = (): ICurrentShipContext => {
+  return useContext(CurrentShipContext) as ICurrentShipContext;
+};

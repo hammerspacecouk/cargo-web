@@ -1,6 +1,6 @@
 import * as React from "react";
-import routes from "../routes";
 import { AboutLayout } from "../components/Templates/AboutLayout/AboutLayout";
+import { routes } from "../routes";
 
 export default function AboutPage() {
   return (

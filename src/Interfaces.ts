@@ -1,62 +1,62 @@
-export interface ActionTokenInterface {
+export interface IActionToken {
   path: string;
   token: string;
 }
 
-export interface PortInterface {
+export interface IPort {
   id: string;
   name: string;
   safeHaven: boolean;
 }
 
-export interface ChannelInterface {
-  destination: PortInterface;
+export interface IChannel {
+  destination: IPort;
   startTime: string;
   arrival: string;
 }
 
-export interface CrateInterface {
+export interface ICrate {
   id: string;
   contents: string;
   value: number;
 }
 
-export interface CrateActionInterface {
-  crate: CrateInterface;
+export interface ICrateAction {
+  crate: ICrate;
   valuePerLY: number;
-  token?: ActionTokenInterface;
+  token?: IActionToken;
 }
 
-export interface RankInterface {
+export interface IRank {
   title: string;
 }
 
-export interface RankStatusInterface {
-  acknowledgeToken?: ActionTokenInterface;
+export interface IRankStatus {
+  acknowledgeToken?: IActionToken;
   portsVisited: number;
   levelProgress: number;
-  currentRank: RankInterface;
-  previousRank: RankInterface;
-  nextRank: RankInterface;
+  currentRank: IRank;
+  previousRank: IRank;
+  nextRank: IRank;
 }
 
-export interface DirectionInterface {
-  destination: PortInterface;
+export interface IDirection {
+  destination: IPort;
   distanceUnit: number;
   earnings: number;
   journeyTimeSeconds: number;
-  action: ActionTokenInterface;
-  minimumRank?: RankInterface;
+  action: IActionToken;
+  minimumRank?: IRank;
   minimumStrength?: number;
 }
 
-export interface DirectionsInterface {
-  NW?: DirectionInterface;
-  NE?: DirectionInterface;
-  E?: DirectionInterface;
-  SE?: DirectionInterface;
-  SW?: DirectionInterface;
-  W?: DirectionInterface;
+export interface IDirections {
+  NW?: IDirection;
+  NE?: IDirection;
+  E?: IDirection;
+  SE?: IDirection;
+  SW?: IDirection;
+  W?: IDirection;
 }
 
 // same as constants from Event.php, with 'public' swapped for 'export'
@@ -69,46 +69,46 @@ export const ACTION_SHIP_ARRIVAL = "ship_arrival";
 export const ACTION_SHIP_DEPARTURE = "ship_departure";
 export const ACTION_SHIP_RENAME = "ship_rename";
 
-export interface ScoreInterface {
+export interface IScore {
   value: number;
   rate: number;
   datetime: string;
 }
 
-export interface PlayerInterface {
+export interface IPlayer {
   id: string;
   colour: string; // todo -remove
   emblem: string;
   startedAt: string;
-  score?: ScoreInterface;
+  score?: IScore;
 }
 
-export interface TransactionInterface {
-  actionToken: ActionTokenInterface;
+export interface ITransaction {
+  actionToken: IActionToken;
   cost: number;
   currentCount: number;
 }
 
-export interface ShipUpgradeInterface extends TransactionInterface {
-  detail: ShipClassInterface;
+export interface IShipUpgrade extends ITransaction {
+  detail: IShipClass;
 }
 
-export interface HealthIncreaseInterface extends TransactionInterface {
+export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
 
-export interface FleetShipInterface {
-  ship: ShipInterface;
+export interface IFleetShip {
+  ship: IShip;
   needsAttention: boolean;
-  renameToken: TransactionInterface;
-  health: HealthIncreaseInterface[];
+  renameToken: ITransaction;
+  health: IHealthIncrease[];
 }
 
-export interface ShipInterface {
+export interface IShip {
   id: string;
   name: string;
-  owner?: PlayerInterface;
-  shipClass?: ShipClassInterface;
+  owner?: IPlayer;
+  shipClass?: IShipClass;
   isDestroyed: boolean;
   strengthPercent: number;
   location?: {
@@ -117,35 +117,35 @@ export interface ShipInterface {
   };
 }
 
-export interface EventInterface {
+export interface IEvent {
   id: string;
   action: string;
   time: string;
   value: string;
-  crate: CrateInterface;
-  actioningPlayer?: PlayerInterface;
-  actioningShip?: ShipInterface;
-  ship?: ShipInterface;
-  port?: PortInterface;
-  rank?: RankInterface;
+  crate: ICrate;
+  actioningPlayer?: IPlayer;
+  actioningShip?: IShip;
+  ship?: IShip;
+  port?: IPort;
+  rank?: IRank;
 }
 
-export interface KeyValueInterface {
+export interface IKeyValue {
   [key: string]: string;
 }
 
-export interface MessageInterface {
+export interface IMessage {
   type: string;
   message: string;
 }
 
-export interface NoPropsInterface {}
+export interface INoProps {}
 
-export interface ChildrenPropsInterface {
+export interface IChildrenProps {
   children: any;
 }
 
-export interface ShipClassInterface {
+export interface IShipClass {
   name: string;
   description: string;
   capacity: number;

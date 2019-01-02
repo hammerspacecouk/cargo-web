@@ -1,27 +1,27 @@
 import * as React from "react";
-import {
-  ActionTokenInterface,
-  ShipInterface,
-  TransactionInterface
-} from "../../../Interfaces";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
-import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
-import { ApiClient } from "../../../util/ApiClient";
-import { useSessionContext } from "../../../context/SessionContext";
-import { useFleetContext } from "../../../context/Page/FleetContext";
 import { ShipNameGenerator } from "../../../containers/Ship/ShipNameGenerator";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
-import { ConfirmButton, DangerButton } from "../../Atoms/Button/Button";
-import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
+import { useFleetContext } from "../../../context/Page/FleetContext";
+import { useSessionContext } from "../../../context/SessionContext";
 import { useMounted } from "../../../hooks/useMounted";
+import {
+  IActionToken,
+  IShip,
+  ITransaction,
+} from "../../../Interfaces";
 import { BREAKPOINTS } from "../../../styles/media";
+import { GRID } from "../../../styles/variables";
+import { ApiClient } from "../../../util/ApiClient";
+import { ConfirmButton, DangerButton } from "../../Atoms/Button/Button";
+import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
+import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
+import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
+import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 
-interface PropsInterface {
-  ship: ShipInterface;
-  renameToken: TransactionInterface;
+interface IProps {
+  ship: IShip;
+  renameToken: ITransaction;
 }
 
 const Container = styled.div`
@@ -41,7 +41,7 @@ const Updating = styled.span`
   font-size: 2.35rem;
 `; // todo - share this value?
 
-export default function EditShipName({ ship, renameToken }: PropsInterface) {
+export default function EditShipName({ ship, renameToken }: IProps) {
   const [requestNameToken, setRequestNameToken] = React.useState(renameToken);
   const { updateScore } = useSessionContext();
   const { setFleetData } = useFleetContext();
@@ -52,10 +52,10 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
   const [offeredShipNameToken, setOfferedShipNameToken] = React.useState(null);
   const isMounted = useMounted();
 
-  const requestShipName = async (token: ActionTokenInterface) => {
+  const requestShipName = async (token: IActionToken) => {
     setIsActive(true);
 
-    //make the API call
+    // make the API call
     const data = await ApiClient.tokenFetch(token);
     updateScore(data.newScore);
     if (isMounted()) {
@@ -72,7 +72,7 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
     setIsActive(false);
   };
 
-  const acceptShipName = async (token: ActionTokenInterface) => {
+  const acceptShipName = async (token: IActionToken) => {
     setAcceptingShipName(true);
     resetOffer();
     const data = await ApiClient.tokenFetch(token);
@@ -97,9 +97,7 @@ export default function EditShipName({ ship, renameToken }: PropsInterface) {
       buttonContent = (
         <>
           <TokenButton token={offeredShipNameToken} handler={acceptShipName}>
-            <ConfirmButton type="submit">
-              Accept
-            </ConfirmButton>
+            <ConfirmButton type="submit">Accept</ConfirmButton>
           </TokenButton>
           <DangerButton
             as="a"

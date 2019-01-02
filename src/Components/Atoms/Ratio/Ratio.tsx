@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ChildrenPropsInterface } from "../../../Interfaces";
+import { IChildrenProps } from "../../../Interfaces";
 
 const Wrap = styled.div`
   display: block;
@@ -20,7 +20,7 @@ const SquareWrap = styled(Wrap)`
   padding-top: 100%;
 `;
 
-export const Square = ({ children }: ChildrenPropsInterface) => {
+export const Square = ({ children }: IChildrenProps) => {
   return (
     <SquareWrap>
       <Inner>{children}</Inner>

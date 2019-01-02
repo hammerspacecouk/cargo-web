@@ -1,15 +1,15 @@
 import * as React from "react";
-import routes from "../../../routes";
-import { CountdownLink } from "../../Molecules/CountdownLink/CountdownLink";
-import { Modal, ModalActions } from "../../Molecules/Modal/Modal";
-import { MessageError, MessageWarning } from "../../Molecules/Message/Message";
+import { routes } from "../../../routes";
 import { Button, ConfirmButton } from "../../Atoms/Button/Button";
+import { CountdownLink } from "../../Molecules/CountdownLink/CountdownLink";
+import { MessageError, MessageWarning } from "../../Molecules/Message/Message";
+import { Modal, ModalActions } from "../../Molecules/Modal/Modal";
 
-interface Props {
+interface IProps {
   readonly isAnonymous: boolean;
 }
 
-export const LogOutButton = ({ isAnonymous }: Props) => {
+export const LogOutButton = ({ isAnonymous }: IProps) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
   const closeModal = () => {
@@ -39,15 +39,10 @@ export const LogOutButton = ({ isAnonymous }: Props) => {
           Are you really sure you want to log out and lose this game forever?
         </MessageError>
         <ModalActions>
-          <CountdownLink
-            time={20000}
-            href={routes.getLogout()}
-          >
+          <CountdownLink time={20000} href={routes.getLogout()}>
             Yes, Log out
           </CountdownLink>{" "}
-          <ConfirmButton onClick={closeModal}>
-            Cancel
-          </ConfirmButton>
+          <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
         </ModalActions>
       </Modal>
     );

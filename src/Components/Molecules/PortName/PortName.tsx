@@ -1,11 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
-import ShieldIcon from "../../Icons/ShieldIcon/ShieldIcon";
+import { IPort } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
-import { PortInterface } from "../../../Interfaces";
+import { ShieldIcon } from "../../Icons/ShieldIcon/ShieldIcon";
 
-interface PropsInterface {
-  port: PortInterface;
+interface IProps {
+  port: IPort;
 }
 
 const Styled = styled.span`
@@ -22,7 +22,7 @@ const Icon = styled.abbr`
   height: 28px;
 `;
 
-export default function PortName({ port }: PropsInterface) {
+export const PortName = ({ port }: IProps) => {
   let safeIndicator = null;
   if (port.safeHaven) {
     safeIndicator = (
@@ -37,4 +37,4 @@ export default function PortName({ port }: PropsInterface) {
       {safeIndicator}
     </Styled>
   );
-}
+};

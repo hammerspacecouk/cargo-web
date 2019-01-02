@@ -1,24 +1,24 @@
 import { Component, createElement } from "react";
 import { withInitialData } from "./withInitialData";
 
-import { EventInterface } from "../Interfaces";
-import { ApiClient } from "../util/ApiClient";
+import { IEvent } from "../Interfaces";
 import HomePage from "../pages/HomePage";
+import { ApiClient } from "../util/ApiClient";
 
-interface Props {
-  events: EventInterface[];
+interface IProps {
+  events: IEvent[];
 }
 
-class Home extends Component<Props, undefined> {
-  static async getInitialData() {
+class Home extends Component<IProps, undefined> {
+  public static async getInitialData() {
     return ApiClient.fetch("/");
   }
 
-  render() {
+  public render() {
     return createElement(HomePage, {
-      events: this.props.events
+      events: this.props.events,
     });
   }
 }
 
-export default withInitialData(Home);
+export const Home = withInitialData(Home);

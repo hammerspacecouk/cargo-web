@@ -1,14 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
-import routes from "../../../routes";
 import { useSessionContext } from "../../../context/SessionContext";
-import { ActionButton, Button } from "../../Atoms/Button/Button";
-import { LoginForm } from "../LoginForm/LoginForm";
-import { GRID } from "../../../styles/variables";
-import { P } from "../../Atoms/Text/Text";
-import { H4 } from "../../Atoms/Heading/Heading";
-import { Panel, PanelTitle } from "../../Molecules/Panel/Panel";
+import { routes } from "../../../routes";
 import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
+import { ActionButton, Button } from "../../Atoms/Button/Button";
+import { H4 } from "../../Atoms/Heading/Heading";
+import { P } from "../../Atoms/Text/Text";
+import { Panel, PanelTitle } from "../../Molecules/Panel/Panel";
+import { LoginForm } from "../LoginForm/LoginForm";
 
 const ButtonArea = styled.div`
   text-align: center;
@@ -45,9 +45,7 @@ export const PlayPanel = () => {
           {loginToken && (
             <input type="hidden" name="loginToken" value={loginToken} />
           )}
-          <ActionButton disabled={!loginToken}>
-            New game
-          </ActionButton>
+          <ActionButton disabled={!loginToken}>New game</ActionButton>
         </form>
       </ButtonArea>
       <SubHeading as="h3">Or create/resume a logged in game:</SubHeading>

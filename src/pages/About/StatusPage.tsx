@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Environment } from "../../util/Environment";
-import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
 import { Button } from "../../components/Atoms/Button/Button";
 import { TableStriped } from "../../components/Molecules/Table/Table";
+import { AboutLayout } from "../../components/Templates/AboutLayout/AboutLayout";
+import { Environment } from "../../util/Environment";
 
 export default function StatusPage() {
   return (

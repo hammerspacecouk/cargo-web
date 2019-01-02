@@ -1,52 +1,52 @@
-import { Component, ComponentClass, createElement } from "react";
-import { match } from "react-router";
 import { Request } from "express";
+import { Component, ComponentClass, createElement } from "react";
+import { match } from "react-router-dom";
 
-export interface InitialDataComponent extends ComponentClass {
+export interface IInitialDataComponent extends ComponentClass {
   getInitialData?: (match: match, request?: Request) => any;
 }
 
-interface State {
+interface IState {
   data: any;
 }
 
-interface Props {
+interface IProps {
   initialData?: any;
   match: match;
 }
 
 // This is a Higher Order Component that abstracts duplicated data fetching
 // on the server and client.
-export const withInitialData = (Page: InitialDataComponent) => {
-  return class WithInitialData extends Component<Props, State> {
-    ignoreLastFetch = false;
+export const withInitialData = (Page: IInitialDataComponent) => {
+  return class WithInitialData extends Component<IProps, IState> {
 
-    static async getInitialData(match: match, request?: Request) {
+    public static async getInitialData(routeMatch: match, request?: Request) {
       // Need to call the wrapped components getInitialData if it exists
       if (Page.getInitialData) {
-        return Page.getInitialData(match, request);
+        return Page.getInitialData(routeMatch, request);
       }
       return null;
     }
+    public ignoreLastFetch = false;
 
-    constructor(props: Props) {
+    constructor(props: IProps) {
       super(props);
       this.state = {
-        data: props.initialData
+        data: props.initialData,
       };
     }
 
-    componentDidMount() {
+    public componentDidMount() {
       if (!this.state.data) {
         this.fetchData();
       }
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
       this.ignoreLastFetch = true;
     }
 
-    fetchData = async () => {
+    public fetchData = async () => {
       // if this.state.data is null, that means that the we are on the client.
       // To get the data we need, we just call getInitialData again on mount.
       if (!this.ignoreLastFetch) {
@@ -57,7 +57,7 @@ export const withInitialData = (Page: InitialDataComponent) => {
       }
     };
 
-    render() {
+    public render() {
       // Flatten out all the props.
       const { initialData, ...rest } = this.props;
 
@@ -74,7 +74,7 @@ export const withInitialData = (Page: InitialDataComponent) => {
 
       return createElement(Page, {
         ...rest,
-        ...this.state.data
+        ...this.state.data,
       });
     }
   };

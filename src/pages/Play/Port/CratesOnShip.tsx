@@ -1,15 +1,15 @@
 import * as React from "react";
-import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { CrateOnShip, CrateOnShipPlaceholder } from "./CrateOnShip";
-import { Loading } from "../../../components/Atoms/Loading/Loading";
 import styled from "styled-components";
-import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
 import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
-import { Environment } from "../../../util/Environment";
-import { GRID } from "../../../styles/variables";
+import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
 import { Square } from "../../../components/Atoms/Ratio/Ratio";
+import { useCurrentShipContext } from "../../../context/CurrentShipContext";
+import { GRID } from "../../../styles/variables";
+import { Environment } from "../../../util/Environment";
+import { CrateOnShip, CrateOnShipPlaceholder } from "./CrateOnShip";
 
-interface PropsInterface {
+interface IProps {
   className?: string;
 }
 
@@ -24,7 +24,7 @@ const ShipImage = styled.div`
     margin ${GRID.UNIT} auto;
 `;
 
-export const CratesOnShip = ({ className }: PropsInterface) => {
+export const CratesOnShip = ({ className }: IProps) => {
   const { ship, cratesOnShip } = useCurrentShipContext();
 
   if (cratesOnShip === undefined) {

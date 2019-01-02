@@ -1,14 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
+import { ICrateAction } from "../../../Interfaces";
+import { GRID } from "../../../styles/variables";
 import { CrateWithContents } from "../../Atoms/CrateContents/CrateContents";
 import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
-import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
-import { CrateActionInterface } from "../../../Interfaces";
-import { GRID } from "../../../styles/variables";
 import { TextE } from "../../Atoms/Text/Text";
+import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
 
-interface PropsInterface {
-  crateAction: CrateActionInterface;
+interface IProps {
+  crateAction: ICrateAction;
 }
 
 export const StyledCrate = styled.div`
@@ -30,7 +30,7 @@ const StyledValue = styled(TextE)`
   margin-right: ${GRID.QUARTER};
 `;
 
-export const CratePickup = ({ crateAction }: PropsInterface) => (
+export const CratePickup = ({ crateAction }: IProps) => (
   <StyledCrate>
     <CrateWithContents crate={crateAction.crate} />
     <StyledCrateValue>

@@ -1,21 +1,21 @@
 import * as React from "react";
-import routes from "../../../routes";
+import { routes } from "../../../routes";
 import { SimplePage } from "../SimplePage/SimplePage";
 
-interface PropsInterface {
+interface IProps {
   readonly title?: string;
   readonly children: any;
 }
 
-export const ProfileLayout = (props: PropsInterface) => {
+export const ProfileLayout = (props: IProps) => {
   let crumbs = null;
   let title = "Profile";
   if (props.title) {
     crumbs = [
       {
         link: routes.getProfile(),
-        title
-      }
+        title,
+      },
     ];
     title = props.title;
   }

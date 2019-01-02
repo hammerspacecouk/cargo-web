@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ELEMENTS, SIZES } from "../../../styles/typography";
 import { COLOURS } from "../../../styles/colours";
+import { ELEMENTS, SIZES } from "../../../styles/typography";
 
 export const P = styled.p`
   ${ELEMENTS.P};

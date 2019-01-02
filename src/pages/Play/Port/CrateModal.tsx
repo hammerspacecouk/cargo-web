@@ -1,9 +1,9 @@
 import * as React from "react";
+import { ActionButton } from "../../../components/Atoms/Button/Button";
+import { P } from "../../../components/Atoms/Text/Text";
+import { ButtonRow } from "../../../components/Molecules/ButtonRow/ButtonRow";
 import { Modal, ModalActions } from "../../../components/Molecules/Modal/Modal";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import { ActionButton } from "../../../components/Atoms/Button/Button";
-import { ButtonRow } from "../../../components/Molecules/ButtonRow/ButtonRow";
-import { P } from "../../../components/Atoms/Text/Text";
 
 export default () => {
   const { confirmMoveButton, modalIsOpen, closeModal } = usePlayPortContext();
@@ -13,9 +13,7 @@ export default () => {
       <ModalActions>
         <ButtonRow>
           {confirmMoveButton}
-          <ActionButton onClick={closeModal}>
-            Cancel
-          </ActionButton>
+          <ActionButton onClick={closeModal}>Cancel</ActionButton>
         </ButtonRow>
       </ModalActions>
     </Modal>

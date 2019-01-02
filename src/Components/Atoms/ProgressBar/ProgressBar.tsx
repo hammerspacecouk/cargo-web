@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
 
-interface Props {
+interface IProps {
   readonly percent: number;
   readonly isHealth?: boolean;
 }
@@ -30,7 +30,7 @@ const Bar = styled.div<{ percentValue: number }>`
   border-radius: 4px;
 `;
 
-export const ProgressBar = ({ percent }: Props) => {
+export const ProgressBar = ({ percent }: IProps) => {
   const percentValue = Math.max(percent, 2); // to show that it is a bar that will fill up
   return (
     <Track>

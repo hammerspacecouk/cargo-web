@@ -1,14 +1,14 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
+import { IPlayer } from "../../../Interfaces";
+import { COLOURS } from "../../../styles/colours";
 import { animate } from "../../Atoms/Placeholder/PlaceHolder";
 import PlayerFlag from "../PlayerFlag/PlayerFlag";
-import { PlayerInterface } from "../../../Interfaces";
-import { COLOURS } from "../../../styles/colours";
 
-interface PropsInterface {
+interface IProps {
   percent?: number;
   className?: string;
-  player?: PlayerInterface;
+  player?: IPlayer;
 }
 
 const radial = keyframes`
@@ -67,8 +67,8 @@ const CircleBar = styled(CircleTrack)<{ colour: string }>`
 export default React.memo(function({
   percent,
   className,
-  player
-}: PropsInterface) {
+  player,
+}: IProps) {
   const size = 100;
   const barWidth = 12;
 

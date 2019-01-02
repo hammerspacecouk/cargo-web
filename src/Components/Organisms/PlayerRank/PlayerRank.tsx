@@ -1,16 +1,16 @@
 import * as React from "react";
-import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
-import { RankStatusInterface } from "../../../Interfaces";
-import { Loading } from "../../Atoms/Loading/Loading";
-import { Panel } from "../../Molecules/Panel/Panel";
+import { IRankStatus } from "../../../Interfaces";
 import { H2 } from "../../Atoms/Heading/Heading";
+import { Loading } from "../../Atoms/Loading/Loading";
+import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
 import { TextF } from "../../Atoms/Text/Text";
+import { Panel } from "../../Molecules/Panel/Panel";
 
-interface Props {
-  rankStatus: RankStatusInterface;
+interface IProps {
+  rankStatus: IRankStatus;
 }
 
-export const PlayerRank = ({ rankStatus }: Props) => {
+export const PlayerRank = ({ rankStatus }: IProps) => {
   if (!rankStatus) {
     return <Loading />;
   }

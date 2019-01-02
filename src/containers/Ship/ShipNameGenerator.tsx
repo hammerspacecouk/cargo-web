@@ -1,14 +1,14 @@
 import * as React from "react";
-import { ActionTokenInterface } from "../../Interfaces";
-import { useShipNameGenerator } from "../../hooks/useShipNameGenerator";
 import { TextB } from "../../components/Atoms/Text/Text";
+import { useShipNameGenerator } from "../../hooks/useShipNameGenerator";
+import { IActionToken } from "../../Interfaces";
 
-interface PropsInterface {
+interface IProps {
   offeredShipName?: string;
-  offeredShipNameToken?: ActionTokenInterface;
+  offeredShipNameToken?: IActionToken;
 }
 
-export const ShipNameGenerator = ({ offeredShipName }: PropsInterface) => {
+export const ShipNameGenerator = ({ offeredShipName }: IProps) => {
   const { nameGuess } = useShipNameGenerator(offeredShipName);
   return <TextB>{nameGuess}</TextB>;
 };

@@ -1,25 +1,25 @@
 import * as React from "react";
-import styled from "styled-components";
-import { MessageInterface } from "../../../Interfaces";
-import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
-import { Environment } from "../../../util/Environment";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useSessionContext } from "../../../context/SessionContext";
+import { IMessage } from "../../../Interfaces";
+import { COLOURS } from "../../../styles/colours";
+import { GRID } from "../../../styles/variables";
+import { Environment } from "../../../util/Environment";
+import { Button } from "../../Atoms/Button/Button";
 import { H4 } from "../../Atoms/Heading/Heading";
+import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
+import { P } from "../../Atoms/Text/Text";
 import {
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
-  TwitterButton
+  TwitterButton,
 } from "../../Molecules/SocialButton/SocialButton";
-import { GRID } from "../../../styles/variables";
-import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
-import { Button } from "../../Atoms/Button/Button";
-import { P } from "../../Atoms/Text/Text";
-import { COLOURS } from "../../../styles/colours";
-import { useSessionContext } from "../../../context/SessionContext";
+import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
 
-interface PropsInterface {
-  messages?: MessageInterface[];
+interface IProps {
+  messages?: IMessage[];
 }
 
 const loginPathEmail = `${Environment.apiHostname}/login/email`;
@@ -78,7 +78,7 @@ const EmailLogin = ({ token }: { token: string }) => {
           id="login-email"
           type="email"
           name="target"
-          required
+          required={true}
           placeholder="name@example.com"
         />
         <Button type="submit">Send</Button>
@@ -87,7 +87,7 @@ const EmailLogin = ({ token }: { token: string }) => {
   );
 };
 
-export const LoginForm = (props: PropsInterface) => {
+export const LoginForm = (props: IProps) => {
   const { loginToken } = useSessionContext();
 
   return (

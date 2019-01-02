@@ -1,19 +1,23 @@
 import * as React from "react";
-import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import { DirectionInterface } from "../../../Interfaces";
+import { ConfirmButton } from "../../../components/Atoms/Button/Button";
+import { IntervalFormat } from "../../../components/Atoms/IntervalFormat/IntervalFormat";
+import { ComplexButton } from "../../../components/Molecules/ComplexButton/ComplexButton";
 import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { IntervalFormat } from "../../../components/Atoms/IntervalFormat/IntervalFormat";
-import { ConfirmButton } from "../../../components/Atoms/Button/Button";
-import { ComplexButton } from "../../../components/Molecules/ComplexButton/ComplexButton";
+import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
+import { IDirection } from "../../../Interfaces";
 
-interface PropsInterface {
-  direction: DirectionInterface;
+interface IProps {
+  direction: IDirection;
   journeyTime: number;
   children: JSX.Element;
 }
 
-export default ({ direction, journeyTime, children }: PropsInterface) => {
+export const GoButton = ({
+  direction,
+  journeyTime,
+  children,
+}: IProps) => {
   const { cratesOnShip, cratesInPort, ship } = useCurrentShipContext();
   const { buttonsDisabled, moveShip, openModal } = usePlayPortContext();
   const buttonDisabled = direction.action === null || buttonsDisabled;
@@ -51,9 +55,7 @@ export default ({ direction, journeyTime, children }: PropsInterface) => {
         onClick={() => {
           openModal(
             <TokenButton token={direction.action} handler={moveShip}>
-              <ConfirmButton type="submit">
-                Yes
-              </ConfirmButton>
+              <ConfirmButton type="submit">Yes</ConfirmButton>
             </TokenButton>
           );
         }}

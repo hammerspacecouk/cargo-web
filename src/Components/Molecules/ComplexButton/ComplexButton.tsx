@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button } from "../../Atoms/Button/Button";
 import { GRID } from "../../../styles/variables";
+import { Button } from "../../Atoms/Button/Button";
 import { Icon } from "../../Atoms/Icon/Icon";
 
-interface PropsInterface {
+interface IProps {
   readonly leading?: JSX.Element;
   readonly icon?: JSX.Element;
   readonly children?: JSX.Element;
@@ -38,7 +38,7 @@ export const ComplexButton = ({
   children,
   className,
   ...props
-}: PropsInterface) => {
+}: IProps) => {
   let styledPrefix;
   if (leading) {
     styledPrefix = <StyledChildren>{leading}</StyledChildren>;
@@ -52,10 +52,7 @@ export const ComplexButton = ({
   }
 
   return (
-    <StyledButton
-      className={className}
-      {...props}
-    >
+    <StyledButton className={className} {...props}>
       {styledPrefix}
       {children}
     </StyledButton>

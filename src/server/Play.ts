@@ -1,24 +1,24 @@
-import PlayPage from "../pages/PlayPage";
 import { Component, createElement } from "react";
-import AppLoading from "../pages/Play/AppLoading";
+import { AppLoading } from "../pages/Play/AppLoading";
+import { PlayPage } from "../pages/PlayPage";
 
-interface StateInterface {
+interface IState {
   appReady: boolean;
 }
 
 // The server rendered game just shows a "JavaScript required" view
-export class Play extends Component<undefined, StateInterface> {
-  state = {
-    appReady: false
+export class Play extends Component<undefined, IState> {
+  public state = {
+    appReady: false,
   };
 
-  componentDidMount() {
+  public componentDidMount() {
     this.setState({
-      appReady: true
+      appReady: true,
     });
   }
 
-  render() {
+  public render() {
     if (!this.state.appReady) {
       return createElement(AppLoading);
     }

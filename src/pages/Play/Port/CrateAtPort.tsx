@@ -1,18 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import { CrateActionInterface } from "../../../Interfaces";
-import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
 import { CrateButton } from "../../../components/Atoms/HaloButton/HaloButton";
 import { CratePickup } from "../../../components/Molecules/CratePickup/CratePickup";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
+import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
+import { ICrateAction } from "../../../Interfaces";
 
-interface CrateAtPortPropsInterface {
-  crateAction: CrateActionInterface;
+interface ICrateAtPortProps {
+  crateAction: ICrateAction;
 }
 
 const StyledCrateAtPort = styled.div``;
 
-export const CrateAtPort = ({ crateAction }: CrateAtPortPropsInterface) => {
+export const CrateAtPort = ({ crateAction }: ICrateAtPortProps) => {
   const { buttonsDisabled, moveCrate } = usePlayPortContext();
 
   const CrateContent = <CratePickup crateAction={crateAction} />;

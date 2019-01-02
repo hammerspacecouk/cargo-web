@@ -7,8 +7,8 @@ export const handler = async (
 ) => {
   res.status(200);
   res.set({
+    "cache-control": 60 * 60 * 24,
     "content-type": "text/plain",
-    "cache-control": 60 * 60 * 24
   });
   res.end(`
 User-agent: *

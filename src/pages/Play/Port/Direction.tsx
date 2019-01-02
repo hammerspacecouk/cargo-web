@@ -1,17 +1,17 @@
 import * as React from "react";
-import { DirectionInterface } from "../../../Interfaces";
 import { Fraction } from "../../../components/Atoms/Fraction/Fraction";
-import { ScoreValue } from "../../../components/Molecules/ScoreValue/ScoreValue";
-import GoButton from "./GoButton";
 import { TextD, TextF, TextWarning } from "../../../components/Atoms/Text/Text";
-import PortName from "../../../components/Molecules/PortName/PortName";
+import { PortName } from "../../../components/Molecules/PortName/PortName";
+import { ScoreValue } from "../../../components/Molecules/ScoreValue/ScoreValue";
+import { IDirection } from "../../../Interfaces";
+import { GoButton } from "./GoButton";
 
-interface PropsInterface {
-  direction: DirectionInterface;
+interface IProps {
+  direction: IDirection;
   children: any;
 }
 
-export const Direction = ({ direction, children }: PropsInterface) => {
+export const Direction = ({ direction, children }: IProps) => {
   const icon = children;
   const directionDisabled = direction.action === null;
 

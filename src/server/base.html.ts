@@ -1,40 +1,38 @@
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { match, matchPath, StaticRouter } from "react-router";
+import { match, matchPath, StaticRouter } from "react-router-dom";
 
-import { CacheType, matches as routes, RouteItem } from "../routes";
-import { InitialDataComponent } from "./withInitialData";
-import { App } from "../App";
-import { Logger } from "../util/Logger";
-import { getForClient } from "../util/Environment";
-import { Assets } from "../util/Assets";
 import { NextFunction, Request, Response } from "express";
+import { App } from "../App";
+import { CacheType, IRouteItem, matches as routes } from "../routes";
+import { Assets } from "../util/Assets";
+import { getForClient } from "../util/Environment";
+import { Logger } from "../util/Logger";
+import { IInitialDataComponent } from "./withInitialData";
 
-interface MatchedRoute {
-  route: RouteItem;
+interface IMatchedRoute {
+  route: IRouteItem;
   match: match;
 }
 
-declare namespace Server {
-  interface RouterContext {
-    url?: string;
-    statusCode?: number;
-  }
+interface IRouterContext {
+  url?: string;
+  statusCode?: number;
 }
 
 const assets = new Assets(
-  require("../../build/assets-manifest.json"),
+  import ("../../build/assets-manifest.json"),
   process.env.APP_ASSET_PREFIX
 );
 
-const buildCacheControl = (matched: MatchedRoute) => {
+const buildCacheControl = (matched: IMatchedRoute) => {
   let cache: string = CacheType.None;
 
   if (matched && matched.route) {
     const route = matched.route;
     cache = route.cacheType || CacheType.None;
     if (cache !== CacheType.None) {
-      let age = route.maxAge || 600;
+      const age = route.maxAge || 600;
       cache = `${cache}, max-age=${age}`;
     }
   }
@@ -51,21 +49,21 @@ export const handler = async (
   const path = req.url;
 
   // find any initial Data that has to be fetched for the routes
-  let matchedRoute: MatchedRoute;
+  let matchedRoute: IMatchedRoute;
   routes.forEach(route => {
-    const match = matchPath(path, route);
+    const matchedPath = matchPath(path, route);
     // We then look for static getInitialData function on each top level component
-    if (match) {
+    if (matchedPath) {
       matchedRoute = {
+        matchedPath,
         route,
-        match
       };
     }
   });
 
-  const context: Server.RouterContext = {
+  const context: IRouterContext = {
+    statusCode: null,
     url: null,
-    statusCode: null
   };
 
   let appElement = "";
@@ -74,10 +72,10 @@ export const handler = async (
   try {
     if (
       matchedRoute &&
-      (matchedRoute.route.component as InitialDataComponent).getInitialData
+      (matchedRoute.route.component as IInitialDataComponent).getInitialData
     ) {
       data = await (matchedRoute.route
-        .component as InitialDataComponent).getInitialData(
+        .component as IInitialDataComponent).getInitialData(
         matchedRoute.match,
         req
       );
@@ -106,20 +104,20 @@ export const handler = async (
     const code = context.statusCode || 200;
     res.status(code);
     res.set({
-      "content-type": "text/html",
       "cache-control": buildCacheControl(matchedRoute),
+      "content-type": "text/html",
       link: [
         `<${assets.get("app.css")}>; rel=preload; as=style`,
         `<${assets.get("vendor.js")}>; rel=preload; as=script`,
-        `<${assets.get("app.js")}>; rel=preload; as=script`
-      ]
+        `<${assets.get("app.js")}>; rel=preload; as=script`,
+      ],
     });
     res.end(
       html({
-        config: getForClient(),
         assets,
+        config: getForClient(),
         content: appElement,
-        data
+        data,
       })
     );
 
@@ -130,8 +128,8 @@ export const handler = async (
   } catch (error) {
     res.status(500);
     res.set({
+      "cache-control": CacheType.None,
       "content-type": "text/html",
-      "cache-control": CacheType.None
     });
     res.end(`Sorry, an error occurred. Please <a href=".">try again</a>`);
     const finish = Date.now() - start;
@@ -142,7 +140,7 @@ export const handler = async (
   }
 };
 
-interface HTMLInterface {
+interface IHTML {
   config: object;
   assets: Assets;
   content: any;
@@ -152,11 +150,11 @@ interface HTMLInterface {
 
 const html = ({
   config,
-  assets,
+  assetsManifest,
   content,
   data,
-  title = null
-}: HTMLInterface) => `<!doctype html>
+  title = null,
+}: IHTML) => `<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -165,7 +163,7 @@ const html = ({
 </head>
 <body>
 <div id="root">${content}</div>
-<script src="${assets.get("vendor.js")}"></script>
+<script src="${assetsManifest.get("vendor.js")}"></script>
 <script>
   window._CONFIG_ = ${JSON.stringify(config)};
   window._INITIAL_DATA_ = ${JSON.stringify(data)};
@@ -180,7 +178,7 @@ const html = ({
   }();
   if (supportsES6) {
     let script = document.createElement('script');
-    script.src = '${assets.get("app.js")}';
+    script.src = '${assetsManifest.get("app.js")}';
     document.head.appendChild(script);
   }
 </script>

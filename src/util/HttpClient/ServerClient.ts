@@ -1,7 +1,7 @@
-import { APIClientInterface } from "../ApiClient";
+import { IActionToken } from "../../Interfaces";
+import { IAPIClient } from "../ApiClient";
 import { Environment } from "../Environment";
 import { Logger } from "../Logger";
-import { ActionTokenInterface } from "../../Interfaces";
 
 const passThroughCookies = (cookies?: any) => {
   if (!cookies) {
@@ -9,7 +9,7 @@ const passThroughCookies = (cookies?: any) => {
   }
 
   const cookieItems = [];
-  for (let property in cookies) {
+  for (const property in cookies) {
     if (cookies.hasOwnProperty(property)) {
       cookieItems.push(
         encodeURIComponent(property) +
@@ -21,22 +21,22 @@ const passThroughCookies = (cookies?: any) => {
   return cookieItems.join(";");
 };
 
-export class ServerClient implements APIClientInterface {
-  getUrl(path: string): string {
+export class ServerClient implements IAPIClient {
+  public getUrl(path: string): string {
     return Environment.apiHostname + path;
   }
 
-  tokenFetch(token: ActionTokenInterface): Promise<any> {
+  public tokenFetch(token: IActionToken): Promise<any> {
     return this.fetch(token.path, { token: token.token });
   }
 
-  async fetch(path: string, payload?: object, cookies?: object): Promise<any> {
+  public async fetch(path: string, payload?: object, cookies?: object): Promise<any> {
     const url = this.getUrl(path);
     try {
       const start = Date.now();
 
       const headers = {
-        cookie: passThroughCookies(cookies)
+        cookie: passThroughCookies(cookies),
       };
 
       const response = await fetch(url, { headers });

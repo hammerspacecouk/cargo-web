@@ -1,12 +1,12 @@
 import * as React from "react";
-import ShieldIcon from "../../../components/Icons/ShieldIcon/ShieldIcon";
-import { useSessionContext } from "../../../context/SessionContext";
-import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { MessageInfo } from "../../../components/Molecules/Message/Message";
-import { P } from "../../../components/Atoms/Text/Text";
 import { Icon, SMALL_ICON } from "../../../components/Atoms/Icon/Icon";
+import { P } from "../../../components/Atoms/Text/Text";
+import { ShieldIcon } from "../../../components/Icons/ShieldIcon/ShieldIcon";
+import { MessageInfo } from "../../../components/Molecules/Message/Message";
+import { useCurrentShipContext } from "../../../context/CurrentShipContext";
+import { useSessionContext } from "../../../context/SessionContext";
 
-export default () => {
+export const Welcome = () => {
   const { rankStatus } = useSessionContext();
   const { port } = useCurrentShipContext();
 

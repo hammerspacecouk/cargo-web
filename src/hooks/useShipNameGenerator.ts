@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
-import { useFrameEffect } from "./useFrameEffect";
 import { makeRandom } from "../util/ShipName";
+import { useFrameEffect } from "./useFrameEffect";
 import { useMounted } from "./useMounted";
 
 export const useShipNameGenerator = (offeredShipName?: string) => {
   const [nameGuess, setNameGuess] = useState("_");
   const isMounted = useMounted();
 
-  let overrideTimer = useRef(null);
-  let found = useRef(false);
+  const overrideTimer = useRef(null);
+  const found = useRef(false);
 
   useFrameEffect(
     () => {
@@ -40,6 +40,6 @@ export const useShipNameGenerator = (offeredShipName?: string) => {
   );
 
   return {
-    nameGuess: nameGuess.trim()
+    nameGuess: nameGuess.trim(),
   };
 };

@@ -1,18 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useSessionContext } from "../../context/SessionContext";
+import { H1 } from "../../components/Atoms/Heading/Heading";
+import { Square } from "../../components/Atoms/Ratio/Ratio";
 import PlayerFlag from "../../components/Molecules/PlayerFlag/PlayerFlag";
-import FleetShips from "../../components/Organisms/FleetShips/FleetShips";
 import { EventsList } from "../../components/Organisms/EventsList/EventsList";
+import FleetShips from "../../components/Organisms/FleetShips/FleetShips";
 import { PlayerRank } from "../../components/Organisms/PlayerRank/PlayerRank";
 import {
   FleetContextProvider,
-  useFleetContext
+  useFleetContext,
 } from "../../context/Page/FleetContext";
-import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
+import { useSessionContext } from "../../context/SessionContext";
 import { COLOURS } from "../../styles/colours";
-import { H1 } from "../../components/Atoms/Heading/Heading";
-import { Square } from "../../components/Atoms/Ratio/Ratio";
+import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 
 const StyledFleetPage = styled.div`
   margin: 0 auto;
@@ -61,7 +61,7 @@ const FleetPageContent = () => {
       </FleetHeader>
       <FleetShips ships={ships} />
       <PlayerRank rankStatus={rankStatus} />
-      <EventsList events={events} firstPerson />
+      <EventsList events={events} firstPerson={true} />
     </StyledFleetPage>
   );
 };

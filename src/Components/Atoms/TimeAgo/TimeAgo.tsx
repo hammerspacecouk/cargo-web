@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface Props {
+interface IProps {
   datetime: Date;
 }
 
@@ -34,7 +34,7 @@ const getValue = (seconds: number, datetime: Date): string => {
 /**
  * Show dynamically updating time since an event
  */
-export const TimeAgo = ({ datetime }: Props) => {
+export const TimeAgo = ({ datetime }: IProps) => {
   const [text, setText] = React.useState(
     getValue(getSeconds(datetime), datetime)
   );

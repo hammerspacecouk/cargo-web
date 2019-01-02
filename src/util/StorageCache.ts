@@ -1,4 +1,4 @@
-interface StoredInterface {
+interface IStored {
   expiry: number;
   data: object;
 }
@@ -9,9 +9,9 @@ export const cacheRemove = (key: string): void => {
 
 // handles and encodes data for storage, with expiry time
 export const cacheSet = (key: string, data: object): void => {
-  const cachedData: StoredInterface = {
+  const cachedData: IStored = {
+    data,
     expiry: Date.now() + 1000 * 60 * 60 * 24 * 28, // 28 days
-    data
   };
   window.localStorage.setItem(key, JSON.stringify(cachedData));
 };
@@ -22,7 +22,7 @@ export const cacheGet = (key: string): object => {
   if (!data) {
     return null;
   }
-  const parsed: StoredInterface = JSON.parse(data);
+  const parsed: IStored = JSON.parse(data);
   if (parsed.expiry < Date.now()) {
     cacheRemove(key);
     return null;

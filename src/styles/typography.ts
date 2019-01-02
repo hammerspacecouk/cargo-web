@@ -39,7 +39,7 @@ export const SIZES = {
     font-size: 0.875rem;
     line-height: 1;
     letter-spacing: 0;
-  `
+  `,
 };
 
 export const ELEMENTS = {
@@ -78,5 +78,5 @@ export const ELEMENTS = {
     margin: 0;
     font-weight: normal;
     ${SIZES.E};
-  `
+  `,
 };
