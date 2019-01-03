@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IPort, IShip } from "../../../Interfaces";
 import { routes } from "../../../routes";
-import ChevronRightIcon from "../../Icons/ChevronRightIcon/ChevronRightIcon";
+import { ChevronRightIcon } from "../../Icons/ChevronRightIcon/ChevronRightIcon";
 import { PortName } from "../../Molecules/PortName/PortName";
 
 interface IProps {
@@ -23,7 +23,7 @@ const Go = styled(Link)`
   width: 48px;
 `;
 
-export default function FleetShipLocation({ ship }: IProps) {
+export const FleetShipLocation = ({ ship }: IProps) => {
   return (
     <Styled>
       <Location>
@@ -34,4 +34,4 @@ export default function FleetShipLocation({ ship }: IProps) {
       </Go>
     </Styled>
   );
-}
+};

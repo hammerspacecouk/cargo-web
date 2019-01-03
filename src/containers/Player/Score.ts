@@ -27,12 +27,12 @@ const scoreState = (score: IScore): number => {
   return getValue(score, new Date());
 };
 
-export default (props: IProps) => {
+export const Score = (props: IProps) => {
   const [score, setScore] = useState(scoreState(props.score));
   const mounted = useRef(false);
   let frameHandler: number = null;
 
-  function frame() {
+  const frame = () => {
     if (!mounted.current || !props.score) {
       return;
     }
@@ -41,7 +41,7 @@ export default (props: IProps) => {
     if (props.score.rate !== 0) {
       frameHandler = window.requestAnimationFrame(frame);
     }
-  }
+  };
 
   useEffect(
     () => {

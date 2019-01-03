@@ -9,6 +9,6 @@ const port = 3000;
 
 app.disable('x-powered-by'); // no need to tell the world what technology to attack
 app.use(CookieParser());
-serverEntryScript.default(app);
+serverEntryScript.start(app);
 
 app.listen(port, () => console.log(`Webapp listening on port ${port}`));

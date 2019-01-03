@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { MONOSPACE_FONT } from "../../../styles/typography";
-import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
+import { CreditsIcon } from "../../Icons/CreditsIcon/CreditsIcon";
 
 interface IProps {
   score: number;

@@ -1,10 +1,6 @@
 import { createContext, createElement, useContext, useState } from "react";
 import { useMounted } from "../../hooks/useMounted";
-import {
-  IChildrenProps,
-  IEvent,
-  IFleetShip,
-} from "../../Interfaces";
+import { IChildrenProps, IEvent, IFleetShip } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
 
@@ -45,10 +41,10 @@ export const FleetContextProvider = ({ children }: IChildrenProps) => {
     FleetContext.Provider,
     {
       value: {
-        ships,
         events,
-        setFleetData,
         refresh,
+        setFleetData,
+        ships,
       },
     },
     children

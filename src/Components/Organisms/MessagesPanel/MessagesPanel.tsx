@@ -1,14 +1,14 @@
 import * as React from "react";
 import { IMessage } from "../../../Interfaces";
 import { Hidden } from "../../Atoms/Hidden/Hidden";
-import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { ListUnstyled } from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
 import { Message } from "../../Molecules/Message/Message";
 
-export interface ListsProps {
+export interface IListsProps {
   readonly messages?: IMessage[];
 }
 
-export const MessagesPanel = ({ messages }: ListsProps) => {
+export const MessagesPanel = ({ messages }: IListsProps) => {
   if (!messages || messages.length < 1) {
     return null;
   }

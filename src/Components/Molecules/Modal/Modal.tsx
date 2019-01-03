@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { GRID, Z_INDEX } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading/Heading";
-import CloseIcon from "../../Icons/CloseIcon/CloseIcon";
+import { CloseIcon } from "../../Icons/CloseIcon/CloseIcon";
 
 interface IProps {
   children: any;
@@ -119,13 +119,13 @@ export const Modal = (props: IProps) => {
         closeTimeoutMS={300}
         contentLabel={title}
         className={{
-          base: "modal",
           afterOpen: "modal--after-open",
+          base: "modal",
           beforeClose: "modal--before-close",
         }}
         overlayClassName={{
-          base: "modal__overlay",
           afterOpen: "modal__overlay--after-open",
+          base: "modal__overlay",
           beforeClose: "modal__overlay--before-close",
         }}
       >

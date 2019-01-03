@@ -10,8 +10,8 @@ import {
 } from "../components/Organisms/PlayBar/PlayBar";
 import { EnsureLoggedIn } from "../containers/Player/EnsureLoggedIn";
 import { CurrentShipContextComponent } from "../context/CurrentShipContext";
-import FleetPage from "./Play/FleetPage";
-import ShipPage from "./Play/ShipPage";
+import { FleetPage } from "./Play/FleetPage";
+import { ShipPage } from "./Play/ShipPage";
 import { UpgradesPage } from "./Play/UpgradesPage";
 
 const StyledPlayArea = styled.div`

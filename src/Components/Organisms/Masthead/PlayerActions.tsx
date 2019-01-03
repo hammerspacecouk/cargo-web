@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import Score from "../../../containers/Player/Score";
+import { Score } from "../../../containers/Player/Score";
 import { useSessionContext } from "../../../context/SessionContext";
 import { routes } from "../../../routes";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
@@ -9,7 +9,7 @@ import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
 import { Hidden } from "../../Atoms/Hidden/Hidden";
 import { Icon } from "../../Atoms/Icon/Icon";
 import { Notification } from "../../Atoms/Notification/Notification";
-import ProfileIcon from "../../Icons/ProfileIcon/ProfileIcon";
+import { ProfileIcon } from "../../Icons/ProfileIcon/ProfileIcon";
 
 const MastHeadScore = styled.div`
   display: flex;

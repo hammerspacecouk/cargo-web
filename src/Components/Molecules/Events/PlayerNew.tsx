@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IEvent } from "../../../Interfaces";
-import PlayerFlag from "../PlayerFlag/PlayerFlag";
-import Event, { EventFlag } from "./Event";
+import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
+import { Event, EventFlag } from "./Event";
 
 interface IProps {
   readonly event: IEvent;

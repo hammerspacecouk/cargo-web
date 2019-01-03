@@ -5,9 +5,9 @@ import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { FlexInline } from "../../Atoms/Flex/Flex";
 import { H3 } from "../../Atoms/Heading/Heading";
-import EditShipName from "../EditShipName/EditShipName";
-import FleetShipHealth from "../FleetShipHealth/FleetShipHealth";
-import FleetShipLocation from "../FleetShipLocation/FleetShipLocation";
+import { EditShipName } from "../EditShipName/EditShipName";
+import { FleetShipHealth } from "../FleetShipHealth/FleetShipHealth";
+import { FleetShipLocation } from "../FleetShipLocation/FleetShipLocation";
 
 interface IProps {
   fleetShip: IFleetShip;
@@ -34,30 +34,28 @@ const DetailRowContent = styled.div`
   flex: 1;
 `;
 
-export default function FleetShipDetail({ fleetShip }: IProps) {
-  return (
-    <StyledDetail>
-      <DetailRow>
-        <DetailRowLabel>Location</DetailRowLabel>
-        <DetailRowContent>
-          <FleetShipLocation ship={fleetShip.ship} />
-        </DetailRowContent>
-      </DetailRow>
-      <DetailRow>
-        <DetailRowLabel>Shield strength</DetailRowLabel>
-        <DetailRowContent>
-          <FleetShipHealth health={fleetShip.health} />
-        </DetailRowContent>
-      </DetailRow>
-      <DetailRow>
-        <DetailRowLabel>Ship name</DetailRowLabel>
-        <DetailRowContent>
-          <EditShipName
-            ship={fleetShip.ship}
-            renameToken={fleetShip.renameToken}
-          />
-        </DetailRowContent>
-      </DetailRow>
-    </StyledDetail>
-  );
-}
+export const FleetShipDetail = ({ fleetShip }: IProps) => (
+  <StyledDetail>
+    <DetailRow>
+      <DetailRowLabel>Location</DetailRowLabel>
+      <DetailRowContent>
+        <FleetShipLocation ship={fleetShip.ship} />
+      </DetailRowContent>
+    </DetailRow>
+    <DetailRow>
+      <DetailRowLabel>Shield strength</DetailRowLabel>
+      <DetailRowContent>
+        <FleetShipHealth health={fleetShip.health} />
+      </DetailRowContent>
+    </DetailRow>
+    <DetailRow>
+      <DetailRowLabel>Ship name</DetailRowLabel>
+      <DetailRowContent>
+        <EditShipName
+          ship={fleetShip.ship}
+          renameToken={fleetShip.renameToken}
+        />
+      </DetailRowContent>
+    </DetailRow>
+  </StyledDetail>
+);

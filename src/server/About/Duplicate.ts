@@ -1,6 +1,6 @@
-import { withInitialData } from "../withInitialData";
 import { Component, createElement } from "react";
-import DuplicatePage from "../../pages/About/DuplicatePage";
+import { DuplicatePage } from "../../pages/About/DuplicatePage";
+import { withInitialData } from "../withInitialData";
 
 class DuplicateComponent extends Component<undefined, undefined> {
   public render() {

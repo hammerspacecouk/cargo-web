@@ -19,7 +19,7 @@ const StyledImg = styled.img`
   background: ${COLOURS.BLACK.STANDARD};
 `;
 
-export default function PlayerFlag({ player, className }: IProps) {
+export const PlayerFlag = ({ player, className }: IProps) => {
   if (player) {
     return (
       <StyledImg
@@ -31,4 +31,4 @@ export default function PlayerFlag({ player, className }: IProps) {
     );
   }
   return <StyledBox />;
-}
+};

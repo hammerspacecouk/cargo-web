@@ -28,7 +28,7 @@ const Content = styled.span`
   margin-right: ${GRID.UNIT};
 `;
 
-export default (props: IProps) => (
+export const Event = (props: IProps) => (
   <StyledEvent>
     <Content>{props.children}</Content>
     <TimeAgo datetime={new Date(props.time)} />

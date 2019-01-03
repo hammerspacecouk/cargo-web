@@ -5,7 +5,7 @@ import { GRID } from "../../../styles/variables";
 import { CrateWithContents } from "../../Atoms/CrateContents/CrateContents";
 import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
 import { TextE } from "../../Atoms/Text/Text";
-import CreditsIcon from "../../Icons/CreditsIcon/CreditsIcon";
+import { CreditsIcon } from "../../Icons/CreditsIcon/CreditsIcon";
 
 interface IProps {
   crateAction: ICrateAction;

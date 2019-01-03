@@ -1,11 +1,9 @@
 import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
-
-import { ErrorInfo } from "react";
 import { Modal, ModalActions } from "./components/Molecules/Modal/Modal";
 import { NotFound } from "./components/Organisms/Error/NotFound";
 import { Masthead } from "./components/Organisms/Masthead/Masthead";
-import SessionContextComponent from "./context/SessionContext";
+import { SessionContextComponent } from "./context/SessionContext";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
 interface IProps {
@@ -13,12 +11,12 @@ interface IProps {
   initialData?: any;
 }
 
-interface State {
+interface IState {
   errorMessage: string | undefined;
 }
 
 // componentDidCatch not yet available via hooks
-export class App extends React.Component<Props, State> {
+export class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = { errorMessage: undefined };
@@ -31,7 +29,7 @@ export class App extends React.Component<Props, State> {
     console.error(error);
   };
 
-  public componentDidCatch(error: Error, info: ErrorInfo) {
+  public componentDidCatch(error: Error, info: React.ErrorInfo) {
     this.setState({
       errorMessage: error.toString(),
     });

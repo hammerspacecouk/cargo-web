@@ -70,57 +70,54 @@ const TemplateAside = styled.aside`
   `};
 `;
 
-export default ({ events }: IProps) => {
-  return (
-    <TemplateHome>
-      <TemplateHero>
-        <Hero>
-          <H1>Planet Cargo</H1>
-        </Hero>
-      </TemplateHero>
-      <TemplatePlay>
-        <PlayPanel />
-      </TemplatePlay>
-      <TemplateMain>
-        <Prose>
-          <p>
-            Colonisation of space has begun, and interstellar shipping is big
-            business. You've got to get in on this. Who else is going to
-            transport those vital supplies of saxophones 🎷 to the other side of
-            the galaxy?
-          </p>
-          <p>
-            But it's a wild west out there. Can you survive, thrive and exploit
-            all <strong>1,000</strong> known planets before someone else does.
-          </p>
+export const HomePage = ({ events }: IProps) => (
+  <TemplateHome>
+    <TemplateHero>
+      <Hero>
+        <H1>Planet Cargo</H1>
+      </Hero>
+    </TemplateHero>
+    <TemplatePlay>
+      <PlayPanel />
+    </TemplatePlay>
+    <TemplateMain>
+      <Prose>
+        <p>
+          Colonisation of space has begun, and interstellar shipping is big
+          business. You've got to get in on this. Who else is going to transport
+          those vital supplies of saxophones 🎷 to the other side of the galaxy?
+        </p>
+        <p>
+          But it's a wild west out there. Can you survive, thrive and exploit
+          all <strong>1,000</strong> known planets before someone else does.
+        </p>
 
-          <ul>
-            <li>
-              <a href={routes.getPlay()} rel="nofollow">
-                Play
-              </a>
-            </li>
-            <li>
-              <a href={routes.getPortsList()}>Ports</a>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <a href={routes.getAbout()}>About</a>
-            </li>
-          </ul>
-        </Prose>
+        <ul>
+          <li>
+            <a href={routes.getPlay()} rel="nofollow">
+              Play
+            </a>
+          </li>
+          <li>
+            <a href={routes.getPortsList()}>Ports</a>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <a href={routes.getAbout()}>About</a>
+          </li>
+        </ul>
+      </Prose>
 
-        <div>
-          <h2>What's happening right now?</h2>
-          <EventsList events={events} />
-        </div>
-      </TemplateMain>
-      <TemplateAside>
-        {/* todo - how many saxophones */}
-        <p>More side stuff</p>
-      </TemplateAside>
-    </TemplateHome>
-  );
-};
+      <div>
+        <h2>What's happening right now?</h2>
+        <EventsList events={events} />
+      </div>
+    </TemplateMain>
+    <TemplateAside>
+      {/* todo - how many saxophones */}
+      <p>More side stuff</p>
+    </TemplateAside>
+  </TemplateHome>
+);

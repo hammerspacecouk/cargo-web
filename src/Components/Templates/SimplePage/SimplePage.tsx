@@ -2,12 +2,12 @@ import * as React from "react";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../../styles/media";
 import { GRID, MAX_CONTENT_WIDTH } from "../../../styles/variables";
-import { Crumb, CrumbTitle } from "../../Molecules/CrumbTitle/CrumbTitle";
+import { CrumbTitle, ICrumb } from "../../Molecules/CrumbTitle/CrumbTitle";
 
 interface IProps {
   readonly title: string;
   readonly children: any;
-  readonly crumbs?: Crumb[];
+  readonly crumbs?: ICrumb[];
 }
 
 const StyledPage = styled.div`

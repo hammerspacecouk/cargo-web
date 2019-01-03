@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { IPlayer } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { animate } from "../../Atoms/Placeholder/PlaceHolder";
-import PlayerFlag from "../PlayerFlag/PlayerFlag";
+import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
 
 interface IProps {
   percent?: number;
@@ -64,69 +64,67 @@ const CircleBar = styled(CircleTrack)<{ colour: string }>`
 /**
  * Standard way to display a score value (with Icon)
  */
-export default React.memo(function({
-  percent,
-  className,
-  player,
-}: IProps) {
-  const size = 100;
-  const barWidth = 12;
+export const ShieldStrength = React.memo(
+  ({ percent, className, player }: IProps) => {
+    const size = 100;
+    const barWidth = 12;
 
-  const centre = size / 2;
-  const radius = centre - barWidth / 2;
-  const trackLength = 2 * Math.PI * radius;
+    const centre = size / 2;
+    const radius = centre - barWidth / 2;
+    const trackLength = 2 * Math.PI * radius;
 
-  let bar = null;
-  if (percent !== undefined) {
-    const barLength = (percent / 100) * trackLength;
-    const dash = `${barLength} ${trackLength}`;
-    let colour = COLOURS.HEALTH.FULL;
-    if (percent < 100) {
-      colour = COLOURS.HEALTH.GOOD;
-    }
-    if (percent <= 75) {
-      colour = COLOURS.HEALTH.OK;
-    }
-    if (percent <= 50) {
-      colour = COLOURS.HEALTH.WARNING;
-    }
-    if (percent <= 25) {
-      colour = COLOURS.HEALTH.DANGER;
-    }
+    let bar = null;
+    if (percent !== undefined) {
+      const barLength = (percent / 100) * trackLength;
+      const dash = `${barLength} ${trackLength}`;
+      let colour = COLOURS.HEALTH.FULL;
+      if (percent < 100) {
+        colour = COLOURS.HEALTH.GOOD;
+      }
+      if (percent <= 75) {
+        colour = COLOURS.HEALTH.OK;
+      }
+      if (percent <= 50) {
+        colour = COLOURS.HEALTH.WARNING;
+      }
+      if (percent <= 25) {
+        colour = COLOURS.HEALTH.DANGER;
+      }
 
-    bar = (
-      <CircleBar
-        cx={centre}
-        cy={centre}
-        r={radius}
-        strokeWidth={barWidth}
-        strokeDasharray={dash}
-        colour={colour}
-      />
-    );
-  }
-
-  let emblem;
-  if (player) {
-    emblem = <StyledFlag player={player} />;
-  }
-
-  return (
-    <StyledShieldStrength
-      title={`${percent}%`}
-      className={className}
-      loading={percent === undefined}
-    >
-      {emblem}
-      <StyledSvg viewBox={`0 0 ${size} ${size}`}>
-        <CircleTrack
+      bar = (
+        <CircleBar
           cx={centre}
           cy={centre}
           r={radius}
           strokeWidth={barWidth}
+          strokeDasharray={dash}
+          colour={colour}
         />
-        {bar}
-      </StyledSvg>
-    </StyledShieldStrength>
-  );
-});
+      );
+    }
+
+    let emblem;
+    if (player) {
+      emblem = <StyledFlag player={player} />;
+    }
+
+    return (
+      <StyledShieldStrength
+        title={`${percent}%`}
+        className={className}
+        loading={percent === undefined}
+      >
+        {emblem}
+        <StyledSvg viewBox={`0 0 ${size} ${size}`}>
+          <CircleTrack
+            cx={centre}
+            cy={centre}
+            r={radius}
+            strokeWidth={barWidth}
+          />
+          {bar}
+        </StyledSvg>
+      </StyledShieldStrength>
+    );
+  }
+);

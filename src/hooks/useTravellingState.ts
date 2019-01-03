@@ -4,7 +4,7 @@ import { useCurrentShipContext } from "../context/CurrentShipContext";
 import { useSessionContext } from "../context/SessionContext";
 import { useFrameEffect } from "./useFrameEffect";
 
-const secondsRemaining = (arrival: Date) => {
+const calculateSecondsRemaining = (arrival: Date) => {
   const now = new Date();
   return Math.max(0, differenceInSeconds(arrival, now));
 };
@@ -15,10 +15,10 @@ const useTravellingCountdown = () => {
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
 
-  const [seconds, setSeconds] = useState(secondsRemaining(arrival));
+  const [seconds, setSeconds] = useState(calculateSecondsRemaining(arrival));
 
   useFrameEffect(() => {
-    setSeconds(secondsRemaining(arrival));
+    setSeconds(calculateSecondsRemaining(arrival));
     return seconds > 0;
   });
 
@@ -29,9 +29,9 @@ const useTravellingCountdown = () => {
   );
 
   return {
-    secondsRemaining: seconds,
-    percent,
     isArriving: seconds <= 0,
+    percent,
+    secondsRemaining: seconds,
   };
 };
 
@@ -70,7 +70,7 @@ export const useTravellingState = () => {
   );
 
   return {
-    secondsRemaining,
     percent,
+    secondsRemaining,
   };
 };

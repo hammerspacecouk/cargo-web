@@ -2,7 +2,7 @@ import * as React from "react";
 import { H2 } from "../components/Atoms/Heading/Heading";
 import { Icon, SMALL_ICON } from "../components/Atoms/Icon/Icon";
 import { Loading } from "../components/Atoms/Loading/Loading";
-import ErrorIcon from "../components/Icons/ErrorIcon/ErrorIcon";
+import { ErrorIcon } from "../components/Icons/ErrorIcon/ErrorIcon";
 import { DeleteAccountButton } from "../components/Molecules/DeleteAccountButton/DeleteAccountButton";
 import { MessageWarning } from "../components/Molecules/Message/Message";
 import { Panel } from "../components/Molecules/Panel/Panel";
@@ -11,10 +11,7 @@ import { Error } from "../components/Organisms/Error/Error";
 import { LoginForm } from "../components/Organisms/LoginForm/LoginForm";
 import { LogOutButton } from "../components/Organisms/LogoutButton/LogOutButton";
 import { ProfileLayout } from "../components/Templates/ProfileLayout/ProfileLayout";
-import {
-  ISessionResponse,
-  useSessionContext,
-} from "../context/SessionContext";
+import { ISessionResponse, useSessionContext } from "../context/SessionContext";
 import { IPort } from "../Interfaces";
 import { routes } from "../routes";
 import { fullDate } from "../util/Format";

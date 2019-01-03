@@ -20,9 +20,7 @@ const UpgradesContext = createContext({
   buttonsDisabled: false,
 });
 
-export const UpgradesContextProvider = ({
-  children,
-}: IChildrenProps) => {
+export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
   const { updateScore } = useSessionContext();
 
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
@@ -39,12 +37,12 @@ export const UpgradesContextProvider = ({
 
     // make the API call
     try {
-      const data = await ApiClient.tokenFetch(token);
-      setShips(data.ships);
-      setMessage(data.message);
+      const actionData = await ApiClient.tokenFetch(token);
+      setShips(actionData.ships);
+      setMessage(actionData.message);
 
       // update the score
-      updateScore(data.newScore);
+      updateScore(actionData.newScore);
     } catch (e) {
       // todo - error handling
     } finally {
@@ -57,15 +55,15 @@ export const UpgradesContextProvider = ({
     {
       value: {
         buttonsDisabled,
-        ships,
-        message,
         makePurchase,
+        message,
+        ships,
       },
     },
     children
   );
 };
 
-export function useUpgradesContext(): IUpgradesContext {
+export const useUpgradesContext = (): IUpgradesContext => {
   return useContext(UpgradesContext) as IUpgradesContext;
-}
+};

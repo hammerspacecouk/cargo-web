@@ -4,11 +4,11 @@ import { IFleetShip } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { HaloButton } from "../../Atoms/HaloButton/HaloButton";
-import ChevronDownIcon from "../../Icons/ChevronDownIcon/ChevronDownIcon";
-import ChevronUpIcon from "../../Icons/ChevronUpIcon/ChevronUpIcon";
-import WarningIcon from "../../Icons/WarningIcon/WarningIcon";
-import FleetShipDetail from "../FleetShipDetail/FleetShipDetail";
-import FleetShipName from "../FleetShipName/FleetShipName";
+import { ChevronDownIcon } from "../../Icons/ChevronDownIcon/ChevronDownIcon";
+import { ChevronUpIcon } from "../../Icons/ChevronUpIcon/ChevronUpIcon";
+import { WarningIcon } from "../../Icons/WarningIcon/WarningIcon";
+import { FleetShipDetail } from "../FleetShipDetail/FleetShipDetail";
+import { FleetShipName } from "../FleetShipName/FleetShipName";
 
 interface IProps {
   fleetShip?: IFleetShip;
@@ -53,7 +53,7 @@ const Destroyed = styled.div`
   text-align: right;
 `;
 
-export default function FleetShipItem({ fleetShip }: IProps) {
+export const FleetShipItem = ({ fleetShip }: IProps) => {
   const [showDetail, setShowDetail] = React.useState(false);
 
   let attention = null;
@@ -99,4 +99,4 @@ export default function FleetShipItem({ fleetShip }: IProps) {
       {detail}
     </StyledItem>
   );
-}
+};

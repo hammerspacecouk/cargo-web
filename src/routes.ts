@@ -25,7 +25,7 @@ export interface IRouteItem extends RouteProps {
   maxAge?: number;
 }
 
-const routes = {
+export const routes = {
   getAbout: () => "/about",
   getAboutCheating: () => "/about/cheating",
   getAboutDuplicate: () => "/about/duplicate",
@@ -145,5 +145,3 @@ export const matches = [
     path: routes.getHome(),
   },
 ] as IRouteItem[];
-
-export const routes;

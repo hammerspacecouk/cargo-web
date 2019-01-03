@@ -19,7 +19,6 @@ interface IProps {
 // on the server and client.
 export const withInitialData = (Page: IInitialDataComponent) => {
   return class WithInitialData extends Component<IProps, IState> {
-
     public static async getInitialData(routeMatch: match, request?: Request) {
       // Need to call the wrapped components getInitialData if it exists
       if (Page.getInitialData) {

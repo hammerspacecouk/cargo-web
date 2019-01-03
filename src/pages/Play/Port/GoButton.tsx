@@ -13,11 +13,7 @@ interface IProps {
   children: JSX.Element;
 }
 
-export const GoButton = ({
-  direction,
-  journeyTime,
-  children,
-}: IProps) => {
+export const GoButton = ({ direction, journeyTime, children }: IProps) => {
   const { cratesOnShip, cratesInPort, ship } = useCurrentShipContext();
   const { buttonsDisabled, moveShip, openModal } = usePlayPortContext();
   const buttonDisabled = direction.action === null || buttonsDisabled;

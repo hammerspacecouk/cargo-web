@@ -7,7 +7,7 @@ import {
 } from "../../context/Page/UpgradesContext";
 import { ShipUpgrades } from "./Upgrades/ShipUpgrades";
 
-const UpgradesPage = () => {
+const UpgradesPageDetail = () => {
   const { message } = useUpgradesContext();
 
   return (
@@ -22,6 +22,6 @@ const UpgradesPage = () => {
 
 export const UpgradesPage = () => (
   <UpgradesContextProvider>
-    <UpgradesPage />
+    <UpgradesPageDetail />
   </UpgradesContextProvider>
 );

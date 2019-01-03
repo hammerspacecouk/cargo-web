@@ -16,7 +16,7 @@ interface IProps {
   children: any;
 }
 
-interface ShipLocationResponse {
+interface IShipLocationResponse {
   // todo - merge with PlayShipResponse
   readonly port?: IPort;
   readonly channel?: IChannel;
@@ -28,7 +28,7 @@ interface ShipLocationResponse {
   readonly cratesInPort?: ICrateAction[];
 }
 
-interface PlayShipResponse extends ShipLocationResponse {
+interface IPlayShipResponse extends IShipLocationResponse {
   readonly ship: IShip;
   readonly playerRankStatus?: IRankStatus;
 }
@@ -45,9 +45,9 @@ interface ICurrentShipContext {
   cratesOnShip?: ICrateAction[];
   loadingNewShip: () => void;
   updateCurrentShip: (ship?: IShip) => void;
-  updateFullResponse: (data?: PlayShipResponse) => void;
-  updateShipLocation: (data?: ShipLocationResponse) => void;
-  refreshState: () => Promise<PlayShipResponse>;
+  updateFullResponse: (data?: IPlayShipResponse) => void;
+  updateShipLocation: (data?: IShipLocationResponse) => void;
+  refreshState: () => Promise<IPlayShipResponse>;
 }
 
 export const CurrentShipContext = createContext({});
@@ -64,7 +64,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [cratesInPort, setCratesInPort] = useState(undefined);
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
 
-  const updateFullResponse = (data?: PlayShipResponse) => {
+  const updateFullResponse = (data?: IPlayShipResponse) => {
     if (!data) {
       setLoaded(true);
       setShip(undefined);
@@ -89,7 +89,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     setCratesOnShip(data.cratesOnShip);
   };
 
-  const refreshState = async (): Promise<PlayShipResponse> => {
+  const refreshState = async (): Promise<IPlayShipResponse> => {
     const data = await ApiClient.fetch(`/play/${ship.id}`);
     updateFullResponse(data);
     return data;
@@ -100,12 +100,12 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     setLoaded(false);
   };
 
-  const updateCurrentShip = (ship?: IShip) => {
-    setShip(ship);
+  const updateCurrentShip = (newShip?: IShip) => {
+    setShip(newShip);
     setLoaded(true);
   };
 
-  const updateShipLocation = (data: ShipLocationResponse) => {
+  const updateShipLocation = (data: IShipLocationResponse) => {
     setPort(data.port);
     setChannel(data.channel);
     setDirections(data.directions);
@@ -117,20 +117,20 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     CurrentShipContext.Provider,
     {
       value: {
-        loaded,
-        ship,
-        port,
         channel,
-        directions,
-        shipsInLocation,
-        events,
         cratesInPort,
         cratesOnShip,
+        directions,
+        events,
+        loaded,
         loadingNewShip,
+        port,
+        refreshState,
+        ship,
+        shipsInLocation,
         updateCurrentShip,
         updateFullResponse,
         updateShipLocation,
-        refreshState,
       },
     },
     children

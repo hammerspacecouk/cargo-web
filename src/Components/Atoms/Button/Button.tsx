@@ -26,7 +26,7 @@ interface IProps {
   target?: string;
 }
 
-export const Button = styled.button<PropsInterface>`
+export const Button = styled.button<IProps>`
   outline: none;
   user-select: none;
   cursor: pointer;

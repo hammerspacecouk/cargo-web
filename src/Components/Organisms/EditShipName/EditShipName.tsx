@@ -5,11 +5,7 @@ import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { useFleetContext } from "../../../context/Page/FleetContext";
 import { useSessionContext } from "../../../context/SessionContext";
 import { useMounted } from "../../../hooks/useMounted";
-import {
-  IActionToken,
-  IShip,
-  ITransaction,
-} from "../../../Interfaces";
+import { IActionToken, IShip, ITransaction } from "../../../Interfaces";
 import { BREAKPOINTS } from "../../../styles/media";
 import { GRID } from "../../../styles/variables";
 import { ApiClient } from "../../../util/ApiClient";
@@ -41,7 +37,7 @@ const Updating = styled.span`
   font-size: 2.35rem;
 `; // todo - share this value?
 
-export default function EditShipName({ ship, renameToken }: IProps) {
+export const EditShipName = ({ ship, renameToken }: IProps) => {
   const [requestNameToken, setRequestNameToken] = React.useState(renameToken);
   const { updateScore } = useSessionContext();
   const { setFleetData } = useFleetContext();
@@ -85,7 +81,8 @@ export default function EditShipName({ ship, renameToken }: IProps) {
     }
   };
 
-  let textContent, buttonContent;
+  let textContent;
+  let buttonContent;
   if (isActive) {
     textContent = (
       <ShipNameGenerator
@@ -146,4 +143,4 @@ export default function EditShipName({ ship, renameToken }: IProps) {
       <ButtonRow>{buttonContent}</ButtonRow>
     </Container>
   );
-}
+};

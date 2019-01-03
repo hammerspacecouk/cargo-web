@@ -7,12 +7,7 @@ import {
 } from "react";
 
 import { PromotionModal } from "../components/Organisms/PromotionModal/PromotionModal";
-import {
-  IChildrenProps,
-  IPlayer,
-  IRankStatus,
-  IScore,
-} from "../Interfaces";
+import { IChildrenProps, IPlayer, IRankStatus, IScore } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
 export interface ISessionResponse {
@@ -39,10 +34,10 @@ interface ISessionContext extends ISessionProperties {
 }
 
 export const initialSession: ISessionProperties = {
-  player: undefined,
-  score: undefined,
   hasProfileNotification: false,
   loginToken: undefined,
+  player: undefined,
+  score: undefined,
 };
 
 const SessionContext = createContext({});
@@ -53,7 +48,7 @@ const getSession = (cookies?: any): Promise<ISessionResponse> => {
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
 
-export function SessionContextComponent({ children }: IChildrenProps) {
+export const SessionContextComponent = ({ children }: IChildrenProps) => {
   const [score, setScore] = useState(initialSession.score);
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   const [player, setPlayer] = useState(initialSession.player);
@@ -111,24 +106,22 @@ export function SessionContextComponent({ children }: IChildrenProps) {
     SessionContext.Provider,
     {
       value: {
-        player,
-        loginToken,
-        score,
-        rankStatus,
         hasProfileNotification,
-        updateScore,
-        updateRankStatus,
-        setSession,
+        loginToken,
+        player,
+        rankStatus,
         refreshSession,
+        score,
+        setSession,
+        updateRankStatus,
+        updateScore,
       },
     },
     children,
     createElement(PromotionModal)
   );
-}
+};
 
-export function useSessionContext(): ISessionContext {
+export const useSessionContext = (): ISessionContext => {
   return useContext(SessionContext) as ISessionContext;
-}
-
-export default SessionContextComponent;
+};

@@ -6,7 +6,7 @@ import { routes } from "../../../routes";
 import { GRID } from "../../../styles/variables";
 import { H2, H6 } from "../../Atoms/Heading/Heading";
 import { PlaceHolder } from "../../Atoms/Placeholder/PlaceHolder";
-import ShieldStrength from "../../Molecules/ShieldStrength/ShieldStrength";
+import { ShieldStrength } from "../../Molecules/ShieldStrength/ShieldStrength";
 
 interface IProps {
   ship?: IShip;
@@ -34,7 +34,7 @@ const Destroyed = styled.span`
   text-decoration: line-through;
 `;
 
-export default function FleetShipName({ ship }: IProps) {
+export const FleetShipName = ({ ship }: IProps) => {
   let detail;
   if (ship) {
     if (ship.isDestroyed) {
@@ -78,4 +78,4 @@ export default function FleetShipName({ ship }: IProps) {
       <Detail>{detail}</Detail>
     </StyledWrap>
   );
-}
+};

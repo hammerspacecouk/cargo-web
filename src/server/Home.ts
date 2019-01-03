@@ -2,14 +2,14 @@ import { Component, createElement } from "react";
 import { withInitialData } from "./withInitialData";
 
 import { IEvent } from "../Interfaces";
-import HomePage from "../pages/HomePage";
+import { HomePage } from "../pages/HomePage";
 import { ApiClient } from "../util/ApiClient";
 
 interface IProps {
   events: IEvent[];
 }
 
-class Home extends Component<IProps, undefined> {
+class HomeComponent extends Component<IProps, undefined> {
   public static async getInitialData() {
     return ApiClient.fetch("/");
   }
@@ -21,4 +21,4 @@ class Home extends Component<IProps, undefined> {
   }
 }
 
-export const Home = withInitialData(Home);
+export const Home = withInitialData(HomeComponent);

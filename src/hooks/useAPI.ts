@@ -8,9 +8,9 @@ export const useApi = (url: string) => {
   // to prevent attempts to update state once unmounted
   let allowUpdate = true;
   const getData = async () => {
-    const data = await ApiClient.fetch(url);
+    const resultData = await ApiClient.fetch(url);
     if (allowUpdate) {
-      setData(data);
+      setData(resultData);
       setLoading(false);
     }
   };

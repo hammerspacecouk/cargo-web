@@ -1,9 +1,9 @@
+import { Request } from "express";
 import { Component, createElement } from "react";
 import { match, RouteProps } from "react-router-dom";
-import { Request } from "express";
-import { withPlayer } from "./withPlayer";
 import { ProfilePage } from "../pages/ProfilePage";
 import { ApiClient } from "../util/ApiClient";
+import { withPlayer } from "./withPlayer";
 
 class ProfileComponent extends Component<RouteProps, undefined> {
   public static async getInitialData(_: match, request: Request) {

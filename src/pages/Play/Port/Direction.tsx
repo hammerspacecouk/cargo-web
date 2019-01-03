@@ -15,7 +15,8 @@ export const Direction = ({ direction, children }: IProps) => {
   const icon = children;
   const directionDisabled = direction.action === null;
 
-  let minimumRank, minimumStrength;
+  let minimumRank;
+  let minimumStrength;
   if (directionDisabled && direction.minimumRank) {
     minimumRank = (
       <TextF as="div">

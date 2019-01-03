@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { IFleetShip } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
-import ListUnstyled from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
-import FleetShipItem from "../FleetShipItem/FleetShipItem";
+import { ListUnstyled } from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { FleetShipItem } from "../FleetShipItem/FleetShipItem";
 
 export interface IProps {
   ships: IFleetShip[];
@@ -22,7 +22,7 @@ const MoreLink = styled.div`
   justify-content: center;
 `;
 
-export default function FleetShips({ ships }: IProps) {
+export const FleetShips = ({ ships }: IProps) => {
   let shipRows;
   if (ships !== undefined) {
     shipRows = ships.map(ship => (
@@ -43,4 +43,4 @@ export default function FleetShips({ ships }: IProps) {
       </MoreLink>
     </>
   );
-}
+};

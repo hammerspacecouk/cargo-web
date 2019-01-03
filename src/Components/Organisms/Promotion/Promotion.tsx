@@ -76,9 +76,9 @@ export const Promotion = ({ rankStatus }: IProps) => {
   let startTime: number = null;
 
   const [displayState, setDisplayState] = React.useState({
-    previousClass: "",
-    previousActive: true,
     nextActive: false,
+    previousActive: true,
+    previousClass: "",
     progress: 80,
   });
 
@@ -104,9 +104,9 @@ export const Promotion = ({ rankStatus }: IProps) => {
     // todo - *ping* on new rank
 
     setDisplayState({
-      previousClass: diff > 1000 ? "o-promotion__previous--go" : "",
-      previousActive: diff < 2500,
       nextActive: diff >= 2500,
+      previousActive: diff < 2500,
+      previousClass: diff > 1000 ? "o-promotion__previous--go" : "",
       progress,
     });
     window.requestAnimationFrame(animate);

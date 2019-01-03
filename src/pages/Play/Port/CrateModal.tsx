@@ -5,7 +5,7 @@ import { ButtonRow } from "../../../components/Molecules/ButtonRow/ButtonRow";
 import { Modal, ModalActions } from "../../../components/Molecules/Modal/Modal";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 
-export default () => {
+export const CrateModal = () => {
   const { confirmMoveButton, modalIsOpen, closeModal } = usePlayPortContext();
   return (
     <Modal isOpen={modalIsOpen} onClose={closeModal} title="Are you sure?">

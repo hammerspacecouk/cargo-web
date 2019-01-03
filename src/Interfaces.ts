@@ -139,8 +139,6 @@ export interface IMessage {
   message: string;
 }
 
-export interface INoProps {}
-
 export interface IChildrenProps {
   children: any;
 }

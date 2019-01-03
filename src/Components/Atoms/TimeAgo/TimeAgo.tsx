@@ -25,7 +25,7 @@ const getValue = (seconds: number, datetime: Date): string => {
   if (interval > 1) {
     return interval + " minutes ago";
   }
-  if (interval == 1) {
+  if (interval === 1) {
     return "1 minute ago";
   }
   return "Just now";

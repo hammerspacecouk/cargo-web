@@ -1,13 +1,13 @@
 import * as React from "react";
 import { IEvent } from "../../../Interfaces";
-import Event from "./Event";
+import { Event } from "./Event";
 
 interface IProps {
   readonly event: IEvent;
   readonly firstPerson?: boolean;
 }
 
-export default ({ firstPerson, event }: IProps) => {
+export const CrateNew = ({ firstPerson, event }: IProps) => {
   let you = "";
   if (firstPerson) {
     you = " for you ";

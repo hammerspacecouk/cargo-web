@@ -16,7 +16,7 @@ export interface IShipParams {
   };
 }
 
-export default withRouter(({ match }: IShipParams) => {
+export const ShipPage = withRouter(({ match }: IShipParams) => {
   const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
 
   let allowUpdate = true;

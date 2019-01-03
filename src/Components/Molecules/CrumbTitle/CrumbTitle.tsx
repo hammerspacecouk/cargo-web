@@ -4,13 +4,13 @@ import { GRID } from "../../../styles/variables";
 import { H1 } from "../../Atoms/Heading/Heading";
 import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 
-export interface Crumb {
+export interface ICrumb {
   link: string;
   title: string;
 }
 
 interface IProps {
-  crumbs?: Crumb[];
+  crumbs?: ICrumb[];
   children: any;
 }
 
@@ -53,7 +53,7 @@ export const CrumbTitle = (props: IProps) => {
   return (
     <StyledCrumbTitle>
       <ListInline>
-        {crumbs.map((crumb: Crumb) => (
+        {crumbs.map((crumb: ICrumb) => (
           <Crumb key={crumb.link}>
             <CrumbLink href={crumb.link}>{crumb.title}</CrumbLink>
           </Crumb>

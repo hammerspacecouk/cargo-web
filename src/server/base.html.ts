@@ -21,7 +21,8 @@ interface IRouterContext {
 }
 
 const assets = new Assets(
-  import ("../../build/assets-manifest.json"),
+  // tslint:disable-next-line:no-var-requires
+  require("../../build/assets-manifest.json"), // todo - bake in using import?
   process.env.APP_ASSET_PREFIX
 );
 
@@ -55,7 +56,7 @@ export const handler = async (
     // We then look for static getInitialData function on each top level component
     if (matchedPath) {
       matchedRoute = {
-        matchedPath,
+        match: matchedPath,
         route,
       };
     }
@@ -114,7 +115,7 @@ export const handler = async (
     });
     res.end(
       html({
-        assets,
+        assetsManifest: assets,
         config: getForClient(),
         content: appElement,
         data,
@@ -142,7 +143,7 @@ export const handler = async (
 
 interface IHTML {
   config: object;
-  assets: Assets;
+  assetsManifest: Assets;
   content: any;
   data?: any;
   title?: string;

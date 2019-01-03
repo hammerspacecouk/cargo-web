@@ -5,7 +5,7 @@ import { H1 } from "../../Atoms/Heading/Heading";
 import { P } from "../../Atoms/Text/Text";
 import { Status } from "../Status/Status";
 
-export interface ErrorProps {
+export interface IErrorProps {
   code?: number;
   message?: string;
 }
@@ -35,7 +35,7 @@ const StyledTitle = styled(H1)`
   animation: ${jiggle} 0.2s infinite;
 `;
 
-export const Error = (props: ErrorProps) => {
+export const Error = (props: IErrorProps) => {
   const code = props.code || 500;
   const msg = props.message || "An error occurred. Sorry about that";
 

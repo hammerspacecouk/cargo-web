@@ -1,5 +1,4 @@
 import * as React from "react";
-import { FormEvent } from "react";
 import styled from "styled-components";
 import { IActionToken } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
@@ -7,9 +6,7 @@ import { ApiClient } from "../../../util/ApiClient";
 interface IProps {
   readonly token: IActionToken;
   readonly children: any;
-  readonly handler?: (
-    token: IActionToken
-  ) => Promise<void> | null | void;
+  readonly handler?: (token: IActionToken) => Promise<void> | null | void;
 }
 
 const StyledForm = styled.form`
@@ -21,7 +18,7 @@ export const TokenButton = ({ token, children, handler }: IProps) => {
     <StyledForm
       method="post"
       action={ApiClient.getUrl(token.path)}
-      onSubmit={(e: FormEvent<HTMLFormElement>) => {
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         if (handler) {
           e.preventDefault();
           handler(token);

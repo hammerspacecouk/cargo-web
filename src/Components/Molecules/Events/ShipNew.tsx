@@ -1,18 +1,16 @@
 import * as React from "react";
 import { IEvent } from "../../../Interfaces";
-import Event from "./Event";
+import { Event } from "./Event";
 
 interface IProps {
   readonly event: IEvent;
   readonly firstPerson?: boolean;
 }
 
-export default (props: IProps) => {
-  let name;
+export const ShipNew = (props: IProps) => {
+  let name = "[deleted]";
   if (props.event.ship) {
     name = props.event.ship.name;
-  } else {
-    name = "[deleted] ";
   }
 
   return (

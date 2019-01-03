@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StaticContext } from "react-router-dom";
+import { StaticContext } from "react-router";
 import { Route, RouteComponentProps } from "react-router-dom";
 
 interface IProps {

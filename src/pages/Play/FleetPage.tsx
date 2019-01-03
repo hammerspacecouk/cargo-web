@@ -2,9 +2,9 @@ import * as React from "react";
 import styled from "styled-components";
 import { H1 } from "../../components/Atoms/Heading/Heading";
 import { Square } from "../../components/Atoms/Ratio/Ratio";
-import PlayerFlag from "../../components/Molecules/PlayerFlag/PlayerFlag";
+import { PlayerFlag } from "../../components/Molecules/PlayerFlag/PlayerFlag";
 import { EventsList } from "../../components/Organisms/EventsList/EventsList";
-import FleetShips from "../../components/Organisms/FleetShips/FleetShips";
+import { FleetShips } from "../../components/Organisms/FleetShips/FleetShips";
 import { PlayerRank } from "../../components/Organisms/PlayerRank/PlayerRank";
 import {
   FleetContextProvider,
@@ -66,10 +66,8 @@ const FleetPageContent = () => {
   );
 };
 
-export default function FleetPage() {
-  return (
-    <FleetContextProvider>
-      <FleetPageContent />
-    </FleetContextProvider>
-  );
-}
+export const FleetPage = () => (
+  <FleetContextProvider>
+    <FleetPageContent />
+  </FleetContextProvider>
+);

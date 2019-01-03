@@ -30,7 +30,11 @@ export class ServerClient implements IAPIClient {
     return this.fetch(token.path, { token: token.token });
   }
 
-  public async fetch(path: string, payload?: object, cookies?: object): Promise<any> {
+  public async fetch(
+    path: string,
+    payload?: object,
+    cookies?: object
+  ): Promise<any> {
     const url = this.getUrl(path);
     try {
       const start = Date.now();

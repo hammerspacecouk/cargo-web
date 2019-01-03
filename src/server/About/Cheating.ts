@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import CheatingPage from "../../pages/About/CheatingPage";
+import { CheatingPage } from "../../pages/About/CheatingPage";
 import { withInitialData } from "../withInitialData";
 
 class CheatingComponent extends Component<undefined, undefined> {

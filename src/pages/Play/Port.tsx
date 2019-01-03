@@ -8,9 +8,9 @@ import {
   usePlayPortContext,
 } from "../../context/Page/PlayPortContext";
 import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
-import CrateModal from "./Port/CrateModal";
+import { CrateModal } from "./Port/CrateModal";
 import { Crates } from "./Port/Crates";
-import Directions from "./Port/Directions";
+import { Directions } from "./Port/Directions";
 import { Welcome } from "./Port/Welcome";
 
 const PortTemplate = styled.div`

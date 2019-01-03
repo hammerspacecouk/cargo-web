@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { Loading } from "../../components/Atoms/Loading/Loading";
 import { RequireLogin } from "../../components/Organisms/RequireLogin/RequireLogin";
 import { useSessionContext } from "../../context/SessionContext";
@@ -12,7 +11,7 @@ interface IInitialProps {
 export const EnsureLoggedIn = ({ children }: IInitialProps) => {
   const { player, refreshSession } = useSessionContext();
 
-  useEffect(
+  React.useEffect(
     () => {
       if (player === undefined) {
         refreshSession();

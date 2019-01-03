@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { IChildrenProps, IMessage } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
-import ErrorIcon from "../../Icons/ErrorIcon/ErrorIcon";
-import InfoIcon from "../../Icons/InfoIcon/InfoIcon";
-import TickIcon from "../../Icons/TickIcon/TickIcon";
-import WarningIcon from "../../Icons/WarningIcon/WarningIcon";
+import { ErrorIcon } from "../../Icons/ErrorIcon/ErrorIcon";
+import { InfoIcon } from "../../Icons/InfoIcon/InfoIcon";
+import { TickIcon } from "../../Icons/TickIcon/TickIcon";
+import { WarningIcon } from "../../Icons/WarningIcon/WarningIcon";
 
 // these are not using Symbol() because messages can come from the server
 export const TYPE_OK = "ok";
@@ -16,7 +16,7 @@ export const TYPE_INFO = "info";
 
 const iconSize = 32;
 
-interface GenericMessageProps {
+interface IGenericMessageProps {
   /** The message object to render */
   readonly message: IMessage;
 }
@@ -26,7 +26,7 @@ interface IStyledProps {
   text: string;
 }
 
-const StyledMessage = styled.div<StyledPropsInterface>`
+const StyledMessage = styled.div<IStyledProps>`
   background: ${({ fill }) => fill};
   color: ${({ text }) => text};
   margin-bottom: ${GRID.UNIT};
@@ -78,7 +78,7 @@ export const MessageInfo = ({ children }: IChildrenProps) =>
 export const MessageError = ({ children }: IChildrenProps) =>
   messageContent(<ErrorIcon />, children, COLOURS.SEMANTIC.DANGER);
 
-export const Message = ({ message }: GenericMessageProps) => {
+export const Message = ({ message }: IGenericMessageProps) => {
   switch (message.type) {
     case TYPE_OK:
       return <MessageOk>{message.message}</MessageOk>;

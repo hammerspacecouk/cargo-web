@@ -5,7 +5,7 @@ import { TextCenter } from "../../components/Atoms/Text/Text";
 export const AppLoading = () => (
   <div>
     <div>
-      <Loading/>
+      <Loading />
     </div>
     <TextCenter>
       To play will require JavaScript to be running successfully

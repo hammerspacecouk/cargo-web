@@ -17,9 +17,7 @@ interface IPlayPortContext {
 
 const PlayPortContext = createContext({});
 
-export const PlayPortContextProvider = ({
-  children,
-}: IChildrenProps) => {
+export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const { updateScore } = useSessionContext();
   const { updateFullResponse } = useCurrentShipContext();
 
@@ -56,18 +54,18 @@ export const PlayPortContextProvider = ({
     {
       value: {
         buttonsDisabled,
+        closeModal: () => {
+          setModalIsOpen(false);
+          setConfirmMoveButton(null);
+        },
         confirmMoveButton,
         departing,
         modalIsOpen,
         moveCrate,
         moveShip,
-        openModal: (confirmMoveButton: JSX.Element) => {
-          setConfirmMoveButton(confirmMoveButton);
+        openModal: (confirmMoveButtonElement: JSX.Element) => {
+          setConfirmMoveButton(confirmMoveButtonElement);
           setModalIsOpen(true);
-        },
-        closeModal: () => {
-          setModalIsOpen(false);
-          setConfirmMoveButton(null);
         },
       },
     },

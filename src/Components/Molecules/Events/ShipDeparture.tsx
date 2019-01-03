@@ -1,20 +1,18 @@
 import * as React from "react";
 import { IEvent } from "../../../Interfaces";
-import Event from "./Event";
+import { Event } from "./Event";
 
 interface IProps {
   readonly event: IEvent;
   readonly firstPerson?: boolean;
 }
 
-export default (props: IProps) => {
+export const ShipDeparture = (props: IProps) => {
   const port = props.event.port;
 
-  let name;
+  let name = "[deleted]";
   if (props.event.actioningShip) {
     name = props.event.actioningShip.name;
-  } else {
-    name = "[deleted] ";
   }
 
   // todo - new event type if you are headed for the void - and achievement

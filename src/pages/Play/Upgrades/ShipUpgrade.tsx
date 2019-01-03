@@ -15,7 +15,7 @@ const ShipImage = styled.div`
   max-width: 160px;
 `;
 
-export default ({ ship }: IProps) => {
+export const ShipUpgrade = ({ ship }: IProps) => {
   const { buttonsDisabled, makePurchase } = useUpgradesContext();
 
   if (!ship) {
