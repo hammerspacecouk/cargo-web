@@ -13,39 +13,22 @@ interface IProps {
 
 export const Direction = ({ direction, children }: IProps) => {
   const icon = children;
-  const directionDisabled = direction.action === null;
+  const detail = direction.detail;
 
-  let minimumRank;
-  let minimumStrength;
-  if (directionDisabled && direction.minimumRank) {
-    minimumRank = (
-      <TextF as="div">
-        <TextWarning>Minimum rank: {direction.minimumRank.title}</TextWarning>
-      </TextF>
-    );
-  }
-  if (directionDisabled && direction.minimumStrength) {
-    minimumStrength = (
-      <TextF as="div">
-        <TextWarning>
-          This ship is not strong enough for this journey. Minimum:
-          {direction.minimumStrength}
-        </TextWarning>
-      </TextF>
-    );
-  }
-
-  let distance = <TextD>{direction.distanceUnit}</TextD>;
-  if (direction.distanceUnit === 0) {
+  let distance = <TextD>{detail.distanceUnit}</TextD>;
+  if (detail.distanceUnit === 0) {
     distance = <Fraction num={1} den={100} />;
   }
 
   return (
     <tr className="destinations__row">
       <td className="destinations__destination d">
-        <PortName port={direction.destination} />
-        {minimumRank}
-        {minimumStrength}
+        <PortName port={detail.destination} />
+        {detail.denialReason && (
+          <TextF as="div">
+            <TextWarning>{detail.denialReason}</TextWarning>
+          </TextF>
+        )}
       </td>
       <td className="destinations__distance">
         {distance}
@@ -54,12 +37,12 @@ export const Direction = ({ direction, children }: IProps) => {
         </abbr>
       </td>
       <td className="destinations__earnings">
-        <ScoreValue score={direction.earnings} />
+        <ScoreValue score={detail.earnings} />
       </td>
       <td className="destinations__action">
         <GoButton
           direction={direction}
-          journeyTime={direction.journeyTimeSeconds}
+          journeyTime={detail.journeyTimeSeconds}
         >
           {icon}
         </GoButton>

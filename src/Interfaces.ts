@@ -40,14 +40,19 @@ export interface IRankStatus {
   nextRank: IRank;
 }
 
-export interface IDirection {
+interface IDirectionDetail {
   destination: IPort;
   distanceUnit: number;
   earnings: number;
   journeyTimeSeconds: number;
-  action: IActionToken;
   minimumRank?: IRank;
   minimumStrength?: number;
+  denialReason?: string;
+}
+
+export interface IDirection {
+  action: IActionToken;
+  detail: IDirectionDetail;
 }
 
 export interface IDirections {

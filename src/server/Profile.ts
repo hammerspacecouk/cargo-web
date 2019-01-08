@@ -22,7 +22,7 @@ class ProfileComponent extends Component<RouteProps, undefined> {
   }
 
   public render() {
-    return createElement(ProfilePage);
+    return createElement(ProfilePage, this.props);
   }
 }
 

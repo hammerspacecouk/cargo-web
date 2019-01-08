@@ -17,7 +17,7 @@ interface IProps {
 }
 
 interface IShipLocationResponse {
-  // todo - merge with PlayShipResponse
+  // todo - merge with IPlayShipResponse
   readonly port?: IPort;
   readonly channel?: IChannel;
   readonly directions?: IDirections;
@@ -31,10 +31,12 @@ interface IShipLocationResponse {
 interface IPlayShipResponse extends IShipLocationResponse {
   readonly ship: IShip;
   readonly playerRankStatus?: IRankStatus;
+  readonly hint?: string;
 }
 
 interface ICurrentShipContext {
   loaded: boolean;
+  hint?: string;
   ship?: IShip;
   port?: IPort;
   channel?: IChannel;
@@ -57,6 +59,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [loaded, setLoaded] = useState(false);
   const [ship, setShip] = useState(undefined);
   const [port, setPort] = useState(undefined);
+  const [hint, setHint] = useState(undefined);
   const [channel, setChannel] = useState(undefined);
   const [directions, setDirections] = useState(undefined);
   const [shipsInLocation, setShipsInLocation] = useState(undefined);
@@ -69,6 +72,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
       setLoaded(true);
       setShip(undefined);
       setPort(undefined);
+      setHint(undefined);
       setChannel(undefined);
       setDirections(undefined);
       setShipsInLocation(undefined);
@@ -82,6 +86,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     setShip(data.ship);
     setPort(data.port);
     setChannel(data.channel);
+    setHint(data.hint);
     setDirections(data.directions);
     setShipsInLocation(data.shipsInLocation);
     setEvents(data.events);
@@ -122,6 +127,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
         cratesOnShip,
         directions,
         events,
+        hint,
         loaded,
         loadingNewShip,
         port,

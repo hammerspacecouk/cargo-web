@@ -7,7 +7,7 @@ import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import { useTravellingState } from "../../hooks/useTravellingState";
 
 export const Travelling = () => {
-  const { channel } = useCurrentShipContext();
+  const { channel, hint } = useCurrentShipContext();
   const { secondsRemaining, percent } = useTravellingState();
 
   let remaining: any = "Arriving...";
@@ -20,6 +20,7 @@ export const Travelling = () => {
       <H2>Destination: {channel.destination.name}</H2>
       <TextCenter as="h3">{remaining}</TextCenter>
       <ProgressBar percent={percent} />
+      <TextCenter>{hint}</TextCenter>
     </div>
   );
 };

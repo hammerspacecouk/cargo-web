@@ -18,24 +18,23 @@ export interface IShipParams {
 
 export const ShipPage = withRouter(({ match }: IShipParams) => {
   const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
+  const mounted = React.useRef(false);
 
   let allowUpdate = true;
   const getData = async () => {
     const data = await ApiClient.fetch(`/play/${match.params.shipId}`);
-    if (allowUpdate) {
+    if (mounted.current) {
       updateFullResponse(data);
     }
   };
 
-  React.useEffect(
-    () => {
-      getData();
-      return () => {
-        allowUpdate = false;
-      };
-    },
-    [match.params.shipId]
-  );
+  React.useEffect(() => {
+    mounted.current = true;
+    getData();
+    return () => {
+      mounted.current = false;
+    };
+  }, [match.params.shipId]);
 
   if (ship === undefined) {
     return <Loading />; // todo - error state, and ensure login?

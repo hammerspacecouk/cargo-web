@@ -13,7 +13,7 @@ export const LogOutButton = ({ isAnonymous }: IProps) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
   const closeModal = () => {
-    setModalIsOpen(true);
+    setModalIsOpen(false);
   };
 
   let warning;

@@ -3,6 +3,7 @@ import { IActionToken, IChildrenProps } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useCurrentShipContext } from "../CurrentShipContext";
 import { useSessionContext } from "../SessionContext";
+import * as React from "react";
 
 interface IPlayPortContext {
   buttonsDisabled: boolean;
@@ -25,6 +26,14 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const [confirmMoveButton, setConfirmMoveButton] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [departing, setDeparting] = useState(false);
+  const mounted = React.useRef(false);
+
+  React.useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  });
 
   const doPortAction = async (token: IActionToken) => {
     try {
@@ -34,7 +43,9 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
     } catch (e) {
       // todo - error handling
     } finally {
-      setButtonsDisabled(false);
+      if (mounted.current) {
+        setButtonsDisabled(false);
+      }
     }
   };
 
