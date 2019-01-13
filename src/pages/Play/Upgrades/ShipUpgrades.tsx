@@ -11,7 +11,7 @@ export const ShipUpgrades = (): JSX.Element => {
   return (
     <ul>
       {ships.map((ship, index) => (
-        <li key={index}>
+        <li key={`ship-upgrades-${index}`}>
           <ShipUpgrade ship={ship} />
         </li>
       ))}

@@ -98,6 +98,10 @@ export interface IShipUpgrade extends ITransaction {
   detail: IShipClass;
 }
 
+export interface IEffectUpgrade extends ITransaction {
+  detail: IEffect;
+}
+
 export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
@@ -146,6 +150,11 @@ export interface IMessage {
 
 export interface IChildrenProps {
   children: any;
+}
+
+export interface IEffect {
+  name: string;
+  description: string;
 }
 
 export interface IShipClass {

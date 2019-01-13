@@ -1,10 +1,10 @@
-import { createContext, createElement, useContext, useState } from "react";
+import { createContext, createElement, useContext, useEffect, useState } from "react";
 import { useApi } from "../../hooks/useAPI";
 import {
   IActionToken,
-  IChildrenProps,
+  IChildrenProps, IEffectUpgrade,
   IMessage,
-  IShipUpgrade,
+  IShipUpgrade
 } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
@@ -12,6 +12,9 @@ import { useSessionContext } from "../SessionContext";
 interface IUpgradesContext {
   buttonsDisabled: boolean;
   ships?: IShipUpgrade[];
+  weapons?: IEffectUpgrade[];
+  defence?: IEffectUpgrade[];
+  navigation?: IEffectUpgrade[];
   message?: IMessage;
   makePurchase: (token: IActionToken) => void;
 }
@@ -26,11 +29,17 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [message, setMessage] = useState(null);
   const [ships, setShips] = useState(undefined);
+  const [weapons, setWeapons] = useState(undefined);
+  const [defence, setDefence] = useState(undefined);
+  const [navigation, setNavigation] = useState(undefined);
   const { data } = useApi("/play/upgrades");
 
-  if (!ships && data) {
+  const setDataFromResponse = (data) => {
     setShips(data.ships);
-  }
+    setWeapons(data.weapons);
+    setDefence(data.defence);
+    setNavigation(data.navigation);
+  };
 
   const makePurchase = async (token: IActionToken) => {
     setButtonsDisabled(true);
@@ -38,7 +47,7 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
     // make the API call
     try {
       const actionData = await ApiClient.tokenFetch(token);
-      setShips(actionData.ships);
+      setDataFromResponse(actionData.upgrades);
       setMessage(actionData.message);
 
       // update the score
@@ -50,6 +59,10 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
     }
   };
 
+  if (!ships && data) {
+    setDataFromResponse(data);
+  }
+
   return createElement(
     UpgradesContext.Provider,
     {
@@ -58,6 +71,9 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
         makePurchase,
         message,
         ships,
+        weapons,
+        defence,
+        navigation
       },
     },
     children
