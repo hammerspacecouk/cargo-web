@@ -16,6 +16,15 @@ export const EffectUpgrade = ({ effect }: IProps) => {
     return <div>LOCKED</div>; // todo - design this
   }
 
+  let purchaseButton = null;
+  if (effect.actionToken) {
+    purchaseButton = (
+      <TokenButton token={effect.actionToken} handler={makePurchase}>
+        <CreditsButton amount={effect.cost} disabledOverride={buttonsDisabled} />
+      </TokenButton>
+    );
+  }
+
   return (
     <TextCenter>
       <h3>
@@ -23,9 +32,7 @@ export const EffectUpgrade = ({ effect }: IProps) => {
       </h3>
       {/* todo - image */}
       <p>{effect.detail.description}</p>
-      <TokenButton token={effect.actionToken} handler={makePurchase}>
-        <CreditsButton amount={effect.cost} disabledOverride={buttonsDisabled} />
-      </TokenButton>
+      {purchaseButton}
     </TextCenter>
   );
 };

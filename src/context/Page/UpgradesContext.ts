@@ -12,9 +12,7 @@ import { useSessionContext } from "../SessionContext";
 interface IUpgradesContext {
   buttonsDisabled: boolean;
   ships?: IShipUpgrade[];
-  weapons?: IEffectUpgrade[];
-  defence?: IEffectUpgrade[];
-  navigation?: IEffectUpgrade[];
+  effects?: IEffectUpgrade[];
   message?: IMessage;
   makePurchase: (token: IActionToken) => void;
 }
@@ -29,16 +27,12 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [message, setMessage] = useState(null);
   const [ships, setShips] = useState(undefined);
-  const [weapons, setWeapons] = useState(undefined);
-  const [defence, setDefence] = useState(undefined);
-  const [navigation, setNavigation] = useState(undefined);
+  const [effects, setEffects] = useState(undefined);
   const { data } = useApi("/play/upgrades");
 
-  const setDataFromResponse = (data) => {
+  const setDataFromResponse = (data: any) => {
     setShips(data.ships);
-    setWeapons(data.weapons);
-    setDefence(data.defence);
-    setNavigation(data.navigation);
+    setEffects(data.effects);
   };
 
   const makePurchase = async (token: IActionToken) => {
@@ -71,9 +65,7 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
         makePurchase,
         message,
         ships,
-        weapons,
-        defence,
-        navigation
+        effects
       },
     },
     children

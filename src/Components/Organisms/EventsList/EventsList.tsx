@@ -2,14 +2,14 @@ import * as React from "react";
 import styled from "styled-components";
 import {
   ACTION_CRATE_NEW,
-  ACTION_CRATE_PICKUP,
+  ACTION_CRATE_PICKUP, ACTION_PLAYER_EFFECT,
   ACTION_PLAYER_NEW,
   ACTION_PLAYER_PROMOTION,
   ACTION_SHIP_ARRIVAL,
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  IEvent,
+  IEvent
 } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
@@ -24,6 +24,7 @@ import { ShipArrival } from "../../Molecules/Events/ShipArrival";
 import { ShipDeparture } from "../../Molecules/Events/ShipDeparture";
 import { ShipNew } from "../../Molecules/Events/ShipNew";
 import { ShipRename } from "../../Molecules/Events/ShipRename";
+import { PlayerEffect } from "../../Molecules/Events/PlayerEffect";
 
 interface IProps {
   readonly events: IEvent[];
@@ -38,6 +39,8 @@ const mapEvent = (event: IEvent, firstPerson: boolean) => {
       return <CratePickup event={event} />;
     case ACTION_PLAYER_NEW:
       return <PlayerNew event={event} firstPerson={firstPerson} />;
+    case ACTION_PLAYER_EFFECT:
+      return <PlayerEffect event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_PROMOTION:
       return <PlayerPromotion event={event} firstPerson={firstPerson} />;
     case ACTION_SHIP_NEW:

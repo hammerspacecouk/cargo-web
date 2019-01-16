@@ -68,6 +68,7 @@ export interface IDirections {
 export const ACTION_CRATE_NEW = "crate_new";
 export const ACTION_CRATE_PICKUP = "crate_pickup";
 export const ACTION_PLAYER_NEW = "player_new";
+export const ACTION_PLAYER_EFFECT = "player_effect";
 export const ACTION_PLAYER_PROMOTION = "player_promotion";
 export const ACTION_SHIP_NEW = "ship_new";
 export const ACTION_SHIP_ARRIVAL = "ship_arrival";

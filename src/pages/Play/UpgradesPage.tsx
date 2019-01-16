@@ -9,18 +9,14 @@ import { ShipUpgrades } from "./Upgrades/ShipUpgrades";
 import { EffectUpgrades } from "./Upgrades/EffectUpgrades";
 
 const UpgradesPageDetail = () => {
-  const { message, weapons, defence, navigation } = useUpgradesContext();
+  const { message, effects } = useUpgradesContext();
 
   return (
     <section>
       <H1>The Yard</H1>
       {message && <Message message={message} />}
-      <H2>Offence</H2>
-      <EffectUpgrades effects={weapons} />
-      <H2>Defence</H2>
-      <EffectUpgrades effects={defence} />
-      <H2>Navigation</H2>
-      <EffectUpgrades effects={navigation} />
+      <H2>Effects</H2>
+      <EffectUpgrades effects={effects} />
       <H2>Ships</H2>
       <ShipUpgrades />
     </section>
