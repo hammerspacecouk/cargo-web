@@ -57,20 +57,7 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const moveShip = async (token: IActionToken) => {
     setButtonsDisabled(true);
     setDeparting(true);
-
-    try {
-      const data = await ApiClient.tokenFetch(token);
-      updateScore(data.shipResponse.playerScore);
-      updateFullResponse(data.shipResponse);
-
-      console.log(data.earnedEffects); // todo - send into useCurrentShipContext
-    } catch (e) {
-      // todo - error handling
-    } finally {
-      if (mounted.current) {
-        setButtonsDisabled(false);
-      }
-    }
+    return doPortAction(token);
   };
 
   return createElement(

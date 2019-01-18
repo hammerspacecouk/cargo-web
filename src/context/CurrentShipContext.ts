@@ -3,12 +3,12 @@ import { createContext, createElement, useContext, useState } from "react";
 import {
   IChannel,
   ICrateAction,
-  IDirections,
+  IDirections, IEffect,
   IEvent,
   IPort,
   IRankStatus,
   IScore,
-  IShip,
+  IShip
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
@@ -32,9 +32,11 @@ interface IPlayShipResponse extends IShipLocationResponse {
   readonly ship: IShip;
   readonly playerRankStatus?: IRankStatus;
   readonly hint?: string;
+  readonly bonus?: IEffect[];
 }
 
 interface ICurrentShipContext {
+  bonusEffects?: IEffect[];
   loaded: boolean;
   hint?: string;
   ship?: IShip;
@@ -66,6 +68,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [events, setEvents] = useState(undefined);
   const [cratesInPort, setCratesInPort] = useState(undefined);
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
+  const [bonusEffects, setBonusEffects] = useState(undefined);
 
   const updateFullResponse = (data?: IPlayShipResponse) => {
     if (!data) {
@@ -79,6 +82,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
       setEvents(undefined);
       setCratesInPort(undefined);
       setCratesOnShip(undefined);
+      setBonusEffects(undefined);
       return;
     }
 
@@ -92,6 +96,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     setEvents(data.events);
     setCratesInPort(data.cratesInPort);
     setCratesOnShip(data.cratesOnShip);
+    setBonusEffects(data.bonus);
   };
 
   const refreshState = async (): Promise<IPlayShipResponse> => {
@@ -122,6 +127,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     CurrentShipContext.Provider,
     {
       value: {
+        bonusEffects,
         channel,
         cratesInPort,
         cratesOnShip,
