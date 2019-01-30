@@ -17,7 +17,7 @@ export const LoginEmailPage = ({ query }: IProps) => {
 
   const token = {
     path: "/login/email",
-    token: queryData.token,
+    token: queryData.token as string,
   };
 
   return (

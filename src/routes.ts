@@ -83,6 +83,7 @@ export const matches = [
   },
 
   // ports
+  /* - disabled until beta phase
   {
     cacheType: CacheType.Public,
     component: Port,
@@ -97,6 +98,7 @@ export const matches = [
     maxAge: 600,
     path: routes.getPortsList(),
   },
+  */
 
   // login
   {

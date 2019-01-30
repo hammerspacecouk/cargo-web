@@ -106,11 +106,19 @@ export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
 
+interface IDefenceOption {
+  actionToken?: IActionToken;
+  effect: IEffect;
+  hitsRemaining?: number;
+  timeRemaining?: number; // todo - should this be a data?
+}
+
 export interface IFleetShip {
   ship: IShip;
   needsAttention: boolean;
   renameToken: ITransaction;
   health: IHealthIncrease[];
+  defenceOptions: IDefenceOption[];
 }
 
 export interface IShip {

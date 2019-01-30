@@ -8,6 +8,7 @@ import { H3 } from "../../Atoms/Heading/Heading";
 import { EditShipName } from "../EditShipName/EditShipName";
 import { FleetShipHealth } from "../FleetShipHealth/FleetShipHealth";
 import { FleetShipLocation } from "../FleetShipLocation/FleetShipLocation";
+import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
 
 interface IProps {
   fleetShip: IFleetShip;
@@ -36,6 +37,14 @@ const DetailRowContent = styled.div`
 
 export const FleetShipDetail = ({ fleetShip }: IProps) => (
   <StyledDetail>
+    <DetailRow>
+      {fleetShip.defenceOptions.map(option => (
+        <EffectActionButton
+          effect={option.effect}
+          token={option.actionToken}
+        />
+      ))}
+    </DetailRow>
     <DetailRow>
       <DetailRowLabel>Location</DetailRowLabel>
       <DetailRowContent>

@@ -22,9 +22,9 @@ const iconStuff = (
   </svg>
 );
 
-const iconMoney = (
+const iconGarage = (
   <svg className="play-bar__icon" viewBox="0 0 24 24">
-    <path d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" />
+    <path d="M19,20H17V11H7V20H5V9L12,5L19,9V20M8,12H16V14H8V12M8,15H16V17H8V15M16,18V20H8V18H16Z" />
   </svg>
 );
 
@@ -89,15 +89,15 @@ export const PlayBar = () => {
         {getShipLink()}
         <PlayBarItem>
           <PlayBarLink to="/play" className="play-bar__link">
-            <PlayBarIcon>{iconStuff}</PlayBarIcon>
+            <PlayBarIcon>{iconGarage}</PlayBarIcon>
             Fleet{" "}
             {/* todo - add a notification icon if any ships are in port */}
           </PlayBarLink>
         </PlayBarItem>
         <PlayBarItem>
-          <PlayBarLink to={`/play/upgrades`} className="play-bar__link">
-            <PlayBarIcon>{iconMoney}</PlayBarIcon>
-            Upgrades
+          <PlayBarLink to={`/play/inventory`} className="play-bar__link">
+            <PlayBarIcon>{iconStuff}</PlayBarIcon>
+            Inventory
           </PlayBarLink>
         </PlayBarItem>
       </List>

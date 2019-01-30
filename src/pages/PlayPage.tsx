@@ -12,7 +12,7 @@ import { EnsureLoggedIn } from "../containers/Player/EnsureLoggedIn";
 import { CurrentShipContextComponent } from "../context/CurrentShipContext";
 import { FleetPage } from "./Play/FleetPage";
 import { ShipPage } from "./Play/ShipPage";
-import { UpgradesPage } from "./Play/UpgradesPage";
+import { InventoryPage } from "./Play/InventoryPage";
 
 const StyledPlayArea = styled.div`
   position: relative;
@@ -31,8 +31,8 @@ export const PlayPage = () => {
           <StyledPlayBoard>
             <Switch>
               <Route
-                path="/play/upgrades"
-                component={UpgradesPage}
+                path="/play/inventory"
+                component={InventoryPage}
                 exact={true}
               />
               <Route path="/play/:shipId" component={ShipPage} exact={true} />

@@ -23,7 +23,7 @@ const UpgradesPageDetail = () => {
   );
 };
 
-export const UpgradesPage = () => (
+export const InventoryPage = () => (
   <UpgradesContextProvider>
     <UpgradesPageDetail />
   </UpgradesContextProvider>

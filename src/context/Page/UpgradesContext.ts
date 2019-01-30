@@ -28,7 +28,7 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
   const [message, setMessage] = useState(null);
   const [ships, setShips] = useState(undefined);
   const [effects, setEffects] = useState(undefined);
-  const { data } = useApi("/play/upgrades");
+  const { data } = useApi("/play/inventory");
 
   const setDataFromResponse = (data: any) => {
     setShips(data.ships);

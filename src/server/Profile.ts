@@ -4,8 +4,17 @@ import { match, RouteProps } from "react-router-dom";
 import { ProfilePage } from "../pages/ProfilePage";
 import { ApiClient } from "../util/ApiClient";
 import { withPlayer } from "./withPlayer";
+import { ISessionResponse } from "../context/SessionContext";
+import { IPort } from "../Interfaces";
 
-class ProfileComponent extends Component<RouteProps, undefined> {
+interface IProps extends RouteProps {
+  readonly session: ISessionResponse;
+  readonly isAnonymous: boolean;
+  readonly canDelete: boolean;
+  readonly homePort: IPort;
+}
+
+class ProfileComponent extends Component<IProps, undefined> {
   public static async getInitialData(_: match, request: Request) {
     try {
       return await ApiClient.fetch(

@@ -39,7 +39,7 @@ export const FleetShips = ({ ships }: IProps) => {
     <>
       <StyledShipsList>{shipRows}</StyledShipsList>
       <MoreLink>
-        <Link to={`/play/upgrades`}>Get more ships</Link>
+        <Link to={`/play/inventory`}>Get more ships</Link>
       </MoreLink>
     </>
   );

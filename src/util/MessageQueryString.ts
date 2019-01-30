@@ -8,5 +8,5 @@ export const messageQueryString = (queryString: string) => {
   }
 
   // query should be base 64 encoded json array
-  return JSON.parse(b64u.decode(query.messages));
+  return JSON.parse(b64u.decode(query.messages as string));
 };

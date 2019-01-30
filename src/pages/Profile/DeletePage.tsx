@@ -27,14 +27,14 @@ const stageTexts = [
 
 export const DeletePage = ({ query }: IProps) => {
   const queryData = parseQueryString(query);
-  const stage = parseInt(queryData.stage || 1, 10);
+  const stage = parseInt((queryData.stage as string) || '1', 10);
   if (stage < 1 || stage > 3) {
     return <Error code={400} message="Invalid stage provided" />;
   }
   const stageText = stageTexts[stage];
   const token = {
     path: "/profile/delete",
-    token: queryData.token || "",
+    token: queryData.token as string || "",
   };
 
   return (
