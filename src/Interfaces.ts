@@ -106,11 +106,11 @@ export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
 
-interface IDefenceOption {
+export interface IDefenceOption {
   actionToken?: IActionToken;
   effect: IEffect;
   hitsRemaining?: number;
-  timeRemaining?: number; // todo - should this be a data?
+  expiry?: number;
 }
 
 export interface IFleetShip {

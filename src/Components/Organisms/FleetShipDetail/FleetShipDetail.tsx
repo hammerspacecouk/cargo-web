@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IFleetShip } from "../../../Interfaces";
+import { IDefenceOption, IFleetShip } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { FlexInline } from "../../Atoms/Flex/Flex";
@@ -9,6 +9,8 @@ import { EditShipName } from "../EditShipName/EditShipName";
 import { FleetShipHealth } from "../FleetShipHealth/FleetShipHealth";
 import { FleetShipLocation } from "../FleetShipLocation/FleetShipLocation";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
+import { Button } from "../../Atoms/Button/Button";
+import { CountdownToTime } from "../../Molecules/CountdownToTime/CountdownToTime";
 
 interface IProps {
   fleetShip: IFleetShip;
@@ -35,26 +37,49 @@ const DetailRowContent = styled.div`
   flex: 1;
 `;
 
+const DefenceEffect = (option: IDefenceOption) => {
+  if (option.actionToken) {
+    return (
+      <EffectActionButton
+        key={option.effect.name}
+        effect={option.effect}
+        token={option.actionToken}
+      />
+    );
+  }
+
+  let detail = null;
+  if (option.hitsRemaining) {
+    detail = `(${option.hitsRemaining})`;
+  } else if (option.expiry) {
+    detail = <CountdownToTime dateTime={option.expiry}/>;
+  }
+
+  return (
+    <Button
+      disabled
+      key={option.effect.name}
+    >
+      {option.effect.name} {detail}
+    </Button>
+  );
+};
+
 export const FleetShipDetail = ({ fleetShip }: IProps) => (
   <StyledDetail>
     <DetailRow>
-      {fleetShip.defenceOptions.map(option => (
-        <EffectActionButton
-          effect={option.effect}
-          token={option.actionToken}
-        />
-      ))}
+      {fleetShip.defenceOptions.map(DefenceEffect)}
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Location</DetailRowLabel>
       <DetailRowContent>
-        <FleetShipLocation ship={fleetShip.ship} />
+        <FleetShipLocation ship={fleetShip.ship}/>
       </DetailRowContent>
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Shield strength</DetailRowLabel>
       <DetailRowContent>
-        <FleetShipHealth health={fleetShip.health} />
+        <FleetShipHealth health={fleetShip.health}/>
       </DetailRowContent>
     </DetailRow>
     <DetailRow>
