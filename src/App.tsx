@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
-import { Modal, ModalActions } from "./components/Molecules/Modal/Modal";
+import { Modal, ModalActions, ModalType } from "./components/Molecules/Modal/Modal";
 import { NotFound } from "./components/Organisms/Error/NotFound";
 import { Masthead } from "./components/Organisms/Masthead/Masthead";
 import { SessionContextComponent } from "./context/SessionContext";
@@ -50,7 +50,7 @@ export class App extends React.Component<IProps, IState> {
     let errorModal = null;
     if (this.state.errorMessage) {
       errorModal = (
-        <Modal isOpen={true} title="An error occurred">
+        <Modal isOpen={true} title="An error occurred" type={ModalType.DANGER}>
           <p>
             There was an error loading data. Please reload the page to try again
           </p>

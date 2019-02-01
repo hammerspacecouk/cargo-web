@@ -8,25 +8,27 @@ interface IProps {
   readonly firstPerson?: boolean;
 }
 
-export const PlayerNew = (props: IProps) => {
+export const EffectUse = ({firstPerson, event}: IProps) => {
   let name;
-  if (props.firstPerson) {
+  if (firstPerson) {
     name = "You ";
-  } else if (props.event.actioningPlayer) {
+  } else if (event.actioningPlayer) {
     name = (
       <EventFlag>
-        <PlayerFlag player={props.event.actioningPlayer} />
+        <PlayerFlag player={event.actioningPlayer} />
       </EventFlag>
     );
   } else {
     name = "[deleted] ";
   }
 
-  const port = props.event.port;
+  const effectName = event.effect ? <em>{event.effect.name}</em> : 'unknown';
+
+  const onShip = event.ship ? ` for ${event.ship.name}` : null;
 
   return (
-    <Event time={props.event.time}>
-      {name} started a new game at {port.name}
+    <Event time={event.time}>
+      {name} activated {effectName}{onShip}
     </Event>
   );
 };

@@ -67,6 +67,7 @@ export interface IDirections {
 // same as constants from Event.php, with 'public' swapped for 'export'
 export const ACTION_CRATE_NEW = "crate_new";
 export const ACTION_CRATE_PICKUP = "crate_pickup";
+export const ACTION_EFFECT_USE = "effect_use";
 export const ACTION_PLAYER_NEW = "player_new";
 export const ACTION_PLAYER_PROMOTION = "player_promotion";
 export const ACTION_SHIP_NEW = "ship_new";
@@ -110,7 +111,7 @@ export interface IDefenceOption {
   actionToken?: IActionToken;
   effect: IEffect;
   hitsRemaining?: number;
-  expiry?: number;
+  expiry?: string;
 }
 
 export interface IFleetShip {
@@ -145,6 +146,7 @@ export interface IEvent {
   ship?: IShip;
   port?: IPort;
   rank?: IRank;
+  effect?: IEffect;
 }
 
 export interface IKeyValue {

@@ -17,8 +17,7 @@ export const ShipArrival = (props: IProps) => {
 
   return (
     <Event time={props.event.time}>
-      <em>{name}</em> arrived safely at{" "}
-      <a href={`/ports/${port.id}`}>{port.name}</a>
+      <em>{name}</em> arrived safely at {port.name}
     </Event>
   );
 };

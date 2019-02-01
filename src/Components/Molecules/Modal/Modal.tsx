@@ -6,9 +6,15 @@ import { GRID, Z_INDEX } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading/Heading";
 import { CloseIcon } from "../../Icons/CloseIcon/CloseIcon";
 
+export enum ModalType {
+  WARNING = 'modal--warning',
+  DANGER = 'modal--danger'
+}
+
 interface IProps {
   children: any;
   title?: string;
+  type?: ModalType;
   isOpen: boolean;
   onClose?: () => void;
 }
@@ -29,6 +35,14 @@ export const modalStyles = css`
     transform: scale(0);
     transition: 0.3s cubic-bezier(0.13, 0.76, 0.49, 1.65);
   }
+  .modal--danger {
+    border: 1px solid ${COLOURS.SEMANTIC.DANGER.KEY};
+    box-shadow: 0 0 32px ${hexToRGBa(COLOURS.SEMANTIC.DANGER.KEY, 0.6)};
+  };
+  .modal--warning {
+    border: 1px solid ${COLOURS.SEMANTIC.WARNING.KEY};
+    box-shadow: 0 0 32px ${hexToRGBa(COLOURS.SEMANTIC.WARNING.KEY, 0.6)};
+  };
   .modal__overlay {
     position: fixed;
     top: 0;
@@ -90,6 +104,9 @@ const ModalContent = styled.div`
 export const ModalActions = styled.div`
   text-align: center;
   margin-top: ${GRID.UNIT};
+  > * {
+   margin: 0 ${GRID.HALF};
+  }
 `;
 
 export const Modal = (props: IProps) => {
@@ -120,7 +137,7 @@ export const Modal = (props: IProps) => {
         contentLabel={title}
         className={{
           afterOpen: "modal--after-open",
-          base: "modal",
+          base: `modal ${props.type}`,
           beforeClose: "modal--before-close",
         }}
         overlayClassName={{

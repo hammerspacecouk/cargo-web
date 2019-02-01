@@ -3,6 +3,7 @@ import { useMounted } from "../../hooks/useMounted";
 import { IChildrenProps, IEvent, IFleetShip } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
+import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 
 export interface IFleetResponse {
   ships: IFleetShip[];
@@ -14,6 +15,9 @@ interface IFleetContext {
   events: IEvent[];
   setFleetData: (data: IFleetResponse) => void;
   refresh: () => void;
+  buttonsDisabled: boolean;
+  enableButtons: () => void;
+  disableButtons: () => void;
 }
 
 const FleetContext = createContext({});
@@ -22,6 +26,7 @@ export const FleetContextProvider = ({ children }: IChildrenProps) => {
   const { setSession } = useSessionContext();
   const [ships, setShips] = useState(undefined);
   const [events, setEvents] = useState(undefined);
+  const {buttonsDisabled, enableButtons, disableButtons} = useButtonsDisabled();
   const isMounted = useMounted();
 
   const setFleetData = (data: IFleetResponse) => {
@@ -41,6 +46,9 @@ export const FleetContextProvider = ({ children }: IChildrenProps) => {
     FleetContext.Provider,
     {
       value: {
+        buttonsDisabled,
+        disableButtons,
+        enableButtons,
         events,
         refresh,
         setFleetData,

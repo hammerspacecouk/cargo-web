@@ -15,22 +15,20 @@ interface IProps {
 
 const StyledButton = styled(Button)``;
 
-export const EffectActionButton = ({ effect, token, disabled }: IProps) => {
+export const EffectActionButton = ({ effect, token }: IProps) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-  const {setFleetData} = useFleetContext();
+  const { setFleetData, buttonsDisabled, enableButtons, disableButtons } = useFleetContext();
 
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
   const applyAction = async (token: IActionToken) => {
-    try {
-      const data = await ApiClient.tokenFetch(token);
-      setFleetData(data);
-      closeModal();
-    } catch (e) {
-      // todo - error handling
-    }
+    disableButtons();
+    const data = await ApiClient.tokenFetch(token);
+    setFleetData(data);
+    closeModal();
+    enableButtons();
   };
 
   const modal = (
@@ -48,7 +46,7 @@ export const EffectActionButton = ({ effect, token, disabled }: IProps) => {
   return (
     <>
       <StyledButton
-        disabled={disabled}
+        disabled={buttonsDisabled}
         onClick={() => setModalIsOpen(true)}
       >
         {effect.name}

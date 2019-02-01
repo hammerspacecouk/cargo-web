@@ -2,8 +2,8 @@ import * as React from "react";
 import { routes } from "../../../routes";
 import { Button, ConfirmButton } from "../../Atoms/Button/Button";
 import { CountdownLink } from "../../Molecules/CountdownLink/CountdownLink";
-import { MessageError, MessageWarning } from "../../Molecules/Message/Message";
-import { Modal, ModalActions } from "../../Molecules/Modal/Modal";
+import { MessageWarning } from "../../Molecules/Message/Message";
+import { Modal, ModalActions, ModalType } from "../../Molecules/Modal/Modal";
 
 interface IProps {
   readonly isAnonymous: boolean;
@@ -26,18 +26,21 @@ export const LogOutButton = ({ isAnonymous }: IProps) => {
       </MessageWarning>
     );
     modal = (
-      <Modal isOpen={modalIsOpen} title="Are you sure?" onClose={closeModal}>
-        <MessageError>
-          IMPORTANT: READ THIS FIRST <br />
-          Your account is anonymous. If you log out, you will not be able to log
-          in to your game again. It will be lost forever and we cannot recover
-          it for you. <br />
-          There are restrictions in place to remove any advantages in frequently
-          creating new accounts. Don't risk losing your game as you may be
-          blocked from creating another.
-          <br />
-          Are you really sure you want to log out and lose this game forever?
-        </MessageError>
+      <Modal
+        isOpen={modalIsOpen}
+        title="Are you sure?"
+        onClose={closeModal}
+        type={ModalType.DANGER}
+      >
+        IMPORTANT: READ THIS FIRST <br/>
+        Your account is anonymous. If you log out, you will not be able to log
+        in to your game again. It will be lost forever and we cannot recover
+        it for you. <br/>
+        There are restrictions in place to remove any advantages in frequently
+        creating new accounts. Don't risk losing your game as you may be
+        blocked from creating another.
+        <br/>
+        Are you really sure you want to log out and lose this game forever?
         <ModalActions>
           <CountdownLink time={20000} href={routes.getLogout()}>
             Yes, Log out
