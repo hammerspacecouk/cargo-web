@@ -8,7 +8,7 @@ import {
   IPort,
   IRankStatus,
   IScore,
-  IShip
+  IShip, ITravelOption
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
@@ -26,6 +26,7 @@ interface IShipLocationResponse {
   readonly playerScore?: IScore;
   readonly cratesOnShip: ICrateAction[];
   readonly cratesInPort?: ICrateAction[];
+  readonly travelOptions?: ITravelOption[];
 }
 
 interface IPlayShipResponse extends IShipLocationResponse {
@@ -47,6 +48,7 @@ interface ICurrentShipContext {
   events?: IEvent[];
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
+  travelEffects?: ITravelOption[];
   loadingNewShip: () => void;
   updateCurrentShip: (ship?: IShip) => void;
   updateFullResponse: (data?: IPlayShipResponse) => void;
@@ -68,7 +70,8 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [events, setEvents] = useState(undefined);
   const [cratesInPort, setCratesInPort] = useState(undefined);
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
-  const [bonusEffects, setBonusEffects] = useState(undefined);
+  const [bonusEffects, setBonusEffects] = useState(undefined); // todo - in use?
+  const [travelEffects, setTravelEffects] = useState(undefined);
 
   const updateFullResponse = (data?: IPlayShipResponse) => {
     if (!data) {
@@ -83,6 +86,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
       setCratesInPort(undefined);
       setCratesOnShip(undefined);
       setBonusEffects(undefined);
+      setTravelEffects(undefined);
       return;
     }
 
@@ -97,6 +101,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
     setCratesInPort(data.cratesInPort);
     setCratesOnShip(data.cratesOnShip);
     setBonusEffects(data.bonus);
+    setTravelEffects(data.travelOptions);
   };
 
   const refreshState = async (): Promise<IPlayShipResponse> => {
@@ -140,6 +145,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
         refreshState,
         ship,
         shipsInLocation,
+        travelEffects,
         updateCurrentShip,
         updateFullResponse,
         updateShipLocation,

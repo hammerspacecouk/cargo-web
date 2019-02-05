@@ -114,6 +114,12 @@ export interface IDefenceOption {
   expiry?: string;
 }
 
+export interface ITravelOption {
+  actionToken?: IActionToken;
+  effect: IEffect;
+  isActive: boolean;
+}
+
 export interface IFleetShip {
   ship: IShip;
   needsAttention: boolean;

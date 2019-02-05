@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IDefenceOption, IFleetShip } from "../../../Interfaces";
+import { IActionToken, IDefenceOption, IFleetShip } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { FlexInline } from "../../Atoms/Flex/Flex";
@@ -11,6 +11,8 @@ import { FleetShipLocation } from "../FleetShipLocation/FleetShipLocation";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
 import { Button } from "../../Atoms/Button/Button";
 import { CountdownToTime } from "../../Molecules/CountdownToTime/CountdownToTime";
+import { useFleetContext } from "../../../context/Page/FleetContext";
+import { ApiClient } from "../../../util/ApiClient";
 
 interface IProps {
   fleetShip: IFleetShip;
@@ -38,12 +40,28 @@ const DetailRowContent = styled.div`
 `;
 
 const DefenceEffect = (option: IDefenceOption) => {
+  const {
+    setFleetData,
+    buttonsDisabled,
+    enableButtons,
+    disableButtons
+  } = useFleetContext();
+
+  const applyAction = async (token: IActionToken) => {
+    disableButtons();
+    const data = await ApiClient.tokenFetch(token);
+    setFleetData(data);
+    enableButtons();
+  };
+
   if (option.actionToken) {
     return (
       <EffectActionButton
         key={option.effect.name}
         effect={option.effect}
         token={option.actionToken}
+        disabled={buttonsDisabled}
+        handler={applyAction}
       />
     );
   }
