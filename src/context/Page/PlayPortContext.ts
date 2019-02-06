@@ -4,6 +4,8 @@ import { ApiClient } from "../../util/ApiClient";
 import { useCurrentShipContext } from "../CurrentShipContext";
 import { useSessionContext } from "../SessionContext";
 import * as React from "react";
+import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
+import { useMounted } from "../../hooks/useMounted";
 
 interface IPlayPortContext {
   buttonsDisabled: boolean;
@@ -14,6 +16,8 @@ interface IPlayPortContext {
   closeModal: () => void;
   moveCrate: (token: IActionToken) => void;
   moveShip: (token: IActionToken) => void;
+  enableButtons: () => void;
+  disableButtons: () => void;
 }
 
 const PlayPortContext = createContext({});
@@ -22,40 +26,28 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const { updateScore } = useSessionContext();
   const { updateFullResponse } = useCurrentShipContext();
 
-  const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [confirmMoveButton, setConfirmMoveButton] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [departing, setDeparting] = useState(false);
-  const mounted = React.useRef(false);
-
-  React.useEffect(() => {
-    mounted.current = true;
-    return () => {
-      mounted.current = false;
-    };
-  });
+  const {buttonsDisabled, enableButtons, disableButtons} = useButtonsDisabled();
+  const mounted = useMounted();
 
   const doPortAction = async (token: IActionToken) => {
-    try {
-      const data = await ApiClient.tokenFetch(token);
-      updateScore(data.playerScore);
-      updateFullResponse(data);
-    } catch (e) {
-      // todo - error handling
-    } finally {
-      if (mounted.current) {
-        setButtonsDisabled(false);
-      }
+    const data = await ApiClient.tokenFetch(token);
+    updateScore(data.playerScore);
+    updateFullResponse(data);
+    if (mounted()) {
+      enableButtons();
     }
   };
 
   const moveCrate = (token: IActionToken): Promise<void> => {
-    setButtonsDisabled(true);
+    disableButtons();
     return doPortAction(token);
   };
 
   const moveShip = async (token: IActionToken) => {
-    setButtonsDisabled(true);
+    disableButtons();
     setDeparting(true);
     return doPortAction(token);
   };
@@ -71,14 +63,16 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
         },
         confirmMoveButton,
         departing,
+        disableButtons,
+        enableButtons,
         modalIsOpen,
         moveCrate,
         moveShip,
         openModal: (confirmMoveButtonElement: JSX.Element) => {
           setConfirmMoveButton(confirmMoveButtonElement);
           setModalIsOpen(true);
-        },
-      },
+        }
+      }
     },
     children
   );

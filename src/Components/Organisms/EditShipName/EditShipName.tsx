@@ -40,7 +40,7 @@ const Updating = styled.span`
 export const EditShipName = ({ ship, renameToken }: IProps) => {
   const [requestNameToken, setRequestNameToken] = React.useState(renameToken);
   const { updateScore } = useSessionContext();
-  const { setFleetData } = useFleetContext();
+  const { setFleetData, buttonsDisabled } = useFleetContext();
   const { ship: currentShip, updateCurrentShip } = useCurrentShipContext();
   const [isActive, setIsActive] = React.useState(false);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
@@ -131,7 +131,7 @@ export const EditShipName = ({ ship, renameToken }: IProps) => {
           token={requestNameToken.actionToken}
           handler={requestShipName}
         >
-          <CreditsButton amount={500} />
+          <CreditsButton disabledOverride={buttonsDisabled} amount={500} />
         </TokenButton>
       );
     }

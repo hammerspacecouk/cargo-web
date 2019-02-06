@@ -23,13 +23,18 @@ const PortTemplate = styled.div`
   padding: ${GRID.UNIT};
 `;
 
-const TravelEffect = (option: ITravelOption) => {
+interface ITravelEffectProps {
+  option: ITravelOption;
+}
+
+const TravelEffect = ({option}: ITravelEffectProps) => {
   const { updateFullResponse } = useCurrentShipContext();
+  const { buttonsDisabled, enableButtons, disableButtons } = usePlayPortContext();
   const applyAction = async (token: IActionToken) => {
-    // disableButtons(); // todo - add to context
+    disableButtons();
     const data = await ApiClient.tokenFetch(token);
     updateFullResponse(data);
-    // enableButtons();
+    enableButtons();
   };
 
   if (option.actionToken) {
@@ -38,7 +43,7 @@ const TravelEffect = (option: ITravelOption) => {
         key={option.effect.name}
         effect={option.effect}
         token={option.actionToken}
-        disabled={false}
+        disabled={buttonsDisabled}
         handler={applyAction}
       />
     );
@@ -66,7 +71,9 @@ const PortComponent = () => {
     if (travelEffects !== undefined) {
       travelEffectsSection = (
         <div>
-          {travelEffects.map(TravelEffect)}
+          {travelEffects.map(option => (
+            <TravelEffect key={option.effect.name} option={option} />
+          ))}
         </div>
       );
     }

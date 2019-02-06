@@ -10,6 +10,7 @@ import { ApiClient } from "../../../util/ApiClient";
 import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
 import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
 import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
+import { useMounted } from "../../../hooks/useMounted";
 
 interface IProps {
   health: IHealthIncrease[];
@@ -25,31 +26,23 @@ const StyledContent = styled.div`
 `;
 
 export const FleetShipHealth = ({ health }: IProps) => {
-  const [buttonsDisabled, setButtonsDisabled] = React.useState(false);
   const { updateScore } = useSessionContext();
-  const { setFleetData } = useFleetContext();
-  const mounted = React.useRef(false);
+  const { setFleetData, buttonsDisabled, enableButtons, disableButtons } = useFleetContext();
+  const mounted = useMounted();
 
   const applyHealth = async (token: IActionToken) => {
-    if (!mounted.current) {
+    if (!mounted()) {
       return;
     }
 
-    setButtonsDisabled(true);
+    disableButtons();
     const data: IUpdateResponse = await ApiClient.tokenFetch(token);
-    if (mounted.current) {
+    if (mounted()) {
       updateScore(data.newScore);
       setFleetData(data.fleet);
-      setButtonsDisabled(false);
+      enableButtons();
     }
   };
-
-  React.useEffect(() => {
-    mounted.current = true;
-    return () => {
-      mounted.current = false;
-    };
-  });
 
   const actionButtons = health.map(transaction => {
     return (

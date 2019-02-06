@@ -39,18 +39,13 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
     setButtonsDisabled(true);
 
     // make the API call
-    try {
-      const actionData = await ApiClient.tokenFetch(token);
-      setDataFromResponse(actionData.upgrades);
-      setMessage(actionData.message);
+    const actionData = await ApiClient.tokenFetch(token);
+    setDataFromResponse(actionData.upgrades);
+    setMessage(actionData.message);
 
-      // update the score
-      updateScore(actionData.newScore);
-    } catch (e) {
-      // todo - error handling
-    } finally {
-      setButtonsDisabled(false);
-    }
+    // update the score
+    updateScore(actionData.newScore);
+    setButtonsDisabled(false);
   };
 
   if (!ships && data) {

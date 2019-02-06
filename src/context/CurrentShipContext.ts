@@ -70,7 +70,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [events, setEvents] = useState(undefined);
   const [cratesInPort, setCratesInPort] = useState(undefined);
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
-  const [bonusEffects, setBonusEffects] = useState(undefined); // todo - in use?
+  const [bonusEffects, setBonusEffects] = useState(undefined);
   const [travelEffects, setTravelEffects] = useState(undefined);
 
   const updateFullResponse = (data?: IPlayShipResponse) => {
