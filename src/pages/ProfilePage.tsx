@@ -46,14 +46,11 @@ export const ProfilePage = ({
 }: IProps) => {
   const { setSession } = useSessionContext();
 
-  React.useEffect(
-    () => {
-      if (session) {
-        setSession(session);
-      }
-    },
-    [session]
-  );
+  React.useEffect(() => {
+    if (session) {
+      setSession(session);
+    }
+  }, [session]);
 
   if (session === undefined) {
     return <Loading />;

@@ -3,12 +3,14 @@ import { createContext, createElement, useContext, useState } from "react";
 import {
   IChannel,
   ICrateAction,
-  IDirections, IEffect,
+  IDirections,
+  IEffect,
   IEvent,
   IPort,
   IRankStatus,
   IScore,
-  IShip, ITravelOption
+  IShip,
+  ITravelOption,
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 

@@ -16,7 +16,12 @@ interface IProps {
 
 const StyledButton = styled(Button)``;
 
-export const EffectActionButton = ({ disabled, effect, handler, token }: IProps) => {
+export const EffectActionButton = ({
+  disabled,
+  effect,
+  handler,
+  token,
+}: IProps) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [isActioning, setIsActioning] = React.useState(false);
 
@@ -26,18 +31,21 @@ export const EffectActionButton = ({ disabled, effect, handler, token }: IProps)
     setModalIsOpen(false);
   };
 
-  let modalActions = <Loading/>;
+  let modalActions = <Loading />;
   if (!isActioning) {
     modalActions = (
       <>
-        <TokenButton token={token} handler={async (token) => {
-          setIsActioning(true);
-          await handler(token);
-          if (isMounted()) {
-            setIsActioning(false);
-            closeModal();
-          }
-        }}>
+        <TokenButton
+          token={token}
+          handler={async token => {
+            setIsActioning(true);
+            await handler(token);
+            if (isMounted()) {
+              setIsActioning(false);
+              closeModal();
+            }
+          }}
+        >
           <ConfirmButton type="submit">Apply</ConfirmButton>
         </TokenButton>
         <ActionButton onClick={closeModal}>Cancel</ActionButton>
@@ -48,18 +56,13 @@ export const EffectActionButton = ({ disabled, effect, handler, token }: IProps)
   const modal = (
     <Modal isOpen={modalIsOpen} title={effect.name} onClose={closeModal}>
       {effect.description}
-      <ModalActions>
-        {modalActions}
-      </ModalActions>
+      <ModalActions>{modalActions}</ModalActions>
     </Modal>
   );
 
   return (
     <>
-      <StyledButton
-        disabled={disabled}
-        onClick={() => setModalIsOpen(true)}
-      >
+      <StyledButton disabled={disabled} onClick={() => setModalIsOpen(true)}>
         {effect.name}
       </StyledButton>
       {modal}

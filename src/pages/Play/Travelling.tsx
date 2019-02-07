@@ -21,7 +21,7 @@ export const Travelling = () => {
       <H2>Destination: {channel.destination.name}</H2>
       <TextCenter as="h3">{remaining}</TextCenter>
       <ProgressBar percent={percent} />
-      <BonusEffects effects={bonusEffects}/>
+      <BonusEffects effects={bonusEffects} />
       <TextCenter>{hint}</TextCenter>
     </div>
   );

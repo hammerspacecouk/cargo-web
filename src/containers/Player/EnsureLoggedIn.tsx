@@ -11,14 +11,11 @@ interface IInitialProps {
 export const EnsureLoggedIn = ({ children }: IInitialProps) => {
   const { player, refreshSession } = useSessionContext();
 
-  React.useEffect(
-    () => {
-      if (player === undefined) {
-        refreshSession();
-      }
-    },
-    [player]
-  );
+  React.useEffect(() => {
+    if (player === undefined) {
+      refreshSession();
+    }
+  }, [player]);
 
   if (player === undefined) {
     return <Loading />;

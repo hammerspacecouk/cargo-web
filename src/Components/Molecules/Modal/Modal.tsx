@@ -7,8 +7,8 @@ import { H3 } from "../../Atoms/Heading/Heading";
 import { CloseIcon } from "../../Icons/CloseIcon/CloseIcon";
 
 export enum ModalType {
-  WARNING = 'modal--warning',
-  DANGER = 'modal--danger'
+  WARNING = "modal--warning",
+  DANGER = "modal--danger",
 }
 
 interface IProps {
@@ -38,11 +38,11 @@ export const modalStyles = css`
   .modal--danger {
     border: 1px solid ${COLOURS.SEMANTIC.DANGER.KEY};
     box-shadow: 0 0 32px ${hexToRGBa(COLOURS.SEMANTIC.DANGER.KEY, 0.6)};
-  };
+  }
   .modal--warning {
     border: 1px solid ${COLOURS.SEMANTIC.WARNING.KEY};
     box-shadow: 0 0 32px ${hexToRGBa(COLOURS.SEMANTIC.WARNING.KEY, 0.6)};
-  };
+  }
   .modal__overlay {
     position: fixed;
     top: 0;
@@ -105,7 +105,7 @@ export const ModalActions = styled.div`
   text-align: center;
   margin-top: ${GRID.UNIT};
   > * {
-   margin: 0 ${GRID.HALF};
+    margin: 0 ${GRID.HALF};
   }
 `;
 

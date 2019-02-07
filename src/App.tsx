@@ -1,6 +1,10 @@
 import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
-import { Modal, ModalActions, ModalType } from "./components/Molecules/Modal/Modal";
+import {
+  Modal,
+  ModalActions,
+  ModalType,
+} from "./components/Molecules/Modal/Modal";
 import { NotFound } from "./components/Organisms/Error/NotFound";
 import { Masthead } from "./components/Organisms/Masthead/Masthead";
 import { SessionContextComponent } from "./context/SessionContext";

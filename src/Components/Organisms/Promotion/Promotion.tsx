@@ -112,17 +112,14 @@ export const Promotion = ({ rankStatus }: IProps) => {
     window.requestAnimationFrame(animate);
   };
 
-  React.useEffect(
-    () => {
-      allowAnimationUpdate = true;
-      window.requestAnimationFrame(animate);
-      return () => {
-        allowAnimationUpdate = false;
-        startTime = null;
-      };
-    },
-    [rankStatus]
-  );
+  React.useEffect(() => {
+    allowAnimationUpdate = true;
+    window.requestAnimationFrame(animate);
+    return () => {
+      allowAnimationUpdate = false;
+      startTime = null;
+    };
+  }, [rankStatus]);
 
   if (!rankStatus) {
     return null;

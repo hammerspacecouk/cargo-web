@@ -7,7 +7,7 @@ interface IProps {
   effects?: IEffectUpgrade[];
 }
 
-export const EffectUpgrades = ({effects}: IProps): JSX.Element => {
+export const EffectUpgrades = ({ effects }: IProps): JSX.Element => {
   if (effects === undefined) {
     return <Loading />; // todo - nice loading state
   }

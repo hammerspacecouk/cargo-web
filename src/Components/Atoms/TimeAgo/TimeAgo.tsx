@@ -52,17 +52,14 @@ export const TimeAgo = ({ datetime }: IProps) => {
     timeout = window.setTimeout(loop, 30 * 60 * 1000);
   };
 
-  React.useEffect(
-    () => {
-      loop();
-      return () => {
-        if (timeout) {
-          window.clearTimeout(timeout);
-        }
-      };
-    },
-    [datetime]
-  );
+  React.useEffect(() => {
+    loop();
+    return () => {
+      if (timeout) {
+        window.clearTimeout(timeout);
+      }
+    };
+  }, [datetime]);
 
   return (
     <time dateTime={datetime.toISOString()} title={datetime.toISOString()}>

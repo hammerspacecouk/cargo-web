@@ -8,7 +8,7 @@ interface IProps {
   readonly firstPerson?: boolean;
 }
 
-export const EffectUse = ({firstPerson, event}: IProps) => {
+export const EffectUse = ({ firstPerson, event }: IProps) => {
   let name;
   if (firstPerson) {
     name = "You ";
@@ -22,13 +22,14 @@ export const EffectUse = ({firstPerson, event}: IProps) => {
     name = "[deleted] ";
   }
 
-  const effectName = event.effect ? <em>{event.effect.name}</em> : 'unknown';
+  const effectName = event.effect ? <em>{event.effect.name}</em> : "unknown";
 
   const onShip = event.ship ? ` for ${event.ship.name}` : null;
 
   return (
     <Event time={event.time}>
-      {name} activated {effectName}{onShip}
+      {name} activated {effectName}
+      {onShip}
     </Event>
   );
 };

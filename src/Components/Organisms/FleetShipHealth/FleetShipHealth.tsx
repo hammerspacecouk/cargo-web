@@ -27,7 +27,12 @@ const StyledContent = styled.div`
 
 export const FleetShipHealth = ({ health }: IProps) => {
   const { updateScore } = useSessionContext();
-  const { setFleetData, buttonsDisabled, enableButtons, disableButtons } = useFleetContext();
+  const {
+    setFleetData,
+    buttonsDisabled,
+    enableButtons,
+    disableButtons,
+  } = useFleetContext();
   const mounted = useMounted();
 
   const applyHealth = async (token: IActionToken) => {

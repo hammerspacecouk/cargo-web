@@ -44,7 +44,7 @@ const DefenceEffect = (option: IDefenceOption) => {
     setFleetData,
     buttonsDisabled,
     enableButtons,
-    disableButtons
+    disableButtons,
   } = useFleetContext();
 
   const applyAction = async (token: IActionToken) => {
@@ -70,14 +70,11 @@ const DefenceEffect = (option: IDefenceOption) => {
   if (option.hitsRemaining) {
     detail = `(${option.hitsRemaining})`;
   } else if (option.expiry) {
-    detail = <CountdownToTime dateTime={option.expiry}/>;
+    detail = <CountdownToTime dateTime={option.expiry} />;
   }
 
   return (
-    <Button
-      disabled
-      key={option.effect.name}
-    >
+    <Button disabled key={option.effect.name}>
       {option.effect.name} {detail}
     </Button>
   );
@@ -85,19 +82,17 @@ const DefenceEffect = (option: IDefenceOption) => {
 
 export const FleetShipDetail = ({ fleetShip }: IProps) => (
   <StyledDetail>
-    <DetailRow>
-      {fleetShip.defenceOptions.map(DefenceEffect)}
-    </DetailRow>
+    <DetailRow>{fleetShip.defenceOptions.map(DefenceEffect)}</DetailRow>
     <DetailRow>
       <DetailRowLabel>Location</DetailRowLabel>
       <DetailRowContent>
-        <FleetShipLocation ship={fleetShip.ship}/>
+        <FleetShipLocation ship={fleetShip.ship} />
       </DetailRowContent>
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Shield strength</DetailRowLabel>
       <DetailRowContent>
-        <FleetShipHealth health={fleetShip.health}/>
+        <FleetShipHealth health={fleetShip.health} />
       </DetailRowContent>
     </DetailRow>
     <DetailRow>

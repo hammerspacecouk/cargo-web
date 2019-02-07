@@ -9,22 +9,21 @@ interface IProps {
 
 const calculateSeconds = (dateTime: string): number => {
   const calculationDate = new Date(dateTime);
-  return Math.max(0, differenceInSeconds(
-    calculationDate,
-    new Date(),
-  ));
+  return Math.max(0, differenceInSeconds(calculationDate, new Date()));
 };
 
 export const CountdownToTime = ({ dateTime }: IProps) => {
   const [seconds, setSeconds] = React.useState(calculateSeconds(dateTime));
 
-  useFrameEffect(() => {
-    const secondsRemaining = calculateSeconds(dateTime);
-    setSeconds(secondsRemaining);
-    return secondsRemaining > 0;
-  }, [dateTime], 500);
-
-  return (
-    <IntervalFormat seconds={seconds}/>
+  useFrameEffect(
+    () => {
+      const secondsRemaining = calculateSeconds(dateTime);
+      setSeconds(secondsRemaining);
+      return secondsRemaining > 0;
+    },
+    [dateTime],
+    500
   );
+
+  return <IntervalFormat seconds={seconds} />;
 };

@@ -20,7 +20,10 @@ export const EffectUpgrade = ({ effect }: IProps) => {
   if (effect.actionToken) {
     purchaseButton = (
       <TokenButton token={effect.actionToken} handler={makePurchase}>
-        <CreditsButton amount={effect.cost} disabledOverride={buttonsDisabled} />
+        <CreditsButton
+          amount={effect.cost}
+          disabledOverride={buttonsDisabled}
+        />
       </TokenButton>
     );
   }

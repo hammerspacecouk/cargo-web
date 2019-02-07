@@ -57,17 +57,14 @@ export const useTravellingState = () => {
     }
   };
 
-  useEffect(
-    () => {
-      if (isArriving && allowArrivalCheck) {
-        handleArrival();
-      }
-      return () => {
-        allowArrivalCheck = false;
-      };
-    },
-    [isArriving]
-  );
+  useEffect(() => {
+    if (isArriving && allowArrivalCheck) {
+      handleArrival();
+    }
+    return () => {
+      allowArrivalCheck = false;
+    };
+  }, [isArriving]);
 
   return {
     percent,

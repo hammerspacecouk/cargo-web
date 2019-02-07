@@ -40,10 +40,7 @@ export const Direction = ({ direction, children }: IProps) => {
         <ScoreValue score={detail.earnings} />
       </td>
       <td className="destinations__action">
-        <GoButton
-          direction={direction}
-          journeyTime={detail.journeyTimeSeconds}
-        >
+        <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>
           {icon}
         </GoButton>
       </td>

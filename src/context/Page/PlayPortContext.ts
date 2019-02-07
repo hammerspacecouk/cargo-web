@@ -29,7 +29,11 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const [confirmMoveButton, setConfirmMoveButton] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [departing, setDeparting] = useState(false);
-  const {buttonsDisabled, enableButtons, disableButtons} = useButtonsDisabled();
+  const {
+    buttonsDisabled,
+    enableButtons,
+    disableButtons,
+  } = useButtonsDisabled();
   const mounted = useMounted();
 
   const doPortAction = async (token: IActionToken) => {
@@ -71,8 +75,8 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
         openModal: (confirmMoveButtonElement: JSX.Element) => {
           setConfirmMoveButton(confirmMoveButtonElement);
           setModalIsOpen(true);
-        }
-      }
+        },
+      },
     },
     children
   );

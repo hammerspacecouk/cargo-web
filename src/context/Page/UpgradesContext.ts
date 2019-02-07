@@ -1,10 +1,17 @@
-import { createContext, createElement, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  createElement,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useApi } from "../../hooks/useAPI";
 import {
   IActionToken,
-  IChildrenProps, IEffectUpgrade,
+  IChildrenProps,
+  IEffectUpgrade,
   IMessage,
-  IShipUpgrade
+  IShipUpgrade,
 } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
@@ -60,7 +67,7 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
         makePurchase,
         message,
         ships,
-        effects
+        effects,
       },
     },
     children

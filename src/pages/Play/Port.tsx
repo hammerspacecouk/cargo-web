@@ -27,9 +27,13 @@ interface ITravelEffectProps {
   option: ITravelOption;
 }
 
-const TravelEffect = ({option}: ITravelEffectProps) => {
+const TravelEffect = ({ option }: ITravelEffectProps) => {
   const { updateFullResponse } = useCurrentShipContext();
-  const { buttonsDisabled, enableButtons, disableButtons } = usePlayPortContext();
+  const {
+    buttonsDisabled,
+    enableButtons,
+    disableButtons,
+  } = usePlayPortContext();
   const applyAction = async (token: IActionToken) => {
     disableButtons();
     const data = await ApiClient.tokenFetch(token);
@@ -50,10 +54,7 @@ const TravelEffect = ({option}: ITravelEffectProps) => {
   }
 
   return (
-    <Button
-      disabled
-      key={option.effect.name}
-    >
+    <Button disabled key={option.effect.name}>
       {option.effect.name}
     </Button>
   );

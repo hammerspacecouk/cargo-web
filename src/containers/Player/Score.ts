@@ -43,17 +43,14 @@ export const Score = (props: IProps) => {
     }
   };
 
-  useEffect(
-    () => {
-      mounted.current = true;
-      frameHandler = window.requestAnimationFrame(frame);
-      return () => {
-        mounted.current = false;
-        window.cancelAnimationFrame(frameHandler);
-      };
-    },
-    [props.score]
-  );
+  useEffect(() => {
+    mounted.current = true;
+    frameHandler = window.requestAnimationFrame(frame);
+    return () => {
+      mounted.current = false;
+      window.cancelAnimationFrame(frameHandler);
+    };
+  }, [props.score]);
 
   return createElement(ScoreValue, { score });
 };
