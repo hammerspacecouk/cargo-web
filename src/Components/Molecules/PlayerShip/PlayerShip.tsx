@@ -25,8 +25,7 @@ const Detail = styled.div`
   line-height: 1;
 `;
 
-const Offence = styled.div`
-`;
+const Offence = styled.div``;
 
 export const PlayerShip = ({ ship, offence }: IProps) => (
   <ShipItem>

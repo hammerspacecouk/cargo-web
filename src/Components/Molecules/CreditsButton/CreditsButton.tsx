@@ -58,7 +58,7 @@ export const CreditsButton = ({
 
     // when going down, things don't deactivate until they are *under* amount,
     // so we'll reduce the threshold by 1
-    const threshold = (isRateNegative ? amount - 1 : amount);
+    const threshold = isRateNegative ? amount - 1 : amount;
 
     const scoreDiff = threshold - currentScoreValue;
     const millisecondsUntilThreshold = Math.abs(scoreDiff / score.rate) * 1000;
@@ -77,11 +77,7 @@ export const CreditsButton = ({
   }
 
   return (
-    <ComplexButton
-      type="submit"
-      disabled={disabledState}
-      leading={children}
-    >
+    <ComplexButton type="submit" disabled={disabledState} leading={children}>
       <ScoreValue score={amount} />
     </ComplexButton>
   );

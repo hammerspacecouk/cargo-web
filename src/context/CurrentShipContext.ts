@@ -11,7 +11,7 @@ import {
   IRankStatus,
   IScore,
   IShip,
-  ITravelOption
+  ITravelOption,
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
@@ -158,8 +158,8 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
         updateCurrentShip,
         updateFullResponse,
         updateShipLocation,
-        warningModalText
-      }
+        warningModalText,
+      },
     },
     children
   );

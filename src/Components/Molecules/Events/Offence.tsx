@@ -19,7 +19,8 @@ export const Offence = (props: IProps) => {
 
   return (
     <Event time={props.event.time}>
-      <em>{shipName}</em> used <strong>{props.event.effect.name}</strong> against <em>{victimShipName}</em> ({props.event.value} damage)
+      <em>{shipName}</em> used <strong>{props.event.effect.name}</strong>{" "}
+      against <em>{victimShipName}</em> ({props.event.value} damage)
     </Event>
   );
 };

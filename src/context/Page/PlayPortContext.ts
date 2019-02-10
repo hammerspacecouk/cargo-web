@@ -36,7 +36,7 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const mounted = useMounted();
 
   const doPortAction = async (token: IActionToken) => {
-    const {data, error} = await ApiClient.tokenFetch(token);
+    const { data, error } = await ApiClient.tokenFetch(token);
     if (error) {
       setWarningModalText(error);
     }

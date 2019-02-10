@@ -136,7 +136,7 @@ export interface IFleetShip {
 
 export interface IOtherShip {
   ship: IShip;
-  offence?: IOffenceOption[]
+  offence?: IOffenceOption[];
 }
 
 export interface IShip {

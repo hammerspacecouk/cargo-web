@@ -18,7 +18,14 @@ export interface IShipParams {
 }
 
 export const ShipPage = withRouter(({ match }: IShipParams) => {
-  const { port, channel, ship, updateFullResponse, setWarningModalText, warningModalText } = useCurrentShipContext();
+  const {
+    port,
+    channel,
+    ship,
+    updateFullResponse,
+    setWarningModalText,
+    warningModalText,
+  } = useCurrentShipContext();
   const mounted = React.useRef(false);
 
   const getData = async () => {
@@ -37,17 +44,17 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
   }, [match.params.shipId]);
 
   if (ship === undefined) {
-    return <Loading/>; // todo - error state, and ensure login?
+    return <Loading />; // todo - error state, and ensure login?
   }
   if (!ship) {
-    return <NotFound message="You be making ship up"/>;
+    return <NotFound message="You be making ship up" />;
   }
 
   let main = null;
   if (port) {
-    main = <Port/>;
+    main = <Port />;
   } else if (channel) {
-    main = <Travelling/>;
+    main = <Travelling />;
   }
 
   return (

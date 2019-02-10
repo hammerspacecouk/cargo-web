@@ -2,7 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import {
   ACTION_CRATE_NEW,
-  ACTION_CRATE_PICKUP, ACTION_EFFECT_OFFENCE,
+  ACTION_CRATE_PICKUP,
+  ACTION_EFFECT_OFFENCE,
   ACTION_EFFECT_USE,
   ACTION_PLAYER_NEW,
   ACTION_PLAYER_PROMOTION,
@@ -10,7 +11,7 @@ import {
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  IEvent
+  IEvent,
 } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
