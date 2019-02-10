@@ -38,10 +38,12 @@ export const modalStyles = css`
   .modal--danger {
     border: 1px solid ${COLOURS.SEMANTIC.DANGER.KEY};
     box-shadow: 0 0 32px ${hexToRGBa(COLOURS.SEMANTIC.DANGER.KEY, 0.6)};
+    color: ${COLOURS.SEMANTIC.DANGER.KEY};
   }
   .modal--warning {
     border: 1px solid ${COLOURS.SEMANTIC.WARNING.KEY};
     box-shadow: 0 0 32px ${hexToRGBa(COLOURS.SEMANTIC.WARNING.KEY, 0.6)};
+    color: ${COLOURS.SEMANTIC.WARNING.KEY};
   }
   .modal__overlay {
     position: fixed;

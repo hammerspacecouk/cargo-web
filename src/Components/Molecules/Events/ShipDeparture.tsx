@@ -15,7 +15,6 @@ export const ShipDeparture = (props: IProps) => {
     name = props.event.actioningShip.name;
   }
 
-  // todo - new event type if you are headed for the void - and achievement
   return (
     <Event time={props.event.time}>
       <em>{name}</em> departed {port.name} headed into open space

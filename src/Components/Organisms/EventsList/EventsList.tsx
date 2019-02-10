@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import {
   ACTION_CRATE_NEW,
-  ACTION_CRATE_PICKUP,
+  ACTION_CRATE_PICKUP, ACTION_EFFECT_OFFENCE,
   ACTION_EFFECT_USE,
   ACTION_PLAYER_NEW,
   ACTION_PLAYER_PROMOTION,
@@ -10,7 +10,7 @@ import {
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  IEvent,
+  IEvent
 } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
@@ -26,6 +26,7 @@ import { ShipDeparture } from "../../Molecules/Events/ShipDeparture";
 import { ShipNew } from "../../Molecules/Events/ShipNew";
 import { ShipRename } from "../../Molecules/Events/ShipRename";
 import { EffectUse } from "../../Molecules/Events/EffectUse";
+import { Offence } from "../../Molecules/Events/Offence";
 
 interface IProps {
   readonly events: IEvent[];
@@ -40,6 +41,8 @@ const mapEvent = (event: IEvent, firstPerson: boolean) => {
       return <CratePickup event={event} />;
     case ACTION_EFFECT_USE:
       return <EffectUse event={event} firstPerson={firstPerson} />;
+    case ACTION_EFFECT_OFFENCE:
+      return <Offence event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_NEW:
       return <PlayerNew event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_PROMOTION:

@@ -6,6 +6,7 @@ import { GRID } from "../../../styles/variables";
 export const TYPE_CONFIRM = "confirm";
 export const TYPE_DANGER = "danger";
 export const TYPE_ACTION = "action";
+export const TYPE_WARNING = "warning";
 
 const getColour = (styleType: string): string => {
   switch (styleType) {
@@ -13,6 +14,8 @@ const getColour = (styleType: string): string => {
       return COLOURS.BUTTON.CONFIRM;
     case TYPE_DANGER:
       return COLOURS.BUTTON.DANGER;
+    case TYPE_WARNING:
+      return COLOURS.BUTTON.WARNING;
     case TYPE_ACTION:
       return COLOURS.BUTTON.ACTION;
     default:
@@ -71,4 +74,8 @@ export const DangerButton = (props: any) => (
 
 export const ActionButton = (props: any) => (
   <Button {...props} styleType={TYPE_ACTION} />
+);
+
+export const WarningButton = (props: any) => (
+  <Button {...props} styleType={TYPE_WARNING} />
 );

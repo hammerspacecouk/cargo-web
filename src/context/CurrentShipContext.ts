@@ -6,11 +6,12 @@ import {
   IDirections,
   IEffect,
   IEvent,
+  IOtherShip,
   IPort,
   IRankStatus,
   IScore,
   IShip,
-  ITravelOption,
+  ITravelOption
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
@@ -23,7 +24,7 @@ interface IShipLocationResponse {
   readonly port?: IPort;
   readonly channel?: IChannel;
   readonly directions?: IDirections;
-  readonly shipsInLocation?: IShip[];
+  readonly shipsInLocation?: IOtherShip[];
   readonly events: IEvent[];
   readonly playerScore?: IScore;
   readonly cratesOnShip: ICrateAction[];
@@ -46,13 +47,15 @@ interface ICurrentShipContext {
   port?: IPort;
   channel?: IChannel;
   directions?: IDirections;
-  shipsInLocation?: IShip[];
+  shipsInLocation?: IOtherShip[];
   events?: IEvent[];
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
   travelEffects?: ITravelOption[];
   loadingNewShip: () => void;
   updateCurrentShip: (ship?: IShip) => void;
+  setWarningModalText: (text?: string) => void;
+  warningModalText?: string;
   updateFullResponse: (data?: IPlayShipResponse) => void;
   updateShipLocation: (data?: IShipLocationResponse) => void;
   refreshState: () => Promise<IPlayShipResponse>;
@@ -74,6 +77,7 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
   const [bonusEffects, setBonusEffects] = useState(undefined);
   const [travelEffects, setTravelEffects] = useState(undefined);
+  const [warningModalText, setWarningModalText] = useState(undefined);
 
   const updateFullResponse = (data?: IPlayShipResponse) => {
     if (!data) {
@@ -145,13 +149,17 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
         loadingNewShip,
         port,
         refreshState,
+        setWarningModalText: (text?: string) => {
+          setWarningModalText(text);
+        },
         ship,
         shipsInLocation,
         travelEffects,
         updateCurrentShip,
         updateFullResponse,
         updateShipLocation,
-      },
+        warningModalText
+      }
     },
     children
   );

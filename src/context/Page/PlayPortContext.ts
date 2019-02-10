@@ -3,7 +3,6 @@ import { IActionToken, IChildrenProps } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useCurrentShipContext } from "../CurrentShipContext";
 import { useSessionContext } from "../SessionContext";
-import * as React from "react";
 import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 import { useMounted } from "../../hooks/useMounted";
 
@@ -24,7 +23,7 @@ const PlayPortContext = createContext({});
 
 export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const { updateScore } = useSessionContext();
-  const { updateFullResponse } = useCurrentShipContext();
+  const { updateFullResponse, setWarningModalText } = useCurrentShipContext();
 
   const [confirmMoveButton, setConfirmMoveButton] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -37,7 +36,10 @@ export const PlayPortContextProvider = ({ children }: IChildrenProps) => {
   const mounted = useMounted();
 
   const doPortAction = async (token: IActionToken) => {
-    const data = await ApiClient.tokenFetch(token);
+    const {data, error} = await ApiClient.tokenFetch(token);
+    if (error) {
+      setWarningModalText(error);
+    }
     updateScore(data.playerScore);
     updateFullResponse(data);
     if (mounted()) {

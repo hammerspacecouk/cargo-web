@@ -68,6 +68,7 @@ export interface IDirections {
 export const ACTION_CRATE_NEW = "crate_new";
 export const ACTION_CRATE_PICKUP = "crate_pickup";
 export const ACTION_EFFECT_USE = "effect_use";
+export const ACTION_EFFECT_OFFENCE = "effect_offence";
 export const ACTION_PLAYER_NEW = "player_new";
 export const ACTION_PLAYER_PROMOTION = "player_promotion";
 export const ACTION_SHIP_NEW = "ship_new";
@@ -120,12 +121,22 @@ export interface ITravelOption {
   isActive: boolean;
 }
 
+export interface IOffenceOption {
+  actionToken?: IActionToken;
+  effect: IEffect;
+}
+
 export interface IFleetShip {
   ship: IShip;
   needsAttention: boolean;
   renameToken: ITransaction;
   health: IHealthIncrease[];
   defenceOptions: IDefenceOption[];
+}
+
+export interface IOtherShip {
+  ship: IShip;
+  offence?: IOffenceOption[]
 }
 
 export interface IShip {

@@ -183,6 +183,7 @@ export const COLOURS = {
     ACTION: allColours.violet[4],
     CONFIRM: allColours.green[4],
     DANGER: allColours.red[5],
+    WARNING: allColours.yellow[4],
   },
   CRATE: {
     LEVEL0: allColours.yellow[2],

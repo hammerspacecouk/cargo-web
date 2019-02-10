@@ -7,6 +7,7 @@ import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import { ApiClient } from "../../util/ApiClient";
 import { Port } from "./Port";
 import { Travelling } from "./Travelling";
+import { WarningModal } from "../../components/Organisms/WarningModal/WarningModal";
 
 export interface IShipParams {
   match: {
@@ -17,10 +18,9 @@ export interface IShipParams {
 }
 
 export const ShipPage = withRouter(({ match }: IShipParams) => {
-  const { port, channel, ship, updateFullResponse } = useCurrentShipContext();
+  const { port, channel, ship, updateFullResponse, setWarningModalText, warningModalText } = useCurrentShipContext();
   const mounted = React.useRef(false);
 
-  let allowUpdate = true;
   const getData = async () => {
     const data = await ApiClient.fetch(`/play/${match.params.shipId}`);
     if (mounted.current) {
@@ -37,23 +37,27 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
   }, [match.params.shipId]);
 
   if (ship === undefined) {
-    return <Loading />; // todo - error state, and ensure login?
+    return <Loading/>; // todo - error state, and ensure login?
   }
   if (!ship) {
-    return <NotFound message="You be making ship up" />;
+    return <NotFound message="You be making ship up"/>;
   }
 
   let main = null;
   if (port) {
-    main = <Port />;
+    main = <Port/>;
   } else if (channel) {
-    main = <Travelling />;
+    main = <Travelling/>;
   }
 
   return (
     <section>
       <H1 style={{ display: "none" }}>{ship.name}</H1>
       {main}
+      <WarningModal
+        text={warningModalText}
+        closeModal={() => setWarningModalText(undefined)}
+      />
     </section>
   );
 });
