@@ -28,7 +28,7 @@ export const CreditsButton = ({
   const [disabled, setDisabled] = React.useState(isDisabled(amount, score));
 
   React.useEffect(() => {
-    let timer: any; // todo - not any
+    let timer: any;
     const unmount = () => {
       if (timer) {
         clearTimeout(timer);
@@ -56,20 +56,30 @@ export const CreditsButton = ({
       return unmount;
     }
 
-    const scoreDiff = amount - currentScoreValue;
+    // when going down, things don't deactivate until they are *under* amount,
+    // so we'll reduce the threshold by 1
+    const threshold = (isRateNegative ? amount - 1 : amount);
+
+    const scoreDiff = threshold - currentScoreValue;
     const millisecondsUntilThreshold = Math.abs(scoreDiff / score.rate) * 1000;
 
-    timer = setInterval(() => {
+    timer = setTimeout(() => {
       setDisabled(isDisabled(amount, score));
     }, millisecondsUntilThreshold);
 
     return unmount;
   });
 
+  let disabledState = disabled || disabledOverride;
+  if (!disabledState) {
+    // check again in case the context score changed
+    disabledState = isDisabled(amount, score);
+  }
+
   return (
     <ComplexButton
       type="submit"
-      disabled={disabled || disabledOverride}
+      disabled={disabledState}
       leading={children}
     >
       <ScoreValue score={amount} />

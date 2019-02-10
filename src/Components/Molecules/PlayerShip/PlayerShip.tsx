@@ -8,7 +8,7 @@ import { OffenceActions } from "../../Organisms/OffenceActions/OffenceActions";
 
 interface IProps {
   ship: IShip;
-  offence: IOffenceOption;
+  offence?: IOffenceOption[];
 }
 
 const ShipItem = styled.div`

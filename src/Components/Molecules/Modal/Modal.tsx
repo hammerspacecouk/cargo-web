@@ -97,6 +97,7 @@ const ModalTitle = styled(H3)`
 const ModalBody = styled.div`
   max-height: 80vh;
   overflow: auto;
+  color: ${COLOURS.WHITE.STANDARD};
 `;
 
 const ModalContent = styled.div`
