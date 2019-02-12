@@ -117,8 +117,7 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
         updateScore,
       },
     },
-    children,
-    createElement(PromotionModal)
+    children
   );
 };
 

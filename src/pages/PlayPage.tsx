@@ -13,6 +13,7 @@ import { CurrentShipContextComponent } from "../context/CurrentShipContext";
 import { FleetPage } from "./Play/FleetPage";
 import { ShipPage } from "./Play/ShipPage";
 import { InventoryPage } from "./Play/InventoryPage";
+import { PromotionModal } from "../components/Organisms/PromotionModal/PromotionModal";
 
 const StyledPlayArea = styled.div`
   position: relative;
@@ -42,6 +43,7 @@ export const PlayPage = () => {
           </StyledPlayBoard>
           <PlayBar />
         </StyledPlayArea>
+        <PromotionModal/>
       </CurrentShipContextComponent>
     </EnsureLoggedIn>
   );

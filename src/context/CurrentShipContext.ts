@@ -111,9 +111,11 @@ export const CurrentShipContextComponent = ({ children }: IProps) => {
   };
 
   const refreshState = async (): Promise<IPlayShipResponse> => {
-    const data = await ApiClient.fetch(`/play/${ship.id}`);
-    updateFullResponse(data);
-    return data;
+    if (ship) {
+      const data = await ApiClient.fetch(`/play/${ship.id}`);
+      updateFullResponse(data);
+      return data;
+    }
   };
 
   const loadingNewShip = (): void => {

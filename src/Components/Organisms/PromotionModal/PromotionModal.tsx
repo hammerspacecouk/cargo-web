@@ -8,9 +8,11 @@ import { TextCenter } from "../../Atoms/Text/Text";
 import { Modal } from "../../Molecules/Modal/Modal";
 import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 import { Promotion } from "../Promotion/Promotion";
+import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 
 export const PromotionModal = () => {
   const { rankStatus, updateRankStatus } = useSessionContext();
+  const { refreshState } = useCurrentShipContext();
   const [acknowledging, setAcknowledging] = React.useState(false);
 
   const acknowledgePromotion = async (token: IActionToken) => {
@@ -18,6 +20,8 @@ export const PromotionModal = () => {
 
     // make the API call
     const data = await ApiClient.tokenFetch(token);
+    // refresh the current ship state as you may now be able to do more things
+    refreshState();
     setAcknowledging(false);
     // Updating rankStatus should remove the token and thus close the modal
     updateRankStatus(data.rankStatus);

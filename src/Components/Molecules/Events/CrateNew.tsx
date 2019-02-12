@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IEvent } from "../../../Interfaces";
 import { Event } from "./Event";
+import { CrateContents } from "../../Atoms/CrateContents/CrateContents";
 
 interface IProps {
   readonly event: IEvent;
@@ -17,7 +18,7 @@ export const CrateNew = ({ firstPerson, event }: IProps) => {
 
   return (
     <Event time={event.time}>
-      A new crate containing {contents} is ready {you} to transport
+      A new crate containing <CrateContents>{contents}</CrateContents> is ready {you} to transport
     </Event>
   );
 };
