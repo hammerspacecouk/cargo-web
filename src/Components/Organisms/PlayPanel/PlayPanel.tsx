@@ -9,6 +9,7 @@ import { H4 } from "../../Atoms/Heading/Heading";
 import { P } from "../../Atoms/Text/Text";
 import { Panel, PanelTitle } from "../../Molecules/Panel/Panel";
 import { LoginForm } from "../LoginForm/LoginForm";
+import { Loading } from "../../Atoms/Loading/Loading";
 
 const ButtonArea = styled.div`
   text-align: center;
@@ -24,7 +25,7 @@ const StyledPanel = styled(Panel)`
 `;
 
 export const PlayPanel = () => {
-  const { player, loginToken } = useSessionContext();
+  const { player, loginOptions } = useSessionContext();
 
   if (player) {
     return (
@@ -36,20 +37,31 @@ export const PlayPanel = () => {
     );
   }
 
+  if (!loginOptions) {
+    return <Loading />;
+  }
+
+  let top = null;
+  if (loginOptions.anon) {
+    top = (
+      <>
+        <P>Start playing an anonymous game immediately without logging in:</P>
+        <ButtonArea>
+          <form action={routes.getLoginAnonymous()} method="post">
+            <input type="hidden" name="loginToken" value={loginOptions.anon}/>
+            <ActionButton>New game</ActionButton>
+          </form>
+        </ButtonArea>
+        <SubHeading as="h3">Or create/resume a logged in game:</SubHeading>
+      </>
+    );
+  }
+
   return (
     <StyledPanel>
       <PanelTitle>Play now</PanelTitle>
-      <P>Start playing an anonymous game immediately without logging in:</P>
-      <ButtonArea>
-        <form action={routes.getLoginAnonymous()} method="post">
-          {loginToken && (
-            <input type="hidden" name="loginToken" value={loginToken} />
-          )}
-          <ActionButton disabled={!loginToken}>New game</ActionButton>
-        </form>
-      </ButtonArea>
-      <SubHeading as="h3">Or create/resume a logged in game:</SubHeading>
-      <LoginForm />
+      {top}
+      <LoginForm/>
     </StyledPanel>
   );
 };

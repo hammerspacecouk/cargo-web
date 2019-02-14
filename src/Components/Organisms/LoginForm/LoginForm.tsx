@@ -14,9 +14,10 @@ import {
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
-  TwitterButton,
+  TwitterButton
 } from "../../Molecules/SocialButton/SocialButton";
 import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
+import { Loading } from "../../Atoms/Loading/Loading";
 
 interface IProps {
   messages?: IMessage[];
@@ -73,7 +74,7 @@ const EmailLogin = ({ token }: { token: string }) => {
         valid for one hour and there are no passwords required.
       </P>
       <StyledForm action={loginPathEmail} method="post">
-        <input type="hidden" name="loginToken" value={token} />
+        <input type="hidden" name="loginToken" value={token}/>
         <StyledInput
           id="login-email"
           type="email"
@@ -88,31 +89,43 @@ const EmailLogin = ({ token }: { token: string }) => {
 };
 
 export const LoginForm = (props: IProps) => {
-  const { loginToken } = useSessionContext();
+  const { loginOptions } = useSessionContext();
+
+  if (!loginOptions) {
+    return <Loading/>;
+  }
 
   return (
     <div>
-      <MessagesPanel messages={props.messages} />
+      <MessagesPanel messages={props.messages}/>
       <P>
         We identify which player you are by confirming your unique e-mail
         address. Use any one of the following methods. We don't get access to
         your accounts on these services. No spam, no sharing with third parties.
       </P>
       <List>
-        <Item>
-          <FacebookButton href={loginPathFacebook} />
-        </Item>
-        <Item>
-          <GoogleButton href={loginPathGoogle} />
-        </Item>
-        <Item>
-          <MicrosoftButton href={loginPathMicrosoft} />
-        </Item>
-        <Item>
-          <TwitterButton href={loginPathTwitter} />
-        </Item>
+        {loginOptions.facebook && (
+          <Item>
+            <FacebookButton href={loginPathFacebook}/>
+          </Item>
+        )}
+        {loginOptions.google && (
+          <Item>
+            <GoogleButton href={loginPathGoogle}/>
+          </Item>
+        )}
+        {loginOptions.microsoft && (
+          <Item>
+            <MicrosoftButton href={loginPathMicrosoft}/>
+          </Item>
+        )}
+        {loginOptions.twitter && (
+          <Item>
+            <TwitterButton href={loginPathTwitter}/>
+          </Item>
+        )}
       </List>
-      {loginToken && <EmailLogin token={loginToken} />}
+      {loginOptions && loginOptions.email && <EmailLogin token={loginOptions.email}/>}
       <P>
         <Link to="/about/policies">More info on our login policies</Link>
       </P>

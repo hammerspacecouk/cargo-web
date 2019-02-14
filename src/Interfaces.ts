@@ -27,6 +27,15 @@ export interface ICrateAction {
   token?: IActionToken;
 }
 
+export interface ILoginOptions {
+  anon: string;
+  email: string;
+  facebook: boolean;
+  google: boolean;
+  microsoft: boolean;
+  twitter: boolean;
+}
+
 export interface IRank {
   title: string;
 }

@@ -11,16 +11,16 @@ const StyledForm = styled.form`
 `;
 
 export const GuestActions = () => {
-  const { loginToken } = useSessionContext();
+  const { loginOptions } = useSessionContext();
 
-  if (!loginToken) {
+  if (!loginOptions) {
     return null;
   }
 
   return (
     <LinkBox>
       <StyledForm action={routes.getLoginAnonymous()} method="post">
-        <input type="hidden" name="loginToken" value={loginToken} />
+        <input type="hidden" name="loginToken" value={loginOptions} />
         <HaloLink as="button" type="submit">
           Play now
         </HaloLink>

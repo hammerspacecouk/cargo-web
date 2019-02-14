@@ -3,11 +3,10 @@ import {
   createElement,
   useContext,
   useEffect,
-  useState,
+  useState
 } from "react";
 
-import { PromotionModal } from "../components/Organisms/PromotionModal/PromotionModal";
-import { IChildrenProps, IPlayer, IRankStatus, IScore } from "../Interfaces";
+import { IChildrenProps, ILoginOptions, IPlayer, IRankStatus, IScore } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
 export interface ISessionResponse {
@@ -15,7 +14,7 @@ export interface ISessionResponse {
   readonly hasProfileNotification: boolean;
   readonly player?: IPlayer;
   readonly rankStatus?: IRankStatus;
-  readonly loginToken?: string;
+  readonly loginOptions?: ILoginOptions;
 }
 
 interface ISessionProperties {
@@ -23,7 +22,7 @@ interface ISessionProperties {
   rankStatus?: IRankStatus;
   score?: IScore;
   hasProfileNotification: boolean;
-  loginToken?: string;
+  loginOptions?: ILoginOptions;
 }
 
 interface ISessionContext extends ISessionProperties {
@@ -35,9 +34,9 @@ interface ISessionContext extends ISessionProperties {
 
 export const initialSession: ISessionProperties = {
   hasProfileNotification: false,
-  loginToken: undefined,
+  loginOptions: undefined,
   player: undefined,
-  score: undefined,
+  score: undefined
 };
 
 const SessionContext = createContext({});
@@ -52,7 +51,7 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
   const [score, setScore] = useState(initialSession.score);
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   const [player, setPlayer] = useState(initialSession.player);
-  const [loginToken, setLoginToken] = useState(initialSession.loginToken);
+  const [loginOptions, setLoginOptions] = useState(initialSession.loginOptions);
   const [hasProfileNotification, setHasProfileNotification] = useState(
     initialSession.hasProfileNotification
   );
@@ -88,7 +87,7 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
       updateRankStatus(null);
       setPlayer(null);
     }
-    setLoginToken(session.loginToken);
+    setLoginOptions(session.loginOptions);
   };
 
   const refreshSession = async () => {
@@ -107,15 +106,15 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
     {
       value: {
         hasProfileNotification,
-        loginToken,
+        loginOptions,
         player,
         rankStatus,
         refreshSession,
         score,
         setSession,
         updateRankStatus,
-        updateScore,
-      },
+        updateScore
+      }
     },
     children
   );
