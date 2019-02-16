@@ -48,7 +48,7 @@ export const PlayPanel = () => {
         <P>Start playing an anonymous game immediately without logging in:</P>
         <ButtonArea>
           <form action={routes.getLoginAnonymous()} method="post">
-            <input type="hidden" name="loginToken" value={loginOptions.anon}/>
+            <input type="hidden" name="loginToken" value={loginOptions.anon} />
             <ActionButton>New game</ActionButton>
           </form>
         </ButtonArea>
@@ -61,7 +61,7 @@ export const PlayPanel = () => {
     <StyledPanel>
       <PanelTitle>Play now</PanelTitle>
       {top}
-      <LoginForm/>
+      <LoginForm />
     </StyledPanel>
   );
 };

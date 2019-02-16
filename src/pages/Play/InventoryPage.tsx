@@ -7,9 +7,13 @@ import {
 } from "../../context/Page/UpgradesContext";
 import { ShipUpgrades } from "./Upgrades/ShipUpgrades";
 import { EffectUpgrades } from "./Upgrades/EffectUpgrades";
+import { useCurrentView } from "../../hooks/useCurrentView";
+
+export const VIEW_NAME = "INVENTORY_PAGE";
 
 const UpgradesPageDetail = () => {
   const { message, effects } = useUpgradesContext();
+  useCurrentView(VIEW_NAME);
 
   return (
     <section>

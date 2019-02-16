@@ -14,7 +14,7 @@ import {
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
-  TwitterButton
+  TwitterButton,
 } from "../../Molecules/SocialButton/SocialButton";
 import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
 import { Loading } from "../../Atoms/Loading/Loading";
@@ -74,7 +74,7 @@ const EmailLogin = ({ token }: { token: string }) => {
         valid for one hour and there are no passwords required.
       </P>
       <StyledForm action={loginPathEmail} method="post">
-        <input type="hidden" name="loginToken" value={token}/>
+        <input type="hidden" name="loginToken" value={token} />
         <StyledInput
           id="login-email"
           type="email"
@@ -92,12 +92,12 @@ export const LoginForm = (props: IProps) => {
   const { loginOptions } = useSessionContext();
 
   if (!loginOptions) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <div>
-      <MessagesPanel messages={props.messages}/>
+      <MessagesPanel messages={props.messages} />
       <P>
         We identify which player you are by confirming your unique e-mail
         address. Use any one of the following methods. We don't get access to
@@ -106,26 +106,28 @@ export const LoginForm = (props: IProps) => {
       <List>
         {loginOptions.facebook && (
           <Item>
-            <FacebookButton href={loginPathFacebook}/>
+            <FacebookButton href={loginPathFacebook} />
           </Item>
         )}
         {loginOptions.google && (
           <Item>
-            <GoogleButton href={loginPathGoogle}/>
+            <GoogleButton href={loginPathGoogle} />
           </Item>
         )}
         {loginOptions.microsoft && (
           <Item>
-            <MicrosoftButton href={loginPathMicrosoft}/>
+            <MicrosoftButton href={loginPathMicrosoft} />
           </Item>
         )}
         {loginOptions.twitter && (
           <Item>
-            <TwitterButton href={loginPathTwitter}/>
+            <TwitterButton href={loginPathTwitter} />
           </Item>
         )}
       </List>
-      {loginOptions && loginOptions.email && <EmailLogin token={loginOptions.email}/>}
+      {loginOptions && loginOptions.email && (
+        <EmailLogin token={loginOptions.email} />
+      )}
       <P>
         <Link to="/about/policies">More info on our login policies</Link>
       </P>

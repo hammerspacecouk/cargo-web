@@ -12,7 +12,6 @@ export interface IProps {
 }
 
 const StyledShipsList = styled(ListUnstyled)`
-  border-top: dashed 1px ${COLOURS.BODY.TEXT};
   width: 100%;
 `;
 

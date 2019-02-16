@@ -1,6 +1,5 @@
 import * as React from "react";
 import { withRouter } from "react-router-dom";
-import { H1 } from "../../components/Atoms/Heading/Heading";
 import { Loading } from "../../components/Atoms/Loading/Loading";
 import { NotFound } from "../../components/Organisms/Error/NotFound";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
@@ -8,6 +7,9 @@ import { ApiClient } from "../../util/ApiClient";
 import { Port } from "./Port";
 import { Travelling } from "./Travelling";
 import { WarningModal } from "../../components/Organisms/WarningModal/WarningModal";
+import { Hidden } from "../../components/Atoms/Hidden/Hidden";
+import { useMounted } from "../../hooks/useMounted";
+import { useCurrentView } from "../../hooks/useCurrentView";
 
 export interface IShipParams {
   match: {
@@ -16,6 +18,8 @@ export interface IShipParams {
     };
   };
 }
+
+export const VIEW_NAME = "PLAY_CURRENT_SHIP";
 
 export const ShipPage = withRouter(({ match }: IShipParams) => {
   const {
@@ -26,21 +30,18 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
     setWarningModalText,
     warningModalText,
   } = useCurrentShipContext();
-  const mounted = React.useRef(false);
+  const isMounted = useMounted();
+  useCurrentView(VIEW_NAME);
 
   const getData = async () => {
     const data = await ApiClient.fetch(`/play/${match.params.shipId}`);
-    if (mounted.current) {
+    if (isMounted) {
       updateFullResponse(data);
     }
   };
 
   React.useEffect(() => {
-    mounted.current = true;
     getData();
-    return () => {
-      mounted.current = false;
-    };
   }, [match.params.shipId]);
 
   if (ship === undefined) {
@@ -59,7 +60,7 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
 
   return (
     <section>
-      <H1 style={{ display: "none" }}>{ship.name}</H1>
+      <Hidden as="h1">{ship.name}</Hidden>
       {main}
       <WarningModal
         text={warningModalText}

@@ -47,6 +47,7 @@ export interface IRankStatus {
   currentRank: IRank;
   previousRank: IRank;
   nextRank: IRank;
+  olderRanks: IRank[];
 }
 
 interface IDirectionDetail {

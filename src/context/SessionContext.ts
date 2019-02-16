@@ -3,10 +3,16 @@ import {
   createElement,
   useContext,
   useEffect,
-  useState
+  useState,
 } from "react";
 
-import { IChildrenProps, ILoginOptions, IPlayer, IRankStatus, IScore } from "../Interfaces";
+import {
+  IChildrenProps,
+  ILoginOptions,
+  IPlayer,
+  IRankStatus,
+  IScore,
+} from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
 export interface ISessionResponse {
@@ -18,6 +24,7 @@ export interface ISessionResponse {
 }
 
 interface ISessionProperties {
+  currentView?: string;
   player?: IPlayer;
   rankStatus?: IRankStatus;
   score?: IScore;
@@ -28,6 +35,7 @@ interface ISessionProperties {
 interface ISessionContext extends ISessionProperties {
   updateScore: (newScore: IScore) => void;
   updateRankStatus: (newRankStatus: IRankStatus) => void;
+  setCurrentView: (newView?: string) => void;
   setSession: (session: ISessionResponse) => void;
   refreshSession: () => void;
 }
@@ -36,7 +44,7 @@ export const initialSession: ISessionProperties = {
   hasProfileNotification: false,
   loginOptions: undefined,
   player: undefined,
-  score: undefined
+  score: undefined,
 };
 
 const SessionContext = createContext({});
@@ -55,6 +63,7 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
   const [hasProfileNotification, setHasProfileNotification] = useState(
     initialSession.hasProfileNotification
   );
+  const [currentView, setCurrentView] = useState(null);
   let allowUpdate = true;
 
   const updateScore = (newScore: IScore) => {
@@ -105,16 +114,18 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
     SessionContext.Provider,
     {
       value: {
+        currentView,
         hasProfileNotification,
         loginOptions,
         player,
         rankStatus,
         refreshSession,
         score,
+        setCurrentView,
         setSession,
         updateRankStatus,
-        updateScore
-      }
+        updateScore,
+      },
     },
     children
   );

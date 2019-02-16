@@ -165,6 +165,7 @@ const allColours = {
 // tslint:disable-next-line:object-literal-sort-keys
 export const COLOURS = {
   BASE: allColours.base,
+  ACTIVE_HIGHLIGHT: allColours.violet[4],
   BLACK: {
     STANDARD: allColours.black,
     COLOURISED: allColours.violet[9],

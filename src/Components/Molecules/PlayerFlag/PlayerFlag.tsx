@@ -16,7 +16,10 @@ const StyledBox = styled.div`
 `;
 const StyledImg = styled.img`
   border-radius: 50%;
+  border: solid 1px ${COLOURS.WHITE.STANDARD};
   background: ${COLOURS.BLACK.STANDARD};
+  width: 100%;
+  height: 100%;
 `;
 
 export const PlayerFlag = ({ player, className }: IProps) => {

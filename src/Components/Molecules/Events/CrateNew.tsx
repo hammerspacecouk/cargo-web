@@ -18,7 +18,8 @@ export const CrateNew = ({ firstPerson, event }: IProps) => {
 
   return (
     <Event time={event.time}>
-      A new crate containing <CrateContents>{contents}</CrateContents> is ready {you} to transport
+      A new crate containing <CrateContents>{contents}</CrateContents> is ready{" "}
+      {you} to transport
     </Event>
   );
 };

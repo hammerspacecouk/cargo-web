@@ -28,7 +28,7 @@ const StyledMasthead = styled.div`
 export const LinkBox = styled.div`
   display: flex;
   height: 100%;
-  > a,
+  a,
   button {
     display: flex;
     align-items: center;

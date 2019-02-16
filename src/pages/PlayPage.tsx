@@ -43,7 +43,7 @@ export const PlayPage = () => {
           </StyledPlayBoard>
           <PlayBar />
         </StyledPlayArea>
-        <PromotionModal/>
+        <PromotionModal />
       </CurrentShipContextComponent>
     </EnsureLoggedIn>
   );

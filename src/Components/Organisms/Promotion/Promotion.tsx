@@ -2,122 +2,94 @@ import * as React from "react";
 import styled from "styled-components";
 import { IRankStatus } from "../../../Interfaces";
 import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
+import { GRID } from "../../../styles/variables";
+import { useMounted } from "../../../hooks/useMounted";
+import { SIZES } from "../../../styles/typography";
 
 interface IProps {
   rankStatus?: IRankStatus;
 }
 
-/*
- todo - style this how I want it
+const StyledPromotion = styled.div`
+  width: 94vw;
+  max-width: 480px;
+`;
 
- .o-promotion {
-  margin-bottom: $grid-unit;
-  width: calc(100vw - #{$grid-unit * 5});
-  @media (min-width: 26em) {
-    width: auto;
-    min-width: 22em;
-  }
+const RankBox = styled.div`
+  margin: ${GRID.UNIT} 0;
+  text-align: center;
+`;
 
-  &__rank-box {
-    @extend .b;
-    padding: $grid-unit 0;
-    text-align: center;
-    overflow: hidden;
-  }
+const RankItem = styled.div`
+  margin-bottom: ${GRID.HALF};
+`;
 
-  &__progress {
-    padding: $grid-unit 0;
-    margin-bottom: $grid-unit;
-  }
+const INACTIVE_OPACITY = "0.4";
+const INACTIVE_SIZE = "1.4rem";
 
-  &__previous {
-    will-change: transform, opacity;
-    &--go {
-      animation: 1.5s zoom-away linear forwards;
-    }
-  }
+const InactiveRank = styled(RankItem)`
+  opacity: ${INACTIVE_OPACITY};
+  font-size: ${INACTIVE_SIZE};
+`;
 
-  &__current {
-    will-change: transform;
-    transform: scale(0);
-    animation: 1s zoom-in cubic-bezier(0.13, 0.76, 0.82, 1.9) forwards;
-  }
+const ActiveRank = styled(RankItem)<{ isOn: boolean }>`
+  transition: all 0.8s ease-in;
+  opacity: ${props => (props.isOn ? "1" : INACTIVE_OPACITY)};
+  font-size: ${props => (props.isOn ? "2.2rem" : INACTIVE_SIZE)};
+`;
 
-  @keyframes zoom-away {
-    0%, 20% {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    100% {
-      transform: scale(3);
-      opacity: 0;
-    }
-  }
-
-  @keyframes zoom-in {
-    0% {
-      transform: scale(0);
-    }
-
-    100% {
-      transform: scale(1);
-    }
-  }
-}
- */
-
-const StyledPromotion = styled.div``;
-const RankBox = styled.div``;
-const PromotionProgress = styled.div``;
+const ANIMATE_START = 500;
+const ANIMATE_END = 3000;
+const ANIMATE_PHASE2 = 2500;
 
 export const Promotion = ({ rankStatus }: IProps) => {
-  let allowAnimationUpdate: boolean = false;
-  let startTime: number = null;
-
-  const [displayState, setDisplayState] = React.useState({
-    nextActive: false,
-    previousActive: true,
-    previousClass: "",
-    progress: 80,
-  });
+  const [progress, setProgress] = React.useState(80);
+  const [phase2, setPhase2] = React.useState(false);
+  const startTime = React.useRef(null);
+  const isMounted = useMounted();
+  let frame: number = null;
 
   const animate = (stamp: number) => {
-    if (!allowAnimationUpdate) {
+    if (!isMounted()) {
       return;
     }
 
-    if (!startTime) {
-      startTime = stamp;
+    if (!startTime.current) {
+      startTime.current = stamp;
     }
 
-    const diff = stamp - startTime;
+    const diff = stamp - startTime.current;
 
-    let progress = displayState.progress;
-    // todo - numbers as constants
-    if (diff > 500 && diff < 2500) {
-      progress = 100;
-    } else if (diff >= 2500) {
-      progress = 2;
+    if (diff < ANIMATE_START) {
+      return (frame = window.requestAnimationFrame(animate)); // come back later
     }
 
-    // todo - *ping* on new rank
+    if (diff > ANIMATE_END) {
+      return; // finished, nothing to do
+    }
 
-    setDisplayState({
-      nextActive: diff >= 2500,
-      previousActive: diff < 2500,
-      previousClass: diff > 1000 ? "o-promotion__previous--go" : "",
-      progress,
-    });
-    window.requestAnimationFrame(animate);
+    // phase 1
+    if (diff < ANIMATE_PHASE2) {
+      if (progress !== 100) {
+        setProgress(100);
+      }
+    }
+    // phase 2
+    if (diff >= ANIMATE_PHASE2) {
+      if (progress !== 2) {
+        setProgress(2);
+      }
+      if (!phase2) {
+        setPhase2(true);
+      }
+    }
+    frame = window.requestAnimationFrame(animate);
   };
 
   React.useEffect(() => {
-    allowAnimationUpdate = true;
-    window.requestAnimationFrame(animate);
+    frame = window.requestAnimationFrame(animate);
     return () => {
-      allowAnimationUpdate = false;
-      startTime = null;
+      cancelAnimationFrame(frame);
     };
   }, [rankStatus]);
 
@@ -125,34 +97,22 @@ export const Promotion = ({ rankStatus }: IProps) => {
     return null;
   }
 
-  let previous = null;
-  let next = null;
-
-  if (displayState.previousActive) {
-    // todo - {`o-promotion__previous ${displayState.previousClass}`}
-    previous = <div>{rankStatus.previousRank.title}</div>;
-  }
-
-  if (displayState.nextActive) {
-    // todo - {`o-promotion__current `}
-    next = <div>{rankStatus.currentRank.title}</div>;
-  }
+  const nextRank = rankStatus.nextRank && rankStatus.nextRank.title;
+  const newRank = rankStatus.currentRank.title;
+  const previousRank = rankStatus.previousRank.title;
+  const olderRanks = rankStatus.olderRanks;
 
   return (
     <StyledPromotion>
+      <ProgressBar percent={progress} />
       <RankBox>
-        {previous}
-        {next}
+        {nextRank && <InactiveRank>{nextRank}</InactiveRank>}
+        <ActiveRank isOn={phase2}>{newRank}</ActiveRank>
+        <ActiveRank isOn={!phase2}>{previousRank}</ActiveRank>
+        {olderRanks.map(rank => (
+          <InactiveRank key={rank.title}>{rank.title}</InactiveRank>
+        ))}
       </RankBox>
-
-      <PromotionProgress>
-        <ProgressBar percent={displayState.progress} />
-      </PromotionProgress>
-
-      <p>Share this:</p>
-      {/* todo - links to this users public page */}
-      <p>Facebook</p>
-      <p>Twitter</p>
     </StyledPromotion>
   );
 };

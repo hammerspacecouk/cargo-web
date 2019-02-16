@@ -5,6 +5,7 @@ import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { GRID, Z_INDEX } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading/Heading";
 import { CloseIcon } from "../../Icons/CloseIcon/CloseIcon";
+import { bool } from "prop-types";
 
 export enum ModalType {
   WARNING = "modal--warning",
@@ -89,9 +90,14 @@ const ModalHeader = styled.div`
   border-bottom: solid 1px;
 `;
 
-const ModalTitle = styled(H3)`
+const ModalTitle = styled(H3)<{ center: boolean }>`
   line-height: 32px;
   flex: 1;
+  ${({ center }) =>
+    center &&
+    css`
+      text-align: center;
+    `}
 `;
 
 const ModalBody = styled.div`
@@ -150,7 +156,9 @@ export const Modal = (props: IProps) => {
         }}
       >
         <ModalHeader>
-          <ModalTitle as="h2">{title}</ModalTitle>
+          <ModalTitle center={!closeButton} as="h2">
+            {title}
+          </ModalTitle>
           {closeButton}
         </ModalHeader>
         <ModalBody>

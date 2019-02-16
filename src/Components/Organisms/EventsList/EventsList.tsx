@@ -89,7 +89,7 @@ const StyledListItem = styled.li`
   display: flex;
   align-items: flex-start;
   &:not(:last-child) {
-    margin-bottom: ${GRID.HALF}px;
+    margin-bottom: ${GRID.QUARTER};
   }
 `;
 

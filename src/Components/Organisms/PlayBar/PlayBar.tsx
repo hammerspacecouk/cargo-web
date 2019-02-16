@@ -6,6 +6,10 @@ import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { Icon } from "../../Atoms/Icon/Icon";
 import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
+import { useSessionContext } from "../../../context/SessionContext";
+import { VIEW_NAME as SHIP_VIEW_NAME } from "../../../pages/Play/ShipPage";
+import { VIEW_NAME as FLEET_VIEW_NAME } from "../../../pages/Play/FleetPage";
+import { VIEW_NAME as INVENTORY_VIEW_NAME } from "../../../pages/Play/InventoryPage";
 
 export const playBarHeight = 80;
 
@@ -28,8 +32,14 @@ const iconGarage = (
   </svg>
 );
 
-const PlayBarItem = styled.li`
+const PlayBarItem = styled.li<{ isActive: boolean }>`
   text-transform: uppercase;
+  width: 33%;
+  ${({ isActive }) => (isActive ? `color: ${COLOURS.ACTIVE_HIGHLIGHT}` : "")};
+`;
+
+const InactivePlayBarItem = styled(PlayBarItem)`
+  opacity: 0.2;
 `;
 
 const PlayBarIcon = styled(Icon)`
@@ -37,33 +47,42 @@ const PlayBarIcon = styled(Icon)`
   margin: 0 auto ${GRID.QUARTER};
 `;
 
+const PlayBarItemText = styled.span`
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+`;
+
 const getShipLink = () => {
   const { ship } = useCurrentShipContext();
+  const { currentView } = useSessionContext();
   if (ship) {
     return (
-      <PlayBarItem>
-        <PlayBarLink to={`/play/${ship.id}`} className="play-bar__link">
+      <PlayBarItem isActive={currentView === SHIP_VIEW_NAME}>
+        <PlayBarLink to={`/play/${ship.id}`}>
           <PlayBarIcon>{iconLocation}</PlayBarIcon>
-          {ship.name}
+          <PlayBarItemText>{ship.name}</PlayBarItemText>
         </PlayBarLink>
       </PlayBarItem>
     );
   }
 
   return (
-    <PlayBarItem>
-      <span className="play-bar__link play-bar__link--disabled">
+    <InactivePlayBarItem>
+      <PlayBarLink as="span">
         <PlayBarIcon>{iconLocation}</PlayBarIcon>
-        Location
-      </span>
-    </PlayBarItem>
+        <PlayBarItemText>Location</PlayBarItemText>
+      </PlayBarLink>
+    </InactivePlayBarItem>
   );
 };
 
 const StyledPlayBar = styled.nav`
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   height: ${playBarHeight}px;
   overflow: hidden;
   background: ${COLOURS.BLACK.STANDARD};
@@ -73,31 +92,44 @@ const StyledPlayBar = styled.nav`
 const PlayBarLink = styled(Link)`
   color: inherit;
   display: inline-block;
+  width: 100%;
+  padding: ${GRID.UNIT} ${GRID.QUARTER};
+  text-decoration: none;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    background: rgba(255, 255, 255, 0.2);
+  }
 `;
 
 const List = styled(ListInline)`
   display: flex;
-  padding: ${GRID.UNIT} 0;
+  padding: 0;
   text-align: center;
   justify-content: space-evenly;
 `;
 
 export const PlayBar = () => {
+  const { currentView } = useSessionContext();
+
   return (
     <StyledPlayBar>
       <List>
         {getShipLink()}
-        <PlayBarItem>
+        <PlayBarItem isActive={currentView === FLEET_VIEW_NAME}>
           <PlayBarLink to="/play" className="play-bar__link">
             <PlayBarIcon>{iconGarage}</PlayBarIcon>
-            Fleet{" "}
-            {/* todo - add a notification icon if any ships are in port */}
+            <PlayBarItemText>Fleet</PlayBarItemText>
           </PlayBarLink>
         </PlayBarItem>
-        <PlayBarItem>
+        <PlayBarItem isActive={currentView === INVENTORY_VIEW_NAME}>
           <PlayBarLink to={`/play/inventory`} className="play-bar__link">
             <PlayBarIcon>{iconStuff}</PlayBarIcon>
-            Inventory
+            <PlayBarItemText>Inventory</PlayBarItemText>
           </PlayBarLink>
         </PlayBarItem>
       </List>

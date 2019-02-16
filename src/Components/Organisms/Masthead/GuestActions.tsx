@@ -17,10 +17,20 @@ export const GuestActions = () => {
     return null;
   }
 
+  if (!loginOptions.anon) {
+    return (
+      <LinkBox>
+        <StyledForm as="div">
+          <HaloLink href="/play">Play now</HaloLink>
+        </StyledForm>
+      </LinkBox>
+    );
+  }
+
   return (
     <LinkBox>
       <StyledForm action={routes.getLoginAnonymous()} method="post">
-        <input type="hidden" name="loginToken" value={loginOptions} />
+        <input type="hidden" name="loginToken" value={loginOptions.anon} />
         <HaloLink as="button" type="submit">
           Play now
         </HaloLink>

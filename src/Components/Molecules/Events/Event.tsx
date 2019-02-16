@@ -11,12 +11,14 @@ interface IProps {
 const StyledEvent = styled.div`
   display: flex;
   width: 100%;
-  align-items: flex-start;
+  align-items: center;
+  min-height: 32px;
 `;
 
 export const EventFlag = styled.span`
   display: inline-block;
-  width: 48px;
+  width: 32px;
+  height: 32px;
   vertical-align: middle;
   line-height: 0;
   position: relative;
