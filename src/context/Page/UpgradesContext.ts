@@ -2,16 +2,15 @@ import {
   createContext,
   createElement,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import { useApi } from "../../hooks/useAPI";
 import {
   IActionToken,
   IChildrenProps,
-  IEffectUpgrade,
+  IInventoryEffects,
   IMessage,
-  IShipUpgrade,
+  IShipUpgrade
 } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useSessionContext } from "../SessionContext";
@@ -19,7 +18,7 @@ import { useSessionContext } from "../SessionContext";
 interface IUpgradesContext {
   buttonsDisabled: boolean;
   ships?: IShipUpgrade[];
-  effects?: IEffectUpgrade[];
+  effects?: IInventoryEffects;
   message?: IMessage;
   makePurchase: (token: IActionToken) => void;
 }

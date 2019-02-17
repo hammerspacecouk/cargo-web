@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IEvent } from "../../../Interfaces";
 import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
-import { Event } from "./Event";
+import { Event, EventFlag } from "./Event";
 
 interface IProps {
   readonly event: IEvent;
@@ -11,18 +11,18 @@ interface IProps {
 export const PlayerPromotion = (props: IProps) => {
   let name;
   if (props.firstPerson) {
-    name = "You were ";
+    name = "You were";
   } else if (props.event.actioningPlayer) {
     name = (
-      <React.Fragment>
-        <span className="events__flag">
+      <>
+        <EventFlag>
           <PlayerFlag player={props.event.actioningPlayer} />
-        </span>{" "}
-        was{" "}
-      </React.Fragment>
+        </EventFlag>{" "}
+        was
+      </>
     );
   } else {
-    name = "[deleted] was ";
+    name = "[deleted] was";
   }
 
   return (

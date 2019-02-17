@@ -11,7 +11,7 @@ import {
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  IEvent,
+  IEvent
 } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
@@ -28,6 +28,7 @@ import { ShipNew } from "../../Molecules/Events/ShipNew";
 import { ShipRename } from "../../Molecules/Events/ShipRename";
 import { EffectUse } from "../../Molecules/Events/EffectUse";
 import { Offence } from "../../Molecules/Events/Offence";
+import { ContentPanel } from "../../Molecules/ContentPanel/ContentPanel";
 
 interface IProps {
   readonly events: IEvent[];
@@ -37,25 +38,25 @@ interface IProps {
 const mapEvent = (event: IEvent, firstPerson: boolean) => {
   switch (event.action) {
     case ACTION_CRATE_NEW:
-      return <CrateNew event={event} firstPerson={firstPerson} />;
+      return <CrateNew event={event} firstPerson={firstPerson}/>;
     case ACTION_CRATE_PICKUP:
-      return <CratePickup event={event} />;
+      return <CratePickup event={event}/>;
     case ACTION_EFFECT_USE:
-      return <EffectUse event={event} firstPerson={firstPerson} />;
+      return <EffectUse event={event} firstPerson={firstPerson}/>;
     case ACTION_EFFECT_OFFENCE:
-      return <Offence event={event} firstPerson={firstPerson} />;
+      return <Offence event={event} firstPerson={firstPerson}/>;
     case ACTION_PLAYER_NEW:
-      return <PlayerNew event={event} firstPerson={firstPerson} />;
+      return <PlayerNew event={event} firstPerson={firstPerson}/>;
     case ACTION_PLAYER_PROMOTION:
-      return <PlayerPromotion event={event} firstPerson={firstPerson} />;
+      return <PlayerPromotion event={event} firstPerson={firstPerson}/>;
     case ACTION_SHIP_NEW:
-      return <ShipNew event={event} />;
+      return <ShipNew event={event}/>;
     case ACTION_SHIP_ARRIVAL:
-      return <ShipArrival event={event} />;
+      return <ShipArrival event={event}/>;
     case ACTION_SHIP_DEPARTURE:
-      return <ShipDeparture event={event} />;
+      return <ShipDeparture event={event}/>;
     case ACTION_SHIP_RENAME:
-      return <ShipRename event={event} />;
+      return <ShipRename event={event}/>;
     default:
       return `Unknown event: ${event.action}`;
   }
@@ -63,8 +64,6 @@ const mapEvent = (event: IEvent, firstPerson: boolean) => {
 
 const StyledList = styled(ListUnstyled)`
   ${MONOSPACE_FONT};
-  padding: ${GRID.UNIT};
-  background: ${COLOURS.BLACK.STANDARD};
   position: relative;
   overflow: hidden;
   line-height: 1.6;
@@ -93,24 +92,29 @@ const StyledListItem = styled.li`
   }
 `;
 
+// todo panelTitle needs to be injected
 export const EventsList = ({ events, firstPerson }: IProps) => {
   if (!events || events.length < 1) {
     return (
-      <StyledList as="ol">
-        <li>
-          <TextCursor />
-        </li>
-      </StyledList>
+      <ContentPanel panelTitle="Captain's Log">
+        <StyledList as="ol">
+          <li>
+            <TextCursor/>
+          </li>
+        </StyledList>
+      </ContentPanel>
     );
   }
 
   return (
-    <StyledList as="ol">
-      {events.map(event => (
-        <StyledListItem key={`event-${event.id}`}>
-          {mapEvent(event, firstPerson)}
-        </StyledListItem>
-      ))}
-    </StyledList>
+    <ContentPanel panelTitle="Captain's Log">
+      <StyledList as="ol">
+        {events.map(event => (
+          <StyledListItem key={`event-${event.id}`}>
+            {mapEvent(event, firstPerson)}
+          </StyledListItem>
+        ))}
+      </StyledList>
+    </ContentPanel>
   );
 };

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
@@ -32,10 +32,11 @@ const iconGarage = (
   </svg>
 );
 
-const PlayBarItem = styled.li<{ isActive: boolean }>`
+const PlayBarItem = styled.li<{ isActive?: boolean }>`
   text-transform: uppercase;
   width: 33%;
-  ${({ isActive }) => (isActive ? `color: ${COLOURS.ACTIVE_HIGHLIGHT}` : "")};
+  ${({ isActive = false }) =>
+    isActive ? `color: ${COLOURS.ACTIVE_HIGHLIGHT}` : ""};
 `;
 
 const InactivePlayBarItem = styled(PlayBarItem)`
@@ -55,30 +56,6 @@ const PlayBarItemText = styled.span`
   width: 100%;
 `;
 
-const getShipLink = () => {
-  const { ship } = useCurrentShipContext();
-  const { currentView } = useSessionContext();
-  if (ship) {
-    return (
-      <PlayBarItem isActive={currentView === SHIP_VIEW_NAME}>
-        <PlayBarLink to={`/play/${ship.id}`}>
-          <PlayBarIcon>{iconLocation}</PlayBarIcon>
-          <PlayBarItemText>{ship.name}</PlayBarItemText>
-        </PlayBarLink>
-      </PlayBarItem>
-    );
-  }
-
-  return (
-    <InactivePlayBarItem>
-      <PlayBarLink as="span">
-        <PlayBarIcon>{iconLocation}</PlayBarIcon>
-        <PlayBarItemText>Location</PlayBarItemText>
-      </PlayBarLink>
-    </InactivePlayBarItem>
-  );
-};
-
 const StyledPlayBar = styled.nav`
   position: fixed;
   bottom: 0;
@@ -89,7 +66,7 @@ const StyledPlayBar = styled.nav`
   color: ${COLOURS.BODY.TEXT};
 `;
 
-const PlayBarLink = styled(Link)`
+const playbarStyles = css`
   color: inherit;
   display: inline-block;
   width: 100%;
@@ -106,12 +83,44 @@ const PlayBarLink = styled(Link)`
   }
 `;
 
+const PlayBarLink = styled(Link)`
+  ${playbarStyles}
+`;
+
+const PlayBarInactiveLink = styled.span`
+  ${playbarStyles}
+`;
+
 const List = styled(ListInline)`
   display: flex;
   padding: 0;
   text-align: center;
   justify-content: space-evenly;
 `;
+
+const getShipLink = () => {
+  const { ship } = useCurrentShipContext();
+  const { currentView } = useSessionContext();
+  if (ship) {
+    return (
+      <PlayBarItem isActive={currentView === SHIP_VIEW_NAME}>
+        <PlayBarLink to={`/play/${ship.id}`}>
+          <PlayBarIcon>{iconLocation}</PlayBarIcon>
+          <PlayBarItemText>{ship.name}</PlayBarItemText>
+        </PlayBarLink>
+      </PlayBarItem>
+    );
+  }
+
+  return (
+    <InactivePlayBarItem>
+      <PlayBarInactiveLink>
+        <PlayBarIcon>{iconLocation}</PlayBarIcon>
+        <PlayBarItemText>Location</PlayBarItemText>
+      </PlayBarInactiveLink>
+    </InactivePlayBarItem>
+  );
+};
 
 export const PlayBar = () => {
   const { currentView } = useSessionContext();

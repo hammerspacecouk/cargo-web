@@ -21,14 +21,16 @@ export const SIZES = {
     ${BREAKPOINTS.S`font-size: 2.4rem`};
   `,
   C: css`
-    font-size: 1.8rem;
-    line-height: 1;
-    letter-spacing: 0;
-  `,
-  D: css`
     font-size: 1.4rem;
     line-height: 1;
     letter-spacing: 0;
+    ${BREAKPOINTS.S`font-size: 1.8rem`};
+  `,
+  D: css`
+    font-size: 1.2rem;
+    line-height: 1;
+    letter-spacing: 0;
+    ${BREAKPOINTS.S`font-size: 1.4rem`};
   `,
   E: css`
     font-size: 1rem;

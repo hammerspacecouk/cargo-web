@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IRankStatus } from "../../../Interfaces";
+import { IPlayer, IRankStatus } from "../../../Interfaces";
 import { H1, H2 } from "../../Atoms/Heading/Heading";
 import { Loading } from "../../Atoms/Loading/Loading";
 import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
@@ -11,6 +11,7 @@ import styled from "styled-components";
 
 interface IProps {
   rankStatus: IRankStatus;
+  player: IPlayer;
 }
 
 const FlagArea = styled.div`

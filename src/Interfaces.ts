@@ -110,6 +110,13 @@ export interface IShipUpgrade extends ITransaction {
   detail: IShipClass;
 }
 
+export interface IInventoryEffects {
+  offence: IEffectUpgrade[];
+  defence: IEffectUpgrade[];
+  travel: IEffectUpgrade[];
+  special: IEffectUpgrade[];
+}
+
 export interface IEffectUpgrade extends ITransaction {
   detail: IEffect;
 }

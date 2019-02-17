@@ -197,6 +197,7 @@ export const COLOURS = {
   },
   GREY: {
     MID: allColours.gray[7],
+    DARK: allColours.gray[9],
   },
   HEALTH: {
     FULL: allColours.violet[4],

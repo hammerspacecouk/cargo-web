@@ -6,6 +6,7 @@ import { Modal, ModalActions } from "../Modal/Modal";
 import { TokenButton } from "../TokenButton/TokenButton";
 import { Loading } from "../../Atoms/Loading/Loading";
 import { useMounted } from "../../../hooks/useMounted";
+import { Effect } from "../Effect/Effect";
 
 interface IProps {
   readonly effect: IEffect;
@@ -63,7 +64,7 @@ export const EffectActionButton = ({
   return (
     <>
       <StyledButton disabled={disabled} onClick={() => setModalIsOpen(true)}>
-        {effect.name}
+        <Effect effect={effect} />
       </StyledButton>
       {modal}
     </>
