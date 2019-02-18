@@ -12,14 +12,13 @@ interface IProps {
   effects?: IEffectUpgrade[];
 }
 
-// todo - breakpoints
 const List = styled(ListUnstyled)`
-  ${BREAKPOINTS.M`
+  ${BREAKPOINTS.XL`
       display: grid;
       grid-column-gap: ${GRID.DOUBLE};
       grid-template-columns: repeat(2, 1fr);
     `}
-  ${BREAKPOINTS.XL`
+  ${BREAKPOINTS.MAX`
       grid-template-columns: repeat(3, 1fr);
     `}
 `;

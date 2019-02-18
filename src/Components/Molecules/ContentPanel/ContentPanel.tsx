@@ -6,6 +6,7 @@ import { ELEMENTS } from "../../../styles/typography";
 
 interface IProps {
   panelTitle: string;
+  className?: string;
   children: JSX.Element;
 }
 
@@ -28,9 +29,9 @@ const Title = styled.h2`
   margin-bottom: ${GRID.UNIT};
 `;
 
-export const ContentPanel = ({ panelTitle, children }: IProps) => {
+export const ContentPanel = ({ panelTitle, className, children }: IProps) => {
   return (
-    <StyledContentPanel panelTitle={panelTitle}>
+    <StyledContentPanel panelTitle={panelTitle} className={className}>
       <Title>{panelTitle}</Title>
       {children}
     </StyledContentPanel>

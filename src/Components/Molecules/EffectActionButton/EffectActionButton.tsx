@@ -1,7 +1,6 @@
 import * as React from "react";
 import { IActionToken, IEffect } from "../../../Interfaces";
-import styled from "styled-components";
-import { ActionButton, Button, ConfirmButton } from "../../Atoms/Button/Button";
+import { ActionButton, ConfirmButton, DisguisedButton } from "../../Atoms/Button/Button";
 import { Modal, ModalActions } from "../Modal/Modal";
 import { TokenButton } from "../TokenButton/TokenButton";
 import { Loading } from "../../Atoms/Loading/Loading";
@@ -14,8 +13,6 @@ interface IProps {
   readonly disabled?: boolean;
   readonly handler?: (token: IActionToken) => Promise<void> | null | void;
 }
-
-const StyledButton = styled(Button)``;
 
 export const EffectActionButton = ({
   disabled,
@@ -63,9 +60,9 @@ export const EffectActionButton = ({
 
   return (
     <>
-      <StyledButton disabled={disabled} onClick={() => setModalIsOpen(true)}>
-        <Effect effect={effect} />
-      </StyledButton>
+      <DisguisedButton disabled={disabled} onClick={() => setModalIsOpen(true)}>
+        <Effect disabled={disabled} isButton={true} effect={effect} />
+      </DisguisedButton>
       {modal}
     </>
   );

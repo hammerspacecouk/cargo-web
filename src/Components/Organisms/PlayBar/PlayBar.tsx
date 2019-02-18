@@ -2,8 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { COLOURS } from "../../../styles/colours";
-import { GRID } from "../../../styles/variables";
+import { COLOURS, hexToRGBa } from "../../../styles/colours";
+import { GRID, MAX_CONTENT_WIDTH } from "../../../styles/variables";
 import { Icon } from "../../Atoms/Icon/Icon";
 import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 import { useSessionContext } from "../../../context/SessionContext";
@@ -34,7 +34,7 @@ const iconGarage = (
 
 const PlayBarItem = styled.li<{ isActive?: boolean }>`
   text-transform: uppercase;
-  width: 33%;
+  flex: 1;
   ${({ isActive = false }) =>
     isActive ? `color: ${COLOURS.ACTIVE_HIGHLIGHT}` : ""};
 `;
@@ -59,11 +59,12 @@ const PlayBarItemText = styled.span`
 const StyledPlayBar = styled.nav`
   position: fixed;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   height: ${playBarHeight}px;
   overflow: hidden;
-  background: ${COLOURS.BLACK.STANDARD};
+  background: ${COLOURS.BODY.BACKGROUND};
   color: ${COLOURS.BODY.TEXT};
+  border-top: solid 1px ${hexToRGBa(COLOURS.BODY.TEXT, 0.6)};
 `;
 
 const playbarStyles = css`
@@ -96,6 +97,8 @@ const List = styled(ListInline)`
   padding: 0;
   text-align: center;
   justify-content: space-evenly;
+  margin: 0 auto;
+  max-width: calc(${MAX_CONTENT_WIDTH} - (2 * ${GRID.UNIT}));
 `;
 
 const getShipLink = () => {

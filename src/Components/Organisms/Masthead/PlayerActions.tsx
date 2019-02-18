@@ -10,6 +10,7 @@ import { Hidden } from "../../Atoms/Hidden/Hidden";
 import { Icon } from "../../Atoms/Icon/Icon";
 import { Notification } from "../../Atoms/Notification/Notification";
 import { ProfileIcon } from "../../Icons/ProfileIcon/ProfileIcon";
+import { BREAKPOINTS } from "../../../styles/media";
 
 const MastHeadScore = styled.div`
   display: flex;
@@ -25,6 +26,9 @@ const Profile = styled.div`
   position: relative;
   height: 100%;
   border-left: solid 1px ${hexToRGBa(COLOURS.BODY.TEXT, 0.6)};
+  ${BREAKPOINTS.MAX`
+    border-right: solid 1px ${hexToRGBa(COLOURS.BODY.TEXT, 0.6)};
+  `}
 `;
 
 const ProfileLink = styled(HaloLink)`

@@ -21,4 +21,4 @@ export const Z_INDEX = {
 };
 // tslint:enable:object-literal-sort-keys
 
-export const MAX_CONTENT_WIDTH = "1280px";
+export const MAX_CONTENT_WIDTH = "1600px";

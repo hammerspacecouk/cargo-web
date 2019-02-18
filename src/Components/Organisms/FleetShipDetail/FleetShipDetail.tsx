@@ -13,6 +13,8 @@ import { Button } from "../../Atoms/Button/Button";
 import { CountdownToTime } from "../../Molecules/CountdownToTime/CountdownToTime";
 import { useFleetContext } from "../../../context/Page/FleetContext";
 import { ApiClient } from "../../../util/ApiClient";
+import { Effect } from "../../Molecules/Effect/Effect";
+import { Badge } from "../../Atoms/Badge/Badge";
 
 interface IProps {
   fleetShip: IFleetShip;
@@ -37,6 +39,18 @@ const DetailRowLabel = styled(H3)`
 `;
 const DetailRowContent = styled.div`
   flex: 1;
+`;
+
+const ActiveEffect = styled.div`
+    display: flex;
+    justify-content: center;
+    position: relative;
+`;
+
+const ActiveDetail = styled(Badge)`
+    position: absolute;
+    bottom: -${GRID.HALF};
+    margin: 0 auto;
 `;
 
 const DefenceEffect = (option: IDefenceOption) => {
@@ -68,15 +82,21 @@ const DefenceEffect = (option: IDefenceOption) => {
 
   let detail = null;
   if (option.hitsRemaining) {
-    detail = `(${option.hitsRemaining})`;
+    detail = <ActiveDetail subtle={true}>{option.hitsRemaining}</ActiveDetail>;
   } else if (option.expiry) {
-    detail = <CountdownToTime dateTime={option.expiry} />;
+    detail = (
+      <ActiveDetail subtle={true}>
+        <CountdownToTime dateTime={option.expiry} />
+      </ActiveDetail>
+    );
   }
 
+  // todo - include the "detail" somewhere
   return (
-    <Button disabled key={option.effect.name}>
-      {option.effect.name} {detail}
-    </Button>
+    <ActiveEffect key={option.effect.name}>
+      <Effect isActive={!!detail} disabled={!detail} effect={option.effect} />
+      {detail}
+    </ActiveEffect>
   );
 };
 

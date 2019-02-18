@@ -79,3 +79,16 @@ export const ActionButton = (props: any) => (
 export const WarningButton = (props: any) => (
   <Button {...props} styleType={TYPE_WARNING} />
 );
+
+export const DisguisedButton = styled.button`
+     background:none;
+     color:inherit;
+     border:none; 
+     padding:0;
+     font: inherit;
+  outline: none;
+  user-select: none;
+     &:not([disabled]) {
+        cursor: pointer;
+     }
+`;

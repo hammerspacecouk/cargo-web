@@ -204,6 +204,7 @@ export interface IEffect {
 export interface IShipClass {
   name: string;
   description: string;
+  strength: number;
   capacity: number;
   image: string;
 }

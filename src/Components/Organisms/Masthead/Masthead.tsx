@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSessionContext } from "../../../context/SessionContext";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { SIZES } from "../../../styles/typography";
-import { GRID, Z_INDEX } from "../../../styles/variables";
+import { GRID, MAX_CONTENT_WIDTH, Z_INDEX } from "../../../styles/variables";
 import { FlexStretch } from "../../Atoms/Flex/Flex";
 import { HaloLink } from "../../Atoms/HaloLink/HaloLink";
 import { GuestActions } from "./GuestActions";
@@ -19,6 +19,8 @@ const MastheadPosition = styled.header`
 `;
 
 const StyledMasthead = styled.div`
+  margin: 0 auto;
+  max-width: calc(${MAX_CONTENT_WIDTH} - (2 * ${GRID.UNIT}));
   color: ${COLOURS.BODY.TEXT};
   display: flex;
   justify-content: space-between;

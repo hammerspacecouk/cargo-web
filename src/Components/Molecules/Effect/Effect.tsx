@@ -1,19 +1,29 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { IEffect } from "../../../Interfaces";
-import { NumberBadge } from "../../Atoms/NumberBadge/NumberBadge";
+import { COLOURS, hexToRGBa } from "../../../styles/colours";
 
 interface IProps {
   readonly effect?: IEffect;
-  readonly count?: number;
+  readonly isButton?: boolean;
+  readonly isActive?: boolean;
+  readonly disabled?: boolean;
 }
 
-const All = styled.div`
-  position: relative;
+const activeFrames = keyframes`
+    0% {
+        border-color: ${COLOURS.BASE};
+    }
+    50% {
+        border-color: ${hexToRGBa(COLOURS.BASE, 0.8)};
+    }
+    100% {
+        border-color: ${COLOURS.BASE};
+    }
 `;
 
-const StyledEffectWrap = styled.div<{ locked: boolean }>`
-  width: 100%;
+const StyledEffectWrap = styled.div<{ locked: boolean, disabled: boolean, isActive: boolean, isButton: boolean }>`
+  width: 64px;
   user-select: none;
   padding-top: calc(100% - 16px);
   border: 8px solid hsl(0, 0%, 48%);
@@ -24,7 +34,20 @@ const StyledEffectWrap = styled.div<{ locked: boolean }>`
   border-top-right-radius: 100%;
   transform: rotate(45deg);
   margin-top: 16px;
-  ${({ locked }) => locked && "opacity: 0.2;"}
+  transition: all 0.15s linear;
+  ${({ locked, disabled }) => (locked || disabled) ? css`opacity: 0.2;` : ""}
+  ${({isButton, disabled}) => (isButton && !disabled) ? css`
+    border-color: ${COLOURS.WHITE.STANDARD};
+    box-shadow: 0 0 16px ${COLOURS.WHITE.STANDARD};
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 32px ${COLOURS.WHITE.STANDARD};
+    }
+` : ''}
+  ${({ isActive }) => isActive && css`
+    border-color: ${COLOURS.BASE};
+    animation: ${activeFrames} 2s ease-in-out infinite;
+`}
 `;
 
 const StyledEffectInner = styled.div`
@@ -41,33 +64,16 @@ const StyledEffectInner = styled.div`
   font-family: sans-serif;
 `;
 
-const BadgePosition = styled.div`
-    position: absolute;
-    top: -16px;
-    right: 0;
-`;
-
-export const Effect = ({ effect, count }: IProps) => {
+export const Effect = ({ effect, isActive = false, disabled = false, isButton = false }: IProps) => {
   let symbol = "?";
-  let countElement = null;
 
   if (effect) {
     symbol = effect.name.substr(0, 2);
-    if (count) {
-      countElement = (
-        <BadgePosition>
-          <NumberBadge value={count}/>
-        </BadgePosition>
-      );
-    }
   }
 
   return (
-    <All>
-      <StyledEffectWrap locked={effect === null}>
-        <StyledEffectInner>{symbol}</StyledEffectInner>
-      </StyledEffectWrap>
-      {countElement}
-    </All>
+    <StyledEffectWrap locked={effect === null} isActive={isActive} isButton={isButton} disabled={disabled}>
+      <StyledEffectInner>{symbol}</StyledEffectInner>
+    </StyledEffectWrap>
   );
 };
