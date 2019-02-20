@@ -6,9 +6,11 @@ import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
 import { IShipUpgrade } from "../../../Interfaces";
 import { Environment } from "../../../util/Environment";
 import {
-  PurchaseCard, PurchaseCardDescription,
-  PurchaseCardDetail, PurchaseCardImage,
-  PurchaseCardTitle
+  PurchaseCard,
+  PurchaseCardDescription,
+  PurchaseCardDetail,
+  PurchaseCardImage,
+  PurchaseCardTitle,
 } from "../../../components/Molecules/PurchaseCard/PurchaseCard";
 import { P } from "../../../components/Atoms/Text/Text";
 import { GRID } from "../../../styles/variables";
@@ -19,21 +21,21 @@ interface IProps {
 }
 
 const ShipImage = styled(PurchaseCardImage)`
-   width: 48px;
-   ${BREAKPOINTS.S`
+  width: 48px;
+  ${BREAKPOINTS.S`
       width: 128px;
    `}
 `;
 
 const Unknown = styled.div`
-    font-size: 2rem;
-    font-family: sans-serif;
-    text-align: center;
-    opacity: 0.4;
+  font-size: 2rem;
+  font-family: sans-serif;
+  text-align: center;
+  opacity: 0.4;
 `;
 
 const ShipStats = styled.dl`
-    ${BREAKPOINTS.S`
+  ${BREAKPOINTS.S`
       display: flex;
       justify-content: space-between;
     `};
@@ -44,16 +46,15 @@ interface IShipStatProps {
   value: string;
 }
 
-
 const ShipStatLabel = styled.dt`
-    display: inline;
-    &:after {
-        content: ":";
-    }
+  display: inline;
+  &:after {
+    content: ":";
+  }
 `;
 const ShipStatValue = styled.dd`
-    display: inline;
-    margin-left: ${GRID.UNIT};
+  display: inline;
+  margin-left: ${GRID.UNIT};
 `;
 
 const ShipStat = ({ label, value }: IShipStatProps) => (
@@ -62,7 +63,6 @@ const ShipStat = ({ label, value }: IShipStatProps) => (
     <ShipStatValue>{value}</ShipStatValue>
   </div>
 );
-
 
 export const ShipUpgrade = ({ ship }: IProps) => {
   const { buttonsDisabled, makePurchase } = useUpgradesContext();
@@ -88,18 +88,26 @@ export const ShipUpgrade = ({ ship }: IProps) => {
         <PurchaseCardDescription>
           <P>{ship.detail.description}</P>
           <ShipStats>
-            <ShipStat label="Capacity" value={ship.detail.capacity.toString(10)}/>
-            <ShipStat label="Strength" value={ship.detail.strength.toString(10)}/>
+            <ShipStat
+              label="Capacity"
+              value={ship.detail.capacity.toString(10)}
+            />
+            <ShipStat
+              label="Strength"
+              value={ship.detail.strength.toString(10)}
+            />
           </ShipStats>
         </PurchaseCardDescription>
         <TokenButton token={ship.actionToken} handler={makePurchase}>
-          <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled}/>
+          <CreditsButton
+            amount={ship.cost}
+            disabledOverride={buttonsDisabled}
+          />
         </TokenButton>
       </PurchaseCardDetail>
       <ShipImage notificationCount={ship.currentCount}>
-        <img src={`${Environment.apiHostname}${ship.detail.image}`} alt=""/>
+        <img src={`${Environment.apiHostname}${ship.detail.image}`} alt="" />
       </ShipImage>
     </PurchaseCard>
-
   );
 };

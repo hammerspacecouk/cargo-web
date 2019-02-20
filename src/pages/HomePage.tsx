@@ -10,6 +10,7 @@ import { routes } from "../routes";
 import { BREAKPOINTS } from "../styles/media";
 import { GRID } from "../styles/variables";
 import { MaxContentArea } from "../components/Templates/MaxSection/MaxContentArea";
+import { ContentPanel } from "../components/Molecules/ContentPanel/ContentPanel";
 
 interface IProps {
   events: IEvent[];
@@ -19,7 +20,7 @@ const TemplateHome = styled.div`
   display: grid;
   grid-template-columns: [main] 1fr [edge-right];
   grid-gap: ${GRID.UNIT};
-  
+
   ${BREAKPOINTS.M`
     grid-template-columns: [main] 1fr [aside] 1fr [edge-right];
     grid-template-rows: [hero] auto [content-start] auto [aside-start] auto [end];
@@ -72,14 +73,15 @@ export const HomePage = ({ events }: IProps) => (
         </Hero>
       </TemplateHero>
       <TemplatePlay>
-        <PlayPanel/>
+        <PlayPanel />
       </TemplatePlay>
       <TemplateMain>
         <Prose>
           <p>
             Colonisation of space has begun, and interstellar shipping is big
-            business. You've got to get in on this. Who else is going to transport
-            those vital supplies of saxophones 🎷 to the other side of the galaxy?
+            business. You've got to get in on this. Who else is going to
+            transport those vital supplies of saxophones 🎷 to the other side of
+            the galaxy?
           </p>
           <p>
             But it's a wild west out there. Can you survive, thrive and exploit
@@ -105,8 +107,9 @@ export const HomePage = ({ events }: IProps) => (
         </Prose>
 
         <div>
-          <h2>What's happening right now?</h2>
-          <EventsList events={events}/>
+          <ContentPanel panelTitle="Universe Activity Monitor">
+            <EventsList events={events} />
+          </ContentPanel>
         </div>
       </TemplateMain>
       <TemplateAside>

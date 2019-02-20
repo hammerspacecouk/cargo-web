@@ -14,8 +14,14 @@ import { Directions } from "./Port/Directions";
 import { Welcome } from "./Port/Welcome";
 import { IActionToken, ITravelOption } from "../../Interfaces";
 import { EffectActionButton } from "../../components/Molecules/EffectActionButton/EffectActionButton";
-import { Button } from "../../components/Atoms/Button/Button";
 import { ApiClient } from "../../util/ApiClient";
+import { Effect } from "../../components/Molecules/Effect/Effect";
+import { EffectsRow } from "../../components/Organisms/EffectsRow/EffectsRow";
+import { ContentPanel } from "../../components/Molecules/ContentPanel/ContentPanel";
+
+interface ITravelEffectProps {
+  option: ITravelOption;
+}
 
 const PortTemplate = styled.div`
   margin: 0 auto;
@@ -23,9 +29,9 @@ const PortTemplate = styled.div`
   padding: ${GRID.UNIT};
 `;
 
-interface ITravelEffectProps {
-  option: ITravelOption;
-}
+const ActiveEffect = styled.div`
+  width: 64px;
+`;
 
 const TravelEffect = ({ option }: ITravelEffectProps) => {
   const { updateFullResponse } = useCurrentShipContext();
@@ -54,9 +60,13 @@ const TravelEffect = ({ option }: ITravelEffectProps) => {
   }
 
   return (
-    <Button disabled key={option.effect.name}>
-      {option.effect.name}
-    </Button>
+    <ActiveEffect key={option.effect.name}>
+      <Effect
+        isActive={option.isActive}
+        disabled={!option.isActive}
+        effect={option.effect}
+      />
+    </ActiveEffect>
   );
 };
 
@@ -72,9 +82,11 @@ const PortComponent = () => {
     if (travelEffects !== undefined) {
       travelEffectsSection = (
         <div>
-          {travelEffects.map(option => (
-            <TravelEffect key={option.effect.name} option={option} />
-          ))}
+          <EffectsRow>
+            {travelEffects.map(option => (
+              <TravelEffect key={option.effect.name} option={option} />
+            ))}
+          </EffectsRow>
         </div>
       );
     }
@@ -88,7 +100,10 @@ const PortComponent = () => {
 
         <h2>Players</h2>
         <PlayerShipList ships={shipsInLocation} />
-        <EventsList events={events} />
+
+        <ContentPanel panelTitle="Visitor's Record">
+          <EventsList events={events} />
+        </ContentPanel>
         <CrateModal />
       </>
     );

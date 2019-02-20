@@ -10,6 +10,8 @@ interface IProps {
   readonly disabled?: boolean;
 }
 
+export const EFFECT_WIDTH = "64px";
+
 const activeFrames = keyframes`
     0% {
         border-color: ${COLOURS.BASE};
@@ -22,32 +24,47 @@ const activeFrames = keyframes`
     }
 `;
 
-const StyledEffectWrap = styled.div<{ locked: boolean, disabled: boolean, isActive: boolean, isButton: boolean }>`
-  width: 64px;
+const StyledEffectWrap = styled.div<{
+  locked: boolean;
+  disabled: boolean;
+  isActive: boolean;
+  isButton: boolean;
+}>`
+  width: ${EFFECT_WIDTH};
   user-select: none;
   padding-top: calc(100% - 16px);
   border: 8px solid hsl(0, 0%, 48%);
   position: relative;
-  background: hsl(264, 45%, 12%);
+  background: hsl(264, 45%, 12%) linear-gradient(135deg, rgba(255,255,255,0.4) 0%,rgba(255,255,255,0) 100%);
   border-bottom-left-radius: 100%;
   border-bottom-right-radius: 100%;
   border-top-right-radius: 100%;
   transform: rotate(45deg);
   margin-top: 16px;
   transition: all 0.15s linear;
-  ${({ locked, disabled }) => (locked || disabled) ? css`opacity: 0.2;` : ""}
-  ${({isButton, disabled}) => (isButton && !disabled) ? css`
-    border-color: ${COLOURS.WHITE.STANDARD};
-    box-shadow: 0 0 16px ${COLOURS.WHITE.STANDARD};
-    &:hover,
-    &:focus {
-      box-shadow: 0 0 32px ${COLOURS.WHITE.STANDARD};
-    }
-` : ''}
-  ${({ isActive }) => isActive && css`
-    border-color: ${COLOURS.BASE};
-    animation: ${activeFrames} 2s ease-in-out infinite;
-`}
+  ${({ locked, disabled }) =>
+    locked || disabled
+      ? css`
+          opacity: 0.2;
+        `
+      : ""}
+  ${({ isButton, disabled }) =>
+    isButton && !disabled
+      ? css`
+          border-color: ${COLOURS.WHITE.STANDARD};
+          box-shadow: 0 0 16px ${COLOURS.WHITE.STANDARD};
+          &:hover,
+          &:focus {
+            box-shadow: 0 0 32px ${COLOURS.WHITE.STANDARD};
+          }
+        `
+      : ""}
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      border-color: ${COLOURS.BASE};
+      animation: ${activeFrames} 2s ease-in-out infinite;
+    `}
 `;
 
 const StyledEffectInner = styled.div`
@@ -64,7 +81,12 @@ const StyledEffectInner = styled.div`
   font-family: sans-serif;
 `;
 
-export const Effect = ({ effect, isActive = false, disabled = false, isButton = false }: IProps) => {
+export const Effect = ({
+  effect,
+  isActive = false,
+  disabled = false,
+  isButton = false,
+}: IProps) => {
   let symbol = "?";
 
   if (effect) {
@@ -72,7 +94,12 @@ export const Effect = ({ effect, isActive = false, disabled = false, isButton = 
   }
 
   return (
-    <StyledEffectWrap locked={effect === null} isActive={isActive} isButton={isButton} disabled={disabled}>
+    <StyledEffectWrap
+      locked={effect === null}
+      isActive={isActive}
+      isButton={isButton}
+      disabled={disabled}
+    >
       <StyledEffectInner>{symbol}</StyledEffectInner>
     </StyledEffectWrap>
   );

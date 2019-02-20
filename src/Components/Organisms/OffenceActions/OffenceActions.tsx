@@ -4,7 +4,8 @@ import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
 import { ApiClient } from "../../../util/ApiClient";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
-import { Button } from "../../Atoms/Button/Button";
+import { EffectsRow } from "../EffectsRow/EffectsRow";
+import { Effect } from "../../Molecules/Effect/Effect";
 
 interface IProps {
   actions?: IOffenceOption[];
@@ -43,11 +44,7 @@ const OffenceEffect = ({ option }: IOffenceEffectProps) => {
     );
   }
 
-  return (
-    <Button disabled key={option.effect.name}>
-      {option.effect.name}
-    </Button>
-  );
+  return <Effect disabled={true} effect={option.effect} />;
 };
 
 export const OffenceActions = ({ actions }: IProps) => {
@@ -56,10 +53,10 @@ export const OffenceActions = ({ actions }: IProps) => {
   }
 
   return (
-    <div>
+    <EffectsRow>
       {actions.map(option => (
         <OffenceEffect key={option.effect.name} option={option} />
       ))}
-    </div>
+    </EffectsRow>
   );
 };

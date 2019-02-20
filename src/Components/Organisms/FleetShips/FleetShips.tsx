@@ -20,16 +20,17 @@ const MoreLink = styled.div`
   justify-content: center;
 `;
 
-const LOCAL_STORAGE_KEY = 'FLEET_SHIP_PLACEHOLDER_COUNT'
+const LOCAL_STORAGE_KEY = "FLEET_SHIP_PLACEHOLDER_COUNT";
 
 export const FleetShips = ({ ships }: IProps) => {
   const [placeholderCount, setPlaceHolderCount] = React.useState(1);
 
   React.useEffect(() => {
+    // remember how many ships you have to show the right number of placeholders
     let count = 1;
     if (ships) {
       count = ships.length;
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, count);
+      window.localStorage.setItem(LOCAL_STORAGE_KEY, count.toString(10));
     } else {
       const lsValue = window.localStorage.getItem(LOCAL_STORAGE_KEY);
       if (lsValue) {
@@ -47,8 +48,9 @@ export const FleetShips = ({ ships }: IProps) => {
       <FleetShipItem key={ship.ship.id} fleetShip={ship} />
     ));
   } else {
-    shipRows = Array.from(Array(placeholderCount).keys())
-      .map(a => (<FleetShipItem key={`placeholder-${a}`} />));
+    shipRows = Array.from(Array(placeholderCount).keys()).map(a => (
+      <FleetShipItem key={`placeholder-${a}`} />
+    ));
   }
 
   return (

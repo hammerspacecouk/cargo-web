@@ -8,11 +8,11 @@ import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
 
 const ListItem = styled.li`
-    &:not(:last-child) {
-        margin-bottom: ${GRID.UNIT};
-        padding-bottom: ${GRID.UNIT};
-        border-bottom: solid 1px ${COLOURS.GREY.DARK};
-    }
+  &:not(:last-child) {
+    margin-bottom: ${GRID.UNIT};
+    padding-bottom: ${GRID.UNIT};
+    border-bottom: solid 1px ${COLOURS.GREY.DARK};
+  }
 `;
 
 export const ShipUpgrades = (): JSX.Element => {

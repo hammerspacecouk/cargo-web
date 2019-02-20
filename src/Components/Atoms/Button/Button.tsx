@@ -81,14 +81,14 @@ export const WarningButton = (props: any) => (
 );
 
 export const DisguisedButton = styled.button`
-     background:none;
-     color:inherit;
-     border:none; 
-     padding:0;
-     font: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
   outline: none;
   user-select: none;
-     &:not([disabled]) {
-        cursor: pointer;
-     }
+  &:not([disabled]) {
+    cursor: pointer;
+  }
 `;

@@ -1,11 +1,16 @@
 import * as React from "react";
 import { IActionToken, IEffect } from "../../../Interfaces";
-import { ActionButton, ConfirmButton, DisguisedButton } from "../../Atoms/Button/Button";
+import {
+  ActionButton,
+  ConfirmButton,
+  DisguisedButton,
+} from "../../Atoms/Button/Button";
 import { Modal, ModalActions } from "../Modal/Modal";
 import { TokenButton } from "../TokenButton/TokenButton";
 import { Loading } from "../../Atoms/Loading/Loading";
 import { useMounted } from "../../../hooks/useMounted";
 import { Effect } from "../Effect/Effect";
+import styled from "styled-components";
 
 interface IProps {
   readonly effect: IEffect;
@@ -13,6 +18,12 @@ interface IProps {
   readonly disabled?: boolean;
   readonly handler?: (token: IActionToken) => Promise<void> | null | void;
 }
+
+const Button = styled(DisguisedButton)`
+  &:active {
+    transform: scale(0.96);
+  }
+`;
 
 export const EffectActionButton = ({
   disabled,
@@ -60,9 +71,9 @@ export const EffectActionButton = ({
 
   return (
     <>
-      <DisguisedButton disabled={disabled} onClick={() => setModalIsOpen(true)}>
+      <Button disabled={disabled} onClick={() => setModalIsOpen(true)}>
         <Effect disabled={disabled} isButton={true} effect={effect} />
-      </DisguisedButton>
+      </Button>
       {modal}
     </>
   );

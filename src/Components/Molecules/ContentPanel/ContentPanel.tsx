@@ -12,6 +12,7 @@ interface IProps {
 
 const StyledContentPanel = styled.div<{ panelTitle: string }>`
   background: ${COLOURS.BLACK.STANDARD};
+  border-radius: ${GRID.UNIT};
   padding: ${GRID.UNIT};
   &:after {
     content: "/${({ panelTitle }) => panelTitle}";

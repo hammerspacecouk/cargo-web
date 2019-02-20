@@ -5,9 +5,11 @@ import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
 import { IEffectUpgrade } from "../../../Interfaces";
 import { Effect } from "../../../components/Molecules/Effect/Effect";
 import {
-  PurchaseCard, PurchaseCardDescription,
-  PurchaseCardDetail, PurchaseCardImage,
-  PurchaseCardTitle
+  PurchaseCard,
+  PurchaseCardDescription,
+  PurchaseCardDetail,
+  PurchaseCardImage,
+  PurchaseCardTitle,
 } from "../../../components/Molecules/PurchaseCard/PurchaseCard";
 import { P } from "../../../components/Atoms/Text/Text";
 
@@ -51,7 +53,7 @@ export const EffectUpgrade = ({ effect }: IProps) => {
       </PurchaseCardDetail>
 
       <PurchaseCardImage notificationCount={effect && effect.currentCount}>
-        <Effect effect={effect && effect.detail}/>
+        <Effect effect={effect && effect.detail} />
       </PurchaseCardImage>
     </PurchaseCard>
   );

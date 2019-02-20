@@ -92,29 +92,24 @@ const StyledListItem = styled.li`
   }
 `;
 
-// todo panelTitle needs to be injected
 export const EventsList = ({ events, firstPerson }: IProps) => {
   if (!events || events.length < 1) {
     return (
-      <ContentPanel panelTitle="Captain's Log">
-        <StyledList as="ol">
-          <li>
-            <TextCursor/>
-          </li>
-        </StyledList>
-      </ContentPanel>
+      <StyledList as="ol">
+        <li>
+          <TextCursor/>
+        </li>
+      </StyledList>
     );
   }
 
   return (
-    <ContentPanel panelTitle="Captain's Log">
-      <StyledList as="ol">
-        {events.map(event => (
-          <StyledListItem key={`event-${event.id}`}>
-            {mapEvent(event, firstPerson)}
-          </StyledListItem>
-        ))}
-      </StyledList>
-    </ContentPanel>
+    <StyledList as="ol">
+      {events.map(event => (
+        <StyledListItem key={`event-${event.id}`}>
+          {mapEvent(event, firstPerson)}
+        </StyledListItem>
+      ))}
+    </StyledList>
   );
 };

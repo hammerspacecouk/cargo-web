@@ -12,6 +12,7 @@ import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import { Hidden } from "../../components/Atoms/Hidden/Hidden";
 import { BREAKPOINTS } from "../../styles/media";
 import { useCurrentView } from "../../hooks/useCurrentView";
+import { ContentPanel } from "../../components/Molecules/ContentPanel/ContentPanel";
 
 export const VIEW_NAME = "VIEW_FLEET_PAGE";
 
@@ -37,7 +38,10 @@ const FleetPageContent = () => {
       <Hidden as="h1">Fleet</Hidden>
       <FleetShips ships={ships} />
       <PlayerRank player={player} rankStatus={rankStatus} />
-      <EventsList events={events} firstPerson={true} />
+
+      <ContentPanel panelTitle="Captain's Log">
+        <EventsList events={events} firstPerson={true} />
+      </ContentPanel>
     </StyledFleetPage>
   );
 };

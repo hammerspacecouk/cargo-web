@@ -16,10 +16,14 @@ const StyledBox = styled.div`
 `;
 const StyledImg = styled.img`
   border-radius: 50%;
-  border: solid 1px ${COLOURS.WHITE.STANDARD};
-  background: ${COLOURS.BLACK.STANDARD};
   width: 100%;
   height: 100%;
+  background: ${COLOURS.BLACK.STANDARD}
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
 `;
 
 export const PlayerFlag = ({ player, className }: IProps) => {

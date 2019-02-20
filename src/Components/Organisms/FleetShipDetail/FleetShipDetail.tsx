@@ -9,12 +9,12 @@ import { EditShipName } from "../EditShipName/EditShipName";
 import { FleetShipHealth } from "../FleetShipHealth/FleetShipHealth";
 import { FleetShipLocation } from "../FleetShipLocation/FleetShipLocation";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
-import { Button } from "../../Atoms/Button/Button";
 import { CountdownToTime } from "../../Molecules/CountdownToTime/CountdownToTime";
 import { useFleetContext } from "../../../context/Page/FleetContext";
 import { ApiClient } from "../../../util/ApiClient";
 import { Effect } from "../../Molecules/Effect/Effect";
 import { Badge } from "../../Atoms/Badge/Badge";
+import { EffectsRow } from "../EffectsRow/EffectsRow";
 
 interface IProps {
   fleetShip: IFleetShip;
@@ -42,15 +42,15 @@ const DetailRowContent = styled.div`
 `;
 
 const ActiveEffect = styled.div`
-    display: flex;
-    justify-content: center;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 
 const ActiveDetail = styled(Badge)`
-    position: absolute;
-    bottom: -${GRID.HALF};
-    margin: 0 auto;
+  position: absolute;
+  bottom: -${GRID.HALF};
+  margin: 0 auto;
 `;
 
 const DefenceEffect = (option: IDefenceOption) => {
@@ -91,7 +91,6 @@ const DefenceEffect = (option: IDefenceOption) => {
     );
   }
 
-  // todo - include the "detail" somewhere
   return (
     <ActiveEffect key={option.effect.name}>
       <Effect isActive={!!detail} disabled={!detail} effect={option.effect} />
@@ -102,7 +101,9 @@ const DefenceEffect = (option: IDefenceOption) => {
 
 export const FleetShipDetail = ({ fleetShip }: IProps) => (
   <StyledDetail>
-    <DetailRow>{fleetShip.defenceOptions.map(DefenceEffect)}</DetailRow>
+    <DetailRow>
+      <EffectsRow>{fleetShip.defenceOptions.map(DefenceEffect)}</EffectsRow>
+    </DetailRow>
     <DetailRow>
       <DetailRowLabel>Location</DetailRowLabel>
       <DetailRowContent>

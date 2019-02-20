@@ -20,7 +20,5 @@ export const NumberBadge = ({ value }: IProps) => {
     };
   }, [value]);
 
-  return (
-    <Badge animate={animate}>{value}</Badge>
-  );
+  return <Badge animate={animate}>{value}</Badge>;
 };

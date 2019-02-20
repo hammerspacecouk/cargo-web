@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { TimeAgo } from "../../Atoms/TimeAgo/TimeAgo";
+import { COLOURS } from "../../../styles/colours";
 
 interface IProps {
   time: string;
@@ -23,6 +24,8 @@ export const EventFlag = styled.span`
   line-height: 0;
   position: relative;
   top: -1px;
+  border-radius: 50%;
+  border: solid 2px ${COLOURS.WHITE.STANDARD};
 `;
 
 const Content = styled.span`
