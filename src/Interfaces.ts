@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IActionToken {
   path: string;
   token: string;
@@ -193,7 +195,7 @@ export interface IMessage {
 }
 
 export interface IChildrenProps {
-  children: any;
+  children: ReactNode;
 }
 
 export interface IEffect {

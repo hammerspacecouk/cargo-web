@@ -25,7 +25,7 @@ export const CreditsButton = ({
   children,
 }: IProps) => {
   const { score } = useSessionContext();
-  const [disabled, setDisabled] = React.useState(isDisabled(amount, score));
+  const [disabled, setDisabled] = React.useState(() => isDisabled(amount, score));
 
   React.useEffect(() => {
     let timer: any;

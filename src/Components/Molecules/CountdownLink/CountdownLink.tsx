@@ -14,7 +14,7 @@ const formatTime = (msTime: number) => {
 
 // todo - abstract this so it doesn't always have to be a <DangerButton>
 export const CountdownLink = ({ time, children, href }: IProps) => {
-  const [timeLeft, setTimeLeft] = React.useState(formatTime(time));
+  const [timeLeft, setTimeLeft] = React.useState(() => formatTime(time));
   const [disabled, setDisabled] = React.useState(false);
 
   useFrameEffect(timePassed => {

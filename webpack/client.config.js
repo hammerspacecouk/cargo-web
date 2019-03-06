@@ -1,31 +1,37 @@
 const Webpack = require("webpack");
 const rimraf = require("rimraf");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
 
 const path = require("path");
 
-const IS_DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') >= 0;
-const chunkHashFormat = IS_DEV_SERVER ? '' : "[chunkhash:10].";
-const hashFormat = IS_DEV_SERVER ? '' : "[hash:10].";
-const outputPath = path.resolve(__dirname, '../build/static');
+const IS_DEV_SERVER = process.argv[1].indexOf("webpack-dev-server") >= 0;
+const chunkHashFormat = IS_DEV_SERVER ? "" : "[chunkhash:10].";
+const hashFormat = IS_DEV_SERVER ? "" : "[hash:10].";
+const outputPath = path.resolve(__dirname, "../build/static");
+const publicPath = `${process.env.STATIC_HOST || ""}/`;
 
 rimraf.sync(outputPath);
 
 const settings = {
-  devtool: 'source-map',
+  devServer: {
+    index: "templates/index.html"
+  },
+  devtool: "source-map",
   entry: {
-    app: path.resolve(__dirname, '../src/index.client.tsx'),
+    app: path.resolve(__dirname, "../src/index.client.tsx")
   },
   output: {
     path: outputPath,
-    publicPath: '/',
+    publicPath,
     filename: `${chunkHashFormat}[name].js`
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     alias: {
-      'scss': path.resolve(__dirname, '../src/assets/scss')
+      "scss": path.resolve(__dirname, "../src/assets/scss")
     }
   },
   module: {
@@ -33,15 +39,24 @@ const settings = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        sideEffects: false,
+        loader: "babel-loader?sourceMap",
+        sideEffects: false
       },
       {
-        exclude: [/\.(js|jsx|mjs|ts|tsx|html|json)$/],
+        test: /\.(css)$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "resolve-url-loader"
+        ]
+      },
+      {
+        test: /\.(jpg|png|gif|woff2|woff)$/,
         loader: "file-loader",
         options: {
           name: `${hashFormat}[name].[ext]`,
-          outputPath: '',
+          outputPath: "",
+          publicPath
         }
       }
     ]
@@ -54,6 +69,15 @@ const settings = {
         __dirname,
         "../build/assets-manifest.json"
       )
+    }),
+    new HtmlWebpackPlugin({
+      template: "templates/index.html",
+      filename: "html/index.html"
+    }),
+    new PreloadWebpackPlugin({
+      rel: "preload",
+      include: "allAssets",
+      excludeHtmlNames: ["index.html"]
     })
   ],
   optimization: {
@@ -61,8 +85,8 @@ const settings = {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all'
+          name: "vendor",
+          chunks: "all"
         }
       }
     }

@@ -37,7 +37,7 @@ services:
 #      - "sh"
 #      - "-c"
 #      - >
-#        yarn server &&
+#        npm run server &&
 #        node server.js
 
   cargo-web-nginx:

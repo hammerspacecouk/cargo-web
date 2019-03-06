@@ -11,7 +11,7 @@ import {
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  IEvent
+  IEvent,
 } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
@@ -38,25 +38,25 @@ interface IProps {
 const mapEvent = (event: IEvent, firstPerson: boolean) => {
   switch (event.action) {
     case ACTION_CRATE_NEW:
-      return <CrateNew event={event} firstPerson={firstPerson}/>;
+      return <CrateNew event={event} firstPerson={firstPerson} />;
     case ACTION_CRATE_PICKUP:
-      return <CratePickup event={event}/>;
+      return <CratePickup event={event} />;
     case ACTION_EFFECT_USE:
-      return <EffectUse event={event} firstPerson={firstPerson}/>;
+      return <EffectUse event={event} firstPerson={firstPerson} />;
     case ACTION_EFFECT_OFFENCE:
-      return <Offence event={event} firstPerson={firstPerson}/>;
+      return <Offence event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_NEW:
-      return <PlayerNew event={event} firstPerson={firstPerson}/>;
+      return <PlayerNew event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_PROMOTION:
-      return <PlayerPromotion event={event} firstPerson={firstPerson}/>;
+      return <PlayerPromotion event={event} firstPerson={firstPerson} />;
     case ACTION_SHIP_NEW:
-      return <ShipNew event={event}/>;
+      return <ShipNew event={event} />;
     case ACTION_SHIP_ARRIVAL:
-      return <ShipArrival event={event}/>;
+      return <ShipArrival event={event} />;
     case ACTION_SHIP_DEPARTURE:
-      return <ShipDeparture event={event}/>;
+      return <ShipDeparture event={event} />;
     case ACTION_SHIP_RENAME:
-      return <ShipRename event={event}/>;
+      return <ShipRename event={event} />;
     default:
       return `Unknown event: ${event.action}`;
   }
@@ -97,7 +97,7 @@ export const EventsList = ({ events, firstPerson }: IProps) => {
     return (
       <StyledList as="ol">
         <li>
-          <TextCursor/>
+          <TextCursor />
         </li>
       </StyledList>
     );

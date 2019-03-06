@@ -1,5 +1,4 @@
 import * as React from "react";
-import { IChildrenProps } from "../../../Interfaces";
 import styled from "styled-components";
 import { ListUnstyled } from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
 import { GRID } from "../../../styles/variables";
@@ -16,10 +15,11 @@ const StyledItem = styled.li`
   margin-left: ${GRID.UNIT};
 `;
 
-export const EffectsRow = ({ children }: IChildrenProps) => {
+// todo - remove the anys here
+export const EffectsRow = ({ children }: {children: any}) => {
   return (
     <StyledRow>
-      {children.map(child => (
+      {children.map((child: any) => (
         <StyledItem key={child.key}>{child}</StyledItem>
       ))}
     </StyledRow>

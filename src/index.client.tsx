@@ -1,5 +1,5 @@
 import * as React from "react";
-import { hydrate as ReactDomRender } from "react-dom";
+import { render as ReactDomRender } from "react-dom"; // todo - SSR & hydrate
 import { BrowserRouter } from "react-router-dom";
 import "typeface-share-tech-mono";
 
