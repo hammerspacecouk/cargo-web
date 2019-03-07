@@ -20,7 +20,7 @@ const settings = {
     index: "templates/index.html"
   },
   devtool: "source-map",
-  context: path.resolve(__dirname, "../src"),
+  context: path.resolve(__dirname, "../"),
   entry: {
     app: path.resolve(__dirname, "../src/index.client.tsx")
   },
