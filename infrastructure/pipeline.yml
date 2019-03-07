@@ -11,94 +11,20 @@ Parameters:
   GitHubUser:
     Type: String
 
-  AlphaStackName:
-    Type: String
-
-  BetaStackName:
-    Type: String
-
-  ProdStackName:
-    Type: String
-
-  TemplateBucket:
-    Type: String
-
-  AssetPrefix:
-    Type: String
-
-  AlphaALBStack:
-    Type: String
-
-  AlphaClusterStack:
-    Type: String
-
-  AlphaDesiredTaskCount:
-    Type: Number
-    Default: 1
-
-  AlphaApiHostname:
-    Type: String
-
-  NodeImageTag:
-    Type: String
-    Default: latest
-
-  NginxImageTag:
-    Type: String
-    Default: latest
-
   StaticBucket:
+    Type: String
+
+  AlphaBucket:
+    Type: String
+
+  BetaBucket:
+    Type: String
+
+  ProdBucket:
     Type: String
 
 
 Resources:
-  Repository:
-    Type: AWS::ECR::Repository
-    Properties:
-      RepositoryName: planet-cargo-web
-      LifecyclePolicy:
-        LifecyclePolicyText: |
-          {
-            "rules": [
-                {
-                    "rulePriority": 1,
-                    "description": "Expire images older than 14 days",
-                    "selection": {
-                        "tagStatus": "untagged",
-                        "countType": "sinceImagePushed",
-                        "countUnit": "days",
-                        "countNumber": 14
-                    },
-                    "action": {
-                        "type": "expire"
-                    }
-                }
-            ]
-          }
-
-  CloudFormationExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      Path: /
-      AssumeRolePolicyDocument: |
-        {
-            "Statement": [{
-                "Effect": "Allow",
-                "Principal": { "Service": [ "cloudformation.amazonaws.com" ]},
-                "Action": [ "sts:AssumeRole" ]
-            }]
-        }
-      Policies:
-        - PolicyName: root
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Resource: "*"
-                Effect: Allow
-                Action:
-                  - ecs:*
-                  - ecr:*
-                  - iam:*
 
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
@@ -137,16 +63,6 @@ Resources:
                   - s3:PutObject
                   - s3:GetObjectVersion
                   - s3:PutObjectAcl
-              - Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/${Repository}
-                Effect: Allow
-                Action:
-                  - ecr:GetDownloadUrlForLayer
-                  - ecr:BatchGetImage
-                  - ecr:BatchCheckLayerAvailability
-                  - ecr:PutImage
-                  - ecr:InitiateLayerUpload
-                  - ecr:UploadLayerPart
-                  - ecr:CompleteLayerUpload
 
   CodePipelineServiceRole:
     Type: AWS::IAM::Role
@@ -167,8 +83,6 @@ Resources:
             Statement:
               - Resource:
                   - !Sub arn:aws:s3:::${ArtifactBucket}/*
-                  - !Sub arn:aws:s3:::${TemplateBucket}
-                  - !Sub arn:aws:s3:::${TemplateBucket}/*
                 Effect: Allow
                 Action:
                   - s3:PutObject
@@ -180,7 +94,6 @@ Resources:
                 Action:
                   - codebuild:StartBuild
                   - codebuild:BatchGetBuilds
-                  - cloudformation:*
                   - iam:PassRole
 
   ArtifactBucket:
@@ -204,10 +117,10 @@ Resources:
             pre_build:
               commands:
                 - echo Installing dependencies...
-                - yarn
+                - npm ci
             build:
               commands:
-                - NODE_ENV=production && yarn server
+                - NODE_ENV=production STATIC_HOST=https://${STATIC_BUCKET} npm run client
             post_build:
               commands:
                 - echo Static files to S3
@@ -221,56 +134,15 @@ Resources:
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION
             Value: !Ref AWS::Region
-          - Name: APP_ENV
-            Value: build
           - Name: STATIC_BUCKET
             Value: !Ref StaticBucket
       Name: "planet-cargo-web-build-app"
       ServiceRole: !Ref CodeBuildServiceRole
 
-  CodeBuildProjectImage:
-    Type: AWS::CodeBuild::Project
-    Properties:
-      Artifacts:
-        Type: CODEPIPELINE
-      Source:
-        Type: CODEPIPELINE
-        BuildSpec: |
-          version: 0.2
-          phases:
-            pre_build:
-              commands:
-                - $(aws ecr get-login)
-                - TAG=r$(date +%F-%H%M%S-%N)
-            build:
-              commands:
-                - docker build -t ${REPOSITORY_URI} --build-arg BASE=${NODE_IMAGE_TAG} .
-                - docker tag ${REPOSITORY_URI}:latest ${REPOSITORY_URI}:${TAG}
-            post_build:
-              commands:
-                - docker push ${REPOSITORY_URI}:latest
-                - docker push ${REPOSITORY_URI}:${TAG}
-                - printf '{"tag":"%s"}' $TAG > build.json
-          artifacts:
-            files: build.json
-      Environment:
-        ComputeType: "BUILD_GENERAL1_SMALL"
-        Image: "aws/codebuild/docker:1.12.1"
-        Type: "LINUX_CONTAINER"
-        EnvironmentVariables:
-          - Name: AWS_DEFAULT_REGION
-            Value: !Ref AWS::Region
-          - Name: NODE_IMAGE_TAG
-            Value: !Sub ${NodeImageTag}
-          - Name: REPOSITORY_URI
-            Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}
-      Name: "planet-cargo-web-build-image"
-      ServiceRole: !Ref CodeBuildServiceRole
-
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
-      Name: planet-cargo-web
+      Name: !Ref AWS::StackName
       RoleArn: !GetAtt CodePipelineServiceRole.Arn
       ArtifactStore:
         Type: S3
@@ -292,18 +164,6 @@ Resources:
               OutputArtifacts:
                 - Name: App
               RunOrder: 1
-            - Name: ECSServiceTemplate
-              ActionTypeId:
-                Category: Source
-                Owner: AWS
-                Version: 1
-                Provider: S3
-              OutputArtifacts:
-                - Name: Template
-              RunOrder: 1
-              Configuration:
-                S3Bucket: !Ref TemplateBucket
-                S3ObjectKey: web/templates.zip
         - Name: Build
           Actions:
             - Name: Build
@@ -319,53 +179,6 @@ Resources:
               OutputArtifacts:
                 - Name: AppOutput
               RunOrder: 2
-        - Name: BuildImage
-          Actions:
-            - Name: BuildImage
-              ActionTypeId:
-                Category: Build
-                Owner: AWS
-                Version: 1
-                Provider: CodeBuild
-              Configuration:
-                ProjectName: !Ref CodeBuildProjectImage
-              InputArtifacts:
-                - Name: AppOutput
-              OutputArtifacts:
-                - Name: BuildOutput
-              RunOrder: 2
-        - Name: DeployAlpha
-          Actions:
-            - Name: DeployAlpha
-              ActionTypeId:
-                Category: Deploy
-                Owner: AWS
-                Version: 1
-                Provider: CloudFormation
-              Configuration:
-                ChangeSetName: Deploy
-                ActionMode: CREATE_UPDATE
-                StackName: !Ref AlphaStackName
-                Capabilities: CAPABILITY_NAMED_IAM
-                TemplatePath: Template::03-ecs-service.yml
-                RoleArn: !GetAtt CloudFormationExecutionRole.Arn
-                ParameterOverrides: !Sub |
-                  {
-                    "ImageTag" : { "Fn::GetParam" : [ "BuildOutput", "build.json", "tag" ] },
-                    "ALBStack": "${AlphaALBStack}",
-                    "ClusterStack": "${AlphaClusterStack}",
-                    "DesiredTaskCount": "${AlphaDesiredTaskCount}",
-                    "ECSRepository": "${Repository}",
-                    "Environment": "alpha",
-                    "NginxImageTag": "${NginxImageTag}",
-                    "ApiHostname": "${AlphaApiHostname}",
-                    "AssetPrefix": "${AssetPrefix}"
-                  }
-              InputArtifacts:
-                - Name: Template
-                - Name: BuildOutput
-              RunOrder: 3
-
 
 Outputs:
   PipelineUrl:

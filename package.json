@@ -57,8 +57,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config=webpack/client.config.js --mode=development --watch --watch-aggregate-timeout=300 --host=0.0.0.0 --port=3000 --watch-poll=1000 --allowed-hosts=dev.planetcargo.live --content-base=webpack/ --history-api-fallback",
-    "server": "webpack --config webpack/server.config.js --mode=production",
-    "client": "webpack --config webpack/client.config.js --mode=production",
+    "server": "webpack --config webpack/server.config.js --mode=production --display-error-details",
+    "client": "webpack --config webpack/client.config.js --mode=production --display-error-details",
     "lint": "tslint -p .",
     "lint:fix": "tslint --fix -p .",
     "start": "node server.js",
