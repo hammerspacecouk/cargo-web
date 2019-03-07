@@ -15,6 +15,8 @@ const publicPath = `${process.env.STATIC_HOST || ""}/`;
 
 rimraf.sync(outputPath);
 
+console.log(path.resolve(__dirname, "../src/index.client.tsx"));
+
 const settings = {
   devServer: {
     index: "templates/index.html"
