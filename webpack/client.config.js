@@ -15,13 +15,12 @@ const publicPath = `${process.env.STATIC_HOST || ""}/`;
 
 rimraf.sync(outputPath);
 
-console.log(path.resolve(__dirname, "../src/index.client.tsx"));
-
 const settings = {
   devServer: {
     index: "templates/index.html"
   },
   devtool: "source-map",
+  context: path.resolve(__dirname, "../src"),
   entry: {
     app: path.resolve(__dirname, "../src/index.client.tsx")
   },
