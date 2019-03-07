@@ -63,7 +63,9 @@ const settings = {
     ]
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      tsconfig: path.resolve(__dirname, '../tsconfig.json')
+    }),
     new Webpack.HashedModuleIdsPlugin(),
     new ManifestPlugin({
       fileName: path.resolve(

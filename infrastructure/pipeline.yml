@@ -118,9 +118,6 @@ Resources:
               commands:
                 - echo Installing dependencies...
                 - npm ci
-                - ls -al
-                - ls -al src
-                - ls -al webpack
             build:
               commands:
                 - NODE_ENV=production STATIC_HOST=https://${STATIC_BUCKET} npm run client
