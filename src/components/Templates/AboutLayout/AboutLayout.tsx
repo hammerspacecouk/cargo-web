@@ -9,7 +9,7 @@ interface IProps {
 
 export const AboutLayout = (props: IProps) => {
   let crumbs = null;
-  let title = "About Planet Cargo";
+  let title = "About Shippin' [space]";
   if (props.title) {
     crumbs = [
       {

@@ -56,10 +56,15 @@ Resources:
                   - s3:GetObject
                   - s3:PutObject
                   - s3:GetObjectVersion
-              - Resource: !Sub arn:aws:s3:::${StaticBucket}/*
+              - Resource:
+                  - !Sub arn:aws:s3:::${StaticBucket}
+                  - !Sub arn:aws:s3:::${StaticBucket}/*
                 Effect: Allow
                 Action:
+                  - s3:DeleteObject
+                  - s3:GetBucketLocation
                   - s3:GetObject
+                  - s3:ListBucket
                   - s3:PutObject
                   - s3:GetObjectVersion
                   - s3:PutObjectAcl
@@ -95,6 +100,13 @@ Resources:
                   - codebuild:StartBuild
                   - codebuild:BatchGetBuilds
                   - iam:PassRole
+              - Resource:
+                  - !Sub arn:aws:s3:::${AlphaBucket}/*
+                  - !Sub arn:aws:s3:::${BetaBucket}/*
+                  - !Sub arn:aws:s3:::${ProdBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:PutObject
 
   ArtifactBucket:
     Type: AWS::S3::Bucket
@@ -126,7 +138,8 @@ Resources:
                 - echo Static files to S3
                 - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control="max-age=31536000, immutable" --acl public-read
           artifacts:
-            files: "**/*"
+            files: "build/static/html/*"
+            discard-paths: yes
       Environment:
         ComputeType: "BUILD_GENERAL1_SMALL"
         Image: aws/codebuild/nodejs:10.14.1
@@ -178,7 +191,58 @@ Resources:
                 - Name: App
               OutputArtifacts:
                 - Name: AppOutput
-              RunOrder: 2
+              RunOrder: 1
+        - Name: DeployAlpha
+          Actions:
+            - Name: DeployAlpha
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: S3
+              Configuration:
+                BucketName: !Ref AlphaBucket
+                Extract: true
+              InputArtifacts:
+                - Name: AppOutput
+              RunOrder: 1
+            - Name: DeployBeta
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: S3
+              Configuration:
+                BucketName: !Ref BetaBucket
+                Extract: true
+              InputArtifacts:
+                - Name: AppOutput
+              RunOrder: 1
+        - Name: ApproveProd
+          Actions:
+            - Name: ApproveProd
+              ActionTypeId:
+                Category: Approval
+                Owner: AWS
+                Provider: Manual
+                Version: '1'
+              RunOrder: 1
+        - Name: DeployProd
+          Actions:
+            - Name: DeployProd
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: S3
+              Configuration:
+                BucketName: !Ref ProdBucket
+                Extract: true
+              InputArtifacts:
+                - Name: AppOutput
+              RunOrder: 1
+
+
 
 Outputs:
   PipelineUrl:

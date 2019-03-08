@@ -53,7 +53,7 @@ export const Masthead = () => {
   return (
     <MastheadPosition>
       <StyledMasthead>
-        <Logo href="/">Planet Cargo</Logo>
+        <Logo href="/">Shippin' [space]</Logo>
         <FlexStretch>
           {player ? <PlayerActions /> : <GuestActions />}
         </FlexStretch>

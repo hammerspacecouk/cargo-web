@@ -69,7 +69,7 @@ export const HomePage = ({ events }: IProps) => (
     <TemplateHome>
       <TemplateHero>
         <Hero>
-          <H1>Planet Cargo</H1>
+          <H1>Shippin' [space]</H1>
         </Hero>
       </TemplateHero>
       <TemplatePlay>
