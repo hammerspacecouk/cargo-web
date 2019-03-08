@@ -129,7 +129,7 @@ Resources:
             files: "**/*"
       Environment:
         ComputeType: "BUILD_GENERAL1_SMALL"
-        Image: thiagoxvo/awscli-node-docker:latest
+        Image: aws/codebuild/nodejs:10.14.1
         Type: "LINUX_CONTAINER"
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION
