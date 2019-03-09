@@ -136,7 +136,8 @@ Resources:
             post_build:
               commands:
                 - echo Static files to S3
-                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control="max-age=31536000, immutable" --acl public-read
+                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control="max-age=31536000, immutable" --acl public-read --exclude "*.js" --exclude "html/*"
+                - aws s3 sync ./build/static s3://${STATIC_BUCKET} --cache-control="max-age=31536000, immutable" --acl public-read --exclude "*" --include "*.js" --content-type "application/javascript; charset=utf-8"
           artifacts:
             files: "build/static/html/*"
             discard-paths: yes
