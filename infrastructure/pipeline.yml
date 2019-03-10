@@ -150,7 +150,7 @@ Resources:
             Value: !Ref AWS::Region
           - Name: STATIC_BUCKET
             Value: !Ref StaticBucket
-      Name: "planet-cargo-web-build-app"
+      Name: "web-build-app"
       ServiceRole: !Ref CodeBuildServiceRole
 
   Pipeline:
