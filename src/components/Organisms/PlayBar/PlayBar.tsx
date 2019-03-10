@@ -72,8 +72,7 @@ const playbarStyles = css`
   display: inline-block;
   width: 100%;
   padding: ${GRID.UNIT} ${GRID.QUARTER};
-  --safe-area-inset-bottom: env(safe-area-inset-bottom);
-  padding-bottom: calc(${GRID.UNIT} + var(--safe-area-inset-bottom));
+  padding-bottom: calc(${GRID.UNIT} + env(safe-area-inset-bottom));
   text-decoration: none;
   &:hover,
   &:active,
