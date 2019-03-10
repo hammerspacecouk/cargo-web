@@ -34,7 +34,7 @@ export const modalStyles = css`
     z-index: ${Z_INDEX.MODAL_PANEL};
     will-change: transform;
     transform: scale(0);
-    transition: 0.3s cubic-bezier(0.13, 0.76, 0.49, 1.65);
+    transition: 0.3s cubic-bezier(0.13, 0.76, 0.49, 1);
   }
   .modal--danger {
     border: 1px solid ${COLOURS.SEMANTIC.DANGER.KEY};
