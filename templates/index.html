@@ -12,7 +12,7 @@
 <script>
   window._CONFIG_ = {
     assetPrefix: null,
-    apiHostname: 'https://api.' + window.location.hostname,
+    apiHostname: '<%= htmlWebpackPlugin.options.apiHost %>' || 'https://api.' + window.location.hostname,
     appVersion: 'client', // todo - server render values
     appEnv: 'client', // todo - server render values
     host: 'client', // todo - server render values

@@ -4,7 +4,6 @@ import { IRankStatus } from "../../../Interfaces";
 import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
 import { GRID } from "../../../styles/variables";
 import { useMounted } from "../../../hooks/useMounted";
-import { SIZES } from "../../../styles/typography";
 
 interface IProps {
   rankStatus?: IRankStatus;
@@ -34,6 +33,7 @@ const InactiveRank = styled(RankItem)`
 
 const ActiveRank = styled(RankItem)<{ isOn: boolean }>`
   transition: all 0.8s ease-in;
+  will-change: font-size, opacity;
   opacity: ${props => (props.isOn ? "1" : INACTIVE_OPACITY)};
   font-size: ${props => (props.isOn ? "2.2rem" : INACTIVE_SIZE)};
 `;

@@ -17,7 +17,7 @@ rimraf.sync(outputPath);
 
 const settings = {
   devServer: {
-    index: "templates/index.html"
+    index: "html/index.html"
   },
   devtool: "source-map",
   entry: {
@@ -74,7 +74,8 @@ const settings = {
     }),
     new HtmlWebpackPlugin({
       template: "templates/index.html",
-      filename: "html/index.html"
+      filename: "html/index.html",
+      apiHost: IS_DEV_SERVER ? 'http://127.0.0.1:8080': '',
     }),
     new PreloadWebpackPlugin({
       rel: "preload",
