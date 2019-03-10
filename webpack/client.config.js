@@ -17,7 +17,12 @@ rimraf.sync(outputPath);
 
 const settings = {
   devServer: {
-    index: "html/index.html"
+    index: "html/index.html",
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/.+/, to: '/' },
+      ]
+    },
   },
   devtool: "source-map",
   entry: {

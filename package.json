@@ -56,7 +56,7 @@
     "webpack-manifest-plugin": "^2.0.3"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config=./webpack/client.config.js --mode=development --watch --watch-aggregate-timeout=300 --host=0.0.0.0 --port=3000 --watch-poll=1000 --history-api-fallback",
+    "dev": "webpack-dev-server --config=./webpack/client.config.js --mode=development --watch --watch-aggregate-timeout=300 --host=0.0.0.0 --port=3000 --watch-poll=1000",
     "server": "webpack --config ./webpack/server.config.js --mode=production --display-error-details",
     "client": "webpack --config ./webpack/client.config.js --mode=production --display-error-details",
     "lint": "tslint -p .",

@@ -72,6 +72,8 @@ const playbarStyles = css`
   display: inline-block;
   width: 100%;
   padding: ${GRID.UNIT} ${GRID.QUARTER};
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  padding-bottom: calc(${GRID.UNIT} + var(--safe-area-inset-bottom));
   text-decoration: none;
   &:hover,
   &:active,
@@ -133,13 +135,13 @@ export const PlayBar = () => {
       <List>
         {getShipLink()}
         <PlayBarItem isActive={currentView === FLEET_VIEW_NAME}>
-          <PlayBarLink to="/play" className="play-bar__link">
+          <PlayBarLink to="/play">
             <PlayBarIcon>{iconGarage}</PlayBarIcon>
             <PlayBarItemText>Fleet</PlayBarItemText>
           </PlayBarLink>
         </PlayBarItem>
         <PlayBarItem isActive={currentView === INVENTORY_VIEW_NAME}>
-          <PlayBarLink to={`/play/inventory`} className="play-bar__link">
+          <PlayBarLink to={`/play/inventory`}>
             <PlayBarIcon>{iconStuff}</PlayBarIcon>
             <PlayBarItemText>Inventory</PlayBarItemText>
           </PlayBarLink>
