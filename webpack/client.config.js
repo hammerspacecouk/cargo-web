@@ -79,6 +79,7 @@ const settings = {
     new PreloadWebpackPlugin({
       rel: "preload",
       include: "allAssets",
+      fileBlacklist: [/\.map/, /\.woff$/],
       excludeHtmlNames: ["index.html"]
     })
   ],
