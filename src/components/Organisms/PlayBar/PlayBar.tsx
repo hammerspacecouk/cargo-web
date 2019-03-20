@@ -104,10 +104,9 @@ const List = styled(ListInline)`
 
 const getShipLink = () => {
   const { ship } = useCurrentShipContext();
-  const { currentView } = useSessionContext();
   if (ship) {
     return (
-      <PlayBarItem isActive={currentView === SHIP_VIEW_NAME}>
+      <PlayBarItem isActive={false}>
         <PlayBarLink to={`/play/${ship.id}`}>
           <PlayBarIcon>{iconLocation}</PlayBarIcon>
           <PlayBarItemText>{ship.name}</PlayBarItemText>
@@ -127,19 +126,18 @@ const getShipLink = () => {
 };
 
 export const PlayBar = () => {
-  const { currentView } = useSessionContext();
 
   return (
     <StyledPlayBar>
       <List>
         {getShipLink()}
-        <PlayBarItem isActive={currentView === FLEET_VIEW_NAME}>
+        <PlayBarItem isActive={false}>
           <PlayBarLink to="/play">
             <PlayBarIcon>{iconGarage}</PlayBarIcon>
             <PlayBarItemText>Fleet</PlayBarItemText>
           </PlayBarLink>
         </PlayBarItem>
-        <PlayBarItem isActive={currentView === INVENTORY_VIEW_NAME}>
+        <PlayBarItem isActive={false}>
           <PlayBarLink to={`/play/inventory`}>
             <PlayBarIcon>{iconStuff}</PlayBarIcon>
             <PlayBarItemText>Inventory</PlayBarItemText>

@@ -15,7 +15,9 @@ const useTravellingCountdown = () => {
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
 
-  const [seconds, setSeconds] = useState(() => calculateSecondsRemaining(arrival));
+  const [seconds, setSeconds] = useState(() =>
+    calculateSecondsRemaining(arrival)
+  );
 
   useFrameEffect(() => {
     setSeconds(calculateSecondsRemaining(arrival));

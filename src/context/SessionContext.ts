@@ -24,19 +24,19 @@ export interface ISessionResponse {
 }
 
 interface ISessionProperties {
-  currentView?: string;
   player?: IPlayer;
   rankStatus?: IRankStatus;
   score?: IScore;
   hasProfileNotification: boolean;
   loginOptions?: ILoginOptions;
+  menuOpen: boolean;
 }
 
 interface ISessionContext extends ISessionProperties {
   updateScore: (newScore: IScore) => void;
   updateRankStatus: (newRankStatus: IRankStatus) => void;
-  setCurrentView: (newView?: string) => void;
   setSession: (session: ISessionResponse) => void;
+  toggleMenu: () => void;
   refreshSession: () => void;
 }
 
@@ -63,7 +63,7 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
   const [hasProfileNotification, setHasProfileNotification] = useState(
     initialSession.hasProfileNotification
   );
-  const [currentView, setCurrentView] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   let allowUpdate = true;
 
   const updateScore = (newScore: IScore) => {
@@ -114,15 +114,15 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
     SessionContext.Provider,
     {
       value: {
-        currentView,
         hasProfileNotification,
         loginOptions,
+        menuOpen,
         player,
         rankStatus,
         refreshSession,
         score,
-        setCurrentView,
         setSession,
+        toggleMenu: () => {setMenuOpen(!menuOpen)},
         updateRankStatus,
         updateScore,
       },

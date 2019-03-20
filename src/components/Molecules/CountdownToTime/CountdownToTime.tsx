@@ -13,7 +13,9 @@ const calculateSeconds = (dateTime: string): number => {
 };
 
 export const CountdownToTime = ({ dateTime }: IProps) => {
-  const [seconds, setSeconds] = React.useState(() => calculateSeconds(dateTime));
+  const [seconds, setSeconds] = React.useState(() =>
+    calculateSeconds(dateTime)
+  );
 
   useFrameEffect(
     () => {

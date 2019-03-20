@@ -25,4 +25,5 @@ export const Notification = styled.abbr`
   border-radius: 100%;
   background-color: ${COLOURS.SEMANTIC.DANGER.KEY};
   animation: ${frames} 1s infinite alternate ease-in;
+  pointer-events: none;
 `;

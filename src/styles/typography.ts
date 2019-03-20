@@ -4,7 +4,11 @@ import { BREAKPOINTS } from "./media";
 export const MONOSPACE_FONT = css`
   font-family: "Share Tech Mono", monospace;
 `;
-export const BASE_FONT = MONOSPACE_FONT;
+export const BASE_FONT = css`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif-light, sans-serif;
+`;
 export const HEADING_FONT = MONOSPACE_FONT;
 
 export const SIZES = {
@@ -57,13 +61,13 @@ export const ELEMENTS = {
   `,
   H3: css`
     margin: 0;
-    font-weight: normal;
-    ${SIZES.C} ${HEADING_FONT};
+    font-weight: bold;
+    ${SIZES.C};
   `,
   H4: css`
     margin: 0;
-    font-weight: normal;
-    ${SIZES.D} ${HEADING_FONT};
+    font-weight: bold;
+    ${SIZES.D};
   `,
   H5: css`
     margin: 0;

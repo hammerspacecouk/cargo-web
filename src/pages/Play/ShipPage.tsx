@@ -9,7 +9,6 @@ import { Travelling } from "./Travelling";
 import { WarningModal } from "../../components/Organisms/WarningModal/WarningModal";
 import { Hidden } from "../../components/Atoms/Hidden/Hidden";
 import { useMounted } from "../../hooks/useMounted";
-import { useCurrentView } from "../../hooks/useCurrentView";
 
 export interface IShipParams {
   match: {
@@ -19,7 +18,6 @@ export interface IShipParams {
   };
 }
 
-export const VIEW_NAME = "PLAY_CURRENT_SHIP";
 
 export const ShipPage = withRouter(({ match }: IShipParams) => {
   const {
@@ -31,7 +29,6 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
     warningModalText,
   } = useCurrentShipContext();
   const isMounted = useMounted();
-  useCurrentView(VIEW_NAME);
 
   const getData = async () => {
     const data = await ApiClient.fetch(`/play/${match.params.shipId}`);

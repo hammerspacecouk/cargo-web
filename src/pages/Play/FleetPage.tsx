@@ -11,10 +11,7 @@ import { useSessionContext } from "../../context/SessionContext";
 import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import { Hidden } from "../../components/Atoms/Hidden/Hidden";
 import { BREAKPOINTS } from "../../styles/media";
-import { useCurrentView } from "../../hooks/useCurrentView";
 import { ContentPanel } from "../../components/Molecules/ContentPanel/ContentPanel";
-
-export const VIEW_NAME = "VIEW_FLEET_PAGE";
 
 const StyledFleetPage = styled.div`
   margin: 0 auto;
@@ -27,7 +24,6 @@ const StyledFleetPage = styled.div`
 const FleetPageContent = () => {
   const { ships, events, refresh } = useFleetContext();
   const { player, rankStatus } = useSessionContext();
-  useCurrentView(VIEW_NAME);
 
   React.useEffect(() => {
     refresh();

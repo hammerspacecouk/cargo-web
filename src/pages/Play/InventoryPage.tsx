@@ -7,7 +7,6 @@ import {
 } from "../../context/Page/UpgradesContext";
 import { ShipUpgrades } from "./Upgrades/ShipUpgrades";
 import { EffectUpgrades } from "./Upgrades/EffectUpgrades";
-import { useCurrentView } from "../../hooks/useCurrentView";
 import { ContentPanel } from "../../components/Molecules/ContentPanel/ContentPanel";
 import { Hidden } from "../../components/Atoms/Hidden/Hidden";
 import { IEffectUpgrade } from "../../Interfaces";
@@ -15,8 +14,6 @@ import { MaxContentArea } from "../../components/Templates/MaxSection/MaxContent
 import { GRID } from "../../styles/variables";
 import { Loading } from "../../components/Atoms/Loading/Loading";
 import { BREAKPOINTS } from "../../styles/media";
-
-export const VIEW_NAME = "INVENTORY_PAGE";
 
 const StyledContentPanel = styled(ContentPanel)`
   margin-top: ${GRID.UNIT};
@@ -58,7 +55,6 @@ const makePanel = (title: string, effects?: IEffectUpgrade[]) => {
 
 const UpgradesPageDetail = () => {
   const { message, effects } = useUpgradesContext();
-  useCurrentView(VIEW_NAME);
 
   return (
     <MaxContentArea>

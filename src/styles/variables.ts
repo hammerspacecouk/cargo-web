@@ -9,6 +9,7 @@ export const GRID = {
 export const Z_INDEX = {
   MODAL_PANEL: 3100,
   MODAL_BLANKING: 3000,
+  MENU: 2800,
   OVERLAY_TOP: 2200,
   OVERLAY_MIDDLE: 2100,
   OVERLAY_BOTTOM: 2000,
@@ -22,3 +23,4 @@ export const Z_INDEX = {
 // tslint:enable:object-literal-sort-keys
 
 export const MAX_CONTENT_WIDTH = "1600px";
+export const MASTHEAD_HEIGHT = 44;

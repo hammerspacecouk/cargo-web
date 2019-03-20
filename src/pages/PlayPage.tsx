@@ -1,23 +1,18 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { GRID } from "../styles/variables";
 
 import { NotFound } from "../components/Organisms/Error/NotFound";
-import {
-  PlayBar,
-  playBarHeight,
-} from "../components/Organisms/PlayBar/PlayBar";
 import { EnsureLoggedIn } from "../containers/Player/EnsureLoggedIn";
 import { CurrentShipContextComponent } from "../context/CurrentShipContext";
 import { FleetPage } from "./Play/FleetPage";
 import { ShipPage } from "./Play/ShipPage";
 import { InventoryPage } from "./Play/InventoryPage";
 import { PromotionModal } from "../components/Organisms/PromotionModal/PromotionModal";
+import { Menu } from "../components/Organisms/Menu/Menu";
 
 const StyledPlayArea = styled.div`
   position: relative;
-  padding-bottom: calc(${playBarHeight}px + ${GRID.UNIT});
 `;
 
 const StyledPlayBoard = styled.div`
@@ -41,9 +36,9 @@ export const PlayPage = () => {
               <Route component={NotFound} />
             </Switch>
           </StyledPlayBoard>
-          <PlayBar />
         </StyledPlayArea>
         <PromotionModal />
+        <Menu />
       </CurrentShipContextComponent>
     </EnsureLoggedIn>
   );

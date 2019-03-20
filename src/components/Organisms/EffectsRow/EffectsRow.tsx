@@ -16,7 +16,7 @@ const StyledItem = styled.li`
 `;
 
 // todo - remove the anys here
-export const EffectsRow = ({ children }: {children: any}) => {
+export const EffectsRow = ({ children }: { children: any }) => {
   return (
     <StyledRow>
       {children.map((child: any) => (
