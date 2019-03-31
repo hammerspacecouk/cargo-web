@@ -1,5 +1,8 @@
 // https://palx.jxnblk.com/5700d2
 // tslint:disable:object-literal-sort-keys
+import { css } from "styled-components";
+import { GRID } from "./variables";
+
 const allColours = {
   base: "#5700d2",
   black: "#1c1a23",
@@ -168,6 +171,7 @@ export const COLOURS = {
   ACTIVE_HIGHLIGHT: allColours.violet[4],
   BLACK: {
     STANDARD: allColours.black,
+    FADED: allColours.gray[9],
     COLOURISED: allColours.violet[9],
   },
   WHITE: {
@@ -241,3 +245,16 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
 
   return `rgb(${r}, ${g}, ${b})`;
 };
+
+export const scrollbars = `
+  &::-webkit-scrollbar {
+    width: ${GRID.HALF};
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLOURS.BLACK.FADED};
+    outline: 1px solid slategrey;
+  }
+`;

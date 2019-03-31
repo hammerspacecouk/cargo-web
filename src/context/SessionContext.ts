@@ -122,7 +122,9 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
         refreshSession,
         score,
         setSession,
-        toggleMenu: () => {setMenuOpen(!menuOpen)},
+        toggleMenu: () => {
+          setMenuOpen(!menuOpen);
+        },
         updateRankStatus,
         updateScore,
       },

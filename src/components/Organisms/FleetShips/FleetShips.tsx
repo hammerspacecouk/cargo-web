@@ -1,64 +1,69 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { IFleetShip } from "../../../Interfaces";
-import { GRID } from "../../../styles/variables";
-import { ListUnstyled } from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
-import { FleetShipItem } from "../FleetShipItem/FleetShipItem";
+import { NavigationItem } from "../../Molecules/NavigationItem/NavigationItem";
+import { InventoryIcon } from "../../Icons/InventoryIcon/InventoryIcon";
+import { routes } from "../../../routes";
+import { NavigationList } from "../Navigation/Navigation";
+import styled from "styled-components";
+import { GRID, NAV_ITEM_HEIGHT } from "../../../styles/variables";
+import { ELEMENTS } from "../../../styles/typography";
+import { ShieldStrength } from "../../Molecules/ShieldStrength/ShieldStrength";
 
-export interface IProps {
-  ships: IFleetShip[];
+interface IProps {
+  fleetShips: IFleetShip[];
 }
 
-const StyledShipsList = styled(ListUnstyled)`
-  width: 100%;
-`;
+interface IItemProps {
+  fleetShip: IFleetShip;
+}
 
-const MoreLink = styled.div`
-  margin: ${GRID.DOUBLE} 0;
+const StyledDestroyedShip = styled.div`
+  height: ${NAV_ITEM_HEIGHT};
   display: flex;
-  justify-content: center;
+  opacity: 0.3;
+  font-style: italic;
+  align-items: center;
+  padding: 0 ${GRID.UNIT};
 `;
 
-const LOCAL_STORAGE_KEY = "FLEET_SHIP_PLACEHOLDER_COUNT";
+const DestroyedLocation = styled.span`
+  ${ELEMENTS.H6};
+  display: block;
+  margin-top: ${GRID.QUARTER};
+`;
 
-export const FleetShips = ({ ships }: IProps) => {
-  const [placeholderCount, setPlaceHolderCount] = React.useState(1);
+const DestroyedShip = ({ fleetShip }: IItemProps) => (
+  <StyledDestroyedShip>
+    <div>
+      {fleetShip.ship.name}
+      <DestroyedLocation>
+        Destroyed at {fleetShip.ship.location.name}
+      </DestroyedLocation>
+    </div>
+  </StyledDestroyedShip>
+);
 
-  React.useEffect(() => {
-    // remember how many ships you have to show the right number of placeholders
-    let count = 1;
-    if (ships) {
-      count = ships.length;
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, count.toString(10));
-    } else {
-      const lsValue = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (lsValue) {
-        count = parseInt(lsValue, 10);
-      }
-    }
-    if (placeholderCount !== count) {
-      setPlaceHolderCount(count);
-    }
-  }, [ships]);
+const ActiveShip = ({ fleetShip }: IItemProps) => (
+  <NavigationItem
+    icon={<ShieldStrength percent={fleetShip.ship.strengthPercent} />}
+    path={routes.getPlayShip(fleetShip.ship.id)}
+    text={fleetShip.ship.name}
+  />
+);
 
-  let shipRows;
-  if (ships !== undefined) {
-    shipRows = ships.map(ship => (
-      <FleetShipItem key={ship.ship.id} fleetShip={ship} />
-    ));
-  } else {
-    shipRows = Array.from(Array(placeholderCount).keys()).map(a => (
-      <FleetShipItem key={`placeholder-${a}`} />
-    ));
-  }
-
+export const FleetShips = ({ fleetShips }: IProps) => {
   return (
-    <>
-      <StyledShipsList>{shipRows}</StyledShipsList>
-      <MoreLink>
-        <Link to={`/play/inventory`}>Get more ships</Link>
-      </MoreLink>
-    </>
+    <NavigationList>
+      {/* todo - destroyed ships & attention */}
+      {fleetShips.map((fleetShip: IFleetShip) => (
+        <li key={fleetShip.ship.name}>
+          {fleetShip.ship.isDestroyed ? (
+            <DestroyedShip fleetShip={fleetShip} />
+          ) : (
+            <ActiveShip fleetShip={fleetShip} />
+          )}
+        </li>
+      ))}
+    </NavigationList>
   );
 };

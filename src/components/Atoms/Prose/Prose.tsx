@@ -22,7 +22,7 @@ export const Prose = styled.div`
   ul,
   ol {
     // maximum readable line-length
-    max-width: 700px;
+    max-width: 704px;
   }
   p {
     line-height: 1.4;

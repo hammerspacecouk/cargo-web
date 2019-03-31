@@ -1,12 +1,12 @@
 import * as React from "react";
-import { SimplePage } from "../../Templates/SimplePage/SimplePage";
 import { LoginForm } from "../LoginForm/LoginForm";
 import { Status } from "../Status/Status";
+import { PanelPage } from "../../Templates/PanelPage/PanelPage";
 
 export const RequireLogin = () => (
   <Status code={403}>
-    <SimplePage title="You must first log in">
+    <PanelPage title="Login">
       <LoginForm />
-    </SimplePage>
+    </PanelPage>
   </Status>
 );

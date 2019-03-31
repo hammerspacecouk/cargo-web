@@ -14,7 +14,7 @@ export const HEADING_FONT = MONOSPACE_FONT;
 export const SIZES = {
   A: css`
     font-size: 3rem;
-    line-height: 1.2;
+    line-height: 1;
     letter-spacing: -2px;
     ${BREAKPOINTS.S`font-size: 3rem;`};
   `,
@@ -52,17 +52,22 @@ export const ELEMENTS = {
   H1: css`
     margin: 0;
     font-weight: normal;
+    text-transform: uppercase;
     ${SIZES.A} ${HEADING_FONT};
   `,
   H2: css`
     margin: 0;
     font-weight: normal;
+    text-transform: uppercase;
+    font-style: italic;
     ${SIZES.B} ${HEADING_FONT};
   `,
   H3: css`
     margin: 0;
     font-weight: bold;
-    ${SIZES.C};
+    text-transform: uppercase;
+    font-style: italic;
+    ${SIZES.C} ${HEADING_FONT};
   `,
   H4: css`
     margin: 0;
@@ -72,6 +77,7 @@ export const ELEMENTS = {
   H5: css`
     margin: 0;
     font-weight: bold;
+    text-transform: uppercase;
     ${SIZES.E} ${HEADING_FONT};
   `,
   H6: css`

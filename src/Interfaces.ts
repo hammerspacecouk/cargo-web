@@ -30,12 +30,12 @@ export interface ICrateAction {
 }
 
 export interface ILoginOptions {
-  anon: string;
-  email: string;
-  facebook: boolean;
-  google: boolean;
-  microsoft: boolean;
-  twitter: boolean;
+  anon?: IActionToken;
+  email?: IActionToken;
+  facebook?: string;
+  google?: string;
+  microsoft?: string;
+  twitter?: string;
 }
 
 export interface IRank {

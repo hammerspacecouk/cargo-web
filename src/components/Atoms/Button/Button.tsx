@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
+import { MONOSPACE_FONT } from "../../../styles/typography";
 
 export const TYPE_CONFIRM = "confirm";
 export const TYPE_DANGER = "danger";
@@ -44,6 +45,8 @@ export const Button = styled.button<IProps>`
   border-radius: 4px;
   transition: all 0.15s linear;
   text-decoration: none;
+  text-transform: uppercase;
+  ${MONOSPACE_FONT};
 
   &[disabled] {
     opacity: 0.4;

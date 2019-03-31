@@ -1,10 +1,14 @@
 import * as React from "react";
+import { Link, Route } from "react-router-dom";
 import styled from "styled-components";
-import { useSessionContext } from "../../../context/SessionContext";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
-import { Z_INDEX } from "../../../styles/variables";
-import { GuestActions } from "./GuestActions";
-import { PlayerActions } from "./PlayerActions";
+import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../styles/variables";
+import { Score } from "../../../containers/Player/Score";
+import { useGameContext } from "../../../context/GameContext";
+import { routes } from "../../../routes";
+import { Hidden } from "../../Atoms/Hidden/Hidden";
+import { ChevronLeftIcon } from "../../Icons/ChevronLeftIcon/ChevronLeftIcon";
+import { Icon } from "../../Atoms/Icon/Icon";
 
 const MastheadPosition = styled.header`
   position: sticky;
@@ -12,8 +16,8 @@ const MastheadPosition = styled.header`
   width: 100%;
   background: ${COLOURS.BODY.BACKGROUND};
   z-index: ${Z_INDEX.OVERLAY_BOTTOM};
-  border-bottom: solid 1px ${hexToRGBa(COLOURS.BODY.TEXT, 0.6)};
-  height: 44px;
+  height: ${MASTHEAD_HEIGHT};
+  border-bottom: solid 1px ${hexToRGBa(COLOURS.BODY.TEXT, 0.2)};
 `;
 
 const StyledMasthead = styled.div`
@@ -21,15 +25,50 @@ const StyledMasthead = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  height: ${MASTHEAD_HEIGHT};
 `;
 
+const MastHeadScore = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  padding: 0 ${GRID.HALF};
+`;
+
+const Back = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: ${MASTHEAD_HEIGHT};
+  width: ${MASTHEAD_HEIGHT};
+  color: ${COLOURS.WHITE.STANDARD};
+  &:hover,
+  &:active,
+  &:focus {
+    background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.2)};
+  }
+`;
+
+const BackButton = () => (
+  <Back to={routes.getPlay()}>
+    <Hidden>Back to fleet list</Hidden>
+    <Icon>
+      <ChevronLeftIcon />
+    </Icon>
+  </Back>
+);
+
 export const Masthead = () => {
-  const { player } = useSessionContext();
+  const { score } = useGameContext();
 
   return (
     <MastheadPosition>
       <StyledMasthead>
-        {player ? <PlayerActions/> : <GuestActions/>}
+        <BackButton />
+        <MastHeadScore>
+          <Score score={score} />
+        </MastHeadScore>
       </StyledMasthead>
     </MastheadPosition>
   );

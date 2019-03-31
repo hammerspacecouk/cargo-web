@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useSessionContext } from "../../../context/SessionContext";
-import { IMessage } from "../../../Interfaces";
+import { IActionToken, IMessage } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { Environment } from "../../../util/Environment";
-import { Button } from "../../Atoms/Button/Button";
-import { H4 } from "../../Atoms/Heading/Heading";
+import { Button, ConfirmButton } from "../../Atoms/Button/Button";
+import { H2, H3 } from "../../Atoms/Heading/Heading";
 import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 import { P } from "../../Atoms/Text/Text";
 import {
@@ -18,34 +17,44 @@ import {
 } from "../../Molecules/SocialButton/SocialButton";
 import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
 import { Loading } from "../../Atoms/Loading/Loading";
+import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
+import { Prose } from "../../Atoms/Prose/Prose";
+import { BREAKPOINTS } from "../../../styles/media";
+import { useGameContext } from "../../../context/GameContext";
+import { MONOSPACE_FONT } from "../../../styles/typography";
 
 interface IProps {
   messages?: IMessage[];
 }
 
-const loginPathEmail = `${Environment.apiHostname}/login/email`;
-const loginPathFacebook = `${Environment.apiHostname}/login/facebook`;
-const loginPathGoogle = `${Environment.apiHostname}/login/google`;
-const loginPathMicrosoft = `${Environment.apiHostname}/login/microsoft`;
-const loginPathTwitter = `${Environment.apiHostname}/login/twitter`;
-
 const List = styled(ListInline)`
   display: flex;
   justify-content: center;
-  margin: ${GRID.UNIT} 0 0;
   flex-wrap: wrap;
+  margin-bottom: ${GRID.UNIT};
+  ${BREAKPOINTS.S`
+    margin-left: -${GRID.UNIT};
+  `}
 `;
 
 const Item = styled.li`
-  margin: 0 ${GRID.UNIT} ${GRID.UNIT} 0;
+  display: block;
+  width: 100%;
+  margin: 0 0 ${GRID.UNIT} 0;
+  ${BREAKPOINTS.S`
+      width: 50%;
+      display: inline-block;
+      padding: 0 0 0 ${GRID.UNIT};
+    `}
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   margin: ${GRID.UNIT} 0;
 `;
 
 const StyledInput = styled.input`
+  ${MONOSPACE_FONT};
   flex: 1;
   outline: none;
   margin-right: ${GRID.UNIT};
@@ -58,79 +67,110 @@ const StyledInput = styled.input`
   }
 `;
 
-const EmailTitle = styled(H4)`
-  margin-bottom: ${GRID.UNIT};
+const AnonForm = styled(TokenButton)`
+  text-align: center;
+  margin: ${GRID.UNIT} 0;
+  display: block;
 `;
 
-const EmailLogin = ({ token }: { token: string }) => {
+const EmailLogin = ({ token }: { token: IActionToken }) => {
   return (
     <>
-      <EmailTitle as="h3">
-        <label htmlFor="login-email">Log in via e-mail</label>
-      </EmailTitle>
+      <H3>
+        <label htmlFor="login-email">Log in via email</label>
+      </H3>
       <P>
-        If you'd rather use your e-mail directly enter your e-mail address and
+        If you'd rather use your email directly enter your email address and
         we'll send you a link that lets you log in immediately. The link is
-        valid for one hour and there are no passwords required.
+        valid for one hour and there are no passwords required. We don't store
+        it.
       </P>
-      <StyledForm action={loginPathEmail} method="post">
-        <input type="hidden" name="loginToken" value={token} />
-        <StyledInput
-          id="login-email"
-          type="email"
-          name="target"
-          required={true}
-          placeholder="name@example.com"
-        />
-        <Button type="submit">Send</Button>
-      </StyledForm>
+      <TokenButton token={token}>
+        <StyledForm>
+          <StyledInput
+            id="login-email"
+            type="email"
+            name="target"
+            required={true}
+            placeholder="name@example.com"
+          />
+          <Button type="submit">Send</Button>
+        </StyledForm>
+      </TokenButton>
     </>
   );
 };
 
-export const LoginForm = (props: IProps) => {
-  const { loginOptions } = useSessionContext();
+export const LoginForm = ({ messages }: IProps) => {
+  const { loginOptions } = useGameContext();
 
-  if (!loginOptions) {
-    return <Loading />;
+  if (loginOptions === undefined) {
+    return (
+      <>
+        <MessagesPanel messages={messages} />
+        <Loading />
+      </>
+    );
   }
 
   return (
-    <div>
-      <MessagesPanel messages={props.messages} />
-      <P>
-        We identify which player you are by confirming your unique e-mail
-        address. Use any one of the following methods. We don't get access to
-        your accounts on these services. No spam, no sharing with third parties.
-      </P>
+    <>
+      <MessagesPanel messages={messages} />
+      <Prose>
+        {loginOptions.anon && (
+          <>
+            <P>Start a new game anonymously</P>
+            <AnonForm token={loginOptions.anon}>
+              <ConfirmButton>New game</ConfirmButton>
+            </AnonForm>
+
+            <H2>Or:</H2>
+          </>
+        )}
+        <P>
+          We identify which player you are by confirming your unique email
+          address. Use any one of the following methods. We don't get access to
+          your accounts on these services. No spam, no sharing with third
+          parties. And we don't store the email address in a way that can be
+          recovered.
+        </P>
+      </Prose>
       <List>
         {loginOptions.facebook && (
           <Item>
-            <FacebookButton href={loginPathFacebook} />
+            <FacebookButton
+              href={`${Environment.apiHostname}${loginOptions.facebook}`}
+            />
           </Item>
         )}
         {loginOptions.google && (
           <Item>
-            <GoogleButton href={loginPathGoogle} />
+            <GoogleButton
+              href={`${Environment.apiHostname}${loginOptions.google}`}
+            />
           </Item>
         )}
         {loginOptions.microsoft && (
           <Item>
-            <MicrosoftButton href={loginPathMicrosoft} />
+            <MicrosoftButton
+              href={`${Environment.apiHostname}${loginOptions.microsoft}`}
+            />
           </Item>
         )}
         {loginOptions.twitter && (
           <Item>
-            <TwitterButton href={loginPathTwitter} />
+            <TwitterButton
+              href={`${Environment.apiHostname}${loginOptions.twitter}`}
+            />
           </Item>
         )}
       </List>
-      {loginOptions && loginOptions.email && (
-        <EmailLogin token={loginOptions.email} />
-      )}
-      <P>
-        <Link to="/about/policies">More info on our login policies</Link>
-      </P>
-    </div>
+      <Prose>
+        {loginOptions.email && <EmailLogin token={loginOptions.email} />}
+        <P>
+          <Link to="/about/policies">More info on our login policies</Link>
+        </P>
+      </Prose>
+    </>
   );
 };

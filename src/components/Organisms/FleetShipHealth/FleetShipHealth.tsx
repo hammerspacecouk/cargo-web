@@ -4,13 +4,13 @@ import {
   IFleetResponse,
   useFleetContext,
 } from "../../../context/Page/FleetContext";
-import { useSessionContext } from "../../../context/SessionContext";
 import { IActionToken, IHealthIncrease, IScore } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
 import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
 import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
 import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 import { useMounted } from "../../../hooks/useMounted";
+import { useGameContext } from "../../../context/GameContext";
 
 interface IProps {
   health: IHealthIncrease[];
@@ -26,7 +26,7 @@ const StyledContent = styled.div`
 `;
 
 export const FleetShipHealth = ({ health }: IProps) => {
-  const { updateScore } = useSessionContext();
+  const { updateScore } = useGameContext();
   const {
     setFleetData,
     buttonsDisabled,

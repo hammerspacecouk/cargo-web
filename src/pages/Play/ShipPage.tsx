@@ -18,7 +18,6 @@ export interface IShipParams {
   };
 }
 
-
 export const ShipPage = withRouter(({ match }: IShipParams) => {
   const {
     port,
@@ -32,7 +31,7 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
 
   const getData = async () => {
     const data = await ApiClient.fetch(`/play/${match.params.shipId}`);
-    if (isMounted) {
+    if (isMounted()) {
       updateFullResponse(data);
     }
   };

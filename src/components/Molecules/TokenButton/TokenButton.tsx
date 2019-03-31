@@ -6,6 +6,7 @@ import { ApiClient } from "../../../util/ApiClient";
 interface IProps {
   readonly token: IActionToken;
   readonly children: any;
+  readonly className?: string;
   readonly handler?: (token: IActionToken) => Promise<void> | null | void;
 }
 
@@ -13,9 +14,15 @@ const StyledForm = styled.form`
   display: inline;
 `;
 
-export const TokenButton = ({ token, children, handler }: IProps) => {
+export const TokenButton = ({
+  token,
+  className,
+  children,
+  handler,
+}: IProps) => {
   return (
     <StyledForm
+      className={className}
       method="post"
       action={ApiClient.getUrl(token.path)}
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {

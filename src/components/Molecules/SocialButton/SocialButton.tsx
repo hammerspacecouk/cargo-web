@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { hexToRGBa } from "../../../styles/colours";
-import { SIZES } from "../../../styles/typography";
+import { MONOSPACE_FONT, SIZES } from "../../../styles/typography";
 import { GRID } from "../../../styles/variables";
 import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
 import {
@@ -32,6 +32,7 @@ const StyledLink = styled.a<{ colour: IColour }>`
   align-items: center;
   padding: 12px ${GRID.UNIT};
   ${SIZES.E};
+  ${MONOSPACE_FONT};
   background: ${({ colour }) => hexToRGBa(colour.bg, 0.9)};
   border: solid 2px ${({ colour }) => colour.bg};
   color: ${({ colour }) => colour.fg};
@@ -40,6 +41,7 @@ const StyledLink = styled.a<{ colour: IColour }>`
   border-radius: 4px;
   transition: all 0.15s linear;
   text-decoration: none;
+  text-transform: uppercase;
 
   &[disabled] {
     opacity: 0.4;

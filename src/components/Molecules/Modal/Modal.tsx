@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ModalHandler from "react-modal";
 import styled, { css } from "styled-components";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
-import { GRID, Z_INDEX } from "../../../styles/variables";
+import { GRID, MAX_PANEL_WIDTH, Z_INDEX } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading/Heading";
 import { CloseIcon } from "../../Icons/CloseIcon/CloseIcon";
 import { bool } from "prop-types";
@@ -24,7 +24,7 @@ export const modalStyles = css`
   .modal {
     margin: ${GRID.UNIT};
     max-height: calc(100vh - ${GRID.DOUBLE});
-    max-width: 800px;
+    max-width: ${MAX_PANEL_WIDTH};
     border: 1px solid ${COLOURS.BODY.TEXT};
     box-shadow: 0 0 32px ${hexToRGBa(COLOURS.BODY.TEXT, 0.6)};
     background: ${COLOURS.BODY.BACKGROUND};

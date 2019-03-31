@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useSessionContext } from "../../../context/SessionContext";
 import { IActionToken } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
 import { Button } from "../../Atoms/Button/Button";
@@ -9,9 +8,10 @@ import { Modal } from "../../Molecules/Modal/Modal";
 import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
 import { Promotion } from "../Promotion/Promotion";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
+import { useGameContext } from "../../../context/GameContext";
 
 export const PromotionModal = () => {
-  const { rankStatus, updateRankStatus } = useSessionContext();
+  const { rankStatus, updateRankStatus } = useGameContext();
   const { refreshState } = useCurrentShipContext();
   const [acknowledging, setAcknowledging] = React.useState(false);
 

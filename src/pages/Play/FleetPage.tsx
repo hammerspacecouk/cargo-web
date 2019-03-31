@@ -32,7 +32,7 @@ const FleetPageContent = () => {
   return (
     <StyledFleetPage>
       <Hidden as="h1">Fleet</Hidden>
-      <FleetShips ships={ships} />
+      <FleetShips fleetShips={ships} />
       <PlayerRank player={player} rankStatus={rankStatus} />
 
       <ContentPanel panelTitle="Captain's Log">

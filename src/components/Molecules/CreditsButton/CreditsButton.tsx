@@ -1,9 +1,9 @@
 import * as React from "react";
 import { getValue } from "../../../containers/Player/Score";
-import { useSessionContext } from "../../../context/SessionContext";
 import { IScore } from "../../../Interfaces";
 import { ComplexButton } from "../ComplexButton/ComplexButton";
 import { ScoreValue } from "../ScoreValue/ScoreValue";
+import { useGameContext } from "../../../context/GameContext";
 
 interface IProps {
   readonly amount: number;
@@ -24,7 +24,7 @@ export const CreditsButton = ({
   disabledOverride,
   children,
 }: IProps) => {
-  const { score } = useSessionContext();
+  const { score } = useGameContext();
   const [disabled, setDisabled] = React.useState(() =>
     isDisabled(amount, score)
   );

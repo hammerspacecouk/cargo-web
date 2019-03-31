@@ -6,12 +6,13 @@ import { GRID } from "../../../styles/variables";
 interface IProps {
   readonly percent: number;
   readonly isHealth?: boolean;
+  readonly small?: boolean;
 }
 
-const Track = styled.div`
+const Track = styled.div<{small: boolean}>`
   display: block;
   width: 100%;
-  height: ${GRID.UNIT};
+  height: ${({small}) => small ? GRID.HALF: GRID.UNIT};
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -30,10 +31,10 @@ const Bar = styled.div<{ percentValue: number }>`
   border-radius: 4px;
 `;
 
-export const ProgressBar = ({ percent }: IProps) => {
+export const ProgressBar = ({ percent, small }: IProps) => {
   const percentValue = Math.max(percent, 2); // to show that it is a bar that will fill up
   return (
-    <Track>
+    <Track small={small}>
       <Bar title={`${percent}%`} percentValue={percentValue} />
     </Track>
   );

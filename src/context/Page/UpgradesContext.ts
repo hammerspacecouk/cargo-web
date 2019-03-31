@@ -32,7 +32,7 @@ export const UpgradesContextProvider = ({ children }: IChildrenProps) => {
   const { data } = useApi("/play/inventory");
 
   const setDataFromResponse = (data: any) => {
-    setShips(data.ships);
+    setShips(data.fleetShips);
     setEffects(data.effects);
   };
 

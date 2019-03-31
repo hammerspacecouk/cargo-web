@@ -18,12 +18,7 @@ const StyledImg = styled.img`
   border-radius: 50%;
   width: 100%;
   height: 100%;
-  background: ${COLOURS.BLACK.STANDARD}
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
+  background: ${COLOURS.BLACK.STANDARD};
 `;
 
 export const PlayerFlag = ({ player, className }: IProps) => {

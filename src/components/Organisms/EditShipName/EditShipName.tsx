@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ShipNameGenerator } from "../../../containers/Ship/ShipNameGenerator";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
 import { useFleetContext } from "../../../context/Page/FleetContext";
-import { useSessionContext } from "../../../context/SessionContext";
 import { useMounted } from "../../../hooks/useMounted";
 import { IActionToken, IShip, ITransaction } from "../../../Interfaces";
 import { BREAKPOINTS } from "../../../styles/media";
@@ -14,6 +13,7 @@ import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
 import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
 import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
 import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
+import { useGameContext } from "../../../context/GameContext";
 
 interface IProps {
   ship: IShip;
@@ -39,7 +39,7 @@ const Updating = styled.span`
 
 export const EditShipName = ({ ship, renameToken }: IProps) => {
   const [requestNameToken, setRequestNameToken] = React.useState(renameToken);
-  const { updateScore } = useSessionContext();
+  const { updateScore } = useGameContext();
   const { setFleetData, buttonsDisabled } = useFleetContext();
   const { ship: currentShip, updateCurrentShip } = useCurrentShipContext();
   const [isActive, setIsActive] = React.useState(false);

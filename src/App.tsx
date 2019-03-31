@@ -6,9 +6,8 @@ import {
   ModalType,
 } from "./components/Molecules/Modal/Modal";
 import { NotFound } from "./components/Organisms/Error/NotFound";
-import { Masthead } from "./components/Organisms/Masthead/Masthead";
-import { SessionContextComponent } from "./context/SessionContext";
 import { GlobalStyle } from "./styles/GlobalStyle";
+import { P } from "./components/Atoms/Text/Text";
 
 interface IProps {
   routes: RouteProps[];
@@ -55,10 +54,10 @@ export class App extends React.Component<IProps, IState> {
     if (this.state.errorMessage) {
       errorModal = (
         <Modal isOpen={true} title="An error occurred" type={ModalType.DANGER}>
-          <p>
+          <P>
             There was an error loading data. Please reload the page to try again
-          </p>
-          <p>Detail: {this.state.errorMessage}</p>
+          </P>
+          <P>Detail: {this.state.errorMessage}</P>
           <ModalActions>
             <a href={window.location.pathname}>Reload</a>
           </ModalActions>
@@ -67,29 +66,26 @@ export class App extends React.Component<IProps, IState> {
     }
 
     return (
-      <SessionContextComponent>
+      <>
         <GlobalStyle />
-        <Masthead />
-        <main>
-          <Switch>
-            {routes.map(route => (
-              <Route
-                key={`${route.path}`}
-                path={route.path}
-                exact={route.exact}
-                render={props =>
-                  React.createElement(route.component, {
-                    ...props,
-                    initialData,
-                  })
-                }
-              />
-            ))}
-            <Route component={NotFound} />
-          </Switch>
-        </main>
+        <Switch>
+          {routes.map(route => (
+            <Route
+              key={`${route.path}`}
+              path={route.path}
+              exact={route.exact}
+              render={props =>
+                React.createElement(route.component, {
+                  ...props,
+                  initialData,
+                })
+              }
+            />
+          ))}
+          <Route component={NotFound} />
+        </Switch>
         {errorModal}
-      </SessionContextComponent>
+      </>
     );
   }
 }

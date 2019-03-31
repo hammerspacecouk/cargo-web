@@ -27,10 +27,10 @@ const getAttachEmailForm = () => {
   return (
     <Panel>
       <MessageWarning>
-        You have not yet linked your game to an e-mail address. <br />
+        You have not yet linked your game to an email address. <br />
         If you clear your cookies or switch browsers you will never be able to
         recover your game. <br />
-        Link your game to an e-mail address now to make sure it is saved
+        Link your game to an email address now to make sure it is saved
       </MessageWarning>
       <h2>Log in to save your game</h2>
       <LoginForm />

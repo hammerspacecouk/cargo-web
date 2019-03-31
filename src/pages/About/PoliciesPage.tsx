@@ -45,14 +45,14 @@ export const PoliciesPage = () => (
       <p>
         We don't ask for a password, so we don't have to store your password. We
         rely on alternative means of authentication using your account on third
-        party services, or an e-mail to your inbox.
+        party services, or an email to your inbox.
       </p>
       <h3>Your data</h3>
       <p>
         It is necessary to have a piece of information unique to you in order to
-        allow you to log in and keep playing the same game. We use your e-mail
-        address. However we don't store the e-mail address itself. We scramble
-        it through a one-way process to get an unpredictable code, and we store
+        allow you to log in and keep playing the same game. We use your email
+        address. However we don't store the email address itself. We scramble it
+        through a one-way process to get an unpredictable code, and we store
         that instead.
       </p>
       <HashDemo as="div">
@@ -62,23 +62,23 @@ export const PoliciesPage = () => (
         </HashDemoCode>
       </HashDemo>
       <p>
-        We have no way of restoring your e-mail address back from this code. We
-        cannot e-mail you from this data so you will not hear from us. There is
+        We have no way of restoring your email address back from this code. We
+        cannot email you from this data so you will not hear from us. There is
         no personally identifying data in our system. We also do not store which
-        third-party account you used to tell us your e-mail address. This means
+        third-party account you used to tell us your email address. This means
         you can mix and match which services you login with, as long as they use
-        the same e-mail address. We do not have any further access to those
-        third party accounts and we cannot post as you.
+        the same email address. We do not have any further access to those third
+        party accounts and we cannot post as you.
       </p>
       <p>
-        Any e-mails we send rely on the e-mail address being provided at that
+        Any emails we send rely on the email address being provided at that
         point.
         <br />
         If somebody sends you an invite we will email you once, and not store
         your address. We will not be able to contact you again even if we wanted
         to.
         <br />
-        When you request to log in via e-mail we send to the e-mail address you
+        When you request to log in via email we send to the email address you
         provide. It is not stored once sent.
       </p>
       <p>

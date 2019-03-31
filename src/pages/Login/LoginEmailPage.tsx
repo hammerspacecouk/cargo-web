@@ -3,7 +3,9 @@ import * as React from "react";
 import { ConfirmButton } from "../../components/Atoms/Button/Button";
 import { TokenButton } from "../../components/Molecules/TokenButton/TokenButton";
 import { Error } from "../../components/Organisms/Error/Error";
-import { SimplePage } from "../../components/Templates/SimplePage/SimplePage";
+import { P } from "../../components/Atoms/Text/Text";
+import { Prose } from "../../components/Atoms/Prose/Prose";
+import { PanelPage } from "../../components/Templates/PanelPage/PanelPage";
 
 interface IProps {
   query?: string;
@@ -21,15 +23,17 @@ export const LoginEmailPage = ({ query }: IProps) => {
   };
 
   return (
-    <SimplePage title="Log in using e-mail">
-      <p>
-        Thank you for clicking the link in your e-mail. If you didn't mean to,
-        don't worry; Nothing has happened yet. To perform the login and continue
-        to your game click below.
-      </p>
-      <TokenButton token={token}>
-        <ConfirmButton>Continue</ConfirmButton>
-      </TokenButton>
-    </SimplePage>
+    <PanelPage title="Email Login">
+      <Prose>
+        <P>
+          You clicked a login link in your email. If you didn't mean to, don't
+          worry; Nothing has happened yet. To perform the login and continue to
+          your game click below.
+        </P>
+        <TokenButton token={token}>
+          <ConfirmButton>Continue</ConfirmButton>
+        </TokenButton>
+      </Prose>
+    </PanelPage>
   );
 };

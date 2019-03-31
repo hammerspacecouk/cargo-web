@@ -9,14 +9,14 @@ export const DuplicatePage = () => (
   <AboutLayout title="Duplicate account">
     <Prose>
       <p>
-        You have tried to associate your anonymous account with an e-mail
-        address which has already been registered. You have two options:
+        You have tried to associate your anonymous account with an email address
+        which has already been registered. You have two options:
       </p>
       <h2>1. Register this anonymous account</h2>
       <p>
         To use <strong>this</strong> account as your preferred account, you will
-        first need to delete your previous account which is linked to that
-        e-mail address. To do this, login to the other account and visit the{" "}
+        first need to delete your previous account which is linked to that email
+        address. To do this, login to the other account and visit the{" "}
         <a href="/profile/delete">Delete</a> page.
       </p>
       <MessageInfo>
@@ -25,7 +25,7 @@ export const DuplicatePage = () => (
       </MessageInfo>
       <p>
         Once the other account has been deleted, you will be able to register
-        this account to that e-mail address on your{" "}
+        this account to that email address on your{" "}
         <a href="/profile">Profile</a> page.
       </p>
 

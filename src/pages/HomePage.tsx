@@ -4,13 +4,13 @@ import styled from "styled-components";
 import { H1 } from "../components/Atoms/Heading/Heading";
 import { Prose } from "../components/Atoms/Prose/Prose";
 import { EventsList } from "../components/Organisms/EventsList/EventsList";
-import { PlayPanel } from "../components/Organisms/PlayPanel/PlayPanel";
 import { IEvent } from "../Interfaces";
 import { routes } from "../routes";
 import { BREAKPOINTS } from "../styles/media";
 import { GRID } from "../styles/variables";
 import { MaxContentArea } from "../components/Templates/MaxSection/MaxContentArea";
 import { ContentPanel } from "../components/Molecules/ContentPanel/ContentPanel";
+import { Button } from "../components/Atoms/Button/Button";
 
 interface IProps {
   events: IEvent[];
@@ -73,7 +73,9 @@ export const HomePage = ({ events }: IProps) => (
         </Hero>
       </TemplateHero>
       <TemplatePlay>
-        <PlayPanel />
+        <Button as="a" href={routes.getPlay()}>
+          Play now
+        </Button>
       </TemplatePlay>
       <TemplateMain>
         <Prose>
