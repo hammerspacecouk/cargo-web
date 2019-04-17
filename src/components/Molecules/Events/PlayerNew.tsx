@@ -1,31 +1,25 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
 import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
-import { Event, EventFlag } from "./Event";
+import { Event, EventFlag, IEventProps } from "./Event";
 
-interface IProps {
-  readonly event: IEvent;
-  readonly firstPerson?: boolean;
-}
-
-export const PlayerNew = (props: IProps) => {
+export const PlayerNew = ({event, firstPerson, onAnimated }: IEventProps) => {
   let name;
-  if (props.firstPerson) {
+  if (firstPerson) {
     name = "You ";
-  } else if (props.event.actioningPlayer) {
+  } else if (event.actioningPlayer) {
     name = (
       <EventFlag>
-        <PlayerFlag player={props.event.actioningPlayer} />
+        <PlayerFlag player={event.actioningPlayer} />
       </EventFlag>
     );
   } else {
     name = "[deleted] ";
   }
 
-  const port = props.event.port;
+  const port = event.port;
 
   return (
-    <Event time={props.event.time}>
+    <Event time={event.time} onAnimated={onAnimated}>
       {name} started a new game at {port.name}
     </Event>
   );

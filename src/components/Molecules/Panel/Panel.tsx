@@ -1,13 +1,47 @@
+import * as React from "react";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { H2 } from "../../Atoms/Heading/Heading";
+import { IChildrenProps } from "../../../Interfaces";
+import { MONOSPACE_FONT, SIZES } from "../../../styles/typography";
 
-export const Panel = styled.div`
+interface IProps extends IChildrenProps {
+  title: string;
+  className?: string;
+}
+
+const StyledPanel = styled.div`
   padding: ${GRID.UNIT};
-  border: solid 1px;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 `;
 
-export const PanelTitle = styled(H2)`
+const PanelTitle = styled(H2)`
   margin-bottom: ${GRID.UNIT};
 `;
+
+const PanelBody = styled.div`
+    flex: 1;
+`;
+
+const PanelFoot = styled.div`
+    ${SIZES.F}
+    ${MONOSPACE_FONT};
+    opacity: 0.6;
+    text-align: right;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-top: ${GRID.UNIT};
+`;
+
+export const Panel = ({ className, title, children }: IProps) => {
+  return (
+    <StyledPanel className={className}>
+      <PanelTitle>{title}</PanelTitle>
+      <PanelBody>
+        {children}
+      </PanelBody>
+      <PanelFoot>/{title}</PanelFoot>
+    </StyledPanel>
+  )
+};

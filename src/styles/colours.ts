@@ -6,6 +6,7 @@ import { GRID } from "./variables";
 const allColours = {
   base: "#5700d2",
   black: "#1c1a23",
+  fullBlack: "#100e16",
   white: "#f9f9fa",
   gray: [
     "#f9f9fa",
@@ -169,7 +170,12 @@ const allColours = {
 export const COLOURS = {
   BASE: allColours.base,
   ACTIVE_HIGHLIGHT: allColours.violet[4],
+  EVENTS: {
+    BACKGROUND: allColours.fullBlack,
+    TEXT: allColours.white
+  },
   BLACK: {
+    FULL: allColours.fullBlack,
     STANDARD: allColours.black,
     FADED: allColours.gray[9],
     COLOURISED: allColours.violet[9],

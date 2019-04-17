@@ -25,6 +25,13 @@ export const Digits = styled.span`
   ${MONOSPACE_FONT};
 `;
 
+const getScoreString = (input: number): string => {
+  if (input > 999999999999999) {
+    return input.toExponential(12);
+  }
+  return input.toLocaleString();
+};
+
 /**
  * Standard way to display a score value (with Icon)
  */
@@ -34,7 +41,7 @@ export const ScoreValue = ({ score, className }: IProps) => {
       <Icon>
         <CreditsIcon />
       </Icon>
-      <Digits>{score.toLocaleString()}</Digits>
+      <Digits>{getScoreString(score)}</Digits>
     </StyledScore>
   );
 };

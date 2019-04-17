@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import {
+  IEvent,
   IFleetShip,
   ILoginOptions,
   IPlayer,
   IRankStatus,
-  IScore,
+  IScore
 } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 import { useMounted } from "./useMounted";
@@ -28,7 +29,11 @@ export interface IGameSession {
   loginOptions?: ILoginOptions;
   score?: IScore;
   ships?: IFleetShip[];
+  events?: IEvent[];
   rankStatus?: IRankStatus;
+  refreshSession: () => void;
+  isAtHome: boolean;
+  setIsAtHome: (val: boolean) => void;
 }
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
@@ -42,7 +47,9 @@ export const useGameSession = (): IGameSession => {
   const [rankStatus, updateRankStatus] = useState(undefined);
   const [score, updateScore] = useState(undefined);
   const [ships, setShips] = useState(undefined);
+  const [events, setEvents] = useState(undefined);
   const [loginOptions, setLoginOptions] = useState(undefined);
+  const [isAtHome, setIsAtHome] = useState(false);
 
   const isMounted = useMounted();
 
@@ -63,6 +70,7 @@ export const useGameSession = (): IGameSession => {
       updateScore(session.sessionState.player.score);
       updateRankStatus(session.sessionState.rankStatus);
       setShips(session.fleet.ships);
+      setEvents(session.fleet.events);
       setPlayer(session.sessionState.player);
       setLoginOptions(null);
       // setHasProfileNotification(session.hasProfileNotification);
@@ -71,6 +79,7 @@ export const useGameSession = (): IGameSession => {
       updateRankStatus(null);
       setShips(null);
       setPlayer(null);
+      setEvents(null);
       setLoginOptions(session.sessionState.loginOptions);
     }
   };
@@ -83,7 +92,11 @@ export const useGameSession = (): IGameSession => {
     loginOptions,
     player,
     rankStatus,
+    events,
+    refreshSession,
     score,
+    isAtHome,
+    setIsAtHome,
     ships,
   };
 };

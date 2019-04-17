@@ -14,6 +14,7 @@ import { BREAKPOINTS } from "../styles/media";
 import { LandingPage } from "./Play/LandingPage";
 import { MASTHEAD_HEIGHT } from "../styles/variables";
 import { scrollbars } from "../styles/colours";
+import { PlayHome } from "./Play/PlayHome";
 
 const StyledPlayBoard = styled.div`
   ${BREAKPOINTS.XL`
@@ -57,6 +58,7 @@ export const PlayPage = () => {
             {/*exact={true}*/}
             {/*/>*/}
             {/*<Route path="/play/:shipId" component={ShipPage} exact={true} />*/}
+            <Route path="/play/log" component={PlayHome} exact={true} />
             <Route path="/play" component={LandingPage} exact={true} />
             <Route component={NotFound} />
           </Switch>

@@ -1,14 +1,9 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
-import { Event } from "./Event";
+import { Event, IEventProps } from "./Event";
 import { CrateContents } from "../../Atoms/CrateContents/CrateContents";
 
-interface IProps {
-  readonly event: IEvent;
-  readonly firstPerson?: boolean;
-}
 
-export const CrateNew = ({ firstPerson, event }: IProps) => {
+export const CrateNew = ({ firstPerson, event, onAnimated }: IEventProps) => {
   let you = "";
   if (firstPerson) {
     you = " for you ";
@@ -17,7 +12,7 @@ export const CrateNew = ({ firstPerson, event }: IProps) => {
   const contents = event.crate ? event.crate.contents : "[deleted]";
 
   return (
-    <Event time={event.time}>
+    <Event time={event.time} onAnimated={onAnimated}>
       A new crate containing <CrateContents>{contents}</CrateContents> is ready{" "}
       {you} to transport
     </Event>

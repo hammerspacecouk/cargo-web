@@ -3,6 +3,7 @@ import { IChildrenProps } from "../Interfaces";
 import { Loading } from "../components/Atoms/Loading/Loading";
 import { RequireLogin } from "../components/Organisms/RequireLogin/RequireLogin";
 import { IGameSession, useGameSession } from "../hooks/useGameSession";
+import { FlexAllCenter } from "../components/Atoms/Flex/Flex";
 
 interface IProps extends IChildrenProps {
   useChildren?: boolean;
@@ -13,7 +14,7 @@ export const GameContextComponent = ({ children, useChildren }: IProps) => {
   const gameSession = useGameSession();
 
   if (gameSession.player === undefined) {
-    return <Loading />; // todo - skeleton
+    return <FlexAllCenter><Loading /></FlexAllCenter>; // todo - skeleton
   }
 
   const body = useChildren || gameSession.player ? children : <RequireLogin />;

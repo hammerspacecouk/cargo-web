@@ -1,22 +1,16 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
-import { Event } from "./Event";
+import { Event, IEventProps } from "./Event";
 
-interface IProps {
-  readonly event: IEvent;
-  readonly firstPerson?: boolean;
-}
-
-export const ShipDeparture = (props: IProps) => {
-  const port = props.event.port;
+export const ShipDeparture = ({event, onAnimated }: IEventProps) => {
+  const port = event.port;
 
   let name = "[deleted]";
-  if (props.event.actioningShip) {
-    name = props.event.actioningShip.name;
+  if (event.actioningShip) {
+    name = event.actioningShip.name;
   }
 
   return (
-    <Event time={props.event.time}>
+    <Event time={event.time} onAnimated={onAnimated}>
       <em>{name}</em> departed {port.name} headed into open space
     </Event>
   );

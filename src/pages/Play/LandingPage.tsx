@@ -1,19 +1,31 @@
 import * as React from "react";
+import { useGameContext } from "../../context/GameContext";
+import { PlayHome } from "./PlayHome";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../styles/media";
 
 const StyledArea = styled.div`
   display: none;
   ${BREAKPOINTS.XL`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     height: 100%;
     `};
 `;
 
-export const LandingPage = () => (
-  <StyledArea>
-    Choose a ship
-  </StyledArea>
-);
+export const LandingPage = () => {
+  const {setIsAtHome} = useGameContext();
+  React.useEffect(() => {
+    setIsAtHome(true);
+    return () => {
+      setIsAtHome(false);
+    }
+  }, []);
+
+
+
+  return (
+    <StyledArea>
+      <PlayHome />
+    </StyledArea>
+  );
+};

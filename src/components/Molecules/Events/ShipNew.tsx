@@ -1,20 +1,14 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
-import { Event } from "./Event";
+import { Event, IEventProps } from "./Event";
 
-interface IProps {
-  readonly event: IEvent;
-  readonly firstPerson?: boolean;
-}
-
-export const ShipNew = (props: IProps) => {
+export const ShipNew = ({event, onAnimated }: IEventProps) => {
   let name = "[deleted]";
-  if (props.event.ship) {
-    name = props.event.ship.name;
+  if (event.ship) {
+    name = event.ship.name;
   }
 
   return (
-    <Event time={props.event.time}>
+    <Event time={event.time} onAnimated={onAnimated}>
       <em>{name}</em> was launched
     </Event>
   );

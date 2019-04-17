@@ -163,7 +163,7 @@ const html = ({
     <title>${title ? `${title} | ` : ""}Planet Cargo</title>
 </head>
 <body>
-<div id="root">${content}</div>
+<div id="root" style="min-height:100vh">${content}</div>
 <script src="${assetsManifest.get("vendor.js")}"></script>
 <script>
   window._CONFIG_ = ${JSON.stringify(config)};

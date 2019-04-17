@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../styles/variables";
@@ -9,6 +9,7 @@ import { routes } from "../../../routes";
 import { Hidden } from "../../Atoms/Hidden/Hidden";
 import { ChevronLeftIcon } from "../../Icons/ChevronLeftIcon/ChevronLeftIcon";
 import { Icon } from "../../Atoms/Icon/Icon";
+import { BREAKPOINTS } from "../../../styles/media";
 
 const MastheadPosition = styled.header`
   position: sticky;
@@ -31,8 +32,9 @@ const StyledMasthead = styled.div`
 const MastHeadScore = styled.div`
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: flex;
+  flex: 1;
+  justify-content: flex-end;
   padding: 0 ${GRID.HALF};
 `;
 
@@ -48,6 +50,7 @@ const Back = styled(Link)`
   &:focus {
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.2)};
   }
+  ${BREAKPOINTS.XL`display: none;`}
 `;
 
 const BackButton = () => (
@@ -60,13 +63,13 @@ const BackButton = () => (
 );
 
 export const Masthead = () => {
-  const { score } = useGameContext();
+  const { score, refreshSession, isAtHome } = useGameContext();
 
   return (
     <MastheadPosition>
       <StyledMasthead>
-        <BackButton />
-        <MastHeadScore>
+        {!isAtHome && <BackButton />}
+        <MastHeadScore onClick={refreshSession}>
           <Score score={score} />
         </MastHeadScore>
       </StyledMasthead>

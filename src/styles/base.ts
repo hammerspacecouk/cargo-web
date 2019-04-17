@@ -82,4 +82,8 @@ export const base = css`
   abbr {
     text-decoration: none;
   }
+  
+  em {
+    font-style: italic;
+  }
 `;
