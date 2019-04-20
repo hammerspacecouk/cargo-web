@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Score } from "../../../containers/Player/Score";
+import { Score } from "../../Organisms/Score/Score";
 import { IOffenceOption, IShip } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
 import { ShieldStrength } from "../ShieldStrength/ShieldStrength";

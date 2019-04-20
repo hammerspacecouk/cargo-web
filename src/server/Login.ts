@@ -1,11 +1,11 @@
 import { Component, createElement } from "react";
 import { RouteProps, withRouter } from "react-router-dom";
-import { LoginPage } from "../pages/LoginPage";
+import { LoginContainer } from "../contexts/GameContext/LoginContainer";
 import { withGuestUser } from "./withGuestUser";
 
 class LoginComponent extends Component<RouteProps, undefined> {
   public render() {
-    return createElement(LoginPage, { query: this.props.location.search });
+    return createElement(LoginContainer, { query: this.props.location.search });
   }
 }
 

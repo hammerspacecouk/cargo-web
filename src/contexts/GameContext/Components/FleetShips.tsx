@@ -1,13 +1,13 @@
 import * as React from "react";
 import { IFleetShip } from "../../../Interfaces";
-import { NavigationItem } from "../../Molecules/NavigationItem/NavigationItem";
-import { InventoryIcon } from "../../Icons/InventoryIcon/InventoryIcon";
+import { NavigationItem } from "../../../components/Molecules/NavigationItem/NavigationItem";
 import { routes } from "../../../routes";
-import { NavigationList } from "../Navigation/Navigation";
+import { NavigationList } from "./Navigation";
 import styled from "styled-components";
 import { GRID, NAV_ITEM_HEIGHT } from "../../../styles/variables";
 import { ELEMENTS } from "../../../styles/typography";
-import { ShieldStrength } from "../../Molecules/ShieldStrength/ShieldStrength";
+import { ShieldStrength } from "../../../components/Molecules/ShieldStrength/ShieldStrength";
+import { useGameContext } from "../GameContext";
 
 interface IProps {
   fleetShips: IFleetShip[];
@@ -15,6 +15,7 @@ interface IProps {
 
 interface IItemProps {
   fleetShip: IFleetShip;
+  isCurrent?: boolean;
 }
 
 const StyledDestroyedShip = styled.div`
@@ -43,15 +44,18 @@ const DestroyedShip = ({ fleetShip }: IItemProps) => (
   </StyledDestroyedShip>
 );
 
-const ActiveShip = ({ fleetShip }: IItemProps) => (
+const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => (
   <NavigationItem
     icon={<ShieldStrength percent={fleetShip.ship.strengthPercent} />}
     path={routes.getPlayShip(fleetShip.ship.id)}
     text={fleetShip.ship.name}
+    isCurrent={isCurrent}
   />
 );
 
 export const FleetShips = ({ fleetShips }: IProps) => {
+  const {activeShip} = useGameContext();
+
   return (
     <NavigationList>
       {/* todo - destroyed ships & attention */}
@@ -60,7 +64,10 @@ export const FleetShips = ({ fleetShips }: IProps) => {
           {fleetShip.ship.isDestroyed ? (
             <DestroyedShip fleetShip={fleetShip} />
           ) : (
-            <ActiveShip fleetShip={fleetShip} />
+            <ActiveShip
+              fleetShip={fleetShip}
+              isCurrent={!!(activeShip && (activeShip.ship.id === fleetShip.ship.id))}
+            />
           )}
         </li>
       ))}

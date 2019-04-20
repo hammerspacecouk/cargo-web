@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 import { AppLoading } from "../pages/Play/AppLoading";
-import { PlayPage } from "../pages/PlayPage";
+import { GameContainer } from "../contexts/GameContext/GameContainer";
 
 interface IState {
   appReady: boolean;
@@ -22,6 +22,6 @@ export class Play extends Component<undefined, IState> {
     if (!this.state.appReady) {
       return createElement(AppLoading);
     }
-    return createElement(PlayPage);
+    return createElement(GameContainer);
   }
 }

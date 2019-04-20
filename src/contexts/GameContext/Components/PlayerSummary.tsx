@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
 import { GRID, NAV_ITEM_HEIGHT } from "../../../styles/variables";
-import { useGameContext } from "../../../context/GameContext";
-import { Icon } from "../../Atoms/Icon/Icon";
-import { PlayerFlag } from "../../Molecules/PlayerFlag/PlayerFlag";
-import { H5 } from "../../Atoms/Heading/Heading";
-import { ProgressBar } from "../../Atoms/ProgressBar/ProgressBar";
-import { TextF } from "../../Atoms/Text/Text";
+import { useGameContext } from "../GameContext";
+import { Icon } from "../../../components/Atoms/Icon/Icon";
+import { PlayerFlag } from "../../../components/Molecules/PlayerFlag/PlayerFlag";
+import { H5 } from "../../../components/Atoms/Heading/Heading";
+import { ProgressBar } from "../../../components/Atoms/ProgressBar/ProgressBar";
+import { TextF } from "../../../components/Atoms/Text/Text";
 import { ELEMENTS, SIZES } from "../../../styles/typography";
 
 const StyledSummary = styled.div`

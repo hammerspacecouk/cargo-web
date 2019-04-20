@@ -25,6 +25,7 @@ interface ISessionResponse {
 }
 
 export interface IGameSession {
+  activeShip?: IFleetShip;
   player?: IPlayer;
   loginOptions?: ILoginOptions;
   score?: IScore;
@@ -34,6 +35,7 @@ export interface IGameSession {
   refreshSession: () => void;
   isAtHome: boolean;
   setIsAtHome: (val: boolean) => void;
+  setActiveShipById: (shipId?: string) => void;
 }
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
@@ -47,6 +49,7 @@ export const useGameSession = (): IGameSession => {
   const [rankStatus, updateRankStatus] = useState(undefined);
   const [score, updateScore] = useState(undefined);
   const [ships, setShips] = useState(undefined);
+  const [activeShip, setActiveShip] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const [loginOptions, setLoginOptions] = useState(undefined);
   const [isAtHome, setIsAtHome] = useState(false);
@@ -84,11 +87,23 @@ export const useGameSession = (): IGameSession => {
     }
   };
 
+  const setActiveShipById = (id: string) => {
+    if (!isMounted()) {
+      return;
+    }
+    if (!ships) {
+      setActiveShip(null);
+    }
+    const foundShip = ships.find((ship: IFleetShip): boolean => ship.ship.id === id);
+    setActiveShip(foundShip || null);
+  };
+
   useEffect(() => {
     updateSession(true);
   }, []);
 
   return {
+    activeShip,
     loginOptions,
     player,
     rankStatus,
@@ -96,6 +111,7 @@ export const useGameSession = (): IGameSession => {
     refreshSession,
     score,
     isAtHome,
+    setActiveShipById,
     setIsAtHome,
     ships,
   };

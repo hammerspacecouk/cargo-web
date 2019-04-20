@@ -8,7 +8,7 @@ import { MessageWarning } from "../components/Molecules/Message/Message";
 import { Panel } from "../components/Molecules/Panel/Panel";
 import { Table } from "../components/Molecules/Table/Table";
 import { Error } from "../components/Organisms/Error/Error";
-import { LoginForm } from "../components/Organisms/LoginForm/LoginForm";
+import { LoginForm } from "../contexts/GameContext/Components/LoginForm";
 import { LogOutButton } from "../components/Organisms/LogoutButton/LogOutButton";
 import { ProfileLayout } from "../components/Templates/ProfileLayout/ProfileLayout";
 import { ISessionResponse, useSessionContext } from "../context/SessionContext";

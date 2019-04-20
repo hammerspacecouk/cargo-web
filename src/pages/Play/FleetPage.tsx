@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { EventsList } from "../../components/Organisms/EventsList/EventsList";
-import { FleetShips } from "../../components/Organisms/FleetShips/FleetShips";
+import { FleetShips } from "../../contexts/GameContext/Components/FleetShips";
 import { PlayerRank } from "../../components/Organisms/PlayerRank/PlayerRank";
 import {
   FleetContextProvider,

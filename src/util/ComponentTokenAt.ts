@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const calculate = (children, index) => {
+const calculate = (children: any, index: number) => {
   const childCount = React.Children.count(children);
   if (childCount <= 1) {
     children = [children];
@@ -26,10 +26,9 @@ const calculate = (children, index) => {
   }
 
   return [token, index];
-
 };
 
-export const componentTokenAt = (component, index) => {
+export const componentTokenAt = (component: any, index: number) => {
   const [token] = calculate(component, index);
   return token;
 };

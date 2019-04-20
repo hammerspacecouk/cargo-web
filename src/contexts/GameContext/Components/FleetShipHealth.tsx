@@ -6,11 +6,11 @@ import {
 } from "../../../context/Page/FleetContext";
 import { IActionToken, IHealthIncrease, IScore } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
-import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
-import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
-import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
+import { ButtonRow } from "../../../components/Molecules/ButtonRow/ButtonRow";
+import { CreditsButton } from "./CreditsButton";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
 import { useMounted } from "../../../hooks/useMounted";
-import { useGameContext } from "../../../context/GameContext";
+import { useGameContext } from "../GameContext";
 
 interface IProps {
   health: IHealthIncrease[];

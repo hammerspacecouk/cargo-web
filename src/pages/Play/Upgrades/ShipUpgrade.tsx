@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CreditsButton } from "../../../components/Molecules/CreditsButton/CreditsButton";
+import { CreditsButton } from "../../../contexts/GameContext/Components/CreditsButton";
 import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
 import { useUpgradesContext } from "../../../context/Page/UpgradesContext";
 import { IShipUpgrade } from "../../../Interfaces";

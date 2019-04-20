@@ -1,14 +1,14 @@
 import * as React from "react";
 import { IActionToken } from "../../../Interfaces";
 import { ApiClient } from "../../../util/ApiClient";
-import { Button } from "../../Atoms/Button/Button";
-import { Loading } from "../../Atoms/Loading/Loading";
-import { TextCenter } from "../../Atoms/Text/Text";
-import { Modal } from "../../Molecules/Modal/Modal";
-import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
-import { Promotion } from "../Promotion/Promotion";
+import { Button } from "../../../components/Atoms/Button/Button";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
+import { TextCenter } from "../../../components/Atoms/Text/Text";
+import { Modal } from "../../../components/Molecules/Modal/Modal";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
+import { Promotion } from "../../../components/Organisms/Promotion/Promotion";
 import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { useGameContext } from "../../../context/GameContext";
+import { useGameContext } from "../GameContext";
 
 export const PromotionModal = () => {
   const { rankStatus, updateRankStatus } = useGameContext();

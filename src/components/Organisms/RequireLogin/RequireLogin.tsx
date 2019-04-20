@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LoginForm } from "../LoginForm/LoginForm";
+import { LoginForm } from "../../../contexts/GameContext/Components/LoginForm";
 import { Status } from "../Status/Status";
 import { PanelPage } from "../../Templates/PanelPage/PanelPage";
 

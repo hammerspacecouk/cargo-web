@@ -5,22 +5,22 @@ import { IActionToken, IMessage } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { Environment } from "../../../util/Environment";
-import { Button, ConfirmButton } from "../../Atoms/Button/Button";
-import { H2, H3 } from "../../Atoms/Heading/Heading";
-import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
-import { P } from "../../Atoms/Text/Text";
+import { Button, ConfirmButton } from "../../../components/Atoms/Button/Button";
+import { H2, H3 } from "../../../components/Atoms/Heading/Heading";
+import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
+import { P } from "../../../components/Atoms/Text/Text";
 import {
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
   TwitterButton,
-} from "../../Molecules/SocialButton/SocialButton";
-import { MessagesPanel } from "../MessagesPanel/MessagesPanel";
-import { Loading } from "../../Atoms/Loading/Loading";
-import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
-import { Prose } from "../../Atoms/Prose/Prose";
+} from "../../../components/Molecules/SocialButton/SocialButton";
+import { MessagesPanel } from "../../../components/Organisms/MessagesPanel/MessagesPanel";
+import { Loading } from "../../../components/Atoms/Loading/Loading";
+import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
+import { Prose } from "../../../components/Atoms/Prose/Prose";
 import { BREAKPOINTS } from "../../../styles/media";
-import { useGameContext } from "../../../context/GameContext";
+import { useGameContext } from "../GameContext";
 import { MONOSPACE_FONT } from "../../../styles/typography";
 
 interface IProps {

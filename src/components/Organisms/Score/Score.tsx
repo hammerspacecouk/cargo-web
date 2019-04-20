@@ -1,8 +1,7 @@
+import * as React from "react";
 import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
-import { createElement, useEffect, useRef, useState } from "react";
-
-import { ScoreValue } from "../../components/Molecules/ScoreValue/ScoreValue";
-import { IScore } from "../../Interfaces";
+import { ScoreValue } from "../../Molecules/ScoreValue/ScoreValue";
+import { IScore } from "../../../Interfaces";
 
 interface IProps {
   score: IScore;
@@ -28,8 +27,8 @@ const scoreState = (score: IScore): number => {
 };
 
 export const Score = (props: IProps) => {
-  const [score, setScore] = useState(scoreState(props.score));
-  const mounted = useRef(false);
+  const [score, setScore] = React.useState(scoreState(props.score));
+  const mounted = React.useRef(false);
   let frameHandler: number = null;
 
   const frame = () => {
@@ -43,7 +42,7 @@ export const Score = (props: IProps) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     mounted.current = true;
     frameHandler = window.requestAnimationFrame(frame);
     return () => {
@@ -52,5 +51,5 @@ export const Score = (props: IProps) => {
     };
   }, [props.score]);
 
-  return createElement(ScoreValue, { score });
+  return <ScoreValue score={score} />;
 };

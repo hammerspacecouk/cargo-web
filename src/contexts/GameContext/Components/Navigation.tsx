@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
 import { COLOURS, hexToRGBa, scrollbars } from "../../../styles/colours";
-import { Hidden } from "../../Atoms/Hidden/Hidden";
-import { PlayerSummary } from "../PlayerSummary/PlayerSummary";
-import { ListUnstyled } from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
+import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
+import { PlayerSummary } from "./PlayerSummary";
+import { ListUnstyled } from "../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 import { BREAKPOINTS } from "../../../styles/media";
-import { NavigationItem } from "../../Molecules/NavigationItem/NavigationItem";
-import { InventoryIcon } from "../../Icons/InventoryIcon/InventoryIcon";
-import { ProfileIcon } from "../../Icons/ProfileIcon/ProfileIcon";
-import { useGameContext } from "../../../context/GameContext";
-import { FleetShips } from "../FleetShips/FleetShips";
+import { NavigationItem } from "../../../components/Molecules/NavigationItem/NavigationItem";
+import { InventoryIcon } from "../../../components/Icons/InventoryIcon/InventoryIcon";
+import { ProfileIcon } from "../../../components/Icons/ProfileIcon/ProfileIcon";
+import { useGameContext } from "../GameContext";
+import { FleetShips } from "./FleetShips";
 
 interface IProps {
   className?: string;

@@ -4,7 +4,7 @@ import { BREAKPOINTS } from "../../styles/media";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
 import { Panel } from "../../components/Molecules/Panel/Panel";
 import { EventsList } from "../../components/Organisms/EventsList/EventsList";
-import { useGameContext } from "../../context/GameContext";
+import { useGameContext } from "../../contexts/GameContext/GameContext";
 
 const StyledArea = styled.div`
   ${BREAKPOINTS.XL`

@@ -28,6 +28,7 @@ import { ShipNew } from "../../Molecules/Events/ShipNew";
 import { ShipRename } from "../../Molecules/Events/ShipRename";
 import { EffectUse } from "../../Molecules/Events/EffectUse";
 import { Offence } from "../../Molecules/Events/Offence";
+import { useMounted } from "../../../hooks/useMounted";
 
 interface IProps {
   readonly events: IEvent[];
@@ -96,9 +97,11 @@ const StyledListItem = styled.li`
 
 export const EventsList = ({ events, firstPerson }: IProps) => {
   const [displayFrom, setDisplayFrom] = React.useState(undefined);
+  const isMounted = useMounted();
 
   React.useEffect(() => {
     // todo - new events
+    // also todo - store localstorage what you last saw and use that for displayFrom
   }, [events]);
 
   const len = events && events.length;
@@ -127,7 +130,11 @@ export const EventsList = ({ events, firstPerson }: IProps) => {
     let onAnimated;
     if (!hasPassed) {
       onAnimated = () => {
-        window.setTimeout(() => setDisplayFrom(event.id), 1500);
+        window.setTimeout(() => {
+          if (isMounted()) {
+            setDisplayFrom(event.id);
+          }
+        }, 1500);
       }
     }
 

@@ -43,7 +43,7 @@ const Content = styled.span`
   margin-right: ${GRID.UNIT};
 `;
 
-const getChildrenUntil = (children, index) => {
+const getChildrenUntil = (children: any, index: number) => {
   let counter = 0;
   let bits = [];
   while (counter <= index && componentTokenAt(children, counter)) {
@@ -71,7 +71,7 @@ export const Event = ({children, time, onAnimated}: IProps) => {
         return;
       }
 
-      let timer;
+      let timer: number;
       if (componentTokenAt(children, visibleChars)) {
         timer = window.setTimeout(addCharacter, 50);
       } else {

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { useGameContext } from "../../context/GameContext";
-import { PlayHome } from "./PlayHome";
+import { useGameContext } from "../GameContext";
+import { PlayHome } from "../../../pages/Play/PlayHome";
 import styled from "styled-components";
-import { BREAKPOINTS } from "../../styles/media";
+import { BREAKPOINTS } from "../../../styles/media";
 
 const StyledArea = styled.div`
   display: none;
@@ -20,8 +20,6 @@ export const LandingPage = () => {
       setIsAtHome(false);
     }
   }, []);
-
-
 
   return (
     <StyledArea>

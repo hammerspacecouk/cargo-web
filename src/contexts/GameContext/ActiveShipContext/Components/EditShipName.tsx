@@ -1,19 +1,19 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ShipNameGenerator } from "../../../containers/Ship/ShipNameGenerator";
-import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { useFleetContext } from "../../../context/Page/FleetContext";
-import { useMounted } from "../../../hooks/useMounted";
-import { IActionToken, IShip, ITransaction } from "../../../Interfaces";
-import { BREAKPOINTS } from "../../../styles/media";
-import { GRID } from "../../../styles/variables";
-import { ApiClient } from "../../../util/ApiClient";
-import { ConfirmButton, DangerButton } from "../../Atoms/Button/Button";
-import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
-import { ButtonRow } from "../../Molecules/ButtonRow/ButtonRow";
-import { CreditsButton } from "../../Molecules/CreditsButton/CreditsButton";
-import { TokenButton } from "../../Molecules/TokenButton/TokenButton";
-import { useGameContext } from "../../../context/GameContext";
+import { ShipNameGenerator } from "../../../../containers/Ship/ShipNameGenerator";
+import { useCurrentShipContext } from "../../../../context/CurrentShipContext";
+import { useFleetContext } from "../../../../context/Page/FleetContext";
+import { useMounted } from "../../../../hooks/useMounted";
+import { IActionToken, IShip, ITransaction } from "../../../../Interfaces";
+import { BREAKPOINTS } from "../../../../styles/media";
+import { GRID } from "../../../../styles/variables";
+import { ApiClient } from "../../../../util/ApiClient";
+import { ConfirmButton, DangerButton } from "../../../../components/Atoms/Button/Button";
+import { TextCursor } from "../../../../components/Atoms/TextCursor/TextCursor";
+import { ButtonRow } from "../../../../components/Molecules/ButtonRow/ButtonRow";
+import { CreditsButton } from "../../Components/CreditsButton";
+import { TokenButton } from "../../../../components/Molecules/TokenButton/TokenButton";
+import { useGameContext } from "../../GameContext";
 
 interface IProps {
   ship: IShip;

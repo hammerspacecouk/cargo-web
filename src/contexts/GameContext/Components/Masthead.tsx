@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../styles/variables";
-import { Score } from "../../../containers/Player/Score";
-import { useGameContext } from "../../../context/GameContext";
+import { Score } from "../../../components/Organisms/Score/Score";
+import { useGameContext } from "../GameContext";
 import { routes } from "../../../routes";
-import { Hidden } from "../../Atoms/Hidden/Hidden";
-import { ChevronLeftIcon } from "../../Icons/ChevronLeftIcon/ChevronLeftIcon";
-import { Icon } from "../../Atoms/Icon/Icon";
+import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
+import { ChevronLeftIcon } from "../../../components/Icons/ChevronLeftIcon/ChevronLeftIcon";
+import { Icon } from "../../../components/Atoms/Icon/Icon";
 import { BREAKPOINTS } from "../../../styles/media";
 
 const MastheadPosition = styled.header`

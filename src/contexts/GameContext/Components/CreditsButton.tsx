@@ -1,9 +1,9 @@
 import * as React from "react";
-import { getValue } from "../../../containers/Player/Score";
+import { getValue } from "../../../components/Organisms/Score/Score";
 import { IScore } from "../../../Interfaces";
-import { ComplexButton } from "../ComplexButton/ComplexButton";
-import { ScoreValue } from "../ScoreValue/ScoreValue";
-import { useGameContext } from "../../../context/GameContext";
+import { ComplexButton } from "../../../components/Molecules/ComplexButton/ComplexButton";
+import { ScoreValue } from "../../../components/Molecules/ScoreValue/ScoreValue";
+import { useGameContext } from "../GameContext";
 
 interface IProps {
   readonly amount: number;

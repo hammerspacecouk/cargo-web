@@ -55,6 +55,7 @@ const getSession = (cookies?: any): Promise<ISessionResponse> => {
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
 
+/** @deprecated */
 export const SessionContextComponent = ({ children }: IChildrenProps) => {
   const [score, setScore] = useState(initialSession.score);
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
