@@ -19,6 +19,7 @@
       "react-dom/server",
       "date-fns"
     ],
+    "object-literal-sort-keys": true,
     "only-arrow-functions": true
   }
 }

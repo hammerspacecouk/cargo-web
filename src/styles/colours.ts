@@ -1,6 +1,4 @@
 // https://palx.jxnblk.com/5700d2
-// tslint:disable:object-literal-sort-keys
-import { css } from "styled-components";
 import { GRID } from "./variables";
 
 const allColours = {
@@ -166,9 +164,93 @@ const allColours = {
   ],
 };
 
-// tslint:disable-next-line:object-literal-sort-keys
+const greyscale = {
+  BLACK: '#1A1F22',
+  DARKEST: '#292E31',
+  DARKER: '#414649',
+  DARK: '#505558',
+  MID: '#777C7F',
+  LIGHT: '#9EA3A6',
+  LIGHTER: '#C5CACD',
+  LIGHTEST: '#EDF2F5',
+  WHITE: '#FFFFFF',
+};
+
+const danger = {
+  DARKEST: '#B43931',
+  DARK: '#D5443A',
+  MID: '#E1483E',
+  LIGHTER: '#E7564A',
+  LIGHTEST: '#FBECEB'
+};
+
+const warning = {
+  DARKEST: '#CC900D',
+  DARK: '#F2AB10',
+  MID: '#FFB511',
+  LIGHTER: '#FFC314',
+  LIGHTEST: '#FFF7E7'
+};
+
+const ok = {
+  DARKEST: '#30855C',
+  DARK: '#399E6E',
+  MID: '#3DA774',
+  LIGHTER: '#49B88B',
+  LIGHTEST: '#EBF6F1'
+};
+
+// export only has semantic names
 export const COLOURS = {
-  BASE: allColours.base,
+  GREY: greyscale,
+  BODY: {
+    BACKGROUND: greyscale.BLACK,
+    TEXT: greyscale.LIGHTER,
+    LINK: allColours.violet[4],
+    FADED: allColours.gray[7],
+  },
+  PANEL_BORDER: greyscale.DARK,
+  KEYLINE: greyscale.MID,
+
+  BUTTON: {
+    STANDARD: greyscale.WHITE,
+    ACTION: ok.MID,
+    CONFIRM: ok.MID,
+    DANGER: danger.MID,
+    WARNING: warning.MID,
+  },
+
+  HEALTH: {
+    FULL: ok.LIGHTER,
+    GOOD: ok.LIGHTER,
+    OK: ok.LIGHTER,
+    WARNING: warning.LIGHTER,
+    DANGER: danger.LIGHTER,
+  },
+  SEMANTIC: {
+    DANGER: {
+      KEY: danger.MID,
+      BACKGROUND: danger.DARKEST,
+      FOREGROUND: danger.LIGHTEST,
+    },
+    OK: {
+      KEY: ok.MID,
+      BACKGROUND: ok.DARKEST,
+      FOREGROUND: ok.LIGHTEST,
+    },
+    WARNING: {
+      KEY: warning.MID,
+      BACKGROUND: warning.DARKEST,
+      FOREGROUND: warning.LIGHTEST,
+    },
+  },
+
+
+
+
+  // deprecated
+
+  BASE: '#7F57B8',
   ACTIVE_HIGHLIGHT: allColours.violet[4],
   EVENTS: {
     BACKGROUND: allColours.fullBlack,
@@ -183,19 +265,7 @@ export const COLOURS = {
   WHITE: {
     STANDARD: allColours.white,
   },
-  BODY: {
-    BACKGROUND: allColours.black,
-    TEXT: allColours.white,
-    LINK: allColours.violet[4],
-    FADED: allColours.gray[7],
-  },
-  BUTTON: {
-    STANDARD: allColours.white,
-    ACTION: allColours.violet[4],
-    CONFIRM: allColours.green[4],
-    DANGER: allColours.red[5],
-    WARNING: allColours.yellow[4],
-  },
+
   CRATE: {
     LEVEL0: allColours.yellow[2],
     LEVEL1: allColours.cyan[2],
@@ -204,39 +274,6 @@ export const COLOURS = {
     LEVEL4: allColours.teal[3],
     LEVEL5: allColours.lime[4],
     LEVEL6: allColours.orange[3],
-  },
-  GREY: {
-    MID: allColours.gray[7],
-    DARK: allColours.gray[9],
-  },
-  HEALTH: {
-    FULL: allColours.violet[4],
-    GOOD: allColours.green[4],
-    OK: allColours.yellow[3],
-    WARNING: allColours.orange[4],
-    DANGER: allColours.red[5],
-  },
-  SEMANTIC: {
-    DANGER: {
-      KEY: allColours.red[5],
-      BACKGROUND: allColours.red[1],
-      FOREGROUND: allColours.red[9],
-    },
-    INFO: {
-      KEY: allColours.blue[4],
-      BACKGROUND: allColours.blue[1],
-      FOREGROUND: allColours.blue[9],
-    },
-    OK: {
-      KEY: allColours.green[5],
-      BACKGROUND: allColours.green[1],
-      FOREGROUND: allColours.green[9],
-    },
-    WARNING: {
-      KEY: allColours.yellow[4],
-      BACKGROUND: allColours.yellow[1],
-      FOREGROUND: allColours.yellow[9],
-    },
   },
 };
 

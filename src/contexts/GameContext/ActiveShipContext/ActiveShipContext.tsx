@@ -27,13 +27,3 @@ export const ShipContextComponent = ({ ship, children }: IProps) => {
 export const useActiveShipContext = (): IActiveShip => {
   return React.useContext(ActiveShipContext) as IActiveShip;
 };
-
-export const useActiveShipView = (currentView: string) => {
-  const {setCurrentView} = useActiveShipContext();
-  React.useEffect(() => {
-    setCurrentView(currentView);
-    return () => {
-      setCurrentView(undefined);
-    }
-  }, []);
-};

@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
-import { ListInline } from "../../../components/Atoms/Lists/ListInline/ListInline";
-import { Loading } from "../../../components/Atoms/Loading/Loading";
-import { Square } from "../../../components/Atoms/Ratio/Ratio";
-import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { GRID } from "../../../styles/variables";
-import { Environment } from "../../../util/Environment";
-import { CrateOnShip, CrateOnShipPlaceholder } from "./CrateOnShip";
+import { Hidden } from "../../../../components/Atoms/Hidden/Hidden";
+import { ListInline } from "../../../../components/Atoms/Lists/ListInline/ListInline";
+import { Loading } from "../../../../components/Atoms/Loading/Loading";
+import { Square } from "../../../../components/Atoms/Ratio/Ratio";
+import { GRID } from "../../../../styles/variables";
+import { Environment } from "../../../../util/Environment";
+import { CrateOnShip, CrateOnShipPlaceholder } from "../../../../pages/Play/Port/CrateOnShip";
+import { useActiveShipContext } from "../ActiveShipContext";
 
 interface IProps {
   className?: string;
@@ -25,7 +25,7 @@ const ShipImage = styled.div`
 `;
 
 export const CratesOnShip = ({ className }: IProps) => {
-  const { ship, cratesOnShip } = useCurrentShipContext();
+  const { ship, cratesOnShip } = useActiveShipContext();
 
   if (cratesOnShip === undefined) {
     return <Loading />;
@@ -37,15 +37,6 @@ export const CratesOnShip = ({ className }: IProps) => {
   const keyStart = cratesOnShip.length;
   return (
     <div className={className}>
-      <ShipImage>
-        <Square>
-          <img
-            src={`${Environment.apiHostname}${ship.shipClass.image}`}
-            alt={`${ship.name} (${ship.shipClass.name})`}
-          />
-        </Square>
-      </ShipImage>
-      <Hidden as="h2">Crates on Ship</Hidden>
       <List>
         {cratesOnShip.map(crate => (
           <li key={`cos-${crate.crate.id}`}>

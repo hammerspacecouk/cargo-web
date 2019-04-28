@@ -21,7 +21,7 @@ const Track = styled.div<{small: boolean}>`
 const Bar = styled.div<{ percentValue: number }>`
   display: block;
   height: 102%;
-  background: ${COLOURS.SEMANTIC.INFO.KEY};
+  background: ${COLOURS.BASE};
   width: ${({ percentValue }) => percentValue + 2}%;
   margin-left: -1%;
   margin-right: -1%;

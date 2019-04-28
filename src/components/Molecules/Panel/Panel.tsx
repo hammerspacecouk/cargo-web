@@ -14,10 +14,12 @@ const StyledPanel = styled.div`
   padding: ${GRID.UNIT};
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const PanelTitle = styled(H2)`
   margin-bottom: ${GRID.UNIT};
+  line-height: 1;
 `;
 
 const PanelBody = styled.div`

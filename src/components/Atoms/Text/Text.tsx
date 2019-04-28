@@ -42,10 +42,6 @@ export const TextOk = styled.span`
   color: ${COLOURS.SEMANTIC.OK.KEY};
 `;
 
-export const TextInfo = styled.span`
-  color: ${COLOURS.SEMANTIC.INFO.KEY};
-`;
-
 // has to be block level or it won't do anything
 export const TextCenter = styled.div`
   text-align: center;

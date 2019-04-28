@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
 import { GRID } from "../../../styles/variables";
-import { CratesAtPort } from "./CratesAtPort";
-import { CratesOnShip } from "./CratesOnShip";
+import { CratesAtPort } from "../../../contexts/GameContext/ActiveShipContext/Components/CratesAtPort";
+import { CratesOnShip } from "../../../contexts/GameContext/ActiveShipContext/Components/CratesOnShip";
 
 const CratesLayout = styled.div`
   ${BREAKPOINTS.M`

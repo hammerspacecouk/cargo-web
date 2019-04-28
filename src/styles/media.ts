@@ -23,7 +23,6 @@ const makeFunction = (size: number): TaggedTemplateFunction => {
   `;
 };
 
-// tslint:disable:object-literal-sort-keys
 export const BREAKPOINTS: ISizeFunctions = {
   XS: makeFunction(480),
   S: makeFunction(600),
@@ -33,4 +32,3 @@ export const BREAKPOINTS: ISizeFunctions = {
   XXL: makeFunction(1280),
   MAX: makeFunction(1600),
 };
-// tslint:enable:object-literal-sort-keys

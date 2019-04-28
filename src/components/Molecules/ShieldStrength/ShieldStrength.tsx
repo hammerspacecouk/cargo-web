@@ -21,7 +21,8 @@ const radial = keyframes`
   }
 `;
 
-const StyledShieldStrength = styled.div<{ loading: boolean }>`
+const StyledShieldStrength = styled.span<{ loading: boolean }>`
+  display: inline-block;
   width: 100%;
   line-height: 0;
   height: 0;

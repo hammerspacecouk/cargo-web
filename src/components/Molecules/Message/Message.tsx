@@ -74,7 +74,7 @@ export const MessageOk = ({ children }: IChildrenProps) =>
 export const MessageWarning = ({ children }: IChildrenProps) =>
   messageContent(<WarningIcon />, children, COLOURS.SEMANTIC.WARNING);
 export const MessageInfo = ({ children }: IChildrenProps) =>
-  messageContent(<InfoIcon />, children, COLOURS.SEMANTIC.INFO);
+  messageContent(<InfoIcon />, children, COLOURS.SEMANTIC.OK);
 export const MessageError = ({ children }: IChildrenProps) =>
   messageContent(<ErrorIcon />, children, COLOURS.SEMANTIC.DANGER);
 

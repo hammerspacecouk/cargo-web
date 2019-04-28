@@ -1,11 +1,11 @@
 import * as React from "react";
-import { ConfirmButton } from "../../../components/Atoms/Button/Button";
-import { IntervalFormat } from "../../../components/Atoms/IntervalFormat/IntervalFormat";
-import { ComplexButton } from "../../../components/Molecules/ComplexButton/ComplexButton";
-import { TokenButton } from "../../../components/Molecules/TokenButton/TokenButton";
-import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import { IDirection } from "../../../Interfaces";
+import { ConfirmButton } from "../../../../components/Atoms/Button/Button";
+import { IntervalFormat } from "../../../../components/Atoms/IntervalFormat/IntervalFormat";
+import { ComplexButton } from "../../../../components/Molecules/ComplexButton/ComplexButton";
+import { TokenButton } from "../../../../components/Molecules/TokenButton/TokenButton";
+import { usePlayPortContext } from "../../../../context/Page/PlayPortContext";
+import { IDirection } from "../../../../Interfaces";
+import { useActiveShipContext } from "../ActiveShipContext";
 
 interface IProps {
   direction: IDirection;
@@ -14,8 +14,8 @@ interface IProps {
 }
 
 export const GoButton = ({ direction, journeyTime, children }: IProps) => {
-  const { cratesOnShip, cratesInPort, ship } = useCurrentShipContext();
-  const { buttonsDisabled, moveShip, openModal } = usePlayPortContext();
+  const { cratesOnShip, cratesInPort, ship } = useActiveShipContext();
+  const { buttonsDisabled, moveShip, openModal } = usePlayPortContext(); // todo - ?
   const buttonDisabled = direction.action === null || buttonsDisabled;
 
   if (cratesOnShip === undefined) {

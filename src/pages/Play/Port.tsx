@@ -10,7 +10,7 @@ import {
 import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import { CrateModal } from "./Port/CrateModal";
 import { Crates } from "./Port/Crates";
-import { Directions } from "./Port/Directions";
+import { Directions } from "../../contexts/GameContext/ActiveShipContext/Components/Directions";
 import { Welcome } from "./Port/Welcome";
 import { IActionToken, ITravelOption } from "../../Interfaces";
 import { EffectActionButton } from "../../components/Molecules/EffectActionButton/EffectActionButton";

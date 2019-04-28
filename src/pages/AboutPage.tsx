@@ -18,5 +18,7 @@ export const AboutPage = () => (
         <a href="/todo">Styleguide</a>
       </li>
     </ul>
+
+    <p>Planet textures from https://www.solarsystemscope.com</p>
   </AboutLayout>
 );

@@ -52,20 +52,20 @@ export const ELEMENTS = {
   H1: css`
     margin: 0;
     font-weight: normal;
-    text-transform: uppercase;
+    font-variant: small-caps;
     ${SIZES.A} ${HEADING_FONT};
   `,
   H2: css`
     margin: 0;
     font-weight: normal;
-    text-transform: uppercase;
+    font-variant: small-caps;
     font-style: italic;
     ${SIZES.B} ${HEADING_FONT};
   `,
   H3: css`
     margin: 0;
     font-weight: bold;
-    text-transform: uppercase;
+    font-variant: small-caps;
     font-style: italic;
     ${SIZES.C} ${HEADING_FONT};
   `,
@@ -77,13 +77,13 @@ export const ELEMENTS = {
   H5: css`
     margin: 0;
     font-weight: bold;
-    text-transform: uppercase;
+    font-variant: small-caps;
     ${SIZES.E} ${HEADING_FONT};
   `,
   H6: css`
     margin: 0;
     font-weight: normal;
-    text-transform: uppercase;
+    font-variant: small-caps;
     ${SIZES.F} ${HEADING_FONT};
   `,
   P: css`
