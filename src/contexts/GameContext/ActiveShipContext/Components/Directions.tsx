@@ -6,7 +6,6 @@ import { DirectionNW } from "../../../../components/Icons/DirectionNW/DirectionN
 import { DirectionSE } from "../../../../components/Icons/DirectionSE/DirectionSE";
 import { DirectionSW } from "../../../../components/Icons/DirectionSW/DirectionSW";
 import { DirectionW } from "../../../../components/Icons/DirectionW/DirectionW";
-import { Destinations } from "../../../../components/Organisms/Destinations/Destinations";
 import { useActiveShipContext } from "../ActiveShipContext";
 import { IDirection } from "../../../../Interfaces";
 import { TextD, TextF, TextWarning } from "../../../../components/Atoms/Text/Text";
@@ -14,11 +13,39 @@ import { Fraction } from "../../../../components/Atoms/Fraction/Fraction";
 import { PortName } from "../../../../components/Molecules/PortName/PortName";
 import { ScoreValue } from "../../../../components/Molecules/ScoreValue/ScoreValue";
 import { GoButton } from "./GoButton";
+import styled from "styled-components";
+import { COLOURS } from "../../../../styles/colours";
+import { GRID } from "../../../../styles/variables";
+import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
+import { H4, H5 } from "../../../../components/Atoms/Heading/Heading";
+import { MONOSPACE_FONT } from "../../../../styles/typography";
 
 interface IProps {
   direction: IDirection;
   children: any;
 }
+
+const dividerColour = COLOURS.GREY.DARKER;
+
+const StyledDirection = styled.li`
+    border-bottom: solid 1px ${dividerColour};
+    padding: ${GRID.UNIT} 0;
+    display: flex;
+    align-items: center;
+`;
+
+const PortSummary = styled.div`
+    flex: 1;
+`;
+
+const SubLine = styled.div`
+    margin-top: ${GRID.HALF};
+`;
+
+const Distance = styled.div`
+    margin: 0 ${GRID.UNIT};
+    ${MONOSPACE_FONT};
+`;
 
 export const Direction = ({ direction, children }: IProps) => {
   const icon = children;
@@ -29,33 +56,42 @@ export const Direction = ({ direction, children }: IProps) => {
     distance = <Fraction num={1} den={100} />;
   }
 
+  let subLine = (<ScoreValue score={detail.earnings} />);
+  if (detail.denialReason) {
+    subLine = (
+      <TextF as="div">
+        <TextWarning>{detail.denialReason}</TextWarning>
+      </TextF>
+    );
+  }
+
   return (
-    <tr className="destinations__row">
-      <td className="destinations__destination d">
-        <PortName port={detail.destination} />
-        {detail.denialReason && (
-          <TextF as="div">
-            <TextWarning>{detail.denialReason}</TextWarning>
-          </TextF>
-        )}
-      </td>
-      <td className="destinations__distance">
+    <StyledDirection>
+      <PortSummary>
+        <H4 as="h3"><PortName port={detail.destination} /></H4>
+        <SubLine>
+          {subLine}
+        </SubLine>
+      </PortSummary>
+      <Distance>
         {distance}
         <abbr title="light year">
           <TextF>ly</TextF>
         </abbr>
-      </td>
-      <td className="destinations__earnings">
-        <ScoreValue score={detail.earnings} />
-      </td>
-      <td className="destinations__action">
+      </Distance>
+      <div>
         <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>
           {icon}
         </GoButton>
-      </td>
-    </tr>
+      </div>
+    </StyledDirection>
   );
 };
+
+
+const StyledDirections = styled(ListUnstyled)`
+    border-top: solid 1px ${dividerColour};
+`;
 
 
 export const Directions = () => {
@@ -68,16 +104,8 @@ export const Directions = () => {
   const { NW, NE, W, E, SW, SE } = directions;
 
   return (
-      <Destinations>
-        <thead>
-          <tr>
-            <th>Destination Port</th>
-            <th>Distance</th>
-            <th>Earnings</th>
-            <th>Go?</th>
-          </tr>
-        </thead>
-        <tbody>
+      <StyledDirections>
+        <ul>
           {NW ? (
             <Direction direction={NW}>
               <DirectionNW />
@@ -108,7 +136,7 @@ export const Directions = () => {
               <DirectionSE />
             </Direction>
           ) : null}
-        </tbody>
-      </Destinations>
+        </ul>
+      </StyledDirections>
   );
 };

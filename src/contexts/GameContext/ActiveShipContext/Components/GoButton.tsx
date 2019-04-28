@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ConfirmButton } from "../../../../components/Atoms/Button/Button";
 import { IntervalFormat } from "../../../../components/Atoms/IntervalFormat/IntervalFormat";
-import { ComplexButton } from "../../../../components/Molecules/ComplexButton/ComplexButton";
+import { StackedButton } from "../../../../components/Molecules/StackedButton/StackedButton";
 import { TokenButton } from "../../../../components/Molecules/TokenButton/TokenButton";
 import { usePlayPortContext } from "../../../../context/Page/PlayPortContext";
 import { IDirection } from "../../../../Interfaces";
@@ -25,9 +25,9 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
   const time = <IntervalFormat seconds={journeyTime} />;
 
   let actionButton = (
-    <ComplexButton type="submit" disabled={buttonDisabled} icon={children}>
+    <StackedButton type="submit" disabled={buttonDisabled} icon={children}>
       {time}
-    </ComplexButton>
+    </StackedButton>
   );
   if (!buttonDisabled) {
     actionButton = (
@@ -44,7 +44,7 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
     cratesInPort.length > 0
   ) {
     actionButton = (
-      <ComplexButton
+      <StackedButton
         type="submit"
         disabled={buttonDisabled}
         icon={children}
@@ -57,7 +57,7 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
         }}
       >
         {time}
-      </ComplexButton>
+      </StackedButton>
     );
   }
   return actionButton;

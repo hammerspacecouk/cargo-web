@@ -3,6 +3,7 @@ import { BREAKPOINTS } from "./media";
 
 export const MONOSPACE_FONT = css`
   font-family: "Share Tech Mono", monospace;
+  font-variant: small-caps;
 `;
 export const BASE_FONT = css`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -52,38 +53,33 @@ export const ELEMENTS = {
   H1: css`
     margin: 0;
     font-weight: normal;
-    font-variant: small-caps;
     ${SIZES.A} ${HEADING_FONT};
   `,
   H2: css`
     margin: 0;
     font-weight: normal;
-    font-variant: small-caps;
     font-style: italic;
     ${SIZES.B} ${HEADING_FONT};
   `,
   H3: css`
     margin: 0;
     font-weight: bold;
-    font-variant: small-caps;
     font-style: italic;
     ${SIZES.C} ${HEADING_FONT};
   `,
   H4: css`
     margin: 0;
     font-weight: bold;
-    ${SIZES.D};
+    ${SIZES.D} ${HEADING_FONT};
   `,
   H5: css`
     margin: 0;
     font-weight: bold;
-    font-variant: small-caps;
     ${SIZES.E} ${HEADING_FONT};
   `,
   H6: css`
     margin: 0;
     font-weight: normal;
-    font-variant: small-caps;
     ${SIZES.F} ${HEADING_FONT};
   `,
   P: css`
