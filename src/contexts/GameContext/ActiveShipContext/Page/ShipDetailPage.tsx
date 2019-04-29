@@ -4,8 +4,8 @@ import { COLOURS } from "../../../../styles/colours";
 import { Panel } from "../../../../components/Molecules/Panel/Panel";
 import { BREAKPOINTS } from "../../../../styles/media";
 import { Directions } from "../Components/Directions";
-import { Welcome } from "../../../../pages/Play/Port/Welcome";
 import { Crates } from "../../../../pages/Play/Port/Crates";
+import { Hidden } from "../../../../components/Atoms/Hidden/Hidden";
 
 interface IProps {
   className?: string;
@@ -22,7 +22,7 @@ const Page = styled.div`
 
 const GeneralPanel = styled.div`
     display: flex;
-    border-top: solid 1px ${COLOURS.PANEL_BORDER};
+    border-bottom: solid 1px ${COLOURS.PANEL_BORDER};
     ${BREAKPOINTS.L`
       &:nth-child(2n + 1) {
           border-right: solid 1px ${COLOURS.PANEL_BORDER};
@@ -38,6 +38,7 @@ const PanelCrates = styled(GeneralPanel)`
 const PanelNavigation = styled(GeneralPanel)`
     grid-column: col 6 / span 5;
     grid-row: row 1;
+    background: ${COLOURS.GREY.BLACK};
 `;
 
 const PanelShips = styled(GeneralPanel)`
@@ -68,14 +69,12 @@ export const ShipDetailPage = ({className}: IProps) => {
   return (
     <Page className={className}>
       <PanelCrates>
-        <Panel title="Cargo">
-          <Crates />
-        </Panel>
+        <Hidden as="h2">Cargo</Hidden>
+        <Crates />
       </PanelCrates>
       <PanelNavigation>
-        <Panel title="Navigation">
-          <Directions />
-        </Panel>
+        <Hidden as="h2">Navigation</Hidden>
+        <Directions />
       </PanelNavigation>
       <PanelShips>
         <Panel title="Tactical">

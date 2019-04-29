@@ -15,10 +15,17 @@ interface ICrateOnShipProps {
   crateAction: ICrateAction;
 }
 
-const StyledCrateOnShip = styled.div``;
+const StyledCrateOnShip = styled.div`
+    display: flex;
+    > * {
+        flex: 1;
+    }
+`;
 
 const StyledPlaceholder = styled.div`
   padding: ${GRID.HALF};
+  display: flex;
+  align-items: center;
 `;
 
 export const CrateOnShip = ({ crateAction }: ICrateOnShipProps) => {

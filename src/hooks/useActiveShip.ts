@@ -55,6 +55,7 @@ export const useActiveShip = (ship: IShip): IActiveShip => {
   };
 
   useEffect(() => {
+    setDataFromResponse(null);
     if (ship) {
       setShipData();
     }

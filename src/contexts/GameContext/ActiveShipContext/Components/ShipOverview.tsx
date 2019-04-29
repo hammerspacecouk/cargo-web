@@ -6,6 +6,7 @@ import { GRID } from "../../../../styles/variables";
 import { Planet } from "../../../../components/Molecules/Planet/Planet";
 import { Environment } from "../../../../util/Environment";
 import { ELEMENTS, SIZES } from "../../../../styles/typography";
+import { COLOURS } from "../../../../styles/colours";
 
 const shipSize = '128px';
 
@@ -15,6 +16,7 @@ const StyledOverview = styled.div`
     padding: ${GRID.UNIT} calc(${shipSize} + ${GRID.UNIT}) ${GRID.UNIT} ${GRID.UNIT};
     position: relative;
     overflow:hidden;
+    border-bottom: solid 1px ${COLOURS.PANEL_BORDER};
 `;
 
 const PlanetPosition = styled.div`

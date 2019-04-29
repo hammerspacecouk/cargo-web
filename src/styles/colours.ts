@@ -209,8 +209,8 @@ export const COLOURS = {
     LINK: allColours.violet[4],
     FADED: allColours.gray[7],
   },
-  PANEL_BORDER: greyscale.DARK,
-  KEYLINE: greyscale.MID,
+  PANEL_BORDER: greyscale.MID,
+  KEY_LINE: greyscale.MID,
 
   BUTTON: {
     STANDARD: greyscale.WHITE,
@@ -289,7 +289,7 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-export const scrollbars = `
+export const scrollbarStyles = `
   &::-webkit-scrollbar {
     width: ${GRID.HALF};
   }

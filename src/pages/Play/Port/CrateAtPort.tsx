@@ -10,7 +10,13 @@ interface ICrateAtPortProps {
   crateAction: ICrateAction;
 }
 
-const StyledCrateAtPort = styled.div``;
+const StyledCrateAtPort = styled.div`
+    display: flex;
+    flex-direction: column;
+    > * {
+        flex: 1;
+    }
+`;
 
 export const CrateAtPort = ({ crateAction }: ICrateAtPortProps) => {
   const { buttonsDisabled, moveCrate } = usePlayPortContext();

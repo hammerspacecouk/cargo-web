@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
-import { COLOURS, hexToRGBa, scrollbars } from "../../../styles/colours";
+import { COLOURS, hexToRGBa, scrollbarStyles } from "../../../styles/colours";
 import { Hidden } from "../../../components/Atoms/Hidden/Hidden";
 import { PlayerSummary } from "./PlayerSummary";
 import { ListUnstyled } from "../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
@@ -26,7 +26,7 @@ const Ships = styled.div`
   flex: 1;
   ${BREAKPOINTS.XL`
     overflow-y: auto;
-    ${scrollbars};
+    ${scrollbarStyles};
     `};
 `;
 

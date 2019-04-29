@@ -17,7 +17,7 @@ import styled from "styled-components";
 import { COLOURS } from "../../../../styles/colours";
 import { GRID } from "../../../../styles/variables";
 import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
-import { H4, H5 } from "../../../../components/Atoms/Heading/Heading";
+import { H4 } from "../../../../components/Atoms/Heading/Heading";
 import { MONOSPACE_FONT } from "../../../../styles/typography";
 
 interface IProps {
@@ -28,8 +28,10 @@ interface IProps {
 const dividerColour = COLOURS.GREY.DARKER;
 
 const StyledDirection = styled.li`
-    border-bottom: solid 1px ${dividerColour};
-    padding: ${GRID.UNIT} 0;
+    &:not(:last-child) {
+        border-bottom: solid 1px ${dividerColour};
+    }
+    padding: ${GRID.UNIT};
     display: flex;
     align-items: center;
 `;
@@ -90,7 +92,12 @@ export const Direction = ({ direction, children }: IProps) => {
 
 
 const StyledDirections = styled(ListUnstyled)`
-    border-top: solid 1px ${dividerColour};
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    > li {
+        flex: 1;
+    }
 `;
 
 
@@ -105,7 +112,6 @@ export const Directions = () => {
 
   return (
       <StyledDirections>
-        <ul>
           {NW ? (
             <Direction direction={NW}>
               <DirectionNW />
@@ -136,7 +142,6 @@ export const Directions = () => {
               <DirectionSE />
             </Direction>
           ) : null}
-        </ul>
       </StyledDirections>
   );
 };

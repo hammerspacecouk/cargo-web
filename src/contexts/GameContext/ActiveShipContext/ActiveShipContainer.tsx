@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled  from "styled-components";
-import { scrollbars } from "../../../styles/colours";
+import { scrollbarStyles } from "../../../styles/colours";
 import { ShipContextComponent } from "./ActiveShipContext";
 import { ShipOverview } from "./Components/ShipOverview";
 import { ShipDetailPage } from "./Page/ShipDetailPage";
@@ -16,7 +16,7 @@ const StyledPlayBoard = styled.div`
 const StyledShipDetail = styled(ShipDetailPage)`
     flex: 1;
     overflow-y: auto;
-    ${scrollbars}
+    ${scrollbarStyles}
 `;
 
 interface IProps {

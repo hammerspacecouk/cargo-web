@@ -1,22 +1,46 @@
 import * as React from "react";
 import styled from "styled-components";
-import { H1 } from "../../../../components/Atoms/Heading/Heading";
-import { Hidden } from "../../../../components/Atoms/Hidden/Hidden";
+import { H6 } from "../../../../components/Atoms/Heading/Heading";
 import { ListInline } from "../../../../components/Atoms/Lists/ListInline/ListInline";
 import { Loading } from "../../../../components/Atoms/Loading/Loading";
-import { TextCenter } from "../../../../components/Atoms/Text/Text";
-import { PortName } from "../../../../components/Molecules/PortName/PortName";
 import { CrateAtPort } from "../../../../pages/Play/Port/CrateAtPort";
 import { useActiveShipContext } from "../ActiveShipContext";
+import { COLOURS, scrollbarStyles } from "../../../../styles/colours";
+import { GRID } from "../../../../styles/variables";
 
 interface IProps {
   className?: string;
 }
 
 const List = styled(ListInline)`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  ${scrollbarStyles};
+  height: 100%;
+  > li {
+    border-right: solid 1px ${COLOURS.GREY.DARKER};
+    height: 100%;
+    width: 160px;
+    > * {
+        height: 100%;
+    }
+  }
+`;
+
+const Heading = styled(H6)`
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    border-top: solid 1px ${COLOURS.GREY.DARKER};
+    border-right: solid 1px ${COLOURS.GREY.DARKER};
+    border-bottom: solid 1px ${COLOURS.GREY.DARKER};
+    padding: ${GRID.HALF};
+    text-transform: uppercase;
+    background: ${COLOURS.GREY.BLACK};
+`;
+
+const StyledWrapper = styled.div`
+    position: relative;
 `;
 
 export const CratesAtPort = ({ className }: IProps) => {
@@ -27,7 +51,8 @@ export const CratesAtPort = ({ className }: IProps) => {
   } // todo - pretty loader
 
   return (
-    <div className={className}>
+    <StyledWrapper className={className}>
+      <Heading as="h3">Available ({cratesInPort.length})</Heading>
       <List>
         {cratesInPort.map(crateAction => (
           <li key={`cap-${crateAction.crate.id}`}>
@@ -35,6 +60,6 @@ export const CratesAtPort = ({ className }: IProps) => {
           </li>
         ))}
       </List>
-    </div>
+    </StyledWrapper>
   );
 };

@@ -13,7 +13,7 @@ import { Navigation } from "./Components/Navigation";
 import { BREAKPOINTS } from "../../styles/media";
 import { LandingPage } from "./Page/LandingPage";
 import { MASTHEAD_HEIGHT } from "../../styles/variables";
-import { scrollbars } from "../../styles/colours";
+import { scrollbarStyles } from "../../styles/colours";
 import { PlayHome } from "../../pages/Play/PlayHome";
 import { ActiveShipContainer } from "./ActiveShipContext/ActiveShipContainer";
 import { routes } from "../../routes";
@@ -43,7 +43,7 @@ const StyledMain = styled.main`
     padding: 0;
     height: calc(100vh - ${MASTHEAD_HEIGHT} - 1px);
     overflow-y: auto;
-    ${scrollbars}
+    ${scrollbarStyles}
     `};
 `;
 

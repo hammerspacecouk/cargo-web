@@ -27,5 +27,5 @@ export const HaloButton = styled.button`
 `;
 
 export const CrateButton = styled(HaloButton)`
-  border-radius: 8px;
+  border-radius: 0;
 `;
