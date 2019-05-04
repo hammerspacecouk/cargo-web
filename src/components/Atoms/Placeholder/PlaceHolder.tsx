@@ -14,7 +14,7 @@ const frames = keyframes`
 `;
 
 export const animate = css`
-  animation: ${frames} 2s ease-in-out;
+  animation: ${frames} 2s ease-in-out infinite;
 `;
 
 export const PlaceHolder = styled.div`

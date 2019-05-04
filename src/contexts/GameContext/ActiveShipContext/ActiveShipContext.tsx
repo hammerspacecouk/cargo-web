@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IChildrenProps, IShip } from "../../../Interfaces";
-import { IActiveShip, useActiveShip } from "../../../hooks/useActiveShip";
+import { IActiveShip, useActiveShip } from "./useActiveShip";
 import { NotFound } from "../../../components/Organisms/Error/NotFound";
 
 interface IProps extends IChildrenProps{

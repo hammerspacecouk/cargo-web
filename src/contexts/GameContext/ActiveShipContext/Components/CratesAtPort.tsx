@@ -1,65 +1,37 @@
 import * as React from "react";
-import styled from "styled-components";
-import { H6 } from "../../../../components/Atoms/Heading/Heading";
-import { ListInline } from "../../../../components/Atoms/Lists/ListInline/ListInline";
-import { Loading } from "../../../../components/Atoms/Loading/Loading";
-import { CrateAtPort } from "../../../../pages/Play/Port/CrateAtPort";
 import { useActiveShipContext } from "../ActiveShipContext";
-import { COLOURS, scrollbarStyles } from "../../../../styles/colours";
-import { GRID } from "../../../../styles/variables";
+import { CratesList, TITLE_POSITION } from "../../../../components/Molecules/CratesList/CratesList";
+import { Crate, CratePlaceholder } from "./Crate";
 
-interface IProps {
-  className?: string;
-}
-
-const List = styled(ListInline)`
-  overflow-x: auto;
-  white-space: nowrap;
-  ${scrollbarStyles};
-  height: 100%;
-  > li {
-    border-right: solid 1px ${COLOURS.GREY.DARKER};
-    height: 100%;
-    width: 160px;
-    > * {
-        height: 100%;
-    }
-  }
-`;
-
-const Heading = styled(H6)`
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    border-top: solid 1px ${COLOURS.GREY.DARKER};
-    border-right: solid 1px ${COLOURS.GREY.DARKER};
-    border-bottom: solid 1px ${COLOURS.GREY.DARKER};
-    padding: ${GRID.HALF};
-    text-transform: uppercase;
-    background: ${COLOURS.GREY.BLACK};
-`;
-
-const StyledWrapper = styled.div`
-    position: relative;
-`;
-
-export const CratesAtPort = ({ className }: IProps) => {
+export const CratesAtPort = () => {
   const { cratesInPort } = useActiveShipContext();
+  let crates;
+  let totalAvailable = "-";
 
-  if (cratesInPort === undefined) {
-    return <Loading />;
-  } // todo - pretty loader
+  if (cratesInPort) {
+    crates = cratesInPort.map(crateAction => (
+      <Crate
+        key={`cap-${crateAction.crate.id}`}
+        crateAction={crateAction}
+      />
+    ));
+    totalAvailable = cratesInPort.length;
+  } else {
+    const placeholderSlots = new Array(3).fill(undefined);
+    crates = placeholderSlots.map((_, i) => (
+      <CratePlaceholder
+        key={`p-${i}`}
+        loading={true}
+      />
+    ));
+  }
 
   return (
-    <StyledWrapper className={className}>
-      <Heading as="h3">Available ({cratesInPort.length})</Heading>
-      <List>
-        {cratesInPort.map(crateAction => (
-          <li key={`cap-${crateAction.crate.id}`}>
-            <CrateAtPort crateAction={crateAction} />
-          </li>
-        ))}
-      </List>
-    </StyledWrapper>
+    <CratesList
+      title={`Available (${totalAvailable})`}
+      titlePosition={TITLE_POSITION.TOP}
+    >
+      {crates}
+    </CratesList>
   );
 };

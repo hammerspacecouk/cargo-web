@@ -210,6 +210,7 @@ export const COLOURS = {
     FADED: allColours.gray[7],
   },
   PANEL_BORDER: greyscale.MID,
+  PANEL_INNER_DIVIDER: greyscale.DARKER,
   KEY_LINE: greyscale.MID,
 
   BUTTON: {
@@ -248,7 +249,7 @@ export const COLOURS = {
 
 
 
-  // deprecated
+  // deprecated - todo -replace all uses
 
   BASE: '#7F57B8',
   ACTIVE_HIGHLIGHT: allColours.violet[4],

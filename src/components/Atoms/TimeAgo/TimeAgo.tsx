@@ -11,7 +11,7 @@ const getSeconds = (datetime: Date): number => {
 
 const getValue = (seconds: number, datetime: Date): string => {
   if (seconds > 60 * 60 * 24 * 28) {
-    return datetime.toLocaleString();
+    return datetime.toLocaleString('default', {'year': 'numeric', 'month': 'short', 'day': '2-digit'});
   }
   let interval = Math.floor(seconds / 86400);
   if (interval > 1) {

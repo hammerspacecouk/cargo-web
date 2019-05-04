@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 import { COLOURS } from "./colours";
-import { BASE_FONT } from "./typography";
+import { MONOSPACE_FONT } from "./typography";
 import { BREAKPOINTS } from "./media";
 import space from "../space.jpg";
 
@@ -27,7 +27,7 @@ export const base = css`
   body {
     color: ${COLOURS.BODY.TEXT};
     min-height: 100vh;
-    ${BASE_FONT};
+    ${MONOSPACE_FONT};
   }
 
   a {

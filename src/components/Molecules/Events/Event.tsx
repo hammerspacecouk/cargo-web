@@ -6,6 +6,7 @@ import { COLOURS } from "../../../styles/colours";
 import { componentTokenAt } from "../../../util/ComponentTokenAt";
 import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
 import { IEvent } from "../../../Interfaces";
+import { SIZES } from "../../../styles/typography";
 
 export interface IEventProps {
   readonly event: IEvent;
@@ -41,6 +42,7 @@ export const EventFlag = styled.span`
 const Content = styled.span`
   flex: 1;
   margin-right: ${GRID.UNIT};
+  ${SIZES.D};
 `;
 
 const getChildrenUntil = (children: any, index: number) => {

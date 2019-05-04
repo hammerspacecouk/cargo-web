@@ -22,7 +22,7 @@ const Rank = styled.div`
 `;
 
 const RankTitle = styled.div`
-    ${ELEMENTS.H6};
+    ${ELEMENTS.H5};
     margin-bottom: ${GRID.QUARTER};
 `;
 

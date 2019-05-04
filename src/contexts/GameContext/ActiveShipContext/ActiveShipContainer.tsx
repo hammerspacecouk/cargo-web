@@ -37,6 +37,7 @@ export const ActiveShipContainer = (props: IProps) => {
     }
   }, [props.match.params.shipId]);
 
+  // todo - choose between travelling and in port
   return (
     <ShipContextComponent ship={activeShip && activeShip.ship}>
       <StyledPlayBoard>

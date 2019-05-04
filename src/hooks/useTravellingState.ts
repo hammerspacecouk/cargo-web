@@ -38,6 +38,7 @@ const useTravellingCountdown = () => {
 };
 
 export const useTravellingState = () => {
+  // todo - don't use context in here
   const { updateScore, updateRankStatus } = useSessionContext();
   const { refreshState } = useCurrentShipContext();
   const { percent, secondsRemaining, isArriving } = useTravellingCountdown();

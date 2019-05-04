@@ -12,7 +12,7 @@ import { TextD, TextF, TextWarning } from "../../../../components/Atoms/Text/Tex
 import { Fraction } from "../../../../components/Atoms/Fraction/Fraction";
 import { PortName } from "../../../../components/Molecules/PortName/PortName";
 import { ScoreValue } from "../../../../components/Molecules/ScoreValue/ScoreValue";
-import { GoButton } from "./GoButton";
+import { GoButton } from "../Components/GoButton";
 import styled from "styled-components";
 import { COLOURS } from "../../../../styles/colours";
 import { GRID } from "../../../../styles/variables";
@@ -25,11 +25,9 @@ interface IProps {
   children: any;
 }
 
-const dividerColour = COLOURS.GREY.DARKER;
-
 const StyledDirection = styled.li`
     &:not(:last-child) {
-        border-bottom: solid 1px ${dividerColour};
+        border-bottom: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
     }
     padding: ${GRID.UNIT};
     display: flex;

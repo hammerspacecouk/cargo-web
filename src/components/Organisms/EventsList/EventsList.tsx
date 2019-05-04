@@ -31,6 +31,7 @@ import { Offence } from "../../Molecules/Events/Offence";
 import { useMounted } from "../../../hooks/useMounted";
 
 interface IProps {
+  readonly className?: string;
   readonly events: IEvent[];
   readonly firstPerson?: boolean;
 }
@@ -95,7 +96,7 @@ const StyledListItem = styled.li`
   }
 `;
 
-export const EventsList = ({ events, firstPerson }: IProps) => {
+export const EventsList = ({ className, events, firstPerson }: IProps) => {
   const [displayFrom, setDisplayFrom] = React.useState(undefined);
   const isMounted = useMounted();
 
@@ -107,7 +108,7 @@ export const EventsList = ({ events, firstPerson }: IProps) => {
   const len = events && events.length;
   if (!events || len < 1) {
     return (
-      <StyledList as="ol">
+      <StyledList as="ol" className={className}>
         <li>
           <TextCursor/>
         </li>
@@ -158,7 +159,7 @@ export const EventsList = ({ events, firstPerson }: IProps) => {
   }
 
   return (
-    <StyledList as="ol">
+    <StyledList as="ol" className={className}>
       {renderedEvents}
     </StyledList>
   );

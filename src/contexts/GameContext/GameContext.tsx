@@ -2,7 +2,7 @@ import * as React from "react";
 import { IChildrenProps } from "../../Interfaces";
 import { Loading } from "../../components/Atoms/Loading/Loading";
 import { RequireLogin } from "../../components/Organisms/RequireLogin/RequireLogin";
-import { IGameSession, useGameSession } from "../../hooks/useGameSession";
+import { IGameSession, useGameSession } from "./useGameSession";
 import { FlexAllCenter } from "../../components/Atoms/Flex/Flex";
 
 interface IProps extends IChildrenProps {

@@ -6,10 +6,10 @@ import {
   IPlayer,
   IRankStatus,
   IScore
-} from "../Interfaces";
-import { ApiClient } from "../util/ApiClient";
-import { useMounted } from "./useMounted";
-import { IFleetResponse } from "../context/Page/FleetContext";
+} from "../../Interfaces";
+import { ApiClient } from "../../util/ApiClient";
+import { useMounted } from "../../hooks/useMounted";
+import { IFleetResponse } from "../../context/Page/FleetContext";
 
 interface IGameSessionResponse {
   fleet: IFleetResponse;
@@ -36,6 +36,7 @@ export interface IGameSession {
   isAtHome: boolean;
   setIsAtHome: (val: boolean) => void;
   setActiveShipById: (shipId?: string) => void;
+  updateScore: (val: IScore) => void;
 }
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
@@ -114,5 +115,6 @@ export const useGameSession = (): IGameSession => {
     setActiveShipById,
     setIsAtHome,
     ships,
+    updateScore,
   };
 };

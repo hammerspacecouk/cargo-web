@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { COLOURS } from "../../../../styles/colours";
 import { Panel } from "../../../../components/Molecules/Panel/Panel";
 import { BREAKPOINTS } from "../../../../styles/media";
-import { Directions } from "../Components/Directions";
-import { Crates } from "../../../../pages/Play/Port/Crates";
+import { Directions } from "../Panels/Directions";
+import { Crates } from "../Panels/Crates";
 import { Hidden } from "../../../../components/Atoms/Hidden/Hidden";
+import { EventsList } from "../../../../components/Organisms/EventsList/EventsList";
+import { useActiveShipContext } from "../ActiveShipContext";
+import { Engineering } from "../Panels/Engineering";
 
 interface IProps {
   className?: string;
@@ -63,9 +66,15 @@ const PanelEngineering = styled(GeneralPanel)`
 `;
 
 
+const StyledEventsList = styled(EventsList)`
+    height: 240px;
+`;
+
 
 // todo - if travelling this is very different
 export const ShipDetailPage = ({className}: IProps) => {
+  const {events} = useActiveShipContext();
+
   return (
     <Page className={className}>
       <PanelCrates>
@@ -88,12 +97,12 @@ export const ShipDetailPage = ({className}: IProps) => {
       </PanelTrade>
       <PanelLog>
         <Panel title="Log">
-          stuff
+          <StyledEventsList events={events} />
         </Panel>
       </PanelLog>
       <PanelEngineering>
         <Panel title="Engineering">
-          stuff
+          <Engineering />
         </Panel>
       </PanelEngineering>
     </Page>

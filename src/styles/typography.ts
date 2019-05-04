@@ -33,9 +33,8 @@ export const SIZES = {
   `,
   D: css`
     font-size: 1.2rem;
-    line-height: 1;
+    line-height: 1.2;
     letter-spacing: 0;
-    ${BREAKPOINTS.S`font-size: 1.4rem`};
   `,
   E: css`
     font-size: 1rem;

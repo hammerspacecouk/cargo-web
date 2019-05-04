@@ -14,8 +14,8 @@ interface IProps {
 }
 
 export const GoButton = ({ direction, journeyTime, children }: IProps) => {
-  const { cratesOnShip, cratesInPort, ship } = useActiveShipContext();
-  const { buttonsDisabled, moveShip, openModal } = usePlayPortContext(); // todo - ?
+  const { buttonsDisabled, cratesOnShip, cratesInPort, ship } = useActiveShipContext();
+  const { moveShip, openModal } = usePlayPortContext(); // todo - ?
   const buttonDisabled = direction.action === null || buttonsDisabled;
 
   if (cratesOnShip === undefined) {
