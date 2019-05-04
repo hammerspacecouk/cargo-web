@@ -81,6 +81,7 @@ const ModalClose = styled.button`
   background: none;
   border: none;
   padding: 0;
+  margin-left: ${GRID.UNIT};
 `;
 
 const ModalHeader = styled.div`

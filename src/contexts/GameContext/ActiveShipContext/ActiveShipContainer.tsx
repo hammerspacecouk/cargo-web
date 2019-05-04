@@ -5,6 +5,7 @@ import { ShipContextComponent } from "./ActiveShipContext";
 import { ShipOverview } from "./Components/ShipOverview";
 import { ShipDetailPage } from "./Page/ShipDetailPage";
 import { useGameContext } from "../GameContext";
+import { ShipNameModal } from "./Components/ShipNameModal";
 
 const StyledPlayBoard = styled.div`
   display: flex;
