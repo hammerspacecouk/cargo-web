@@ -8,7 +8,7 @@ import { ListInline } from "../../Atoms/Lists/ListInline/ListInline";
 
 export enum TITLE_POSITION {
   TOP,
-  BOTTOM
+  BOTTOM,
 }
 
 interface IProps extends IChildrenProps {
@@ -23,24 +23,25 @@ const topTitleStyle = css`
 `;
 
 const bottomTitleStyle = css`
-    top: 100%;
-    right: 1px;
-    border-left: solid 1px ${COLOURS.GREY.DARKER};
+  top: 100%;
+  right: 1px;
+  border-left: solid 1px ${COLOURS.GREY.DARKER};
 `;
 
-const Heading = styled(H6)<{titlePosition: TITLE_POSITION}>`
-    position: absolute;
-    padding: ${GRID.HALF};
-    text-transform: uppercase;
-    background: ${COLOURS.GREY.BLACK};
-    border-bottom: solid 1px ${COLOURS.GREY.DARKER};
-    border-top: solid 1px ${COLOURS.GREY.DARKER};
-    
-    ${({titlePosition}) => titlePosition === TITLE_POSITION.TOP ? topTitleStyle : bottomTitleStyle}
+const Heading = styled(H6)<{ titlePosition: TITLE_POSITION }>`
+  position: absolute;
+  padding: ${GRID.HALF};
+  text-transform: uppercase;
+  background: ${COLOURS.GREY.BLACK};
+  border-bottom: solid 1px ${COLOURS.GREY.DARKER};
+  border-top: solid 1px ${COLOURS.GREY.DARKER};
+
+  ${({ titlePosition }) =>
+    titlePosition === TITLE_POSITION.TOP ? topTitleStyle : bottomTitleStyle}
 `;
 
 const StyledWrapper = styled.div`
-    position: relative;
+  position: relative;
 `;
 
 const List = styled(ListInline)`
@@ -54,23 +55,22 @@ const List = styled(ListInline)`
     height: 100%;
     width: 160px;
     > * {
-        height: 100%;
+      height: 100%;
     }
   }
 `;
 
 export const CratesList = ({ title, titlePosition, children }: IProps) => {
-
   const crates = React.Children.toArray(children);
 
   return (
-    <StyledWrapper >
-      <Heading as="h3" titlePosition={titlePosition}>{title}</Heading>
+    <StyledWrapper>
+      <Heading as="h3" titlePosition={titlePosition}>
+        {title}
+      </Heading>
       <List>
         {crates.map((crate, i) => (
-          <li key={`crate-${i}`}>
-            {crate}
-          </li>
+          <li key={`crate-${i}`}>{crate}</li>
         ))}
       </List>
     </StyledWrapper>

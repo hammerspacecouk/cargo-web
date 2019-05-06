@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Event, IEventProps } from "./Event";
 
-export const Offence = ({event, onAnimated }: IEventProps) => {
+export const Offence = ({ event, onAnimated }: IEventProps) => {
   let shipName = "[deleted]";
   if (event.actioningShip) {
     shipName = event.actioningShip.name;
@@ -13,8 +13,8 @@ export const Offence = ({event, onAnimated }: IEventProps) => {
 
   return (
     <Event time={event.time} onAnimated={onAnimated}>
-      <em>{shipName}</em> used <strong>{event.effect.name}</strong>{" "}
-      against <em>{victimShipName}</em> ({event.value} damage)
+      <em>{shipName}</em> used <strong>{event.effect.name}</strong> against{" "}
+      <em>{victimShipName}</em> ({event.value} damage)
     </Event>
   );
 };

@@ -60,7 +60,7 @@ export const Navigation = ({ className }: IProps) => {
             <NavigationItem
               icon={<InventoryIcon />}
               path="/play/inventory"
-              text="Inventory"
+              text="Launch ships"
             />
           </li>
           <li>

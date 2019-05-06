@@ -1,5 +1,6 @@
 // https://palx.jxnblk.com/5700d2
 import { GRID } from "./variables";
+import { css } from "styled-components";
 
 const allColours = {
   base: "#5700d2",
@@ -165,39 +166,47 @@ const allColours = {
 };
 
 const greyscale = {
-  BLACK: '#1A1F22',
-  DARKEST: '#292E31',
-  DARKER: '#414649',
-  DARK: '#505558',
-  MID: '#777C7F',
-  LIGHT: '#9EA3A6',
-  LIGHTER: '#C5CACD',
-  LIGHTEST: '#EDF2F5',
-  WHITE: '#FFFFFF',
+  BLACK: "#1A1F22",
+  DARKEST: "#292E31",
+  DARKER: "#414649",
+  DARK: "#505558",
+  MID: "#777C7F",
+  LIGHT: "#9EA3A6",
+  LIGHTER: "#C5CACD",
+  LIGHTEST: "#EDF2F5",
+  WHITE: "#FFFFFF",
 };
 
 const danger = {
-  DARKEST: '#B43931',
-  DARK: '#D5443A',
-  MID: '#E1483E',
-  LIGHTER: '#E7564A',
-  LIGHTEST: '#FBECEB'
+  DARKEST: "#B43931",
+  DARK: "#D5443A",
+  MID: "#E1483E",
+  LIGHTER: "#E7564A",
+  LIGHTEST: "#FBECEB",
 };
 
 const warning = {
-  DARKEST: '#CC900D',
-  DARK: '#F2AB10',
-  MID: '#FFB511',
-  LIGHTER: '#FFC314',
-  LIGHTEST: '#FFF7E7'
+  DARKEST: "#CC900D",
+  DARK: "#F2AB10",
+  MID: "#FFB511",
+  LIGHTER: "#FFC314",
+  LIGHTEST: "#FFF7E7",
 };
 
 const ok = {
-  DARKEST: '#30855C',
-  DARK: '#399E6E',
-  MID: '#3DA774',
-  LIGHTER: '#49B88B',
-  LIGHTEST: '#EBF6F1'
+  DARKEST: "#30855C",
+  DARK: "#399E6E",
+  MID: "#3DA774",
+  LIGHTER: "#49B88B",
+  LIGHTEST: "#EBF6F1",
+};
+
+const action = {
+  DARKEST: "#4b3264",
+  DARK: "#5f3d85",
+  MID: "#723da6",
+  LIGHTER: "#8149b8",
+  LIGHTEST: "#e9dcf5",
 };
 
 // export only has semantic names
@@ -209,20 +218,20 @@ export const COLOURS = {
     LINK: allColours.violet[4],
     FADED: allColours.gray[7],
   },
-  PANEL_BORDER: greyscale.MID,
+  PANEL_BORDER: action.DARKEST,
   PANEL_INNER_DIVIDER: greyscale.DARKER,
   KEY_LINE: greyscale.MID,
 
   BUTTON: {
     STANDARD: greyscale.WHITE,
-    ACTION: ok.MID,
+    ACTION: action.LIGHTER,
     CONFIRM: ok.MID,
     DANGER: danger.MID,
     WARNING: warning.MID,
   },
 
   HEALTH: {
-    FULL: ok.LIGHTER,
+    FULL: allColours.blue[4],
     GOOD: ok.LIGHTER,
     OK: ok.LIGHTER,
     WARNING: warning.LIGHTER,
@@ -246,16 +255,13 @@ export const COLOURS = {
     },
   },
 
-
-
-
   // deprecated - todo -replace all uses
 
-  BASE: '#7F57B8',
+  BASE: "#7F57B8",
   ACTIVE_HIGHLIGHT: allColours.violet[4],
   EVENTS: {
     BACKGROUND: allColours.fullBlack,
-    TEXT: allColours.white
+    TEXT: allColours.white,
   },
   BLACK: {
     FULL: allColours.fullBlack,
@@ -290,7 +296,7 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-export const scrollbarStyles = `
+export const scrollbarStyles = css`
   &::-webkit-scrollbar {
     width: ${GRID.HALF};
   }
@@ -302,3 +308,5 @@ export const scrollbarStyles = `
     outline: 1px solid slategrey;
   }
 `;
+export const PANEL_BORDER = `solid 1px ${COLOURS.PANEL_BORDER}`;
+export const PANEL_INNER_DIVIDER_BORDER = `solid 1px ${COLOURS.PANEL_INNER_DIVIDER}`;

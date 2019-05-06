@@ -54,9 +54,20 @@ export const GameContainer = () => {
       <StyledPlayBoard>
         <StyledMain>
           <Switch>
-            <Route path={routes.getPlayLog()} component={PlayHome} exact={true} />
-            <Route path={routes.getPlayShip()} component={ActiveShipContainer} />
-            <Route path={routes.getPlay()} component={LandingPage} exact={true} />
+            <Route
+              path={routes.getPlayLog()}
+              component={PlayHome}
+              exact={true}
+            />
+            <Route
+              path={routes.getPlayShip()}
+              component={ActiveShipContainer}
+            />
+            <Route
+              path={routes.getPlay()}
+              component={LandingPage}
+              exact={true}
+            />
             <Route component={NotFound} />
           </Switch>
         </StyledMain>

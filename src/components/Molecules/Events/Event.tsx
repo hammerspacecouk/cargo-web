@@ -23,8 +23,9 @@ interface IProps {
 const StyledEvent = styled.div`
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   min-height: 32px;
+  flex-wrap: wrap;
 `;
 
 export const EventFlag = styled.span`
@@ -41,24 +42,33 @@ export const EventFlag = styled.span`
 
 const Content = styled.span`
   flex: 1;
+  min-width: 240px;
   margin-right: ${GRID.UNIT};
   ${SIZES.D};
+`;
+
+const Time = styled(TimeAgo)`
+  opacity: 0.6;
 `;
 
 const getChildrenUntil = (children: any, index: number) => {
   let counter = 0;
   let bits = [];
   while (counter <= index && componentTokenAt(children, counter)) {
-    bits.push(<React.Fragment key={counter}>{componentTokenAt(children, counter)}</React.Fragment>);
+    bits.push(
+      <React.Fragment key={counter}>
+        {componentTokenAt(children, counter)}
+      </React.Fragment>
+    );
     counter++;
   }
   if (componentTokenAt(children, counter)) {
-    bits.push(<TextCursor key={counter}/>);
+    bits.push(<TextCursor key={counter} />);
   }
   return bits;
 };
 
-export const Event = ({children, time, onAnimated}: IProps) => {
+export const Event = ({ children, time, onAnimated }: IProps) => {
   const [visibleChars, setVisibleChars] = React.useState(0);
   const [done, setDone] = React.useState(!onAnimated);
 
@@ -66,32 +76,34 @@ export const Event = ({children, time, onAnimated}: IProps) => {
     setVisibleChars(visibleChars + 1);
   };
 
-  React.useEffect(
-    () => {
-      if (!onAnimated) {
-        if (!done) {setDone(true)}
-        return;
-      }
-
-      let timer: number;
-      if (componentTokenAt(children, visibleChars)) {
-        timer = window.setTimeout(addCharacter, 50);
-      } else {
+  React.useEffect(() => {
+    if (!onAnimated) {
+      if (!done) {
         setDone(true);
-        if (onAnimated) {
-          onAnimated();
-        }
       }
-      return () => {
-        window.clearTimeout(timer);
-      };
-    }, [visibleChars, onAnimated]
-  );
+      return;
+    }
+
+    let timer: number;
+    if (componentTokenAt(children, visibleChars)) {
+      timer = window.setTimeout(addCharacter, 50);
+    } else {
+      setDone(true);
+      if (onAnimated) {
+        onAnimated();
+      }
+    }
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [visibleChars, onAnimated]);
 
   return (
-  <StyledEvent>
-    <Content>{done ? children : getChildrenUntil(children, visibleChars)}</Content>
-    <TimeAgo datetime={new Date(time)}/>
-  </StyledEvent>
+    <StyledEvent>
+      <Content>
+        {done ? children : getChildrenUntil(children, visibleChars)}
+      </Content>
+      <Time datetime={new Date(time)} />
+    </StyledEvent>
   );
 };

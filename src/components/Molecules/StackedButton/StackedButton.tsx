@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button } from "../../Atoms/Button/Button";
+import { ActionButton } from "../../Atoms/Button/Button";
 import { Icon } from "../../Atoms/Icon/Icon";
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
   readonly onClick?: any;
 }
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(ActionButton)`
   display: flex;
   align-items: center;
   justify-content: center;

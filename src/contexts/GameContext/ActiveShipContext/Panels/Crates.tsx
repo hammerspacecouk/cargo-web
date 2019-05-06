@@ -4,13 +4,13 @@ import { CratesAtPort } from "../Components/CratesAtPort";
 import { CratesOnShip } from "../Components/CratesOnShip";
 import { ChevronUpIcon } from "../../../../components/Icons/ChevronUpIcon/ChevronUpIcon";
 import { Icon } from "../../../../components/Atoms/Icon/Icon";
-import { COLOURS } from "../../../../styles/colours";
-import { GRID } from "../../../../styles/variables";
+import { GRID} from "../../../../styles/variables";
+import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 
 const CratesLayout = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const FullFlex = styled.div`
@@ -21,35 +21,32 @@ const FullFlex = styled.div`
   }
 `;
 
-const StyledCratesOnShip = styled(FullFlex)`
-  border-bottom: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
-`;
-
-const StyledCratesAtPort = styled(FullFlex)`
-  border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+const StyledCratesList = styled(FullFlex)`
+  border-top: ${PANEL_INNER_DIVIDER_BORDER};
+  border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
 `;
 
 const DirectionArrow = styled.div`
-    display: flex;
-    justify-content: center;
-    opacity: 0.5;
-    padding: ${GRID.UNIT} 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0.5;
+  padding: ${GRID.UNIT} 0;
 `;
 
 export const Crates = () => {
   return (
     <CratesLayout>
-      <StyledCratesOnShip>
+      <StyledCratesList>
         <CratesOnShip />
-      </StyledCratesOnShip>
+      </StyledCratesList>
       <DirectionArrow>
         <Icon>
-          <ChevronUpIcon/>
+          <ChevronUpIcon />
         </Icon>
       </DirectionArrow>
-      <StyledCratesAtPort>
+      <StyledCratesList>
         <CratesAtPort />
-      </StyledCratesAtPort>
+      </StyledCratesList>
     </CratesLayout>
   );
 };

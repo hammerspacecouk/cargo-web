@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Event, IEventProps } from "./Event";
 
-export const ShipNew = ({event, onAnimated }: IEventProps) => {
+export const ShipNew = ({ event, onAnimated }: IEventProps) => {
   let name = "[deleted]";
   if (event.ship) {
     name = event.ship.name;

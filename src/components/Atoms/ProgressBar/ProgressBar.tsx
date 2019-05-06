@@ -9,10 +9,10 @@ interface IProps {
   readonly small?: boolean;
 }
 
-const Track = styled.div<{small: boolean}>`
+const Track = styled.div<{ small: boolean }>`
   display: block;
   width: 100%;
-  height: ${({small}) => small ? GRID.HALF: GRID.UNIT};
+  height: ${({ small }) => (small ? GRID.HALF : GRID.UNIT)};
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.5);
   overflow: hidden;

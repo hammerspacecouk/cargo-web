@@ -1,4 +1,12 @@
-import { IActionToken, ICrateAction, IDirections, IEvent, IShip } from "../../../Interfaces";
+import {
+  IActionToken,
+  ICrateAction, IDefenceOption,
+  IDirections,
+  IEvent,
+  IHealthIncrease,
+  IShip,
+  ITransaction
+} from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
 import { ApiClient } from "../../../util/ApiClient";
@@ -9,28 +17,42 @@ export interface IActiveShip {
   buttonsDisabled: boolean;
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
+  defenceOptions?: IDefenceOption[];
   directions?: IDirections;
   events?: IEvent[];
+  healthOptions: IHealthIncrease[];
+  setRequestNameToken: (token: ITransaction) => void;
+  requestNameToken: ITransaction;
   ship?: IShip;
   moveCrateHandler: (token: IActionToken) => Promise<void>;
+  updateShipName: (newName: string) => void;
+  applyHealthHandler: (token: IActionToken) => Promise<void>;
 }
 
-export const useActiveShip = (ship: IShip): IActiveShip => {
-  const {updateScore} = useGameContext();
+export const useActiveShip = (incomingShip: IShip): IActiveShip => {
+  const { updateScore, updateAShipProperty } = useGameContext();
+  const [ship, setShip] = useState(incomingShip);
   const [directions, setDirections] = useState(undefined);
+  const [defenceOptions, setDefenceOptions] = useState(undefined);
   const [cratesInPort, setCratesInPort] = useState(undefined);
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
+  const [healthOptions, setHealthOptions] = useState(undefined);
+  const [requestNameToken, setRequestNameToken] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const isMounted = useMounted();
-  const {disableButtons, enableButtons, buttonsDisabled} = useButtonsDisabled();
+  const {
+    disableButtons,
+    enableButtons,
+    buttonsDisabled
+  } = useButtonsDisabled();
 
-  const setDataFromResponse = (data) => {
+  const setDataFromResponse = data => {
     if (!isMounted()) {
       return;
     }
     if (!data) {
       // setLoaded(true);
-      // setShip(undefined);
+      setShip(undefined);
       // setPort(undefined);
       // setHint(undefined);
       // setChannel(undefined);
@@ -39,13 +61,16 @@ export const useActiveShip = (ship: IShip): IActiveShip => {
       setEvents(undefined);
       setCratesInPort(undefined);
       setCratesOnShip(undefined);
+      setDefenceOptions(undefined);
       // setBonusEffects(undefined);
       // setTravelEffects(undefined);
+      setRequestNameToken(undefined);
+      setHealthOptions(undefined);
       return;
     }
 
     // setLoaded(true);
-    // setShip(data.ship);
+    setShip(data.ship);
     // setPort(data.port);
     // setChannel(data.channel);
     // setHint(data.hint);
@@ -54,12 +79,15 @@ export const useActiveShip = (ship: IShip): IActiveShip => {
     setEvents(data.events);
     setCratesInPort(data.cratesInPort);
     setCratesOnShip(data.cratesOnShip);
+    setDefenceOptions(data.defenceOptions);
     // setBonusEffects(data.bonus);
     // setTravelEffects(data.travelOptions);
+    setRequestNameToken(data.renameToken);
+    setHealthOptions(data.health);
   };
 
-  const setShipData = async () => {
-    const data = await ApiClient.fetch(`/play/${ship.id}`);
+  const setShipData = async (id: string) => {
+    const data = await ApiClient.fetch(`/play/${id}`);
     setDataFromResponse(data);
   };
 
@@ -68,6 +96,7 @@ export const useActiveShip = (ship: IShip): IActiveShip => {
     updateScore(data.playerScore);
     setDataFromResponse(data);
     enableButtons();
+    return data;
   };
 
   const moveCrateHandler = (token: IActionToken): Promise<void> => {
@@ -75,21 +104,45 @@ export const useActiveShip = (ship: IShip): IActiveShip => {
     return doPortAction(token);
   };
 
-  useEffect(() => {
-    setDataFromResponse(null);
-    if (ship) {
-      setShipData();
-    }
-  }, [ship]);
+  const applyHealthHandler = async (token: IActionToken) => {
+    disableButtons();
+    const data = await doPortAction(token);
+    updateAShipProperty(ship.id, { strengthPercent: data.ship.strengthPercent });
 
+    // const data: any = await ApiClient.tokenFetch(token);
+    // enableButtons();
+    // updateScore(data.newScore);
+    // setDataFromResponse(data.activeShip);
+  };
+
+  const updateShipName = (name: string) => {
+    if (isMounted()) {
+      setShip({ ...ship, name });
+    }
+    updateAShipProperty(ship.id, { name });
+  };
+
+  useEffect(() => {
+    setShip(incomingShip);
+    setDataFromResponse(null);
+    if (incomingShip) {
+      setShipData(incomingShip.id);
+    }
+  }, [incomingShip]);
 
   return {
     buttonsDisabled,
     cratesInPort,
     cratesOnShip,
+    defenceOptions,
     directions,
     events,
+    healthOptions,
+    requestNameToken,
+    setRequestNameToken,
     ship,
-    moveCrateHandler
+    moveCrateHandler,
+    updateShipName,
+    applyHealthHandler
   };
 };

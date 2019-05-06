@@ -1,13 +1,16 @@
 import * as React from "react";
 import { Crate, CratePlaceholder } from "./Crate";
 import { useActiveShipContext } from "../ActiveShipContext";
-import { CratesList, TITLE_POSITION } from "../../../../components/Molecules/CratesList/CratesList";
+import {
+  CratesList,
+  TITLE_POSITION,
+} from "../../../../components/Molecules/CratesList/CratesList";
 
 export const CratesOnShip = () => {
   const { ship, cratesOnShip } = useActiveShipContext();
 
   let availableCrates = [];
-  let loadedCount = '-';
+  let loadedCount = "-";
 
   if (cratesOnShip) {
     availableCrates = cratesOnShip;
@@ -24,13 +27,10 @@ export const CratesOnShip = () => {
       titlePosition={TITLE_POSITION.BOTTOM}
     >
       {availableCrates.map(crate => (
-          <Crate crateAction={crate} key={`cos-${crate.crate.id}`} />
+        <Crate crateAction={crate} key={`cos-${crate.crate.id}`} />
       ))}
       {placeholderSlots.map((_, i) => (
-          <CratePlaceholder
-            key={`p-${i}`}
-            loading={cratesOnShip === undefined}
-          />
+        <CratePlaceholder key={`p-${i}`} loading={cratesOnShip === undefined} />
       ))}
     </CratesList>
   );

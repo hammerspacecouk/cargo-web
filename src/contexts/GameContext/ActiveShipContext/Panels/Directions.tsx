@@ -8,17 +8,21 @@ import { DirectionSW } from "../../../../components/Icons/DirectionSW/DirectionS
 import { DirectionW } from "../../../../components/Icons/DirectionW/DirectionW";
 import { useActiveShipContext } from "../ActiveShipContext";
 import { IDirection } from "../../../../Interfaces";
-import { TextD, TextF, TextWarning } from "../../../../components/Atoms/Text/Text";
+import {
+  TextD,
+  TextF,
+  TextWarning,
+} from "../../../../components/Atoms/Text/Text";
 import { Fraction } from "../../../../components/Atoms/Fraction/Fraction";
 import { PortName } from "../../../../components/Molecules/PortName/PortName";
 import { ScoreValue } from "../../../../components/Molecules/ScoreValue/ScoreValue";
 import { GoButton } from "../Components/GoButton";
 import styled from "styled-components";
-import { COLOURS } from "../../../../styles/colours";
-import { GRID } from "../../../../styles/variables";
+import { GRID} from "../../../../styles/variables";
 import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 import { H4 } from "../../../../components/Atoms/Heading/Heading";
 import { MONOSPACE_FONT } from "../../../../styles/typography";
+import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 
 interface IProps {
   direction: IDirection;
@@ -26,25 +30,26 @@ interface IProps {
 }
 
 const StyledDirection = styled.li`
-    &:not(:last-child) {
-        border-bottom: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
-    }
-    padding: ${GRID.UNIT};
-    display: flex;
-    align-items: center;
+  &:not(:last-child) {
+    border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
+  }
+  padding: ${GRID.UNIT};
+  display: flex;
+  align-items: center;
 `;
 
 const PortSummary = styled.div`
-    flex: 1;
+  flex: 1;
 `;
 
 const SubLine = styled.div`
-    margin-top: ${GRID.HALF};
+  margin-top: ${GRID.HALF};
 `;
 
 const Distance = styled.div`
-    margin: 0 ${GRID.UNIT};
-    ${MONOSPACE_FONT};
+  margin: 0 ${GRID.UNIT};
+  ${MONOSPACE_FONT};
+  font-variant: small-caps;
 `;
 
 export const Direction = ({ direction, children }: IProps) => {
@@ -56,7 +61,7 @@ export const Direction = ({ direction, children }: IProps) => {
     distance = <Fraction num={1} den={100} />;
   }
 
-  let subLine = (<ScoreValue score={detail.earnings} />);
+  let subLine = <ScoreValue score={detail.earnings} />;
   if (detail.denialReason) {
     subLine = (
       <TextF as="div">
@@ -68,14 +73,14 @@ export const Direction = ({ direction, children }: IProps) => {
   return (
     <StyledDirection>
       <PortSummary>
-        <H4 as="h3"><PortName port={detail.destination} /></H4>
-        <SubLine>
-          {subLine}
-        </SubLine>
+        <H4 as="h3">
+          <PortName port={detail.destination} />
+        </H4>
+        <SubLine>{subLine}</SubLine>
       </PortSummary>
       <Distance>
         {distance}
-        <abbr title="light year">
+        <abbr title="light years">
           <TextF>ly</TextF>
         </abbr>
       </Distance>
@@ -88,17 +93,6 @@ export const Direction = ({ direction, children }: IProps) => {
   );
 };
 
-
-const StyledDirections = styled(ListUnstyled)`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    > li {
-        flex: 1;
-    }
-`;
-
-
 export const Directions = () => {
   const { directions } = useActiveShipContext();
 
@@ -109,37 +103,37 @@ export const Directions = () => {
   const { NW, NE, W, E, SW, SE } = directions;
 
   return (
-      <StyledDirections>
-          {NW ? (
-            <Direction direction={NW}>
-              <DirectionNW />
-            </Direction>
-          ) : null}
-          {NE ? (
-            <Direction direction={NE}>
-              <DirectionNE />
-            </Direction>
-          ) : null}
-          {W ? (
-            <Direction direction={W}>
-              <DirectionW />
-            </Direction>
-          ) : null}
-          {E ? (
-            <Direction direction={E}>
-              <DirectionE />
-            </Direction>
-          ) : null}
-          {SW ? (
-            <Direction direction={SW}>
-              <DirectionSW />
-            </Direction>
-          ) : null}
-          {SE ? (
-            <Direction direction={SE}>
-              <DirectionSE />
-            </Direction>
-          ) : null}
-      </StyledDirections>
+    <ListUnstyled>
+      {NW ? (
+        <Direction direction={NW}>
+          <DirectionNW />
+        </Direction>
+      ) : null}
+      {NE ? (
+        <Direction direction={NE}>
+          <DirectionNE />
+        </Direction>
+      ) : null}
+      {W ? (
+        <Direction direction={W}>
+          <DirectionW />
+        </Direction>
+      ) : null}
+      {E ? (
+        <Direction direction={E}>
+          <DirectionE />
+        </Direction>
+      ) : null}
+      {SW ? (
+        <Direction direction={SW}>
+          <DirectionSW />
+        </Direction>
+      ) : null}
+      {SE ? (
+        <Direction direction={SE}>
+          <DirectionSE />
+        </Direction>
+      ) : null}
+    </ListUnstyled>
   );
 };

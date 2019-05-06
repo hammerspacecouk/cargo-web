@@ -14,7 +14,11 @@ export const GameContextComponent = ({ children, useChildren }: IProps) => {
   const gameSession = useGameSession();
 
   if (gameSession.player === undefined) {
-    return <FlexAllCenter><Loading /></FlexAllCenter>; // todo - skeleton
+    return (
+      <FlexAllCenter>
+        <Loading />
+      </FlexAllCenter>
+    ); // todo - skeleton
   }
 
   const body = useChildren || gameSession.player ? children : <RequireLogin />;

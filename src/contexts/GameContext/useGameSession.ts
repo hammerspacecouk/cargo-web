@@ -37,6 +37,7 @@ export interface IGameSession {
   setIsAtHome: (val: boolean) => void;
   setActiveShipById: (shipId?: string) => void;
   updateScore: (val: IScore) => void;
+  updateAShipProperty: (id: string, newProp: object) => void;
 }
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
@@ -95,8 +96,26 @@ export const useGameSession = (): IGameSession => {
     if (!ships) {
       setActiveShip(null);
     }
-    const foundShip = ships.find((ship: IFleetShip): boolean => ship.ship.id === id);
+    const foundShip = ships.find(
+      (ship: IFleetShip): boolean => ship.ship.id === id
+    );
     setActiveShip(foundShip || null);
+  };
+
+  const updateAShipProperty = (id: string, newProps: object) => {
+    if (isMounted()) {
+      const updatedShips = ships.map(ship => {
+        if (ship.ship.id === id) {
+          const newShip = { ...ship.ship, ...newProps };
+          return {
+            ...ship,
+            ship: newShip
+          };
+        }
+        return ship;
+      });
+      setShips(updatedShips);
+    }
   };
 
   useEffect(() => {
@@ -116,5 +135,6 @@ export const useGameSession = (): IGameSession => {
     setIsAtHome,
     ships,
     updateScore,
+    updateAShipProperty
   };
 };

@@ -5,8 +5,7 @@ import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { FlexInline } from "../../Atoms/Flex/Flex";
 import { H3 } from "../../Atoms/Heading/Heading";
-import { EditShipName } from "../../../contexts/GameContext/ActiveShipContext/Components/EditShipName";
-import { FleetShipHealth } from "../../../contexts/GameContext/Components/FleetShipHealth";
+import { ShipHealth } from "../../../contexts/GameContext/ActiveShipContext/Components/ShipHealth";
 import { FleetShipLocation } from "../FleetShipLocation/FleetShipLocation";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
 import { CountdownToTime } from "../../Molecules/CountdownToTime/CountdownToTime";
@@ -113,17 +112,11 @@ export const FleetShipDetail = ({ fleetShip }: IProps) => (
     <DetailRow>
       <DetailRowLabel>Shield strength</DetailRowLabel>
       <DetailRowContent>
-        <FleetShipHealth health={fleetShip.health} />
       </DetailRowContent>
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Ship name</DetailRowLabel>
-      <DetailRowContent>
-        <EditShipName
-          ship={fleetShip.ship}
-          renameToken={fleetShip.renameToken}
-        />
-      </DetailRowContent>
+      <DetailRowContent />
     </DetailRow>
   </StyledDetail>
 );

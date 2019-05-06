@@ -1,11 +1,10 @@
 import * as React from "react";
-import styled  from "styled-components";
+import styled from "styled-components";
 import { scrollbarStyles } from "../../../styles/colours";
 import { ShipContextComponent } from "./ActiveShipContext";
 import { ShipOverview } from "./Components/ShipOverview";
 import { ShipDetailPage } from "./Page/ShipDetailPage";
 import { useGameContext } from "../GameContext";
-import { ShipNameModal } from "./Components/ShipNameModal";
 
 const StyledPlayBoard = styled.div`
   display: flex;
@@ -15,34 +14,34 @@ const StyledPlayBoard = styled.div`
 `;
 
 const StyledShipDetail = styled(ShipDetailPage)`
-    flex: 1;
-    overflow-y: auto;
-    ${scrollbarStyles}
+  flex: 1;
+  overflow-y: auto;
+  ${scrollbarStyles}
 `;
 
 interface IProps {
   match: {
     params: {
       shipId: string;
-    }
-  }
+    };
+  };
 }
 
 export const ActiveShipContainer = (props: IProps) => {
-  const {activeShip, setActiveShipById} = useGameContext();
+  const { activeShip, setActiveShipById } = useGameContext();
 
   React.useEffect(() => {
     setActiveShipById(props.match.params.shipId);
     return () => {
       setActiveShipById(undefined);
-    }
+    };
   }, [props.match.params.shipId]);
 
   // todo - choose between travelling and in port
   return (
     <ShipContextComponent ship={activeShip && activeShip.ship}>
       <StyledPlayBoard>
-        <ShipOverview/>
+        <ShipOverview />
         <StyledShipDetail />
       </StyledPlayBoard>
     </ShipContextComponent>

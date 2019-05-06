@@ -18,7 +18,7 @@ const MastheadPosition = styled.header`
   background: ${COLOURS.BODY.BACKGROUND};
   z-index: ${Z_INDEX.OVERLAY_BOTTOM};
   height: ${MASTHEAD_HEIGHT};
-  border-bottom: solid 1px ${COLOURS.PANEL_BORDER};
+  border-bottom: solid 1px ${COLOURS.GREY.MID};
 `;
 
 const StyledMasthead = styled.div`

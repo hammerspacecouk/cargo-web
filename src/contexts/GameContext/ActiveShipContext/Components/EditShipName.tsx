@@ -1,47 +1,53 @@
 import * as React from "react";
 import styled from "styled-components";
 import { ShipNameGenerator } from "../../../../containers/Ship/ShipNameGenerator";
-import { useCurrentShipContext } from "../../../../context/CurrentShipContext";
-import { useFleetContext } from "../../../../context/Page/FleetContext";
 import { useMounted } from "../../../../hooks/useMounted";
-import { IActionToken, IShip, ITransaction } from "../../../../Interfaces";
-import { BREAKPOINTS } from "../../../../styles/media";
+import { IActionToken } from "../../../../Interfaces";
 import { GRID } from "../../../../styles/variables";
 import { ApiClient } from "../../../../util/ApiClient";
-import { ConfirmButton, DangerButton } from "../../../../components/Atoms/Button/Button";
+import {
+  ConfirmButton,
+  DangerButton,
+} from "../../../../components/Atoms/Button/Button";
 import { TextCursor } from "../../../../components/Atoms/TextCursor/TextCursor";
 import { ButtonRow } from "../../../../components/Molecules/ButtonRow/ButtonRow";
 import { CreditsButton } from "../../Components/CreditsButton";
 import { TokenButton } from "../../../../components/Molecules/TokenButton/TokenButton";
 import { useGameContext } from "../../GameContext";
-
-interface IProps {
-  ship: IShip;
-  renameToken: ITransaction;
-}
+import { useActiveShipContext } from "../ActiveShipContext";
+import { ModalActions } from "../../../../components/Molecules/Modal/Modal";
+import { SIZES } from "../../../../styles/typography";
+import { BREAKPOINTS } from "../../../../styles/media";
+import { P } from "../../../../components/Atoms/Text/Text";
 
 const Container = styled.div`
-  ${BREAKPOINTS.XL`
-      display: flex;
-      align-items: start;
-    `};
+  width: calc(100vw - (4 * ${GRID.UNIT}));
+  max-width: 512px;
 `;
+
 const Text = styled.div`
   margin: 0 0 ${GRID.UNIT};
-  ${BREAKPOINTS.XL`
-    flex: 1;
-    margin: 0 ${GRID.UNIT} 0 0;
-  `};
+  text-align: center;
 `;
-const Updating = styled.span`
-  font-size: 2.35rem;
-`; // todo - share this value?
 
-export const EditShipName = ({ ship, renameToken }: IProps) => {
-  const [requestNameToken, setRequestNameToken] = React.useState(renameToken);
-  const { updateScore } = useGameContext();
-  const { setFleetData, buttonsDisabled } = useFleetContext();
-  const { ship: currentShip, updateCurrentShip } = useCurrentShipContext();
+const Updating = styled.span`
+  ${SIZES.D};
+  ${BREAKPOINTS.S`
+    ${SIZES.B}
+  `}
+`;
+
+interface IProps {
+  onComplete: () => void;
+}
+
+export const EditShipName = ({ onComplete }: IProps) => {
+  const {
+    requestNameToken,
+    setRequestNameToken,
+    updateShipName,
+  } = useActiveShipContext();
+  const { updateScore, buttonsDisabled } = useGameContext();
   const [isActive, setIsActive] = React.useState(false);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
   const [offeredShipName, setOfferedShipName] = React.useState(null);
@@ -54,9 +60,8 @@ export const EditShipName = ({ ship, renameToken }: IProps) => {
     // make the API call
     const data = await ApiClient.tokenFetch(token);
     updateScore(data.newScore);
+    setRequestNameToken(data.newRequestShipNameToken);
     if (isMounted()) {
-      // todo - new token needs to be set on the fleet, in case you closed the panel
-      setRequestNameToken(data.newRequestShipNameToken);
       setOfferedShipName(data.nameOffered);
       setOfferedShipNameToken(data.action);
     }
@@ -72,13 +77,11 @@ export const EditShipName = ({ ship, renameToken }: IProps) => {
     setAcceptingShipName(true);
     resetOffer();
     const data = await ApiClient.tokenFetch(token);
+    updateShipName(data.ship.name);
     if (isMounted()) {
       setAcceptingShipName(false);
-      setFleetData(data.fleet);
-      if (currentShip && currentShip.id === data.ship.id) {
-        updateCurrentShip(data.ship);
-      }
     }
+    onComplete();
   };
 
   let textContent;
@@ -109,7 +112,12 @@ export const EditShipName = ({ ship, renameToken }: IProps) => {
         </>
       );
     } else {
-      buttonContent = null;
+      buttonContent = (
+        <>
+          <ConfirmButton disabled>Accept</ConfirmButton>
+          <DangerButton disabled>Reject</DangerButton>
+        </>
+      );
     }
   } else {
     if (acceptingShipName) {
@@ -121,10 +129,10 @@ export const EditShipName = ({ ship, renameToken }: IProps) => {
       );
     } else {
       textContent = (
-        <p>
-          You can request a new name option at random. <br />
-          You don't have to take it, but no refunds
-        </p>
+        <P>
+          You can request a new name option at random. You don't have to take
+          it, but no refunds
+        </P>
       );
       buttonContent = (
         <TokenButton
@@ -140,7 +148,9 @@ export const EditShipName = ({ ship, renameToken }: IProps) => {
   return (
     <Container>
       <Text>{textContent}</Text>
-      <ButtonRow>{buttonContent}</ButtonRow>
+      <ModalActions>
+        <ButtonRow>{buttonContent}</ButtonRow>
+      </ModalActions>
     </Container>
   );
 };

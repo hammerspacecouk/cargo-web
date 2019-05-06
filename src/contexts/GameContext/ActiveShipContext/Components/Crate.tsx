@@ -14,18 +14,18 @@ interface ICrateOnShipProps {
 }
 
 const StyledCrate = styled.div`
-    display: flex;
-    > * {
-        flex: 1;
-    }
+  display: flex;
+  > * {
+    flex: 1;
+  }
 `;
 
-const StyledPlaceholder = styled.div<{loading: boolean}>`
+const StyledPlaceholder = styled.div<{ loading: boolean }>`
   padding: ${GRID.HALF};
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({loading}) => loading && animate}
+  ${({ loading }) => loading && animate}
 `;
 
 export const Crate = ({ crateAction }: ICrateOnShipProps) => {
@@ -47,10 +47,10 @@ export const Crate = ({ crateAction }: ICrateOnShipProps) => {
   return <StyledCrate>{tokenButton}</StyledCrate>;
 };
 
-export const CratePlaceholder = ({loading}: {loading: boolean}) => {
+export const CratePlaceholder = ({ loading }: { loading: boolean }) => {
   return (
     <StyledPlaceholder loading={loading}>
-        <PlaceholderContents />
+      <PlaceholderContents />
     </StyledPlaceholder>
   );
 };

@@ -14,10 +14,10 @@ const StyledArea = styled.div`
 `;
 
 const EventsPanel = styled(Panel)`
-    background: ${COLOURS.EVENTS.BACKGROUND};
-    border-color: ${hexToRGBa(COLOURS.BODY.TEXT, 0.2)};
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+  background: ${COLOURS.EVENTS.BACKGROUND};
+  border-color: ${hexToRGBa(COLOURS.BODY.TEXT, 0.2)};
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
   ${BREAKPOINTS.XL`
     flex: 1;
     border-bottom: none;
@@ -34,16 +34,14 @@ const Progress = styled(Panel)`
 `;
 
 export const PlayHome = () => {
-  const {events} = useGameContext();
+  const { events } = useGameContext();
 
   return (
     <StyledArea>
       <EventsPanel title="Captain's Log">
         <EventsList events={events} />
       </EventsPanel>
-      <Progress title="Progress">
-        Contnets
-      </Progress>
+      <Progress title="Progress">Contnets</Progress>
     </StyledArea>
   );
 };

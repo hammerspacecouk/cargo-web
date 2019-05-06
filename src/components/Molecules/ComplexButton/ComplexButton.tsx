@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
-import { Button } from "../../Atoms/Button/Button";
 import { Icon } from "../../Atoms/Icon/Icon";
+import { ActionButton } from "../../Atoms/Button/Button";
 
 interface IProps {
   readonly leading?: JSX.Element;
@@ -14,7 +14,7 @@ interface IProps {
   readonly onClick?: any;
 }
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(ActionButton)`
   display: flex;
   align-items: center;
 `;

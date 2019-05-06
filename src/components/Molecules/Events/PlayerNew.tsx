@@ -2,7 +2,7 @@ import * as React from "react";
 import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
 import { Event, EventFlag, IEventProps } from "./Event";
 
-export const PlayerNew = ({event, firstPerson, onAnimated }: IEventProps) => {
+export const PlayerNew = ({ event, firstPerson, onAnimated }: IEventProps) => {
   let name;
   if (firstPerson) {
     name = "You ";

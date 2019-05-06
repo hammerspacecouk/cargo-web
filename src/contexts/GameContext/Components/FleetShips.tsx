@@ -54,7 +54,7 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => (
 );
 
 export const FleetShips = ({ fleetShips }: IProps) => {
-  const {activeShip} = useGameContext();
+  const { activeShip } = useGameContext();
 
   return (
     <NavigationList>
@@ -66,7 +66,9 @@ export const FleetShips = ({ fleetShips }: IProps) => {
           ) : (
             <ActiveShip
               fleetShip={fleetShip}
-              isCurrent={!!(activeShip && (activeShip.ship.id === fleetShip.ship.id))}
+              isCurrent={
+                !!(activeShip && activeShip.ship.id === fleetShip.ship.id)
+              }
             />
           )}
         </li>

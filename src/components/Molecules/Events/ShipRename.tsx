@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Event, IEventProps } from "./Event";
 
-export const ShipRename = ({event, onAnimated }: IEventProps) => {
+export const ShipRename = ({ event, onAnimated }: IEventProps) => {
   if (!event.ship) {
     return (
       <Event time={event.time}>
@@ -12,8 +12,7 @@ export const ShipRename = ({event, onAnimated }: IEventProps) => {
 
   return (
     <Event time={event.time} onAnimated={onAnimated}>
-      <em>{event.value}</em> was renamed to{" "}
-      <em>{event.ship.name}</em>
+      <em>{event.value}</em> was renamed to <em>{event.ship.name}</em>
     </Event>
   );
 };

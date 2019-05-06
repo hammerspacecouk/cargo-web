@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useActiveShipContext } from "../ActiveShipContext";
-import { CratesList, TITLE_POSITION } from "../../../../components/Molecules/CratesList/CratesList";
+import {
+  CratesList,
+  TITLE_POSITION,
+} from "../../../../components/Molecules/CratesList/CratesList";
 import { Crate, CratePlaceholder } from "./Crate";
 
 export const CratesAtPort = () => {
@@ -10,19 +13,13 @@ export const CratesAtPort = () => {
 
   if (cratesInPort) {
     crates = cratesInPort.map(crateAction => (
-      <Crate
-        key={`cap-${crateAction.crate.id}`}
-        crateAction={crateAction}
-      />
+      <Crate key={`cap-${crateAction.crate.id}`} crateAction={crateAction} />
     ));
     totalAvailable = cratesInPort.length;
   } else {
     const placeholderSlots = new Array(3).fill(undefined);
     crates = placeholderSlots.map((_, i) => (
-      <CratePlaceholder
-        key={`p-${i}`}
-        loading={true}
-      />
+      <CratePlaceholder key={`p-${i}`} loading={true} />
     ));
   }
 

@@ -22,7 +22,6 @@ const calculate = (children: any, index: number) => {
     } else {
       index = index - child.length;
     }
-
   }
 
   return [token, index];

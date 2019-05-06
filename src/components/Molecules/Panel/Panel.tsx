@@ -8,6 +8,7 @@ import { MONOSPACE_FONT, SIZES } from "../../../styles/typography";
 interface IProps extends IChildrenProps {
   title: string;
   className?: string;
+  full?: boolean;
 }
 
 const StyledPanel = styled.div`
@@ -22,28 +23,27 @@ const PanelTitle = styled(H2)`
   line-height: 1;
 `;
 
-const PanelBody = styled.div`
-    flex: 1;
+const PanelBody = styled.div<{full: boolean}>`
+  flex: 1;
+  ${({full}) => full && `margin: 0 -${GRID.UNIT}`}
 `;
 
 const PanelFoot = styled.div`
-    ${SIZES.F}
-    ${MONOSPACE_FONT};
-    opacity: 0.6;
-    text-align: right;
-    font-style: italic;
-    text-transform: uppercase;
-    margin-top: ${GRID.UNIT};
+  ${SIZES.F}
+  ${MONOSPACE_FONT};
+  opacity: 0.6;
+  text-align: right;
+  font-style: italic;
+  text-transform: uppercase;
+  margin-top: ${GRID.UNIT};
 `;
 
-export const Panel = ({ className, title, children }: IProps) => {
+export const Panel = ({ className, title, children, full }: IProps) => {
   return (
     <StyledPanel className={className}>
       <PanelTitle>{title}</PanelTitle>
-      <PanelBody>
-        {children}
-      </PanelBody>
+      <PanelBody full={full}>{children}</PanelBody>
       <PanelFoot>/{title}</PanelFoot>
     </StyledPanel>
-  )
+  );
 };

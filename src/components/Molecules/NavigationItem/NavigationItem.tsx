@@ -14,7 +14,9 @@ interface IProps {
   isCurrent: boolean;
 }
 
-const StyledItem = styled(({ isCurrent, ...props }) => <Link {...props} />)<{isCurrent:boolean}>`
+const StyledItem = styled(({ isCurrent, ...props }) => <Link {...props} />)<{
+  isCurrent: boolean;
+}>`
   display: flex;
   padding: 0 ${GRID.UNIT} 0 ${GRID.HALF};
   border-left: solid transparent ${GRID.HALF};
@@ -27,7 +29,9 @@ const StyledItem = styled(({ isCurrent, ...props }) => <Link {...props} />)<{isC
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.1)};
     text-decoration: none;
   }
-  ${({isCurrent}) => isCurrent && `
+  ${({ isCurrent }) =>
+    isCurrent &&
+    `
     border-left-color: ${COLOURS.ACTIVE_HIGHLIGHT};
   `}
 `;
@@ -39,7 +43,6 @@ const StyledIcon = styled(Icon)`
 const Text = styled.span`
   flex: 1;
   display: inline-block;
-  white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
   ${SIZES.E};

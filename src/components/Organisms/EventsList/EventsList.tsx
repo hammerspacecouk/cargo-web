@@ -11,7 +11,7 @@ import {
   ACTION_SHIP_DEPARTURE,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
-  IEvent
+  IEvent,
 } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
@@ -36,28 +36,62 @@ interface IProps {
   readonly firstPerson?: boolean;
 }
 
-const mapEvent = (event: IEvent, firstPerson: boolean, onAnimated?: () => void) => {
+const mapEvent = (
+  event: IEvent,
+  firstPerson: boolean,
+  onAnimated?: () => void
+) => {
   switch (event.action) {
     case ACTION_CRATE_NEW:
-      return <CrateNew event={event} onAnimated={onAnimated} firstPerson={firstPerson}/>;
+      return (
+        <CrateNew
+          event={event}
+          onAnimated={onAnimated}
+          firstPerson={firstPerson}
+        />
+      );
     case ACTION_CRATE_PICKUP:
-      return <CratePickup event={event}  onAnimated={onAnimated}/>;
+      return <CratePickup event={event} onAnimated={onAnimated} />;
     case ACTION_EFFECT_USE:
-      return <EffectUse event={event} onAnimated={onAnimated} firstPerson={firstPerson}/>;
+      return (
+        <EffectUse
+          event={event}
+          onAnimated={onAnimated}
+          firstPerson={firstPerson}
+        />
+      );
     case ACTION_EFFECT_OFFENCE:
-      return <Offence event={event}  onAnimated={onAnimated} firstPerson={firstPerson}/>;
+      return (
+        <Offence
+          event={event}
+          onAnimated={onAnimated}
+          firstPerson={firstPerson}
+        />
+      );
     case ACTION_PLAYER_NEW:
-      return <PlayerNew event={event} onAnimated={onAnimated} firstPerson={firstPerson}/>;
+      return (
+        <PlayerNew
+          event={event}
+          onAnimated={onAnimated}
+          firstPerson={firstPerson}
+        />
+      );
     case ACTION_PLAYER_PROMOTION:
-      return <PlayerPromotion event={event} onAnimated={onAnimated} firstPerson={firstPerson}/>;
+      return (
+        <PlayerPromotion
+          event={event}
+          onAnimated={onAnimated}
+          firstPerson={firstPerson}
+        />
+      );
     case ACTION_SHIP_NEW:
-      return <ShipNew event={event} onAnimated={onAnimated}/>;
+      return <ShipNew event={event} onAnimated={onAnimated} />;
     case ACTION_SHIP_ARRIVAL:
-      return <ShipArrival event={event} onAnimated={onAnimated}/>;
+      return <ShipArrival event={event} onAnimated={onAnimated} />;
     case ACTION_SHIP_DEPARTURE:
-      return <ShipDeparture event={event} onAnimated={onAnimated}/>;
+      return <ShipDeparture event={event} onAnimated={onAnimated} />;
     case ACTION_SHIP_RENAME:
-      return <ShipRename event={event} onAnimated={onAnimated}/>;
+      return <ShipRename event={event} onAnimated={onAnimated} />;
     default:
       return `Unknown event: ${event.action}`;
   }
@@ -92,7 +126,7 @@ const StyledListItem = styled.li`
   display: flex;
   align-items: flex-start;
   &:not(:last-child) {
-    margin-bottom: ${GRID.QUARTER};
+    margin-bottom: ${GRID.HALF};
   }
 `;
 
@@ -110,7 +144,7 @@ export const EventsList = ({ className, events, firstPerson }: IProps) => {
     return (
       <StyledList as="ol" className={className}>
         <li>
-          <TextCursor/>
+          <TextCursor />
         </li>
       </StyledList>
     );
@@ -136,7 +170,7 @@ export const EventsList = ({ className, events, firstPerson }: IProps) => {
             setDisplayFrom(event.id);
           }
         }, 1500);
-      }
+      };
     }
 
     const item = (

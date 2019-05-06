@@ -17,17 +17,17 @@ const StyledSummary = styled.div`
 `;
 
 const Rank = styled.div`
-    flex: 1;
-    margin-left: ${GRID.UNIT};
+  flex: 1;
+  margin-left: ${GRID.UNIT};
 `;
 
 const RankTitle = styled.div`
-    ${ELEMENTS.H5};
-    margin-bottom: ${GRID.QUARTER};
+  ${ELEMENTS.H5};
+  margin-bottom: ${GRID.QUARTER};
 `;
 
 export const PlayerSummary = () => {
-  const {player, rankStatus} = useGameContext();
+  const { player, rankStatus } = useGameContext();
 
   return (
     <StyledSummary>

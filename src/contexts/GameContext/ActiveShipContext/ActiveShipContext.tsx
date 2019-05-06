@@ -3,7 +3,7 @@ import { IChildrenProps, IShip } from "../../../Interfaces";
 import { IActiveShip, useActiveShip } from "./useActiveShip";
 import { NotFound } from "../../../components/Organisms/Error/NotFound";
 
-interface IProps extends IChildrenProps{
+interface IProps extends IChildrenProps {
   ship?: IShip;
 }
 
@@ -20,7 +20,9 @@ export const ShipContextComponent = ({ ship, children }: IProps) => {
   }
 
   return (
-    <ActiveShipContext.Provider value={activeShip}>{children}</ActiveShipContext.Provider>
+    <ActiveShipContext.Provider value={activeShip}>
+      {children}
+    </ActiveShipContext.Provider>
   );
 };
 

@@ -13,12 +13,12 @@ const StyledArea = styled.div`
 `;
 
 export const LandingPage = () => {
-  const {setIsAtHome} = useGameContext();
+  const { setIsAtHome } = useGameContext();
   React.useEffect(() => {
     setIsAtHome(true);
     return () => {
       setIsAtHome(false);
-    }
+    };
   }, []);
 
   return (

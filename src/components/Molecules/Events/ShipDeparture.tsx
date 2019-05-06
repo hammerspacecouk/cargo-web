@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Event, IEventProps } from "./Event";
 
-export const ShipDeparture = ({event, onAnimated }: IEventProps) => {
+export const ShipDeparture = ({ event, onAnimated }: IEventProps) => {
   const port = event.port;
 
   let name = "[deleted]";

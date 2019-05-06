@@ -1,6 +1,7 @@
 import * as React from "react";
 
 interface IProps {
+  className: string;
   datetime: Date;
 }
 
@@ -11,7 +12,11 @@ const getSeconds = (datetime: Date): number => {
 
 const getValue = (seconds: number, datetime: Date): string => {
   if (seconds > 60 * 60 * 24 * 28) {
-    return datetime.toLocaleString('default', {'year': 'numeric', 'month': 'short', 'day': '2-digit'});
+    return datetime.toLocaleString("default", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    });
   }
   let interval = Math.floor(seconds / 86400);
   if (interval > 1) {
@@ -34,7 +39,7 @@ const getValue = (seconds: number, datetime: Date): string => {
 /**
  * Show dynamically updating time since an event
  */
-export const TimeAgo = ({ datetime }: IProps) => {
+export const TimeAgo = ({ className, datetime }: IProps) => {
   const [text, setText] = React.useState(
     getValue(getSeconds(datetime), datetime)
   );
@@ -62,7 +67,11 @@ export const TimeAgo = ({ datetime }: IProps) => {
   }, [datetime]);
 
   return (
-    <time dateTime={datetime.toISOString()} title={datetime.toISOString()}>
+    <time
+      className={className}
+      dateTime={datetime.toISOString()}
+      title={datetime.toISOString()}
+    >
       {text}
     </time>
   );
