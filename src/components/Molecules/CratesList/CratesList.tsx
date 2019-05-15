@@ -46,11 +46,13 @@ const StyledWrapper = styled.div`
 
 const List = styled(ListInline)`
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   ${scrollbarStyles};
   height: 100%;
   min-height: 112px;
   > li {
+    vertical-align: top;
     border-right: solid 1px ${COLOURS.GREY.DARKER};
     height: 100%;
     width: 160px;

@@ -5,16 +5,17 @@ import {
   CratesList,
   TITLE_POSITION,
 } from "../../../../components/Molecules/CratesList/CratesList";
+import { ICrateAction } from "../../../../Interfaces";
 
 export const CratesOnShip = () => {
   const { ship, cratesOnShip } = useActiveShipContext();
 
-  let availableCrates = [];
+  let availableCrates: ICrateAction[] = [];
   let loadedCount = "-";
 
   if (cratesOnShip) {
     availableCrates = cratesOnShip;
-    loadedCount = cratesOnShip.length;
+    loadedCount = cratesOnShip.length.toString();
   }
 
   const placeholderSlots = new Array(

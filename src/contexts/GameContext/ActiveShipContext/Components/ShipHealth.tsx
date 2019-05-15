@@ -20,37 +20,45 @@ const StyledLabel = styled.div`
 `;
 
 export const ShipHealth = () => {
-  const { buttonsDisabled, applyHealthHandler, healthOptions } = useActiveShipContext();
+  const {
+    buttonsDisabled,
+    applyHealthHandler,
+    healthOptions,
+  } = useActiveShipContext();
 
   if (!healthOptions) {
     return null;
   }
 
-  return healthOptions.map(transaction => {
-    let button = (
-      <CreditsButton
-        amount={transaction.cost}
-        disabledOverride={buttonsDisabled || !transaction.actionToken}
-      />
-    );
+  return (
+    <>
+      {healthOptions.map(transaction => {
+        let button = (
+          <CreditsButton
+            amount={transaction.cost}
+            disabledOverride={buttonsDisabled || !transaction.actionToken}
+          />
+        );
 
-    if (transaction.actionToken) {
-      button = (
-        <TokenButton
-          key={transaction.detail}
-          token={transaction.actionToken}
-          handler={applyHealthHandler}
-        >
-          {button}
-        </TokenButton>
-      );
-    }
+        if (transaction.actionToken) {
+          button = (
+            <TokenButton
+              key={transaction.detail}
+              token={transaction.actionToken}
+              handler={applyHealthHandler}
+            >
+              {button}
+            </TokenButton>
+          );
+        }
 
-    return (
-      <StyledRow key={transaction.detail}>
-        <StyledLabel>Repair {transaction.detail}</StyledLabel>
-        {button}
-      </StyledRow>
-    );
-  });
+        return (
+          <StyledRow key={transaction.detail}>
+            <StyledLabel>Repair {transaction.detail}</StyledLabel>
+            {button}
+          </StyledRow>
+        );
+      })}
+    </>
+  );
 };

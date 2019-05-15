@@ -297,6 +297,8 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
 };
 
 export const scrollbarStyles = css`
+  /* 1st: thumb, 2nd: track. */
+  scrollbar-color: ${COLOURS.BLACK.FADED} rgba(0, 0, 0, 0.3);   
   &::-webkit-scrollbar {
     width: ${GRID.HALF};
   }
@@ -309,4 +311,6 @@ export const scrollbarStyles = css`
   }
 `;
 export const PANEL_BORDER = `solid 1px ${COLOURS.PANEL_BORDER}`;
-export const PANEL_INNER_DIVIDER_BORDER = `solid 1px ${COLOURS.PANEL_INNER_DIVIDER}`;
+export const PANEL_INNER_DIVIDER_BORDER = `solid 1px ${
+  COLOURS.PANEL_INNER_DIVIDER
+}`;

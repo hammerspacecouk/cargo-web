@@ -24,11 +24,11 @@ interface IProps {
   option?: IDefenceOption;
 }
 
-export const DefenceEffect = ({option}: IProps) => {
-  const {buttonsDisabled} = useActiveShipContext();
+export const DefenceEffect = ({ option }: IProps) => {
+  const { buttonsDisabled } = useActiveShipContext();
 
   if (!option) {
-    return '----'; // todo - placeholder
+    return <Effect />;
   }
 
   // const {
@@ -39,7 +39,7 @@ export const DefenceEffect = ({option}: IProps) => {
   // } = useFleetContext();
 
   const applyAction = async (token: IActionToken) => {
-    alert('not!! yet!!!');
+    alert("not!! yet!!!");
     // disableButtons();
     // const data = await ApiClient.tokenFetch(token);
     // setFleetData(data);

@@ -1,9 +1,10 @@
 import {
   IActionToken,
-  ICrateAction, IDefenceOption,
+  ICrateAction,
+  IDefenceOption,
   IDirections,
   IEvent,
-  IHealthIncrease,
+  IHealthIncrease, IOtherShip,
   IShip,
   ITransaction
 } from "../../../Interfaces";
@@ -27,6 +28,9 @@ export interface IActiveShip {
   moveCrateHandler: (token: IActionToken) => Promise<void>;
   updateShipName: (newName: string) => void;
   applyHealthHandler: (token: IActionToken) => Promise<void>;
+  message?: string;
+  resetMessage: () => void;
+  shipsInLocation?: IOtherShip[];
 }
 
 export const useActiveShip = (incomingShip: IShip): IActiveShip => {
@@ -38,15 +42,17 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
   const [healthOptions, setHealthOptions] = useState(undefined);
   const [requestNameToken, setRequestNameToken] = useState(undefined);
+  const [shipsInLocation, setShipsInLocation] = useState(undefined);
   const [events, setEvents] = useState(undefined);
+  const [message, setMessage] = useState(null);
   const isMounted = useMounted();
   const {
     disableButtons,
     enableButtons,
-    buttonsDisabled
+    buttonsDisabled,
   } = useButtonsDisabled();
 
-  const setDataFromResponse = data => {
+  const setDataFromResponse = (data: any) => {
     if (!isMounted()) {
       return;
     }
@@ -57,7 +63,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
       // setHint(undefined);
       // setChannel(undefined);
       setDirections(undefined);
-      // setShipsInLocation(undefined);
+      setShipsInLocation(undefined);
       setEvents(undefined);
       setCratesInPort(undefined);
       setCratesOnShip(undefined);
@@ -75,7 +81,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     // setChannel(data.channel);
     // setHint(data.hint);
     setDirections(data.directions);
-    // setShipsInLocation(data.shipsInLocation);
+    setShipsInLocation(data.shipsInLocation);
     setEvents(data.events);
     setCratesInPort(data.cratesInPort);
     setCratesOnShip(data.cratesOnShip);
@@ -92,10 +98,13 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   };
 
   const doPortAction = async (token: IActionToken) => {
-    const { data } = await ApiClient.tokenFetch(token);
+    const { data, error } = await ApiClient.tokenFetch(token);
     updateScore(data.playerScore);
     setDataFromResponse(data);
     enableButtons();
+    if (error) {
+      setMessage(error);
+    }
     return data;
   };
 
@@ -107,8 +116,11 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const applyHealthHandler = async (token: IActionToken) => {
     disableButtons();
     const data = await doPortAction(token);
-    updateAShipProperty(ship.id, { strengthPercent: data.ship.strengthPercent });
+    updateAShipProperty(ship.id, {
+      strengthPercent: data.ship.strengthPercent,
+    });
 
+    // todo - should this be there?
     // const data: any = await ApiClient.tokenFetch(token);
     // enableButtons();
     // updateScore(data.newScore);
@@ -143,6 +155,9 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     ship,
     moveCrateHandler,
     updateShipName,
-    applyHealthHandler
+    applyHealthHandler,
+    message,
+    resetMessage: () => setMessage(null),
+    shipsInLocation
   };
 };

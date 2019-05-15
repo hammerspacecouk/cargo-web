@@ -13,7 +13,7 @@ import {
   ACTION_SHIP_RENAME,
   IEvent,
 } from "../../../Interfaces";
-import { COLOURS, hexToRGBa } from "../../../styles/colours";
+import { COLOURS } from "../../../styles/colours";
 import { MONOSPACE_FONT } from "../../../styles/typography";
 import { GRID } from "../../../styles/variables";
 import { ListUnstyled } from "../../Atoms/Lists/ListUnstyled/ListUnstyled";
@@ -29,6 +29,7 @@ import { ShipRename } from "../../Molecules/Events/ShipRename";
 import { EffectUse } from "../../Molecules/Events/EffectUse";
 import { Offence } from "../../Molecules/Events/Offence";
 import { useMounted } from "../../../hooks/useMounted";
+import { getStoredItem, storeItem } from "../../../util/Storage";
 
 interface IProps {
   readonly className?: string;
@@ -99,45 +100,61 @@ const mapEvent = (
 
 const StyledList = styled(ListUnstyled)`
   ${MONOSPACE_FONT};
-  position: relative;
-  overflow: hidden;
   line-height: 1.6;
   color: ${COLOURS.EVENTS.TEXT};
   height: 100%;
   min-height: 60px;
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: block;
-    height: ${GRID.DOUBLE};
-    background: linear-gradient(
-      to bottom,
-      ${hexToRGBa(COLOURS.EVENTS.BACKGROUND, 0)} 0%,
-      ${COLOURS.EVENTS.BACKGROUND} 100%
-    );
-    pointer-events: none;
-  }
+  overflow: hidden;
 `;
 
-const StyledListItem = styled.li`
+interface IRenderedEvent {
+  id: string;
+  element: React.ReactNode;
+}
+
+const calculateOpacity = (position: number, total: number) => {
+  const index = position + 1;
+  if (index <= 3) {
+    return 1;
+  }
+
+  const thresholdToFade = Math.max(4, total - 2);
+
+  if (index === thresholdToFade) {
+    return 0.7;
+  }
+  if (index === thresholdToFade + 1) {
+    return 0.4;
+  }
+  if (index === thresholdToFade + 2) {
+    return 0.1;
+  }
+
+  return 1;
+};
+
+const StyledListItem = styled.li<{ opacity: number }>`
   display: flex;
   align-items: flex-start;
+  opacity: ${({ opacity }) => opacity};
   &:not(:last-child) {
     margin-bottom: ${GRID.HALF};
   }
 `;
 
-export const EventsList = ({ className, events, firstPerson }: IProps) => {
-  const [displayFrom, setDisplayFrom] = React.useState(undefined);
-  const isMounted = useMounted();
+const LAST_SEEN_EVENT_TIME_KEY = "LAST_SEEN_EVENT_TIME";
 
-  React.useEffect(() => {
-    // todo - new events
-    // also todo - store localstorage what you last saw and use that for displayFrom
-  }, [events]);
+const getLastSeenTime = (): Date => {
+  const iso = getStoredItem(LAST_SEEN_EVENT_TIME_KEY);
+  if (iso) {
+    return new Date(iso);
+  }
+  return null;
+};
+
+export const EventsList = ({ className, events, firstPerson }: IProps) => {
+  const [animateFrom, setAnimateFrom] = React.useState(undefined);
+  const isMounted = useMounted();
 
   const len = events && events.length;
   if (!events || len < 1) {
@@ -150,51 +167,59 @@ export const EventsList = ({ className, events, firstPerson }: IProps) => {
     );
   }
 
-  const renderedEvents = [];
+  const lastSeenTime = getLastSeenTime();
+  const renderedEvents: IRenderedEvent[] = [];
 
-  let hasPassed = false;
-  let animatingItem = null;
-  events.forEach((event, i) => {
-    if (event.id === displayFrom) {
-      hasPassed = true;
-      // push the most recent animating item
-      renderedEvents.push(animatingItem);
-      animatingItem = null;
+  // loop from oldest to newest
+  // items should only be added to the rendered list
+  // if they are before "animateFrom" or they've already been seen
+  let showNoMore: boolean;
+  let willAnimate: boolean;
+  // copy events array to reverse it
+  [...events].reverse().forEach(event => {
+    if (showNoMore) {
+      return; // item is after the animating line. ignore it
     }
 
-    let onAnimated;
-    if (!hasPassed) {
-      onAnimated = () => {
+    const hasSeen = lastSeenTime && new Date(event.time) <= lastSeenTime;
+
+    let onAnimationComplete; // leave as undefined to disable animation
+    if (!hasSeen && (willAnimate || !animateFrom)) {
+      onAnimationComplete = () => {
         window.setTimeout(() => {
           if (isMounted()) {
-            setDisplayFrom(event.id);
+            setAnimateFrom(event.id);
+            storeItem(LAST_SEEN_EVENT_TIME_KEY, event.time);
           }
         }, 1500);
       };
+      showNoMore = true; // the last one should be the animating one
+    } else if (event.id === animateFrom) {
+      // animate the next item
+      willAnimate = true;
     }
 
-    const item = (
-      <StyledListItem key={`event-${event.id}`}>
-        {mapEvent(event, firstPerson, onAnimated)}
-      </StyledListItem>
-    );
-    if (!hasPassed) {
-      // if not ready to be displayed, store it
-      animatingItem = item;
-    } else {
-      // or push immediately
-      renderedEvents.push(item);
-    }
+    renderedEvents.push({
+      id: event.id,
+      element: mapEvent(event, firstPerson, onAnimationComplete),
+    });
   });
 
-  if (animatingItem) {
-    // should only happen for the last item in the list (first to display)
-    renderedEvents.push(animatingItem);
-  }
+  // put them back into reverse chronological order (most recent first)
+  renderedEvents.reverse();
 
+  const total = renderedEvents.length;
   return (
     <StyledList as="ol" className={className}>
-      {renderedEvents}
+      {renderedEvents.map((event, i) => (
+        <StyledListItem
+          key={`event-${event.id}`}
+          data-event-id={event.id}
+          opacity={calculateOpacity(i, total)}
+        >
+          {event.element}
+        </StyledListItem>
+      ))}
     </StyledList>
   );
 };

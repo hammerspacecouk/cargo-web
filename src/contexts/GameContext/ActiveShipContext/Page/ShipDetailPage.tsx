@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { COLOURS, PANEL_BORDER } from "../../../../styles/colours";
+import { COLOURS, hexToRGBa, PANEL_BORDER } from "../../../../styles/colours";
 import { Panel } from "../../../../components/Molecules/Panel/Panel";
 import { BREAKPOINTS } from "../../../../styles/media";
 import { Directions } from "../Panels/Directions";
@@ -15,7 +15,18 @@ interface IProps {
 }
 
 const Page = styled.div`
-  background: ${COLOURS.GREY.DARKEST};
+  background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.75)};
+  background-image: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  background-size: 100% 2px, 3px 100%;
   ${BREAKPOINTS.L`
       display: grid;
       grid-template-columns: repeat(10, [col] 10%);
@@ -41,7 +52,7 @@ const PanelCrates = styled(GeneralPanel)`
 const PanelNavigation = styled(GeneralPanel)`
   grid-column: col 6 / span 5;
   grid-row: row 1;
-  background: ${COLOURS.GREY.BLACK};
+  background: ${hexToRGBa(COLOURS.GREY.BLACK, 0.7)};
 `;
 
 const PanelShips = styled(GeneralPanel)`
@@ -55,19 +66,17 @@ const PanelTrade = styled(GeneralPanel)`
 `;
 
 const PanelLog = styled(GeneralPanel)`
-  grid-column: col 1 / span 4;
+  grid-column: col 1 / span 5;
   grid-row: row 3;
-  background: ${COLOURS.EVENTS.BACKGROUND};
+  background: ${hexToRGBa(COLOURS.EVENTS.BACKGROUND, 0.75)};
 `;
 
 const PanelEngineering = styled(GeneralPanel)`
-  grid-column: col 5 / span 6;
+  grid-column: col 6 / span 5;
   grid-row: row 3;
 `;
 
-const StyledEventsList = styled(EventsList)`
-  height: 240px;
-`;
+const StyledEventsList = styled(EventsList)``;
 
 // todo - if travelling this is very different
 export const ShipDetailPage = ({ className }: IProps) => {
@@ -77,16 +86,16 @@ export const ShipDetailPage = ({ className }: IProps) => {
     <Page className={className}>
       <PanelCrates>
         <Panel title="Cargo" full>
-        <Crates />
+          <Crates />
         </Panel>
       </PanelCrates>
       <PanelNavigation>
         <Panel title="Navigation" full>
-        <Directions />
+          <Directions />
         </Panel>
       </PanelNavigation>
       <PanelShips>
-        <Panel title="Tactical" full>
+        <Panel title="Tactical">
           <Tactical />
         </Panel>
       </PanelShips>

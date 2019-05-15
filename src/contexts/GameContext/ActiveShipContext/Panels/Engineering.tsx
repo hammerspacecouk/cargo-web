@@ -2,7 +2,7 @@ import * as React from "react";
 import { useActiveShipContext } from "../ActiveShipContext";
 import styled from "styled-components";
 import { SIZES } from "../../../../styles/typography";
-import { GRID} from "../../../../styles/variables";
+import { GRID } from "../../../../styles/variables";
 import { ShieldStrength } from "../../../../components/Molecules/ShieldStrength/ShieldStrength";
 import { ActionButton } from "../../../../components/Atoms/Button/Button";
 import { EditShipName } from "../Components/EditShipName";
@@ -133,7 +133,9 @@ export const Engineering = () => {
           onClose={() => isMounted() && setShipNameModalIsOpen(false)}
           title="Request new ship name"
         >
-          <EditShipName onComplete={() => isMounted() && setShipNameModalIsOpen(false)} />
+          <EditShipName
+            onComplete={() => isMounted() && setShipNameModalIsOpen(false)}
+          />
         </Modal>
       )}
     </>

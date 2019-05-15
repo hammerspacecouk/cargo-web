@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface IProps {
-  className: string;
+  className?: string;
   datetime: Date;
 }
 

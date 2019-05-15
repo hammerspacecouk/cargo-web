@@ -111,8 +111,7 @@ export const FleetShipDetail = ({ fleetShip }: IProps) => (
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Shield strength</DetailRowLabel>
-      <DetailRowContent>
-      </DetailRowContent>
+      <DetailRowContent />
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Ship name</DetailRowLabel>

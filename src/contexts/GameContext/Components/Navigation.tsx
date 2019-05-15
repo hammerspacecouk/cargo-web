@@ -26,7 +26,7 @@ const Ships = styled.div`
   flex: 1;
   ${BREAKPOINTS.XL`
     overflow-y: auto;
-    ${scrollbarStyles};
+    ${scrollbarStyles.toString()};
     `};
 `;
 
@@ -59,6 +59,7 @@ export const Navigation = ({ className }: IProps) => {
           <li>
             <NavigationItem
               icon={<InventoryIcon />}
+              isCurrent={false}
               path="/play/inventory"
               text="Launch ships"
             />
@@ -66,6 +67,7 @@ export const Navigation = ({ className }: IProps) => {
           <li>
             <NavigationItem
               icon={<ProfileIcon />}
+              isCurrent={false}
               path="/profile"
               text="Profile"
             />

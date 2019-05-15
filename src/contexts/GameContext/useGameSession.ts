@@ -5,7 +5,7 @@ import {
   ILoginOptions,
   IPlayer,
   IRankStatus,
-  IScore
+  IScore,
 } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useMounted } from "../../hooks/useMounted";
@@ -24,6 +24,13 @@ interface ISessionResponse {
   readonly loginOptions?: ILoginOptions;
 }
 
+interface IUpdateRankStatus {
+  (rankStatus: IRankStatus): void;
+}
+interface IUpdateFleetShips {
+  (fleetShips: IFleetShip[]): void;
+}
+
 export interface IGameSession {
   activeShip?: IFleetShip;
   player?: IPlayer;
@@ -38,6 +45,7 @@ export interface IGameSession {
   setActiveShipById: (shipId?: string) => void;
   updateScore: (val: IScore) => void;
   updateAShipProperty: (id: string, newProp: object) => void;
+  updateRankStatus: IUpdateRankStatus;
 }
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
@@ -48,9 +56,14 @@ const getSession = (): Promise<IGameSessionResponse> => {
 
 export const useGameSession = (): IGameSession => {
   const [player, setPlayer] = useState(undefined);
-  const [rankStatus, updateRankStatus] = useState(undefined);
+  const [rankStatus, updateRankStatus]: [
+    IRankStatus,
+    IUpdateRankStatus
+  ] = useState(undefined);
   const [score, updateScore] = useState(undefined);
-  const [ships, setShips] = useState(undefined);
+  const [ships, setShips]: [IFleetShip[], IUpdateFleetShips] = useState(
+    undefined
+  );
   const [activeShip, setActiveShip] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const [loginOptions, setLoginOptions] = useState(undefined);
@@ -104,15 +117,15 @@ export const useGameSession = (): IGameSession => {
 
   const updateAShipProperty = (id: string, newProps: object) => {
     if (isMounted()) {
-      const updatedShips = ships.map(ship => {
-        if (ship.ship.id === id) {
-          const newShip = { ...ship.ship, ...newProps };
+      const updatedShips: IFleetShip[] = ships.map(fleetShip => {
+        if (fleetShip.ship.id === id) {
+          const newShip = { ...fleetShip.ship, ...newProps };
           return {
-            ...ship,
-            ship: newShip
+            ...fleetShip,
+            ship: newShip,
           };
         }
-        return ship;
+        return fleetShip;
       });
       setShips(updatedShips);
     }
@@ -135,6 +148,7 @@ export const useGameSession = (): IGameSession => {
     setIsAtHome,
     ships,
     updateScore,
-    updateAShipProperty
+    updateAShipProperty,
+    updateRankStatus,
   };
 };

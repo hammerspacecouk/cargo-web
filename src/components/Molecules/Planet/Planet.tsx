@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import planetTexture from "../../../planet.jpg";
 import { BREAKPOINTS } from "../../../styles/media";
 
@@ -33,11 +33,11 @@ const StyledPlanet = styled.div`
 
 // todo - figure out a performant animation strategy
 const PlanetInner = styled.div`
-    background: url(${planetTexture}) repeat top left;
-    width: 100%;
-    height: 2400px;
-    ${BREAKPOINTS.MAX`
-      animation: ${rotatingPlanet} 200s infinite linear;
+  background: url(${planetTexture}) repeat top left;
+  width: 100%;
+  height: 2400px;
+  ${BREAKPOINTS.MAX`
+      animation:  ${rotatingPlanet.getName()} 200s infinite linear;
     `}
 `;
 

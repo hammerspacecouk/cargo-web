@@ -1,11 +1,8 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { NotFound } from "../../components/Organisms/Error/NotFound";
-import { FleetPage } from "../../pages/Play/FleetPage";
-import { ShipPage } from "../../pages/Play/ShipPage";
-import { InventoryPage } from "../../pages/Play/InventoryPage";
 import { PromotionModal } from "./Components/PromotionModal";
 import { GameContextComponent } from "./GameContext";
 import { Masthead } from "./Components/Masthead";
@@ -43,7 +40,7 @@ const StyledMain = styled.main`
     padding: 0;
     height: calc(100vh - ${MASTHEAD_HEIGHT} - 1px);
     overflow-y: auto;
-    ${scrollbarStyles}
+    ${scrollbarStyles.toString()}
     `};
 `;
 

@@ -23,9 +23,9 @@ const PanelTitle = styled(H2)`
   line-height: 1;
 `;
 
-const PanelBody = styled.div<{full: boolean}>`
+const PanelBody = styled.div<{ full: boolean }>`
   flex: 1;
-  ${({full}) => full && `margin: 0 -${GRID.UNIT}`}
+  ${({ full }) => full && `margin: 0 -${GRID.UNIT}`}
 `;
 
 const PanelFoot = styled.div`

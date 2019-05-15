@@ -21,6 +21,7 @@ const StyledFleetPage = styled.div`
   `}
 `;
 
+/** @deprecated */
 const FleetPageContent = () => {
   const { ships, events, refresh } = useFleetContext();
   const { player, rankStatus } = useSessionContext();

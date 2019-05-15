@@ -1,23 +1,25 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { MONOSPACE_FONT } from "../../../styles/typography";
 
-export const TYPE_CONFIRM = "confirm";
-export const TYPE_DANGER = "danger";
-export const TYPE_ACTION = "action";
-export const TYPE_WARNING = "warning";
+export enum Type {
+  Confirm,
+  Danger,
+  Action,
+  Warning
+}
 
-const getColour = (styleType: string): string => {
+const getColour = (styleType: Type): string => {
   switch (styleType) {
-    case TYPE_CONFIRM:
+    case Type.Confirm:
       return COLOURS.BUTTON.CONFIRM;
-    case TYPE_DANGER:
+    case Type.Danger:
       return COLOURS.BUTTON.DANGER;
-    case TYPE_WARNING:
+    case Type.Warning:
       return COLOURS.BUTTON.WARNING;
-    case TYPE_ACTION:
+    case Type.Action:
       return COLOURS.BUTTON.ACTION;
     default:
       return COLOURS.BUTTON.STANDARD;
@@ -30,6 +32,13 @@ interface IProps {
   target?: string;
 }
 
+export const buttonColours = (styleType: Type) => css`
+  border: solid 2px ${getColour(styleType)};
+  color: ${getColour(styleType)};
+  box-shadow: 0 0 16px ${getColour(styleType)},
+    0 0 16px inset ${getColour(styleType)};
+`;
+
 export const Button = styled.button<IProps>`
   outline: none;
   user-select: none;
@@ -38,10 +47,7 @@ export const Button = styled.button<IProps>`
   display: inline-block;
   padding: ${GRID.HALF} ${GRID.UNIT};
   background: none;
-  border: solid 2px ${({ styleType }) => getColour(styleType)};
-  color: ${({ styleType }) => getColour(styleType)};
-  box-shadow: 0 0 16px ${({ styleType }) => getColour(styleType)},
-    0 0 16px inset ${({ styleType }) => getColour(styleType)};
+  ${({ styleType }) => buttonColours(styleType)};
   border-radius: 4px;
   transition: all 0.15s linear;
   text-decoration: none;
@@ -68,19 +74,19 @@ export const Button = styled.button<IProps>`
 `;
 
 export const ConfirmButton = (props: any) => (
-  <Button {...props} styleType={TYPE_CONFIRM} />
+  <Button {...props} styleType={Type.Confirm} />
 );
 
 export const DangerButton = (props: any) => (
-  <Button {...props} styleType={TYPE_DANGER} />
+  <Button {...props} styleType={Type.Danger} />
 );
 
 export const ActionButton = (props: any) => (
-  <Button {...props} styleType={TYPE_ACTION} />
+  <Button {...props} styleType={Type.Action} />
 );
 
 export const WarningButton = (props: any) => (
-  <Button {...props} styleType={TYPE_WARNING} />
+  <Button {...props} styleType={Type.Warning} />
 );
 
 export const DisguisedButton = styled.button`

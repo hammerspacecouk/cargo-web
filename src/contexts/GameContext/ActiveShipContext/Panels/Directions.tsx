@@ -18,7 +18,7 @@ import { PortName } from "../../../../components/Molecules/PortName/PortName";
 import { ScoreValue } from "../../../../components/Molecules/ScoreValue/ScoreValue";
 import { GoButton } from "../Components/GoButton";
 import styled from "styled-components";
-import { GRID} from "../../../../styles/variables";
+import { GRID } from "../../../../styles/variables";
 import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 import { H4 } from "../../../../components/Atoms/Heading/Heading";
 import { MONOSPACE_FONT } from "../../../../styles/typography";

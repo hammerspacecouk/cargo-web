@@ -15,7 +15,7 @@ export const CratesAtPort = () => {
     crates = cratesInPort.map(crateAction => (
       <Crate key={`cap-${crateAction.crate.id}`} crateAction={crateAction} />
     ));
-    totalAvailable = cratesInPort.length;
+    totalAvailable = cratesInPort.length.toString();
   } else {
     const placeholderSlots = new Array(3).fill(undefined);
     crates = placeholderSlots.map((_, i) => (

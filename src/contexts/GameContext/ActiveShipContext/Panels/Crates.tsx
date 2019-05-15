@@ -4,7 +4,7 @@ import { CratesAtPort } from "../Components/CratesAtPort";
 import { CratesOnShip } from "../Components/CratesOnShip";
 import { ChevronUpIcon } from "../../../../components/Icons/ChevronUpIcon/ChevronUpIcon";
 import { Icon } from "../../../../components/Atoms/Icon/Icon";
-import { GRID} from "../../../../styles/variables";
+import { GRID } from "../../../../styles/variables";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 
 const CratesLayout = styled.div`

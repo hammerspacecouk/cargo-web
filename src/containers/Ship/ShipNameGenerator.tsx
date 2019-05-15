@@ -1,5 +1,4 @@
 import * as React from "react";
-import { TextB } from "../../components/Atoms/Text/Text";
 import { useShipNameGenerator } from "../../hooks/useShipNameGenerator";
 import { IActionToken } from "../../Interfaces";
 import styled from "styled-components";
@@ -14,7 +13,7 @@ interface IProps {
 const Guess = styled.span`
   ${SIZES.D};
   ${BREAKPOINTS.S`
-    ${SIZES.B}
+    ${SIZES.B.toString()}
   `}
 `;
 

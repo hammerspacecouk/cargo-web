@@ -5,6 +5,7 @@ import { ShipContextComponent } from "./ActiveShipContext";
 import { ShipOverview } from "./Components/ShipOverview";
 import { ShipDetailPage } from "./Page/ShipDetailPage";
 import { useGameContext } from "../GameContext";
+import { MessageModal } from "./Components/MessageModal";
 
 const StyledPlayBoard = styled.div`
   display: flex;
@@ -44,6 +45,7 @@ export const ActiveShipContainer = (props: IProps) => {
         <ShipOverview />
         <StyledShipDetail />
       </StyledPlayBoard>
+      <MessageModal />
     </ShipContextComponent>
   );
 };

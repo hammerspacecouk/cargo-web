@@ -2,6 +2,8 @@ import * as React from "react";
 import styled, { css, keyframes } from "styled-components";
 import { IEffect } from "../../../Interfaces";
 import { COLOURS, hexToRGBa } from "../../../styles/colours";
+import { SIZES } from "../../../styles/typography";
+import { buttonColours, Type } from "../../Atoms/Button/Button";
 
 interface IProps {
   readonly effect?: IEffect;
@@ -24,6 +26,12 @@ const activeFrames = keyframes`
     }
 `;
 
+
+// todo - get a handle on this styling.
+// todo - available = purple
+// todo - inactive = faded
+// todo - unknown = grey/whitefaded
+// todo - active = green/yellow/blue
 const StyledEffectWrap = styled.div<{
   locked: boolean;
   disabled: boolean;
@@ -33,9 +41,9 @@ const StyledEffectWrap = styled.div<{
   width: ${EFFECT_WIDTH};
   user-select: none;
   padding-top: calc(100% - 16px);
-  border: 8px solid hsl(0, 0%, 48%);
+  ${buttonColours(Type.Action)};
+  
   position: relative;
-  background: hsl(264, 45%, 12%) linear-gradient(135deg, rgba(255,255,255,0.4) 0%,rgba(255,255,255,0) 100%);
   border-bottom-left-radius: 100%;
   border-bottom-right-radius: 100%;
   border-top-right-radius: 100%;
@@ -77,8 +85,7 @@ const StyledEffectInner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  font-family: sans-serif;
+  ${SIZES.D};
 `;
 
 export const Effect = ({

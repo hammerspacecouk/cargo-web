@@ -33,7 +33,7 @@ const Text = styled.div`
 const Updating = styled.span`
   ${SIZES.D};
   ${BREAKPOINTS.S`
-    ${SIZES.B}
+    ${SIZES.B.toString()}
   `}
 `;
 
@@ -47,7 +47,7 @@ export const EditShipName = ({ onComplete }: IProps) => {
     setRequestNameToken,
     updateShipName,
   } = useActiveShipContext();
-  const { updateScore, buttonsDisabled } = useGameContext();
+  const { updateScore } = useGameContext();
   const [isActive, setIsActive] = React.useState(false);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
   const [offeredShipName, setOfferedShipName] = React.useState(null);
@@ -139,7 +139,7 @@ export const EditShipName = ({ onComplete }: IProps) => {
           token={requestNameToken.actionToken}
           handler={requestShipName}
         >
-          <CreditsButton disabledOverride={buttonsDisabled} amount={500} />
+          <CreditsButton amount={500} />
         </TokenButton>
       );
     }
