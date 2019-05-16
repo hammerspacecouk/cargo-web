@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Score } from "../../Organisms/Score/Score";
 import { IOffenceOption, IShip } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
 import { ShieldStrength } from "../ShieldStrength/ShieldStrength";
 import { OffenceActions } from "../../Organisms/OffenceActions/OffenceActions";
+import { Score } from "../../Organisms/Score/Score";
 
 interface IProps {
   ship: IShip;
@@ -25,7 +25,9 @@ const Detail = styled.div`
   line-height: 1;
 `;
 
-const Offence = styled.div``;
+const Offence = styled.div`
+  width: 48px;
+`;
 
 export const PlayerShip = ({ ship, offence }: IProps) => (
   <ShipItem>

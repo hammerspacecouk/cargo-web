@@ -1,12 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { scrollbarStyles, } from "../../../../styles/colours";
+import { scrollbarStyles } from "../../../../styles/colours";
 import { useActiveShipContext } from "../ActiveShipContext";
 import { DefenceEffect } from "../Components/DefenceEffect";
 import { IDefenceOption } from "../../../../Interfaces";
 import { GRID } from "../../../../styles/variables";
 import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 import { PlayerShipList } from "../../../../components/Organisms/PlayerShipList/PlayerShipList";
+import { EFFECT_WIDTH } from "../../../../components/Molecules/Effect/Effect";
 
 const Panel = styled.div`
   display: flex;
@@ -19,8 +20,9 @@ const DefenceListGrid = styled(ListUnstyled)`
   justify-content: flex-end;
   flex-wrap: wrap;
   & > li {
-    width: 56px;
+    width: ${EFFECT_WIDTH};
     margin-left: ${GRID.UNIT};
+    margin-bottom: ${GRID.UNIT};
   }
 `;
 

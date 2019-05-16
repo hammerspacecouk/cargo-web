@@ -4,9 +4,10 @@ import {
   IDefenceOption,
   IDirections,
   IEvent,
-  IHealthIncrease, IOtherShip,
+  IHealthIncrease,
+  IOtherShip,
   IShip,
-  ITransaction
+  ITransaction,
 } from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
@@ -158,6 +159,6 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     applyHealthHandler,
     message,
     resetMessage: () => setMessage(null),
-    shipsInLocation
+    shipsInLocation,
   };
 };

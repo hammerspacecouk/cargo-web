@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { MONOSPACE_FONT } from "../../../styles/typography";
@@ -8,10 +8,10 @@ export enum Type {
   Confirm,
   Danger,
   Action,
-  Warning
+  Warning,
 }
 
-const getColour = (styleType: Type): string => {
+const getColour = (styleType?: Type): string => {
   switch (styleType) {
     case Type.Confirm:
       return COLOURS.BUTTON.CONFIRM;

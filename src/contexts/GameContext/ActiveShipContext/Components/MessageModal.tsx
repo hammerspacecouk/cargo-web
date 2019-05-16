@@ -1,5 +1,9 @@
 import * as React from "react";
-import { Modal, ModalActions, ModalType } from "../../../../components/Molecules/Modal/Modal";
+import {
+  Modal,
+  ModalActions,
+  ModalType,
+} from "../../../../components/Molecules/Modal/Modal";
 import { P } from "../../../../components/Atoms/Text/Text";
 import { Button } from "../../../../components/Atoms/Button/Button";
 import { useActiveShipContext } from "../ActiveShipContext";

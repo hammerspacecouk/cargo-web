@@ -6,6 +6,7 @@ import { ApiClient } from "../../../util/ApiClient";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
 import { EffectsRow } from "../EffectsRow/EffectsRow";
 import { Effect } from "../../Molecules/Effect/Effect";
+import { AttackIcon } from "../../Icons/AttackIcon/AttackIcon";
 
 interface IProps {
   actions?: IOffenceOption[];
@@ -48,6 +49,10 @@ const OffenceEffect = ({ option }: IOffenceEffectProps) => {
 };
 
 export const OffenceActions = ({ actions }: IProps) => {
+
+  return <AttackIcon/>;
+
+  // todo
   if (!actions) {
     return null;
   }
