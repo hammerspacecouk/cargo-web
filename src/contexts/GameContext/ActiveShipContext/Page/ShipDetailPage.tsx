@@ -9,6 +9,7 @@ import { EventsList } from "../../../../components/Organisms/EventsList/EventsLi
 import { useActiveShipContext } from "../ActiveShipContext";
 import { Engineering } from "../Panels/Engineering";
 import { Tactical } from "../Panels/Tactical";
+import { Trade } from "../Panels/Trade";
 
 interface IProps {
   className?: string;
@@ -56,12 +57,12 @@ const PanelNavigation = styled(GeneralPanel)`
 `;
 
 const PanelShips = styled(GeneralPanel)`
-  grid-column: col 1 / span 6;
+  grid-column: col 1 / span 4;
   grid-row: row 2;
 `;
 
 const PanelTrade = styled(GeneralPanel)`
-  grid-column: col 7 / span 4;
+  grid-column: col 5 / span 6;
   grid-row: row 2;
 `;
 
@@ -100,7 +101,9 @@ export const ShipDetailPage = ({ className }: IProps) => {
         </Panel>
       </PanelShips>
       <PanelTrade>
-        <Panel title="Trade">stuff</Panel>
+        <Panel title="Trade">
+          <Trade />
+        </Panel>
       </PanelTrade>
       <PanelLog>
         <Panel title="Log">

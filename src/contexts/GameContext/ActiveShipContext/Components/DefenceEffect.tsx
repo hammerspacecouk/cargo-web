@@ -1,4 +1,4 @@
-import { IActionToken, IDefenceOption } from "../../../../Interfaces";
+import { IActionToken, ITacticalOption } from "../../../../Interfaces";
 import { EffectActionButton } from "../../../../components/Molecules/EffectActionButton/EffectActionButton";
 import { CountdownToTime } from "../../../../components/Molecules/CountdownToTime/CountdownToTime";
 import { Effect } from "../../../../components/Molecules/Effect/Effect";
@@ -21,7 +21,7 @@ const ActiveDetail = styled(Badge)`
 `;
 
 interface IProps {
-  option?: IDefenceOption;
+  option?: ITacticalOption;
 }
 
 export const DefenceEffect = ({ option }: IProps) => {

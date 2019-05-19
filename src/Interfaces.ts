@@ -112,6 +112,7 @@ export interface IShipUpgrade extends ITransaction {
   detail: IShipClass;
 }
 
+// @deprecated
 export interface IInventoryEffects {
   offence: IEffectUpgrade[];
   defence: IEffectUpgrade[];
@@ -127,13 +128,15 @@ export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
 
-export interface IDefenceOption {
+export interface ITacticalOption {
   actionToken?: IActionToken;
   effect: IEffect;
   hitsRemaining?: number;
   expiry?: string;
+  isActive?: boolean;
 }
 
+// @deprecated
 export interface ITravelOption {
   actionToken?: IActionToken;
   effect: IEffect;
@@ -150,7 +153,6 @@ export interface IFleetShip {
   needsAttention: boolean;
   renameToken: ITransaction;
   health: IHealthIncrease[];
-  defenceOptions: IDefenceOption[];
 }
 
 export interface IOtherShip {
@@ -199,6 +201,7 @@ export interface IChildrenProps {
 }
 
 export interface IEffect {
+  id: string;
   name: string;
   description: string;
 }

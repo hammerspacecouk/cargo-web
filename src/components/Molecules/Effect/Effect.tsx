@@ -28,13 +28,14 @@ const StyledEffectWrap = styled.div<{
   border-bottom-right-radius: 100%;
   border-top-right-radius: 100%;
   transition: all 0.15s linear;
-  ${({locked}) => buttonColours(locked ? null : Type.Action)}
-  ${({ disabled, locked }) => (disabled || locked) && css`
-    opacity: ${locked ? 0.1 : 0.3};
-  `}
+  ${({ locked }) => buttonColours(locked ? null : Type.Action)}
+  ${({ disabled, locked }) =>
+    (disabled || locked) &&
+    css`
+      opacity: ${locked ? 0.1 : 0.3};
+    `}
   ${({ isButton, disabled }) =>
-    isButton && !disabled && buttonColours(Type.Action)
-}
+    isButton && !disabled && buttonColours(Type.Action)}
   ${({ isActive }) =>
     isActive &&
     css`

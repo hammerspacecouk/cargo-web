@@ -1,13 +1,13 @@
 import {
   IActionToken,
   ICrateAction,
-  IDefenceOption,
+  ITacticalOption,
   IDirections,
   IEvent,
   IHealthIncrease,
   IOtherShip,
   IShip,
-  ITransaction,
+  ITransaction, IInventoryEffects, IEffectUpgrade
 } from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
@@ -19,7 +19,7 @@ export interface IActiveShip {
   buttonsDisabled: boolean;
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
-  defenceOptions?: IDefenceOption[];
+  tacticalOptions?: ITacticalOption[];
   directions?: IDirections;
   events?: IEvent[];
   healthOptions: IHealthIncrease[];
@@ -32,18 +32,20 @@ export interface IActiveShip {
   message?: string;
   resetMessage: () => void;
   shipsInLocation?: IOtherShip[];
+  purchaseOptions: IEffectUpgrade[];
 }
 
 export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const { updateScore, updateAShipProperty } = useGameContext();
   const [ship, setShip] = useState(incomingShip);
   const [directions, setDirections] = useState(undefined);
-  const [defenceOptions, setDefenceOptions] = useState(undefined);
+  const [tacticalOptions, setTacticalOptions] = useState(undefined);
   const [cratesInPort, setCratesInPort] = useState(undefined);
   const [cratesOnShip, setCratesOnShip] = useState(undefined);
   const [healthOptions, setHealthOptions] = useState(undefined);
   const [requestNameToken, setRequestNameToken] = useState(undefined);
   const [shipsInLocation, setShipsInLocation] = useState(undefined);
+  const [purchaseOptions, setPurchaseOptions] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const [message, setMessage] = useState(null);
   const isMounted = useMounted();
@@ -58,7 +60,6 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
       return;
     }
     if (!data) {
-      // setLoaded(true);
       setShip(undefined);
       // setPort(undefined);
       // setHint(undefined);
@@ -68,15 +69,14 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
       setEvents(undefined);
       setCratesInPort(undefined);
       setCratesOnShip(undefined);
-      setDefenceOptions(undefined);
+      setTacticalOptions(undefined);
       // setBonusEffects(undefined);
-      // setTravelEffects(undefined);
       setRequestNameToken(undefined);
       setHealthOptions(undefined);
+      setPurchaseOptions(undefined);
       return;
     }
 
-    // setLoaded(true);
     setShip(data.ship);
     // setPort(data.port);
     // setChannel(data.channel);
@@ -86,11 +86,11 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     setEvents(data.events);
     setCratesInPort(data.cratesInPort);
     setCratesOnShip(data.cratesOnShip);
-    setDefenceOptions(data.defenceOptions);
+    setTacticalOptions(data.tacticalOptions);
     // setBonusEffects(data.bonus);
-    // setTravelEffects(data.travelOptions);
     setRequestNameToken(data.renameToken);
     setHealthOptions(data.health);
+    setPurchaseOptions(data.purchaseOptions);
   };
 
   const setShipData = async (id: string) => {
@@ -147,7 +147,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     buttonsDisabled,
     cratesInPort,
     cratesOnShip,
-    defenceOptions,
+    tacticalOptions,
     directions,
     events,
     healthOptions,
@@ -160,5 +160,6 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     message,
     resetMessage: () => setMessage(null),
     shipsInLocation,
+    purchaseOptions
   };
 };

@@ -27,7 +27,7 @@ const getColour = (styleType?: Type): string => {
 };
 
 interface IProps {
-  styleType?: string;
+  styleType?: Type;
   href?: string;
   target?: string;
 }

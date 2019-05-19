@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IActionToken, IDefenceOption, IFleetShip } from "../../../Interfaces";
+import { IActionToken, ITacticalOption, IFleetShip } from "../../../Interfaces";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { FlexInline } from "../../Atoms/Flex/Flex";
@@ -52,7 +52,7 @@ const ActiveDetail = styled(Badge)`
   margin: 0 auto;
 `;
 
-const DefenceEffect = (option: IDefenceOption) => {
+const DefenceEffect = (option: ITacticalOption) => {
   const {
     setFleetData,
     buttonsDisabled,
@@ -101,7 +101,6 @@ const DefenceEffect = (option: IDefenceOption) => {
 export const FleetShipDetail = ({ fleetShip }: IProps) => (
   <StyledDetail>
     <DetailRow>
-      <EffectsRow>{fleetShip.defenceOptions.map(DefenceEffect)}</EffectsRow>
     </DetailRow>
     <DetailRow>
       <DetailRowLabel>Location</DetailRowLabel>

@@ -49,8 +49,7 @@ const OffenceEffect = ({ option }: IOffenceEffectProps) => {
 };
 
 export const OffenceActions = ({ actions }: IProps) => {
-
-  return <AttackIcon/>;
+  return <AttackIcon />;
 
   // todo
   if (!actions) {

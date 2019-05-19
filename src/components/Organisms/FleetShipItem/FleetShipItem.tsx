@@ -7,7 +7,6 @@ import { HaloButton } from "../../Atoms/HaloButton/HaloButton";
 import { ChevronDownIcon } from "../../Icons/ChevronDownIcon/ChevronDownIcon";
 import { ChevronUpIcon } from "../../Icons/ChevronUpIcon/ChevronUpIcon";
 import { WarningIcon } from "../../Icons/WarningIcon/WarningIcon";
-import { FleetShipDetail } from "../FleetShipDetail/FleetShipDetail";
 import { FleetShipName } from "../FleetShipName/FleetShipName";
 
 interface IProps {
@@ -74,7 +73,7 @@ export const FleetShipItem = ({ fleetShip }: IProps) => {
         </ButtonArea>
       );
       if (showDetail) {
-        detail = <FleetShipDetail fleetShip={fleetShip} />;
+        // detail = <FleetShipDetail fleetShip={fleetShip} />;
       }
       if (fleetShip.needsAttention) {
         attention = (

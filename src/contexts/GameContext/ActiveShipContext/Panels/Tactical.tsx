@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { scrollbarStyles } from "../../../../styles/colours";
 import { useActiveShipContext } from "../ActiveShipContext";
 import { DefenceEffect } from "../Components/DefenceEffect";
-import { IDefenceOption } from "../../../../Interfaces";
+import { ITacticalOption } from "../../../../Interfaces";
 import { GRID } from "../../../../styles/variables";
 import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 import { PlayerShipList } from "../../../../components/Organisms/PlayerShipList/PlayerShipList";
@@ -17,8 +17,9 @@ const Panel = styled.div`
 const DefenceListGrid = styled(ListUnstyled)`
   margin-bottom: ${GRID.UNIT};
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   flex-wrap: wrap;
+  margin-left: -${GRID.UNIT};
   & > li {
     width: ${EFFECT_WIDTH};
     margin-left: ${GRID.UNIT};
@@ -26,7 +27,7 @@ const DefenceListGrid = styled(ListUnstyled)`
   }
 `;
 
-const DefenceItem = ({ effect }: { effect?: IDefenceOption }) => {
+const DefenceItem = ({ effect }: { effect?: ITacticalOption }) => {
   return (
     <li>
       <DefenceEffect option={effect} />
@@ -38,20 +39,19 @@ const OtherShips = styled.div`
   flex: 1;
   overflow-y: auto;
   margin-right: -${GRID.UNIT};
-  padding-right: ${GRID.UNIT};
   ${scrollbarStyles};
   min-height: 64px;
   max-height: 320px;
 `;
 
 export const Tactical = () => {
-  const { defenceOptions, shipsInLocation } = useActiveShipContext();
+  const { tacticalOptions, shipsInLocation } = useActiveShipContext();
 
   return (
     <Panel>
-      {defenceOptions && (
+      {tacticalOptions && (
         <DefenceListGrid>
-          {defenceOptions.map((effect, i) => (
+          {tacticalOptions.map((effect, i) => (
             <DefenceItem key={i} effect={effect} />
           ))}
         </DefenceListGrid>
