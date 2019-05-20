@@ -81,7 +81,7 @@ const StyledEventsList = styled(EventsList)``;
 
 // todo - if travelling this is very different
 export const ShipDetailPage = ({ className }: IProps) => {
-  const { events } = useActiveShipContext();
+  const { events, port } = useActiveShipContext();
 
   return (
     <Page className={className}>
@@ -101,7 +101,7 @@ export const ShipDetailPage = ({ className }: IProps) => {
         </Panel>
       </PanelShips>
       <PanelTrade>
-        <Panel title="Trade">
+        <Panel title={`Trade at ${port && port.name}`}>
           <Trade />
         </Panel>
       </PanelTrade>

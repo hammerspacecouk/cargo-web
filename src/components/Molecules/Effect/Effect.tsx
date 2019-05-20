@@ -41,7 +41,7 @@ const StyledEffectWrap = styled.div<{
     css`
       ${buttonColours(Type.Confirm)};
     `}
-`;
+`; // todo - hover state same as button
 
 const StyledEffectInner = styled.div`
   transform: rotate(-45deg);

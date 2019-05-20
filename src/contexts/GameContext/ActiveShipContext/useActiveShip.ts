@@ -7,7 +7,8 @@ import {
   IHealthIncrease,
   IOtherShip,
   IShip,
-  ITransaction, IInventoryEffects, IEffectUpgrade
+  ITransaction,
+  IEffectUpgrade, IPort
 } from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
@@ -26,13 +27,14 @@ export interface IActiveShip {
   setRequestNameToken: (token: ITransaction) => void;
   requestNameToken: ITransaction;
   ship?: IShip;
-  moveCrateHandler: (token: IActionToken) => Promise<void>;
+  portActionHandler: (token: IActionToken) => Promise<void>;
   updateShipName: (newName: string) => void;
   applyHealthHandler: (token: IActionToken) => Promise<void>;
   message?: string;
   resetMessage: () => void;
   shipsInLocation?: IOtherShip[];
   purchaseOptions: IEffectUpgrade[];
+  port: IPort;
 }
 
 export const useActiveShip = (incomingShip: IShip): IActiveShip => {
@@ -46,6 +48,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const [requestNameToken, setRequestNameToken] = useState(undefined);
   const [shipsInLocation, setShipsInLocation] = useState(undefined);
   const [purchaseOptions, setPurchaseOptions] = useState(undefined);
+  const [port, setPort] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const [message, setMessage] = useState(null);
   const isMounted = useMounted();
@@ -61,7 +64,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     }
     if (!data) {
       setShip(undefined);
-      // setPort(undefined);
+      setPort(undefined);
       // setHint(undefined);
       // setChannel(undefined);
       setDirections(undefined);
@@ -78,7 +81,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     }
 
     setShip(data.ship);
-    // setPort(data.port);
+    setPort(data.port);
     // setChannel(data.channel);
     // setHint(data.hint);
     setDirections(data.directions);
@@ -109,7 +112,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     return data;
   };
 
-  const moveCrateHandler = (token: IActionToken): Promise<void> => {
+  const portActionHandler = (token: IActionToken): Promise<void> => {
     disableButtons();
     return doPortAction(token);
   };
@@ -120,12 +123,6 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     updateAShipProperty(ship.id, {
       strengthPercent: data.ship.strengthPercent,
     });
-
-    // todo - should this be there?
-    // const data: any = await ApiClient.tokenFetch(token);
-    // enableButtons();
-    // updateScore(data.newScore);
-    // setDataFromResponse(data.activeShip);
   };
 
   const updateShipName = (name: string) => {
@@ -154,12 +151,13 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     requestNameToken,
     setRequestNameToken,
     ship,
-    moveCrateHandler,
+    portActionHandler,
     updateShipName,
     applyHealthHandler,
     message,
     resetMessage: () => setMessage(null),
     shipsInLocation,
-    purchaseOptions
+    purchaseOptions,
+    port,
   };
 };

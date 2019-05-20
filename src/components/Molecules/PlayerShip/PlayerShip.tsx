@@ -13,6 +13,7 @@ interface IProps {
 
 const ShipItem = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const Status = styled.div`
@@ -26,7 +27,8 @@ const Detail = styled.div`
 `;
 
 const Offence = styled.div`
-  width: 48px;
+  width: 40px;
+  margin-left: ${GRID.UNIT}
 `;
 
 export const PlayerShip = ({ ship, offence }: IProps) => (

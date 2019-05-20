@@ -15,9 +15,8 @@ const Panel = styled.div`
 `;
 
 const DefenceListGrid = styled(ListUnstyled)`
-  margin-bottom: ${GRID.UNIT};
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin-left: -${GRID.UNIT};
   & > li {

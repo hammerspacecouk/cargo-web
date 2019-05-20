@@ -29,14 +29,14 @@ const StyledPlaceholder = styled.div<{ loading: boolean }>`
 `;
 
 export const Crate = ({ crateAction }: ICrateOnShipProps) => {
-  const { buttonsDisabled, moveCrateHandler } = useActiveShipContext();
+  const { buttonsDisabled, portActionHandler } = useActiveShipContext();
 
   const CrateContent = <CratePickup crateAction={crateAction} />;
 
   let tokenButton = <CrateButton disabled={true}>{CrateContent}</CrateButton>;
   if (crateAction.token) {
     tokenButton = (
-      <TokenButton token={crateAction.token} handler={moveCrateHandler}>
+      <TokenButton token={crateAction.token} handler={portActionHandler}>
         <CrateButton type="submit" disabled={buttonsDisabled}>
           {CrateContent}
         </CrateButton>

@@ -4,53 +4,65 @@ import { IEffect, IEffectUpgrade } from "../../../../Interfaces";
 import styled from "styled-components";
 import { GRID } from "../../../../styles/variables";
 import { TokenButton } from "../../../../components/Molecules/TokenButton/TokenButton";
-import { ActionButton } from "../../../../components/Atoms/Button/Button";
 import { H4 } from "../../../../components/Atoms/Heading/Heading";
 import { CreditsButton } from "../../Components/CreditsButton";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 
 const EffectsList = styled.ul`
-    border-top: ${PANEL_INNER_DIVIDER_BORDER};
+  border-top: ${PANEL_INNER_DIVIDER_BORDER};
 `;
 
 const EffectsListItem = styled.li`
-    display: flex;
-    align-items: center;
-    padding: ${GRID.UNIT} 0;
-    border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
+  display: flex;
+  align-items: center;
+  padding: ${GRID.UNIT} 0;
+  border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
 `;
 
 const EffectSymbol = styled.div`
-    transform: rotate(-45deg);
-    width: 48px;
-    line-height: 48px;
-    text-align: center;
-    font-size: 1.2rem;
-    margin-right: 16px;
+  transform: rotate(-45deg);
+  width: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-right: 16px;
 `;
 
 const EffectDetail = styled.div`
-    flex: 1;
+  flex: 1;
 `;
 
-const EffectButton = styled.div`
-
-`;
+const EffectButton = styled.div``;
 
 const getSymbol = (effect: IEffect) => {
   return effect.name.substr(0, 2);
 };
 
+const Effect = ({
+  buttonsDisabled,
+  effect,
+}: {
+  buttonsDisabled: boolean;
+  effect: IEffectUpgrade;
+}) => {
+  const {portActionHandler} = useActiveShipContext();
 
-const Effect = ({ buttonsDisabled, effect }: { buttonsDisabled: boolean, effect: IEffectUpgrade }) => {
   if (!effect) {
-    return <EffectsListItem>LOCKED</EffectsListItem>;
+    // todo - show minimum rank
+    return (
+      <EffectsListItem>
+        <EffectSymbol>?</EffectSymbol>
+        <EffectDetail>
+          <H4 as="p">LOCKED</H4>
+        </EffectDetail>
+      </EffectsListItem>
+    );
   }
 
-  let tokenButton = <ActionButton disabled={true}>SSS</ActionButton>;
+  let tokenButton = null;
   if (effect.actionToken) {
     tokenButton = (
-      <TokenButton token={effect.actionToken} handler={() => alert('sds')}>
+      <TokenButton token={effect.actionToken} handler={portActionHandler}>
         <CreditsButton
           amount={effect.cost}
           disabledOverride={buttonsDisabled}
@@ -66,27 +78,11 @@ const Effect = ({ buttonsDisabled, effect }: { buttonsDisabled: boolean, effect:
         <H4 as="h3">{effect.detail.name}</H4>
         <p>{effect.detail.description}</p>
       </EffectDetail>
-      <EffectButton>
-        {tokenButton}
-      </EffectButton>
+      <EffectButton>{tokenButton}</EffectButton>
     </EffectsListItem>
   );
-
 };
 
-const Effects = ({ buttonsDisabled, effects }: { buttonsDisabled: boolean, effects: IEffectUpgrade[] }) => {
-  return (
-    <EffectsList>
-      {effects.map((effect, i) => (
-        <Effect
-          key={(effect && effect.detail) ? effect.detail.id : i}
-          buttonsDisabled={buttonsDisabled}
-          effect={effect}
-        />
-      ))}
-    </EffectsList>
-  )
-};
 
 export const Trade = () => {
   const { purchaseOptions, buttonsDisabled } = useActiveShipContext();
@@ -95,6 +91,14 @@ export const Trade = () => {
   }
 
   return (
-    <Effects buttonsDisabled={buttonsDisabled} effects={purchaseOptions}/>
+    <EffectsList>
+      {purchaseOptions.map((effect, i) => (
+        <Effect
+          key={effect && effect.detail ? effect.detail.id : i}
+          buttonsDisabled={buttonsDisabled}
+          effect={effect}
+        />
+      ))}
+    </EffectsList>
   );
 };

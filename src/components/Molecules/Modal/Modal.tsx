@@ -5,7 +5,6 @@ import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { GRID, MAX_PANEL_WIDTH, Z_INDEX } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading/Heading";
 import { CloseIcon } from "../../Icons/CloseIcon/CloseIcon";
-import { bool } from "prop-types";
 
 export enum ModalType {
   WARNING = "modal--warning",

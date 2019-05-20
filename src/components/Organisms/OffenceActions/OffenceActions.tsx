@@ -1,12 +1,14 @@
 import * as React from "react";
+import styled from "styled-components";
 import { IActionToken, IOffenceOption } from "../../../Interfaces";
-import { useCurrentShipContext } from "../../../context/CurrentShipContext";
-import { usePlayPortContext } from "../../../context/Page/PlayPortContext";
-import { ApiClient } from "../../../util/ApiClient";
 import { EffectActionButton } from "../../Molecules/EffectActionButton/EffectActionButton";
 import { EffectsRow } from "../EffectsRow/EffectsRow";
 import { Effect } from "../../Molecules/Effect/Effect";
 import { AttackIcon } from "../../Icons/AttackIcon/AttackIcon";
+import { DangerButton } from "../../Atoms/Button/Button";
+import { Modal } from "../../Molecules/Modal/Modal";
+import { useActiveShipContext } from "../../../contexts/GameContext/ActiveShipContext/ActiveShipContext";
+import { COLOURS } from "../../../styles/colours";
 
 interface IProps {
   actions?: IOffenceOption[];
@@ -14,23 +16,20 @@ interface IProps {
 
 interface IOffenceEffectProps {
   option: IOffenceOption;
+  doneHandler: () => void;
 }
 
-const OffenceEffect = ({ option }: IOffenceEffectProps) => {
-  const { updateFullResponse, setWarningModalText } = useCurrentShipContext();
-  const {
-    buttonsDisabled,
-    enableButtons,
-    disableButtons,
-  } = usePlayPortContext();
-  const applyAction = async (token: IActionToken) => {
-    disableButtons();
-    const response = await ApiClient.tokenFetch(token);
-    if (response.error) {
-      setWarningModalText(response.error);
-    }
-    updateFullResponse(response.data);
-    enableButtons();
+const AttackButton = styled(DangerButton)`
+    width: 100%;
+    padding: 4px 6px;
+`;
+
+const OffenceEffect = ({ option, doneHandler }: IOffenceEffectProps) => {
+  const { portActionHandler, buttonsDisabled } = useActiveShipContext();
+
+  const handler = async (token: IActionToken) => {
+    await portActionHandler(token);
+    doneHandler();
   };
 
   if (option.actionToken) {
@@ -40,7 +39,7 @@ const OffenceEffect = ({ option }: IOffenceEffectProps) => {
         effect={option.effect}
         token={option.actionToken}
         disabled={buttonsDisabled}
-        handler={applyAction}
+        handler={handler}
       />
     );
   }
@@ -49,18 +48,44 @@ const OffenceEffect = ({ option }: IOffenceEffectProps) => {
 };
 
 export const OffenceActions = ({ actions }: IProps) => {
-  return <AttackIcon />;
+  const [showModal, setShowModal] = React.useState(false);
+  const { buttonsDisabled } = useActiveShipContext();
 
-  // todo
+
   if (!actions) {
     return null;
   }
 
+  let modal = null;
+  if (showModal) {
+    modal = (
+      <Modal
+        isOpen={true}
+        title="Attack ship"
+        onClose={() => setShowModal(false)}
+      >
+        <EffectsRow>
+          {actions.map(option => (
+            <OffenceEffect
+              key={option.effect.name}
+              option={option}
+              doneHandler={() => setShowModal(false)}
+            />
+          ))}
+        </EffectsRow>
+      </Modal>
+    )
+  }
+
   return (
-    <EffectsRow>
-      {actions.map(option => (
-        <OffenceEffect key={option.effect.name} option={option} />
-      ))}
-    </EffectsRow>
+    <>
+      <AttackButton
+        disabled={buttonsDisabled}
+        onClick={() => setShowModal(true)}
+      >
+        <AttackIcon />
+      </AttackButton>
+      {modal}
+    </>
   );
 };

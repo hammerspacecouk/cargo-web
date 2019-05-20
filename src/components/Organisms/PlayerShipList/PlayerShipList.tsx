@@ -13,7 +13,7 @@ interface IProps {
 
 const Item = styled.li`
   padding-top: ${GRID.UNIT};
-  padding-right: ${GRID.HALF};
+  padding-right: ${GRID.UNIT};
   border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
   margin-bottom: ${GRID.UNIT};
 `;
@@ -21,12 +21,13 @@ const Item = styled.li`
 export const PlayerShipList = ({ ships }: IProps) => {
   if (ships === undefined) {
     return <Loading />;
-  } // todo - pretty loader
+  }
 
   if (ships.length === 0) {
     return null;
   }
 
+  // todo - no tactical options on own ships
   return (
     <ListUnstyled>
       {ships.map(shipItem => (

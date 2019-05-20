@@ -100,8 +100,7 @@ const DefenceEffect = (option: ITacticalOption) => {
 
 export const FleetShipDetail = ({ fleetShip }: IProps) => (
   <StyledDetail>
-    <DetailRow>
-    </DetailRow>
+    <DetailRow />
     <DetailRow>
       <DetailRowLabel>Location</DetailRowLabel>
       <DetailRowContent>
