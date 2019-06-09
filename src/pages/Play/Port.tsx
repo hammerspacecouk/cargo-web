@@ -3,10 +3,7 @@ import styled from "styled-components";
 import { EventsList } from "../../components/Organisms/EventsList/EventsList";
 import { PlayerShipList } from "../../components/Organisms/PlayerShipList/PlayerShipList";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
-import {
-  PlayPortContextProvider,
-  usePlayPortContext,
-} from "../../context/Page/PlayPortContext";
+import { PlayPortContextProvider, usePlayPortContext } from "../../context/Page/PlayPortContext";
 import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import { CrateModal } from "./Port/CrateModal";
 import { Crates } from "../../contexts/GameContext/ActiveShipContext/Panels/Crates";
@@ -35,11 +32,7 @@ const ActiveEffect = styled.div`
 
 const TravelEffect = ({ option }: ITravelEffectProps) => {
   const { updateFullResponse } = useCurrentShipContext();
-  const {
-    buttonsDisabled,
-    enableButtons,
-    disableButtons,
-  } = usePlayPortContext();
+  const { buttonsDisabled, enableButtons, disableButtons } = usePlayPortContext();
   const applyAction = async (token: IActionToken) => {
     disableButtons();
     const data = await ApiClient.tokenFetch(token);
@@ -61,11 +54,7 @@ const TravelEffect = ({ option }: ITravelEffectProps) => {
 
   return (
     <ActiveEffect key={option.effect.name}>
-      <Effect
-        isActive={option.isActive}
-        disabled={!option.isActive}
-        effect={option.effect}
-      />
+      <Effect isActive={option.isActive} disabled={!option.isActive} effect={option.effect} />
     </ActiveEffect>
   );
 };

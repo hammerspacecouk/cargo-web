@@ -19,14 +19,7 @@ export interface IShipParams {
 }
 
 export const ShipPage = withRouter(({ match }: IShipParams) => {
-  const {
-    port,
-    channel,
-    ship,
-    updateFullResponse,
-    setWarningModalText,
-    warningModalText,
-  } = useCurrentShipContext();
+  const { port, channel, ship, updateFullResponse, setWarningModalText, warningModalText } = useCurrentShipContext();
   const isMounted = useMounted();
 
   const getData = async () => {
@@ -58,10 +51,7 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
     <section>
       <Hidden as="h1">{ship.name}</Hidden>
       {main}
-      <WarningModal
-        text={warningModalText}
-        closeModal={() => setWarningModalText(undefined)}
-      />
+      <WarningModal text={warningModalText} closeModal={() => setWarningModalText(undefined)} />
     </section>
   );
 });

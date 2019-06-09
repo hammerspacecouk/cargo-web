@@ -13,8 +13,8 @@ export const Offence = ({ event, onAnimated }: IEventProps) => {
 
   return (
     <Event time={event.time} onAnimated={onAnimated}>
-      <em>{shipName}</em> used <strong>{event.effect.name}</strong> against{" "}
-      <em>{victimShipName}</em> ({event.value} damage)
+      <em>{shipName}</em> used <strong>{event.effect.name}</strong> against <em>{victimShipName}</em> ({event.value}{" "}
+      damage)
     </Event>
   );
 };

@@ -26,8 +26,7 @@ const StyledPlanet = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-    box-shadow: 0 -240px 200px black inset, 0 0px 130px 40px #8cbaff inset,
-      0 0px 23px 4px #8cbaff inset;
+    box-shadow: 0 -240px 200px black inset, 0 0px 130px 40px #8cbaff inset, 0 0px 23px 4px #8cbaff inset;
   }
 `;
 

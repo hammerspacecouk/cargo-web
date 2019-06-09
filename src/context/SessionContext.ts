@@ -1,18 +1,6 @@
-import {
-  createContext,
-  createElement,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, createElement, useContext, useEffect, useState } from "react";
 
-import {
-  IChildrenProps,
-  ILoginOptions,
-  IPlayer,
-  IRankStatus,
-  IScore,
-} from "../Interfaces";
+import { IChildrenProps, ILoginOptions, IPlayer, IRankStatus, IScore } from "../Interfaces";
 import { ApiClient } from "../util/ApiClient";
 
 export interface ISessionResponse {
@@ -61,9 +49,7 @@ export const SessionContextComponent = ({ children }: IChildrenProps) => {
   const [rankStatus, setRanksStatus] = useState(initialSession.rankStatus);
   const [player, setPlayer] = useState(initialSession.player);
   const [loginOptions, setLoginOptions] = useState(initialSession.loginOptions);
-  const [hasProfileNotification, setHasProfileNotification] = useState(
-    initialSession.hasProfileNotification
-  );
+  const [hasProfileNotification, setHasProfileNotification] = useState(initialSession.hasProfileNotification);
   const [menuOpen, setMenuOpen] = useState(false);
   let allowUpdate = true;
 

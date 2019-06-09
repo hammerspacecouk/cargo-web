@@ -22,10 +22,7 @@ export const calculateHexPoints = (width: number, center: Point): Point[] => {
 
   const corner = (i: number) => {
     const angle = (Math.PI / 180) * (60 * i + 30);
-    return new Point(
-      round(center.x + size * Math.cos(angle)),
-      round(center.y + size * Math.sin(angle))
-    );
+    return new Point(round(center.x + size * Math.cos(angle)), round(center.y + size * Math.sin(angle)));
   };
   const points = [];
   for (let i = 0; i < 6; i++) {

@@ -1,17 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IOffenceOption, IShip } from "../../../Interfaces";
+import { IEffectAction, IShip } from "../../../Interfaces";
 import { GRID } from "../../../styles/variables";
 import { ShieldStrength } from "../ShieldStrength/ShieldStrength";
 import { OffenceActions } from "../../Organisms/OffenceActions/OffenceActions";
 import { Score } from "../../Organisms/Score/Score";
+import { ActionRow, ActionRowButton, ActionRowContent } from "../ActionRow/ActionRow";
 
 interface IProps {
   ship: IShip;
-  offence?: IOffenceOption[];
+  offence?: IEffectAction[];
 }
 
-const ShipItem = styled.div`
+const ShipDetail = styled(ActionRowContent)`
   display: flex;
   align-items: center;
 `;
@@ -26,22 +27,19 @@ const Detail = styled.div`
   line-height: 1;
 `;
 
-const Offence = styled.div`
-  width: 40px;
-  margin-left: ${GRID.UNIT}
-`;
-
 export const PlayerShip = ({ ship, offence }: IProps) => (
-  <ShipItem>
-    <Status>
-      <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />
-    </Status>
-    <Detail>
-      <h3>{ship.name}</h3>
-      <Score score={ship.owner.score} />
-    </Detail>
-    <Offence>
-      <OffenceActions actions={offence} />
-    </Offence>
-  </ShipItem>
+  <ActionRow>
+    <ShipDetail>
+      <Status>
+        <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />
+      </Status>
+      <Detail>
+        <h3>{ship.name}</h3>
+        <Score score={ship.owner.score} />
+      </Detail>
+    </ShipDetail>
+    <ActionRowButton>
+      <OffenceActions actions={offence} ship={ship} />
+    </ActionRowButton>
+  </ActionRow>
 );

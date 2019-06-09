@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { IEffect } from "../../../Interfaces";
 import { SIZES } from "../../../styles/typography";
 import { buttonColours, Type } from "../../Atoms/Button/Button";
+import { GRID } from "../../../styles/variables";
 
 interface IProps {
   readonly effect?: IEffect;
@@ -24,9 +25,8 @@ const StyledEffectWrap = styled.div<{
   user-select: none;
   padding-top: calc(100% - 16px);
   position: relative;
-  border-bottom-left-radius: 100%;
-  border-bottom-right-radius: 100%;
-  border-top-right-radius: 100%;
+  border-bottom-left-radius: ${GRID.UNIT};
+  border-top-right-radius: ${GRID.UNIT};
   transition: all 0.15s linear;
   ${({ locked }) => buttonColours(locked ? null : Type.Action)}
   ${({ disabled, locked }) =>
@@ -34,8 +34,7 @@ const StyledEffectWrap = styled.div<{
     css`
       opacity: ${locked ? 0.1 : 0.3};
     `}
-  ${({ isButton, disabled }) =>
-    isButton && !disabled && buttonColours(Type.Action)}
+  ${({ isButton, disabled }) => isButton && !disabled && buttonColours(Type.Action)}
   ${({ isActive }) =>
     isActive &&
     css`
@@ -56,12 +55,7 @@ const StyledEffectInner = styled.div`
   ${SIZES.D};
 `;
 
-export const Effect = ({
-  effect,
-  isActive = false,
-  disabled = false,
-  isButton = false,
-}: IProps) => {
+export const Effect = ({ effect, isActive = false, disabled = false, isButton = false }: IProps) => {
   let symbol = "?";
 
   if (effect) {
@@ -69,12 +63,7 @@ export const Effect = ({
   }
 
   return (
-    <StyledEffectWrap
-      locked={!effect}
-      isActive={isActive}
-      isButton={isButton}
-      disabled={disabled}
-    >
+    <StyledEffectWrap locked={!effect} isActive={isActive} isButton={isButton} disabled={disabled}>
       <StyledEffectInner>{symbol}</StyledEffectInner>
     </StyledEffectWrap>
   );

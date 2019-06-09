@@ -26,11 +26,7 @@ export const FleetContextProvider = ({ children }: IChildrenProps) => {
   const { setSession } = useSessionContext();
   const [ships, setShips] = useState(undefined);
   const [events, setEvents] = useState(undefined);
-  const {
-    buttonsDisabled,
-    enableButtons,
-    disableButtons,
-  } = useButtonsDisabled();
+  const { buttonsDisabled, enableButtons, disableButtons } = useButtonsDisabled();
   const isMounted = useMounted();
 
   const setFleetData = (data: IFleetResponse) => {

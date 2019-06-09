@@ -2,10 +2,11 @@ import * as React from "react";
 import { Badge } from "../Badge/Badge";
 
 interface IProps {
+  className?: string;
   value: number;
 }
 
-export const NumberBadge = ({ value }: IProps) => {
+export const NumberBadge = ({ className, value }: IProps) => {
   const [animate, setAnimate] = React.useState(true);
 
   let resetTimer: any; // can't find the right type
@@ -20,5 +21,9 @@ export const NumberBadge = ({ value }: IProps) => {
     };
   }, [value]);
 
-  return <Badge animate={animate}>{value}</Badge>;
+  return (
+    <Badge className={className} animate={animate}>
+      {value}
+    </Badge>
+  );
 };

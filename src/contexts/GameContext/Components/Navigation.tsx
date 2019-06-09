@@ -57,20 +57,10 @@ export const Navigation = ({ className }: IProps) => {
         <Hidden as="h2">Player</Hidden>
         <NavigationList>
           <li>
-            <NavigationItem
-              icon={<InventoryIcon />}
-              isCurrent={false}
-              path="/play/inventory"
-              text="Launch ships"
-            />
+            <NavigationItem icon={<InventoryIcon />} isCurrent={false} path="/play/inventory" text="Launch ships" />
           </li>
           <li>
-            <NavigationItem
-              icon={<ProfileIcon />}
-              isCurrent={false}
-              path="/profile"
-              text="Profile"
-            />
+            <NavigationItem icon={<ProfileIcon />} isCurrent={false} path="/profile" text="Profile" />
           </li>
         </NavigationList>
       </PlayerOptions>

@@ -41,11 +41,7 @@ export class BrowserClient implements IAPIClient {
     }
   }
 
-  public setInCache(
-    key: string,
-    value: object,
-    cacheControl: CacheControlHelper
-  ): void {
+  public setInCache(key: string, value: object, cacheControl: CacheControlHelper): void {
     if (!this.canStore || !cacheControl.isCacheable()) {
       return null;
     }

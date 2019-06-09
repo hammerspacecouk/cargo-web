@@ -40,9 +40,7 @@ const getValue = (seconds: number, datetime: Date): string => {
  * Show dynamically updating time since an event
  */
 export const TimeAgo = ({ className, datetime }: IProps) => {
-  const [text, setText] = React.useState(
-    getValue(getSeconds(datetime), datetime)
-  );
+  const [text, setText] = React.useState(getValue(getSeconds(datetime), datetime));
 
   let timeout: number = null;
 
@@ -67,11 +65,7 @@ export const TimeAgo = ({ className, datetime }: IProps) => {
   }, [datetime]);
 
   return (
-    <time
-      className={className}
-      dateTime={datetime.toISOString()}
-      title={datetime.toISOString()}
-    >
+    <time className={className} dateTime={datetime.toISOString()} title={datetime.toISOString()}>
       {text}
     </time>
   );

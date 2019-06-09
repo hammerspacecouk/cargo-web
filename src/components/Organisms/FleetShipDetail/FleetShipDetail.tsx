@@ -53,12 +53,7 @@ const ActiveDetail = styled(Badge)`
 `;
 
 const DefenceEffect = (option: ITacticalOption) => {
-  const {
-    setFleetData,
-    buttonsDisabled,
-    enableButtons,
-    disableButtons,
-  } = useFleetContext();
+  const { setFleetData, buttonsDisabled, enableButtons, disableButtons } = useFleetContext();
 
   const applyAction = async (token: IActionToken) => {
     disableButtons();

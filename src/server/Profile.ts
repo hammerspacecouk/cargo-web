@@ -17,11 +17,7 @@ interface IProps extends RouteProps {
 class ProfileComponent extends Component<IProps, undefined> {
   public static async getInitialData(_: match, request: Request) {
     try {
-      return await ApiClient.fetch(
-        "/profile",
-        null,
-        request && request.cookies
-      );
+      return await ApiClient.fetch("/profile", null, request && request.cookies);
     } catch (e) {
       if (e.statusCode && e.statusCode === 403) {
         return { isLoggedOut: true };

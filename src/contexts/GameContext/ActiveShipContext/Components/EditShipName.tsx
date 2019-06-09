@@ -5,10 +5,7 @@ import { useMounted } from "../../../../hooks/useMounted";
 import { IActionToken } from "../../../../Interfaces";
 import { GRID } from "../../../../styles/variables";
 import { ApiClient } from "../../../../util/ApiClient";
-import {
-  ConfirmButton,
-  DangerButton,
-} from "../../../../components/Atoms/Button/Button";
+import { ConfirmButton, DangerButton } from "../../../../components/Atoms/Button/Button";
 import { TextCursor } from "../../../../components/Atoms/TextCursor/TextCursor";
 import { ButtonRow } from "../../../../components/Molecules/ButtonRow/ButtonRow";
 import { CreditsButton } from "../../Components/CreditsButton";
@@ -42,11 +39,7 @@ interface IProps {
 }
 
 export const EditShipName = ({ onComplete }: IProps) => {
-  const {
-    requestNameToken,
-    setRequestNameToken,
-    updateShipName,
-  } = useActiveShipContext();
+  const { requestNameToken, setRequestNameToken, updateShipName } = useActiveShipContext();
   const { updateScore } = useGameContext();
   const [isActive, setIsActive] = React.useState(false);
   const [acceptingShipName, setAcceptingShipName] = React.useState(false);
@@ -87,12 +80,7 @@ export const EditShipName = ({ onComplete }: IProps) => {
   let textContent;
   let buttonContent;
   if (isActive) {
-    textContent = (
-      <ShipNameGenerator
-        offeredShipName={offeredShipName}
-        offeredShipNameToken={offeredShipNameToken}
-      />
-    );
+    textContent = <ShipNameGenerator offeredShipName={offeredShipName} offeredShipNameToken={offeredShipNameToken} />;
     if (offeredShipNameToken) {
       buttonContent = (
         <>
@@ -128,17 +116,9 @@ export const EditShipName = ({ onComplete }: IProps) => {
         </Updating>
       );
     } else {
-      textContent = (
-        <P>
-          You can request a new name option at random. You don't have to take
-          it, but no refunds
-        </P>
-      );
+      textContent = <P>You can request a new name option at random. You don't have to take it, but no refunds</P>;
       buttonContent = (
-        <TokenButton
-          token={requestNameToken.actionToken}
-          handler={requestShipName}
-        >
+        <TokenButton token={requestNameToken.actionToken} handler={requestShipName}>
           <CreditsButton amount={500} />
         </TokenButton>
       );

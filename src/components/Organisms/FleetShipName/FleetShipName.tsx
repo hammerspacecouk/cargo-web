@@ -67,9 +67,7 @@ export const FleetShipName = ({ ship }: IProps) => {
 
   let shield = null;
   if (!ship || ship.strengthPercent) {
-    shield = (
-      <ShieldStrength percent={ship ? ship.strengthPercent : undefined} />
-    );
+    shield = <ShieldStrength percent={ship ? ship.strengthPercent : undefined} />;
   }
 
   return (

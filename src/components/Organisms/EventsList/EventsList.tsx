@@ -37,54 +37,20 @@ interface IProps {
   readonly firstPerson?: boolean;
 }
 
-const mapEvent = (
-  event: IEvent,
-  firstPerson: boolean,
-  onAnimated?: () => void
-) => {
+const mapEvent = (event: IEvent, firstPerson: boolean, onAnimated?: () => void) => {
   switch (event.action) {
     case ACTION_CRATE_NEW:
-      return (
-        <CrateNew
-          event={event}
-          onAnimated={onAnimated}
-          firstPerson={firstPerson}
-        />
-      );
+      return <CrateNew event={event} onAnimated={onAnimated} firstPerson={firstPerson} />;
     case ACTION_CRATE_PICKUP:
       return <CratePickup event={event} onAnimated={onAnimated} />;
     case ACTION_EFFECT_USE:
-      return (
-        <EffectUse
-          event={event}
-          onAnimated={onAnimated}
-          firstPerson={firstPerson}
-        />
-      );
+      return <EffectUse event={event} onAnimated={onAnimated} firstPerson={firstPerson} />;
     case ACTION_EFFECT_OFFENCE:
-      return (
-        <Offence
-          event={event}
-          onAnimated={onAnimated}
-          firstPerson={firstPerson}
-        />
-      );
+      return <Offence event={event} onAnimated={onAnimated} firstPerson={firstPerson} />;
     case ACTION_PLAYER_NEW:
-      return (
-        <PlayerNew
-          event={event}
-          onAnimated={onAnimated}
-          firstPerson={firstPerson}
-        />
-      );
+      return <PlayerNew event={event} onAnimated={onAnimated} firstPerson={firstPerson} />;
     case ACTION_PLAYER_PROMOTION:
-      return (
-        <PlayerPromotion
-          event={event}
-          onAnimated={onAnimated}
-          firstPerson={firstPerson}
-        />
-      );
+      return <PlayerPromotion event={event} onAnimated={onAnimated} firstPerson={firstPerson} />;
     case ACTION_SHIP_NEW:
       return <ShipNew event={event} onAnimated={onAnimated} />;
     case ACTION_SHIP_ARRIVAL:
@@ -212,11 +178,7 @@ export const EventsList = ({ className, events, firstPerson }: IProps) => {
   return (
     <StyledList as="ol" className={className}>
       {renderedEvents.map((event, i) => (
-        <StyledListItem
-          key={`event-${event.id}`}
-          data-event-id={event.id}
-          opacity={calculateOpacity(i, total)}
-        >
+        <StyledListItem key={`event-${event.id}`} data-event-id={event.id} opacity={calculateOpacity(i, total)}>
           {event.element}
         </StyledListItem>
       ))}

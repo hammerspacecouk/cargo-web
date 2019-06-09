@@ -14,11 +14,7 @@ export const FacebookLogo = () => (
 );
 
 export const GoogleLogo = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    viewBox="0 0 48 48"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48">
     <defs>
       <path
         id="a"
@@ -42,10 +38,7 @@ export const MicrosoftLogo = () => (
     <path fill="#F35325" d="M104.868 104.868H0V0h104.868v104.868z" />
     <path fill="#81BC06" d="M220.654 104.868H115.788V0h104.866v104.868z" />
     <path fill="#05A6F0" d="M104.865 220.695H0V115.827h104.865v104.868z" />
-    <path
-      fill="#FFBA08"
-      d="M220.654 220.695H115.788V115.827h104.866v104.868z"
-    />
+    <path fill="#FFBA08" d="M220.654 220.695H115.788V115.827h104.866v104.868z" />
   </svg>
 );
 

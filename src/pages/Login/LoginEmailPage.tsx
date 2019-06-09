@@ -26,9 +26,8 @@ export const LoginEmailPage = ({ query }: IProps) => {
     <PanelPage title="Email Login">
       <Prose>
         <P>
-          You clicked a login link in your email. If you didn't mean to, don't
-          worry; Nothing has happened yet. To perform the login and continue to
-          your game click below.
+          You clicked a login link in your email. If you didn't mean to, don't worry; Nothing has happened yet. To
+          perform the login and continue to your game click below.
         </P>
         <TokenButton token={token}>
           <ConfirmButton>Continue</ConfirmButton>

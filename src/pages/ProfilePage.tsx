@@ -28,8 +28,7 @@ const getAttachEmailForm = () => {
     <Panel>
       <MessageWarning>
         You have not yet linked your game to an email address. <br />
-        If you clear your cookies or switch browsers you will never be able to
-        recover your game. <br />
+        If you clear your cookies or switch browsers you will never be able to recover your game. <br />
         Link your game to an email address now to make sure it is saved
       </MessageWarning>
       <h2>Log in to save your game</h2>
@@ -38,12 +37,7 @@ const getAttachEmailForm = () => {
   );
 };
 
-export const ProfilePage = ({
-  session,
-  isAnonymous,
-  canDelete,
-  homePort,
-}: IProps) => {
+export const ProfilePage = ({ session, isAnonymous, canDelete, homePort }: IProps) => {
   const { setSession } = useSessionContext();
 
   React.useEffect(() => {
@@ -102,10 +96,7 @@ export const ProfilePage = ({
 
         <Panel>
           <LogOutButton isAnonymous={isAnonymous} />
-          <DeleteAccountButton
-            route={routes.getProfileDelete()}
-            canDelete={canDelete}
-          />
+          <DeleteAccountButton route={routes.getProfileDelete()} canDelete={canDelete} />
         </Panel>
       </div>
 

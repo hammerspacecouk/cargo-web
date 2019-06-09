@@ -1,9 +1,6 @@
 import { css } from "styled-components";
 
-type TaggedTemplateFunction = (
-  literals: TemplateStringsArray,
-  ...placeholders: string[]
-) => any;
+type TaggedTemplateFunction = (literals: TemplateStringsArray, ...placeholders: string[]) => any;
 
 interface ISizeFunctions {
   XS: TaggedTemplateFunction;

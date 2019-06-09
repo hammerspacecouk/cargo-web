@@ -8,60 +8,41 @@ import { DirectionSW } from "../../../../components/Icons/DirectionSW/DirectionS
 import { DirectionW } from "../../../../components/Icons/DirectionW/DirectionW";
 import { useActiveShipContext } from "../ActiveShipContext";
 import { IDirection } from "../../../../Interfaces";
-import {
-  TextD,
-  TextF,
-  TextWarning,
-} from "../../../../components/Atoms/Text/Text";
-import { Fraction } from "../../../../components/Atoms/Fraction/Fraction";
+import { TextF, TextWarning } from "../../../../components/Atoms/Text/Text";
 import { PortName } from "../../../../components/Molecules/PortName/PortName";
 import { ScoreValue } from "../../../../components/Molecules/ScoreValue/ScoreValue";
 import { GoButton } from "../Components/GoButton";
 import styled from "styled-components";
 import { GRID } from "../../../../styles/variables";
-import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 import { H4 } from "../../../../components/Atoms/Heading/Heading";
-import { MONOSPACE_FONT } from "../../../../styles/typography";
-import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
+import { ListLined } from "../../../../components/Atoms/Lists/ListLined/ListLined";
+import { ActionRow, ActionRowButton, ActionRowContent } from "../../../../components/Molecules/ActionRow/ActionRow";
+import { Distance } from "../../../../components/Atoms/Distance";
 
 interface IProps {
   direction: IDirection;
   children: any;
 }
 
-const StyledDirection = styled.li`
-  &:not(:last-child) {
-    border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
-  }
-  padding: ${GRID.UNIT};
+const PortOverview = styled(ActionRowContent)`
   display: flex;
   align-items: center;
 `;
 
 const PortSummary = styled.div`
   flex: 1;
+  margin-right: ${GRID.UNIT};
 `;
 
 const SubLine = styled.div`
   margin-top: ${GRID.HALF};
 `;
 
-const Distance = styled.div`
-  margin: 0 ${GRID.UNIT};
-  ${MONOSPACE_FONT};
-  font-variant: small-caps;
-`;
-
 export const Direction = ({ direction, children }: IProps) => {
   const icon = children;
   const detail = direction.detail;
 
-  let distance = <TextD>{detail.distanceUnit}</TextD>;
-  if (detail.distanceUnit === 0) {
-    distance = <Fraction num={1} den={100} />;
-  }
-
-  let subLine = <ScoreValue score={detail.earnings} />;
+  let subLine = <ScoreValue score={detail.earnings} prefix="+" />;
   if (detail.denialReason) {
     subLine = (
       <TextF as="div">
@@ -71,25 +52,24 @@ export const Direction = ({ direction, children }: IProps) => {
   }
 
   return (
-    <StyledDirection>
-      <PortSummary>
-        <H4 as="h3">
-          <PortName port={detail.destination} />
-        </H4>
-        <SubLine>{subLine}</SubLine>
-      </PortSummary>
-      <Distance>
-        {distance}
-        <abbr title="light years">
-          <TextF>ly</TextF>
-        </abbr>
-      </Distance>
-      <div>
-        <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>
-          {icon}
-        </GoButton>
-      </div>
-    </StyledDirection>
+    <li>
+      <ActionRow>
+        <PortOverview>
+          <PortSummary>
+            <H4 as="h3">
+              <PortName port={detail.destination} />
+            </H4>
+            <SubLine>{subLine}</SubLine>
+          </PortSummary>
+          <Distance value={detail.distanceUnit} />
+        </PortOverview>
+        <ActionRowButton>
+          <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>
+            {icon}
+          </GoButton>
+        </ActionRowButton>
+      </ActionRow>
+    </li>
   );
 };
 
@@ -103,7 +83,7 @@ export const Directions = () => {
   const { NW, NE, W, E, SW, SE } = directions;
 
   return (
-    <ListUnstyled>
+    <ListLined>
       {NW ? (
         <Direction direction={NW}>
           <DirectionNW />
@@ -134,6 +114,6 @@ export const Directions = () => {
           <DirectionSE />
         </Direction>
       ) : null}
-    </ListUnstyled>
+    </ListLined>
   );
 };

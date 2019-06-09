@@ -46,10 +46,7 @@ export const PromotionModal = () => {
     <Modal isOpen={true} title="Promotion">
       <Promotion rankStatus={rankStatus} />
       <TextCenter>
-        <TokenButton
-          token={rankStatus.acknowledgeToken}
-          handler={acknowledgePromotion}
-        >
+        <TokenButton token={rankStatus.acknowledgeToken} handler={acknowledgePromotion}>
           {button}
         </TokenButton>
       </TextCenter>

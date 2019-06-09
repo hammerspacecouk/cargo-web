@@ -1,6 +1,4 @@
-const characters: string[] = `abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ'`.split(
-  ""
-);
+const characters: string[] = `abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ'`.split("");
 const originalGuessLength: number = 25;
 const characterIncrement: number = 7;
 

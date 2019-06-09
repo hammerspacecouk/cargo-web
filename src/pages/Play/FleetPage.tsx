@@ -3,10 +3,7 @@ import styled from "styled-components";
 import { EventsList } from "../../components/Organisms/EventsList/EventsList";
 import { FleetShips } from "../../contexts/GameContext/Components/FleetShips";
 import { PlayerRank } from "../../components/Organisms/PlayerRank/PlayerRank";
-import {
-  FleetContextProvider,
-  useFleetContext,
-} from "../../context/Page/FleetContext";
+import { FleetContextProvider, useFleetContext } from "../../context/Page/FleetContext";
 import { useSessionContext } from "../../context/SessionContext";
 import { GRID, MAX_CONTENT_WIDTH } from "../../styles/variables";
 import { Hidden } from "../../components/Atoms/Hidden/Hidden";

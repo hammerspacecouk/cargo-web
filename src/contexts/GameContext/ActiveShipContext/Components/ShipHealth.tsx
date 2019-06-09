@@ -20,11 +20,7 @@ const StyledLabel = styled.div`
 `;
 
 export const ShipHealth = () => {
-  const {
-    buttonsDisabled,
-    applyHealthHandler,
-    healthOptions,
-  } = useActiveShipContext();
+  const { buttonsDisabled, applyHealthHandler, healthOptions } = useActiveShipContext();
 
   if (!healthOptions) {
     return null;
@@ -34,19 +30,12 @@ export const ShipHealth = () => {
     <>
       {healthOptions.map(transaction => {
         let button = (
-          <CreditsButton
-            amount={transaction.cost}
-            disabledOverride={buttonsDisabled || !transaction.actionToken}
-          />
+          <CreditsButton amount={transaction.cost} disabledOverride={buttonsDisabled || !transaction.actionToken} />
         );
 
         if (transaction.actionToken) {
           button = (
-            <TokenButton
-              key={transaction.detail}
-              token={transaction.actionToken}
-              handler={applyHealthHandler}
-            >
+            <TokenButton key={transaction.detail} token={transaction.actionToken} handler={applyHealthHandler}>
               {button}
             </TokenButton>
           );

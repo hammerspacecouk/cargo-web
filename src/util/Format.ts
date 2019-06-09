@@ -2,8 +2,7 @@ let locale: string;
 let timeZone: string;
 
 const getOptions = (): Intl.ResolvedDateTimeFormatOptions => {
-  const format: Intl.DateTimeFormat =
-    Intl && Intl.DateTimeFormat && Intl.DateTimeFormat();
+  const format: Intl.DateTimeFormat = Intl && Intl.DateTimeFormat && Intl.DateTimeFormat();
   const options = format && format.resolvedOptions && format.resolvedOptions();
   return options ? options : null;
 };

@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  IEvent,
-  IFleetShip,
-  ILoginOptions,
-  IPlayer,
-  IRankStatus,
-  IScore,
-} from "../../Interfaces";
+import { IEvent, IFleetShip, ILoginOptions, IPlayer, IRankStatus, IScore } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useMounted } from "../../hooks/useMounted";
 import { IFleetResponse } from "../../context/Page/FleetContext";
@@ -56,14 +49,9 @@ const getSession = (): Promise<IGameSessionResponse> => {
 
 export const useGameSession = (): IGameSession => {
   const [player, setPlayer] = useState(undefined);
-  const [rankStatus, updateRankStatus]: [
-    IRankStatus,
-    IUpdateRankStatus
-  ] = useState(undefined);
+  const [rankStatus, updateRankStatus]: [IRankStatus, IUpdateRankStatus] = useState(undefined);
   const [score, updateScore] = useState(undefined);
-  const [ships, setShips]: [IFleetShip[], IUpdateFleetShips] = useState(
-    undefined
-  );
+  const [ships, setShips]: [IFleetShip[], IUpdateFleetShips] = useState(undefined);
   const [activeShip, setActiveShip] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const [loginOptions, setLoginOptions] = useState(undefined);
@@ -109,9 +97,7 @@ export const useGameSession = (): IGameSession => {
     if (!ships) {
       setActiveShip(null);
     }
-    const foundShip = ships.find(
-      (ship: IFleetShip): boolean => ship.ship.id === id
-    );
+    const foundShip = ships.find((ship: IFleetShip): boolean => ship.ship.id === id);
     setActiveShip(foundShip || null);
   };
 

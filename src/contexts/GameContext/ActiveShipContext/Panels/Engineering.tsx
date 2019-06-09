@@ -78,9 +78,7 @@ export const Engineering = () => {
   const { buttonsDisabled, ship, requestNameToken } = useActiveShipContext();
   const isMounted = useMounted();
 
-  const strengthValue = Math.ceil(
-    (ship.strengthPercent / 100) * ship.shipClass.strength
-  );
+  const strengthValue = Math.ceil((ship.strengthPercent / 100) * ship.shipClass.strength);
 
   return (
     <>
@@ -91,10 +89,7 @@ export const Engineering = () => {
             <dd>{ship.name}</dd>
           </ShipName>
           {requestNameToken && (
-            <RenameButton
-              disabled={buttonsDisabled}
-              onClick={() => setShipNameModalIsOpen(true)}
-            >
+            <RenameButton disabled={buttonsDisabled} onClick={() => setShipNameModalIsOpen(true)}>
               Rename
             </RenameButton>
           )}
@@ -116,8 +111,7 @@ export const Engineering = () => {
           <ShieldIntro>
             <dt>Shield</dt>
             <dd>
-              {strengthValue.toLocaleString()}/
-              {ship.shipClass.strength.toLocaleString()} ({ship.strengthPercent}
+              {strengthValue.toLocaleString()}/{ship.shipClass.strength.toLocaleString()} ({ship.strengthPercent}
               %)
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
@@ -128,14 +122,8 @@ export const Engineering = () => {
         </Shield>
       </DL>
       {shipNameModalIsOpen && (
-        <Modal
-          isOpen={true}
-          onClose={() => isMounted() && setShipNameModalIsOpen(false)}
-          title="Request new ship name"
-        >
-          <EditShipName
-            onComplete={() => isMounted() && setShipNameModalIsOpen(false)}
-          />
+        <Modal isOpen={true} onClose={() => isMounted() && setShipNameModalIsOpen(false)} title="Request new ship name">
+          <EditShipName onComplete={() => isMounted() && setShipNameModalIsOpen(false)} />
         </Modal>
       )}
     </>

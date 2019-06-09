@@ -5,6 +5,7 @@ import { CreditsIcon } from "../../Icons/CreditsIcon/CreditsIcon";
 
 interface IProps {
   score: number;
+  prefix?: string;
   className?: string;
 }
 
@@ -35,13 +36,16 @@ const getScoreString = (input: number): string => {
 /**
  * Standard way to display a score value (with Icon)
  */
-export const ScoreValue = ({ score, className }: IProps) => {
+export const ScoreValue = ({ score, prefix = "", className }: IProps) => {
   return (
     <StyledScore className={className}>
       <Icon>
         <CreditsIcon />
       </Icon>
-      <Digits>{getScoreString(score)}</Digits>
+      <Digits>
+        {prefix}
+        {getScoreString(score)}
+      </Digits>
     </StyledScore>
   );
 };

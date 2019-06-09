@@ -1,10 +1,6 @@
 import * as React from "react";
 import { Route, RouteProps, Switch } from "react-router-dom";
-import {
-  Modal,
-  ModalActions,
-  ModalType,
-} from "./components/Molecules/Modal/Modal";
+import { Modal, ModalActions, ModalType } from "./components/Molecules/Modal/Modal";
 import { NotFound } from "./components/Organisms/Error/NotFound";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { P } from "./components/Atoms/Text/Text";
@@ -54,9 +50,7 @@ export class App extends React.Component<IProps, IState> {
     if (this.state.errorMessage) {
       errorModal = (
         <Modal isOpen={true} title="An error occurred" type={ModalType.DANGER}>
-          <P>
-            There was an error loading data. Please reload the page to try again
-          </P>
+          <P>There was an error loading data. Please reload the page to try again</P>
           <P>Detail: {this.state.errorMessage}</P>
           <ModalActions>
             <a href={window.location.pathname}>Reload</a>

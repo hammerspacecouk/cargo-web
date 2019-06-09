@@ -15,9 +15,7 @@ const StyledPage = styled.div`
   grid-template-columns: [edge-left] 0 [main] calc(100% - ${GRID.DOUBLE}) 0 [edge-right];
   grid-gap: ${GRID.UNIT};
   ${BREAKPOINTS.XXL`
-      grid-template-columns: [edge-left] 1fr [main] calc(${MAX_CONTENT_WIDTH} - ${
-    GRID.DOUBLE
-  }) 1fr [edge-right];
+      grid-template-columns: [edge-left] 1fr [main] calc(${MAX_CONTENT_WIDTH} - ${GRID.DOUBLE}) 1fr [edge-right];
     `}
 `;
 

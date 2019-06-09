@@ -80,20 +80,12 @@ const EmailLogin = ({ token }: { token: IActionToken }) => {
         <label htmlFor="login-email">Log in via email</label>
       </H3>
       <P>
-        If you'd rather use your email directly enter your email address and
-        we'll send you a link that lets you log in immediately. The link is
-        valid for one hour and there are no passwords required. We don't store
-        it.
+        If you'd rather use your email directly enter your email address and we'll send you a link that lets you log in
+        immediately. The link is valid for one hour and there are no passwords required. We don't store it.
       </P>
       <TokenButton token={token}>
         <StyledForm>
-          <StyledInput
-            id="login-email"
-            type="email"
-            name="target"
-            required={true}
-            placeholder="name@example.com"
-          />
+          <StyledInput id="login-email" type="email" name="target" required={true} placeholder="name@example.com" />
           <Button type="submit">Send</Button>
         </StyledForm>
       </TokenButton>
@@ -128,40 +120,30 @@ export const LoginForm = ({ messages }: IProps) => {
           </>
         )}
         <P>
-          We identify which player you are by confirming your unique email
-          address. Use any one of the following methods. We don't get access to
-          your accounts on these services. No spam, no sharing with third
-          parties. And we don't store the email address in a way that can be
-          recovered.
+          We identify which player you are by confirming your unique email address. Use any one of the following
+          methods. We don't get access to your accounts on these services. No spam, no sharing with third parties. And
+          we don't store the email address in a way that can be recovered.
         </P>
       </Prose>
       <List>
         {loginOptions.facebook && (
           <Item>
-            <FacebookButton
-              href={`${Environment.apiHostname}${loginOptions.facebook}`}
-            />
+            <FacebookButton href={`${Environment.apiHostname}${loginOptions.facebook}`} />
           </Item>
         )}
         {loginOptions.google && (
           <Item>
-            <GoogleButton
-              href={`${Environment.apiHostname}${loginOptions.google}`}
-            />
+            <GoogleButton href={`${Environment.apiHostname}${loginOptions.google}`} />
           </Item>
         )}
         {loginOptions.microsoft && (
           <Item>
-            <MicrosoftButton
-              href={`${Environment.apiHostname}${loginOptions.microsoft}`}
-            />
+            <MicrosoftButton href={`${Environment.apiHostname}${loginOptions.microsoft}`} />
           </Item>
         )}
         {loginOptions.twitter && (
           <Item>
-            <TwitterButton
-              href={`${Environment.apiHostname}${loginOptions.twitter}`}
-            />
+            <TwitterButton href={`${Environment.apiHostname}${loginOptions.twitter}`} />
           </Item>
         )}
       </List>

@@ -1,10 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Message } from "../../components/Molecules/Message/Message";
-import {
-  UpgradesContextProvider,
-  useUpgradesContext,
-} from "../../context/Page/UpgradesContext";
+import { UpgradesContextProvider, useUpgradesContext } from "../../context/Page/UpgradesContext";
 import { ShipUpgrades } from "./Upgrades/ShipUpgrades";
 import { EffectUpgrades } from "./Upgrades/EffectUpgrades";
 import { ContentPanel } from "../../components/Molecules/ContentPanel/ContentPanel";

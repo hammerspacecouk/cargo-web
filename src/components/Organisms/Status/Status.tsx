@@ -9,9 +9,7 @@ interface IProps {
 
 export const Status = (props: IProps) => (
   <Route
-    render={({
-      staticContext,
-    }: RouteComponentProps<any, StaticContext, any>) => {
+    render={({ staticContext }: RouteComponentProps<any, StaticContext, any>) => {
       if (staticContext) {
         staticContext.statusCode = props.code;
       }

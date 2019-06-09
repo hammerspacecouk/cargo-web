@@ -3,6 +3,10 @@ import styled, { css } from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { GRID } from "../../../styles/variables";
 import { MONOSPACE_FONT } from "../../../styles/typography";
+import { AttackIcon } from "../../Icons/AttackIcon/AttackIcon";
+import { TacticalIcon } from "../../Icons/TacticalIcon/TacticalIcon";
+import { TravelIcon } from "../../Icons/TravelIcon/TravelIcon";
+import { ShieldIcon } from "../../Icons/ShieldIcon/ShieldIcon";
 
 export enum Type {
   Confirm,
@@ -35,8 +39,7 @@ interface IProps {
 export const buttonColours = (styleType: Type) => css`
   border: solid 2px ${getColour(styleType)};
   color: ${getColour(styleType)};
-  box-shadow: 0 0 16px ${getColour(styleType)},
-    0 0 16px inset ${getColour(styleType)};
+  box-shadow: 0 0 16px ${getColour(styleType)}, 0 0 16px inset ${getColour(styleType)};
 `;
 
 export const Button = styled.button<IProps>`
@@ -73,21 +76,13 @@ export const Button = styled.button<IProps>`
   }
 `;
 
-export const ConfirmButton = (props: any) => (
-  <Button {...props} styleType={Type.Confirm} />
-);
+export const ConfirmButton = (props: any) => <Button {...props} styleType={Type.Confirm} />;
 
-export const DangerButton = (props: any) => (
-  <Button {...props} styleType={Type.Danger} />
-);
+export const DangerButton = (props: any) => <Button {...props} styleType={Type.Danger} />;
 
-export const ActionButton = (props: any) => (
-  <Button {...props} styleType={Type.Action} />
-);
+export const ActionButton = (props: any) => <Button {...props} styleType={Type.Action} />;
 
-export const WarningButton = (props: any) => (
-  <Button {...props} styleType={Type.Warning} />
-);
+export const WarningButton = (props: any) => <Button {...props} styleType={Type.Warning} />;
 
 export const DisguisedButton = styled.button`
   background: none;
@@ -101,3 +96,30 @@ export const DisguisedButton = styled.button`
     cursor: pointer;
   }
 `;
+
+const iconButtonStyles = css`
+  width: 40px;
+  height: 40px;
+  line-height: 0;
+  padding: 4px 6px;
+`;
+
+const AttackDangerButton = styled(DangerButton)`
+  ${iconButtonStyles};
+`;
+
+const TacticalConfirmButton = styled(ConfirmButton)`
+  ${iconButtonStyles};
+`;
+
+export const AttackButton = (props: any) => (
+  <AttackDangerButton {...props}>
+    <AttackIcon />
+  </AttackDangerButton>
+);
+
+export const TacticalButton = (props: any) => (
+  <TacticalConfirmButton {...props}>
+    <TacticalIcon />
+  </TacticalConfirmButton>
+);

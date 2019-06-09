@@ -8,7 +8,8 @@ import {
   IOtherShip,
   IShip,
   ITransaction,
-  IEffectUpgrade, IPort
+  IEffectUpgrade,
+  IPort,
 } from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
@@ -52,11 +53,7 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const [events, setEvents] = useState(undefined);
   const [message, setMessage] = useState(null);
   const isMounted = useMounted();
-  const {
-    disableButtons,
-    enableButtons,
-    buttonsDisabled,
-  } = useButtonsDisabled();
+  const { disableButtons, enableButtons, buttonsDisabled } = useButtonsDisabled();
 
   const setDataFromResponse = (data: any) => {
     if (!isMounted()) {

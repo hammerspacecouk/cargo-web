@@ -15,9 +15,7 @@ const useTravellingCountdown = () => {
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
 
-  const [seconds, setSeconds] = useState(() =>
-    calculateSecondsRemaining(arrival)
-  );
+  const [seconds, setSeconds] = useState(() => calculateSecondsRemaining(arrival));
 
   useFrameEffect(() => {
     setSeconds(calculateSecondsRemaining(arrival));
@@ -25,10 +23,7 @@ const useTravellingCountdown = () => {
   });
 
   const totalSeconds = differenceInSeconds(arrival, start);
-  const percent = Math.max(
-    0,
-    Math.min(100, ((totalSeconds - seconds) / totalSeconds) * 100)
-  );
+  const percent = Math.max(0, Math.min(100, ((totalSeconds - seconds) / totalSeconds) * 100));
 
   return {
     isArriving: seconds <= 0,

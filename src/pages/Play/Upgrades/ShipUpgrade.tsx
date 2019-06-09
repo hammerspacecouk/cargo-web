@@ -88,21 +88,12 @@ export const ShipUpgrade = ({ ship }: IProps) => {
         <PurchaseCardDescription>
           <P>{ship.detail.description}</P>
           <ShipStats>
-            <ShipStat
-              label="Capacity"
-              value={ship.detail.capacity.toString(10)}
-            />
-            <ShipStat
-              label="Strength"
-              value={ship.detail.strength.toString(10)}
-            />
+            <ShipStat label="Capacity" value={ship.detail.capacity.toString(10)} />
+            <ShipStat label="Strength" value={ship.detail.strength.toString(10)} />
           </ShipStats>
         </PurchaseCardDescription>
         <TokenButton token={ship.actionToken} handler={makePurchase}>
-          <CreditsButton
-            amount={ship.cost}
-            disabledOverride={buttonsDisabled}
-          />
+          <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled} />
         </TokenButton>
       </PurchaseCardDetail>
       <ShipImage notificationCount={ship.currentCount}>

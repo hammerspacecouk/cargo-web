@@ -23,11 +23,13 @@ export const GameContextComponent = ({ children, useChildren }: IProps) => {
 
   const body = useChildren || gameSession.player ? children : <RequireLogin />;
 
-  return (
-    <GameContext.Provider value={gameSession}>{body}</GameContext.Provider>
-  );
+  return <GameContext.Provider value={gameSession}>{body}</GameContext.Provider>;
 };
 
 export const useGameContext = (): IGameSession => {
-  return React.useContext(GameContext) as IGameSession;
+  const context: IGameSession = React.useContext(GameContext);
+  if (!context) {
+    throw "useGameContext called outside of the provider";
+  }
+  return context;
 };

@@ -29,9 +29,7 @@ export const PurchaseCard = styled.div`
   flex-direction: row-reverse;
 `;
 
-export const PurchaseCardTitle = ({ children }: IChildrenProps) => (
-  <H4 as="h3">{children}</H4>
-);
+export const PurchaseCardTitle = ({ children }: IChildrenProps) => <H4 as="h3">{children}</H4>;
 
 export const PurchaseCardDetail = styled.div`
   flex: 1;
@@ -42,11 +40,7 @@ export const PurchaseCardDescription = styled.div`
   margin: ${GRID.HALF} 0 ${GRID.UNIT};
 `;
 
-export const PurchaseCardImage = ({
-  className,
-  children,
-  notificationCount,
-}: IPurchaseCardImageProps) => {
+export const PurchaseCardImage = ({ className, children, notificationCount }: IPurchaseCardImageProps) => {
   let countElement = null;
   if (notificationCount) {
     countElement = (

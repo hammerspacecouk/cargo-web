@@ -14,12 +14,7 @@ interface IProps {
 }
 
 export const GoButton = ({ direction, journeyTime, children }: IProps) => {
-  const {
-    buttonsDisabled,
-    cratesOnShip,
-    cratesInPort,
-    ship,
-  } = useActiveShipContext();
+  const { buttonsDisabled, cratesOnShip, cratesInPort, ship } = useActiveShipContext();
   const { moveShip, openModal } = usePlayPortContext(); // todo - ?
   const buttonDisabled = direction.action === null || buttonsDisabled;
 
@@ -43,11 +38,7 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
   }
 
   // if the player tries to leave without picking up any crates, warn them
-  if (
-    cratesOnShip.length === 0 &&
-    ship.shipClass.capacity > 0 &&
-    cratesInPort.length > 0
-  ) {
+  if (cratesOnShip.length === 0 && ship.shipClass.capacity > 0 && cratesInPort.length > 0) {
     actionButton = (
       <StackedButton
         type="submit"

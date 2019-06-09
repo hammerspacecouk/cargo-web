@@ -14,8 +14,7 @@ const shipSize = "128px";
 const StyledOverview = styled.div`
   display: block;
   min-height: 300px;
-  padding: ${GRID.UNIT} calc(${shipSize} + ${GRID.UNIT}) ${GRID.UNIT}
-    ${GRID.UNIT};
+  padding: ${GRID.UNIT} calc(${shipSize} + ${GRID.UNIT}) ${GRID.UNIT} ${GRID.UNIT};
   position: relative;
   overflow: hidden;
   border-bottom: ${PANEL_BORDER};
@@ -81,10 +80,7 @@ export const ShipOverview = () => {
         </h1>
       </div>
       <Ship>
-        <img
-          src={`${Environment.apiHostname}${ship.shipClass.image}`}
-          alt={`${ship.name} (${ship.shipClass.name})`}
-        />
+        <img src={`${Environment.apiHostname}${ship.shipClass.image}`} alt={`${ship.name} (${ship.shipClass.name})`} />
       </Ship>
     </StyledOverview>
   );

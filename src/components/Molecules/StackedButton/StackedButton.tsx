@@ -23,12 +23,7 @@ const StyledChildren = styled.div``;
 
 const StyledIcon = styled(StyledChildren)``;
 
-export const StackedButton = ({
-  icon,
-  children,
-  className,
-  ...props
-}: IProps) => {
+export const StackedButton = ({ icon, children, className, ...props }: IProps) => {
   let styledPrefix;
   if (icon) {
     styledPrefix = (

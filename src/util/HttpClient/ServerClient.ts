@@ -11,11 +11,7 @@ const passThroughCookies = (cookies?: any) => {
   const cookieItems = [];
   for (const property in cookies) {
     if (cookies.hasOwnProperty(property)) {
-      cookieItems.push(
-        encodeURIComponent(property) +
-          "=" +
-          encodeURIComponent(cookies[property])
-      );
+      cookieItems.push(encodeURIComponent(property) + "=" + encodeURIComponent(cookies[property]));
     }
   }
   return cookieItems.join(";");
@@ -30,11 +26,7 @@ export class ServerClient implements IAPIClient {
     return this.fetch(token.path, { token: token.token });
   }
 
-  public async fetch(
-    path: string,
-    payload?: object,
-    cookies?: object
-  ): Promise<any> {
+  public async fetch(path: string, payload?: object, cookies?: object): Promise<any> {
     const url = this.getUrl(path);
     try {
       const start = Date.now();
@@ -46,9 +38,7 @@ export class ServerClient implements IAPIClient {
       const response = await fetch(url, { headers });
 
       const time = Date.now() - start;
-      Logger.info(
-        `[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`
-      );
+      Logger.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);
 
       if (response.status === 403) {
         // you don't have access to this. might need to login or not allowed

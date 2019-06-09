@@ -37,9 +37,7 @@ const DestroyedShip = ({ fleetShip }: IItemProps) => (
   <StyledDestroyedShip>
     <div>
       {fleetShip.ship.name}
-      <DestroyedLocation>
-        Destroyed at {fleetShip.ship.location.name}
-      </DestroyedLocation>
+      <DestroyedLocation>Destroyed at {fleetShip.ship.location.name}</DestroyedLocation>
     </div>
   </StyledDestroyedShip>
 );
@@ -64,12 +62,7 @@ export const FleetShips = ({ fleetShips }: IProps) => {
           {fleetShip.ship.isDestroyed ? (
             <DestroyedShip fleetShip={fleetShip} />
           ) : (
-            <ActiveShip
-              fleetShip={fleetShip}
-              isCurrent={
-                !!(activeShip && activeShip.ship.id === fleetShip.ship.id)
-              }
-            />
+            <ActiveShip fleetShip={fleetShip} isCurrent={!!(activeShip && activeShip.ship.id === fleetShip.ship.id)} />
           )}
         </li>
       ))}

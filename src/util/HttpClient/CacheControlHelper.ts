@@ -17,14 +17,11 @@ export class CacheControlHelper {
     const regex = /(?:^|(?:\s*\,\s*))([^\x00-\x20\(\)<>@\,;\:\\"\/\[\]\?\=\{\}\x7F]+)(?:\=(?:([^\x00-\x20\(\)<>@\,;\:\\"\/\[\]\?\=\{\}\x7F]+)|(?:\"((?:[^"\\]|\\.)*)\")))?/g;
 
     const header: { [key: string]: any } = {};
-    const err = field.replace(
-      regex,
-      ($0: string, $1: string, $2?: string, $3?: string) => {
-        const value = $2 || $3;
-        header[$1] = value ? value.toLowerCase() : true;
-        return "";
-      }
-    );
+    const err = field.replace(regex, ($0: string, $1: string, $2?: string, $3?: string) => {
+      const value = $2 || $3;
+      header[$1] = value ? value.toLowerCase() : true;
+      return "";
+    });
 
     if (header["max-age"]) {
       const maxAge = parseInt(header["max-age"], 10);

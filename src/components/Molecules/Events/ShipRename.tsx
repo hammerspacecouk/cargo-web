@@ -3,11 +3,7 @@ import { Event, IEventProps } from "./Event";
 
 export const ShipRename = ({ event, onAnimated }: IEventProps) => {
   if (!event.ship) {
-    return (
-      <Event time={event.time}>
-        A ship was renamed (but has since been deleted)
-      </Event>
-    );
+    return <Event time={event.time}>A ship was renamed (but has since been deleted)</Event>;
   }
 
   return (

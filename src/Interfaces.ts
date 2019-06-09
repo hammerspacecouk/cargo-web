@@ -128,9 +128,7 @@ export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
 
-export interface ITacticalOption {
-  actionToken?: IActionToken;
-  effect: IEffect;
+export interface ITacticalOption extends IEffectAction {
   hitsRemaining?: number;
   expiry?: string;
   isActive?: boolean;
@@ -143,8 +141,9 @@ export interface ITravelOption {
   isActive: boolean;
 }
 
-export interface IOffenceOption {
+export interface IEffectAction {
   actionToken?: IActionToken;
+  currentCount?: number;
   effect: IEffect;
 }
 
@@ -157,7 +156,7 @@ export interface IFleetShip {
 
 export interface IOtherShip {
   ship: IShip;
-  offence?: IOffenceOption[];
+  offence?: IEffectAction[];
 }
 
 export interface IShip {
@@ -200,10 +199,17 @@ export interface IChildrenProps {
   children: ReactNode;
 }
 
+export enum EffectType {
+  OFFENCE = "OFFENCE",
+  DEFENCE = "DEFENCE",
+  TRAVEL = "TRAVEL",
+}
+
 export interface IEffect {
   id: string;
   name: string;
   description: string;
+  type: EffectType;
 }
 
 export interface IShipClass {

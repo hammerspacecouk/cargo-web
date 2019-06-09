@@ -22,6 +22,4 @@ const secondsToFormat = (seconds: number): string => {
   ].join(":");
 };
 
-export const IntervalFormat = (props: IProps) => (
-  <span>{secondsToFormat(props.seconds)}</span>
-);
+export const IntervalFormat = (props: IProps) => <span>{secondsToFormat(props.seconds)}</span>;

@@ -60,16 +60,12 @@ export const FleetShipItem = ({ fleetShip }: IProps) => {
   let detail = null;
   if (fleetShip) {
     if (fleetShip.ship.isDestroyed) {
-      detail = (
-        <Destroyed>Destroyed at {fleetShip.ship.location.name}</Destroyed>
-      );
+      detail = <Destroyed>Destroyed at {fleetShip.ship.location.name}</Destroyed>;
     } else {
       const icon = showDetail ? <ChevronUpIcon /> : <ChevronDownIcon />;
       moreButton = (
         <ButtonArea>
-          <HaloButton onClick={() => setShowDetail((prev: boolean) => !prev)}>
-            {icon}
-          </HaloButton>
+          <HaloButton onClick={() => setShowDetail((prev: boolean) => !prev)}>{icon}</HaloButton>
         </ButtonArea>
       );
       if (showDetail) {

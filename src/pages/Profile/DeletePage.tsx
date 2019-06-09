@@ -1,9 +1,6 @@
 import { parse as parseQueryString } from "query-string";
 import * as React from "react";
-import {
-  ConfirmButton,
-  DangerButton,
-} from "../../components/Atoms/Button/Button";
+import { ConfirmButton, DangerButton } from "../../components/Atoms/Button/Button";
 import { Prose } from "../../components/Atoms/Prose/Prose";
 import { TextCenter } from "../../components/Atoms/Text/Text";
 import { TokenButton } from "../../components/Molecules/TokenButton/TokenButton";

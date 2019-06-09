@@ -13,6 +13,7 @@ interface IProps extends IChildrenProps {
 
 const StyledPanel = styled.div`
   padding: ${GRID.UNIT};
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;

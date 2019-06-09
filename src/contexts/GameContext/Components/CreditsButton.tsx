@@ -19,15 +19,9 @@ const isDisabled = (amount: number, playerScore: IScore): boolean => {
   return scoreValue < amount;
 };
 
-export const CreditsButton = ({
-  amount,
-  disabledOverride,
-  children,
-}: IProps) => {
+export const CreditsButton = ({ amount, disabledOverride, children }: IProps) => {
   const { score } = useGameContext();
-  const [disabled, setDisabled] = React.useState(() =>
-    isDisabled(amount, score)
-  );
+  const [disabled, setDisabled] = React.useState(() => isDisabled(amount, score));
 
   React.useEffect(() => {
     let timer: any;
@@ -50,10 +44,7 @@ export const CreditsButton = ({
     const currentScoreValue = getValue(score, new Date());
     const isRateNegative = score.rate < 0;
 
-    if (
-      (isRateNegative && currentScoreValue <= amount) ||
-      (!isRateNegative && currentScoreValue > amount)
-    ) {
+    if ((isRateNegative && currentScoreValue <= amount) || (!isRateNegative && currentScoreValue > amount)) {
       // already passed it. state won't change
       return unmount;
     }

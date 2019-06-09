@@ -20,16 +20,14 @@ const frames = keyframes`
 
 export const Badge = styled.span<{ animate?: boolean; subtle?: boolean }>`
   display: inline-block;
-  background: ${({ subtle }) =>
-    subtle ? COLOURS.BLACK.STANDARD : COLOURS.BASE};
+  background: ${({ subtle }) => (subtle ? COLOURS.BLACK.STANDARD : COLOURS.BASE)};
   color: ${COLOURS.WHITE.STANDARD};
-  border-radius: 50px;
-  line-height: 24px;
-  font-size: 16px;
-  padding: 0 ${GRID.HALF};
-  min-width: 26px;
+  border-radius: ${GRID.DOUBLE};
+  line-height: ${GRID.UNIT};
+  font-size: 12px;
+  padding: 0 ${GRID.QUARTER};
+  min-width: ${GRID.UNIT};
   text-align: center;
-  border: solid 1px ${COLOURS.WHITE.STANDARD};
   box-shadow: 1px 1px 8px black;
   ${({ animate }) =>
     animate

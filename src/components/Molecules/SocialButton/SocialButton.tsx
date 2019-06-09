@@ -4,12 +4,7 @@ import { hexToRGBa } from "../../../styles/colours";
 import { MONOSPACE_FONT, SIZES } from "../../../styles/typography";
 import { GRID } from "../../../styles/variables";
 import { Icon, SMALL_ICON } from "../../Atoms/Icon/Icon";
-import {
-  FacebookLogo,
-  GoogleLogo,
-  MicrosoftLogo,
-  TwitterLogo,
-} from "../../Atoms/Logos/Logos";
+import { FacebookLogo, GoogleLogo, MicrosoftLogo, TwitterLogo } from "../../Atoms/Logos/Logos";
 
 interface IProps {
   href: string;
@@ -36,8 +31,7 @@ const StyledLink = styled.a<{ colour: IColour }>`
   background: ${({ colour }) => hexToRGBa(colour.bg, 0.9)};
   border: solid 2px ${({ colour }) => colour.bg};
   color: ${({ colour }) => colour.fg};
-  box-shadow: 0 0 16px ${({ colour }) => colour.bg},
-    0 0 16px inset ${({ colour }) => colour.bg};
+  box-shadow: 0 0 16px ${({ colour }) => colour.bg}, 0 0 16px inset ${({ colour }) => colour.bg};
   border-radius: 4px;
   transition: all 0.15s linear;
   text-decoration: none;
@@ -50,14 +44,12 @@ const StyledLink = styled.a<{ colour: IColour }>`
     &:hover,
     &:focus {
       background: ${({ colour }) => hexToRGBa(colour.bg, 1)};
-      box-shadow: 0 0 32px ${({ colour }) => colour.bg},
-        0 0 16px inset ${({ colour }) => colour.bg};
+      box-shadow: 0 0 32px ${({ colour }) => colour.bg}, 0 0 16px inset ${({ colour }) => colour.bg};
       text-decoration: none;
     }
     &:active {
       background: ${({ colour }) => hexToRGBa(colour.bg, 1)};
-      box-shadow: 0 0 16px ${({ colour }) => colour.bg},
-        0 0 16px inset ${({ colour }) => colour.bg};
+      box-shadow: 0 0 16px ${({ colour }) => colour.bg}, 0 0 16px inset ${({ colour }) => colour.bg};
       transform: scale(0.98);
       text-decoration: none;
     }

@@ -32,13 +32,7 @@ const StyledIcon = styled(StyledChildren)`
   margin-left: -${GRID.HALF};
 `;
 
-export const ComplexButton = ({
-  leading,
-  icon,
-  children,
-  className,
-  ...props
-}: IProps) => {
+export const ComplexButton = ({ leading, icon, children, className, ...props }: IProps) => {
   let styledPrefix;
   if (leading) {
     styledPrefix = <StyledChildren>{leading}</StyledChildren>;

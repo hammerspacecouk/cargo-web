@@ -11,12 +11,7 @@ interface IProps {
 
 export const WarningModal = ({ text, closeModal }: IProps) => {
   return (
-    <Modal
-      isOpen={text !== undefined}
-      onClose={closeModal}
-      title="Notice"
-      type={ModalType.WARNING}
-    >
+    <Modal isOpen={text !== undefined} onClose={closeModal} title="Notice" type={ModalType.WARNING}>
       <P>{text}</P>
       <ModalActions>
         <ButtonRow>

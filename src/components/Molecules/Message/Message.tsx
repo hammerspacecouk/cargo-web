@@ -54,11 +54,7 @@ const MessageText = styled.div`
   line-height: 1.2;
 `;
 
-const messageContent = (
-  icon: any,
-  children: any,
-  color: { BACKGROUND: string; FOREGROUND: string }
-) => (
+const messageContent = (icon: any, children: any, color: { BACKGROUND: string; FOREGROUND: string }) => (
   <StyledMessage fill={color.BACKGROUND} text={color.FOREGROUND}>
     <StyledIcon>
       <StyledIconImage>{icon}</StyledIconImage>
@@ -69,8 +65,7 @@ const messageContent = (
   </StyledMessage>
 );
 
-export const MessageOk = ({ children }: IChildrenProps) =>
-  messageContent(<TickIcon />, children, COLOURS.SEMANTIC.OK);
+export const MessageOk = ({ children }: IChildrenProps) => messageContent(<TickIcon />, children, COLOURS.SEMANTIC.OK);
 export const MessageWarning = ({ children }: IChildrenProps) =>
   messageContent(<WarningIcon />, children, COLOURS.SEMANTIC.WARNING);
 export const MessageInfo = ({ children }: IChildrenProps) =>

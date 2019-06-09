@@ -24,6 +24,7 @@ interface IProps {
   option?: ITacticalOption;
 }
 
+// todo - inline bits
 export const DefenceEffect = ({ option }: IProps) => {
   const { buttonsDisabled } = useActiveShipContext();
 

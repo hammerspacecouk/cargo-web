@@ -23,14 +23,7 @@ const StyledImg = styled.img`
 
 export const PlayerFlag = ({ player, className }: IProps) => {
   if (player) {
-    return (
-      <StyledImg
-        as="img"
-        className={className}
-        src={`${Environment.apiHostname}${player.emblem}`}
-        alt=""
-      />
-    );
+    return <StyledImg as="img" className={className} src={`${Environment.apiHostname}${player.emblem}`} alt="" />;
   }
   return <StyledBox />;
 };

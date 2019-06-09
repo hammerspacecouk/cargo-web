@@ -55,11 +55,7 @@ const getChildrenUntil = (children: any, index: number) => {
   let counter = 0;
   let bits = [];
   while (counter <= index && componentTokenAt(children, counter)) {
-    bits.push(
-      <React.Fragment key={counter}>
-        {componentTokenAt(children, counter)}
-      </React.Fragment>
-    );
+    bits.push(<React.Fragment key={counter}>{componentTokenAt(children, counter)}</React.Fragment>);
     counter++;
   }
   if (componentTokenAt(children, counter)) {
@@ -100,9 +96,7 @@ export const Event = ({ children, time, onAnimated }: IProps) => {
 
   return (
     <StyledEvent>
-      <Content>
-        {done ? children : getChildrenUntil(children, visibleChars)}
-      </Content>
+      <Content>{done ? children : getChildrenUntil(children, visibleChars)}</Content>
       <Time datetime={new Date(time)} />
     </StyledEvent>
   );

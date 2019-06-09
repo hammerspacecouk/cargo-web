@@ -7,8 +7,6 @@ export const AppLoading = () => (
     <div>
       <Loading />
     </div>
-    <TextCenter>
-      To play will require JavaScript to be running successfully
-    </TextCenter>
+    <TextCenter>To play will require JavaScript to be running successfully</TextCenter>
   </div>
 );

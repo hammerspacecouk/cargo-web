@@ -14,12 +14,7 @@ const StyledForm = styled.form`
   display: inline;
 `;
 
-export const TokenButton = ({
-  token,
-  className,
-  children,
-  handler,
-}: IProps) => {
+export const TokenButton = ({ token, className, children, handler }: IProps) => {
   return (
     <StyledForm
       className={className}

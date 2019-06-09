@@ -41,11 +41,7 @@ const buildCacheControl = (matched: IMatchedRoute) => {
   return cache;
 };
 
-export const handler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const handler = async (req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
   const path = req.url;
 
@@ -71,23 +67,12 @@ export const handler = async (
   let data;
 
   try {
-    if (
-      matchedRoute &&
-      (matchedRoute.route.component as IInitialDataComponent).getInitialData
-    ) {
-      data = await (matchedRoute.route
-        .component as IInitialDataComponent).getInitialData(
-        matchedRoute.match,
-        req
-      );
+    if (matchedRoute && (matchedRoute.route.component as IInitialDataComponent).getInitialData) {
+      data = await (matchedRoute.route.component as IInitialDataComponent).getInitialData(matchedRoute.match, req);
     }
 
     appElement = renderToString(
-      createElement(
-        StaticRouter,
-        { context, location: path },
-        createElement(App, { routes, initialData: data })
-      )
+      createElement(StaticRouter, { context, location: path }, createElement(App, { routes, initialData: data }))
     );
 
     if (context.url) {
@@ -95,9 +80,7 @@ export const handler = async (
       res.redirect(code, context.url);
       res.end();
       const finish = Date.now() - start;
-      Logger.info(
-        `[RESPONSE] [${code}] [${finish}ms] ${path} [REDIRECT] ${context.url}`
-      );
+      Logger.info(`[RESPONSE] [${code}] [${finish}ms] ${path} [REDIRECT] ${context.url}`);
       next();
       return;
     }
@@ -149,13 +132,7 @@ interface IHTML {
   title?: string;
 }
 
-const html = ({
-  config,
-  assetsManifest,
-  content,
-  data,
-  title = null,
-}: IHTML) => `<!doctype html>
+const html = ({ config, assetsManifest, content, data, title = null }: IHTML) => `<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />

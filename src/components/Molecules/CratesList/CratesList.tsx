@@ -36,8 +36,7 @@ const Heading = styled(H6)<{ titlePosition: TITLE_POSITION }>`
   border-bottom: solid 1px ${COLOURS.GREY.DARKER};
   border-top: solid 1px ${COLOURS.GREY.DARKER};
 
-  ${({ titlePosition }) =>
-    titlePosition === TITLE_POSITION.TOP ? topTitleStyle : bottomTitleStyle}
+  ${({ titlePosition }) => (titlePosition === TITLE_POSITION.TOP ? topTitleStyle : bottomTitleStyle)}
 `;
 
 const StyledWrapper = styled.div`
