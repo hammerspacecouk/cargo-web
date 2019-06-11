@@ -3,7 +3,6 @@ const rimraf = require("rimraf");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const PreloadWebpackPlugin = require("preload-webpack-plugin");
 
 const path = require("path");
 
@@ -81,12 +80,6 @@ const settings = {
       template: "templates/index.html",
       filename: "html/index.html",
       apiHost: IS_DEV_SERVER ? 'http://127.0.0.1:8080': '',
-    }),
-    new PreloadWebpackPlugin({
-      rel: "preload",
-      include: "allAssets",
-      fileBlacklist: [/\.map/, /\.woff$/],
-      excludeHtmlNames: ["index.html"]
     })
   ],
   optimization: {
