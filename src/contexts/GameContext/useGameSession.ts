@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { IEvent, IFleetShip, ILoginOptions, IPlayer, IRankStatus, IScore } from "../../Interfaces";
 import { ApiClient } from "../../util/ApiClient";
 import { useMounted } from "../../hooks/useMounted";
-import { IFleetResponse } from "../../context/Page/FleetContext";
+
+interface IFleetResponse {
+  ships: IFleetShip[];
+  events: IEvent[];
+}
 
 interface IGameSessionResponse {
   fleet: IFleetResponse;

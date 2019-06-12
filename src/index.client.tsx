@@ -15,4 +15,3 @@ ReactDomRender(
   </BrowserRouter>,
   document.getElementById("root")
 );
-w

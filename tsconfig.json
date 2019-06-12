@@ -8,7 +8,7 @@
     "module": "commonjs",
     "jsx": "react",
     "target": "ES2017",
-    "types": ["react", "jest"]
+    "types": ["react"]
   },
   "include": [
     "./src/**/*"

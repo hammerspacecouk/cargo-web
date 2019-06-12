@@ -27,7 +27,7 @@ export const GameContextComponent = ({ children, useChildren }: IProps) => {
 };
 
 export const useGameContext = (): IGameSession => {
-  const context: IGameSession = React.useContext(GameContext);
+  const context = React.useContext(GameContext) as IGameSession;
   if (!context) {
     throw "useGameContext called outside of the provider";
   }

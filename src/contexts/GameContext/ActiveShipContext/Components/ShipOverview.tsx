@@ -8,6 +8,7 @@ import { Environment } from "../../../../util/Environment";
 import { ELEMENTS, SIZES } from "../../../../styles/typography";
 import { PANEL_BORDER } from "../../../../styles/colours";
 import { BREAKPOINTS } from "../../../../styles/media";
+import { IShip } from "../../../../Interfaces";
 
 const shipSize = "128px";
 
@@ -50,6 +51,14 @@ const Ship = styled.div`
   right: ${GRID.UNIT};
 `;
 
+const TravellingShip = styled.div`
+  width: ${shipSize};
+  position: absolute;
+  top: ${GRID.UNIT};
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
 const TitleName = styled.span`
   ${ELEMENTS.H3};
   font-size: ${SIZES.D};
@@ -65,12 +74,33 @@ const TitleLocation = styled.span`
   margin-top: ${GRID.UNIT};
 `;
 
+const ShipImage = ({ship}: {ship: IShip}) => (
+  <img src={`${Environment.apiHostname}${ship.shipClass.image}`}
+       alt={`${ship.name} (${ship.shipClass.name})`}/>
+);
+
 export const ShipOverview = () => {
-  const { ship } = useActiveShipContext();
+  const { ship, port } = useActiveShipContext();
+
+  if (!port) {
+    return (
+      <StyledOverview>
+        <div>
+          <h1>
+            <TitleName>{ship.name}</TitleName>
+          </h1>
+        </div>
+        <TravellingShip>
+          <ShipImage ship={ship} />
+        </TravellingShip>
+      </StyledOverview>
+    );
+  }
+
   return (
     <StyledOverview>
       <PlanetPosition>
-        <Planet />
+        <Planet/>
       </PlanetPosition>
       <div>
         <h1>
@@ -80,7 +110,7 @@ export const ShipOverview = () => {
         </h1>
       </div>
       <Ship>
-        <img src={`${Environment.apiHostname}${ship.shipClass.image}`} alt={`${ship.name} (${ship.shipClass.name})`} />
+        <ShipImage ship={ship} />
       </Ship>
     </StyledOverview>
   );

@@ -10,6 +10,9 @@ import { useActiveShipContext } from "../ActiveShipContext";
 import { Engineering } from "../Panels/Engineering";
 import { Tactical } from "../Panels/Tactical";
 import { Trade } from "../Panels/Trade";
+import { P } from "../../../../components/Atoms/Text/Text";
+import { H3 } from "../../../../components/Atoms/Heading/Heading";
+import { ListUnstyled } from "../../../../components/Atoms/Lists/ListUnstyled/ListUnstyled";
 
 interface IProps {
   className?: string;
@@ -71,9 +74,31 @@ const PanelEngineering = styled(GeneralPanel)`
 
 const StyledEventsList = styled(EventsList)``;
 
-// todo - if travelling this is very different
 export const ShipDetailPage = ({ className }: IProps) => {
-  const { events, port } = useActiveShipContext();
+  const { events, port, hint, bonusEffects } = useActiveShipContext();
+
+  if (!port) {
+    let bonus;
+    if (bonusEffects) {
+      bonus = (
+        <>
+          <H3>Award from head office</H3>
+          <ListUnstyled>
+            {bonusEffects.map(bonus => (
+              <li key={`bonus-${bonus.id}`}>{bonus.name}</li>
+            ))}
+          </ListUnstyled>
+        </>
+      )
+    }
+
+    return (
+      <Page className={className}>
+        {hint && <P>{hint}</P>}
+        {bonus}
+      </Page>
+    )
+  }
 
   return (
     <Page className={className}>

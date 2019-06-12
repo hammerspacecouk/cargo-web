@@ -9,7 +9,7 @@ import {
   IShip,
   ITransaction,
   IEffectUpgrade,
-  IPort,
+  IPort, IChannel, IEffect
 } from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
@@ -18,6 +18,7 @@ import { useButtonsDisabled } from "../../../hooks/useButtonsDisabled";
 import { useGameContext } from "../GameContext";
 
 export interface IActiveShip {
+  bonusEffects?: IEffect[];
   buttonsDisabled: boolean;
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
@@ -35,7 +36,9 @@ export interface IActiveShip {
   resetMessage: () => void;
   shipsInLocation?: IOtherShip[];
   purchaseOptions: IEffectUpgrade[];
-  port: IPort;
+  channel?: IChannel;
+  port?: IPort;
+  hint?: string;
 }
 
 export const useActiveShip = (incomingShip: IShip): IActiveShip => {
@@ -50,6 +53,9 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const [shipsInLocation, setShipsInLocation] = useState(undefined);
   const [purchaseOptions, setPurchaseOptions] = useState(undefined);
   const [port, setPort] = useState(undefined);
+  const [channel, setChannel] = useState(undefined);
+  const [hint, setHint] = useState(undefined);
+  const [bonusEffects, setBonusEffects] = useState(undefined);
   const [events, setEvents] = useState(undefined);
   const [message, setMessage] = useState(null);
   const isMounted = useMounted();
@@ -62,35 +68,37 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     if (!data) {
       setShip(undefined);
       setPort(undefined);
-      // setHint(undefined);
-      // setChannel(undefined);
+      setHint(undefined);
+      setChannel(undefined);
       setDirections(undefined);
       setShipsInLocation(undefined);
       setEvents(undefined);
       setCratesInPort(undefined);
       setCratesOnShip(undefined);
       setTacticalOptions(undefined);
-      // setBonusEffects(undefined);
+      setBonusEffects(undefined);
       setRequestNameToken(undefined);
       setHealthOptions(undefined);
       setPurchaseOptions(undefined);
       return;
     }
 
-    setShip(data.ship);
     setPort(data.port);
-    // setChannel(data.channel);
-    // setHint(data.hint);
+    setChannel(data.channel);
+    setHint(data.hint);
     setDirections(data.directions);
     setShipsInLocation(data.shipsInLocation);
     setEvents(data.events);
     setCratesInPort(data.cratesInPort);
     setCratesOnShip(data.cratesOnShip);
     setTacticalOptions(data.tacticalOptions);
-    // setBonusEffects(data.bonus);
+    setBonusEffects(data.bonus && data.bonus.length ? data.bonus : undefined);
     setRequestNameToken(data.renameToken);
     setHealthOptions(data.health);
     setPurchaseOptions(data.purchaseOptions);
+
+    // set the ship last as a change here would trigger a re-render of the whole context
+    setShip(data.ship);
   };
 
   const setShipData = async (id: string) => {
@@ -155,6 +163,9 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     resetMessage: () => setMessage(null),
     shipsInLocation,
     purchaseOptions,
+    channel,
     port,
+    hint,
+    bonusEffects
   };
 };

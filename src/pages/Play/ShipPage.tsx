@@ -4,7 +4,6 @@ import { Loading } from "../../components/Atoms/Loading/Loading";
 import { NotFound } from "../../components/Organisms/Error/NotFound";
 import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import { ApiClient } from "../../util/ApiClient";
-import { Port } from "./Port";
 import { Travelling } from "./Travelling";
 import { WarningModal } from "../../components/Organisms/WarningModal/WarningModal";
 import { Hidden } from "../../components/Atoms/Hidden/Hidden";
@@ -42,7 +41,6 @@ export const ShipPage = withRouter(({ match }: IShipParams) => {
 
   let main = null;
   if (port) {
-    main = <Port />;
   } else if (channel) {
     main = <Travelling />;
   }

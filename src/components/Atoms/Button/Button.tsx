@@ -5,8 +5,6 @@ import { GRID } from "../../../styles/variables";
 import { MONOSPACE_FONT } from "../../../styles/typography";
 import { AttackIcon } from "../../Icons/AttackIcon/AttackIcon";
 import { TacticalIcon } from "../../Icons/TacticalIcon/TacticalIcon";
-import { TravelIcon } from "../../Icons/TravelIcon/TravelIcon";
-import { ShieldIcon } from "../../Icons/ShieldIcon/ShieldIcon";
 
 export enum Type {
   Confirm,
