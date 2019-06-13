@@ -16,6 +16,7 @@ const StyledPlayBoard = styled.div`
 
 const StyledShipDetail = styled(ShipDetailPage)`
   flex: 1;
+  display: flex;
   overflow-y: auto;
   ${scrollbarStyles}
 `;

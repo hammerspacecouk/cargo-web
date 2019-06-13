@@ -199,6 +199,10 @@ export interface IChildrenProps {
   children: ReactNode;
 }
 
+export interface IClassNameProps {
+  className?: string;
+}
+
 export enum EffectType {
   OFFENCE = "OFFENCE",
   DEFENCE = "DEFENCE",
