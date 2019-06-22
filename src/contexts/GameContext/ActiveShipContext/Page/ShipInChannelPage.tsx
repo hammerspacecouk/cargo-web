@@ -15,11 +15,15 @@ export const ShipInChannelPage = () => {
       <Column>
         <GeneralPanel title="Travelling">COUNTDOWN</GeneralPanel>
         <GeneralPanel title="Incoming...">
-            <Hint />
+          <Hint />
         </GeneralPanel>
       </Column>
       <Column>
-        {bonusEffects && <GeneralPanel title="From head office"><Bonus /></GeneralPanel>}
+        {bonusEffects && (
+          <GeneralPanel title="From head office">
+            <Bonus />
+          </GeneralPanel>
+        )}
         <GeneralPanel title="Tactical">TACTICAL</GeneralPanel>
       </Column>
     </Page>
@@ -27,13 +31,13 @@ export const ShipInChannelPage = () => {
 };
 
 const Page = styled.div`
-    ${BREAKPOINTS.L`
+  ${BREAKPOINTS.L`
       display: flex;
     `};
 `;
 
 const Column = styled.div`
-    ${BREAKPOINTS.L`
+  ${BREAKPOINTS.L`
       width: 50%;
       &:first-child {
         border-right: ${PANEL_BORDER};

@@ -6,15 +6,13 @@ import { useActiveShipContext } from "../ActiveShipContext";
 
 export const Hint = () => {
   const { hint } = useActiveShipContext();
-  return (
-    <StyledHint as="p">{hint}</StyledHint>
-  );
+  return <StyledHint as="p">{hint}</StyledHint>;
 };
 
 const StyledHint = styled(H3)`
-    padding: ${GRID.UNIT};
-    font-style: italic;
-    text-align: center;
-    line-height: 1.5;
-    opacity: 0.6;
+  padding: ${GRID.UNIT};
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+  opacity: 0.6;
 `;

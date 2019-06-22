@@ -9,7 +9,9 @@ import {
   IShip,
   ITransaction,
   IEffectUpgrade,
-  IPort, IChannel, IEffect
+  IPort,
+  IChannel,
+  IEffect,
 } from "../../../Interfaces";
 import { useEffect, useState } from "react";
 import { useMounted } from "../../../hooks/useMounted";
@@ -166,6 +168,6 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
     channel,
     port,
     hint,
-    bonusEffects
+    bonusEffects,
   };
 };

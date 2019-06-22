@@ -53,6 +53,7 @@ export const ShipInPortPage = () => {
 const Page = styled.div`
   ${BREAKPOINTS.L`
       display: grid;
+      width: 100%;
       grid-template-columns: repeat(10, [col] 10%);
       grid-template-rows: repeat(3, [row] auto);
     `};

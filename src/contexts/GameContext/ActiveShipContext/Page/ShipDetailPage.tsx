@@ -6,21 +6,17 @@ import { COLOURS, hexToRGBa } from "../../../../styles/colours";
 import { ShipInChannelPage } from "./ShipInChannelPage";
 import { IClassNameProps } from "../../../../Interfaces";
 
-export const ShipDetailPage = ({className}: IClassNameProps) => {
+export const ShipDetailPage = ({ className }: IClassNameProps) => {
   const { port } = useActiveShipContext();
 
   let innerPage;
   if (port) {
-    innerPage = <ShipInPortPage />
+    innerPage = <ShipInPortPage />;
   } else {
-    innerPage = <ShipInChannelPage />
+    innerPage = <ShipInChannelPage />;
   }
 
-  return (
-    <Page className={className}>
-      {innerPage}
-    </Page>
-  )
+  return <Page className={className}>{innerPage}</Page>;
 };
 
 const Page = styled.div`

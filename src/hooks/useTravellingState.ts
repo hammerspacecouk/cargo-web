@@ -32,6 +32,7 @@ const useTravellingCountdown = () => {
   };
 };
 
+/** @deprecated */
 export const useTravellingState = () => {
   // todo - don't use context in here
   const { updateScore, updateRankStatus } = useSessionContext();

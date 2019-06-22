@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { scrollbarStyles } from "../../../styles/colours";
 import { ShipContextComponent } from "./ActiveShipContext";
@@ -32,7 +33,7 @@ interface IProps {
 export const ActiveShipContainer = (props: IProps) => {
   const { activeShip, setActiveShipById } = useGameContext();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setActiveShipById(props.match.params.shipId);
     return () => {
       setActiveShipById(undefined);

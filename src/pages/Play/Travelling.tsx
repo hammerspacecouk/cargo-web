@@ -7,6 +7,7 @@ import { useCurrentShipContext } from "../../context/CurrentShipContext";
 import { useTravellingState } from "../../hooks/useTravellingState";
 import { BonusEffects } from "../../components/Organisms/BonusEffects/BonusEffects";
 
+/** @deprecated */
 export const Travelling = () => {
   const { bonusEffects, channel, hint } = useCurrentShipContext();
   const { secondsRemaining, percent } = useTravellingState();

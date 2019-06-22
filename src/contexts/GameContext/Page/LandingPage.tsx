@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { useGameContext } from "../GameContext";
 import { PlayHome } from "../../../pages/Play/PlayHome";
 import styled from "styled-components";
@@ -14,7 +15,7 @@ const StyledArea = styled.div`
 
 export const LandingPage = () => {
   const { setIsAtHome } = useGameContext();
-  React.useEffect(() => {
+  useEffect(() => {
     setIsAtHome(true);
     return () => {
       setIsAtHome(false);

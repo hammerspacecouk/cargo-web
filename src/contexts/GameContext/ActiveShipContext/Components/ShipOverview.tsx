@@ -74,9 +74,8 @@ const TitleLocation = styled.span`
   margin-top: ${GRID.UNIT};
 `;
 
-const ShipImage = ({ship}: {ship: IShip}) => (
-  <img src={`${Environment.apiHostname}${ship.shipClass.image}`}
-       alt={`${ship.name} (${ship.shipClass.name})`}/>
+const ShipImage = ({ ship }: { ship: IShip }) => (
+  <img src={`${Environment.apiHostname}${ship.shipClass.image}`} alt={`${ship.name} (${ship.shipClass.name})`} />
 );
 
 export const ShipOverview = () => {
@@ -100,7 +99,7 @@ export const ShipOverview = () => {
   return (
     <StyledOverview>
       <PlanetPosition>
-        <Planet/>
+        <Planet />
       </PlanetPosition>
       <div>
         <h1>

@@ -41,22 +41,19 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
         <P>You have not picked up any crates. Are you sure you want to leave?</P>
         <ModalActions>
           <TokenButton token={direction.action} handler={portActionHandler}>
-            <ActionButton disabled={buttonIsDisabled} type="submit">Yes</ActionButton>
+            <ActionButton disabled={buttonIsDisabled} type="submit">
+              Yes
+            </ActionButton>
           </TokenButton>{" "}
           <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
         </ModalActions>
       </Modal>
-    )
+    );
   }
 
   return (
     <>
-      <StackedButton
-        type="submit"
-        disabled={buttonIsDisabled}
-        icon={children}
-        onClick={buttonHandler}
-      >
+      <StackedButton type="submit" disabled={buttonIsDisabled} icon={children} onClick={buttonHandler}>
         <IntervalFormat seconds={journeyTime} />
       </StackedButton>
       {modal}
