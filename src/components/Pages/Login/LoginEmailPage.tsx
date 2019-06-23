@@ -13,7 +13,7 @@ interface IProps {
 export const LoginEmailPage = ({ query }: IProps) => {
   const queryData = parseQueryString(query);
   if (!queryData.token) {
-    return 'Bad request (Missing token)'; // todo - status page and 400 response
+    return "Bad request (Missing token)"; // todo - status page and 400 response
   }
 
   const token = {

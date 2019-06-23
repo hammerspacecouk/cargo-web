@@ -34,8 +34,6 @@ const getAttachEmailForm = () => {
 };
 
 export const ProfilePage = ({ session, isAnonymous, canDelete, homePort }: IProps) => {
-
-
   const playingSinceDate: Date = new Date(session.player.startedAt);
 
   let mode;

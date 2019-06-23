@@ -15,7 +15,6 @@ interface IProps {
 }
 
 export const EffectUpgrade = ({ effect }: IProps) => {
-
   let purchaseButton = null;
   let title = null;
   let description = null;
@@ -27,7 +26,7 @@ export const EffectUpgrade = ({ effect }: IProps) => {
         <P>{effect.detail.description}</P>
       </PurchaseCardDescription>
     );
-/*
+    /*
     if (effect.actionToken) {
       purchaseButton = (
         <TokenButton token={effect.actionToken} handler={makePurchase}>
@@ -36,7 +35,6 @@ export const EffectUpgrade = ({ effect }: IProps) => {
       );
     }
     */
-
   }
 
   return (

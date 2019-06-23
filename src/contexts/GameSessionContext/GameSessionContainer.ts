@@ -28,7 +28,7 @@ export const GameSessionContainer = (Page: IPageWithData) => {
 };
 
 interface IProps {
-  gameSession?: IGameSessionResponse,
+  gameSession?: IGameSessionResponse;
   page: any;
 }
 
@@ -36,12 +36,12 @@ const calculateInitialProps = async (context: NextContext, Page: IPageWithData):
   const { req, res } = context;
   let initialProps: IProps = {
     gameSession: undefined,
-    page: {}
+    page: {},
   };
 
   try {
     // save an unnecessary call to the API if we already know the cookie isn't there
-    if ((req && req.headers) && (!req.headers.cookie || !req.headers.cookie.includes("AUTHENTICATION_TOKEN"))) {
+    if (req && req.headers && (!req.headers.cookie || !req.headers.cookie.includes("AUTHENTICATION_TOKEN"))) {
       throw UnauthenticatedError("Cookie not found");
     }
     // get the gameSession data
@@ -56,7 +56,7 @@ const calculateInitialProps = async (context: NextContext, Page: IPageWithData):
     // redirect unauthenticated to the login page
     if (errorIs(err, UNAUTHENTICATED_ERROR)) {
       res.writeHead(302, {
-        Location: `/login?r=${encodeURIComponent(req.url)}`
+        Location: `/login?r=${encodeURIComponent(req.url)}`,
       });
       res.end();
       return {};

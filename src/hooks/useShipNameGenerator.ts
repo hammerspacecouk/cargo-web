@@ -7,8 +7,8 @@ export const useShipNameGenerator = (offeredShipName?: string) => {
   const [nameGuess, setNameGuess] = useState("_");
   const isMounted = useMounted();
 
-  const overrideTimer: {current?: number} = useRef(undefined);
-  const found: {current: boolean} = useRef(false);
+  const overrideTimer: { current?: number } = useRef(undefined);
+  const found: { current: boolean } = useRef(false);
 
   useFrameEffect(
     () => {

@@ -3,12 +3,11 @@ import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
 import { Environment } from "../environment";
 import { Logger } from "../Logger";
-import {UnauthenticatedError} from "./Error";
+import { UnauthenticatedError } from "./Error";
 
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 
 export class ServerClient implements IAPIClient {
-
   public tokenFetch(token: IActionToken): Promise<any> {
     return this.fetch(token.path, { token: token.token });
   }
@@ -19,7 +18,7 @@ export class ServerClient implements IAPIClient {
       const start = Date.now();
 
       const headers = {
-        cookie: incomingHttpHeaders && incomingHttpHeaders.cookie
+        cookie: incomingHttpHeaders && incomingHttpHeaders.cookie,
       };
 
       const response = await fetch(url, { headers });
@@ -28,7 +27,7 @@ export class ServerClient implements IAPIClient {
       Logger.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);
 
       if (response.status === 401) {
-        throw UnauthenticatedError('Not authenticated');
+        throw UnauthenticatedError("Not authenticated");
       }
       if (response.status === 403) {
         // you don't have access to this. might need to login or not allowed

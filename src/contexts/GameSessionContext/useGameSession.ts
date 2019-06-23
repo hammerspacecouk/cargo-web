@@ -160,7 +160,6 @@ interface IFleetResponse {
   events: IEvent[];
 }
 
-
 interface ISessionResponse {
   readonly isLoggedIn: boolean;
   readonly hasProfileNotification: boolean;

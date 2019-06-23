@@ -1,5 +1,5 @@
 import { isClient, isServer } from "./runtime";
-import getConfig from 'next/config';
+import getConfig from "next/config";
 
 export interface IEnvironment {
   serverApiHostname?: string;
@@ -15,7 +15,7 @@ export interface IEnvironment {
 let environment: IEnvironment;
 
 if (isClient) {
-  const {publicRuntimeConfig} = getConfig();
+  const { publicRuntimeConfig } = getConfig();
   environment = {
     ...publicRuntimeConfig,
     isClient: true,

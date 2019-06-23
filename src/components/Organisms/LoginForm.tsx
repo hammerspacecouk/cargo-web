@@ -8,12 +8,7 @@ import { Button, ConfirmButton } from "../Atoms/Button";
 import { H2, H3 } from "../Atoms/Heading";
 import { ListInline } from "../Atoms/List/ListInline";
 import { P } from "../Atoms/Text";
-import {
-  FacebookButton,
-  GoogleButton,
-  MicrosoftButton,
-  TwitterButton,
-} from "../Molecules/SocialButton";
+import { FacebookButton, GoogleButton, MicrosoftButton, TwitterButton } from "../Molecules/SocialButton";
 import { MessagesPanel } from "./MessagesPanel";
 import { Loading } from "../Atoms/Loading";
 import { TokenButton } from "../Molecules/TokenButton";
@@ -22,7 +17,6 @@ import { BREAKPOINTS } from "../../styles/media";
 import { MONOSPACE_FONT } from "../../styles/typography";
 
 export const LoginForm = ({ loginOptions, messages }: IProps) => {
-
   if (loginOptions === undefined) {
     return (
       <>
@@ -83,7 +77,6 @@ export const LoginForm = ({ loginOptions, messages }: IProps) => {
     </>
   );
 };
-
 
 interface IProps {
   readonly messages?: IMessage[];

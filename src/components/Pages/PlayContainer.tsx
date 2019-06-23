@@ -11,7 +11,7 @@ import { useGameSession } from "../../contexts/GameSessionContext/useGameSession
 import { FlexAllCenter } from "../Atoms/Flex";
 import { Loading } from "../Atoms/Loading";
 
-export const PlayContainer = ({ children } : IChildrenProps) => {
+export const PlayContainer = ({ children }: IChildrenProps) => {
   const gameSession = useGameSession();
 
   if (gameSession.player === undefined) {
@@ -24,16 +24,14 @@ export const PlayContainer = ({ children } : IChildrenProps) => {
 
   return (
     <>
-      <InGameMasthead/>
+      <InGameMasthead />
       <StyledPlayBoard>
-        <StyledMain>
-          {children}
-        </StyledMain>
-        <StyledNavigation/>
+        <StyledMain>{children}</StyledMain>
+        <StyledNavigation />
       </StyledPlayBoard>
-      <PromotionModal/>
+      <PromotionModal />
     </>
-  )
+  );
 };
 
 const StyledPlayBoard = styled.div`

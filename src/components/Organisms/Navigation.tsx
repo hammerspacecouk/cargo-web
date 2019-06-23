@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled  from "styled-components";
+import styled from "styled-components";
 import { COLOURS, hexToRGBa, scrollbarStyles } from "../../styles/colours";
 import { Hidden } from "../Atoms/Hidden";
 import { PlayerSummary } from "./PlayerSummary";
@@ -57,10 +57,15 @@ export const Navigation = ({ className }: IProps) => {
         <Hidden as="h2">Player</Hidden>
         <NavigationList>
           <li>
-            <NavigationItem icon={<InventoryIcon />} isCurrent={false} path={{href:"/play/inventory"}} text="Launch ships" />
+            <NavigationItem
+              icon={<InventoryIcon />}
+              isCurrent={false}
+              path={{ href: "/play/inventory" }}
+              text="Launch ships"
+            />
           </li>
           <li>
-            <NavigationItem icon={<ProfileIcon />} isCurrent={false} path={{href:"/play/profile"}} text="Profile" />
+            <NavigationItem icon={<ProfileIcon />} isCurrent={false} path={{ href: "/play/profile" }} text="Profile" />
           </li>
         </NavigationList>
       </PlayerOptions>

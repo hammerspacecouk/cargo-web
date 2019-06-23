@@ -64,7 +64,7 @@ const ShipStat = ({ label, value }: IShipStatProps) => (
 );
 
 export const ShipUpgrade = ({ ship }: IProps) => {
-  const { buttonsDisabled, makePurchase } = { buttonsDisabled: false, makePurchase: () => {} }
+  const { buttonsDisabled, makePurchase } = { buttonsDisabled: false, makePurchase: () => {} };
 
   if (!ship) {
     return (

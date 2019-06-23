@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import styled from "styled-components";
 import { GRID, NAV_ITEM_HEIGHT } from "../../styles/variables";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
@@ -11,13 +11,13 @@ interface IProps {
   path: {
     href: string;
     as?: string;
-  }
+  };
   text: string;
   icon: JSX.Element;
   isCurrent: boolean;
 }
 
-const StyledItem = styled.div<{ isCurrent: boolean; }>`
+const StyledItem = styled.div<{ isCurrent: boolean }>`
   display: flex;
   padding: 0 ${GRID.UNIT} 0 ${GRID.HALF};
   border-left: solid transparent ${GRID.HALF};

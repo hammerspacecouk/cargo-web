@@ -1,6 +1,5 @@
 const hasLocalStorage = (): boolean => {
-  return !!(window &&
-    window.localStorage);
+  return !!(window && window.localStorage);
 };
 
 export const getStoredItem = (key: string): any => {
