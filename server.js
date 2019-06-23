@@ -1,14 +1,30 @@
 'use strict';
 
-const Express = require('express');
-const CookieParser = require('cookie-parser');
-const app = Express();
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 
-const serverEntryScript = require('./build/server.js');
-const port = 3000;
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-app.disable('x-powered-by'); // no need to tell the world what technology to attack
-app.use(CookieParser());
-serverEntryScript.start(app);
+app.disable('x-powered-by'); // no need to tell the world
+app.setAssetPrefix(process.env.STATIC_PREFIX || '');
+app.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    const { pathname, query } = parsedUrl;
 
-app.listen(port, () => console.log(`Webapp listening on port ${port}`));
+    if (pathname === '/a') {
+      app.render(req, res, '/a', query)
+    } else if (pathname === '/b') {
+      app.render(req, res, '/b', query)
+    } else {
+      handle(req, res, parsedUrl)
+    }
+  }).listen(port, err => {
+    if (err) throw err;
+    console.log(`> Ready on http://localhost:${port}`)
+  })
+});

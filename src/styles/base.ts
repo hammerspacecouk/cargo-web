@@ -2,7 +2,6 @@ import { css } from "styled-components";
 import { COLOURS } from "./colours";
 import { MONOSPACE_FONT } from "./typography";
 import { BREAKPOINTS } from "./media";
-import space from "../space.jpg";
 
 export const base = css`
   *,
@@ -17,7 +16,7 @@ export const base = css`
     -webkit-text-size-adjust: 100%;
     margin: 0;
     min-height: 100%;
-    background: ${COLOURS.BODY.BACKGROUND} url(${space}) fixed;
+    background: ${COLOURS.BODY.BACKGROUND} url('/static/space.jpg') fixed;
     background-size: cover;
     ${BREAKPOINTS.XL`
       overflow-y: hidden;

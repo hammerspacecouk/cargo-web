@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { MONOSPACE_FONT } from "../../styles/typography";
-import { TextD, TextF } from "./Text/Text";
+import { TextD, TextF } from "./Text";
 import * as React from "react";
-import { Fraction } from "./Fraction/Fraction";
+import { Fraction } from "./Fraction";
 
 const StyledDistance = styled.div`
   ${MONOSPACE_FONT};

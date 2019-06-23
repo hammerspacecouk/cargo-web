@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CrateContents } from "../../Atoms/CrateContents/CrateContents";
+import { CrateContents } from "../../Atoms/CrateContents";
 import { Event, IEventProps } from "./Event";
 
 export const CratePickup = ({ event, onAnimated }: IEventProps) => {

@@ -1,7 +1,7 @@
 {
   "presets": [
-    "@babel/react",
-    "@babel/typescript",
+    "next/babel",
+    "@zeit/next-typescript/babel",
     [
       "@babel/preset-env",
       {
@@ -12,6 +12,7 @@
   ],
   "plugins": [
     "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread"
+    "@babel/proposal-object-rest-spread",
+    ["styled-components", { "ssr": true }]
   ]
 }

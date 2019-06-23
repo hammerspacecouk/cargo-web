@@ -1,11 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
-import { TimeAgo } from "../../Atoms/TimeAgo/TimeAgo";
+import { TimeAgo } from "../../Atoms/TimeAgo";
 import { COLOURS } from "../../../styles/colours";
-import { componentTokenAt } from "../../../util/ComponentTokenAt";
-import { TextCursor } from "../../Atoms/TextCursor/TextCursor";
-import { IEvent } from "../../../Interfaces";
+import { componentTokenAt } from "../../../utils/componentTokenAt";
+import { TextCursor } from "../../Atoms/TextCursor";
+import { IEvent } from "../../../interfaces";
 import { SIZES } from "../../../styles/typography";
 
 export interface IEventProps {

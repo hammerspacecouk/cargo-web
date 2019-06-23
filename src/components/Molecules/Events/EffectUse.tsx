@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
+import { PlayerFlag } from "../PlayerFlag";
 import { Event, EventFlag, IEventProps } from "./Event";
 
 export const EffectUse = ({ firstPerson, event, onAnimated }: IEventProps) => {

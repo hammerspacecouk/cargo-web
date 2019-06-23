@@ -2,4 +2,4 @@
 
 Loading...
 
-`docker-compose run --rm --service-ports cargo-web-node npm run dev`
+`docker-compose run --rm --service-ports cargo-web-node yarn dev`
