@@ -1,15 +1,12 @@
 import { Component, createElement } from "react";
 import { GameSessionContainer } from "../../src/contexts/GameSessionContext/GameSessionContainer";
+import { ActiveShipContainer } from "../../src/contexts/ActiveShipContext/ActiveShipContainer";
+import { ShipDetailPage } from "../../src/components/Pages/Play/ActiveShip/ShipDetailPage";
 
 class Page extends Component {
-  static async getInitialProps({ query }) {
-    console.log('shipId', query.shipId);
-    return {};
-  }
-
   public render() {
-    return 'HELLO THERE  YRD';
+    return createElement(ShipDetailPage, this.props);
   }
 }
 
-export default GameSessionContainer(Page);
+export default GameSessionContainer(ActiveShipContainer(Page));

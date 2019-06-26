@@ -1,8 +1,8 @@
+import * as React from "react";
+import styled from "styled-components";
 import { IChildrenProps } from "../../interfaces";
 import { InGameMasthead } from "../Organisms/InGameMasthead";
 import { PromotionModal } from "../Organisms/PromotionModal";
-import * as React from "react";
-import styled from "styled-components";
 import { BREAKPOINTS } from "../../styles/media";
 import { Navigation } from "../Organisms/Navigation";
 import { MASTHEAD_HEIGHT } from "../../styles/variables";

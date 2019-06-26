@@ -1,28 +1,27 @@
-'use strict';
-
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
+const pathMatch = require('path-match');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+const route = pathMatch();
+const match = route('/play/:shipId');
 
-app.disable('x-powered-by'); // no need to tell the world
-app.setAssetPrefix(process.env.STATIC_PREFIX || '');
 app.prepare().then(() => {
   createServer((req, res) => {
-    const parsedUrl = parse(req.url, true);
-    const { pathname, query } = parsedUrl;
-
-    if (pathname === '/a') {
-      app.render(req, res, '/a', query)
-    } else if (pathname === '/b') {
-      app.render(req, res, '/b', query)
-    } else {
-      handle(req, res, parsedUrl)
+    const { pathname, query } = parse(req.url, true);
+    const params = match(pathname);
+    if (params === false) {
+      handle(req, res);
+      return
     }
+    // assigning `query` into the params means that we still
+    // get the query string passed to our application
+    // i.e. /play/123?show-comments=true
+    app.render(req, res, '/play/ship', Object.assign(params, query))
   }).listen(port, err => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`)

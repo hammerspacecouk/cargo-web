@@ -17,7 +17,7 @@ interface IProps {
   isCurrent: boolean;
 }
 
-const StyledItem = styled.div<{ isCurrent: boolean }>`
+const StyledItem = styled.a<{ isCurrent: boolean }>`
   display: flex;
   padding: 0 ${GRID.UNIT} 0 ${GRID.HALF};
   border-left: solid transparent ${GRID.HALF};
@@ -56,7 +56,7 @@ const ArrowIcon = styled(Icon)`
 export const NavigationItem = ({ path, text, icon, isCurrent }: IProps) => {
   return (
     <Link href={path.href} as={path.as}>
-      <StyledItem isCurrent={isCurrent}>
+      <StyledItem href={path.as} isCurrent={isCurrent}>
         <StyledIcon>{icon}</StyledIcon>
         <Text>{text}</Text>
         <ArrowIcon size={TINY_ICON}>

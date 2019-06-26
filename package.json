@@ -11,6 +11,7 @@
     "date-fns": "^1.29.0",
     "next": "^8.1.0",
     "node-fetch": "^2.6.0",
+    "path-match": "^1.2.4",
     "query-string": "^6.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -46,7 +47,7 @@
     "lint": "tslint -p .",
     "lint:fix": "tslint --fix -p .",
     "pretty": "prettier --write '{src,tests}/**/*.{ts,tsx}'",
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },

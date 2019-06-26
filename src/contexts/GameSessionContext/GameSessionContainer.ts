@@ -1,10 +1,10 @@
 import { Component, createElement } from "react";
 import { GameContextComponent } from "./GameSessionContext";
 import { errorIs, UNAUTHENTICATED_ERROR, UnauthenticatedError } from "../../utils/HttpClient/Error";
-import { getSession, IGameSessionResponse } from "./useGameSession";
 import { PlayContainer } from "../../components/Pages/PlayContainer";
 import { IPageWithData } from "../../interfaces";
 import { NextContext } from "next";
+import { getSession, IGameSessionResponse } from "../../data/game";
 
 // responsible for fetching the data required for this context
 export const GameSessionContainer = (Page: IPageWithData) => {

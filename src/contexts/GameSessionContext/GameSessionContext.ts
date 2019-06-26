@@ -1,5 +1,6 @@
 import { createContext, createElement, ReactNode, useContext } from "react";
-import { IGameSession, IGameSessionResponse, useGameSession } from "./useGameSession";
+import { IGameSession, useGameSession } from "./useGameSession";
+import { IGameSessionResponse } from "../../data/game";
 
 // hook to use for getting at the game session context
 export const useGameSessionContext = (): IGameSession => {

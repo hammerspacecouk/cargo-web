@@ -13,7 +13,7 @@ export const routes = {
   getLogout: () => `${Environment.clientApiHostname}/logout`,
   getPlay: () => "/play",
   getPlayLog: () => "/play/log",
-  getPlayShip: (id: string = ":shipId") => ({ href: `/play?shipId=${id}`, as: `/play/${id}` }),
+  getPlayShip: (id: string = ":shipId") => ({ href: `/play/ship?shipId=${id}`, as: `/play/${id}` }),
   getPlayShipDirections: (id: string = ":shipId") => `/play/${id}/directions`,
   getPortShow: (id: string = ":portId") => `/ports/${id}`,
   getPortsList: () => "/ports",

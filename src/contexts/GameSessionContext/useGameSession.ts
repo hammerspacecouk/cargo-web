@@ -1,8 +1,7 @@
-import http from "http";
 import { useEffect, useState } from "react";
 import { IEvent, IFleetShip, IPlayer, IRankStatus, IScore } from "../../interfaces";
-import { ApiClient } from "../../utils/ApiClient";
 import { useMounted } from "../../hooks/useMounted";
+import { getSession, IGameSessionResponse } from "../../data/game";
 
 export interface IGameSession extends IGameSessionState {
   refreshSession: () => void;
@@ -50,15 +49,6 @@ export const useGameSession = (initialSession?: IGameSessionResponse): IGameSess
       isMounted() && setSessionState(prev => updateAShipProperty(prev, id, newProps)),
   };
 };
-
-export const getSession = (headers?: http.IncomingHttpHeaders): Promise<IGameSessionResponse> => {
-  return ApiClient.fetch("/play", undefined, headers);
-};
-
-export interface IGameSessionResponse {
-  fleet: IFleetResponse;
-  sessionState: ISessionResponse;
-}
 
 interface IGameSessionState {
   activeShip?: IFleetShip;
@@ -154,18 +144,6 @@ const setActiveShipById = (state: IGameSessionState, id?: string) => {
 };
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
-
-interface IFleetResponse {
-  ships: IFleetShip[];
-  events: IEvent[];
-}
-
-interface ISessionResponse {
-  readonly isLoggedIn: boolean;
-  readonly hasProfileNotification: boolean;
-  readonly player?: IPlayer;
-  readonly rankStatus?: IRankStatus;
-}
 
 interface IUpdateRankStatus {
   (rankStatus: IRankStatus): void;

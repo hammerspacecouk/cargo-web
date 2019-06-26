@@ -1,111 +1,64 @@
 import {
   IActionToken,
+  IChannel,
   ICrateAction,
-  ITacticalOption,
   IDirections,
+  IEffect,
+  IEffectUpgrade,
   IEvent,
   IHealthIncrease,
   IOtherShip,
-  IShip,
-  ITransaction,
-  IEffectUpgrade,
   IPort,
-  IChannel,
-  IEffect,
+  IShip,
+  ITacticalOption,
+  ITransaction
 } from "../../interfaces";
-import { useEffect, useState } from "react";
-import { useMounted } from "../../hooks/useMounted";
+import { useState } from "react";
 import { ApiClient } from "../../utils/ApiClient";
 import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 import { useGameSessionContext } from "../GameSessionContext/GameSessionContext";
+import { IActiveShipResponse } from "../../data/active-ship";
+import { useMounted } from "../../hooks/useMounted";
 
-export interface IActiveShip {
+export interface IActiveShip extends IActiveShipState {
+  buttonsDisabled?: boolean;
+  setRequestNameToken: (token: ITransaction) => void;
+  portActionHandler: (token: IActionToken) => Promise<void>;
+  updateShipName: (newName: string) => void;
+  applyHealthHandler: (token: IActionToken) => Promise<void>;
+  resetMessage: () => void;
+}
+
+interface IActiveShipState {
   bonusEffects?: IEffect[];
-  buttonsDisabled: boolean;
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
   tacticalOptions?: ITacticalOption[];
   directions?: IDirections;
   events?: IEvent[];
-  healthOptions: IHealthIncrease[];
-  setRequestNameToken: (token: ITransaction) => void;
-  requestNameToken: ITransaction;
+  healthOptions?: IHealthIncrease[];
+  requestNameToken?: ITransaction;
   ship?: IShip;
-  portActionHandler: (token: IActionToken) => Promise<void>;
-  updateShipName: (newName: string) => void;
-  applyHealthHandler: (token: IActionToken) => Promise<void>;
   message?: string;
-  resetMessage: () => void;
   shipsInLocation?: IOtherShip[];
-  purchaseOptions: IEffectUpgrade[];
+  purchaseOptions?: IEffectUpgrade[];
   channel?: IChannel;
   port?: IPort;
   hint?: string;
 }
 
-export const useActiveShip = (incomingShip: IShip): IActiveShip => {
+export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
   const { updateScore, updateAShipProperty } = useGameSessionContext();
-  const [ship, setShip] = useState(incomingShip);
-  const [directions, setDirections] = useState(undefined);
-  const [tacticalOptions, setTacticalOptions] = useState(undefined);
-  const [cratesInPort, setCratesInPort] = useState(undefined);
-  const [cratesOnShip, setCratesOnShip] = useState(undefined);
-  const [healthOptions, setHealthOptions] = useState(undefined);
-  const [requestNameToken, setRequestNameToken] = useState(undefined);
-  const [shipsInLocation, setShipsInLocation] = useState(undefined);
-  const [purchaseOptions, setPurchaseOptions] = useState(undefined);
-  const [port, setPort] = useState(undefined);
-  const [channel, setChannel] = useState(undefined);
-  const [hint, setHint] = useState(undefined);
-  const [bonusEffects, setBonusEffects] = useState(undefined);
-  const [events, setEvents] = useState(undefined);
+  const [activeShipState, setActiveShipState] = useState(() => getNewActiveShipState({}, initialShip));
   const [message, setMessage] = useState(null);
-  const isMounted = useMounted();
   const { disableButtons, enableButtons, buttonsDisabled } = useButtonsDisabled();
+  const isMounted = useMounted();
 
-  const setDataFromResponse = (data: any) => {
+  const setDataFromResponse = (data?: IActiveShipResponse) => {
     if (!isMounted()) {
       return;
     }
-    if (!data) {
-      setShip(undefined);
-      setPort(undefined);
-      setHint(undefined);
-      setChannel(undefined);
-      setDirections(undefined);
-      setShipsInLocation(undefined);
-      setEvents(undefined);
-      setCratesInPort(undefined);
-      setCratesOnShip(undefined);
-      setTacticalOptions(undefined);
-      setBonusEffects(undefined);
-      setRequestNameToken(undefined);
-      setHealthOptions(undefined);
-      setPurchaseOptions(undefined);
-      return;
-    }
-
-    setPort(data.port);
-    setChannel(data.channel);
-    setHint(data.hint);
-    setDirections(data.directions);
-    setShipsInLocation(data.shipsInLocation);
-    setEvents(data.events);
-    setCratesInPort(data.cratesInPort);
-    setCratesOnShip(data.cratesOnShip);
-    setTacticalOptions(data.tacticalOptions);
-    setBonusEffects(data.bonus && data.bonus.length ? data.bonus : undefined);
-    setRequestNameToken(data.renameToken);
-    setHealthOptions(data.health);
-    setPurchaseOptions(data.purchaseOptions);
-
-    // set the ship last as a change here would trigger a re-render of the whole context
-    setShip(data.ship);
-  };
-
-  const setShipData = async (id: string) => {
-    const data = await ApiClient.fetch(`/play/${id}`);
-    setDataFromResponse(data);
+    setActiveShipState(getNewActiveShipState(activeShipState, data));
   };
 
   const doPortAction = async (token: IActionToken) => {
@@ -127,47 +80,62 @@ export const useActiveShip = (incomingShip: IShip): IActiveShip => {
   const applyHealthHandler = async (token: IActionToken) => {
     disableButtons();
     const data = await doPortAction(token);
-    updateAShipProperty(ship.id, {
+    updateAShipProperty(activeShipState.ship.id, {
       strengthPercent: data.ship.strengthPercent,
     });
   };
 
   const updateShipName = (name: string) => {
     if (isMounted()) {
-      setShip({ ...ship, name });
+      setActiveShipState(
+        setPropIfChanged(activeShipState, "ship", { ...activeShipState.ship, name })
+      );
     }
-    updateAShipProperty(ship.id, { name });
+    updateAShipProperty(activeShipState.ship.id, { name });
   };
 
-  useEffect(() => {
-    setShip(incomingShip);
-    setDataFromResponse(null);
-    if (incomingShip) {
-      setShipData(incomingShip.id);
-    }
-  }, [incomingShip]);
-
   return {
+    ...activeShipState,
     buttonsDisabled,
-    cratesInPort,
-    cratesOnShip,
-    tacticalOptions,
-    directions,
-    events,
-    healthOptions,
-    requestNameToken,
-    setRequestNameToken,
-    ship,
     portActionHandler,
     updateShipName,
     applyHealthHandler,
+    setRequestNameToken: (token: ITransaction) =>
+      isMounted() && setActiveShipState((prev: IActiveShipState) => setPropIfChanged(prev, "requestNameToken", token)),
     message,
     resetMessage: () => setMessage(null),
-    shipsInLocation,
-    purchaseOptions,
-    channel,
-    port,
-    hint,
-    bonusEffects,
+  };
+};
+
+const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipResponse): IActiveShipState => {
+  let newState = state;
+  newState = setPropIfChanged(newState, "ship", activeShip.ship);
+  newState = setPropIfChanged(newState, "directions", activeShip.directions);
+  newState = setPropIfChanged(newState, "tacticalOptions", activeShip.tacticalOptions);
+  newState = setPropIfChanged(newState, "cratesInPort", activeShip.cratesInPort);
+  newState = setPropIfChanged(newState, "healthOptions", activeShip.health);
+  newState = setPropIfChanged(newState, "healthOptions", activeShip.health);
+  newState = setPropIfChanged(newState, "requestNameToken", activeShip.renameToken);
+  newState = setPropIfChanged(newState, "shipsInLocation", activeShip.shipsInLocation);
+  newState = setPropIfChanged(newState, "purchaseOptions", activeShip.purchaseOptions);
+  newState = setPropIfChanged(newState, "port", activeShip.port);
+  newState = setPropIfChanged(newState, "channel", activeShip.channel);
+  newState = setPropIfChanged(newState, "hint", activeShip.hint);
+  newState = setPropIfChanged(newState, "bonusEffects", activeShip.bonus);
+  newState = setPropIfChanged(newState, "events", activeShip.events);
+  return newState;
+};
+
+const setPropIfChanged = (
+  state: IActiveShipState,
+  prop: keyof IActiveShipState,
+  newValue: any
+): IActiveShipState => {
+  if (JSON.stringify(state[prop]) === JSON.stringify(newValue)) {
+    return state;
+  }
+  return {
+    ...state,
+    [prop]: newValue,
   };
 };
