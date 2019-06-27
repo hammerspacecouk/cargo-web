@@ -9,6 +9,7 @@ module.exports = withTypescript({
 
     return config;
   },
+  poweredByHeader: false,
   publicRuntimeConfig: {
     clientApiHostname: process.env.CLIENT_API_HOSTNAME,
     appEnv: process.env.APP_ENV,

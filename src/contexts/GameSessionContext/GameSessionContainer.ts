@@ -46,7 +46,8 @@ const calculateInitialProps = async (context: NextContext, Page: IPageWithData):
     }
     // get the gameSession data
     // todo - VERY IMPORTANT. COOKIES NEED TO COME BACK TO THE USER response
-    initialProps.gameSession = await getSession(req && req.headers);
+    initialProps.gameSession = await getSession(req && req.headers, res);
+
     // get the sub-page data
     if (Page.getInitialProps) {
       initialProps.page = await Page.getInitialProps(context);

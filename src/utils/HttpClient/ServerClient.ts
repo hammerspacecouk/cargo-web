@@ -12,7 +12,7 @@ export class ServerClient implements IAPIClient {
     return this.fetch(token.path, { token: token.token });
   }
 
-  public async fetch(path: string, payload?: object, incomingHttpHeaders?: http.IncomingHttpHeaders): Promise<any> {
+  public async fetch(path: string, payload?: object, incomingHttpHeaders?: http.IncomingHttpHeaders,  outgoingResponse?: http.ServerResponse): Promise<any> {
     const url = this.getUrl(path);
     try {
       const start = Date.now();
@@ -22,6 +22,10 @@ export class ServerClient implements IAPIClient {
       };
 
       const response = await fetch(url, { headers });
+
+      if (outgoingResponse && response.headers.get('set-cookie')) {
+        outgoingResponse.setHeader('set-cookie', response.headers.get('set-cookie'));
+      }
 
       const time = Date.now() - start;
       Logger.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);

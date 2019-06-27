@@ -2,8 +2,8 @@ import http from "http";
 import { ApiClient } from "../utils/ApiClient";
 import { IEvent, IFleetShip, IPlayer, IRankStatus } from "../interfaces";
 
-export const getSession = (headers?: http.IncomingHttpHeaders): Promise<IGameSessionResponse> => {
-  return ApiClient.fetch("/play", undefined, headers);
+export const getSession = (headers?: http.IncomingHttpHeaders, response?: http.ServerResponse): Promise<IGameSessionResponse> => {
+  return ApiClient.fetch("/play", undefined, headers, response);
 };
 
 export interface IGameSessionResponse {
