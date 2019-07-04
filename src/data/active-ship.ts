@@ -9,7 +9,7 @@ import {
   IEvent,
   IHealthIncrease,
   IOtherShip,
-  IPort,
+  IPort, IRankStatus, IScore,
   IShip,
   ITacticalOption,
   ITransaction
@@ -28,6 +28,8 @@ export interface IActiveShipResponse {
   events: IEvent[];
   health: IHealthIncrease[];
   renameToken: ITransaction;
+  playerScore: IScore;
+  playerRankStatus: IRankStatus;
   ship: IShip;
   shipsInLocation: IOtherShip[];
   purchaseOptions: IEffectUpgrade[];

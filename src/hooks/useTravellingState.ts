@@ -1,9 +1,8 @@
-/*
-// todo - remove/rebuld me
-
 import * as differenceInSeconds from "date-fns/difference_in_seconds";
 import { useEffect, useState } from "react";
 import { useFrameEffect } from "./useFrameEffect";
+import { useActiveShipContext } from "../contexts/ActiveShipContext/ActiveShipContext";
+import { useGameSessionContext } from "../contexts/GameSessionContext/GameSessionContext";
 
 const calculateSecondsRemaining = (arrival: Date) => {
   const now = new Date();
@@ -11,7 +10,7 @@ const calculateSecondsRemaining = (arrival: Date) => {
 };
 
 const useTravellingCountdown = () => {
-  const { channel } = {};//useCurrentShipContext();
+  const { channel } = useActiveShipContext();
 
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
@@ -35,6 +34,8 @@ const useTravellingCountdown = () => {
 
 export const useTravellingState = () => {
   const { percent, secondsRemaining, isArriving } = useTravellingCountdown();
+  const { refreshState } = useActiveShipContext();
+  const { updateScore, updateRankStatus } = useGameSessionContext();
   let allowArrivalCheck = true;
 
   const handleArrival = async () => {
@@ -67,4 +68,3 @@ export const useTravellingState = () => {
     secondsRemaining,
   };
 };
-*/

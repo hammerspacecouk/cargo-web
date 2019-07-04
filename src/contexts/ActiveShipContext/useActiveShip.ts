@@ -17,7 +17,7 @@ import { useState } from "react";
 import { ApiClient } from "../../utils/ApiClient";
 import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 import { useGameSessionContext } from "../GameSessionContext/GameSessionContext";
-import { IActiveShipResponse } from "../../data/active-ship";
+import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 import { useMounted } from "../../hooks/useMounted";
 
 export interface IActiveShip extends IActiveShipState {
@@ -27,6 +27,7 @@ export interface IActiveShip extends IActiveShipState {
   updateShipName: (newName: string) => void;
   applyHealthHandler: (token: IActionToken) => Promise<void>;
   resetMessage: () => void;
+  refreshState: () => Promise<IActiveShipResponse>;
 }
 
 interface IActiveShipState {
@@ -94,6 +95,14 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
     updateAShipProperty(activeShipState.ship.id, { name });
   };
 
+  const refreshState = async (): Promise<IActiveShipResponse> => {
+    if (activeShipState.ship) {
+      const data = await getShipData(activeShipState.ship.id);
+      setDataFromResponse(data);
+      return data;
+    }
+  };
+
   return {
     ...activeShipState,
     buttonsDisabled,
@@ -104,6 +113,7 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
       isMounted() && setActiveShipState((prev: IActiveShipState) => setPropIfChanged(prev, "requestNameToken", token)),
     message,
     resetMessage: () => setMessage(null),
+    refreshState
   };
 };
 
@@ -113,6 +123,7 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "directions", activeShip.directions);
   newState = setPropIfChanged(newState, "tacticalOptions", activeShip.tacticalOptions);
   newState = setPropIfChanged(newState, "cratesInPort", activeShip.cratesInPort);
+  newState = setPropIfChanged(newState, "cratesOnShip", activeShip.cratesOnShip);
   newState = setPropIfChanged(newState, "healthOptions", activeShip.health);
   newState = setPropIfChanged(newState, "healthOptions", activeShip.health);
   newState = setPropIfChanged(newState, "requestNameToken", activeShip.renameToken);
