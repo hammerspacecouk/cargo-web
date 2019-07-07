@@ -5,6 +5,7 @@ import { COLOURS, hexToRGBa } from "../../../styles/colours";
 import { Panel } from "../../Molecules/Panel";
 import { EventsList } from "../../Organisms/EventsList";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
+import { Progress } from "../../Organisms/PlayHome/Panels/Progress";
 
 const StyledArea = styled.div`
   ${BREAKPOINTS.XL`
@@ -26,7 +27,7 @@ const EventsPanel = styled(Panel)`
     `};
 `;
 
-const Progress = styled(Panel)`
+const ProgressPanel = styled(Panel)`
   ${BREAKPOINTS.XL`
     width: 40%;
     min-width: 320px;
@@ -39,9 +40,11 @@ export const PlayHome = () => {
   return (
     <StyledArea>
       <EventsPanel title="Captain's Log">
-        <EventsList events={events} />
+        <EventsList events={events} firstPerson />
       </EventsPanel>
-      <Progress title="Progress">Contnets</Progress>
+      <ProgressPanel title="Progress">
+        <Progress />
+      </ProgressPanel>
     </StyledArea>
   );
 };

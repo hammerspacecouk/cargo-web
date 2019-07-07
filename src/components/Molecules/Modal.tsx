@@ -125,7 +125,7 @@ export const Modal = (props: IProps) => {
   }
 
   const title = props.title || "";
-  const appElement = (window as any).document.getElementById("root");
+  const appElement = (window as any).document.getElementById("__next");
 
   let closeButton = null;
   if (props.onClose) {

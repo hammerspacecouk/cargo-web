@@ -25,10 +25,13 @@ const StyledItem = styled.a<{ isCurrent: boolean }>`
   align-items: center;
   color: ${COLOURS.WHITE.STANDARD};
   &:hover,
-  &:active,
   &:focus {
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.1)};
     text-decoration: none;
+  }
+  &:active {
+    text-decoration: none;
+    background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.05)};
   }
   ${({ isCurrent }) =>
     isCurrent &&

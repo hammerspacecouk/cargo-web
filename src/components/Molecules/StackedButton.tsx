@@ -19,7 +19,9 @@ const StyledButton = styled(ActionButton)`
   flex-direction: column;
 `;
 
-const StyledChildren = styled.div``;
+const StyledChildren = styled.span`
+    display: block;
+`;
 
 const StyledIcon = styled(StyledChildren)``;
 

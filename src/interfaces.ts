@@ -41,6 +41,7 @@ export interface ILoginOptions {
 }
 
 export interface IRank {
+  id: string;
   title: string;
 }
 

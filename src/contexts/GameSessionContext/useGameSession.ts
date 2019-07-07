@@ -46,7 +46,7 @@ export const useGameSession = (initialSession?: IGameSessionResponse): IGameSess
     updateScore: newScore => isMounted() && setSessionState(prev => setPropIfChanged(prev, "score", newScore)),
     refreshSession,
     updateAShipProperty: (id: string, newProps: object) =>
-      isMounted() && setSessionState(prev => updateAShipProperty(prev, id, newProps)),
+      isMounted() && setSessionState(prev => doUpdateAShipProperty(prev, id, newProps)),
   };
 };
 
@@ -78,9 +78,9 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
   return newState;
 };
 
-const updateAShipProperty = (state: IGameSessionState, id: string, newProps: object): IGameSessionState => {
-  if (state.ships) {
-    return; // do nothing
+const doUpdateAShipProperty = (state: IGameSessionState, id: string, newProps: object): IGameSessionState => {
+  if (!state.ships) {
+    return state; // do nothing
   }
 
   const updatedShips: IFleetShip[] = state.ships.map(fleetShip => {

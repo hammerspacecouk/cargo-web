@@ -61,7 +61,7 @@ const TravellingShip = styled.div`
 
 const TitleName = styled.span`
   ${ELEMENTS.H3};
-  font-size: ${SIZES.D};
+  ${SIZES.D};
 `;
 
 const TitleConjunction = styled.span`

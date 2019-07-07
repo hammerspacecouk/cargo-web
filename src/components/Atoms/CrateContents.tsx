@@ -8,19 +8,21 @@ interface IProps {
   crate: ICrate;
 }
 
-const StyledCrateContents = styled.div`
+const StyledCrateContents = styled.span`
+  display: block;
   position: relative;
   width: 60px;
 `;
 
-const StyledCrate = styled.div`
+const StyledCrate = styled.span`
   display: inline-block;
   line-height: 0;
   width: 60px;
   height: 40px;
 `;
 
-const Side = styled.div`
+const Side = styled.span`
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -32,7 +34,8 @@ const Side = styled.div`
   perspective-origin: left;
 `;
 
-const StyledContent = styled.div`
+const StyledContent = styled.span`
+  display: block;
   transform: rotateY(-40deg);
   color: ${COLOURS.BLACK.STANDARD};
 `;

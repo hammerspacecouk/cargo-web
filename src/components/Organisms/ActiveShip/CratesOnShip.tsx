@@ -23,7 +23,7 @@ export const CratesOnShip = () => {
         <Crate crateAction={crate} key={`cos-${crate.crate.id}`} />
       ))}
       {placeholderSlots.map((_, i) => (
-        <CratePlaceholder key={`p-${i}`} loading={cratesOnShip === undefined} />
+        <CratePlaceholder key={`p-${i}`} loading={cratesOnShip === undefined ? true : undefined} />
       ))}
     </CratesList>
   );

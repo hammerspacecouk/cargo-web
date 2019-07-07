@@ -11,18 +11,20 @@ import { ShipHealth } from "../ShipHealth";
 import { useMounted } from "../../../../hooks/useMounted";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 
-const DL = styled.dl`
-  dt {
+const Panel = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const SectionTitle = styled.h3`
     ${SIZES.E};
     text-transform: uppercase;
     margin-bottom: ${GRID.HALF};
     opacity: 0.7;
-  }
-  dd {
+`;
+
+const SectionDetail = styled.div`
     ${SIZES.D};
-  }
-  display: flex;
-  flex-wrap: wrap;
 `;
 
 const Name = styled.div`
@@ -82,11 +84,11 @@ export const Engineering = () => {
 
   return (
     <>
-      <DL>
+      <Panel>
         <Name>
           <ShipName>
-            <dt>Name</dt>
-            <dd>{ship.name}</dd>
+            <SectionTitle>Name</SectionTitle>
+            <SectionDetail>{ship.name}</SectionDetail>
           </ShipName>
           {requestNameToken && (
             <RenameButton disabled={buttonsDisabled} onClick={() => setShipNameModalIsOpen(true)}>
@@ -96,31 +98,31 @@ export const Engineering = () => {
         </Name>
 
         <ShipClass>
-          <dt>Class</dt>
-          <dd>{ship.shipClass.name}</dd>
+          <SectionTitle>Class</SectionTitle>
+          <SectionDetail>{ship.shipClass.name}</SectionDetail>
         </ShipClass>
 
         <Capacity>
-          <dt>Capacity</dt>
-          <dd>
+          <SectionTitle>Capacity</SectionTitle>
+          <SectionDetail>
             {ship.shipClass.capacity} crate{ship.shipClass.capacity > 1 && "s"}
-          </dd>
+          </SectionDetail>
         </Capacity>
 
         <Shield>
           <ShieldIntro>
-            <dt>Shield</dt>
-            <dd>
+            <SectionTitle>Shield</SectionTitle>
+            <SectionDetail>
               {strengthValue.toLocaleString()}/{ship.shipClass.strength.toLocaleString()} ({ship.strengthPercent}
               %)
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </StyledShield>
-            </dd>
+            </SectionDetail>
           </ShieldIntro>
           <ShipHealth />
         </Shield>
-      </DL>
+      </Panel>
       {shipNameModalIsOpen && (
         <Modal isOpen={true} onClose={() => isMounted() && setShipNameModalIsOpen(false)} title="Request new ship name">
           <EditShipName onComplete={() => isMounted() && setShipNameModalIsOpen(false)} />

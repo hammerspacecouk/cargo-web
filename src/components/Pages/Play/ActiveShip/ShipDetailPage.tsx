@@ -1,4 +1,5 @@
 import * as React from "react";
+import Head from 'next/head';
 import styled from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { ShipInPortPage } from "./ShipInPortPage";
@@ -7,9 +8,10 @@ import { ShipInChannelPage } from "./ShipInChannelPage";
 import { IClassNameProps } from "../../../../interfaces";
 import { ShipOverview } from "../../../Organisms/ActiveShip/ShipOverview";
 import { MessageModal } from "../../../Organisms/ActiveShip/MessageModal";
+import { pageTitle } from "../../../../utils/pageTitle";
 
 export const ShipDetailPage = ({ className }: IClassNameProps) => {
-  const { port } = useActiveShipContext();
+  const { ship, port } = useActiveShipContext();
 
   let innerPage;
   if (port) {
@@ -20,6 +22,9 @@ export const ShipDetailPage = ({ className }: IClassNameProps) => {
 
   return (
     <>
+      <Head>
+        <title>{pageTitle(ship.name)}</title>
+      </Head>
       <StyledPlayBoard>
         <ShipOverview />
         <Page className={className}>{innerPage}</Page>

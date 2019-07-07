@@ -1,8 +1,10 @@
 import React from 'react'
+import Head from 'next/head';
 import App, { Container } from 'next/app';
 import { Modal, ModalActions, ModalType } from "../src/components/Molecules/Modal";
 import { P } from "../src/components/Atoms/Text";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
+import { pageTitle } from "../src/utils/pageTitle";
 
 interface IState {
   errorMessage: string | undefined;
@@ -55,6 +57,9 @@ export default class extends App<IProps, IState> {
 
     return (
       <Container>
+        <Head>
+          <title>{pageTitle()}</title>
+        </Head>
         <GlobalStyle />
         <Component {...pageProps} />
         {errorModal}

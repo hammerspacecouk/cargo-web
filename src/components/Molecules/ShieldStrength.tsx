@@ -21,7 +21,7 @@ const radial = keyframes`
   }
 `;
 
-const StyledShieldStrength = styled.span<{ loading: number }>`
+const StyledShieldStrength = styled.span<{ loading?:boolean }>`
   display: inline-block;
   width: 100%;
   line-height: 0;
@@ -102,7 +102,7 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   }
 
   return (
-    <StyledShieldStrength title={`${percent}%`} className={className} loading={percent === undefined ? 1 : 0}>
+    <StyledShieldStrength title={`${percent}%`} className={className} loading={percent === undefined ? true : undefined}>
       {emblem}
       <StyledSvg viewBox={`0 0 ${size} ${size}`}>
         <CircleTrack cx={centre} cy={centre} r={radius} strokeWidth={barWidth} />

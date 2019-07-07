@@ -9,7 +9,7 @@ import { SIZES } from "../../../styles/typography";
 import { GRID } from "../../../styles/variables";
 
 const HashDemo = styled.div`
-  font-size: ${SIZES.C};
+  ${SIZES.C};
   font-family: monospace;
   display: block;
   padding: ${GRID.HALF};
@@ -21,7 +21,7 @@ const HashDemo = styled.div`
 const HashDemoEmail = styled.div`
   text-align: center;
   &:after {
-    font-size: ${SIZES.B};
+    ${SIZES.B};
     content: "⬇";
     display: block;
     margin: ${GRID.HALF} 0;

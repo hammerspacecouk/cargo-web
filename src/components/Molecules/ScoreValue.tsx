@@ -9,7 +9,7 @@ interface IProps {
   className?: string;
 }
 
-const StyledScore = styled.div`
+const StyledScore = styled.span`
   font-weight: bold;
   letter-spacing: 1px;
   display: flex;

@@ -11,14 +11,14 @@ interface IProps {
   crateAction: ICrateAction;
 }
 
-export const StyledCrate = styled.div`
+export const StyledCrate = styled.span`
   width: 144px;
   display: flex;
   align-items: start;
   justify-content: center;
   flex-wrap: wrap;
 `;
-const StyledCrateValue = styled.div`
+const StyledCrateValue = styled.span`
   text-align: center;
   margin-top: ${GRID.QUARTER};
   width: 100%;

@@ -99,10 +99,10 @@ const calculateOpacity = (position: number, total: number) => {
   return 1;
 };
 
-const StyledListItem = styled.li<{ opacity: number }>`
+const StyledListItem = styled.li<{ opac: number }>`
   display: flex;
   align-items: flex-start;
-  opacity: ${({ opacity }) => opacity};
+  opacity: ${({ opac }) => opac};
   &:not(:last-child) {
     margin-bottom: ${GRID.HALF};
   }
@@ -178,7 +178,7 @@ export const EventsList = ({ className, events, firstPerson }: IProps) => {
   return (
     <StyledList as="ol" className={className}>
       {renderedEvents.map((event, i) => (
-        <StyledListItem key={`event-${event.id}`} data-event-id={event.id} opacity={calculateOpacity(i, total)}>
+        <StyledListItem key={`event-${event.id}`} data-event-id={event.id} opac={calculateOpacity(i, total)}>
           {event.element}
         </StyledListItem>
       ))}
