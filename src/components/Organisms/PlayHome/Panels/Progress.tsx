@@ -18,14 +18,10 @@ export const Progress = () => {
           </WinRequirement>
         </WinItem>
         <WinItem>
-          <WinRequirement achieved={true /* todo */}>
-            Available Reticulum Shuttle
-          </WinRequirement>
+          <WinRequirement achieved={true /* todo */}>Available Reticulum Shuttle</WinRequirement>
         </WinItem>
         <WinItem>
-          <WinRequirement achieved={false /* todo */}>
-            Saxophone on board
-          </WinRequirement>
+          <WinRequirement achieved={false /* todo */}>Saxophone on board</WinRequirement>
         </WinItem>
       </WinStatus>
       <H3>Rank</H3>
@@ -35,12 +31,11 @@ export const Progress = () => {
 };
 
 const WinStatus = styled.ul`
-    margin-bottom: ${GRID.UNIT};
+  margin-bottom: ${GRID.UNIT};
 `;
 
 const WinItem = styled.li`
-    &:not(:last-child) {
-        margin-bottom: ${GRID.HALF};
-    }
+  &:not(:last-child) {
+    margin-bottom: ${GRID.HALF};
+  }
 `;
-

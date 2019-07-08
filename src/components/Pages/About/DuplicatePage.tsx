@@ -4,7 +4,9 @@ import { Prose } from "../../Atoms/Prose";
 import { MessageInfo } from "../../Molecules/Message";
 import { LogOutButton } from "../../Organisms/LogOutButton";
 import { AboutLayout } from "../../Templates/AboutLayout";
+import { routes } from "../../../routes";
 
+// todo - probably don't need this if moving away from e-mails
 export const DuplicatePage = () => (
   <AboutLayout title="Duplicate account">
     <Prose>
@@ -16,7 +18,7 @@ export const DuplicatePage = () => (
       <p>
         To use <strong>this</strong> account as your preferred account, you will first need to delete your previous
         account which is linked to that email address. To do this, login to the other account and visit the{" "}
-        <a href="/profile/delete">Delete</a> page.
+        <a href={routes.getDeleteAccount()}>Delete</a> page.
       </p>
       <MessageInfo>
         You should use an Incognito/Private window to login to your other account so that you do not lose this anonymous

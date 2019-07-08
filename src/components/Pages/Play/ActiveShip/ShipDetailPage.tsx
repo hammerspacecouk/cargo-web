@@ -1,9 +1,9 @@
 import * as React from "react";
-import Head from 'next/head';
+import Head from "next/head";
 import styled from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { ShipInPortPage } from "./ShipInPortPage";
-import { COLOURS, hexToRGBa, scrollbarStyles } from "../../../../styles/colours";
+import { panelBackground, scrollbarStyles } from "../../../../styles/colours";
 import { ShipInChannelPage } from "./ShipInChannelPage";
 import { IClassNameProps } from "../../../../interfaces";
 import { ShipOverview } from "../../../Organisms/ActiveShip/ShipOverview";
@@ -39,10 +39,7 @@ const Page = styled.div`
   display: flex;
   overflow-y: auto;
   ${scrollbarStyles}
-  background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.75)};
-  background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  background-size: 100% 2px, 3px 100%;
+  ${panelBackground}
 `;
 
 const StyledPlayBoard = styled.div`

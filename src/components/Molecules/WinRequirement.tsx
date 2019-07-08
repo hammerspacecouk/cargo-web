@@ -8,7 +8,7 @@ import { COLOURS } from "../../styles/colours";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { IChildrenProps } from "../../interfaces";
 
-export const WinRequirement = ({achieved, children}: IProps) => {
+export const WinRequirement = ({ achieved, children }: IProps) => {
   let IndicatorIcon, color;
   if (achieved) {
     IndicatorIcon = TickIcon;
@@ -21,7 +21,9 @@ export const WinRequirement = ({achieved, children}: IProps) => {
   return (
     <StyledRequirement>
       <StyledIcon color={color}>
-        <Icon size={SMALL_ICON}><IndicatorIcon /></Icon>
+        <Icon size={SMALL_ICON}>
+          <IndicatorIcon />
+        </Icon>
       </StyledIcon>
       <Text>{children}</Text>
     </StyledRequirement>
@@ -31,17 +33,17 @@ export const WinRequirement = ({achieved, children}: IProps) => {
 interface IProps extends IChildrenProps {
   achieved: boolean;
 }
-const StyledIcon = styled.div<{color: string}>`
-    margin-right: ${GRID.HALF};
-    color: ${({color}) => color};
-    line-height: 0;
+const StyledIcon = styled.div<{ color: string }>`
+  margin-right: ${GRID.HALF};
+  color: ${({ color }) => color};
+  line-height: 0;
 `;
 
 const StyledRequirement = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 `;
 
 const Text = styled(TextD)`
-    flex: 1;
+  flex: 1;
 `;

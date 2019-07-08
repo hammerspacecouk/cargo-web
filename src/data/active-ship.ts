@@ -9,10 +9,12 @@ import {
   IEvent,
   IHealthIncrease,
   IOtherShip,
-  IPort, IRankStatus, IScore,
+  IPort,
+  IRankStatus,
+  IScore,
   IShip,
   ITacticalOption,
-  ITransaction
+  ITransaction,
 } from "../interfaces";
 
 export const getShipData = (shipId: string, headers?: http.IncomingHttpHeaders): Promise<IActiveShipResponse> => {

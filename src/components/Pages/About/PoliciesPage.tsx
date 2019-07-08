@@ -40,6 +40,7 @@ export const PoliciesPage = () => (
       <h2>Human readable</h2>
       <div className="unit">
         <MessageOk>We store NO personal data</MessageOk>
+        <MessageOk>We have no tracking code or ads</MessageOk>
       </div>
       <h3>Security</h3>
       <p>

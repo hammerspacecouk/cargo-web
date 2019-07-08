@@ -17,7 +17,7 @@ export const ActiveShipContextComponent = ({ shipId, initialShipData, children }
   return createElement(
     ActiveShipContext.Provider,
     {
-      value: activeShip
+      value: activeShip,
     },
     children
   );

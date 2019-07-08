@@ -9,7 +9,9 @@ export const Bonus = () => {
   return (
     <ListUnstyled>
       {bonusEffects.map(bonus => (
-        <li key={`bonus-${bonus.id}`}><EffectDetail effect={bonus} /></li>
+        <li key={`bonus-${bonus.id}`}>
+          <EffectDetail effect={bonus} />
+        </li>
       ))}
     </ListUnstyled>
   );

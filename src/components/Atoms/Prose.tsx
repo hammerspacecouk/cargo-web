@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
+import { GRID, MAX_PROSE_WIDTH } from "../../styles/variables";
 
 export const Prose = styled.div`
   p,
@@ -22,7 +22,7 @@ export const Prose = styled.div`
   ul,
   ol {
     // maximum readable line-length
-    max-width: 704px;
+    max-width: ${MAX_PROSE_WIDTH};
   }
   p {
     line-height: 1.4;

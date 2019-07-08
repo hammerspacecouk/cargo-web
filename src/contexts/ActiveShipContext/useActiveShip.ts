@@ -11,7 +11,7 @@ import {
   IPort,
   IShip,
   ITacticalOption,
-  ITransaction
+  ITransaction,
 } from "../../interfaces";
 import { useState } from "react";
 import { ApiClient } from "../../utils/ApiClient";
@@ -88,9 +88,7 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
 
   const updateShipName = (name: string) => {
     if (isMounted()) {
-      setActiveShipState(
-        setPropIfChanged(activeShipState, "ship", { ...activeShipState.ship, name })
-      );
+      setActiveShipState(setPropIfChanged(activeShipState, "ship", { ...activeShipState.ship, name }));
     }
     updateAShipProperty(activeShipState.ship.id, { name });
   };
@@ -113,7 +111,7 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
       isMounted() && setActiveShipState((prev: IActiveShipState) => setPropIfChanged(prev, "requestNameToken", token)),
     message,
     resetMessage: () => setMessage(null),
-    refreshState
+    refreshState,
   };
 };
 
@@ -137,11 +135,7 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   return newState;
 };
 
-const setPropIfChanged = (
-  state: IActiveShipState,
-  prop: keyof IActiveShipState,
-  newValue: any
-): IActiveShipState => {
+const setPropIfChanged = (state: IActiveShipState, prop: keyof IActiveShipState, newValue: any): IActiveShipState => {
   if (JSON.stringify(state[prop]) === JSON.stringify(newValue)) {
     return state;
   }

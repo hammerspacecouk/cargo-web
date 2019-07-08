@@ -10,7 +10,7 @@ export const ActiveShipContainer = (Page: IPageWithData) => {
       const shipData = await getShipData(query.shipId as string, req && req.headers);
       return {
         shipId: query.shipId,
-        shipData
+        shipData,
       };
     }
 
@@ -19,7 +19,7 @@ export const ActiveShipContainer = (Page: IPageWithData) => {
         ActiveShipContextComponent,
         {
           shipId: this.props.shipId,
-          initialShipData: this.props.shipData
+          initialShipData: this.props.shipData,
         },
         createElement(Page)
       );

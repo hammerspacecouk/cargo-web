@@ -53,12 +53,12 @@ const StyledNavigation = styled(Navigation)`
 `;
 
 const StyledMain = styled.main`
+  ${scrollbarStyles};
   ${BREAKPOINTS.XL`
     flex: 1;
     order: 2;
     padding: 0;
     height: calc(100vh - ${MASTHEAD_HEIGHT} - 1px);
     overflow-y: auto;
-    ${scrollbarStyles.toString()}
-    `};
+  `};
 `;

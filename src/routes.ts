@@ -6,6 +6,7 @@ export const routes = {
   getAboutDuplicate: () => "/about/duplicate",
   getAboutPolicies: () => "/about/policies",
   getAboutStatus: () => "/about/status",
+  getDeleteAccount: () => "/delete",
   getHome: () => "/",
   getLogin: () => "/login",
   getLoginAnonymous: () => `${Environment.clientApiHostname}/login/anonymous`,
@@ -18,5 +19,4 @@ export const routes = {
   getPortShow: (id: string = ":portId") => `/ports/${id}`,
   getPortsList: () => "/ports",
   getProfile: () => "/profile",
-  getProfileDelete: () => "/profile/delete",
 };

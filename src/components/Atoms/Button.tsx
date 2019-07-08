@@ -5,6 +5,8 @@ import { GRID } from "../../styles/variables";
 import { MONOSPACE_FONT } from "../../styles/typography";
 import { AttackIcon } from "../Icons/AttackIcon";
 import { TacticalIcon } from "../Icons/TacticalIcon";
+import { CloseIcon } from "../Icons/CloseIcon";
+import { AddIcon } from "../Icons/AddIcon";
 
 export enum Type {
   Confirm,
@@ -102,22 +104,34 @@ const iconButtonStyles = css`
   padding: 4px 6px;
 `;
 
-const AttackDangerButton = styled(DangerButton)`
+const IconDangerButton = styled(DangerButton)`
   ${iconButtonStyles};
 `;
 
-const TacticalConfirmButton = styled(ConfirmButton)`
+const IconConfirmButton = styled(ConfirmButton)`
   ${iconButtonStyles};
 `;
 
 export const AttackButton = (props: any) => (
-  <AttackDangerButton {...props}>
+  <IconDangerButton {...props}>
     <AttackIcon />
-  </AttackDangerButton>
+  </IconDangerButton>
 );
 
 export const TacticalButton = (props: any) => (
-  <TacticalConfirmButton {...props}>
+  <IconConfirmButton {...props}>
     <TacticalIcon />
-  </TacticalConfirmButton>
+  </IconConfirmButton>
+);
+
+export const AddButton = (props: any) => (
+  <IconConfirmButton title="Add" {...props}>
+    <AddIcon />
+  </IconConfirmButton>
+);
+
+export const RemoveButton = (props: any) => (
+  <IconDangerButton title="Remove" {...props}>
+    <CloseIcon />
+  </IconDangerButton>
 );

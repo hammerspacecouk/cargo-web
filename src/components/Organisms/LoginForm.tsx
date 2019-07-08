@@ -15,6 +15,7 @@ import { TokenButton } from "../Molecules/TokenButton";
 import { Prose } from "../Atoms/Prose";
 import { BREAKPOINTS } from "../../styles/media";
 import { MONOSPACE_FONT } from "../../styles/typography";
+import { routes } from "../../routes";
 
 export const LoginForm = ({ loginOptions, messages }: IProps) => {
   if (loginOptions === undefined) {
@@ -71,7 +72,7 @@ export const LoginForm = ({ loginOptions, messages }: IProps) => {
       <Prose>
         {loginOptions.email && <EmailLogin token={loginOptions.email} />}
         <P>
-          <a href="/about/policies">More info on our login policies</a>
+          <a href={routes.getAboutPolicies()}>More info on our login policies</a>
         </P>
       </Prose>
     </>

@@ -20,7 +20,7 @@ const StyledButton = styled(ActionButton)`
 `;
 
 const StyledChildren = styled.span`
-    display: block;
+  display: block;
 `;
 
 const StyledIcon = styled(StyledChildren)``;

@@ -17,14 +17,14 @@ const Panel = styled.div`
 `;
 
 const SectionTitle = styled.h3`
-    ${SIZES.E};
-    text-transform: uppercase;
-    margin-bottom: ${GRID.HALF};
-    opacity: 0.7;
+  ${SIZES.E};
+  text-transform: uppercase;
+  margin-bottom: ${GRID.HALF};
+  opacity: 0.7;
 `;
 
 const SectionDetail = styled.div`
-    ${SIZES.D};
+  ${SIZES.D};
 `;
 
 const Name = styled.div`

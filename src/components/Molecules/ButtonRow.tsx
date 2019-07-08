@@ -1,9 +1,8 @@
-import * as React from "react";
 import styled from "styled-components";
-import { IChildrenProps } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 
-const StyledButtonRow = styled.div`
+export const ButtonRow = styled.div`
+  text-align: center;
   > * {
     display: inline-block;
     &:not(:first-child) {
@@ -11,7 +10,3 @@ const StyledButtonRow = styled.div`
     }
   }
 `;
-
-export const ButtonRow = ({ children }: IChildrenProps) => {
-  return <StyledButtonRow>{children}</StyledButtonRow>;
-};

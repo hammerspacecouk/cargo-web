@@ -1,4 +1,4 @@
-const APP_TITLE = 'Planet Reed';
+const APP_TITLE = "Planet Reed";
 
 export const pageTitle = (title?: string): string => {
   if (title) {

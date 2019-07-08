@@ -69,5 +69,5 @@ const GeneralPanel = styled(Panel)`
 `;
 
 const TimeRemaining = styled(TextCenter)`
-    margin-bottom: ${GRID.UNIT};
+  margin-bottom: ${GRID.UNIT};
 `;

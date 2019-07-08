@@ -5,7 +5,12 @@ import { ServerClient } from "./HttpClient/ServerClient";
 import { isClient, isServer } from "./runtime";
 
 export interface IAPIClient {
-  fetch(path: string, payload?: object, headers?: http.IncomingHttpHeaders, response?: http.ServerResponse): Promise<any>;
+  fetch(
+    path: string,
+    payload?: object,
+    headers?: http.IncomingHttpHeaders,
+    response?: http.ServerResponse
+  ): Promise<any>;
   tokenFetch(token: IActionToken): Promise<any>;
 }
 

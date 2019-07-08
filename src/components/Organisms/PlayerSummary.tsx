@@ -43,11 +43,11 @@ export const PlayerSummary = () => {
     <Link href="/play">
       <StyledSummary href="/play">
         <Icon>
-          <PlayerFlag player={player}/>
+          <PlayerFlag player={player} />
         </Icon>
         <Rank>
           <RankTitle>{rankStatus.currentRank.title}</RankTitle>
-          <ProgressBar small percent={rankStatus.levelProgress}/>
+          <ProgressBar small percent={rankStatus.levelProgress} />
         </Rank>
       </StyledSummary>
     </Link>
