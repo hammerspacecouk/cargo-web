@@ -7,6 +7,20 @@ import { Icon, TINY_ICON } from "../Atoms/Icon";
 import { ChevronRightIcon } from "../Icons/ChevronRightIcon";
 import { SIZES } from "../../styles/typography";
 
+export const NavigationItem = ({ path, text, icon, isCurrent }: IProps) => {
+  return (
+    <Link href={path.href} as={path.as}>
+      <StyledItem href={path.as || path.href} isCurrent={isCurrent}>
+        <StyledIcon>{icon}</StyledIcon>
+        <Text>{text}</Text>
+        <ArrowIcon size={TINY_ICON}>
+          <ChevronRightIcon />
+        </ArrowIcon>
+      </StyledItem>
+    </Link>
+  );
+};
+
 interface IProps {
   path: {
     href: string;
@@ -55,17 +69,3 @@ const Text = styled.span`
 const ArrowIcon = styled(Icon)`
   opacity: 0.5;
 `;
-
-export const NavigationItem = ({ path, text, icon, isCurrent }: IProps) => {
-  return (
-    <Link href={path.href} as={path.as}>
-      <StyledItem href={path.as} isCurrent={isCurrent}>
-        <StyledIcon>{icon}</StyledIcon>
-        <Text>{text}</Text>
-        <ArrowIcon size={TINY_ICON}>
-          <ChevronRightIcon />
-        </ArrowIcon>
-      </StyledItem>
-    </Link>
-  );
-};

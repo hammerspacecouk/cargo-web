@@ -32,7 +32,7 @@ export const DuplicatePage = () => (
       <h2>2. Use your already registered account</h2>
       <p>
         To use your other account, you will first have to log out of this anonymous account. You will then be able to
-        log in to your registered account using the standard methods on the <a href="/login">Login</a> page
+        log in to your registered account using the standard methods on the <a href={routes.getLogin()}>Login</a> page
       </p>
     </Prose>
     <LogOutButton isAnonymous={true} />

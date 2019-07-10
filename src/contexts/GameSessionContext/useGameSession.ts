@@ -5,7 +5,6 @@ import { getSession, IGameSessionResponse } from "../../data/game";
 
 export interface IGameSession extends IGameSessionState {
   refreshSession: () => void;
-  setIsAtHome: (val: boolean) => void;
   setActiveShipById: (shipId?: string) => void;
   updateScore: (val: IScore) => void;
   updateAShipProperty: (id: string, newProp: object) => void;
@@ -13,7 +12,7 @@ export interface IGameSession extends IGameSessionState {
 }
 
 // game session data calculation
-export const useGameSession = (initialSession?: IGameSessionResponse): IGameSession => {
+export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome = false): IGameSession => {
   const [sessionState, setSessionState] = useState(() => getNewSessionState({}, initialSession));
   const isMounted = useMounted();
 
@@ -39,8 +38,8 @@ export const useGameSession = (initialSession?: IGameSessionResponse): IGameSess
 
   return {
     ...sessionState,
+    isAtHome,
     setActiveShipById: id => isMounted() && setSessionState(prev => setActiveShipById(prev, id)),
-    setIsAtHome: val => isMounted() && setSessionState(prev => setIsAtHome(prev, val)),
     updateRankStatus: newScore =>
       isMounted() && setSessionState(prev => setPropIfChanged(prev, "rankStatus", newScore)),
     updateScore: newScore => isMounted() && setSessionState(prev => setPropIfChanged(prev, "score", newScore)),
@@ -107,17 +106,6 @@ const setPropIfChanged = (
   return {
     ...state,
     [prop]: newValue,
-  };
-};
-
-const setIsAtHome = (state: IGameSessionState, newValue: boolean) => {
-  // undefined is allowed to be equivalent to false here
-  if (!!state.isAtHome === newValue) {
-    return state;
-  }
-  return {
-    ...state,
-    isAtHome: newValue,
   };
 };
 

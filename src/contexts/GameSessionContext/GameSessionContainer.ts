@@ -5,9 +5,10 @@ import { PlayContainer } from "../../components/Pages/PlayContainer";
 import { IPageWithData } from "../../interfaces";
 import { NextContext } from "next";
 import { getSession, IGameSessionResponse } from "../../data/game";
+import { routes } from "../../routes";
 
 // responsible for fetching the data required for this context
-export const GameSessionContainer = (Page: IPageWithData) => {
+export const GameSessionContainer = (Page: IPageWithData, isAtHome: boolean = false) => {
   return class extends Component<IProps, undefined> {
     public static async getInitialProps(context: NextContext) {
       return calculateInitialProps(context, Page);
@@ -22,7 +23,7 @@ export const GameSessionContainer = (Page: IPageWithData) => {
       const Container = createElement(PlayContainer, null, HydratedPage);
 
       // add the context
-      return createElement(GameContextComponent, { initialSession: gameSession }, Container);
+      return createElement(GameContextComponent, { initialSession: gameSession, isAtHome }, Container);
     }
   };
 };
@@ -45,7 +46,6 @@ const calculateInitialProps = async (context: NextContext, Page: IPageWithData):
       throw UnauthenticatedError("Cookie not found");
     }
     // get the gameSession data
-    // todo - VERY IMPORTANT. COOKIES NEED TO COME BACK TO THE USER response
     initialProps.gameSession = await getSession(req && req.headers, res);
 
     // get the sub-page data
@@ -57,7 +57,7 @@ const calculateInitialProps = async (context: NextContext, Page: IPageWithData):
     // redirect unauthenticated to the login page
     if (errorIs(err, UNAUTHENTICATED_ERROR)) {
       res.writeHead(302, {
-        Location: `/login?r=${encodeURIComponent(req.url)}`,
+        Location: `${routes.getLogin()}?r=${encodeURIComponent(req.url)}`,
       });
       res.end();
       return {};

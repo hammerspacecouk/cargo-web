@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { COLOURS, hexToRGBa, scrollbarStyles } from "../../styles/colours";
+import { COLOURS, hexToRGBa } from "../../styles/colours";
 import { Hidden } from "../Atoms/Hidden";
 import { PlayerSummary } from "./PlayerSummary";
 import { ListUnstyled } from "../Atoms/List/ListUnstyled";
@@ -9,6 +9,7 @@ import { NavigationItem } from "../Molecules/NavigationItem";
 import { InventoryIcon } from "../Icons/InventoryIcon";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
+import { routes } from "../../routes";
 
 interface IProps {
   className?: string;
@@ -25,8 +26,7 @@ const Ships = styled.div`
   flex: 1;
   ${BREAKPOINTS.XL`
     overflow-y: auto;
-    ${scrollbarStyles.toString()};
-    `};
+  `};
 `;
 
 const PlayerOptions = styled.div`
@@ -59,7 +59,7 @@ export const Navigation = ({ className }: IProps) => {
             <NavigationItem
               icon={<InventoryIcon />}
               isCurrent={false}
-              path={{ href: "/play/inventory" }}
+              path={{ href: routes.getPlayLaunch() }}
               text="Launch ships"
             />
           </li>

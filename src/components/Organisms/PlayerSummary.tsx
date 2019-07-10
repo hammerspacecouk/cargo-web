@@ -8,6 +8,7 @@ import { PlayerFlag } from "../Molecules/PlayerFlag";
 import { ProgressBar } from "../Atoms/ProgressBar";
 import { ELEMENTS } from "../../styles/typography";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
+import { routes } from "../../routes";
 
 const StyledSummary = styled.a`
   display: flex;
@@ -40,8 +41,8 @@ export const PlayerSummary = () => {
   const { player, rankStatus } = useGameSessionContext();
 
   return (
-    <Link href="/play">
-      <StyledSummary href="/play">
+    <Link href={routes.getPlayHome()}>
+      <StyledSummary href={routes.getPlayHome()}>
         <Icon>
           <PlayerFlag player={player} />
         </Icon>

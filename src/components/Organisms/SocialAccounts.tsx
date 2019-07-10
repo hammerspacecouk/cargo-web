@@ -8,7 +8,15 @@ import { GRID } from "../../styles/variables";
 import { Icon } from "../Atoms/Icon";
 import { ReactNode } from "react";
 import { AddButton, RemoveButton } from "../Atoms/Button";
-import { AppleLogo, FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo } from "../Atoms/Logos";
+import {
+  AmazonLogo,
+  AppleLogo,
+  FacebookLogo,
+  GoogleLogo,
+  MicrosoftLogo,
+  RedditLogo,
+  TwitterLogo,
+} from "../Atoms/Logos";
 import { IChildrenProps } from "../../interfaces";
 import { routes } from "../../routes";
 
@@ -32,11 +40,15 @@ export const SocialAccounts = ({ className }: { className?: string }) => {
       {warning}
       <Prose>
         <p>
-          We recognise your account through the association with one of these accounts. We don't store or access your
-          personal data on these platforms. <a href={routes.getAboutPolicies()}>Read more about your privacy</a>.
+          We recognise your account through the association with one of these authentication providers. We don't store
+          or access your personal data on these platforms.{" "}
+          <a href={routes.getAboutPolicies()}>Read more about your privacy</a>.
         </p>
       </Prose>
       <GridWrapper as="ul">
+        <SocialAccount logo={<AmazonLogo />} text="Amazon">
+          <AddButton />
+        </SocialAccount>
         <SocialAccount logo={<AppleLogo />} text="Apple">
           <RemoveButton />
         </SocialAccount>

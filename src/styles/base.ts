@@ -1,13 +1,16 @@
 import { css } from "styled-components";
-import { COLOURS } from "./colours";
+import { COLOURS, scrollbarStyles } from "./colours";
 import { MONOSPACE_FONT } from "./typography";
 import { BREAKPOINTS } from "./media";
 
 export const base = css`
-  *,
-  *:before,
-  *:after {
+  * {
+    ${scrollbarStyles};
     box-sizing: border-box;
+    &:before,
+    &:after {
+      box-sizing: border-box;
+    }
   }
 
   html {

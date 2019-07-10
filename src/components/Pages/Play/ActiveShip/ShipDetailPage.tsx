@@ -3,7 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { ShipInPortPage } from "./ShipInPortPage";
-import { panelBackground, scrollbarStyles } from "../../../../styles/colours";
+import { panelBackground } from "../../../../styles/colours";
 import { ShipInChannelPage } from "./ShipInChannelPage";
 import { IClassNameProps } from "../../../../interfaces";
 import { ShipOverview } from "../../../Organisms/ActiveShip/ShipOverview";
@@ -36,9 +36,7 @@ export const ShipDetailPage = ({ className }: IClassNameProps) => {
 
 const Page = styled.div`
   flex: 1;
-  display: flex;
   overflow-y: auto;
-  ${scrollbarStyles}
   ${panelBackground}
 `;
 

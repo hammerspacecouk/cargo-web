@@ -12,12 +12,13 @@ export const useGameSessionContext = (): IGameSession => {
 };
 
 // responsible for being the session provider
-export const GameContextComponent = ({ initialSession, children }: IProps) => {
-  const gameSession = useGameSession(initialSession);
+export const GameContextComponent = ({ initialSession, children, isAtHome = false }: IProps) => {
+  const gameSession = useGameSession(initialSession, isAtHome);
   return createElement(GameSessionContext.Provider, { value: gameSession }, children);
 };
 
 interface IProps {
+  isAtHome?: boolean;
   initialSession?: IGameSessionResponse;
   children?: ReactNode;
 }

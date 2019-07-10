@@ -6,7 +6,6 @@ import { PromotionModal } from "../Organisms/PromotionModal";
 import { BREAKPOINTS } from "../../styles/media";
 import { Navigation } from "../Organisms/Navigation";
 import { MASTHEAD_HEIGHT } from "../../styles/variables";
-import { scrollbarStyles } from "../../styles/colours";
 import { useGameSession } from "../../contexts/GameSessionContext/useGameSession";
 import { FlexAllCenter } from "../Atoms/Flex";
 import { Loading } from "../Atoms/Loading";
@@ -53,7 +52,6 @@ const StyledNavigation = styled(Navigation)`
 `;
 
 const StyledMain = styled.main`
-  ${scrollbarStyles};
   ${BREAKPOINTS.XL`
     flex: 1;
     order: 2;

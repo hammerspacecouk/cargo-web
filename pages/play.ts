@@ -8,4 +8,4 @@ class Page extends Component {
   }
 }
 
-export default GameSessionContainer(Page);
+export default GameSessionContainer(Page, true);

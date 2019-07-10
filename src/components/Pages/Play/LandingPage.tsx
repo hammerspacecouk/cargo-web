@@ -1,29 +1,22 @@
 import * as React from "react";
-import { useEffect } from "react";
-import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
 import { PlayHome } from "./PlayHome";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../../styles/media";
+import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
 
-const StyledArea = styled.div`
-  display: none;
+const StyledArea = styled.div<{ hideDisplay: boolean }>`
+  display: ${({ hideDisplay }) => (hideDisplay ? "none" : "block")};
   ${BREAKPOINTS.XL`
     display: block;
     height: 100%;
-    `};
+  `};
 `;
 
 export const LandingPage = () => {
-  const { setIsAtHome } = useGameSessionContext();
-  useEffect(() => {
-    setIsAtHome(true);
-    return () => {
-      setIsAtHome(false);
-    };
-  }, []);
+  const { isAtHome } = useGameSessionContext();
 
   return (
-    <StyledArea>
+    <StyledArea hideDisplay={!!isAtHome}>
       <PlayHome />
     </StyledArea>
   );

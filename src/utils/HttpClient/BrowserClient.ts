@@ -2,6 +2,7 @@ import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
 import { Environment } from "../environment";
 import { Logger } from "../Logger";
+import { routes } from "../../routes";
 
 export class BrowserClient implements IAPIClient {
   public tokenFetch(token: IActionToken): Promise<any> {
@@ -31,7 +32,7 @@ export class BrowserClient implements IAPIClient {
 
     if (response.status === 409) {
       // you tried to perform an action you weren't allowed to perform. CHEAT!
-      window.location.href = "/about/cheating";
+      window.location.href = routes.getAboutCheating();
       return null;
     }
     if (response.status === 404) {

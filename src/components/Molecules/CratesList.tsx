@@ -2,7 +2,7 @@ import * as React from "react";
 import { IChildrenProps } from "../../interfaces";
 import styled, { css } from "styled-components";
 import { H6 } from "../Atoms/Heading";
-import { COLOURS, scrollbarStyles } from "../../styles/colours";
+import { COLOURS } from "../../styles/colours";
 import { GRID } from "../../styles/variables";
 import { ListInline } from "../Atoms/List/ListInline";
 
@@ -47,7 +47,6 @@ const List = styled(ListInline)`
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  ${scrollbarStyles};
   height: 100%;
   min-height: 112px;
   > li {

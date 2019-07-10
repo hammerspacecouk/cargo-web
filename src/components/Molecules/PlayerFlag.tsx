@@ -4,7 +4,14 @@ import { IPlayer } from "../../interfaces";
 import { COLOURS } from "../../styles/colours";
 import { Environment } from "../../utils/environment";
 
-export interface IProps {
+export const PlayerFlag = ({ player, className }: IProps) => {
+  if (player) {
+    return <StyledImg as="img" className={className} src={`${Environment.clientApiHostname}${player.emblem}`} alt="" />;
+  }
+  return <StyledBox />;
+};
+
+interface IProps {
   player: IPlayer;
   className?: string;
 }
@@ -20,10 +27,3 @@ const StyledImg = styled.img`
   height: 100%;
   background: ${COLOURS.BLACK.STANDARD};
 `;
-
-export const PlayerFlag = ({ player, className }: IProps) => {
-  if (player) {
-    return <StyledImg as="img" className={className} src={`${Environment.clientApiHostname}${player.emblem}`} alt="" />;
-  }
-  return <StyledBox />;
-};

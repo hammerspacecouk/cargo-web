@@ -34,7 +34,7 @@ export const ShipInChannelPage = () => {
       </Column>
       <Column>
         {bonusEffects && bonusEffects.length > 0 && (
-          <GeneralPanel title="From head office">
+          <GeneralPanel title="From headquarters">
             <Bonus />
           </GeneralPanel>
         )}

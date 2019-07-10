@@ -10,6 +10,7 @@ import { GRID } from "../../styles/variables";
 import { MaxContentArea } from "../Templates/MaxContentArea";
 import { ContentPanel } from "../Molecules/ContentPanel";
 import { Button } from "../Atoms/Button";
+import { APP_TITLE } from "../../utils/pageTitle";
 
 interface IProps {
   events: IEvent[];
@@ -68,7 +69,7 @@ export const HomePage = ({ events }: IProps) => (
     <TemplateHome>
       <TemplateHero>
         <Hero>
-          <H1>Shippin' [space]</H1>
+          <H1>{APP_TITLE}</H1>
         </Hero>
       </TemplateHero>
       <TemplatePlay>
@@ -79,8 +80,9 @@ export const HomePage = ({ events }: IProps) => (
       <TemplateMain>
         <Prose>
           <p>
-            Colonisation of space has begun, and interstellar shipping is big business. You've got to get in on this.
-            Who else is going to transport those vital supplies of saxophones 🎷 to the other side of the galaxy?
+            The citizens of Saxopholis need your help. Colonisation of space has begun, and interstellar shipping is big
+            business. You've got to get in on this. Who else is going to transport those vital supplies of saxophones 🎷
+            to the other side of the galaxy?
           </p>
           <p>
             But it's a wild west out there. Can you survive, thrive and exploit all <strong>1,000</strong> known planets

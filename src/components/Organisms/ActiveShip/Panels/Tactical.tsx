@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { scrollbarStyles } from "../../../../styles/colours";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { GRID } from "../../../../styles/variables";
 import { PlayerShipList } from "../../PlayerShipList";
@@ -26,7 +25,6 @@ const OtherShips = styled.div`
   overflow-y: auto;
   margin-right: -${GRID.UNIT};
   padding-right: ${GRID.UNIT};
-  ${scrollbarStyles};
   min-height: 64px;
   max-height: 320px;
 `;
