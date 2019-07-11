@@ -1,16 +1,14 @@
 import * as React from "react";
 import Head from "next/head";
-import styled from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { ShipInPortPage } from "./ShipInPortPage";
-import { panelBackground } from "../../../../styles/colours";
 import { ShipInChannelPage } from "./ShipInChannelPage";
-import { IClassNameProps } from "../../../../interfaces";
 import { ShipOverview } from "../../../Organisms/ActiveShip/ShipOverview";
 import { MessageModal } from "../../../Organisms/ActiveShip/MessageModal";
 import { pageTitle } from "../../../../utils/pageTitle";
+import { PlayBoardLayout } from "../../../Templates/PlayBoardLayout";
 
-export const ShipDetailPage = ({ className }: IClassNameProps) => {
+export const ShipDetailPage = () => {
   const { ship, port } = useActiveShipContext();
 
   let innerPage;
@@ -25,24 +23,10 @@ export const ShipDetailPage = ({ className }: IClassNameProps) => {
       <Head>
         <title>{pageTitle(ship.name)}</title>
       </Head>
-      <StyledPlayBoard>
-        <ShipOverview />
-        <Page className={className}>{innerPage}</Page>
-      </StyledPlayBoard>
+      <PlayBoardLayout overview={<ShipOverview />}>
+        {innerPage}
+      </PlayBoardLayout>
       <MessageModal />
     </>
   );
 };
-
-const Page = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  ${panelBackground}
-`;
-
-const StyledPlayBoard = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-`;

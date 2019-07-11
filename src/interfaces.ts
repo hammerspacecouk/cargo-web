@@ -105,7 +105,13 @@ export interface IPlayer {
   score?: IScore;
 }
 
+export interface ILockedTransaction {
+  available: boolean;
+  requirement: string;
+}
+
 export interface ITransaction {
+  available: boolean;
   actionToken: IActionToken;
   cost: number;
   currentCount: number;

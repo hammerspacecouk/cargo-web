@@ -4,16 +4,15 @@ import { NumberBadge } from "../Atoms/NumberBadge";
 import { GRID } from "../../styles/variables";
 import { H4 } from "../Atoms/Heading";
 import { IChildrenProps } from "../../interfaces";
+import { Square } from "../Atoms/Ratio";
 
 interface IPurchaseCardImageProps extends IChildrenProps {
   className?: string;
   notificationCount?: number;
 }
 
-const StyledPurchaseCardImage = styled.div`
+const StyledPurchaseCardImage = styled(Square)`
   position: relative;
-  width: 64px;
-  margin-right: ${GRID.UNIT};
 `;
 const BadgePosition = styled.div`
   position: absolute;

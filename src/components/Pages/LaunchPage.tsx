@@ -2,6 +2,9 @@ import * as React from "react";
 import { ShipUpgrades } from "../Organisms/ShipUpgrades";
 import { pageTitle } from "../../utils/pageTitle";
 import Head from "next-server/head";
+import { PlayBoardLayout } from "../Templates/PlayBoardLayout";
+import styled from "styled-components";
+import { GRID } from "../../styles/variables";
 
 export const LaunchPage = ({ ships }: IProps) => {
   return (
@@ -9,7 +12,9 @@ export const LaunchPage = ({ ships }: IProps) => {
       <Head>
         <title>{pageTitle("Launch ships...")}</title>
       </Head>
-      <ShipUpgrades shipUpgrades={ships} />
+      <PlayBoardLayout title="Launch ships">
+        <StyledShipUpgrades shipUpgrades={ships} />
+      </PlayBoardLayout>
     </>
   );
 };
@@ -17,3 +22,7 @@ export const LaunchPage = ({ ships }: IProps) => {
 interface IProps {
   ships: any[];
 }
+
+const StyledShipUpgrades = styled(ShipUpgrades)`
+    padding: ${GRID.UNIT};
+`;

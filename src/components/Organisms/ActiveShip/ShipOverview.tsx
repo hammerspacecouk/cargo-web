@@ -1,24 +1,17 @@
 import * as React from "react";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
 import styled from "styled-components";
+import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
 import { GRID } from "../../../styles/variables";
-
 import { Planet } from "../../Molecules/Planet";
 import { Environment } from "../../../utils/environment";
 import { ELEMENTS, SIZES } from "../../../styles/typography";
-import { PANEL_BORDER } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
 import { IShip } from "../../../interfaces";
 
 const shipSize = "128px";
 
 const StyledOverview = styled.div`
-  display: block;
-  min-height: 300px;
-  padding: ${GRID.UNIT} calc(${shipSize} + ${GRID.UNIT}) ${GRID.UNIT} ${GRID.UNIT};
-  position: relative;
-  overflow: hidden;
-  border-bottom: ${PANEL_BORDER};
+  padding-right: calc(${shipSize} + ${GRID.UNIT});
 `;
 
 const PlanetPosition = styled.div`

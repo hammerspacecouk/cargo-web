@@ -1,14 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IShipUpgrade } from "../../interfaces";
+import { ILockedTransaction, IShipUpgrade } from "../../interfaces";
 import { ListUnstyled } from "../Atoms/List/ListUnstyled";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
 import { ShipUpgrade } from "../Molecules/ShipUpgrade";
 
-export const ShipUpgrades = ({ shipUpgrades }: IProps) => {
+export const ShipUpgrades = ({ shipUpgrades, className }: IProps) => {
   return (
-    <ListUnstyled>
+    <ListUnstyled className={className}>
       {shipUpgrades.map((ship, index) => (
         <ListItem key={`ship-upgrades-${index}`}>
           <ShipUpgrade ship={ship} />
@@ -19,7 +19,8 @@ export const ShipUpgrades = ({ shipUpgrades }: IProps) => {
 };
 
 interface IProps {
-  shipUpgrades: IShipUpgrade[];
+  shipUpgrades: (IShipUpgrade|ILockedTransaction)[];
+  className?: string;
 }
 
 const ListItem = styled.li`
