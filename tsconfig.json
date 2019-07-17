@@ -1,16 +1,36 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "esnext",
     "noErrorTruncation": true,
     "noImplicitAny": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "module": "commonjs",
-    "jsx": "react",
-    "target": "ES2017",
-    "types": ["react", "jest"]
+    "types": [
+      "react"
+    ],
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "include": [
     "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

@@ -1,14 +1,8 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
-import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
-import { Event, EventFlag } from "./Event";
+import { PlayerFlag } from "../PlayerFlag";
+import { Event, EventFlag, IEventProps } from "./Event";
 
-interface IProps {
-  readonly event: IEvent;
-  readonly firstPerson?: boolean;
-}
-
-export const EffectUse = ({ firstPerson, event }: IProps) => {
+export const EffectUse = ({ firstPerson, event, onAnimated }: IEventProps) => {
   let name;
   if (firstPerson) {
     name = "You ";
@@ -27,7 +21,7 @@ export const EffectUse = ({ firstPerson, event }: IProps) => {
   const onShip = event.ship ? ` for ${event.ship.name}` : null;
 
   return (
-    <Event time={event.time}>
+    <Event time={event.time} onAnimated={onAnimated}>
       {name} activated {effectName}
       {onShip}
     </Event>

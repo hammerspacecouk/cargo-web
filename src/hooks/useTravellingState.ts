@@ -1,8 +1,8 @@
-import * as differenceInSeconds from "date-fns/difference_in_seconds";
+import differenceInSeconds from "date-fns/difference_in_seconds";
 import { useEffect, useState } from "react";
-import { useCurrentShipContext } from "../context/CurrentShipContext";
-import { useSessionContext } from "../context/SessionContext";
 import { useFrameEffect } from "./useFrameEffect";
+import { useActiveShipContext } from "../contexts/ActiveShipContext/ActiveShipContext";
+import { useGameSessionContext } from "../contexts/GameSessionContext/GameSessionContext";
 
 const calculateSecondsRemaining = (arrival: Date) => {
   const now = new Date();
@@ -10,7 +10,7 @@ const calculateSecondsRemaining = (arrival: Date) => {
 };
 
 const useTravellingCountdown = () => {
-  const { channel } = useCurrentShipContext();
+  const { channel } = useActiveShipContext();
 
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
@@ -23,10 +23,7 @@ const useTravellingCountdown = () => {
   });
 
   const totalSeconds = differenceInSeconds(arrival, start);
-  const percent = Math.max(
-    0,
-    Math.min(100, ((totalSeconds - seconds) / totalSeconds) * 100)
-  );
+  const percent = Math.max(0, Math.min(100, ((totalSeconds - seconds) / totalSeconds) * 100));
 
   return {
     isArriving: seconds <= 0,
@@ -36,9 +33,9 @@ const useTravellingCountdown = () => {
 };
 
 export const useTravellingState = () => {
-  const { updateScore, updateRankStatus } = useSessionContext();
-  const { refreshState } = useCurrentShipContext();
   const { percent, secondsRemaining, isArriving } = useTravellingCountdown();
+  const { refreshState } = useActiveShipContext();
+  const { updateScore, updateRankStatus } = useGameSessionContext();
   let allowArrivalCheck = true;
 
   const handleArrival = async () => {

@@ -1,21 +1,13 @@
 // https://palx.jxnblk.com/5700d2
-// tslint:disable:object-literal-sort-keys
+import { GRID } from "./variables";
+import { css } from "styled-components";
+
 const allColours = {
   base: "#5700d2",
   black: "#1c1a23",
+  fullBlack: "#100e16",
   white: "#f9f9fa",
-  gray: [
-    "#f9f9fa",
-    "#eeecef",
-    "#e1dfe4",
-    "#d4d1d8",
-    "#c6c2cb",
-    "#b6b0bd",
-    "#a39dac",
-    "#8d8599",
-    "#72677f",
-    "#433c4d",
-  ],
+  gray: ["#f9f9fa", "#eeecef", "#e1dfe4", "#d4d1d8", "#c6c2cb", "#b6b0bd", "#a39dac", "#8d8599", "#72677f", "#433c4d"],
   violet: [
     "#f0e9fb",
     "#e0d2f7",
@@ -40,30 +32,8 @@ const allColours = {
     "#7c008a",
     "#5a0064",
   ],
-  pink: [
-    "#fbe9f4",
-    "#f7d2e8",
-    "#f2b6da",
-    "#ec94c9",
-    "#e466b1",
-    "#d2007e",
-    "#be0072",
-    "#a60064",
-    "#8a0053",
-    "#64003c",
-  ],
-  red: [
-    "#fbeaeb",
-    "#f7d2d6",
-    "#f2b7bd",
-    "#ec969f",
-    "#e46975",
-    "#d20015",
-    "#be0013",
-    "#a60010",
-    "#8a000d",
-    "#64000a",
-  ],
+  pink: ["#fbe9f4", "#f7d2e8", "#f2b6da", "#ec94c9", "#e466b1", "#d2007e", "#be0072", "#a60064", "#8a0053", "#64003c"],
+  red: ["#fbeaeb", "#f7d2d6", "#f2b7bd", "#ec969f", "#e46975", "#d20015", "#be0013", "#a60010", "#8a000d", "#64000a"],
   orange: [
     "#faede4",
     "#f5d9c6",
@@ -88,66 +58,11 @@ const allColours = {
     "#8a7c00",
     "#635900",
   ],
-  lime: [
-    "#eff9df",
-    "#ddf3bd",
-    "#caec97",
-    "#b4e56c",
-    "#9bdc3b",
-    "#7ed200",
-    "#72be00",
-    "#64a600",
-    "#538a00",
-    "#3c6400",
-  ],
-  green: [
-    "#e6fae4",
-    "#caf4c6",
-    "#abeea4",
-    "#86e77b",
-    "#57de48",
-    "#15d200",
-    "#13be00",
-    "#10a600",
-    "#0d8a00",
-    "#0a6400",
-  ],
-  teal: [
-    "#e4faec",
-    "#c5f4d8",
-    "#a3eec1",
-    "#7ae7a6",
-    "#47de84",
-    "#00d254",
-    "#00be4c",
-    "#00a642",
-    "#008a37",
-    "#006428",
-  ],
-  cyan: [
-    "#e3faf7",
-    "#c4f4ef",
-    "#a1eee6",
-    "#78e7dc",
-    "#45dece",
-    "#00d2bd",
-    "#00beab",
-    "#00a796",
-    "#008a7c",
-    "#00645a",
-  ],
-  blue: [
-    "#e4f1fa",
-    "#c6e2f4",
-    "#a4d1ee",
-    "#7bbce7",
-    "#49a3de",
-    "#007ed2",
-    "#0071bd",
-    "#0063a5",
-    "#005188",
-    "#003a61",
-  ],
+  lime: ["#eff9df", "#ddf3bd", "#caec97", "#b4e56c", "#9bdc3b", "#7ed200", "#72be00", "#64a600", "#538a00", "#3c6400"],
+  green: ["#e6fae4", "#caf4c6", "#abeea4", "#86e77b", "#57de48", "#15d200", "#13be00", "#10a600", "#0d8a00", "#0a6400"],
+  teal: ["#e4faec", "#c5f4d8", "#a3eec1", "#7ae7a6", "#47de84", "#00d254", "#00be4c", "#00a642", "#008a37", "#006428"],
+  cyan: ["#e3faf7", "#c4f4ef", "#a1eee6", "#78e7dc", "#45dece", "#00d2bd", "#00beab", "#00a796", "#008a7c", "#00645a"],
+  blue: ["#e4f1fa", "#c6e2f4", "#a4d1ee", "#7bbce7", "#49a3de", "#007ed2", "#0071bd", "#0063a5", "#005188", "#003a61"],
   indigo: [
     "#e9ebfb",
     "#d2d5f7",
@@ -162,30 +77,114 @@ const allColours = {
   ],
 };
 
-// tslint:disable-next-line:object-literal-sort-keys
+const greyscale = {
+  BLACK: "#1A1F22",
+  DARKEST: "#292E31",
+  DARKER: "#414649",
+  DARK: "#505558",
+  MID: "#777C7F",
+  LIGHT: "#9EA3A6",
+  LIGHTER: "#C5CACD",
+  LIGHTEST: "#EDF2F5",
+  WHITE: "#FFFFFF",
+};
+
+const danger = {
+  DARKEST: "#B43931",
+  DARK: "#D5443A",
+  MID: "#E1483E",
+  LIGHTER: "#E7564A",
+  LIGHTEST: "#FBECEB",
+};
+
+const warning = {
+  DARKEST: "#CC900D",
+  DARK: "#F2AB10",
+  MID: "#FFB511",
+  LIGHTER: "#FFC314",
+  LIGHTEST: "#FFF7E7",
+};
+
+const ok = {
+  DARKEST: "#30855C",
+  DARK: "#399E6E",
+  MID: "#3DA774",
+  LIGHTER: "#49B88B",
+  LIGHTEST: "#EBF6F1",
+};
+
+const action = {
+  DARKEST: "#4b3264",
+  DARK: "#5f3d85",
+  MID: "#723da6",
+  LIGHTER: "#8149b8",
+  LIGHTEST: "#e9dcf5",
+};
+
+// export only has semantic names
 export const COLOURS = {
-  BASE: allColours.base,
+  GREY: greyscale,
+  BODY: {
+    BACKGROUND: greyscale.BLACK,
+    TEXT: greyscale.LIGHTER,
+    LINK: allColours.violet[4],
+    FADED: allColours.gray[7],
+  },
+  PANEL_BORDER: action.DARKEST,
+  PANEL_INNER_DIVIDER: greyscale.DARKER,
+  KEY_LINE: greyscale.MID,
+
+  BUTTON: {
+    STANDARD: greyscale.WHITE,
+    ACTION: action.LIGHTER,
+    CONFIRM: ok.MID,
+    DANGER: danger.MID,
+    WARNING: warning.MID,
+  },
+
+  HEALTH: {
+    FULL: allColours.blue[4],
+    GOOD: ok.LIGHTER,
+    OK: ok.LIGHTER,
+    WARNING: warning.LIGHTER,
+    DANGER: danger.LIGHTER,
+  },
+  SEMANTIC: {
+    DANGER: {
+      KEY: danger.MID,
+      BACKGROUND: danger.DARKEST,
+      FOREGROUND: danger.LIGHTEST,
+    },
+    OK: {
+      KEY: ok.MID,
+      BACKGROUND: ok.DARKEST,
+      FOREGROUND: ok.LIGHTEST,
+    },
+    WARNING: {
+      KEY: warning.MID,
+      BACKGROUND: warning.DARKEST,
+      FOREGROUND: warning.LIGHTEST,
+    },
+  },
+
+  // deprecated - todo -replace all uses
+
+  BASE: "#7F57B8",
   ACTIVE_HIGHLIGHT: allColours.violet[4],
+  EVENTS: {
+    BACKGROUND: allColours.fullBlack,
+    TEXT: allColours.white,
+  },
   BLACK: {
+    FULL: allColours.fullBlack,
     STANDARD: allColours.black,
+    FADED: allColours.gray[9],
     COLOURISED: allColours.violet[9],
   },
   WHITE: {
     STANDARD: allColours.white,
   },
-  BODY: {
-    BACKGROUND: allColours.black,
-    TEXT: allColours.white,
-    LINK: allColours.violet[4],
-    FADED: allColours.gray[7],
-  },
-  BUTTON: {
-    STANDARD: allColours.white,
-    ACTION: allColours.violet[4],
-    CONFIRM: allColours.green[4],
-    DANGER: allColours.red[5],
-    WARNING: allColours.yellow[4],
-  },
+
   CRATE: {
     LEVEL0: allColours.yellow[2],
     LEVEL1: allColours.cyan[2],
@@ -194,39 +193,6 @@ export const COLOURS = {
     LEVEL4: allColours.teal[3],
     LEVEL5: allColours.lime[4],
     LEVEL6: allColours.orange[3],
-  },
-  GREY: {
-    MID: allColours.gray[7],
-    DARK: allColours.gray[9],
-  },
-  HEALTH: {
-    FULL: allColours.violet[4],
-    GOOD: allColours.green[4],
-    OK: allColours.yellow[3],
-    WARNING: allColours.orange[4],
-    DANGER: allColours.red[5],
-  },
-  SEMANTIC: {
-    DANGER: {
-      KEY: allColours.red[5],
-      BACKGROUND: allColours.red[1],
-      FOREGROUND: allColours.red[9],
-    },
-    INFO: {
-      KEY: allColours.blue[4],
-      BACKGROUND: allColours.blue[1],
-      FOREGROUND: allColours.blue[9],
-    },
-    OK: {
-      KEY: allColours.green[5],
-      BACKGROUND: allColours.green[1],
-      FOREGROUND: allColours.green[9],
-    },
-    WARNING: {
-      KEY: allColours.yellow[4],
-      BACKGROUND: allColours.yellow[1],
-      FOREGROUND: allColours.yellow[9],
-    },
   },
 };
 
@@ -241,3 +207,28 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
 
   return `rgb(${r}, ${g}, ${b})`;
 };
+
+export const scrollbarStyles = css`
+  /* 1st: thumb, 2nd: track. */
+  scrollbar-color: ${COLOURS.BLACK.FADED} rgba(0, 0, 0, 0.3);
+  &::-webkit-scrollbar {
+    width: ${GRID.HALF};
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLOURS.BLACK.FADED};
+    outline: 1px solid slategrey;
+  }
+`;
+
+export const panelBackground = css`
+  background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.75)};
+  background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 3px 100%;
+`;
+
+export const PANEL_BORDER = `solid 1px ${COLOURS.PANEL_BORDER}`;
+export const PANEL_INNER_DIVIDER_BORDER = `solid 1px ${COLOURS.PANEL_INNER_DIVIDER}`;

@@ -4,13 +4,19 @@ import { BREAKPOINTS } from "./media";
 export const MONOSPACE_FONT = css`
   font-family: "Share Tech Mono", monospace;
 `;
-export const BASE_FONT = MONOSPACE_FONT;
-export const HEADING_FONT = MONOSPACE_FONT;
+export const BASE_FONT = css`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif-light, sans-serif;
+`;
+export const HEADING_FONT = css`
+  ${MONOSPACE_FONT};
+  font-variant: small-caps;
+`;
 
 export const SIZES = {
   A: css`
     font-size: 3rem;
-    line-height: 1.2;
+    line-height: 1;
     letter-spacing: -2px;
     ${BREAKPOINTS.S`font-size: 3rem;`};
   `,
@@ -28,9 +34,8 @@ export const SIZES = {
   `,
   D: css`
     font-size: 1.2rem;
-    line-height: 1;
+    line-height: 1.2;
     letter-spacing: 0;
-    ${BREAKPOINTS.S`font-size: 1.4rem`};
   `,
   E: css`
     font-size: 1rem;
@@ -53,16 +58,18 @@ export const ELEMENTS = {
   H2: css`
     margin: 0;
     font-weight: normal;
+    font-style: italic;
     ${SIZES.B} ${HEADING_FONT};
   `,
   H3: css`
     margin: 0;
-    font-weight: normal;
+    font-weight: bold;
+    font-style: italic;
     ${SIZES.C} ${HEADING_FONT};
   `,
   H4: css`
     margin: 0;
-    font-weight: normal;
+    font-weight: bold;
     ${SIZES.D} ${HEADING_FONT};
   `,
   H5: css`
@@ -73,7 +80,6 @@ export const ELEMENTS = {
   H6: css`
     margin: 0;
     font-weight: normal;
-    text-transform: uppercase;
     ${SIZES.F} ${HEADING_FONT};
   `,
   P: css`

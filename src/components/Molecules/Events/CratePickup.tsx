@@ -1,17 +1,12 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
-import { CrateContents } from "../../Atoms/CrateContents/CrateContents";
-import { Event } from "./Event";
+import { CrateContents } from "../../Atoms/CrateContents";
+import { Event, IEventProps } from "./Event";
 
-interface IProps {
-  readonly event: IEvent;
-}
-
-export const CratePickup = ({ event }: IProps) => {
+export const CratePickup = ({ event, onAnimated }: IEventProps) => {
   const contents = event.crate ? event.crate.contents : "[deleted]";
   const name = event.actioningShip ? event.actioningShip.name : "[deleted]";
   return (
-    <Event time={event.time}>
+    <Event time={event.time} onAnimated={onAnimated}>
       {name} picked up <CrateContents>{contents}</CrateContents> for transport
     </Event>
   );

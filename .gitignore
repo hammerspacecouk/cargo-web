@@ -1,8 +1,9 @@
 # Build artifacts
-build/
+/build/
+/.next
 
 # Compiled
-dist/
+/dist/
 
 # Dependency directories
 node_modules/

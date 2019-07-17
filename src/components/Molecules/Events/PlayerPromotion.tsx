@@ -1,22 +1,16 @@
 import * as React from "react";
-import { IEvent } from "../../../Interfaces";
-import { PlayerFlag } from "../PlayerFlag/PlayerFlag";
-import { Event, EventFlag } from "./Event";
+import { PlayerFlag } from "../PlayerFlag";
+import { Event, EventFlag, IEventProps } from "./Event";
 
-interface IProps {
-  readonly event: IEvent;
-  readonly firstPerson?: boolean;
-}
-
-export const PlayerPromotion = (props: IProps) => {
+export const PlayerPromotion = ({ event, firstPerson, onAnimated }: IEventProps) => {
   let name;
-  if (props.firstPerson) {
+  if (firstPerson) {
     name = "You were";
-  } else if (props.event.actioningPlayer) {
+  } else if (event.actioningPlayer) {
     name = (
       <>
         <EventFlag>
-          <PlayerFlag player={props.event.actioningPlayer} />
+          <PlayerFlag player={event.actioningPlayer} />
         </EventFlag>{" "}
         was
       </>
@@ -26,8 +20,8 @@ export const PlayerPromotion = (props: IProps) => {
   }
 
   return (
-    <Event time={props.event.time}>
-      {name} promoted to <strong>{props.event.rank.title}</strong>
+    <Event time={event.time} onAnimated={onAnimated}>
+      {name} promoted to <strong>{event.rank.title}</strong>
     </Event>
   );
 };

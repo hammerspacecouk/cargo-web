@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { makeRandom } from "../util/ShipName";
+import { makeRandom } from "../utils/shipName";
 import { useFrameEffect } from "./useFrameEffect";
 import { useMounted } from "./useMounted";
 
@@ -7,8 +7,8 @@ export const useShipNameGenerator = (offeredShipName?: string) => {
   const [nameGuess, setNameGuess] = useState("_");
   const isMounted = useMounted();
 
-  const overrideTimer = useRef(null);
-  const found = useRef(false);
+  const overrideTimer: { current?: number } = useRef(undefined);
+  const found: { current: boolean } = useRef(false);
 
   useFrameEffect(
     () => {

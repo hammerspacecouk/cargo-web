@@ -1,14 +1,20 @@
 import { useState } from "react";
+import { useMounted } from "./useMounted";
 
 export const useButtonsDisabled = () => {
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const isMounted = useMounted();
 
   const disableButtons = () => {
-    setButtonsDisabled(true);
+    if (isMounted()) {
+      setButtonsDisabled(true);
+    }
   };
 
   const enableButtons = () => {
-    setButtonsDisabled(false);
+    if (isMounted()) {
+      setButtonsDisabled(false);
+    }
   };
 
   return { buttonsDisabled, disableButtons, enableButtons };

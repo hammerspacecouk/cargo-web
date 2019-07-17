@@ -5,10 +5,10 @@ export const GRID = {
   UNIT: "16px",
 };
 
-// tslint:disable:object-literal-sort-keys
 export const Z_INDEX = {
   MODAL_PANEL: 3100,
   MODAL_BLANKING: 3000,
+  MENU: 2800,
   OVERLAY_TOP: 2200,
   OVERLAY_MIDDLE: 2100,
   OVERLAY_BOTTOM: 2000,
@@ -19,6 +19,9 @@ export const Z_INDEX = {
   GROUND: 0,
   BURIED: -1,
 };
-// tslint:enable:object-literal-sort-keys
 
 export const MAX_CONTENT_WIDTH = "1600px";
+export const MAX_PANEL_WIDTH = "736px";
+export const MAX_PROSE_WIDTH = "704px";
+export const MASTHEAD_HEIGHT = "44px";
+export const NAV_ITEM_HEIGHT = "64px";
