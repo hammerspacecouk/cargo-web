@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
 import { Environment } from "../environment";
@@ -14,18 +15,22 @@ export class BrowserClient implements IAPIClient {
     const start = Date.now();
 
     const options: any = {
-      credentials: "include",
+      url,
+      withCredentials: true,
       headers: { accept: "application/json" },
-      method: "GET",
+      method: "get",
+      validateStatus: function (status) {
+        return status >= 200 && status < 500; // default
+      }
     };
 
     if (payload) {
-      options.method = "POST";
-      options.body = JSON.stringify(payload);
+      options.method = "post";
+      options.data = payload;
       options.headers["content-type"] = "application/json";
     }
 
-    const response = await fetch(url, options);
+    const response = await axios(options);
 
     const time = Date.now() - start;
     Logger.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);
@@ -39,15 +44,14 @@ export class BrowserClient implements IAPIClient {
       return null;
     }
     if (response.status !== 200) {
-      const text = await response.text();
       Logger.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
       throw {
-        message: text,
+        message: response.data,
         statusCode: response.status,
       };
     }
 
-    return response.json();
+    return response.data;
   }
 
   private getUrl(path: string): string {

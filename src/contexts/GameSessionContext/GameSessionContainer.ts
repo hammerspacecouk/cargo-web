@@ -3,14 +3,14 @@ import { GameContextComponent } from "./GameSessionContext";
 import { errorIs, UNAUTHENTICATED_ERROR, UnauthenticatedError } from "../../utils/HttpClient/Error";
 import { PlayContainer } from "../../components/Pages/PlayContainer";
 import { IPageWithData } from "../../interfaces";
-import { NextContext } from "next";
+import { NextPageContext } from "next";
 import { getSession, IGameSessionResponse } from "../../data/game";
 import { routes } from "../../routes";
 
 // responsible for fetching the data required for this context
 export const GameSessionContainer = (Page: IPageWithData, isAtHome: boolean = false) => {
   return class extends Component<IProps, undefined> {
-    public static async getInitialProps(context: NextContext) {
+    public static async getInitialProps(context: NextPageContext) {
       return calculateInitialProps(context, Page);
     }
 
@@ -33,7 +33,7 @@ interface IProps {
   page: any;
 }
 
-const calculateInitialProps = async (context: NextContext, Page: IPageWithData): IProps => {
+const calculateInitialProps = async (context: NextPageContext, Page: IPageWithData): Promise<IProps> => {
   const { req, res } = context;
   let initialProps: IProps = {
     gameSession: undefined,
@@ -60,7 +60,7 @@ const calculateInitialProps = async (context: NextContext, Page: IPageWithData):
         Location: `${routes.getLogin()}?r=${encodeURIComponent(req.url)}`,
       });
       res.end();
-      return {};
+      return initialProps;
     }
     throw err;
   }

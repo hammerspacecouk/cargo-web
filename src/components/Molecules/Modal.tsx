@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ModalHandler from "react-modal";
+import ReactModal from "react-modal";
 import styled, { css } from "styled-components";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
 import { GRID, MAX_PANEL_WIDTH, Z_INDEX } from "../../styles/variables";
@@ -94,8 +94,8 @@ const ModalTitle = styled(H3)<{ center: boolean }>`
   line-height: 32px;
   flex: 1;
   ${({ center }) =>
-    center &&
-    css`
+  center &&
+  css`
       text-align: center;
     `}
 `;
@@ -131,40 +131,38 @@ export const Modal = (props: IProps) => {
   if (props.onClose) {
     closeButton = (
       <ModalClose onClick={props.onClose}>
-        <CloseIcon />
+        <CloseIcon/>
       </ModalClose>
     );
   }
 
   return (
-    <>
-      <ModalHandler
-        appElement={appElement}
-        isOpen={props.isOpen}
-        onRequestClose={props.onClose}
-        closeTimeoutMS={300}
-        contentLabel={title}
-        className={{
-          afterOpen: "modal--after-open",
-          base: `modal ${props.type}`,
-          beforeClose: "modal--before-close",
-        }}
-        overlayClassName={{
-          afterOpen: "modal__overlay--after-open",
-          base: "modal__overlay",
-          beforeClose: "modal__overlay--before-close",
-        }}
-      >
-        <ModalHeader>
-          <ModalTitle center={!closeButton} as="h2">
-            {title}
-          </ModalTitle>
-          {closeButton}
-        </ModalHeader>
-        <ModalBody>
-          <ModalContent>{props.children}</ModalContent>
-        </ModalBody>
-      </ModalHandler>
-    </>
+    <ReactModal
+      appElement={appElement}
+      isOpen={props.isOpen}
+      onRequestClose={props.onClose}
+      closeTimeoutMS={300}
+      contentLabel={title}
+      className={{
+        afterOpen: "modal--after-open",
+        base: `modal ${props.type}`,
+        beforeClose: "modal--before-close"
+      }}
+      overlayClassName={{
+        afterOpen: "modal__overlay--after-open",
+        base: "modal__overlay",
+        beforeClose: "modal__overlay--before-close"
+      }}
+    >
+      <ModalHeader>
+        <ModalTitle center={!closeButton} as="h2">
+          {title}
+        </ModalTitle>
+        {closeButton}
+      </ModalHeader>
+      <ModalBody>
+        <ModalContent>{props.children}</ModalContent>
+      </ModalBody>
+    </ReactModal>
   );
 };

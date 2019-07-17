@@ -1,6 +1,6 @@
 import { ComponentClass, ReactNode } from "react";
-import { DefaultAppIProps } from "next/app";
-import { NextContext } from "next";
+import { AppInitialProps } from "next/app";
+import { NextPageContext } from "next";
 
 export interface IActionToken {
   path: string;
@@ -219,5 +219,5 @@ export interface IShipClass {
 }
 
 export interface IPageWithData extends ComponentClass {
-  getInitialProps?: (context: NextContext) => Promise<DefaultAppIProps>;
+  getInitialProps?: (context: NextPageContext) => Promise<AppInitialProps>;
 }

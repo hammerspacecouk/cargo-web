@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as differenceInMilliseconds from "date-fns/difference_in_milliseconds";
+import differenceInMilliseconds from "date-fns/difference_in_milliseconds";
 import { ScoreValue } from "../Molecules/ScoreValue";
 import { IScore } from "../../interfaces";
 

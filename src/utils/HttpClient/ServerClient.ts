@@ -1,11 +1,10 @@
+import axios from 'axios';
 import http from "http";
 import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
 import { Environment } from "../environment";
 import { Logger } from "../Logger";
 import { UnauthenticatedError } from "./Error";
-
-const fetch = require("node-fetch");
 
 export class ServerClient implements IAPIClient {
   public tokenFetch(token: IActionToken): Promise<any> {
@@ -22,14 +21,19 @@ export class ServerClient implements IAPIClient {
     try {
       const start = Date.now();
 
-      const headers = {
-        cookie: incomingHttpHeaders && incomingHttpHeaders.cookie,
-      };
+      const response = await axios({
+        method: 'get',
+        url,
+        headers: {
+          cookie: incomingHttpHeaders && incomingHttpHeaders.cookie,
+        },
+        validateStatus: function (status) {
+          return status >= 200 && status < 500; // default
+        }
+      });
 
-      const response = await fetch(url, { headers });
-
-      if (outgoingResponse && response.headers.get("set-cookie")) {
-        outgoingResponse.setHeader("set-cookie", response.headers.get("set-cookie"));
+      if (outgoingResponse && response.headers["set-cookie"]) {
+        outgoingResponse.setHeader("set-cookie", response.headers["set-cookie"]);
       }
 
       const time = Date.now() - start;
@@ -55,7 +59,7 @@ export class ServerClient implements IAPIClient {
         return null;
       }
 
-      return response.json();
+      return response.data;
     } catch (e) {
       Logger.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
       throw e;

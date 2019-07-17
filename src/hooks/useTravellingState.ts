@@ -1,4 +1,4 @@
-import * as differenceInSeconds from "date-fns/difference_in_seconds";
+import differenceInSeconds from "date-fns/difference_in_seconds";
 import { useEffect, useState } from "react";
 import { useFrameEffect } from "./useFrameEffect";
 import { useActiveShipContext } from "../contexts/ActiveShipContext/ActiveShipContext";

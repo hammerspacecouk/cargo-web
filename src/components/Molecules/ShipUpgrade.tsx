@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { CreditsButton } from "./CreditsButton";
 import { TokenButton } from "./TokenButton";
-import { ILockedTransaction, IShipUpgrade } from "../../Interfaces";
+import { ILockedTransaction, IShipUpgrade } from "../../interfaces";
 import { Environment } from "../../utils/environment";
 import {
   PurchaseCard,

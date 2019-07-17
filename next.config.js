@@ -1,14 +1,5 @@
 // next.config.js
-const withTypescript = require("@zeit/next-typescript");
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-
-module.exports = withTypescript({
-  webpack(config, options) {
-    // Do not run type checking twice:
-    if (options.isServer) config.plugins.push(new ForkTsCheckerWebpackPlugin());
-
-    return config;
-  },
+module.exports = {
   poweredByHeader: false,
   publicRuntimeConfig: {
     clientApiHostname: process.env.CLIENT_API_HOSTNAME,
@@ -20,4 +11,4 @@ module.exports = withTypescript({
   onDemandEntries: {
     websocketPort: 3007,
   },
-});
+};
