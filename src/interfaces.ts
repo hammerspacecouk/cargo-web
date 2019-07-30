@@ -210,12 +210,20 @@ export interface IEffect {
   type: EffectType;
 }
 
+export interface IShipClassStats {
+  max: number;
+  strength: number;
+  capacity: number;
+  speed: number;
+}
+
 export interface IShipClass {
   name: string;
   description: string;
   strength: number;
   capacity: number;
   image: string;
+  stats: IShipClassStats
 }
 
 export interface IPageWithData extends ComponentClass {

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Event, IEventProps } from "./Event";
 import { CrateContents } from "../../Atoms/CrateContents";
 
-export const CrateNew = ({ firstPerson, event, onAnimated }: IEventProps) => {
+export const CrateNew = ({ firstPerson, event }: IEventProps) => {
   let you = "";
   if (firstPerson) {
     you = " for you ";
@@ -11,7 +11,7 @@ export const CrateNew = ({ firstPerson, event, onAnimated }: IEventProps) => {
   const contents = event.crate ? event.crate.contents : "[deleted]";
 
   return (
-    <Event time={event.time} onAnimated={onAnimated}>
+    <Event time={event.time}>
       A new crate containing <CrateContents>{contents}</CrateContents> is ready {you} to transport
     </Event>
   );

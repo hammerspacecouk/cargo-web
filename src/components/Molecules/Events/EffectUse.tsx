@@ -2,7 +2,7 @@ import * as React from "react";
 import { PlayerFlag } from "../PlayerFlag";
 import { Event, EventFlag, IEventProps } from "./Event";
 
-export const EffectUse = ({ firstPerson, event, onAnimated }: IEventProps) => {
+export const EffectUse = ({ firstPerson, event }: IEventProps) => {
   let name;
   if (firstPerson) {
     name = "You ";
@@ -21,7 +21,7 @@ export const EffectUse = ({ firstPerson, event, onAnimated }: IEventProps) => {
   const onShip = event.ship ? ` for ${event.ship.name}` : null;
 
   return (
-    <Event time={event.time} onAnimated={onAnimated}>
+    <Event time={event.time}>
       {name} activated {effectName}
       {onShip}
     </Event>

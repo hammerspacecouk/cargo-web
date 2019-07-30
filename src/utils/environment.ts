@@ -10,6 +10,7 @@ export interface IEnvironment {
   nodeEnv?: string;
   isClient: boolean;
   isServer: boolean;
+  locale: string;
 }
 
 let environment: IEnvironment;
@@ -20,6 +21,7 @@ if (isClient) {
     ...publicRuntimeConfig,
     isClient: true,
     isServer: false,
+    locale: navigator.language
   };
 } else if (isServer) {
   environment = {
@@ -29,6 +31,7 @@ if (isClient) {
     appVersion: process.env.APP_VERSION,
     host: process.env.HOSTNAME,
     nodeEnv: process.env.NODE_ENV,
+    locale: 'en-gb', // can change in future
     isClient: false,
     isServer: true,
   };

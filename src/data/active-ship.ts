@@ -17,8 +17,12 @@ import {
   ITransaction,
 } from "../interfaces";
 
-export const getShipData = (shipId: string, headers?: http.IncomingHttpHeaders): Promise<IActiveShipResponse> => {
-  return ApiClient.fetch(`/play/${shipId}`, undefined, headers);
+export const getShipData = (
+  shipId: string,
+  incomingRequest?: http.IncomingMessage,
+  outGoingResponse?: http.ServerResponse
+): Promise<IActiveShipResponse> => {
+  return ApiClient.fetch(`/play/${shipId}`, undefined, incomingRequest, outGoingResponse);
 };
 
 export interface IActiveShipResponse {

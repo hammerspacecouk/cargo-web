@@ -5,6 +5,7 @@ import { getSession, IGameSessionResponse } from "../../data/game";
 
 export interface IGameSession extends IGameSessionState {
   refreshSession: () => void;
+  setSession: (newSession: IGameSessionResponse) => void;
   setActiveShipById: (shipId?: string) => void;
   updateScore: (val: IScore) => void;
   updateAShipProperty: (id: string, newProp: object) => void;
@@ -18,7 +19,11 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
 
   const refreshSession = async () => {
     const session: IGameSessionResponse = await getSession();
-    setSessionState(prev => getNewSessionState(prev, session));
+    setSession(session);
+  };
+
+  const setSession = (newSession: IGameSessionResponse) => {
+    setSessionState(prev => getNewSessionState(prev, newSession));
   };
 
   const updateSession = (skipFirstTime: boolean) => {
@@ -39,6 +44,7 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
   return {
     ...sessionState,
     isAtHome,
+    setSession,
     setActiveShipById: id => isMounted() && setSessionState(prev => setActiveShipById(prev, id)),
     updateRankStatus: newScore =>
       isMounted() && setSessionState(prev => setPropIfChanged(prev, "rankStatus", newScore)),

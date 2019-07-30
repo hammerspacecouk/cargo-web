@@ -13,12 +13,12 @@ export const Progress = () => {
     <>
       <WinStatus>
         <WinItem>
+          <WinRequirement achieved={true /* todo */}>Reticulum Shuttle</WinRequirement>
+        </WinItem>
+        <WinItem>
           <WinRequirement achieved={rankStatus.portsVisited === 1000}>
             {rankStatus.portsVisited}/1000 planets visited
           </WinRequirement>
-        </WinItem>
-        <WinItem>
-          <WinRequirement achieved={true /* todo */}>Available Reticulum Shuttle</WinRequirement>
         </WinItem>
         <WinItem>
           <WinRequirement achieved={false /* todo */}>Saxophone on board</WinRequirement>

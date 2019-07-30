@@ -19,7 +19,7 @@ export class BrowserClient implements IAPIClient {
       withCredentials: true,
       headers: { accept: "application/json" },
       method: "get",
-      validateStatus: function (status) {
+      validateStatus: function (status: number) {
         return status >= 200 && status < 500; // default
       }
     };

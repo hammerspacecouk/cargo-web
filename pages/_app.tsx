@@ -1,6 +1,6 @@
-import React from 'react'
-import Head from 'next/head';
-import App, { Container } from 'next/app';
+import React from "react";
+import Head from "next/head";
+import App, { Container } from "next/app";
 import { Modal, ModalActions, ModalType } from "../src/components/Molecules/Modal";
 import { P } from "../src/components/Atoms/Text";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
@@ -19,24 +19,24 @@ export default class extends App<IProps, IState> {
 
   public catchMessage = (error: PromiseRejectionEvent) => {
     this.setState({
-      errorMessage: error.reason.message,
+      errorMessage: error.reason.message
     });
     console.error(error);
   };
 
   public componentDidCatch(error: Error, info: React.ErrorInfo) {
     this.setState({
-      errorMessage: error.toString(),
+      errorMessage: error.toString()
     });
     console.error(info);
   }
 
   public componentDidMount() {
-    window.addEventListener('unhandledrejection', this.catchMessage);
+    window.addEventListener("unhandledrejection", this.catchMessage);
   }
 
   public componentWillUnmount() {
-    window.removeEventListener('unhandledrejection', this.catchMessage);
+    window.removeEventListener("unhandledrejection", this.catchMessage);
   }
 
   public render() {
@@ -56,14 +56,14 @@ export default class extends App<IProps, IState> {
     }
 
     return (
-      <Container>
-        <Head>
-          <title>{pageTitle()}</title>
-        </Head>
-        <GlobalStyle />
-        <Component {...pageProps} />
-        {errorModal}
-      </Container>
+        <Container>
+          <Head>
+            <title>{pageTitle()}</title>
+          </Head>
+          <GlobalStyle/>
+          <Component {...pageProps} />
+          {errorModal}
+        </Container>
     );
   }
 }

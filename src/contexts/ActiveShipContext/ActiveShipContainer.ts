@@ -6,8 +6,8 @@ import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 
 export const ActiveShipContainer = (Page: IPageWithData) => {
   return class extends Component<IProps, undefined> {
-    public static async getInitialProps({ query, req }: NextPageContext) {
-      const shipData = await getShipData(query.ship as string, req && req.headers);
+    public static async getInitialProps({ query, req, res }: NextPageContext) {
+      const shipData = await getShipData(query.ship as string, req, res);
       return {
         shipId: query.ship,
         shipData,

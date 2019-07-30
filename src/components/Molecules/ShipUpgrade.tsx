@@ -5,80 +5,108 @@ import { TokenButton } from "./TokenButton";
 import { ILockedTransaction, IShipUpgrade } from "../../interfaces";
 import { Environment } from "../../utils/environment";
 import {
+  LockedPurchaseCardDetail,
   PurchaseCard,
   PurchaseCardDescription,
   PurchaseCardDetail,
   PurchaseCardImage,
-  PurchaseCardTitle,
+  PurchaseCardTitle
 } from "./PurchaseCard";
 import { P, TextWarning } from "../Atoms/Text";
 import { GRID } from "../../styles/variables";
 import { BREAKPOINTS } from "../../styles/media";
 import { COLOURS } from "../../styles/colours";
+import { ShipStats } from "./ShipStats";
+import { Hidden } from "../Atoms/Hidden";
+import { useLaunchShipsContext } from "../../contexts/LaunchShipsContext/LaunchShipsContext";
 
 export const ShipUpgrade = ({ ship }: IProps) => {
   if (ship.available) {
-    return <ShipPurchase ship={ship as IShipUpgrade} />;
+    return <ShipPurchase ship={ship as IShipUpgrade}/>;
   }
-  return <ShipLocked ship={ship as ILockedTransaction} />;
+  return <ShipLocked ship={ship as ILockedTransaction}/>;
 };
 
 interface IProps {
-  ship?: IShipUpgrade|ILockedTransaction;
+  ship?: IShipUpgrade | ILockedTransaction;
 }
 
-const ShipLocked = ({ship}: {ship: ILockedTransaction}) => (
+const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
   <PurchaseCard>
-    <PurchaseCardDetail>
+    <LockedPurchaseCardDetail>
       <PurchaseCardTitle>
         <TextWarning>{ship.requirement}</TextWarning>
       </PurchaseCardTitle>
-    </PurchaseCardDetail>
-    <ShipImage>
-      <Unknown>?</Unknown>
-    </ShipImage>
+    </LockedPurchaseCardDetail>
+    <PurchaseCardImage>
+      <ShipImage>
+        <Unknown>?</Unknown>
+      </ShipImage>
+    </PurchaseCardImage>
   </PurchaseCard>
 );
 
-const ShipPurchase = ({ship} : {ship: IShipUpgrade}) => {
-  const makePurchase = () => {
-    alert("todo");
-  };
-  const buttonsDisabled = false; // todo
+const ShipPurchase = ({ ship }: { ship: IShipUpgrade }) => {
+  const { buttonsDisabled, purchaseHandler } = useLaunchShipsContext();
 
   return (
     <PurchaseCard>
       <PurchaseCardDetail>
         <PurchaseCardTitle>{ship.detail.name}</PurchaseCardTitle>
         <PurchaseCardDescription>
-          <P>{ship.detail.description}</P>
-          <ShipStats>
-            <ShipStat label="Capacity" value={ship.detail.capacity.toString(10)}/>
-            <ShipStat label="Strength" value={ship.detail.strength.toString(10)}/>
-          </ShipStats>
+          <Detail>
+            <DetailDescription>{ship.detail.description}</DetailDescription>
+            <DetailStats>
+              <Hidden as="h3">Stats</Hidden>
+              <ShipStats stats={ship.detail.stats}/>
+            </DetailStats>
+          </Detail>
         </PurchaseCardDescription>
-        <TokenButton token={ship.actionToken} handler={makePurchase}>
+        <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
           <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled}/>
-        </TokenButton>
+        </StyledTokenButton>
       </PurchaseCardDetail>
-      <ShipImage>
-        <PurchaseCardImage notificationCount={ship.currentCount}>
+      <PurchaseCardImage notificationCount={ship.currentCount}>
+        <ShipImage>
           <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt=""/>
-        </PurchaseCardImage>
-      </ShipImage>
+        </ShipImage>
+      </PurchaseCardImage>
     </PurchaseCard>
   );
 };
 
+const Detail = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+const DetailDescription = styled(P)`
+    flex: 1;
+    margin-bottom: ${GRID.UNIT};
+    ${BREAKPOINTS.M`margin-bottom: 0`};
+`;
+const DetailStats = styled.div`
+    width: 100%;
+    ${BREAKPOINTS.M`
+      width: 304px;
+      margin-left: ${GRID.UNIT};
+      padding-left: ${GRID.UNIT};
+      border-left: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+    `};
+`;
+
+const StyledTokenButton = styled(TokenButton)`
+    display: flex;
+    justify-content: center;
+    ${BREAKPOINTS.M`justify-content: flex-end`};
+`;
+
 const ShipImage = styled.div`
-  width: 48px;
   border-radius: 50%;
   background: ${COLOURS.GREY.DARKER};
   padding: ${GRID.UNIT};
-    margin-right: ${GRID.UNIT};
-  ${BREAKPOINTS.S`
-      width: 112px;
-   `}
+  width: 112px;
+  height: 112px;
+  margin-top: 4px; // for the illusion of lining up a circle
 `;
 
 const Unknown = styled.div`
@@ -86,34 +114,5 @@ const Unknown = styled.div`
   font-family: sans-serif;
   text-align: center;
   opacity: 0.4;
+  line-height: 80px;
 `;
-
-const ShipStats = styled.dl`
-  ${BREAKPOINTS.S`
-      display: flex;
-      justify-content: space-between;
-    `};
-`;
-
-interface IShipStatProps {
-  label: string;
-  value: string;
-}
-
-const ShipStatLabel = styled.dt`
-  display: inline;
-  &:after {
-    content: ":";
-  }
-`;
-const ShipStatValue = styled.dd`
-  display: inline;
-  margin-left: ${GRID.UNIT};
-`;
-
-const ShipStat = ({ label, value }: IShipStatProps) => (
-  <div>
-    <ShipStatLabel>{label}</ShipStatLabel>
-    <ShipStatValue>{value}</ShipStatValue>
-  </div>
-);

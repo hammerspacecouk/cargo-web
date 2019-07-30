@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 import http from "http";
 import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
@@ -14,23 +14,28 @@ export class ServerClient implements IAPIClient {
   public async fetch(
     path: string,
     payload?: object,
-    incomingHttpHeaders?: http.IncomingHttpHeaders,
+    incomingRequest?: http.IncomingMessage,
     outgoingResponse?: http.ServerResponse
   ): Promise<any> {
     const url = this.getUrl(path);
     try {
       const start = Date.now();
 
-      const response = await axios({
+      const config: AxiosRequestConfig = {
         method: 'get',
         url,
-        headers: {
-          cookie: incomingHttpHeaders && incomingHttpHeaders.cookie,
-        },
-        validateStatus: function (status) {
+        validateStatus: function (status: number) {
           return status >= 200 && status < 500; // default
         }
-      });
+      };
+
+      if (incomingRequest && incomingRequest.headers && incomingRequest.headers.cookie) {
+        config.headers = {
+          cookie: incomingRequest.headers.cookie,
+        }
+      }
+
+      const response = await axios(config);
 
       if (outgoingResponse && response.headers["set-cookie"]) {
         outgoingResponse.setHeader("set-cookie", response.headers["set-cookie"]);

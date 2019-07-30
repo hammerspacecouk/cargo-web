@@ -8,8 +8,8 @@ export interface IAPIClient {
   fetch(
     path: string,
     payload?: object,
-    headers?: http.IncomingHttpHeaders,
-    response?: http.ServerResponse
+    incomingRequest?: http.IncomingMessage,
+    outgoingResponse?: http.ServerResponse
   ): Promise<any>;
   tokenFetch(token: IActionToken): Promise<any>;
 }

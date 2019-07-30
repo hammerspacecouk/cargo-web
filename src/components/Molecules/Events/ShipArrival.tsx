@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Event, IEventProps } from "./Event";
 
-export const ShipArrival = ({ event, onAnimated }: IEventProps) => {
+export const ShipArrival = ({ event }: IEventProps) => {
   const port = event.port;
 
   let name = "[deleted]";
@@ -10,7 +10,7 @@ export const ShipArrival = ({ event, onAnimated }: IEventProps) => {
   }
 
   return (
-    <Event time={event.time} onAnimated={onAnimated}>
+    <Event time={event.time}>
       <em>{name}</em> arrived safely at {port.name}
     </Event>
   );

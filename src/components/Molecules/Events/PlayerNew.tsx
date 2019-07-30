@@ -2,7 +2,7 @@ import * as React from "react";
 import { PlayerFlag } from "../PlayerFlag";
 import { Event, EventFlag, IEventProps } from "./Event";
 
-export const PlayerNew = ({ event, firstPerson, onAnimated }: IEventProps) => {
+export const PlayerNew = ({ event, firstPerson }: IEventProps) => {
   let name;
   if (firstPerson) {
     name = "You ";
@@ -19,7 +19,7 @@ export const PlayerNew = ({ event, firstPerson, onAnimated }: IEventProps) => {
   const port = event.port;
 
   return (
-    <Event time={event.time} onAnimated={onAnimated}>
+    <Event time={event.time}>
       {name} started a new game at {port.name}
     </Event>
   );

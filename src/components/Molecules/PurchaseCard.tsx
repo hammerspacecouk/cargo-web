@@ -4,15 +4,20 @@ import { NumberBadge } from "../Atoms/NumberBadge";
 import { GRID } from "../../styles/variables";
 import { H4 } from "../Atoms/Heading";
 import { IChildrenProps } from "../../interfaces";
-import { Square } from "../Atoms/Ratio";
+import { BREAKPOINTS } from "../../styles/media";
 
 interface IPurchaseCardImageProps extends IChildrenProps {
   className?: string;
   notificationCount?: number;
 }
 
-const StyledPurchaseCardImage = styled(Square)`
+const StyledPurchaseCardImage = styled.div`
   position: relative;
+  width: 112px;
+  margin: 0 auto ${GRID.UNIT} auto;
+  ${BREAKPOINTS.M`
+    margin: 0 ${GRID.UNIT} 0 0;
+  `};
 `;
 const BadgePosition = styled.div`
   position: absolute;
@@ -24,14 +29,24 @@ const BadgePosition = styled.div`
 
 export const PurchaseCard = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
+  ${BREAKPOINTS.M`
+    flex-direction: row-reverse;
+  `};
 `;
 
 export const PurchaseCardTitle = ({ children }: IChildrenProps) => <H4 as="h3">{children}</H4>;
 
 export const PurchaseCardDetail = styled.div`
   flex: 1;
+`;
+
+export const LockedPurchaseCardDetail = styled(PurchaseCardDetail)`
+    display: flex;
+    justify-content: center;
+    align-self: center;
 `;
 
 export const PurchaseCardDescription = styled.div`

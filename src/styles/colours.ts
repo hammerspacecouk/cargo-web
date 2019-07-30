@@ -141,6 +141,11 @@ export const COLOURS = {
     DANGER: danger.MID,
     WARNING: warning.MID,
   },
+  STATS: {
+    STRENGTH: allColours.red[4],
+    SPEED: allColours.blue[4],
+    CAPACITY: allColours.yellow[4],
+  },
 
   HEALTH: {
     FULL: allColours.blue[4],
@@ -211,6 +216,7 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
 export const scrollbarStyles = css`
   /* 1st: thumb, 2nd: track. */
   scrollbar-color: ${COLOURS.BLACK.FADED} rgba(0, 0, 0, 0.3);
+  scrollbar-width: thin;
   &::-webkit-scrollbar {
     width: ${GRID.HALF};
   }

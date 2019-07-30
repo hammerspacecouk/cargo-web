@@ -46,7 +46,7 @@ const calculateInitialProps = async (context: NextPageContext, Page: IPageWithDa
       throw UnauthenticatedError("Cookie not found");
     }
     // get the gameSession data
-    initialProps.gameSession = await getSession(req && req.headers, res);
+    initialProps.gameSession = await getSession(req, res);
 
     // get the sub-page data
     if (Page.getInitialProps) {
