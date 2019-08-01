@@ -25,7 +25,7 @@ const StyledChildren = styled.span`
 
 const StyledIcon = styled(StyledChildren)``;
 
-export const StackedButton = ({ icon, children, className, ...props }: IProps) => {
+export const StackedButton = React.memo(({ icon, children, className, ...props }: IProps) => {
   let styledPrefix;
   if (icon) {
     styledPrefix = (
@@ -41,4 +41,4 @@ export const StackedButton = ({ icon, children, className, ...props }: IProps) =
       {children}
     </StyledButton>
   );
-};
+});

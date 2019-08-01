@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { IPort } from "../../interfaces";
 import { GRID } from "../../styles/variables";
-import { ShieldIcon } from "../Icons/ShieldIcon";
+import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
 
 interface IProps {
   port: IPort;
@@ -18,16 +18,16 @@ const Text = styled.span`
 const Icon = styled.abbr`
   display: inline-block;
   margin-left: ${GRID.HALF};
-  width: 28px;
-  height: 28px;
+  width: 1em;
+  height: 1em;
 `;
 
-export const PortName = ({ port }: IProps) => {
+export const PortName = React.memo(({ port }: IProps) => {
   let safeIndicator = null;
   if (port.safeHaven) {
     safeIndicator = (
-      <Icon title="Safe Haven">
-        <ShieldIcon />
+      <Icon title="Sanctuary">
+        <SanctuaryIcon />
       </Icon>
     );
   }
@@ -37,4 +37,4 @@ export const PortName = ({ port }: IProps) => {
       {safeIndicator}
     </Styled>
   );
-};
+});

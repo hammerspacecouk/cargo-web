@@ -4,7 +4,7 @@ import * as React from "react";
  * Show dynamically updating time since an event
  * todo - use FormattedRelativeTime once no longer in beta
  */
-export const TimeAgo = ({ className, datetime }: IProps) => {
+export const TimeAgo = React.memo(({ className, datetime }: IProps) => {
   const diffInSeconds: number = getSeconds(datetime);
   return (
     <time className={className} dateTime={datetime.toISOString()} title={datetime.toISOString()}>
@@ -20,7 +20,7 @@ export const TimeAgo = ({ className, datetime }: IProps) => {
       {/*/>*/}
     </time>
   );
-};
+});
 
 interface IProps {
   className?: string;

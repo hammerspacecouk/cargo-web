@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
 
-export const ShipStats = ({ className, stats }: IShipStatsProps) => (
+export const ShipStats = React.memo(({ className, stats }: IShipStatsProps) => (
   <StyledTable className={className}>
     <tbody>
     <ShipStat
@@ -27,7 +27,7 @@ export const ShipStats = ({ className, stats }: IShipStatsProps) => (
     />
     </tbody>
   </StyledTable>
-);
+));
 
 interface IShipStatsProps extends IClassNameProps {
   stats: IShipClassStats;

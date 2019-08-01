@@ -9,7 +9,7 @@ const StyledDistance = styled.div`
   font-variant: small-caps;
 `;
 
-export const Distance = ({ value }: { value: number }) => {
+export const Distance = React.memo(({ value }: { value: number }) => {
   let distance = <TextD>{value}</TextD>;
   if (value === 0) {
     distance = <Fraction num={1} den={100} />;
@@ -23,4 +23,4 @@ export const Distance = ({ value }: { value: number }) => {
       </abbr>
     </StyledDistance>
   );
-};
+});

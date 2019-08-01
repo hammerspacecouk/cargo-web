@@ -8,7 +8,7 @@ import { COLOURS } from "../../styles/colours";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { IChildrenProps } from "../../interfaces";
 
-export const WinRequirement = ({ achieved, children }: IProps) => {
+export const WinRequirement = React.memo(({ achieved, children }: IProps) => {
   let IndicatorIcon, color;
   if (achieved) {
     IndicatorIcon = TickIcon;
@@ -28,7 +28,7 @@ export const WinRequirement = ({ achieved, children }: IProps) => {
       <Text>{children}</Text>
     </StyledRequirement>
   );
-};
+});
 
 interface IProps extends IChildrenProps {
   achieved: boolean;

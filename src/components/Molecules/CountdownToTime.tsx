@@ -7,12 +7,13 @@ interface IProps {
   readonly dateTime: string;
 }
 
+// todo - same logic as arrival time. combine
 const calculateSeconds = (dateTime: string): number => {
   const calculationDate = new Date(dateTime);
   return Math.max(0, differenceInSeconds(calculationDate, new Date()));
 };
 
-export const CountdownToTime = ({ dateTime }: IProps) => {
+export const CountdownToTime = React.memo(({ dateTime }: IProps) => {
   const [seconds, setSeconds] = React.useState(() => calculateSeconds(dateTime));
 
   useFrameEffect(
@@ -26,4 +27,4 @@ export const CountdownToTime = ({ dateTime }: IProps) => {
   );
 
   return <IntervalFormat seconds={seconds} />;
-};
+});

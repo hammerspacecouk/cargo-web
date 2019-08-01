@@ -8,24 +8,19 @@ import { Hint } from "../../../Organisms/ActiveShip/Panels/Hint";
 import { Bonus } from "../../../Organisms/ActiveShip/Panels/Bonus";
 import { TextCenter } from "../../../Atoms/Text";
 import { ProgressBar } from "../../../Atoms/ProgressBar";
-import { IntervalFormat } from "../../../Atoms/IntervalFormat";
 import { useTravellingState } from "../../../../hooks/useTravellingState";
 import { GRID } from "../../../../styles/variables";
+import { TravelCountdown } from "../../../Atoms/TravelCountdown";
 
 export const ShipInChannelPage = () => {
-  //const { bonusEffects, channel, hint } = useCurrentShipContext();
   const { bonusEffects } = useActiveShipContext();
   const { secondsRemaining, percent } = useTravellingState();
-  let remaining: any = "Arriving...";
-  if (secondsRemaining) {
-    remaining = <IntervalFormat seconds={secondsRemaining} />;
-  }
 
   return (
     <Page>
       <Column>
         <GeneralPanel title="Travelling">
-          <TimeRemaining as="h3">{remaining}</TimeRemaining>
+          <TimeRemaining as="h3"><TravelCountdown seconds={secondsRemaining} /></TimeRemaining>
           <ProgressBar percent={percent} />
         </GeneralPanel>
         <GeneralPanel title="Incoming...">

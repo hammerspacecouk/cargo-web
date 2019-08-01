@@ -11,7 +11,7 @@ interface IOffenceEffectProps {
   doneHandler: () => void;
 }
 
-export const UseEffectItem = ({ option, doneHandler }: IOffenceEffectProps) => {
+export const UseEffectItem = React.memo(({ option, doneHandler }: IOffenceEffectProps) => {
   const { portActionHandler, buttonsDisabled } = useActiveShipContext();
 
   if (!option) {
@@ -42,4 +42,4 @@ export const UseEffectItem = ({ option, doneHandler }: IOffenceEffectProps) => {
       <ActionRowButton>{actionButton}</ActionRowButton>
     </ActionRow>
   );
-};
+});

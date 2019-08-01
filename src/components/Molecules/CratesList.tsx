@@ -60,7 +60,7 @@ const List = styled(ListInline)`
   }
 `;
 
-export const CratesList = ({ title, titlePosition, children }: IProps) => {
+export const CratesList = React.memo(({ title, titlePosition, children }: IProps) => {
   const crates = React.Children.toArray(children);
 
   return (
@@ -75,4 +75,4 @@ export const CratesList = ({ title, titlePosition, children }: IProps) => {
       </List>
     </StyledWrapper>
   );
-};
+});

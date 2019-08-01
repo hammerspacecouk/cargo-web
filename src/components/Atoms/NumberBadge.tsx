@@ -6,7 +6,7 @@ interface IProps {
   value: number;
 }
 
-export const NumberBadge = ({ className, value }: IProps) => {
+export const NumberBadge = React.memo(({ className, value }: IProps) => {
   const [animate, setAnimate] = React.useState(true);
 
   let resetTimer: any; // can't find the right type
@@ -26,4 +26,4 @@ export const NumberBadge = ({ className, value }: IProps) => {
       {value}
     </Badge>
   );
-};
+});

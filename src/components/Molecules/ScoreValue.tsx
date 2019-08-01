@@ -36,7 +36,7 @@ const getScoreString = (input: number): string => {
 /**
  * Standard way to display a score value (with Icon)
  */
-export const ScoreValue = ({ score, prefix = "", className }: IProps) => {
+export const ScoreValue = React.memo(({ score, prefix = "", className }: IProps) => {
   return (
     <StyledScore className={className}>
       <Icon>
@@ -48,4 +48,4 @@ export const ScoreValue = ({ score, prefix = "", className }: IProps) => {
       </Digits>
     </StyledScore>
   );
-};
+});

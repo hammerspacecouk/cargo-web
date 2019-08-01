@@ -30,11 +30,11 @@ const Title = styled.h2`
   margin-bottom: ${GRID.UNIT};
 `;
 
-export const ContentPanel = ({ panelTitle, className, children }: IProps) => {
+export const ContentPanel = React.memo(({ panelTitle, className, children }: IProps) => {
   return (
     <StyledContentPanel panelTitle={panelTitle} className={className}>
       <Title>{panelTitle}</Title>
       {children}
     </StyledContentPanel>
   );
-};
+});

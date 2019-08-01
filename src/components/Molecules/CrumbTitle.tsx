@@ -41,7 +41,7 @@ const CrumbTitleH1 = styled(H1)`
   margin-top: ${GRID.HALF};
 `;
 
-export const CrumbTitle = (props: IProps) => {
+export const CrumbTitle = React.memo((props: IProps) => {
   const crumbs = [
     {
       link: "/",
@@ -62,4 +62,4 @@ export const CrumbTitle = (props: IProps) => {
       <CrumbTitleH1>{props.children}</CrumbTitleH1>
     </StyledCrumbTitle>
   );
-};
+});

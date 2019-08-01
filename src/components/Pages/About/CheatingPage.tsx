@@ -3,6 +3,6 @@ import { AboutLayout } from "../../Templates/AboutLayout";
 
 export const CheatingPage = () => (
   <AboutLayout title="Cheating">
-    <div>Not cool dawg...</div>
+    <div>Not cool dawg</div>
   </AboutLayout>
 );

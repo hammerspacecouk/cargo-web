@@ -54,7 +54,7 @@ export const PurchaseCardDescription = styled.div`
   margin: ${GRID.HALF} 0 ${GRID.UNIT};
 `;
 
-export const PurchaseCardImage = ({ className, children, notificationCount }: IPurchaseCardImageProps) => {
+export const PurchaseCardImage = React.memo(({ className, children, notificationCount }: IPurchaseCardImageProps) => {
   let countElement = null;
   if (notificationCount) {
     countElement = (
@@ -70,4 +70,4 @@ export const PurchaseCardImage = ({ className, children, notificationCount }: IP
       {countElement}
     </StyledPurchaseCardImage>
   );
-};
+});

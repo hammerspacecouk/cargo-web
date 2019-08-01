@@ -4,12 +4,12 @@ import { IPlayer } from "../../interfaces";
 import { COLOURS } from "../../styles/colours";
 import { Environment } from "../../utils/environment";
 
-export const PlayerFlag = ({ player, className }: IProps) => {
+export const PlayerFlag = React.memo(({ player, className }: IProps) => {
   if (player) {
     return <StyledImg as="img" className={className} src={`${Environment.clientApiHostname}${player.emblem}`} alt="" />;
   }
   return <StyledBox />;
-};
+});
 
 interface IProps {
   player: IPlayer;

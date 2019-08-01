@@ -7,21 +7,33 @@ import { ShipOverview } from "../../../Organisms/ActiveShip/ShipOverview";
 import { MessageModal } from "../../../Organisms/ActiveShip/MessageModal";
 import { pageTitle } from "../../../../utils/pageTitle";
 import { PlayBoardLayout } from "../../../Templates/PlayBoardLayout";
+import { Loading } from "../../../Atoms/Loading";
+import { useGameSessionContext } from "../../../../contexts/GameSessionContext/GameSessionContext";
+import { useEffect } from "react";
 
 export const ShipDetailPage = () => {
+  const { setActiveShipById } = useGameSessionContext();
   const { ship, port } = useActiveShipContext();
+
+  useEffect(() => {
+    const id = ship ? ship.id : null;
+    setActiveShipById(id);
+    return () => setActiveShipById(null);
+  }, [ship]);
 
   let innerPage;
   if (port) {
     innerPage = <ShipInPortPage />;
-  } else {
+  } else if (ship) {
     innerPage = <ShipInChannelPage />;
+  } else {
+    innerPage = <Loading />
   }
 
   return (
     <>
       <Head>
-        <title>{pageTitle(ship.name)}</title>
+        <title>{pageTitle(ship ? ship.name : 'Loading...')}</title>
       </Head>
       <PlayBoardLayout overview={<ShipOverview />}>
         {innerPage}

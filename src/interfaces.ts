@@ -160,10 +160,7 @@ export interface IShip {
   shipClass?: IShipClass;
   isDestroyed: boolean;
   strengthPercent: number;
-  location?: {
-    name?: string; // todo - use a location interface
-    safeHaven?: boolean;
-  };
+  location?: IChannel | IPort;
 }
 
 export interface IEvent {

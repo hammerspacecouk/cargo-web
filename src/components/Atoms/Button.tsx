@@ -76,13 +76,13 @@ export const Button = styled.button<IProps>`
   }
 `;
 
-export const ConfirmButton = (props: any) => <Button {...props} styleType={Type.Confirm} />;
+export const ConfirmButton = React.memo((props: any) => <Button {...props} styleType={Type.Confirm} />);
 
-export const DangerButton = (props: any) => <Button {...props} styleType={Type.Danger} />;
+export const DangerButton = React.memo((props: any) => <Button {...props} styleType={Type.Danger} />);
 
-export const ActionButton = (props: any) => <Button {...props} styleType={Type.Action} />;
+export const ActionButton = React.memo((props: any) => <Button {...props} styleType={Type.Action} />);
 
-export const WarningButton = (props: any) => <Button {...props} styleType={Type.Warning} />;
+export const WarningButton = React.memo((props: any) => <Button {...props} styleType={Type.Warning} />);
 
 export const DisguisedButton = styled.button`
   background: none;
@@ -112,26 +112,26 @@ const IconConfirmButton = styled(ConfirmButton)`
   ${iconButtonStyles};
 `;
 
-export const AttackButton = (props: any) => (
+export const AttackButton = React.memo((props: any) => (
   <IconDangerButton {...props}>
     <AttackIcon />
   </IconDangerButton>
-);
+));
 
-export const TacticalButton = (props: any) => (
+export const TacticalButton = React.memo((props: any) => (
   <IconConfirmButton {...props}>
     <TacticalIcon />
   </IconConfirmButton>
-);
+));
 
-export const AddButton = (props: any) => (
+export const AddButton = React.memo((props: any) => (
   <IconConfirmButton title="Add" {...props}>
     <AddIcon />
   </IconConfirmButton>
-);
+));
 
-export const RemoveButton = (props: any) => (
+export const RemoveButton = React.memo((props: any) => (
   <IconDangerButton title="Remove" {...props}>
     <CloseIcon />
   </IconDangerButton>
-);
+));

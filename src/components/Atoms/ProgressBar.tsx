@@ -30,11 +30,11 @@ const Bar = styled.div<{ percentValue: number }>`
   border-radius: 4px;
 `;
 
-export const ProgressBar = ({ percent, small = false }: IProps) => {
+export const ProgressBar = React.memo(({ percent, small = false }: IProps) => {
   const percentValue = Math.max(percent, 2); // to show that it is a bar that will fill up
   return (
     <Track small={small}>
       <Bar title={`${percent}%`} percentValue={percentValue} />
     </Track>
   );
-};
+});

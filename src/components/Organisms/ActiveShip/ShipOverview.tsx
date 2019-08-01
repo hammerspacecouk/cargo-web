@@ -6,7 +6,8 @@ import { Planet } from "../../Molecules/Planet";
 import { Environment } from "../../../utils/environment";
 import { ELEMENTS, SIZES } from "../../../styles/typography";
 import { BREAKPOINTS } from "../../../styles/media";
-import { IShip } from "../../../interfaces";
+import { IPort, IShip } from "../../../interfaces";
+import { PortName } from "../../Molecules/PortName";
 
 const shipSize = "128px";
 
@@ -74,6 +75,18 @@ const ShipImage = ({ ship }: { ship: IShip }) => (
 export const ShipOverview = () => {
   const { ship, port } = useActiveShipContext();
 
+  if (!ship) {
+    return (
+      <StyledOverview>
+        <div>
+          <h1>
+            <TitleName>Contacting ship...</TitleName>
+          </h1>
+        </div>
+      </StyledOverview>
+    )
+  }
+
   if (!port) {
     return (
       <StyledOverview>
@@ -98,7 +111,7 @@ export const ShipOverview = () => {
         <h1>
           <TitleName>{ship.name}</TitleName>
           <TitleConjunction> arrived at </TitleConjunction>
-          <TitleLocation>{ship.location.name}</TitleLocation>
+          <TitleLocation><PortName port={(ship.location as IPort)} /></TitleLocation>
         </h1>
       </div>
       <Ship>

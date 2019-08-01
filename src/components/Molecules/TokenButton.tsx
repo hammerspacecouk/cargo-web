@@ -14,7 +14,7 @@ const StyledForm = styled.form`
   display: inline;
 `;
 
-export const TokenButton = ({ token, className, children, handler }: IProps) => {
+export const TokenButton = React.memo(({ token, className, children, handler }: IProps) => {
   return (
     <StyledForm
       className={className}
@@ -31,4 +31,4 @@ export const TokenButton = ({ token, className, children, handler }: IProps) => 
       {children}
     </StyledForm>
   );
-};
+});

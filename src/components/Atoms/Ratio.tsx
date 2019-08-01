@@ -20,10 +20,10 @@ const SquareWrap = styled(Wrap)`
   padding-top: 100%;
 `;
 
-export const Square = ({ children, className }: IChildrenProps & IClassNameProps) => {
+export const Square = React.memo(({ children, className }: IChildrenProps & IClassNameProps) => {
   return (
     <SquareWrap className={className}>
       <Inner>{children}</Inner>
     </SquareWrap>
   );
-};
+});

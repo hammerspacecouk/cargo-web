@@ -118,7 +118,7 @@ export const ModalActions = styled.div`
   }
 `;
 
-export const Modal = (props: IProps) => {
+export const Modal = React.memo((props: IProps) => {
   // on server just render nothing (as you can't open modals on server)
   if (typeof window === "undefined") {
     return null;
@@ -165,4 +165,4 @@ export const Modal = (props: IProps) => {
       </ModalBody>
     </ReactModal>
   );
-};
+});

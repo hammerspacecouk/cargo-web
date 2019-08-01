@@ -21,7 +21,7 @@ const Button = styled(DisguisedButton)`
   }
 `;
 
-export const EffectActionButton = ({ disabled, effect, handler, token }: IProps) => {
+export const EffectActionButton = React.memo(({ disabled, effect, handler, token }: IProps) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [isActioning, setIsActioning] = React.useState(false);
 
@@ -70,4 +70,4 @@ export const EffectActionButton = ({ disabled, effect, handler, token }: IProps)
       {modal}
     </>
   );
-};
+});

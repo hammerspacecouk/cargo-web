@@ -27,7 +27,7 @@ const Detail = styled.div`
   line-height: 1;
 `;
 
-export const PlayerShip = ({ ship, offence }: IProps) => (
+export const PlayerShip = React.memo(({ ship, offence }: IProps) => (
   <ActionRow>
     <ShipDetail>
       <Status>
@@ -42,4 +42,4 @@ export const PlayerShip = ({ ship, offence }: IProps) => (
       <OffenceActions actions={offence} ship={ship} />
     </ActionRowButton>
   </ActionRow>
-);
+));

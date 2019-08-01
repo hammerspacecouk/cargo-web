@@ -30,7 +30,7 @@ const StyledValue = styled(TextE)`
   margin-right: ${GRID.QUARTER};
 `;
 
-export const CratePickup = ({ crateAction }: IProps) => (
+export const CratePickup = React.memo(({ crateAction }: IProps) => (
   <StyledCrate>
     <CrateWithContents crate={crateAction.crate} />
     <StyledCrateValue>
@@ -41,4 +41,4 @@ export const CratePickup = ({ crateAction }: IProps) => (
       <abbr title="per light year">/ly</abbr>
     </StyledCrateValue>
   </StyledCrate>
-);
+));

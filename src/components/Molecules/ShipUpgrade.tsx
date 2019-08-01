@@ -46,7 +46,7 @@ const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
   </PurchaseCard>
 );
 
-const ShipPurchase = ({ ship }: { ship: IShipUpgrade }) => {
+const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
   const { buttonsDisabled, purchaseHandler } = useLaunchShipsContext();
 
   return (
@@ -73,7 +73,7 @@ const ShipPurchase = ({ ship }: { ship: IShipUpgrade }) => {
       </PurchaseCardImage>
     </PurchaseCard>
   );
-};
+});
 
 const Detail = styled.div`
     display: flex;

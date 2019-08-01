@@ -39,7 +39,7 @@ const PanelFoot = styled.div`
   margin-top: ${GRID.UNIT};
 `;
 
-export const Panel = ({ className, title, children, full }: IProps) => {
+export const Panel = React.memo(({ className, title, children, full }: IProps) => {
   return (
     <StyledPanel className={className}>
       <PanelTitle>{title}</PanelTitle>
@@ -47,4 +47,4 @@ export const Panel = ({ className, title, children, full }: IProps) => {
       <PanelFoot>/{title}</PanelFoot>
     </StyledPanel>
   );
-};
+});

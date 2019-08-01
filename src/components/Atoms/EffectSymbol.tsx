@@ -11,7 +11,7 @@ interface IProps {
   currentCount?: number;
 }
 
-export const EffectSymbol = ({ effect, currentCount }: IProps) => {
+export const EffectSymbol = React.memo(({ effect, currentCount }: IProps) => {
   let numberBadge;
   if (currentCount) {
     numberBadge = <PositionedNumberBadge value={currentCount} />;
@@ -23,7 +23,7 @@ export const EffectSymbol = ({ effect, currentCount }: IProps) => {
       {numberBadge}
     </Outer>
   );
-};
+});
 
 // Workings below
 

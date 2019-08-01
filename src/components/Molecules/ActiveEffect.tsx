@@ -13,7 +13,7 @@ const StyledActiveEffect = styled.div`
   border-radius: ${GRID.HALF};
 `;
 
-export const ActiveEffect = ({ effectOption }: { effectOption: ITacticalOption }) => {
+export const ActiveEffect = React.memo(({ effectOption }: { effectOption: ITacticalOption }) => {
   let description = null;
 
   if (effectOption.hitsRemaining) {
@@ -31,4 +31,4 @@ export const ActiveEffect = ({ effectOption }: { effectOption: ITacticalOption }
       <EffectDetail effect={effectOption.effect} altDescription={description} />
     </StyledActiveEffect>
   );
-};
+});

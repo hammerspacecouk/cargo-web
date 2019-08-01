@@ -61,12 +61,12 @@ const StyledText = styled.span`
   margin-left: ${GRID.UNIT};
 `;
 
-const SocialButton = ({ href, icon, text, colour }: IButtonProps) => (
+const SocialButton = React.memo(({ href, icon, text, colour }: IButtonProps) => (
   <StyledLink colour={colour} href={href}>
     <Icon size={SMALL_ICON}>{icon}</Icon>
     <StyledText>{text}</StyledText>
   </StyledLink>
-);
+));
 
 export const FacebookButton = ({ href }: IProps) => (
   <SocialButton

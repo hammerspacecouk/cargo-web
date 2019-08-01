@@ -21,7 +21,7 @@ const StyledEffectDescription = styled.div`
   flex: 1;
 `;
 
-export const EffectDetail = ({ effect, currentCount, altDescription, className }: IProps) => (
+export const EffectDetail = React.memo(({ effect, currentCount, altDescription, className }: IProps) => (
   <StyledEffectDetail className={className}>
     <EffectSymbol effect={effect} currentCount={currentCount} />
     <StyledEffectDescription>
@@ -29,7 +29,7 @@ export const EffectDetail = ({ effect, currentCount, altDescription, className }
       {altDescription || altDescription === null ? altDescription : <p>{effect.description}</p>}
     </StyledEffectDescription>
   </StyledEffectDetail>
-);
+));
 
 export const LockedEffectDetail = () => (
   <StyledEffectDetail>

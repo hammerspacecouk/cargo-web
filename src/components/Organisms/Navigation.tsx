@@ -6,7 +6,7 @@ import { PlayerSummary } from "./PlayerSummary";
 import { ListUnstyled } from "../Atoms/List/ListUnstyled";
 import { BREAKPOINTS } from "../../styles/media";
 import { NavigationItem } from "../Molecules/NavigationItem";
-import { InventoryIcon } from "../Icons/InventoryIcon";
+import { LaunchIcon } from "../Icons/LaunchIcon";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
@@ -57,7 +57,7 @@ export const Navigation = ({ className }: IProps) => {
         <NavigationList>
           <li>
             <NavigationItem
-              icon={<InventoryIcon />}
+              icon={<LaunchIcon />}
               isCurrent={false}
               path={{ href: routes.getPlayLaunch() }}
               text="Launch ships"

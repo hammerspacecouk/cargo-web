@@ -18,8 +18,8 @@ const StyledSub = styled.sup`
   left: -1px;
 `;
 
-export const Fraction = ({ num, den }: IProps) => (
+export const Fraction = React.memo(({ num, den }: IProps) => (
   <>
     <StyledSup>{num}</StyledSup>&#8260;<StyledSub>{den}</StyledSub>
   </>
-);
+));

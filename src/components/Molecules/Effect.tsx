@@ -55,7 +55,7 @@ const StyledEffectInner = styled.div`
   ${SIZES.D};
 `;
 
-export const Effect = ({ effect, isActive = false, disabled = false, isButton = false }: IProps) => {
+export const Effect = React.memo(({ effect, isActive = false, disabled = false, isButton = false }: IProps) => {
   let symbol = "?";
 
   if (effect) {
@@ -67,4 +67,4 @@ export const Effect = ({ effect, isActive = false, disabled = false, isButton = 
       <StyledEffectInner>{symbol}</StyledEffectInner>
     </StyledEffectWrap>
   );
-};
+});

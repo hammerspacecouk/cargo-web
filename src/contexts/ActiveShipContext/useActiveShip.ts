@@ -13,7 +13,7 @@ import {
   ITacticalOption,
   ITransaction,
 } from "../../interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ApiClient } from "../../utils/ApiClient";
 import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 import { useGameSessionContext } from "../GameSessionContext/GameSessionContext";
@@ -50,10 +50,14 @@ interface IActiveShipState {
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
   const { updateScore, updateAShipProperty } = useGameSessionContext();
-  const [activeShipState, setActiveShipState] = useState(() => getNewActiveShipState({}, initialShip));
+  const [activeShipState, setActiveShipState] = useState({} as IActiveShipState);
   const [message, setMessage] = useState(null);
   const { disableButtons, enableButtons, buttonsDisabled } = useButtonsDisabled();
   const isMounted = useMounted();
+
+  useEffect(() => {
+    setActiveShipState(getNewActiveShipState(activeShipState, initialShip));
+  }, [initialShip]);
 
   const setDataFromResponse = (data?: IActiveShipResponse) => {
     if (!isMounted()) {

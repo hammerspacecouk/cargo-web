@@ -66,7 +66,7 @@ const getColour = (value: number): string => {
   return COLOURS.CRATE.LEVEL0;
 };
 
-export const CrateWithContents = ({ crate }: IProps) => (
+export const CrateWithContents = React.memo(({ crate }: IProps) => (
   <StyledCrateContents>
     <StyledCrate>
       <Crate colour={getColour(crate.value)} />
@@ -77,7 +77,7 @@ export const CrateWithContents = ({ crate }: IProps) => (
       </StyledContent>
     </Side>
   </StyledCrateContents>
-);
+));
 
 export const PlaceholderContents = () => (
   <StyledCrateContents>

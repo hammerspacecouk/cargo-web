@@ -73,7 +73,7 @@ export const MessageInfo = ({ children }: IChildrenProps) =>
 export const MessageError = ({ children }: IChildrenProps) =>
   messageContent(<ErrorIcon />, children, COLOURS.SEMANTIC.DANGER);
 
-export const Message = ({ message }: IGenericMessageProps) => {
+export const Message = React.memo(({ message }: IGenericMessageProps) => {
   switch (message.type) {
     case TYPE_OK:
       return <MessageOk>{message.message}</MessageOk>;
@@ -85,4 +85,4 @@ export const Message = ({ message }: IGenericMessageProps) => {
     default:
       return <MessageInfo>{message.message}</MessageInfo>;
   }
-};
+});
