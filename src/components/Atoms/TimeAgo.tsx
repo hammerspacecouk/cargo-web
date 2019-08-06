@@ -1,23 +1,37 @@
 import * as React from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { FormattedRelativeTime } from "react-intl";
+import { useDate } from "../../hooks/useDate";
 
 /**
  * Show dynamically updating time since an event
- * todo - use FormattedRelativeTime once no longer in beta
  */
 export const TimeAgo = React.memo(({ className, datetime }: IProps) => {
-  const diffInSeconds: number = getSeconds(datetime);
+  const [relativeSeconds, setRelativeSeconds] = useState(undefined);
+
+  useEffect(() => {
+    // only do relative time on the client, hence useEffect
+    setRelativeSeconds(getSeconds(datetime));
+  }, [datetime]);
+
+  let relativeTime: ReactNode = useDate(datetime);
+  if (relativeSeconds) {
+    relativeTime = (
+      <FormattedRelativeTime
+        value={relativeSeconds}
+        numeric="always"
+        unit="second"
+        style="long"
+        updateIntervalInSeconds={10}
+        format=""
+        localeMatcher="best fit"
+      />
+    );
+  }
+
   return (
     <time className={className} dateTime={datetime.toISOString()} title={datetime.toISOString()}>
-      {getString(diffInSeconds)}
-      {/*<FormattedRelativeTime*/}
-      {/*  value={diffInSeconds}*/}
-      {/*  numeric="always"*/}
-      {/*  unit="second"*/}
-      {/*  style="long"*/}
-      {/*  updateIntervalInSeconds={10}*/}
-      {/*  format=""*/}
-      {/*  localeMatcher="best fit"*/}
-      {/*/>*/}
+      {relativeTime}
     </time>
   );
 });
@@ -30,12 +44,4 @@ interface IProps {
 const getSeconds = (datetime: Date): number => {
   const now = new Date();
   return Math.floor((datetime.getTime() - now.getTime()) / 1000);
-};
-
-const getString = (seconds: number): string => {
-  if (Intl && (Intl as any).RelativeTimeFormat) {
-    const formatter = new (Intl as any).RelativeTimeFormat('en', { style: 'long' });
-    return formatter.format(seconds, 'second');
-  }
-  return `${Math.abs(seconds)} seconds ago`;
 };

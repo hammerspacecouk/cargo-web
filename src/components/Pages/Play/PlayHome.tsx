@@ -11,18 +11,18 @@ import { GRID } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading";
 import { DangerButton } from "../../Atoms/Button";
 import { Prose } from "../../Atoms/Prose";
-import { fullDate } from "../../../utils/format";
 import { TableSubtle } from "../../Molecules/Table";
 import { TextDanger, TextWarning } from "../../Atoms/Text";
 import { LogOutButton } from "../../Organisms/LogOutButton";
 import { MessageError } from "../../Molecules/Message";
 import { routes } from "../../../routes";
+import { useDate } from "../../../hooks/useDate";
 
 export const PlayHome = () => {
   const { events, player } = useGameSessionContext();
+  const playingSinceDate = useDate(new Date(player.startedAt));
 
   let isAnonymous = false; // todo - get from session
-  const playingSinceDate: Date = new Date(player.startedAt);
 
   let mode;
   if (isAnonymous) {
@@ -62,7 +62,7 @@ export const PlayHome = () => {
               </tr>
               <tr>
                 <th>Playing since:</th>
-                <td>{fullDate(playingSinceDate)}</td>
+                <td>{playingSinceDate}</td>
               </tr>
             </tbody>
           </TableSubtle>

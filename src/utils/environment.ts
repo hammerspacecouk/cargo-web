@@ -12,6 +12,7 @@ export interface IEnvironment {
   isServer: boolean;
   locale: string;
 }
+export const defaultLocale: string = 'en-gb';
 
 let environment: IEnvironment;
 
@@ -31,7 +32,7 @@ if (isClient) {
     appVersion: process.env.APP_VERSION,
     host: process.env.HOSTNAME,
     nodeEnv: process.env.NODE_ENV,
-    locale: 'en-gb', // can change in future
+    locale: defaultLocale, // can change in future
     isClient: false,
     isServer: true,
   };

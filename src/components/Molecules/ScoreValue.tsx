@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { MONOSPACE_FONT } from "../../styles/typography";
 import { CreditsIcon } from "../Icons/CreditsIcon";
+import { useNumber } from "../../hooks/useNumber";
 
 interface IProps {
   score: number;
@@ -26,25 +27,19 @@ export const Digits = styled.span`
   ${MONOSPACE_FONT};
 `;
 
-const getScoreString = (input: number): string => {
-  if (input > 999999999999999) {
-    return input.toExponential(12);
-  }
-  return input.toLocaleString();
-};
-
 /**
  * Standard way to display a score value (with Icon)
  */
 export const ScoreValue = React.memo(({ score, prefix = "", className }: IProps) => {
+  const number = useNumber(score);
+
   return (
     <StyledScore className={className}>
       <Icon>
         <CreditsIcon />
       </Icon>
       <Digits>
-        {prefix}
-        {getScoreString(score)}
+        {prefix}{number}
       </Digits>
     </StyledScore>
   );

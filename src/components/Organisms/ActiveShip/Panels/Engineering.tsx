@@ -10,6 +10,8 @@ import { Modal } from "../../../Molecules/Modal";
 import { ShipHealth } from "../ShipHealth";
 import { useMounted } from "../../../../hooks/useMounted";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
+import { usePercent } from "../../../../hooks/usePercent";
+import { useNumber } from "../../../../hooks/useNumber";
 
 const Panel = styled.div`
   display: flex;
@@ -80,7 +82,9 @@ export const Engineering = () => {
   const { buttonsDisabled, ship, requestNameToken } = useActiveShipContext();
   const isMounted = useMounted();
 
-  const strengthValue = Math.ceil((ship.strengthPercent / 100) * ship.shipClass.strength);
+  const strengthPercent = usePercent(ship.strengthPercent);
+  const strengthMax = useNumber(ship.shipClass.strength);
+  const strengthValue = useNumber(Math.ceil(ship.strengthPercent * ship.shipClass.strength));
 
   return (
     <>
@@ -113,8 +117,7 @@ export const Engineering = () => {
           <ShieldIntro>
             <SectionTitle>Shield</SectionTitle>
             <SectionDetail>
-              {strengthValue.toLocaleString()}/{ship.shipClass.strength.toLocaleString()} ({ship.strengthPercent}
-              %)
+              {strengthValue}/{strengthMax} ({strengthPercent})
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </StyledShield>

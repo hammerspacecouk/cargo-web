@@ -4,6 +4,7 @@ import { IPlayer } from "../../interfaces";
 import { COLOURS } from "../../styles/colours";
 import { animate } from "../Atoms/PlaceHolder";
 import { PlayerFlag } from "./PlayerFlag";
+import { usePercent } from "../../hooks/usePercent";
 
 interface IProps {
   percent?: number;
@@ -73,21 +74,23 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   const radius = centre - barWidth / 2;
   const trackLength = 2 * Math.PI * radius;
 
+  const percentLabel = usePercent(percent);
+
   let bar = null;
   if (percent !== undefined) {
-    const barLength = (percent / 100) * trackLength;
+    const barLength = percent * trackLength;
     const dash = `${barLength} ${trackLength}`;
     let colour = COLOURS.HEALTH.FULL;
-    if (percent < 100) {
+    if (percent < 1) {
       colour = COLOURS.HEALTH.GOOD;
     }
-    if (percent <= 75) {
+    if (percent <= .75) {
       colour = COLOURS.HEALTH.OK;
     }
-    if (percent <= 50) {
+    if (percent <= .50) {
       colour = COLOURS.HEALTH.WARNING;
     }
-    if (percent <= 25) {
+    if (percent <= .25) {
       colour = COLOURS.HEALTH.DANGER;
     }
 
@@ -103,7 +106,7 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
 
   return (
     <StyledShieldStrength
-      title={`${percent}%`}
+      title={percentLabel}
       className={className}
       loading={percent === undefined ? true : undefined}
     >

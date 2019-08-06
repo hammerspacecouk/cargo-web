@@ -70,14 +70,14 @@ export const Promotion = ({ rankStatus }: IProps) => {
 
     // phase 1
     if (diff < ANIMATE_PHASE2) {
-      if (progress !== 100) {
-        setProgress(100);
+      if (progress !== 1) {
+        setProgress(1);
       }
     }
     // phase 2
     if (diff >= ANIMATE_PHASE2) {
-      if (progress !== 2) {
-        setProgress(2);
+      if (progress !== .02) {
+        setProgress(.02);
       }
       if (!phase2) {
         setPhase2(true);

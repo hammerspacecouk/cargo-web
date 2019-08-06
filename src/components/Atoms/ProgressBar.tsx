@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { COLOURS } from "../../styles/colours";
 import { GRID } from "../../styles/variables";
+import { usePercent } from "../../hooks/usePercent";
 
 interface IProps {
   readonly percent: number;
@@ -21,7 +22,9 @@ const Bar = styled.div<{ percentValue: number }>`
   display: block;
   height: 102%;
   background: ${COLOURS.BASE};
+  // displays minimum of 2% to show that it is a bar that will fill up
   width: ${({ percentValue }) => percentValue + 2}%;
+  min-width: 2%;
   margin-left: -1%;
   margin-right: -1%;
   will-change: width;
@@ -31,10 +34,10 @@ const Bar = styled.div<{ percentValue: number }>`
 `;
 
 export const ProgressBar = React.memo(({ percent, small = false }: IProps) => {
-  const percentValue = Math.max(percent, 2); // to show that it is a bar that will fill up
+  const percentString = usePercent(percent);
   return (
     <Track small={small}>
-      <Bar title={`${percent}%`} percentValue={percentValue} />
+      <Bar title={percentString} percentValue={percent * 100} />
     </Track>
   );
 });

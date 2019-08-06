@@ -5,6 +5,8 @@ import { Modal, ModalActions, ModalType } from "../src/components/Molecules/Moda
 import { P } from "../src/components/Atoms/Text";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
 import { pageTitle } from "../src/utils/pageTitle";
+import { IntlProvider } from "react-intl";
+import { Environment } from "../src/utils/environment";
 
 interface IState {
   errorMessage: string | undefined;
@@ -56,14 +58,16 @@ export default class extends App<IProps, IState> {
     }
 
     return (
-        <Container>
+      <Container>
+        <IntlProvider locale={Environment.locale}>
           <Head>
             <title>{pageTitle()}</title>
           </Head>
           <GlobalStyle/>
           <Component {...pageProps} />
           {errorModal}
-        </Container>
+        </IntlProvider>
+      </Container>
     );
   }
 }
