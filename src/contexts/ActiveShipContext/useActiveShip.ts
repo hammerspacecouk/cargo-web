@@ -23,6 +23,7 @@ import { useMounted } from "../../hooks/useMounted";
 export interface IActiveShip extends IActiveShipState {
   buttonsDisabled?: boolean;
   setRequestNameToken: (token: ITransaction) => void;
+  departureHandler: (token: IActionToken) => Promise<void>;
   portActionHandler: (token: IActionToken) => Promise<void>;
   updateShipName: (newName: string) => void;
   applyHealthHandler: (token: IActionToken) => Promise<void>;
@@ -49,7 +50,7 @@ interface IActiveShipState {
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
-  const { updateScore, updateAShipProperty } = useGameSessionContext();
+  const { refreshSession, updateScore, updateAShipProperty } = useGameSessionContext();
   const [activeShipState, setActiveShipState] = useState({} as IActiveShipState);
   const [message, setMessage] = useState(null);
   const { disableButtons, enableButtons, buttonsDisabled } = useButtonsDisabled();
@@ -82,6 +83,11 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
     return doPortAction(token);
   };
 
+  const departureHandler = async (token: IActionToken): Promise<void> => {
+    await portActionHandler(token);
+    refreshSession();
+  };
+
   const applyHealthHandler = async (token: IActionToken) => {
     disableButtons();
     const data = await doPortAction(token);
@@ -108,6 +114,7 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
   return {
     ...activeShipState,
     buttonsDisabled,
+    departureHandler,
     portActionHandler,
     updateShipName,
     applyHealthHandler,

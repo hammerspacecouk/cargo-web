@@ -12,7 +12,7 @@ export interface IEnvironment {
   isServer: boolean;
   locale: string;
 }
-export const defaultLocale: string = 'en-gb';
+export const defaultLocale: string = "en-gb";
 
 let environment: IEnvironment;
 
@@ -22,7 +22,7 @@ if (isClient) {
     ...publicRuntimeConfig,
     isClient: true,
     isServer: false,
-    locale: navigator.language
+    locale: navigator.language,
   };
 } else if (isServer) {
   environment = {

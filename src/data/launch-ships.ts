@@ -6,7 +6,7 @@ export const getAvailableShips = (
   incomingRequest?: http.IncomingMessage,
   outGoingResponse?: http.ServerResponse
 ): Promise<ILaunchShipsResponse> => {
-  return ApiClient.fetch('/play/inventory', undefined, incomingRequest, outGoingResponse);
+  return ApiClient.fetch("/play/inventory", undefined, incomingRequest, outGoingResponse);
 };
 
 export interface ILaunchShipsResponse {

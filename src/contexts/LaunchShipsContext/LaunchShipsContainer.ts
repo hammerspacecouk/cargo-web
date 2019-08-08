@@ -6,11 +6,11 @@ import { NextPageContext } from "next";
 
 export const LaunchShipsContainer = (Page: IPageWithData) => {
   return class extends Component<IProps, undefined> {
-    public static async getInitialProps({req, res}: NextPageContext) {
+    public static async getInitialProps({ req, res }: NextPageContext) {
       const data = await getAvailableShips(req, res);
       return {
-        ships: data.ships
-      }
+        ships: data.ships,
+      };
     }
 
     public render() {

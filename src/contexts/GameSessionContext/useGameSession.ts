@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IEvent, IFleetShip, IPlayer, IRankStatus, IScore } from "../../interfaces";
 import { useMounted } from "../../hooks/useMounted";
 import { getSession, IGameSessionResponse } from "../../data/game";
@@ -16,10 +16,14 @@ export interface IGameSession extends IGameSessionState {
 export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome = false): IGameSession => {
   const [sessionState, setSessionState] = useState(() => getNewSessionState({}, initialSession));
   const isMounted = useMounted();
+  const sessionRefreshInProgress = useRef(null);
 
   const refreshSession = async () => {
+    const id = sessionRefreshInProgress.current = Date.now();
     const session: IGameSessionResponse = await getSession();
-    setSession(session);
+    if (sessionRefreshInProgress.current === id) { // prevents out of order refreshes
+      setSession(session);
+    }
   };
 
   const setSession = (newSession: IGameSessionResponse) => {

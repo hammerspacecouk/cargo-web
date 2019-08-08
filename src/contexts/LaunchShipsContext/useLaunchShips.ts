@@ -45,5 +45,5 @@ export const useLaunchShips = (initialShips: IShipUpgrade[]): ILaunchShips => {
 interface IPurchaseResponse {
   launch: ILaunchEvent;
   session: IGameSessionResponse;
-  shipsAvailable: ILaunchShipsResponse
+  shipsAvailable: ILaunchShipsResponse;
 }

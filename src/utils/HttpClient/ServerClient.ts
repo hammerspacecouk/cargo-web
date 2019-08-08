@@ -22,17 +22,17 @@ export class ServerClient implements IAPIClient {
       const start = Date.now();
 
       const config: AxiosRequestConfig = {
-        method: 'get',
+        method: "get",
         url,
-        validateStatus: function (status: number) {
+        validateStatus: function(status: number) {
           return status >= 200 && status < 500; // default
-        }
+        },
       };
 
       if (incomingRequest && incomingRequest.headers && incomingRequest.headers.cookie) {
         config.headers = {
           cookie: incomingRequest.headers.cookie,
-        }
+        };
       }
 
       const response = await axios(config);

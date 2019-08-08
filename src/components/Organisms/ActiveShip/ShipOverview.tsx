@@ -84,7 +84,7 @@ export const ShipOverview = () => {
           </h1>
         </div>
       </StyledOverview>
-    )
+    );
   }
 
   if (!port) {
@@ -111,7 +111,9 @@ export const ShipOverview = () => {
         <h1>
           <TitleName>{ship.name}</TitleName>
           <TitleConjunction> arrived at </TitleConjunction>
-          <TitleLocation><PortName port={(ship.location as IPort)} /></TitleLocation>
+          <TitleLocation>
+            <PortName port={ship.location as IPort} />
+          </TitleLocation>
         </h1>
       </div>
       <Ship>

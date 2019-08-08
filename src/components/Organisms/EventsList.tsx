@@ -52,8 +52,6 @@ export const EventsList = ({ className, events, firstPerson }: IProps) => {
   );
 };
 
-
-
 interface IProps {
   readonly className?: string;
   readonly events: IEvent[];

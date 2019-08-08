@@ -22,9 +22,9 @@ export const FleetShips = ({ fleetShips }: IProps) => {
       {fleetShips.map((fleetShip: IFleetShip) => (
         <li key={fleetShip.ship.name}>
           {fleetShip.ship.isDestroyed ? (
-            <DestroyedShip fleetShip={fleetShip}/>
+            <DestroyedShip fleetShip={fleetShip} />
           ) : (
-            <ActiveShip fleetShip={fleetShip} isCurrent={!!(activeShip && activeShip.ship.id === fleetShip.ship.id)}/>
+            <ActiveShip fleetShip={fleetShip} isCurrent={!!(activeShip && activeShip.ship.id === fleetShip.ship.id)} />
           )}
         </li>
       ))}
@@ -69,17 +69,25 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
   let subtext;
   if ((fleetShip.ship.location as IPort).name) {
     if ((fleetShip.ship.location as IPort).safeHaven) {
-      subtext = <TextWarning><PortName port={fleetShip.ship.location as IPort} /></TextWarning>
+      subtext = (
+        <TextWarning>
+          <PortName port={fleetShip.ship.location as IPort} />
+        </TextWarning>
+      );
     } else {
-      subtext = <TextDanger>{(fleetShip.ship.location as IPort).name}</TextDanger>
+      subtext = <TextDanger>{(fleetShip.ship.location as IPort).name}</TextDanger>;
     }
   } else if ((fleetShip.ship.location as IChannel).arrival) {
-    subtext = <TextOk><Travelling channel={fleetShip.ship.location as IChannel} /></TextOk>
+    subtext = (
+      <TextOk>
+        <Travelling channel={fleetShip.ship.location as IChannel} />
+      </TextOk>
+    );
   }
 
   return (
     <NavigationItem
-      icon={<ShieldStrength percent={fleetShip.ship.strengthPercent}/>}
+      icon={<ShieldStrength percent={fleetShip.ship.strengthPercent} />}
       path={routes.getPlayShip(fleetShip.ship.id)}
       text={fleetShip.ship.name}
       subtext={subtext}
@@ -88,7 +96,7 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
   );
 };
 
-const Travelling = ({channel}: {channel: IChannel}) => {
-  const {secondsRemaining} = useTravellingCountdown(channel);
+const Travelling = ({ channel }: { channel: IChannel }) => {
+  const { secondsRemaining } = useTravellingCountdown(channel);
   return <TravelCountdown seconds={secondsRemaining} />;
 };

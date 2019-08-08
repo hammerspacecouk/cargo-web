@@ -76,13 +76,21 @@ export const Button = styled.button<IProps>`
   }
 `;
 
-export const ConfirmButton = React.memo((props: any) => <Button {...props} styleType={Type.Confirm} />);
+export const ConfirmButton = React.memo(
+  React.forwardRef((props: any, ref: React.Ref<any>) => <Button ref={ref} {...props} styleType={Type.Confirm} />)
+);
 
-export const DangerButton = React.memo((props: any) => <Button {...props} styleType={Type.Danger} />);
+export const DangerButton = React.memo(
+  React.forwardRef((props: any, ref: React.Ref<any>) => <Button ref={ref} {...props} styleType={Type.Danger} />)
+);
 
-export const ActionButton = React.memo((props: any) => <Button {...props} styleType={Type.Action} />);
+export const ActionButton = React.memo(
+  React.forwardRef((props: any, ref: React.Ref<any>) => <Button ref={ref} {...props} styleType={Type.Action} />)
+);
 
-export const WarningButton = React.memo((props: any) => <Button {...props} styleType={Type.Warning} />);
+export const WarningButton = React.memo(
+  React.forwardRef((props: any, ref: React.Ref<any>) => <Button ref={ref} {...props} styleType={Type.Warning} />)
+);
 
 export const DisguisedButton = styled.button`
   background: none;

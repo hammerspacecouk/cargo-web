@@ -21,7 +21,9 @@ export const LaunchPage = () => {
     launchModal = (
       <Modal isOpen={true} title="Ship Launched" onClose={acknowledgeLaunchEvent}>
         <Prose>
-          <p><em>{launchEvent.newShip.name}</em> was launched at <strong>{launchEvent.atPort.name}</strong></p>
+          <p>
+            <em>{launchEvent.newShip.name}</em> was launched at <strong>{launchEvent.atPort.name}</strong>
+          </p>
         </Prose>
         <ModalActions>
           <Link as={link.as} href={link.href}>
@@ -42,7 +44,7 @@ export const LaunchPage = () => {
       </Head>
       <PlayBoardLayout title="Launch ships">
         <StyledShipUpgrades>
-          <ShipUpgrades shipUpgrades={ships}/>
+          <ShipUpgrades shipUpgrades={ships} />
         </StyledShipUpgrades>
       </PlayBoardLayout>
       {launchModal}
@@ -51,5 +53,5 @@ export const LaunchPage = () => {
 };
 
 const StyledShipUpgrades = styled.div`
-    padding: ${GRID.UNIT};
+  padding: ${GRID.UNIT};
 `;

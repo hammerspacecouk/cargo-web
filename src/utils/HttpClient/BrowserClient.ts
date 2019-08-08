@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
 import { Environment } from "../environment";
@@ -19,9 +19,9 @@ export class BrowserClient implements IAPIClient {
       withCredentials: true,
       headers: { accept: "application/json" },
       method: "get",
-      validateStatus: function (status: number) {
+      validateStatus: function(status: number) {
         return status >= 200 && status < 500; // default
-      }
+      },
     };
 
     if (payload) {

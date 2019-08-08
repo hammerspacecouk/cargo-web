@@ -11,47 +11,38 @@ import { ProgressBar } from "../../../Atoms/ProgressBar";
 import { useTravellingState } from "../../../../hooks/useTravellingState";
 import { GRID } from "../../../../styles/variables";
 import { TravelCountdown } from "../../../Atoms/TravelCountdown";
+import { SIZES } from "../../../../styles/typography";
 
 export const ShipInChannelPage = () => {
   const { bonusEffects } = useActiveShipContext();
+  const { channel } = useActiveShipContext();
   const { secondsRemaining, percent } = useTravellingState();
 
   return (
-    <Page>
-      <Column>
-        <GeneralPanel title="Travelling">
-          <TimeRemaining as="h3"><TravelCountdown seconds={secondsRemaining} /></TimeRemaining>
-          <ProgressBar percent={percent} />
+    <div>
+      <GeneralPanel title="Travelling">
+        <TimeRemaining as="h3">
+          <Intro>{channel.destination.name}</Intro>
+          <TravelCountdown seconds={secondsRemaining}/>
+        </TimeRemaining>
+        <ProgressBar percent={percent}/>
+      </GeneralPanel>
+      {bonusEffects && bonusEffects.length > 0 && (
+        <GeneralPanel title="From headquarters">
+          <Intro>For a great performance you have been gifted these to help you on your travels:</Intro>
+          <Bonus/>
         </GeneralPanel>
-        <GeneralPanel title="Incoming...">
-          <Hint />
-        </GeneralPanel>
-      </Column>
-      <Column>
-        {bonusEffects && bonusEffects.length > 0 && (
-          <GeneralPanel title="From headquarters">
-            <Bonus />
-          </GeneralPanel>
-        )}
-        <GeneralPanel title="Tactical">TACTICAL</GeneralPanel>
-      </Column>
-    </Page>
+      )}
+      <GeneralPanel title="Incoming...">
+        <Hint/>
+      </GeneralPanel>
+    </div>
   );
 };
 
-const Page = styled.div`
-  ${BREAKPOINTS.L`
-      display: flex;
-    `};
-`;
-
-const Column = styled.div`
-  ${BREAKPOINTS.L`
-      width: 50%;
-      &:first-child {
-        border-right: ${PANEL_BORDER};
-      }
-    `};
+const Intro = styled.p`
+ ${SIZES.D};
+ margin-bottom: ${GRID.HALF};
 `;
 
 const GeneralPanel = styled(Panel)`

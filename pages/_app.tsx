@@ -21,7 +21,7 @@ export default class extends App<IProps, IState> {
 
   public catchMessage = (error: PromiseRejectionEvent) => {
     this.setState({
-      errorMessage: error.reason.message
+      errorMessage: error.reason.message.toString()
     });
     console.error(error);
   };

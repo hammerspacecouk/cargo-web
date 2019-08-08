@@ -39,7 +39,8 @@ export const ScoreValue = React.memo(({ score, prefix = "", className }: IProps)
         <CreditsIcon />
       </Icon>
       <Digits>
-        {prefix}{number}
+        {prefix}
+        {number}
       </Digits>
     </StyledScore>
   );

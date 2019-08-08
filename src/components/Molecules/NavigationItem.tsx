@@ -14,10 +14,8 @@ export const NavigationItem = React.memo(({ path, text, subtext, icon, isCurrent
       <StyledItem href={path.as || path.href} isCurrent={isCurrent}>
         <StyledIcon>{icon}</StyledIcon>
         <Detail>
-          <Text>
-            {text}
-          </Text>
-          { subtext && <SubText>{subtext}</SubText>}
+          <Text>{text}</Text>
+          {subtext && <SubText>{subtext}</SubText>}
         </Detail>
         <ArrowIcon size={TINY_ICON}>
           <ChevronRightIcon />

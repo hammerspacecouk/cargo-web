@@ -94,8 +94,8 @@ const ModalTitle = styled(H3)<{ center: boolean }>`
   line-height: 32px;
   flex: 1;
   ${({ center }) =>
-  center &&
-  css`
+    center &&
+    css`
       text-align: center;
     `}
 `;
@@ -131,7 +131,7 @@ export const Modal = React.memo((props: IProps) => {
   if (props.onClose) {
     closeButton = (
       <ModalClose onClick={props.onClose}>
-        <CloseIcon/>
+        <CloseIcon />
       </ModalClose>
     );
   }
@@ -146,12 +146,12 @@ export const Modal = React.memo((props: IProps) => {
       className={{
         afterOpen: "modal--after-open",
         base: `modal ${props.type}`,
-        beforeClose: "modal--before-close"
+        beforeClose: "modal--before-close",
       }}
       overlayClassName={{
         afterOpen: "modal__overlay--after-open",
         base: "modal__overlay",
-        beforeClose: "modal__overlay--before-close"
+        beforeClose: "modal__overlay--before-close",
       }}
     >
       <ModalHeader>

@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export const GoButton = ({ direction, journeyTime, children }: IProps) => {
-  const { buttonsDisabled, cratesOnShip, cratesInPort, ship, portActionHandler } = useActiveShipContext();
+  const { buttonsDisabled, cratesOnShip, cratesInPort, ship, departureHandler } = useActiveShipContext();
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const buttonIsDisabled = direction.action === null || buttonsDisabled;
 
@@ -30,7 +30,7 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
       setModalIsOpen(true);
     } else if (direction.action) {
       setModalIsOpen(false);
-      portActionHandler(direction.action);
+      departureHandler(direction.action);
     }
   };
 
@@ -40,7 +40,7 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
       <Modal isOpen={true} title="Confirm?" onClose={closeModal} type={ModalType.WARNING}>
         <P>You have not picked up any crates. Are you sure you want to leave?</P>
         <ModalActions>
-          <TokenButton token={direction.action} handler={portActionHandler}>
+          <TokenButton token={direction.action} handler={departureHandler}>
             <ActionButton disabled={buttonIsDisabled} type="submit">
               Yes
             </ActionButton>

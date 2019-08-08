@@ -84,13 +84,13 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
     if (percent < 1) {
       colour = COLOURS.HEALTH.GOOD;
     }
-    if (percent <= .75) {
+    if (percent <= 0.75) {
       colour = COLOURS.HEALTH.OK;
     }
-    if (percent <= .50) {
+    if (percent <= 0.5) {
       colour = COLOURS.HEALTH.WARNING;
     }
-    if (percent <= .25) {
+    if (percent <= 0.25) {
       colour = COLOURS.HEALTH.DANGER;
     }
 
@@ -105,11 +105,7 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   }
 
   return (
-    <StyledShieldStrength
-      title={percentLabel}
-      className={className}
-      loading={percent === undefined ? true : undefined}
-    >
+    <StyledShieldStrength title={percentLabel} className={className} loading={percent === undefined ? true : undefined}>
       {emblem}
       <StyledSvg viewBox={`0 0 ${size} ${size}`}>
         <CircleTrack cx={centre} cy={centre} r={radius} strokeWidth={barWidth} />

@@ -9,22 +9,16 @@ import { TokenButton } from "../Molecules/TokenButton";
 import { Promotion } from "./Promotion";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 
-// todo - fix the commented out bits
 export const PromotionModal = () => {
-  const { rankStatus, updateRankStatus } = useGameSessionContext();
-  // const { refreshState } = useCurrentShipContext();
+  const { rankStatus } = useGameSessionContext();
   const [acknowledging, setAcknowledging] = React.useState(false);
 
   const acknowledgePromotion = async (token: IActionToken) => {
     setAcknowledging(true);
 
     // make the API call
-    const data = await ApiClient.tokenFetch(token);
-    // refresh the current ship state as you may now be able to do more things
-    // refreshState();
-    setAcknowledging(false);
-    // Updating rankStatus should remove the token and thus close the modal
-    updateRankStatus(data.rankStatus);
+    await ApiClient.tokenFetch(token);
+    window.location.reload();
   };
 
   if (!rankStatus || !rankStatus.acknowledgeToken) {

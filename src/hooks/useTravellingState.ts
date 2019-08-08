@@ -15,9 +15,11 @@ export const useTravellingState = () => {
     }
     try {
       const data = await refreshState();
-      updateScore(data.playerScore);
-      updateRankStatus(data.playerRankStatus);
-      refreshSession();
+      if (data.port) {
+        updateScore(data.playerScore);
+        updateRankStatus(data.playerRankStatus);
+        refreshSession();
+      }
       return;
     } catch (e) {
       // do nothing. we'll try again in a moment

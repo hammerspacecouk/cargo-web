@@ -10,7 +10,7 @@ import {
   PurchaseCardDescription,
   PurchaseCardDetail,
   PurchaseCardImage,
-  PurchaseCardTitle
+  PurchaseCardTitle,
 } from "./PurchaseCard";
 import { P, TextWarning } from "../Atoms/Text";
 import { GRID } from "../../styles/variables";
@@ -22,9 +22,9 @@ import { useLaunchShipsContext } from "../../contexts/LaunchShipsContext/LaunchS
 
 export const ShipUpgrade = ({ ship }: IProps) => {
   if (ship.available) {
-    return <ShipPurchase ship={ship as IShipUpgrade}/>;
+    return <ShipPurchase ship={ship as IShipUpgrade} />;
   }
-  return <ShipLocked ship={ship as ILockedTransaction}/>;
+  return <ShipLocked ship={ship as ILockedTransaction} />;
 };
 
 interface IProps {
@@ -58,17 +58,17 @@ const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
             <DetailDescription>{ship.detail.description}</DetailDescription>
             <DetailStats>
               <Hidden as="h3">Stats</Hidden>
-              <ShipStats stats={ship.detail.stats}/>
+              <ShipStats stats={ship.detail.stats} />
             </DetailStats>
           </Detail>
         </PurchaseCardDescription>
         <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
-          <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled}/>
+          <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled} />
         </StyledTokenButton>
       </PurchaseCardDetail>
       <PurchaseCardImage notificationCount={ship.currentCount}>
         <ShipImage>
-          <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt=""/>
+          <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt="" />
         </ShipImage>
       </PurchaseCardImage>
     </PurchaseCard>
@@ -76,17 +76,17 @@ const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
 });
 
 const Detail = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 `;
 const DetailDescription = styled(P)`
-    flex: 1;
-    margin-bottom: ${GRID.UNIT};
-    ${BREAKPOINTS.M`margin-bottom: 0`};
+  flex: 1;
+  margin-bottom: ${GRID.UNIT};
+  ${BREAKPOINTS.M`margin-bottom: 0`};
 `;
 const DetailStats = styled.div`
-    width: 100%;
-    ${BREAKPOINTS.M`
+  width: 100%;
+  ${BREAKPOINTS.M`
       width: 304px;
       margin-left: ${GRID.UNIT};
       padding-left: ${GRID.UNIT};
@@ -95,9 +95,9 @@ const DetailStats = styled.div`
 `;
 
 const StyledTokenButton = styled(TokenButton)`
-    display: flex;
-    justify-content: center;
-    ${BREAKPOINTS.M`justify-content: flex-end`};
+  display: flex;
+  justify-content: center;
+  ${BREAKPOINTS.M`justify-content: flex-end`};
 `;
 
 const ShipImage = styled.div`

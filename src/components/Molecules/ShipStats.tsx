@@ -7,24 +7,9 @@ import { COLOURS } from "../../styles/colours";
 export const ShipStats = React.memo(({ className, stats }: IShipStatsProps) => (
   <StyledTable className={className}>
     <tbody>
-    <ShipStat
-      label="Speed"
-      value={stats.speed}
-      max={stats.max}
-      color={COLOURS.STATS.SPEED}
-    />
-    <ShipStat
-      label="Strength"
-      value={stats.strength}
-      max={stats.max}
-      color={COLOURS.STATS.STRENGTH}
-    />
-    <ShipStat
-      label="Capacity"
-      value={stats.capacity}
-      max={stats.max}
-      color={COLOURS.STATS.CAPACITY}
-    />
+      <ShipStat label="Speed" value={stats.speed} max={stats.max} color={COLOURS.STATS.SPEED} />
+      <ShipStat label="Strength" value={stats.strength} max={stats.max} color={COLOURS.STATS.STRENGTH} />
+      <ShipStat label="Capacity" value={stats.capacity} max={stats.max} color={COLOURS.STATS.CAPACITY} />
     </tbody>
   </StyledTable>
 ));
@@ -44,7 +29,7 @@ const ShipStat = ({ label, color, value, max }: IShipStatProps) => (
   <tr>
     <LabelCell>{label}</LabelCell>
     <ValueCell>
-      <Fractions color={color} value={value} max={max}/>
+      <Fractions color={color} value={value} max={max} />
     </ValueCell>
   </tr>
 );
@@ -58,33 +43,27 @@ interface IFractionsProps {
 const Fractions = ({ max, value, color }: IFractionsProps) => {
   let items = [];
   for (let i = 0; i < max; i++) {
-    items.push(
-      <Fraction color={color} key={i} isActive={i < value}/>
-    );
+    items.push(<Fraction color={color} key={i} isActive={i < value} />);
   }
 
-  return (
-    <FractionsWrap title={`${value}/${max}`}>
-      {items}
-    </FractionsWrap>
-  );
+  return <FractionsWrap title={`${value}/${max}`}>{items}</FractionsWrap>;
 };
 
 const FractionsWrap = styled.abbr`
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 
-const Fraction = styled.span<{ color: string, isActive: boolean }>`
-    display: block;
-    height: ${GRID.UNIT};
-    width: ${GRID.UNIT};
-    background: ${({ color }) => color};
-    ${({ isActive }) => !isActive && `opacity: 0.1;`}
+const Fraction = styled.span<{ color: string; isActive: boolean }>`
+  display: block;
+  height: ${GRID.UNIT};
+  width: ${GRID.UNIT};
+  background: ${({ color }) => color};
+  ${({ isActive }) => !isActive && `opacity: 0.1;`}
 `;
 
 const StyledTable = styled.table`
-    width: 100%;
+  width: 100%;
 `;
 
 const LabelCell = styled.th`
@@ -92,5 +71,5 @@ const LabelCell = styled.th`
 `;
 
 const ValueCell = styled.td`
-    width: 100%;
+  width: 100%;
 `;

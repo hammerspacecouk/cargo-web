@@ -36,11 +36,11 @@ export const CratePickup = React.memo(({ crateAction }: IProps) => {
 
   return (
     <StyledCrate>
-      <CrateWithContents crate={crateAction.crate}/>
+      <CrateWithContents crate={crateAction.crate} />
       <StyledCrateValue>
         <StyledValue>+{crateValue}</StyledValue>
         <Icon size={SMALL_ICON}>
-          <CreditsIcon/>
+          <CreditsIcon />
         </Icon>
         <abbr title="per light year">/ly</abbr>
       </StyledCrateValue>

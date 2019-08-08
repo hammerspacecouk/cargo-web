@@ -27,17 +27,15 @@ export const ShipDetailPage = () => {
   } else if (ship) {
     innerPage = <ShipInChannelPage />;
   } else {
-    innerPage = <Loading />
+    innerPage = <Loading />;
   }
 
   return (
     <>
       <Head>
-        <title>{pageTitle(ship ? ship.name : 'Loading...')}</title>
+        <title>{pageTitle(ship ? ship.name : "Loading...")}</title>
       </Head>
-      <PlayBoardLayout overview={<ShipOverview />}>
-        {innerPage}
-      </PlayBoardLayout>
+      <PlayBoardLayout overview={<ShipOverview />}>{innerPage}</PlayBoardLayout>
       <MessageModal />
     </>
   );

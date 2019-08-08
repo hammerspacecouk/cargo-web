@@ -6,12 +6,16 @@ import { IChildrenProps } from "../../interfaces";
 import { ReactNode } from "react";
 import { H1 } from "../Atoms/Heading";
 
-export const PlayBoardLayout = ({title, overview, children}: IProps) => {
+export const PlayBoardLayout = ({ title, overview, children }: IProps) => {
   let overviewContent;
   if (overview) {
     overviewContent = <StyledOverview>{overview}</StyledOverview>;
   } else if (title) {
-    overviewContent = <TitleOverview><H1>{title}</H1></TitleOverview>;
+    overviewContent = (
+      <TitleOverview>
+        <H1>{title}</H1>
+      </TitleOverview>
+    );
   }
 
   return (
@@ -24,7 +28,7 @@ export const PlayBoardLayout = ({title, overview, children}: IProps) => {
 
 interface IProps extends IChildrenProps {
   title?: string;
-  overview?: ReactNode
+  overview?: ReactNode;
 }
 
 const StyledPlayBoard = styled.div`

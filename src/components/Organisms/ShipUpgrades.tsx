@@ -19,7 +19,7 @@ export const ShipUpgrades = ({ shipUpgrades, className }: IProps) => {
 };
 
 interface IProps {
-  shipUpgrades: (IShipUpgrade|ILockedTransaction)[];
+  shipUpgrades: (IShipUpgrade | ILockedTransaction)[];
   className?: string;
 }
 

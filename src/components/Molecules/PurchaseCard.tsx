@@ -44,9 +44,9 @@ export const PurchaseCardDetail = styled.div`
 `;
 
 export const LockedPurchaseCardDetail = styled(PurchaseCardDetail)`
-    display: flex;
-    justify-content: center;
-    align-self: center;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 `;
 
 export const PurchaseCardDescription = styled.div`

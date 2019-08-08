@@ -220,7 +220,7 @@ export interface IShipClass {
   strength: number;
   capacity: number;
   image: string;
-  stats: IShipClassStats
+  stats: IShipClassStats;
 }
 
 export interface IPageWithData extends ComponentClass {

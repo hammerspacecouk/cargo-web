@@ -24,6 +24,6 @@ export const useTravellingCountdown = (channel: IChannel) => {
   return {
     isArriving: seconds <= 0,
     percent,
-    secondsRemaining: seconds
+    secondsRemaining: seconds,
   };
 };
