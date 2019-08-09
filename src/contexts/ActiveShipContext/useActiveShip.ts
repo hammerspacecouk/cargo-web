@@ -19,6 +19,7 @@ import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 import { useGameSessionContext } from "../GameSessionContext/GameSessionContext";
 import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 import { useMounted } from "../../hooks/useMounted";
+import { IAuthProviders } from "../../data/profile";
 
 export interface IActiveShip extends IActiveShipState {
   buttonsDisabled?: boolean;
@@ -47,6 +48,7 @@ interface IActiveShipState {
   channel?: IChannel;
   port?: IPort;
   hint?: string;
+  authProviders?: IAuthProviders;
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
@@ -141,6 +143,7 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "port", activeShip.port);
   newState = setPropIfChanged(newState, "channel", activeShip.channel);
   newState = setPropIfChanged(newState, "hint", activeShip.hint);
+  newState = setPropIfChanged(newState, "authProviders", activeShip.authProviders);
   newState = setPropIfChanged(newState, "bonusEffects", activeShip.bonus);
   newState = setPropIfChanged(newState, "events", activeShip.events);
   return newState;

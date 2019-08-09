@@ -10,10 +10,9 @@ export const routes = {
   getHome: () => "/",
   getLogin: () => "/login",
   getLoginAnonymous: () => `${Environment.clientApiHostname}/login/anonymous`,
-  getLoginEmail: () => "/login/email", // todo - shouldn't be needed now
   getLogout: () => `${Environment.clientApiHostname}/logout`,
   getPlay: () => "/play",
-  getPlayHome: () => "/play/home",
+  getPlayHome: () => "/play/profile",
   getPlayLaunch: () => "/play/launch",
   getPlayShip: (id: string = ":shipId") => ({ href: `/play/[ship]?ship=${id}`, as: `/play/${id}` }),
   getPortsList: () => "/ports",

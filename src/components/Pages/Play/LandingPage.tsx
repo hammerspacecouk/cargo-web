@@ -3,6 +3,8 @@ import { PlayHome } from "./PlayHome";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../../styles/media";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
+import { IProfileResponse } from "../../../data/profile";
+import { Loading } from "../../Atoms/Loading";
 
 const StyledArea = styled.div<{ hideDisplay: boolean }>`
   display: ${({ hideDisplay }) => (hideDisplay ? "none" : "block")};
@@ -12,12 +14,8 @@ const StyledArea = styled.div<{ hideDisplay: boolean }>`
   `};
 `;
 
-export const LandingPage = () => {
+export const LandingPage = ({ profile }: { profile?: IProfileResponse }) => {
   const { isAtHome } = useGameSessionContext();
 
-  return (
-    <StyledArea hideDisplay={!!isAtHome}>
-      <PlayHome />
-    </StyledArea>
-  );
+  return <StyledArea hideDisplay={!!isAtHome}>{profile ? <PlayHome profile={profile} /> : <Loading />}</StyledArea>;
 };

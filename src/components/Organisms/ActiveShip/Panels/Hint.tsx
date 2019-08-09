@@ -6,11 +6,10 @@ import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/Act
 import { SocialAccounts } from "../../SocialAccounts";
 
 export const Hint = () => {
-  const { hint } = useActiveShipContext();
+  const { authProviders, hint } = useActiveShipContext();
 
-  if (true) {
-    // todo - check anonymous state
-    return <SocialAccounts />;
+  if (authProviders) {
+    return <SocialAccounts isAnonymous={true} authProviders={authProviders} />;
   }
 
   return <StyledHint as="p">{hint}</StyledHint>;

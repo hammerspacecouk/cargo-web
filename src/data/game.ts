@@ -21,7 +21,6 @@ interface IFleetResponse {
 
 interface ISessionResponse {
   readonly isLoggedIn: boolean;
-  readonly hasProfileNotification: boolean;
   readonly player?: IPlayer;
   readonly rankStatus?: IRankStatus;
 }

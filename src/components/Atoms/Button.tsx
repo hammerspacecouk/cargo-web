@@ -106,6 +106,7 @@ export const DisguisedButton = styled.button`
 `;
 
 const iconButtonStyles = css`
+  display: inline-block;
   width: 40px;
   height: 40px;
   line-height: 0;

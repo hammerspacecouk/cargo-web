@@ -17,23 +17,23 @@ import { LogOutButton } from "../../Organisms/LogOutButton";
 import { MessageError } from "../../Molecules/Message";
 import { routes } from "../../../routes";
 import { useDate } from "../../../hooks/useDate";
+import { IProfileResponse } from "../../../data/profile";
 
-export const PlayHome = () => {
+export const PlayHome = ({ profile }: { profile: IProfileResponse }) => {
   const { events, player } = useGameSessionContext();
   const playingSinceDate = useDate(new Date(player.startedAt));
 
-  let isAnonymous = false; // todo - get from session
-
   let mode;
-  if (isAnonymous) {
+  if (profile.isAnonymous) {
     mode = <TextDanger>Anonymous</TextDanger>;
-  } else {
+  } else if (profile.isTrial) {
     mode = (
       <TextWarning>
         Trial (<a href="#">change</a>)
       </TextWarning>
     );
-    // todo - other game modes
+  } else {
+    mode = "Standard";
   }
 
   return (
@@ -53,8 +53,10 @@ export const PlayHome = () => {
                 <td>{player.id}</td>
               </tr>
               <tr>
-                <th>Home port:</th>
-                <td>NAME GOES HERE</td>
+                <th>Home planet:</th>
+                <td>
+                  <em>{profile.homePort.name}</em> (<a href="#">change</a>)
+                </td>
               </tr>
               <tr>
                 <th>Game mode:</th>
@@ -69,27 +71,26 @@ export const PlayHome = () => {
         </SubPanel>
         <SubPanel>
           <Heading>Linked Authentication Providers</Heading>
-          <SocialAccounts />
+          <SocialAccounts isAnonymous={profile.isAnonymous} authProviders={profile.authProviders} />
         </SubPanel>
         <Heading>Logout</Heading>
         <AccountOption>
           <Prose>
             <p>Logout and clear your session on this browser.</p>
           </Prose>
-          <LogOutButton isAnonymous={isAnonymous} />
+          <LogOutButton isAnonymous={profile.isAnonymous} />
         </AccountOption>
         <Heading>Delete Account</Heading>
-        <DeleteAccount />
+        <DeleteAccount canDelete={profile.canDelete} />
       </AccountPanel>
     </StyledArea>
   );
 };
 
-const DeleteAccount = () => {
+const DeleteAccount = ({ canDelete }: { canDelete: boolean }) => {
   let button;
   let warning;
 
-  let canDelete = true; // todo - real value
   if (canDelete) {
     button = (
       <DangerButton as="a" href={routes.getDeleteAccount()}>
@@ -103,7 +104,7 @@ const DeleteAccount = () => {
         be long).
       </MessageError>
     );
-    button = <DangerButton disabled={true}>>Delete (Step 0/3)</DangerButton>;
+    button = <DangerButton disabled={true}>Delete (Step 0/3)</DangerButton>;
   }
 
   return (

@@ -23,26 +23,26 @@ export const ShipInChannelPage = () => {
       <GeneralPanel title="Travelling">
         <TimeRemaining as="h3">
           <Intro>{channel.destination.name}</Intro>
-          <TravelCountdown seconds={secondsRemaining}/>
+          <TravelCountdown seconds={secondsRemaining} />
         </TimeRemaining>
-        <ProgressBar percent={percent}/>
+        <ProgressBar percent={percent} />
       </GeneralPanel>
       {bonusEffects && bonusEffects.length > 0 && (
         <GeneralPanel title="From headquarters">
           <Intro>For a great performance you have been gifted these to help you on your travels:</Intro>
-          <Bonus/>
+          <Bonus />
         </GeneralPanel>
       )}
       <GeneralPanel title="Incoming...">
-        <Hint/>
+        <Hint />
       </GeneralPanel>
     </div>
   );
 };
 
 const Intro = styled.p`
- ${SIZES.D};
- margin-bottom: ${GRID.HALF};
+  ${SIZES.D};
+  margin-bottom: ${GRID.HALF};
 `;
 
 const GeneralPanel = styled(Panel)`

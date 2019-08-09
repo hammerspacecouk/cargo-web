@@ -19,9 +19,10 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
   const sessionRefreshInProgress = useRef(null);
 
   const refreshSession = async () => {
-    const id = sessionRefreshInProgress.current = Date.now();
+    const id = (sessionRefreshInProgress.current = Date.now());
     const session: IGameSessionResponse = await getSession();
-    if (sessionRefreshInProgress.current === id) { // prevents out of order refreshes
+    if (sessionRefreshInProgress.current === id) {
+      // prevents out of order refreshes
       setSession(session);
     }
   };

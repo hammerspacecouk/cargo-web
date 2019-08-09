@@ -1,6 +1,5 @@
 import { MessageWarning } from "../Molecules/Message";
 import * as React from "react";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { GridWrapper } from "../Atoms/GridWrapper";
 import styled from "styled-components";
 import { Prose } from "../Atoms/Prose";
@@ -17,16 +16,16 @@ import {
   RedditLogo,
   TwitterLogo,
 } from "../Atoms/Logos";
-import { IChildrenProps } from "../../interfaces";
+import { IClassNameProps } from "../../interfaces";
 import { routes } from "../../routes";
+import { IAuthProvider, IAuthProviders } from "../../data/profile";
+import { TokenButton } from "../Molecules/TokenButton";
+import { Environment } from "../../utils/environment";
 
-export const SocialAccounts = ({ className }: { className?: string }) => {
-  const {} = useGameSessionContext();
-
+export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps) => {
   // todo - prompt if you go to remove the last one
   let warning;
-  if (true) {
-    // todo - reals
+  if (isAnonymous) {
     warning = (
       <MessageWarning>
         You have not yet linked your game to an authentication provider. <br />
@@ -46,43 +45,58 @@ export const SocialAccounts = ({ className }: { className?: string }) => {
         </p>
       </Prose>
       <GridWrapper as="ul">
-        <SocialAccount logo={<AmazonLogo />} text="Amazon">
-          <AddButton />
-        </SocialAccount>
-        <SocialAccount logo={<AppleLogo />} text="Apple">
-          <RemoveButton />
-        </SocialAccount>
-        <SocialAccount logo={<FacebookLogo />} text="Facebook">
-          <RemoveButton />
-        </SocialAccount>
-        <SocialAccount logo={<GoogleLogo />} text="Google">
-          <AddButton />
-        </SocialAccount>
-        <SocialAccount logo={<MicrosoftLogo />} text="Microsoft">
-          <AddButton />
-        </SocialAccount>
-        <SocialAccount logo={<RedditLogo />} text="Reddit">
-          <AddButton />
-        </SocialAccount>
-        <SocialAccount logo={<TwitterLogo />} text="Twitter">
-          <RemoveButton />
-        </SocialAccount>
+        {authProviders.amazon && <SocialAccount logo={<AmazonLogo />} text="Amazon" provider={authProviders.amazon} />}
+        {authProviders.apple && <SocialAccount logo={<AppleLogo />} text="Apple" provider={authProviders.apple} />}
+        {authProviders.facebook && (
+          <SocialAccount logo={<FacebookLogo />} text="Facebook" provider={authProviders.facebook} />
+        )}
+        {authProviders.google && <SocialAccount logo={<GoogleLogo />} text="Google" provider={authProviders.google} />}
+        {authProviders.microsoft && (
+          <SocialAccount logo={<MicrosoftLogo />} text="Microsoft" provider={authProviders.microsoft} />
+        )}
+        {authProviders.reddit && <SocialAccount logo={<RedditLogo />} text="Reddit" provider={authProviders.reddit} />}
+        {authProviders.twitter && (
+          <SocialAccount logo={<TwitterLogo />} text="Twitter" provider={authProviders.twitter} />
+        )}
       </GridWrapper>
     </div>
   );
 };
 
-const SocialAccount = ({ logo, text, children }: ISocialAccountProps) => (
-  <StyledSocialAccount>
-    <Logo>{logo}</Logo>
-    <Text>{text}</Text>
-    <SocialButton>{children}</SocialButton>
-  </StyledSocialAccount>
-);
+interface IProps extends IClassNameProps {
+  isAnonymous: boolean;
+  authProviders: IAuthProviders;
+}
 
-interface ISocialAccountProps extends IChildrenProps {
+const SocialAccount = ({ logo, text, provider }: ISocialAccountProps) => {
+  let button;
+  if (provider.removalToken) {
+    button = (
+      <TokenButton token={provider.removalToken}>
+        <RemoveButton />
+      </TokenButton>
+    );
+  } else {
+    button = (
+      <form method="post" action={`${Environment.clientApiHostname}${provider.addUrl}`}>
+        <AddButton type="submit" />
+      </form>
+    );
+  }
+
+  return (
+    <StyledSocialAccount>
+      <Logo>{logo}</Logo>
+      <Text>{text}</Text>
+      <SocialButton>{button}</SocialButton>
+    </StyledSocialAccount>
+  );
+};
+
+interface ISocialAccountProps {
   text: string;
   logo: ReactNode;
+  provider: IAuthProvider;
 }
 
 const SocialButton = styled.span`

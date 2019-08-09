@@ -16,6 +16,7 @@ import {
   ITacticalOption,
   ITransaction,
 } from "../interfaces";
+import { IAuthProviders } from "./profile";
 
 export const getShipData = (
   shipId: string,
@@ -41,5 +42,6 @@ export interface IActiveShipResponse {
   purchaseOptions: IEffectUpgrade[];
   channel: IChannel;
   port: IPort;
-  hint: string;
+  hint?: string;
+  authProviders?: IAuthProviders;
 }
