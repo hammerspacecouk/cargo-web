@@ -3,16 +3,16 @@ import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/Act
 import { IEffectUpgrade } from "../../../../interfaces";
 import { TokenButton } from "../../../Molecules/TokenButton";
 import { CreditsButton } from "../../../Molecules/CreditsButton";
-import { EffectDetail, LockedEffectDetail } from "../../../Molecules/EffectDetail";
+import { EffectDetail } from "../../../Molecules/EffectDetail";
 import { ListLined } from "../../../Atoms/List/ListLined";
 import { ActionRow, ActionRowButton, ActionRowContent } from "../../../Molecules/ActionRow";
 
+// todo - delete me
 const Effect = ({ buttonsDisabled, effect }: { buttonsDisabled: boolean; effect: IEffectUpgrade }) => {
   const { portActionHandler } = useActiveShipContext();
 
   if (!effect) {
     // todo - show minimum rank
-    return <LockedEffectDetail />;
   }
 
   let tokenButton = null;

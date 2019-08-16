@@ -10,7 +10,7 @@ import { ReactNode } from "react";
 
 export const NavigationItem = React.memo(({ path, text, subtext, icon, isCurrent }: IProps) => {
   return (
-    <Link href={path.href} as={path.as}>
+    <Link href={path.href} as={path.as} prefetch={false}>
       <StyledItem href={path.as || path.href} isCurrent={isCurrent}>
         <StyledIcon>{icon}</StyledIcon>
         <Detail>

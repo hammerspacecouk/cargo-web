@@ -3,16 +3,16 @@ import { Panel } from "../../../Molecules/Panel";
 import { Crates } from "../../../Organisms/ActiveShip/Panels/Crates";
 import { Directions } from "../../../Organisms/ActiveShip/Panels/Directions";
 import { Tactical } from "../../../Organisms/ActiveShip/Panels/Tactical";
-import { Trade } from "../../../Organisms/ActiveShip/Panels/Trade";
 import { Engineering } from "../../../Organisms/ActiveShip/Panels/Engineering";
 import styled from "styled-components";
 import { COLOURS, hexToRGBa, PANEL_BORDER } from "../../../../styles/colours";
 import { BREAKPOINTS } from "../../../../styles/media";
 import { EventsList } from "../../../Organisms/EventsList";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
+import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
 
 export const ShipInPortPage = () => {
-  const { events, port } = useActiveShipContext();
+  const { events } = useActiveShipContext();
 
   return (
     <Page>
@@ -27,15 +27,15 @@ export const ShipInPortPage = () => {
         </Panel>
       </PanelNavigation>
       <PanelShips>
+        <Panel title="Ships">
+          <Ships />
+        </Panel>
+      </PanelShips>
+      <PanelTactical>
         <Panel title="Tactical">
           <Tactical />
         </Panel>
-      </PanelShips>
-      <PanelTrade>
-        <Panel title={`Trade at ${port && port.name}`}>
-          <Trade />
-        </Panel>
-      </PanelTrade>
+      </PanelTactical>
       <PanelLog>
         <Panel title="Log">
           <StyledEventsList events={events} />
@@ -55,7 +55,7 @@ const Page = styled.div`
       display: grid;
       width: 100%;
       grid-template-columns: repeat(10, [col] 10%);
-      grid-template-rows: repeat(3, [row] auto);
+      grid-template-rows: repeat(4, [row] auto);
     `};
 `;
 
@@ -80,25 +80,25 @@ const PanelNavigation = styled(GeneralPanel)`
   background: ${hexToRGBa(COLOURS.GREY.BLACK, 0.7)};
 `;
 
+const PanelTactical = styled(GeneralPanel)`
+  grid-column: col 5 / span 6;
+  grid-row: row 2;
+`;
+
 const PanelShips = styled(GeneralPanel)`
   grid-column: col 1 / span 4;
   grid-row: row 2;
 `;
 
-const PanelTrade = styled(GeneralPanel)`
-  grid-column: col 5 / span 6;
-  grid-row: row 2;
+const PanelEngineering = styled(GeneralPanel)`
+  grid-column: col 6 / span 5;
+  grid-row: row 3;
 `;
 
 const PanelLog = styled(GeneralPanel)`
   grid-column: col 1 / span 5;
   grid-row: row 3;
   background: ${hexToRGBa(COLOURS.EVENTS.BACKGROUND, 0.75)};
-`;
-
-const PanelEngineering = styled(GeneralPanel)`
-  grid-column: col 6 / span 5;
-  grid-row: row 3;
 `;
 
 const StyledEventsList = styled(EventsList)``;

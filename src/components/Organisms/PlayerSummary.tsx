@@ -41,7 +41,7 @@ export const PlayerSummary = () => {
   const { player, rankStatus } = useGameSessionContext();
 
   return (
-    <Link href={routes.getPlayHome()}>
+    <Link href={routes.getPlayHome()} prefetch={false}>
       <StyledSummary href={routes.getPlayHome()}>
         <Icon>
           <PlayerFlag player={player} />

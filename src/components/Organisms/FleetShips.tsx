@@ -68,7 +68,7 @@ const DestroyedShip = ({ fleetShip }: IItemProps) => (
 const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
   let subtext;
   if ((fleetShip.ship.location as IPort).name) {
-    if ((fleetShip.ship.location as IPort).safeHaven) {
+    if ((fleetShip.ship.location as IPort).isSafe) {
       subtext = (
         <TextWarning>
           <PortName port={fleetShip.ship.location as IPort} />

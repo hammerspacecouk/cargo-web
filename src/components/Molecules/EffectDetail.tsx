@@ -1,9 +1,10 @@
 import { H4 } from "../Atoms/Heading";
 import * as React from "react";
-import { IEffect } from "../../interfaces";
+import { IEffect, IRank } from "../../interfaces";
 import styled from "styled-components";
 import { EffectSymbol } from "../Atoms/EffectSymbol";
 import { GRID } from "../../styles/variables";
+import { TextWarning } from "../Atoms/Text";
 
 interface IProps {
   effect: IEffect;
@@ -31,11 +32,11 @@ export const EffectDetail = React.memo(({ effect, currentCount, altDescription, 
   </StyledEffectDetail>
 ));
 
-export const LockedEffectDetail = () => (
+export const LockedEffectDetail = ({minimumRank}: {minimumRank: IRank}) => (
   <StyledEffectDetail>
     <EffectSymbol />
     <StyledEffectDescription>
-      <H4 as="p">LOCKED</H4>
+      <H4 as="p"><TextWarning>Requires: {minimumRank.title}</TextWarning></H4>
     </StyledEffectDescription>
   </StyledEffectDetail>
 );

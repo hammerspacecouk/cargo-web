@@ -52,7 +52,6 @@ export class ServerClient implements IAPIClient {
         return null;
       }
       if (response.status === 404) {
-        // didn't exist - todo - differentiate from 403
         return null;
       }
       if (response.status === 409) {

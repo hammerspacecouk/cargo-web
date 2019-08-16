@@ -130,6 +130,10 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
 
 const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipResponse): IActiveShipState => {
   let newState = state;
+  if (!activeShip) {
+    newState = setPropIfChanged(newState, "ship", null);
+    return newState;
+  }
   newState = setPropIfChanged(newState, "ship", activeShip.ship);
   newState = setPropIfChanged(newState, "directions", activeShip.directions);
   newState = setPropIfChanged(newState, "tacticalOptions", activeShip.tacticalOptions);

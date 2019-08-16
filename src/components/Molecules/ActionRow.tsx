@@ -12,4 +12,6 @@ export const ActionRowContent = styled.div`
 
 export const ActionRowButton = styled.div`
   margin-left: ${GRID.UNIT};
+  min-width: 64px;
+  text-align: right;
 `;

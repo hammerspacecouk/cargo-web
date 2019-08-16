@@ -24,7 +24,7 @@ const Icon = styled.abbr`
 
 export const PortName = React.memo(({ port }: IProps) => {
   let safeIndicator = null;
-  if (port.safeHaven) {
+  if (port.isSafe) {
     safeIndicator = (
       <Icon title="Sanctuary">
         <SanctuaryIcon />

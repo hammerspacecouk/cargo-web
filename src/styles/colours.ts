@@ -117,7 +117,7 @@ const action = {
   DARKEST: "#4b3264",
   DARK: "#5f3d85",
   MID: "#723da6",
-  LIGHTER: "#8149b8",
+  LIGHTER: "#ab86d0",
   LIGHTEST: "#e9dcf5",
 };
 

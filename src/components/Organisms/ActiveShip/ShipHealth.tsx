@@ -15,7 +15,6 @@ const StyledRow = styled.div`
 const StyledLabel = styled.div`
   flex: 1;
   margin-right: ${GRID.UNIT};
-  min-width: 240px;
   ${SIZES.D};
 `;
 

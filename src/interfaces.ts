@@ -10,7 +10,7 @@ export interface IActionToken {
 export interface IPort {
   id: string;
   name: string;
-  safeHaven: boolean;
+  isSafe: boolean;
 }
 
 export interface IChannel {
@@ -130,15 +130,18 @@ export interface IHealthIncrease extends ITransaction {
 }
 
 export interface ITacticalOption extends IEffectAction {
+  minimumRank?: IRank;
   hitsRemaining?: number;
   expiry?: string;
   isActive?: boolean;
+  mustSelectShip?: boolean;
+  purchaseToken?: ITransaction;
 }
 
 export interface IEffectAction {
   actionToken?: IActionToken;
   currentCount?: number;
-  effect: IEffect;
+  effect?: IEffect;
 }
 
 export interface IFleetShip {

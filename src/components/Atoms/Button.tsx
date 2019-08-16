@@ -4,7 +4,6 @@ import { COLOURS } from "../../styles/colours";
 import { GRID } from "../../styles/variables";
 import { MONOSPACE_FONT } from "../../styles/typography";
 import { AttackIcon } from "../Icons/AttackIcon";
-import { TacticalIcon } from "../Icons/TacticalIcon";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { AddIcon } from "../Icons/AddIcon";
 
@@ -125,12 +124,6 @@ export const AttackButton = React.memo((props: any) => (
   <IconDangerButton {...props}>
     <AttackIcon />
   </IconDangerButton>
-));
-
-export const TacticalButton = React.memo((props: any) => (
-  <IconConfirmButton {...props}>
-    <TacticalIcon />
-  </IconConfirmButton>
 ));
 
 export const AddButton = React.memo((props: any) => (

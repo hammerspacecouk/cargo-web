@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IActionToken, IEffectAction } from "../../interfaces";
-import { EffectDetail, LockedEffectDetail } from "./EffectDetail";
+import { EffectDetail } from "./EffectDetail";
 import { ActionButton } from "../Atoms/Button";
 import { TokenButton } from "./TokenButton";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
@@ -11,12 +11,14 @@ interface IOffenceEffectProps {
   doneHandler: () => void;
 }
 
+// todo - rename for offence effects specifically
 export const UseEffectItem = React.memo(({ option, doneHandler }: IOffenceEffectProps) => {
   const { portActionHandler, buttonsDisabled } = useActiveShipContext();
 
-  if (!option) {
-    return <LockedEffectDetail />;
-  }
+  return null;
+  // if (!option) {
+  //   return <LockedEffectDetail />;
+  // }
 
   const handler = async (token: IActionToken) => {
     await portActionHandler(token);

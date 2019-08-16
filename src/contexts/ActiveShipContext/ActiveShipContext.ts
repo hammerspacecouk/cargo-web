@@ -1,6 +1,7 @@
 import { createContext, createElement, ReactNode, useContext } from "react";
 import { IActiveShip, useActiveShip } from "./useActiveShip";
 import { IActiveShipResponse } from "../../data/active-ship";
+import Error from "../../../pages/_error";
 
 // hook to use for getting at the active ship context
 export const useActiveShipContext = (): IActiveShip => {
@@ -14,6 +15,11 @@ export const useActiveShipContext = (): IActiveShip => {
 // responsible for being the session provider
 export const ActiveShipContextComponent = ({ shipId, initialShipData, children }: IProps) => {
   const activeShip = useActiveShip(shipId, initialShipData);
+
+  if (activeShip.ship === null) {
+    return createElement(Error, { statusCode: 404 });
+  }
+
   return createElement(
     ActiveShipContext.Provider,
     {
