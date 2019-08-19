@@ -8,7 +8,6 @@ import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSes
 interface IProps {
   readonly amount: number;
   readonly disabledOverride?: boolean;
-  readonly children?: JSX.Element;
 }
 
 const isDisabled = (amount: number, playerScore: IScore): boolean => {
@@ -19,7 +18,7 @@ const isDisabled = (amount: number, playerScore: IScore): boolean => {
   return scoreValue < amount;
 };
 
-export const CreditsButton = ({ amount, disabledOverride, children }: IProps) => {
+export const CreditsButton = ({ amount, disabledOverride }: IProps) => {
   const { score } = useGameSessionContext();
   const [disabled, setDisabled] = React.useState(() => isDisabled(amount, score));
 
@@ -69,8 +68,10 @@ export const CreditsButton = ({ amount, disabledOverride, children }: IProps) =>
     disabledState = isDisabled(amount, score);
   }
 
+  const title = disabledState && !disabledOverride ? "Not enough credit" : null;
+
   return (
-    <ComplexButton type="submit" disabled={disabledState} leading={children}>
+    <ComplexButton type="submit" disabled={disabledState} title={title}>
       <ScoreValue score={amount} />
     </ComplexButton>
   );

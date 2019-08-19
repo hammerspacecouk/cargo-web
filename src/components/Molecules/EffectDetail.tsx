@@ -15,7 +15,7 @@ interface IProps {
 
 const StyledEffectDetail = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 `;
 const StyledEffectDescription = styled.div`
   margin-left: ${GRID.UNIT};
@@ -32,11 +32,13 @@ export const EffectDetail = React.memo(({ effect, currentCount, altDescription, 
   </StyledEffectDetail>
 ));
 
-export const LockedEffectDetail = ({minimumRank}: {minimumRank: IRank}) => (
+export const LockedEffectDetail = ({ minimumRank }: { minimumRank: IRank }) => (
   <StyledEffectDetail>
     <EffectSymbol />
     <StyledEffectDescription>
-      <H4 as="p"><TextWarning>Requires: {minimumRank.title}</TextWarning></H4>
+      <H4 as="p">
+        <TextWarning>Requires: {minimumRank.title}</TextWarning>
+      </H4>
     </StyledEffectDescription>
   </StyledEffectDetail>
 );

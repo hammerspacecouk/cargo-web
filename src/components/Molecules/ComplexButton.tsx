@@ -1,52 +1,32 @@
 import * as React from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { Icon } from "../Atoms/Icon";
-import { ActionButton } from "../Atoms/Button";
+import { Icon, SMALL_ICON } from "../Atoms/Icon";
+import { Button, Type } from "../Atoms/Button";
+import { ButtonHTMLAttributes } from "react";
 
-interface IProps {
-  readonly leading?: JSX.Element;
-  readonly icon?: JSX.Element;
-  readonly children?: JSX.Element;
-  readonly disabled?: boolean;
-  readonly type: string;
-  readonly className?: string;
-  readonly onClick?: any;
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  readonly icon?: ReactNode;
+  readonly styleType?: Type;
 }
 
-const StyledButton = styled(ActionButton)`
+const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
 `;
 
-const StyledChildren = styled.div`
-  margin-right: ${GRID.UNIT};
-  padding-right: ${GRID.UNIT};
-  border-right-style: solid;
-  border-right-width: 1px;
+const StyledIcon = styled(Icon)`
+  margin-right: 4px;
 `;
 
-const StyledIcon = styled(StyledChildren)`
-  line-height: 0;
-  padding-right: ${GRID.HALF};
-  margin-left: -${GRID.HALF};
-`;
-
-export const ComplexButton = React.memo(({ leading, icon, children, className, ...props }: IProps) => {
+export const ComplexButton = React.memo(({ icon, children, styleType = Type.Action, ...props }: IProps) => {
   let styledPrefix;
-  if (leading) {
-    styledPrefix = <StyledChildren>{leading}</StyledChildren>;
-  }
   if (icon) {
-    styledPrefix = (
-      <StyledIcon>
-        <Icon>{icon}</Icon>
-      </StyledIcon>
-    );
+    styledPrefix = <StyledIcon size={SMALL_ICON}>{icon}</StyledIcon>;
   }
 
   return (
-    <StyledButton className={className} {...props}>
+    <StyledButton styleType={styleType} {...props}>
       {styledPrefix}
       {children}
     </StyledButton>

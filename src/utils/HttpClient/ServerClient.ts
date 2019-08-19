@@ -1,10 +1,17 @@
-import axios, { AxiosRequestConfig } from "axios";
+const fetch = require("node-fetch");
 import http from "http";
 import { IActionToken } from "../../interfaces";
 import { IAPIClient } from "../ApiClient";
 import { Environment } from "../environment";
 import { Logger } from "../Logger";
 import { UnauthenticatedError } from "./Error";
+
+export const AUTH_COOKIE_NAME = "AUTHENTICATION_TOKEN";
+
+const findAuthCookie = (cookieString: string): string => {
+  const bits = cookieString.split(";");
+  return bits.find(bit => bit.includes(AUTH_COOKIE_NAME));
+};
 
 export class ServerClient implements IAPIClient {
   public tokenFetch(token: IActionToken): Promise<any> {
@@ -19,30 +26,50 @@ export class ServerClient implements IAPIClient {
   ): Promise<any> {
     const url = this.getUrl(path);
     try {
-      const start = Date.now();
-
-      const config: AxiosRequestConfig = {
-        method: "get",
-        url,
-        validateStatus: function(status: number) {
-          return status >= 200 && status < 500; // default
-        },
+      const headers: any = { accept: "application/json" };
+      const options: RequestInit = {
+        method: "GET",
+        credentials: "include",
       };
 
+      if (payload) {
+        options.method = "POST";
+        options.body = JSON.stringify(payload);
+        headers["content-type"] = "application/json";
+      }
+
       if (incomingRequest && incomingRequest.headers && incomingRequest.headers.cookie) {
-        config.headers = {
-          cookie: incomingRequest.headers.cookie,
-        };
+        headers["cookie"] = incomingRequest.headers.cookie;
       }
 
-      const response = await axios(config);
-
-      if (outgoingResponse && response.headers["set-cookie"]) {
-        outgoingResponse.setHeader("set-cookie", response.headers["set-cookie"]);
-      }
-
+      const start = Date.now();
+      const response = await fetch(url, { ...options, headers });
       const time = Date.now() - start;
-      Logger.info(`[DATACLIENT] [FETCH] [${response.status}] [${time}ms] ${url}`);
+      const cookieString = response.headers.get("set-cookie");
+      const cacheControl = response.headers.get("cache-control");
+      Logger.info(
+        "[DATA_CLIENT_FETCH]",
+        JSON.stringify({
+          status: response.status,
+          time: `${time}ms`,
+          url,
+          sendHeaders: headers,
+          receiveCookie: cookieString,
+        })
+      );
+
+      if (outgoingResponse) {
+        if (cookieString) {
+          outgoingResponse.setHeader("set-cookie", cookieString);
+          const authCookie = findAuthCookie(cookieString);
+          if (incomingRequest && authCookie) {
+            incomingRequest.headers.cookie = authCookie;
+          }
+        }
+        if (cacheControl) {
+          outgoingResponse.setHeader("cache-control", cacheControl);
+        }
+      }
 
       if (response.status === 401) {
         throw UnauthenticatedError("Not authenticated");
@@ -58,14 +85,14 @@ export class ServerClient implements IAPIClient {
         // didn't exist - todo - cheating
         return null;
       }
-      if (response.status !== 200) {
+      if (!response.ok) {
         // todo - all other errors (perhaps split by 4xx/5xx)
         return null;
       }
 
-      return response.data;
+      return await response.json();
     } catch (e) {
-      Logger.info(`[DATACLIENT] [FETCH ERROR] ${url}`);
+      Logger.info(`[DATA_CLIENT] [FETCH ERROR] ${url} ${e.message}`);
       throw e;
     }
   }

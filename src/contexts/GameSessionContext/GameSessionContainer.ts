@@ -6,6 +6,7 @@ import { IPageWithData } from "../../interfaces";
 import { NextPageContext } from "next";
 import { getSession, IGameSessionResponse } from "../../data/game";
 import { routes } from "../../routes";
+import { AUTH_COOKIE_NAME } from "../../utils/HttpClient/ServerClient";
 
 // responsible for fetching the data required for this context
 export const GameSessionContainer = (Page: IPageWithData, isAtHome: boolean = false) => {
@@ -42,7 +43,7 @@ const calculateInitialProps = async (context: NextPageContext, Page: IPageWithDa
 
   try {
     // save an unnecessary call to the API if we already know the cookie isn't there
-    if (req && req.headers && (!req.headers.cookie || !req.headers.cookie.includes("AUTHENTICATION_TOKEN"))) {
+    if (req && req.headers && (!req.headers.cookie || !req.headers.cookie.includes(AUTH_COOKIE_NAME))) {
       throw UnauthenticatedError("Cookie not found");
     }
     // get the gameSession data
