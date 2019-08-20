@@ -1,43 +1,51 @@
 import * as React from "react";
-import { IEffectAction, IShip } from "../../interfaces";
-import { AttackButton } from "../Atoms/Button";
-import { Modal } from "../Molecules/Modal";
+import { IEffectAction } from "../../interfaces";
+import { DangerButton } from "../Atoms/Button";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
-import { UseEffectItem } from "../Molecules/UseEffectItem";
-import { ListLined } from "../Atoms/List/ListLined";
+import { TokenButton } from "../Molecules/TokenButton";
+import { ListInline } from "../Atoms/List/ListInline";
+import { InnerEffectSymbol } from "../Atoms/EffectSymbol";
+import styled from "styled-components";
+import { NumberBadge } from "../Atoms/NumberBadge";
+import { GRID } from "../../styles/variables";
 
-interface IProps {
-  actions?: IEffectAction[];
-  ship: IShip;
-}
-
-export const OffenceActions = ({ actions, ship }: IProps) => {
-  const [showModal, setShowModal] = React.useState(false);
-  const { buttonsDisabled } = useActiveShipContext();
+export const OffenceActions = ({ actions }: IProps) => {
+  const { portActionHandler, buttonsDisabled } = useActiveShipContext();
 
   if (!actions) {
     return null;
   }
 
-  let modal = null;
-  if (showModal) {
-    modal = (
-      <Modal isOpen={true} title={`Attack ${ship.name}?`} onClose={() => setShowModal(false)}>
-        <ListLined>
-          {actions.map(option => (
-            <li key={option.effect.id}>
-              <UseEffectItem option={option} doneHandler={() => setShowModal(false)} />
-            </li>
-          ))}
-        </ListLined>
-      </Modal>
-    );
-  }
-
   return (
-    <>
-      <AttackButton disabled={buttonsDisabled} onClick={() => setShowModal(true)} />
-      {modal}
-    </>
+    <ListInline spaced>
+      {actions.map((option: IEffectAction) => (
+        <li key={option.effect.id}>
+          <TokenButton token={option.actionToken} handler={portActionHandler}>
+            <ActionButton disabled={buttonsDisabled} title={option.effect.name}>
+              <InnerEffectSymbol effect={option.effect} />
+            </ActionButton>
+          </TokenButton>
+          <PositionedNumberBadge value={option.currentCount} />
+        </li>
+      ))}
+    </ListInline>
   );
 };
+
+interface IProps {
+  actions?: IEffectAction[];
+}
+
+const PositionedNumberBadge = styled(NumberBadge)`
+  position: absolute;
+  top: -${GRID.HALF};
+  right: -${GRID.HALF};
+`;
+
+const ActionButton = styled(DangerButton)`
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-transform: none;
+`;

@@ -5,15 +5,22 @@ import { GRID } from "../../styles/variables";
 import { ShieldStrength } from "./ShieldStrength";
 import { OffenceActions } from "../Organisms/OffenceActions";
 import { Score } from "../Organisms/Score";
-import { ActionRow, ActionRowButton, ActionRowContent } from "./ActionRow";
 
 interface IProps {
   ship: IShip;
   offence?: IEffectAction[];
 }
 
-const ShipDetail = styled(ActionRowContent)`
+const ShipRow = styled.div`
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const ShipDetail = styled.div`
+  display: flex;
+  margin-right: ${GRID.UNIT};
   align-items: center;
 `;
 
@@ -28,7 +35,7 @@ const Detail = styled.div`
 `;
 
 export const PlayerShip = React.memo(({ ship, offence }: IProps) => (
-  <ActionRow>
+  <ShipRow>
     <ShipDetail>
       <Status>
         <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />
@@ -38,8 +45,6 @@ export const PlayerShip = React.memo(({ ship, offence }: IProps) => (
         <Score score={ship.owner.score} />
       </Detail>
     </ShipDetail>
-    <ActionRowButton>
-      <OffenceActions actions={offence} ship={ship} />
-    </ActionRowButton>
-  </ActionRow>
+    <OffenceActions actions={offence} />
+  </ShipRow>
 ));

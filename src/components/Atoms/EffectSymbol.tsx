@@ -19,11 +19,15 @@ export const EffectSymbol = React.memo(({ effect, currentCount }: IProps) => {
 
   return (
     <Outer effect={effect}>
-      <Inner>{getSymbol(effect)}</Inner>
+      <InnerEffectSymbol effect={effect} />
       {numberBadge}
     </Outer>
   );
 });
+
+export const InnerEffectSymbol = ({effect}: {effect: IEffect}) => (
+  <Inner>{getSymbol(effect)}</Inner>
+);
 
 // Workings below
 

@@ -121,10 +121,6 @@ export interface IShipUpgrade extends ITransaction {
   detail: IShipClass;
 }
 
-export interface IEffectUpgrade extends ITransaction {
-  detail: IEffect;
-}
-
 export interface IHealthIncrease extends ITransaction {
   detail: number;
 }

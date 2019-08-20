@@ -4,7 +4,6 @@ import {
   ICrateAction,
   IDirections,
   IEffect,
-  IEffectUpgrade,
   IEvent,
   IHealthIncrease,
   IOtherShip,
@@ -44,7 +43,6 @@ interface IActiveShipState {
   ship?: IShip;
   message?: string;
   shipsInLocation?: IOtherShip[];
-  purchaseOptions?: IEffectUpgrade[];
   channel?: IChannel;
   port?: IPort;
   hint?: string;
@@ -143,7 +141,6 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "healthOptions", activeShip.health);
   newState = setPropIfChanged(newState, "requestNameToken", activeShip.renameToken);
   newState = setPropIfChanged(newState, "shipsInLocation", activeShip.shipsInLocation);
-  newState = setPropIfChanged(newState, "purchaseOptions", activeShip.purchaseOptions);
   newState = setPropIfChanged(newState, "port", activeShip.port);
   newState = setPropIfChanged(newState, "channel", activeShip.channel);
   newState = setPropIfChanged(newState, "hint", activeShip.hint);

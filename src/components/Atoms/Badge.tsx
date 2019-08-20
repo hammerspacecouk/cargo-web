@@ -18,13 +18,14 @@ const frames = keyframes`
     }
 `;
 
-export const Badge = styled.span<{ animate?: boolean; subtle?: boolean }>`
+export const Badge = styled.span<{ animate?: boolean; }>`
   display: inline-block;
-  background: ${({ subtle }) => (subtle ? COLOURS.BLACK.STANDARD : COLOURS.BASE)};
-  color: ${COLOURS.WHITE.STANDARD};
+  background: ${COLOURS.WHITE.STANDARD};
+  color: ${COLOURS.BLACK.STANDARD};
   border-radius: ${GRID.DOUBLE};
   line-height: ${GRID.UNIT};
   font-size: 12px;
+  font-weight: bold;
   padding: 0 ${GRID.QUARTER};
   min-width: ${GRID.UNIT};
   text-align: center;

@@ -11,6 +11,7 @@ interface IProps {
 }
 
 const Guess = styled.span`
+  white-space: pre;
   ${SIZES.D};
   ${BREAKPOINTS.S`
     ${SIZES.B.toString()}

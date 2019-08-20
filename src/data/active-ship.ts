@@ -5,7 +5,6 @@ import {
   ICrateAction,
   IDirections,
   IEffect,
-  IEffectUpgrade,
   IEvent,
   IHealthIncrease,
   IOtherShip,
@@ -39,7 +38,6 @@ export interface IActiveShipResponse {
   playerRankStatus: IRankStatus;
   ship: IShip;
   shipsInLocation: IOtherShip[];
-  purchaseOptions: IEffectUpgrade[];
   channel: IChannel;
   port: IPort;
   hint?: string;

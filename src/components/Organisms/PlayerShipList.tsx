@@ -17,7 +17,6 @@ export const PlayerShipList = ({ ships }: IProps) => {
     return null;
   }
 
-  // todo - no tactical options on own ships
   return (
     <ListLined>
       {ships.map(shipItem => (

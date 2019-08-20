@@ -74,7 +74,6 @@ const ShipImage = ({ ship }: { ship: IShip }) => (
 
 export const ShipOverview = () => {
   const { ship, port } = useActiveShipContext();
-
   if (!ship) {
     return (
       <StyledOverview>

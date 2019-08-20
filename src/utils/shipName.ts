@@ -21,7 +21,10 @@ export const makeRandom = (previous: string, toMatch?: string): string => {
 
   let toMatchArray = null;
   if (toMatch) {
-    toMatchArray = toMatch.padEnd(originalGuessLength).split("");
+    toMatchArray = toMatch
+      .padStart((toMatch.length + originalGuessLength)/ 2)
+      .padEnd(originalGuessLength)
+      .split("");
   }
 
   const charactersLength = characters.length;

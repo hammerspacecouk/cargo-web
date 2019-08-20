@@ -45,18 +45,10 @@ export class ServerClient implements IAPIClient {
       const start = Date.now();
       const response = await fetch(url, { ...options, headers });
       const time = Date.now() - start;
+      Logger.info(`[DATA_CLIENT] [FETCH] ${response.status} ${time}ms ${url}`);
+
       const cookieString = response.headers.get("set-cookie");
       const cacheControl = response.headers.get("cache-control");
-      Logger.info(
-        "[DATA_CLIENT_FETCH]",
-        JSON.stringify({
-          status: response.status,
-          time: `${time}ms`,
-          url,
-          sendHeaders: headers,
-          receiveCookie: cookieString,
-        })
-      );
 
       if (outgoingResponse) {
         if (cookieString) {

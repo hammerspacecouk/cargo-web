@@ -4,6 +4,18 @@ import { MONOSPACE_FONT } from "./typography";
 import { BREAKPOINTS } from "./media";
 
 export const base = css`
+  /* share-tech-mono-400normal - latin */
+  @font-face {
+    font-family: 'Share Tech Mono';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src:
+      local('Share Tech Mono Regular '),
+      local('Share Tech Mono-Regular'),
+      url('/static/share-tech-mono-latin-400.woff2') format('woff2') // Modern Browsers
+  }
+
   * {
     ${scrollbarStyles};
     box-sizing: border-box;
