@@ -7,10 +7,10 @@ import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShi
 import { CountdownToTime } from "./CountdownToTime";
 import { CreditsButton } from "./CreditsButton";
 import { ComplexButton } from "./ComplexButton";
-import { TickIcon } from "../Icons/TickIcon";
 import { AlarmActiveIcon } from "../Icons/AlarmActiveIcon";
-import { AttackIcon } from "../Icons/AttackIcon";
 import styled from "styled-components";
+import { CheckboxEmpty } from "../Icons/CheckboxEmptyIcon";
+import { CheckboxChecked } from "../Icons/CheckboxCheckedIcon";
 
 interface IOffenceEffectProps {
   option: ITacticalOption;
@@ -35,13 +35,12 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
 
   let actionButton;
   let purchaseButton;
-  const label = "Engage";
 
   if (option.actionToken) {
     actionButton = (
       <TokenButton token={option.actionToken} handler={handler}>
-        <ComplexButton icon={<TickIcon />} type="submit" disabled={buttonsDisabled}>
-          {label}
+        <ComplexButton icon={<CheckboxEmpty />} type="submit" disabled={buttonsDisabled}>
+          Engage
         </ComplexButton>
       </TokenButton>
     );
@@ -56,7 +55,7 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
     }
     actionButton = (
       <ComplexButton
-        icon={<AttackIcon />}
+        icon={<CheckboxChecked />}
         disabled={true}
         title={`${option.hitsRemaining} hits remaining`}
         styleType={type}
@@ -70,10 +69,16 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         <CountdownToTime dateTime={option.expiry} />
       </ComplexButton>
     );
+  } else if (option.isActive) {
+    actionButton = (
+      <ComplexButton icon={<CheckboxChecked />} styleType={Type.Confirm} disabled={true}>
+        Engaged
+      </ComplexButton>
+    );
   } else if (!option.mustSelectShip) {
     actionButton = (
-      <ComplexButton icon={<TickIcon />} disabled={true}>
-        {label}
+      <ComplexButton icon={<CheckboxEmpty />} disabled={true}>
+        Engage
       </ComplexButton>
     );
   }

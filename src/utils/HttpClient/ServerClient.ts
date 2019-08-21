@@ -8,11 +8,6 @@ import { UnauthenticatedError } from "./Error";
 
 export const AUTH_COOKIE_NAME = "AUTHENTICATION_TOKEN";
 
-const findAuthCookie = (cookieString: string): string => {
-  const bits = cookieString.split(";");
-  return bits.find(bit => bit.includes(AUTH_COOKIE_NAME));
-};
-
 export class ServerClient implements IAPIClient {
   public tokenFetch(token: IActionToken): Promise<any> {
     return this.fetch(token.path, { token: token.token });
@@ -47,20 +42,10 @@ export class ServerClient implements IAPIClient {
       const time = Date.now() - start;
       Logger.info(`[DATA_CLIENT] [FETCH] ${response.status} ${time}ms ${url}`);
 
-      const cookieString = response.headers.get("set-cookie");
       const cacheControl = response.headers.get("cache-control");
 
-      if (outgoingResponse) {
-        if (cookieString) {
-          outgoingResponse.setHeader("set-cookie", cookieString);
-          const authCookie = findAuthCookie(cookieString);
-          if (incomingRequest && authCookie) {
-            incomingRequest.headers.cookie = authCookie;
-          }
-        }
-        if (cacheControl) {
+      if (outgoingResponse && cacheControl) {
           outgoingResponse.setHeader("cache-control", cacheControl);
-        }
       }
 
       if (response.status === 401) {
