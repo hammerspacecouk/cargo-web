@@ -1,4 +1,5 @@
 export const GRID = {
+  QUADRUPLE: "64px",
   DOUBLE: "32px",
   HALF: "8px",
   QUARTER: "4px",

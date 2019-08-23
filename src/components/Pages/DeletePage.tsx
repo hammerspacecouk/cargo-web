@@ -3,7 +3,7 @@ import { ConfirmButton, DangerButton } from "../Atoms/Button";
 import { Prose } from "../Atoms/Prose";
 import { TokenButton } from "../Molecules/TokenButton";
 import { routes } from "../../routes";
-import { SimplePage } from "../Templates/SimplePage";
+import { XSimplePage } from "../Templates/XSimplePage";
 import styled from "styled-components";
 import { MAX_PROSE_WIDTH } from "../../styles/variables";
 import { ButtonRow } from "../Molecules/ButtonRow";
@@ -32,7 +32,7 @@ export const DeletePage = ({ stage, token }: IProps) => {
   };
 
   return (
-    <SimplePage title="Delete account">
+    <XSimplePage title="Delete account">
       <Content>
         <Prose>
           <H3 as="h2">{stage}/3</H3>
@@ -47,7 +47,7 @@ export const DeletePage = ({ stage, token }: IProps) => {
           </TokenButton>
         </ButtonRow>
       </Content>
-    </SimplePage>
+    </XSimplePage>
   );
 };
 

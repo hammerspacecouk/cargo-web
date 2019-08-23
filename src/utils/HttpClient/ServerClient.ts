@@ -45,7 +45,7 @@ export class ServerClient implements IAPIClient {
       const cacheControl = response.headers.get("cache-control");
 
       if (outgoingResponse && cacheControl) {
-          outgoingResponse.setHeader("cache-control", cacheControl);
+        outgoingResponse.setHeader("cache-control", cacheControl);
       }
 
       if (response.status === 401) {

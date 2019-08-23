@@ -25,9 +25,7 @@ export const EffectSymbol = React.memo(({ effect, currentCount }: IProps) => {
   );
 });
 
-export const InnerEffectSymbol = ({effect}: {effect: IEffect}) => (
-  <Inner>{getSymbol(effect)}</Inner>
-);
+export const InnerEffectSymbol = ({ effect }: { effect: IEffect }) => <Inner>{getSymbol(effect)}</Inner>;
 
 // Workings below
 

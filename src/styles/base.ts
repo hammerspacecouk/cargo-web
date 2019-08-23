@@ -33,9 +33,10 @@ export const base = css`
     min-height: 100%;
     background: ${COLOURS.BODY.BACKGROUND} url("/static/space.jpg") fixed;
     background-size: cover;
-    ${BREAKPOINTS.XL`
-      overflow-y: hidden;
-    `}
+    // todo - figure out this overflow on all pages
+    // ${BREAKPOINTS.XL`
+    //   overflow-y: hidden;
+    // `}
   }
 
   body {

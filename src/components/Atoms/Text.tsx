@@ -43,6 +43,10 @@ export const TextOk = styled.span`
 `;
 
 // has to be block level or it won't do anything
-export const TextCenter = styled.div`
+export const TextCenter = styled.p`
   text-align: center;
+`;
+
+export const TextRight = styled.p`
+  text-align: right;
 `;

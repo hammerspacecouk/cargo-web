@@ -18,7 +18,7 @@ const frames = keyframes`
     }
 `;
 
-export const Badge = styled.span<{ animate?: boolean; }>`
+export const Badge = styled.span<{ animate?: boolean }>`
   display: inline-block;
   background: ${COLOURS.WHITE.STANDARD};
   color: ${COLOURS.BLACK.STANDARD};
