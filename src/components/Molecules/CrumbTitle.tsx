@@ -16,6 +16,7 @@ interface IProps {
 
 const StyledCrumbTitle = styled.div`
   display: block;
+  margin-bottom: ${GRID.UNIT};
 `;
 
 const Crumb = styled.li`

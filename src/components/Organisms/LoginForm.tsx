@@ -1,11 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IActionToken, ILoginOptions, IMessage } from "../../interfaces";
-import { COLOURS } from "../../styles/colours";
+import { ILoginOptions, IMessage } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 import { Environment } from "../../utils/environment";
-import { Button, ConfirmButton } from "../Atoms/Button";
-import { H2, H3 } from "../Atoms/Heading";
+import { ConfirmButton } from "../Atoms/Button";
+import { H2 } from "../Atoms/Heading";
 import { ListInline } from "../Atoms/List/ListInline";
 import { P } from "../Atoms/Text";
 import { FacebookButton, GoogleButton, MicrosoftButton, TwitterButton } from "../Molecules/SocialButton";
@@ -14,7 +13,6 @@ import { Loading } from "../Atoms/Loading";
 import { TokenButton } from "../Molecules/TokenButton";
 import { Prose } from "../Atoms/Prose";
 import { BREAKPOINTS } from "../../styles/media";
-import { MONOSPACE_FONT } from "../../styles/typography";
 import { routes } from "../../routes";
 
 export const LoginForm = ({ loginOptions, messages }: IProps) => {
@@ -42,9 +40,9 @@ export const LoginForm = ({ loginOptions, messages }: IProps) => {
           </>
         )}
         <P>
-          We identify which player you are by confirming your unique email address. Use any one of the following
-          methods. We don't get access to your accounts on these services. No spam, no sharing with third parties. And
-          we don't store the email address in a way that can be recovered.
+          Use any of the following authentication providers. We don't get access to your account details on these
+          services. No spam, no sharing with third parties.{" "}
+          <a href={routes.getAboutPolicies()}>More about our login policies</a>
         </P>
       </Prose>
       <List>
@@ -69,12 +67,6 @@ export const LoginForm = ({ loginOptions, messages }: IProps) => {
           </Item>
         )}
       </List>
-      <Prose>
-        {loginOptions.email && <EmailLogin token={loginOptions.email} />}
-        <P>
-          <a href={routes.getAboutPolicies()}>More info on our login policies</a>
-        </P>
-      </Prose>
     </>
   );
 };
@@ -105,47 +97,8 @@ const Item = styled.li`
     `}
 `;
 
-const StyledForm = styled.div`
-  display: flex;
-  margin: ${GRID.UNIT} 0;
-`;
-
-const StyledInput = styled.input`
-  ${MONOSPACE_FONT};
-  flex: 1;
-  outline: none;
-  margin-right: ${GRID.UNIT};
-  background: none;
-  border: none;
-  border-bottom: solid 2px ${COLOURS.BODY.TEXT};
-  padding-left: ${GRID.HALF};
-  &:focus {
-    border-bottom-color: ${COLOURS.BODY.LINK};
-  }
-`;
-
 const AnonForm = styled(TokenButton)`
   text-align: center;
   margin: ${GRID.UNIT} 0;
   display: block;
 `;
-
-const EmailLogin = ({ token }: { token: IActionToken }) => {
-  return (
-    <>
-      <H3>
-        <label htmlFor="login-email">Log in via email</label>
-      </H3>
-      <P>
-        If you'd rather use your email directly enter your email address and we'll send you a link that lets you log in
-        immediately. The link is valid for one hour and there are no passwords required. We don't store it.
-      </P>
-      <TokenButton token={token}>
-        <StyledForm>
-          <StyledInput id="login-email" type="email" name="target" required={true} placeholder="name@example.com" />
-          <Button type="submit">Send</Button>
-        </StyledForm>
-      </TokenButton>
-    </>
-  );
-};

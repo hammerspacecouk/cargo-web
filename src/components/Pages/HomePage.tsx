@@ -12,31 +12,8 @@ import { ComplexButton } from "../Molecules/ComplexButton";
 import { AnimatedEllipsis } from "../Atoms/AnimatedEllipsis";
 import { SimplePage } from "../Templates/SimplePage";
 
-interface IProps {
-  events: IEvent[];
-}
-
-const IntroPanel = styled.section`
-  padding: ${GRID.DOUBLE};
-  background: ${COLOURS.BODY.BACKGROUND};
-  margin-bottom: ${GRID.UNIT};
-`;
-
-const EventsPanel = styled.section`
-  padding: ${GRID.DOUBLE};
-  background: ${COLOURS.BLACK.STANDARD};
-`;
-
-const PanelHeading = styled(H2)`
-  margin-bottom: ${GRID.UNIT};
-`;
-
-const StyledStartButton = styled(ComplexButton)`
-  margin-left: auto;
-`;
-
 export const HomePage = ({ events }: IProps) => (
-  <SimplePage>
+  <SimplePage isHome={true}>
     <IntroPanel>
       <Prose>
         <p>
@@ -64,3 +41,26 @@ export const HomePage = ({ events }: IProps) => (
     </EventsPanel>
   </SimplePage>
 );
+
+interface IProps {
+  events: IEvent[];
+}
+
+const IntroPanel = styled.section`
+  padding: ${GRID.DOUBLE};
+  background: ${COLOURS.BODY.BACKGROUND};
+  margin-bottom: ${GRID.UNIT};
+`;
+
+const EventsPanel = styled.section`
+  padding: ${GRID.DOUBLE};
+  background: ${COLOURS.BLACK.STANDARD};
+`;
+
+const PanelHeading = styled(H2)`
+  margin-bottom: ${GRID.UNIT};
+`;
+
+const StyledStartButton = styled(ComplexButton)`
+  margin-left: auto;
+`;

@@ -3,11 +3,10 @@ import { ConfirmButton, DangerButton } from "../Atoms/Button";
 import { Prose } from "../Atoms/Prose";
 import { TokenButton } from "../Molecules/TokenButton";
 import { routes } from "../../routes";
-import { XSimplePage } from "../Templates/XSimplePage";
-import styled from "styled-components";
-import { MAX_PROSE_WIDTH } from "../../styles/variables";
 import { ButtonRow } from "../Molecules/ButtonRow";
 import { H3 } from "../Atoms/Heading";
+import { SimplePage } from "../Templates/SimplePage";
+import { PanelPage } from "../Templates/PanelPage";
 
 interface IProps {
   stage?: number;
@@ -32,8 +31,8 @@ export const DeletePage = ({ stage, token }: IProps) => {
   };
 
   return (
-    <XSimplePage title="Delete account">
-      <Content>
+    <SimplePage>
+      <PanelPage title="Delete Account">
         <Prose>
           <H3 as="h2">{stage}/3</H3>
           <p>{stageText}</p>
@@ -46,11 +45,7 @@ export const DeletePage = ({ stage, token }: IProps) => {
             <DangerButton type="submit">Yes</DangerButton>
           </TokenButton>
         </ButtonRow>
-      </Content>
-    </XSimplePage>
+      </PanelPage>
+    </SimplePage>
   );
 };
-
-const Content = styled.div`
-  max-width: ${MAX_PROSE_WIDTH};
-`;

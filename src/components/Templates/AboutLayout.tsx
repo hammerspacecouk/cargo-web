@@ -3,7 +3,9 @@ import { SimplePage } from "./SimplePage";
 import styled from "styled-components";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
-import { H1 } from "../Atoms/Heading";
+import { APP_TITLE } from "../../utils/pageTitle";
+import { CrumbTitle } from "../Molecules/CrumbTitle";
+import { routes } from "../../routes";
 
 interface IProps {
   readonly title?: string;
@@ -11,22 +13,22 @@ interface IProps {
 }
 
 export const AboutLayout = (props: IProps) => {
-  // let crumbs = null;
-  // let title = `About ${APP_TITLE}`;
-  // if (props.title) {
-  //   crumbs = [
-  //     {
-  //       link: routes.getAbout(),
-  //       title,
-  //     },
-  //   ];
-  //   title = props.title;
-  // }
+  let crumbs = null;
+  let title = `About ${APP_TITLE}`;
+  if (props.title) {
+    crumbs = [
+      {
+        link: routes.getAbout(),
+        title,
+      },
+    ];
+    title = props.title;
+  }
 
   return (
     <SimplePage>
       <Panel>
-        <PanelHeading>About</PanelHeading>
+        <CrumbTitle crumbs={crumbs}>{title}</CrumbTitle>
         {props.children}
       </Panel>
     </SimplePage>
@@ -36,8 +38,4 @@ export const AboutLayout = (props: IProps) => {
 const Panel = styled.section`
   padding: ${GRID.DOUBLE};
   background: ${COLOURS.BODY.BACKGROUND};
-`;
-
-const PanelHeading = styled(H1)`
-  margin-bottom: ${GRID.UNIT};
 `;

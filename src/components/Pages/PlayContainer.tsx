@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { IChildrenProps } from "../../interfaces";
 import { InGameMasthead } from "../Organisms/InGameMasthead";
 import { PromotionModal } from "../Organisms/PromotionModal";
@@ -23,6 +23,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
 
   return (
     <>
+      <GlobalStyle />
       <InGameMasthead />
       <StyledPlayBoard>
         <StyledMain>{children}</StyledMain>
@@ -33,6 +34,14 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
   );
 };
 
+const GlobalStyle = createGlobalStyle`
+  html {
+    ${BREAKPOINTS.XL`
+       overflow-y: hidden;
+    `}
+  }
+`;
+
 const StyledPlayBoard = styled.div`
   ${BREAKPOINTS.XL`
   display: flex;
@@ -40,13 +49,13 @@ const StyledPlayBoard = styled.div`
 `;
 
 const StyledNavigation = styled(Navigation)`
-  min-height: calc(100vh - ${MASTHEAD_HEIGHT} - 1px);
+  min-height: calc(100vh - ${MASTHEAD_HEIGHT});
   display: flex;
   ${BREAKPOINTS.XL`
     width: 20%;
     max-width: 400px;
     min-width: 240px;
-    height: calc(100vh - ${MASTHEAD_HEIGHT} - 1px);
+    height: calc(100vh - ${MASTHEAD_HEIGHT});
     order: 1;
   `}
 `;
@@ -56,7 +65,7 @@ const StyledMain = styled.main`
     flex: 1;
     order: 2;
     padding: 0;
-    height: calc(100vh - ${MASTHEAD_HEIGHT} - 1px);
+    height: calc(100vh - ${MASTHEAD_HEIGHT});
     overflow-y: auto;
   `};
 `;

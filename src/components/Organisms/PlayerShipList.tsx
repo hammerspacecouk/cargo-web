@@ -14,7 +14,7 @@ export const PlayerShipList = ({ ships }: IProps) => {
   }
 
   if (ships.length === 0) {
-    return null;
+    return <p>Lonely here</p>;
   }
 
   return (

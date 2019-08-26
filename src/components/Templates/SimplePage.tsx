@@ -10,19 +10,19 @@ import { APP_TITLE } from "../../utils/pageTitle";
 import { ListInline } from "../Atoms/List/ListInline";
 import { COLOURS } from "../../styles/colours";
 
-// todo - title prop to switch on/off <h1> and put in main panel
-//  Allow children to be wrapped/unwrapped in main panel
-export const SimplePage = ({ children }: IChildrenProps) => (
+export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
   <TemplateSimple>
     <TemplateIntro>
       <IntroBits>
         <LogoLink href={routes.getHome()}>
           <Logo>🎷</Logo>
-          <StyledTitle>{APP_TITLE}</StyledTitle>
+          <StyledTitle as={isHome ? "h1" : "p"}>{APP_TITLE}</StyledTitle>
         </LogoLink>
-        <Button as="a" href={routes.getPlay()}>
-          Go to game
-        </Button>
+        {!disablePlayButton && (
+          <Button as="a" href={routes.getPlay()}>
+            Go to game
+          </Button>
+        )}
       </IntroBits>
     </TemplateIntro>
     <TemplateMain>
@@ -46,6 +46,11 @@ export const SimplePage = ({ children }: IChildrenProps) => (
     </TemplateMain>
   </TemplateSimple>
 );
+
+interface IProps extends IChildrenProps {
+  isHome?: boolean;
+  disablePlayButton?: boolean;
+}
 
 const LogoLink = styled.a`
   color: inherit;
@@ -73,7 +78,7 @@ const TemplateIntro = styled.div`
   `};
 `;
 
-const IntroBits = styled.div`
+const IntroBits = styled.header`
   ${BREAKPOINTS.L`
     position: sticky;
     top: ${GRID.DOUBLE};
