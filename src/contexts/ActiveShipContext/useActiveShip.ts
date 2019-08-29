@@ -18,7 +18,7 @@ import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
 import { useGameSessionContext } from "../GameSessionContext/GameSessionContext";
 import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 import { useMounted } from "../../hooks/useMounted";
-import { IAuthProviders } from "../../data/profile";
+import { IAuthProvider } from "../../data/profile";
 
 export interface IActiveShip extends IActiveShipState {
   buttonsDisabled?: boolean;
@@ -46,7 +46,7 @@ interface IActiveShipState {
   channel?: IChannel;
   port?: IPort;
   hint?: string;
-  authProviders?: IAuthProviders;
+  authProviders?: IAuthProvider[];
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {

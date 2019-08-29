@@ -14,20 +14,11 @@ export interface IProfileResponse {
   isTrial: boolean;
   canDelete: boolean;
   homePort: IPort;
-  authProviders: IAuthProviders;
-}
-
-export interface IAuthProviders {
-  amazon?: IAuthProvider;
-  apple?: IAuthProvider;
-  facebook?: IAuthProvider;
-  google?: IAuthProvider;
-  microsoft?: IAuthProvider;
-  reddit?: IAuthProvider;
-  twitter?: IAuthProvider;
+  authProviders: IAuthProvider[];
 }
 
 export interface IAuthProvider {
-  removalToken: IActionToken;
+  provider: string;
+  removalToken?: IActionToken;
   addUrl: string;
 }

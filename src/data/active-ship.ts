@@ -15,7 +15,7 @@ import {
   ITacticalOption,
   ITransaction,
 } from "../interfaces";
-import { IAuthProviders } from "./profile";
+import { IAuthProvider } from "./profile";
 
 export const getShipData = (
   shipId: string,
@@ -41,5 +41,5 @@ export interface IActiveShipResponse {
   channel: IChannel;
   port: IPort;
   hint?: string;
-  authProviders?: IAuthProviders;
+  authProviders?: IAuthProvider[];
 }

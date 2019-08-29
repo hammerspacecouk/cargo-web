@@ -6,7 +6,7 @@ import { Prose } from "../Atoms/Prose";
 import { GRID } from "../../styles/variables";
 import { Icon } from "../Atoms/Icon";
 import { ReactNode } from "react";
-import { AddButton, RemoveButton } from "../Atoms/Button";
+import { AddButton, ConfirmButton, DangerButton, RemoveButton } from "../Atoms/Button";
 import {
   AmazonLogo,
   AppleLogo,
@@ -16,14 +16,16 @@ import {
   RedditLogo,
   TwitterLogo,
 } from "../Atoms/Logos";
-import { IClassNameProps } from "../../interfaces";
+import { IActionToken, IClassNameProps } from "../../interfaces";
 import { routes } from "../../routes";
-import { IAuthProvider, IAuthProviders } from "../../data/profile";
+import { IAuthProvider } from "../../data/profile";
 import { TokenButton } from "../Molecules/TokenButton";
 import { Environment } from "../../utils/environment";
+import { useState } from "react";
+import { Modal, ModalActions, ModalType } from "../Molecules/Modal";
+import { ApiClient } from "../../utils/ApiClient";
 
 export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps) => {
-  // todo - prompt if you go to remove the last one
   let warning;
   if (isAnonymous) {
     warning = (
@@ -44,38 +46,123 @@ export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps
           <a href={routes.getAboutPolicies()}>Read more about your privacy</a>.
         </p>
       </Prose>
-      <GridWrapper as="ul">
-        {authProviders.amazon && <SocialAccount logo={<AmazonLogo />} text="Amazon" provider={authProviders.amazon} />}
-        {authProviders.apple && <SocialAccount logo={<AppleLogo />} text="Apple" provider={authProviders.apple} />}
-        {authProviders.facebook && (
-          <SocialAccount logo={<FacebookLogo />} text="Facebook" provider={authProviders.facebook} />
-        )}
-        {authProviders.google && <SocialAccount logo={<GoogleLogo />} text="Google" provider={authProviders.google} />}
-        {authProviders.microsoft && (
-          <SocialAccount logo={<MicrosoftLogo />} text="Microsoft" provider={authProviders.microsoft} />
-        )}
-        {authProviders.reddit && <SocialAccount logo={<RedditLogo />} text="Reddit" provider={authProviders.reddit} />}
-        {authProviders.twitter && (
-          <SocialAccount logo={<TwitterLogo />} text="Twitter" provider={authProviders.twitter} />
-        )}
-      </GridWrapper>
+      <Providers providers={authProviders} />
     </div>
+  );
+};
+
+const Providers = ({providers}: {providers: IAuthProvider[]}) => {
+  const activeCount = providers.reduce((acc, provider) => {
+    if (provider.removalToken) {
+      acc++;
+    }
+    return acc;
+  }, 0);
+
+  const withWarning = activeCount === 1;
+
+  const providerButtons = providers.map((provider: IAuthProvider) => {
+    switch (provider.provider) {
+      case 'amazon':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<AmazonLogo />}
+          text="Amazon" provider={provider} />;
+      case 'apple':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<AppleLogo />}
+          text="Apple" provider={provider} />;
+      case 'facebook':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<FacebookLogo />}
+          text="Facebook" provider={provider} />;
+      case 'google':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<GoogleLogo />}
+          text="Google" provider={provider} />;
+      case 'microsoft':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<MicrosoftLogo />}
+          text="Microsoft" provider={provider} />;
+      case 'reddit':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<RedditLogo />}
+          text="Reddit" provider={provider} />;
+      case 'twitter':
+        return <SocialAccount
+          key={provider.provider}
+          withWarning={withWarning}
+          logo={<TwitterLogo />}
+          text="Twitter" provider={provider} />;
+    }
+  });
+
+  return (
+  <GridWrapper as="ul">
+    {providerButtons}
+  </GridWrapper>
   );
 };
 
 interface IProps extends IClassNameProps {
   isAnonymous: boolean;
-  authProviders: IAuthProviders;
+  authProviders: IAuthProvider[];
 }
 
-const SocialAccount = ({ logo, text, provider }: ISocialAccountProps) => {
-  let button;
+const SocialAccount = ({ logo, text, provider, withWarning }: ISocialAccountProps) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const removalHandler = async (token: IActionToken) => {
+    // todo - update the session directly
+    await ApiClient.tokenFetch(token);
+    window.location.reload();
+  };
+
+  let button, modal;
   if (provider.removalToken) {
-    button = (
-      <TokenButton token={provider.removalToken}>
-        <RemoveButton />
-      </TokenButton>
-    );
+    if (withWarning) {
+      modal = (
+        <Modal isOpen={modalIsOpen} title="Are you sure?" onClose={closeModal} type={ModalType.DANGER}>
+          <Prose>
+            <p>
+              You are unlinking all providers from your account so it will become fully <strong>Anonymous</strong>.
+              In this state if you clear your cookies or reset your browser you will lose access to this game forever.
+            </p>
+            <p>Are you really sure you want to convert to an anonymous account?</p>
+          </Prose>
+          <ModalActions>
+            <TokenButton token={provider.removalToken} handler={removalHandler}>
+              <DangerButton>Yes, unlink {text}</DangerButton>
+            </TokenButton>{" "}
+            <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
+          </ModalActions>
+        </Modal>
+      );
+      button = (
+        <RemoveButton onClick={() => setModalIsOpen(true)} />
+      );
+    } else {
+      button = (
+        <TokenButton token={provider.removalToken} handler={removalHandler}>
+          <RemoveButton />
+        </TokenButton>
+      );
+    }
   } else {
     button = (
       <form method="post" action={`${Environment.clientApiHostname}${provider.addUrl}`}>
@@ -89,6 +176,7 @@ const SocialAccount = ({ logo, text, provider }: ISocialAccountProps) => {
       <Logo>{logo}</Logo>
       <Text>{text}</Text>
       <SocialButton>{button}</SocialButton>
+      {modal}
     </StyledSocialAccount>
   );
 };
@@ -97,6 +185,7 @@ interface ISocialAccountProps {
   text: string;
   logo: ReactNode;
   provider: IAuthProvider;
+  withWarning: boolean;
 }
 
 const SocialButton = styled.span`
