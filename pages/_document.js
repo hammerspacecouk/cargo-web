@@ -34,6 +34,17 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <style dangerouslySetInnerHTML={{__html: `
+              /* share-tech-mono-400normal - latin */
+              @font-face {
+                font-family: "Share Tech Mono";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: local("Share Tech Mono Regular "), local("Share Tech Mono-Regular"),
+                  url("/static/share-tech-mono-latin-400.woff2") format("woff2");
+              }
+          `}}/>
         </Head>
         <body>
         <Main/>

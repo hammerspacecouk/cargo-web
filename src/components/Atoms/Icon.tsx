@@ -15,3 +15,7 @@ export const Icon = styled.span<IProps>`
   height: ${({ size = NORMAL_ICON }) => size};
   width: ${({ size = NORMAL_ICON }) => size};
 `;
+
+export const InlineIcon = styled(Icon)`
+  vertical-align: text-top;
+`;

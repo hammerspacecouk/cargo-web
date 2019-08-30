@@ -4,43 +4,8 @@ import { IRankStatus } from "../../interfaces";
 import { ProgressBar } from "../Atoms/ProgressBar";
 import { GRID } from "../../styles/variables";
 import { useMounted } from "../../hooks/useMounted";
-
-interface IProps {
-  rankStatus?: IRankStatus;
-}
-
-const StyledPromotion = styled.div`
-  width: 94vw;
-  max-width: 480px;
-`;
-
-const RankBox = styled.div`
-  margin: ${GRID.UNIT} 0;
-  text-align: center;
-`;
-
-const RankItem = styled.div`
-  margin-bottom: ${GRID.HALF};
-`;
-
-const INACTIVE_OPACITY = "0.4";
-const INACTIVE_SIZE = "1.4rem";
-
-const InactiveRank = styled(RankItem)`
-  opacity: ${INACTIVE_OPACITY};
-  font-size: ${INACTIVE_SIZE};
-`;
-
-const ActiveRank = styled(RankItem)<{ isOn: boolean }>`
-  transition: all 0.8s ease-in;
-  will-change: font-size, opacity;
-  opacity: ${props => (props.isOn ? "1" : INACTIVE_OPACITY)};
-  font-size: ${props => (props.isOn ? "2.2rem" : INACTIVE_SIZE)};
-`;
-
-const ANIMATE_START = 500;
-const ANIMATE_END = 3000;
-const ANIMATE_PHASE2 = 2500;
+import { P } from "../Atoms/Text";
+import { COLOURS } from "../../styles/colours";
 
 export const Promotion = ({ rankStatus }: IProps) => {
   const [progress, setProgress] = React.useState(80);
@@ -113,6 +78,51 @@ export const Promotion = ({ rankStatus }: IProps) => {
           <InactiveRank key={rank.title}>{rank.title}</InactiveRank>
         ))}
       </RankBox>
+      {rankStatus.description && <StyledDescription>{rankStatus.description}</StyledDescription>}
     </StyledPromotion>
   );
 };
+
+
+interface IProps {
+  rankStatus?: IRankStatus;
+}
+
+const StyledPromotion = styled.div`
+  width: 94vw;
+  max-width: 480px;
+`;
+
+const StyledDescription = styled(P)`
+  border-top: ${COLOURS.PANEL_INNER_DIVIDER} solid 1px;
+  padding-top: ${GRID.UNIT};
+  margin-bottom: ${GRID.UNIT};
+`;
+
+const RankBox = styled.div`
+  margin: ${GRID.UNIT} 0;
+  text-align: center;
+`;
+
+const RankItem = styled.div`
+  margin-bottom: ${GRID.HALF};
+`;
+
+const INACTIVE_OPACITY = "0.4";
+const INACTIVE_SIZE = "1.4rem";
+
+const InactiveRank = styled(RankItem)`
+  opacity: ${INACTIVE_OPACITY};
+  font-size: ${INACTIVE_SIZE};
+`;
+
+const ActiveRank = styled(RankItem)<{ isOn: boolean }>`
+  transition: all 0.8s ease-in;
+  will-change: font-size, opacity;
+  opacity: ${props => (props.isOn ? "1" : INACTIVE_OPACITY)};
+  font-size: ${props => (props.isOn ? "2.2rem" : INACTIVE_SIZE)};
+`;
+
+const ANIMATE_START = 500;
+const ANIMATE_END = 3000;
+const ANIMATE_PHASE2 = 2500;

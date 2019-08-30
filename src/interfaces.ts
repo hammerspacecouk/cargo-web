@@ -53,6 +53,7 @@ export interface IRankStatus {
   previousRank: IRank;
   nextRank: IRank;
   olderRanks: IRank[];
+  description?: string;
 }
 
 interface IDirectionDetail {
@@ -63,6 +64,7 @@ interface IDirectionDetail {
   minimumRank?: IRank;
   minimumStrength?: number;
   denialReason?: string;
+  isHomePort: boolean;
 }
 
 export interface IDirection {

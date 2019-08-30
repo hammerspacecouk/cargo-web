@@ -47,6 +47,7 @@ interface IActiveShipState {
   port?: IPort;
   hint?: string;
   authProviders?: IAuthProvider[];
+  tutorialStep?: number;
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
@@ -147,6 +148,7 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "authProviders", activeShip.authProviders);
   newState = setPropIfChanged(newState, "bonusEffects", activeShip.bonus);
   newState = setPropIfChanged(newState, "events", activeShip.events);
+  newState = setPropIfChanged(newState, "tutorialStep", activeShip.tutorialStep);
   return newState;
 };
 

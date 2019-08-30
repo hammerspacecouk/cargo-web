@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { GRID, MAX_PROSE_WIDTH } from "../../styles/variables";
+import { SIZES } from "../../styles/typography";
 
 export const Prose = styled.div`
   p,
@@ -16,15 +17,19 @@ export const Prose = styled.div`
     margin-bottom: ${GRID.UNIT};
   }
   li {
-    padding-left: ${GRID.UNIT};
+    margin-left: ${GRID.UNIT};
+    &:not(:last-child) {
+      margin-bottom: ${GRID.UNIT};
+    }
   }
   p,
   ul,
   ol {
     // maximum readable line-length
+    ${SIZES.E};
     max-width: ${MAX_PROSE_WIDTH};
   }
-  p {
-    line-height: 1.4;
+  ul {
+    list-style: square;
   }
 `;

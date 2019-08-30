@@ -1,18 +1,8 @@
 import { css } from "styled-components";
 import { COLOURS, scrollbarStyles } from "./colours";
-import { MONOSPACE_FONT } from "./typography";
+import { MONOSPACE_FONT, SIZES } from "./typography";
 
 export const base = css`
-  /* share-tech-mono-400normal - latin */
-  @font-face {
-    font-family: "Share Tech Mono";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400;
-    src: local("Share Tech Mono Regular "), local("Share Tech Mono-Regular"),
-      url("/static/share-tech-mono-latin-400.woff2") format("woff2"); // Modern Browsers
-  }
-
   * {
     ${scrollbarStyles};
     box-sizing: border-box;
@@ -35,6 +25,7 @@ export const base = css`
   body {
     color: ${COLOURS.BODY.TEXT};
     min-height: 100vh;
+    ${SIZES.E};
     ${MONOSPACE_FONT};
   }
 
@@ -94,5 +85,9 @@ export const base = css`
 
   em {
     font-style: italic;
+  }
+  
+  strong {
+    font-weight: bold;
   }
 `;

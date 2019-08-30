@@ -3,9 +3,37 @@ import styled from "styled-components";
 import { IPort } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
+import { HomeIcon } from "../Icons/HomeIcon";
+
+export const PortName = React.memo(({ port, isHome = false }: IProps) => {
+  let safeIndicator = null;
+  let homeIndicator = null;
+  if (port.isSafe) {
+    safeIndicator = (
+      <Icon title="Sanctuary">
+        <SanctuaryIcon />
+      </Icon>
+    );
+  }
+  if (isHome) {
+    homeIndicator = (
+      <Icon title="Home space port">
+        <HomeIcon />
+      </Icon>
+    );
+  }
+  return (
+    <Styled>
+      <Text>{port.name}</Text>
+      {safeIndicator}
+      {homeIndicator}
+    </Styled>
+  );
+});
 
 interface IProps {
   port: IPort;
+  isHome?: boolean;
 }
 
 const Styled = styled.span`
@@ -21,20 +49,3 @@ const Icon = styled.abbr`
   width: 1em;
   height: 1em;
 `;
-
-export const PortName = React.memo(({ port }: IProps) => {
-  let safeIndicator = null;
-  if (port.isSafe) {
-    safeIndicator = (
-      <Icon title="Sanctuary">
-        <SanctuaryIcon />
-      </Icon>
-    );
-  }
-  return (
-    <Styled>
-      <Text>{port.name}</Text>
-      {safeIndicator}
-    </Styled>
-  );
-});

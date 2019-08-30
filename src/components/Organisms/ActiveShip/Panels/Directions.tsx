@@ -57,7 +57,7 @@ export const Direction = ({ direction, children }: IProps) => {
         <PortOverview>
           <PortSummary>
             <H4 as="h3">
-              <PortName port={detail.destination} />
+              <PortName port={detail.destination} isHome={detail.isHomePort} />
             </H4>
             <SubLine>{subLine}</SubLine>
           </PortSummary>

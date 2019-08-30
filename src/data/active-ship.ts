@@ -42,4 +42,5 @@ export interface IActiveShipResponse {
   port: IPort;
   hint?: string;
   authProviders?: IAuthProvider[];
+  tutorialStep?: number;
 }
