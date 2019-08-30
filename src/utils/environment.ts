@@ -1,5 +1,5 @@
 import { isClient, isServer } from "./runtime";
-import getConfig from "next/config";
+// import getConfig from "next/config";
 
 export interface IEnvironment {
   serverApiHostname?: string;
@@ -17,9 +17,9 @@ export const defaultLocale: string = "en-gb";
 let environment: IEnvironment;
 
 if (isClient) {
-  const { publicRuntimeConfig } = getConfig();
+  // const { publicRuntimeConfig } = getConfig();
   environment = {
-    ...publicRuntimeConfig,
+    // ...publicRuntimeConfig,
     isClient: true,
     isServer: false,
     locale: navigator.language,
