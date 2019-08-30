@@ -112,7 +112,7 @@ const PageWrap = styled.div`
       display: grid;
       width: 100%;
       grid-template-columns: repeat(10, [col] 10%);
-      grid-template-rows: repeat(5, [row] auto);
+      grid-template-rows: repeat(10, [row] auto);
     `};
 `;
 
@@ -172,12 +172,12 @@ const PanelTacticalTutorial = styled(PanelShips)`
 
 const PanelEngineering = styled(GeneralPanel)`
   grid-column: col 6 / span 5;
-  grid-row: row 4;
+  grid-row: row 10;
 `;
 
 const PanelLog = styled(GeneralPanel)`
   grid-column: col 1 / span 5;
-  grid-row: row 4;
+  grid-row: row 10;
   background: ${hexToRGBa(COLOURS.EVENTS.BACKGROUND, 0.75)};
   ${BREAKPOINTS.L`
       border-right: ${PANEL_BORDER};

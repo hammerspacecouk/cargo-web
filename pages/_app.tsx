@@ -59,11 +59,11 @@ export default class extends App<IProps, IState> {
 
     return (
       <Container>
+        <GlobalStyle/>
         <IntlProvider locale={Environment.locale}>
           <Head>
             <title>{pageTitle()}</title>
           </Head>
-          <GlobalStyle/>
           <Component {...pageProps} />
           {errorModal}
         </IntlProvider>
