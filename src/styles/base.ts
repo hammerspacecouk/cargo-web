@@ -18,7 +18,7 @@ export const base = css`
     -webkit-text-size-adjust: 100%;
     margin: 0;
     min-height: 100%;
-    background: ${COLOURS.BODY.BACKGROUND} url("/static/space.jpg") fixed;
+    background: ${COLOURS.BODY.BACKGROUND} url("/static/space.1.jpg") fixed;
     background-size: cover;
   }
 

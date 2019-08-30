@@ -31,7 +31,7 @@ const StyledPlanet = styled.div`
 
 // todo - figure out a performant animation strategy
 const PlanetInner = styled.div`
-  background: url("/static/planet.jpg") repeat top left;
+  background: url("/static/planet.1.jpg") repeat top left;
   width: 100%;
   height: 2400px;
   ${BREAKPOINTS.MAX`

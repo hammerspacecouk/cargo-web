@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
                 font-display: swap;
                 font-weight: 400;
                 src: local("Share Tech Mono Regular "), local("Share Tech Mono-Regular"),
-                  url("/static/share-tech-mono-latin-400.woff2") format("woff2");
+                  url("/static/share-tech-mono-latin-400.1.woff2") format("woff2");
               }
           `}}/>
         </Head>
