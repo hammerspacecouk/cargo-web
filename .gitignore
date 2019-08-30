@@ -12,3 +12,5 @@ node_modules/
 yarn-error.log
 icudt64l.dat
 
+# Environment
+/.env

@@ -15,10 +15,6 @@ export const StatusPage = () => (
     <TableStriped>
       <tbody>
         <tr>
-          <th>Environment</th>
-          <td>{Environment.appEnv}</td>
-        </tr>
-        <tr>
           <th>Version</th>
           <td>{Environment.appVersion}</td>
         </tr>
@@ -26,20 +22,12 @@ export const StatusPage = () => (
           <th>Client API Hostname</th>
           <td>{Environment.clientApiHostname}</td>
         </tr>
-        <tr>
-          <th>NODE_ENV</th>
-          <td>{Environment.nodeEnv}</td>
-        </tr>
       </tbody>
     </TableStriped>
 
     <h2>Request</h2>
     <TableStriped>
       <tbody>
-        <tr>
-          <th>Host</th>
-          <td>{Environment.host}</td>
-        </tr>
         <tr>
           <th>Server Rendered</th>
           <td>{Environment.isServer ? "yes" : "no"}</td>

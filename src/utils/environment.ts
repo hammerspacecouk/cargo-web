@@ -1,13 +1,10 @@
 import { isClient, isServer } from "./runtime";
-// import getConfig from "next/config";
 
 export interface IEnvironment {
+  assetPrefix: string;
   serverApiHostname?: string;
   clientApiHostname?: string;
-  appEnv?: string;
   appVersion?: string;
-  host?: string;
-  nodeEnv?: string;
   isClient: boolean;
   isServer: boolean;
   locale: string;
@@ -17,21 +14,21 @@ export const defaultLocale: string = "en-gb";
 let environment: IEnvironment;
 
 if (isClient) {
-  // const { publicRuntimeConfig } = getConfig();
   environment = {
-    // ...publicRuntimeConfig,
+    assetPrefix: process.env.APP_ASSET_PREFIX,
+    serverApiHostname: process.env.SERVER_API_HOSTNAME,
+    clientApiHostname: process.env.CLIENT_API_HOSTNAME,
+    appVersion: process.env.APP_VERSION,
     isClient: true,
     isServer: false,
     locale: navigator.language,
   };
 } else if (isServer) {
   environment = {
+    assetPrefix: process.env.APP_ASSET_PREFIX,
     serverApiHostname: process.env.SERVER_API_HOSTNAME,
     clientApiHostname: process.env.CLIENT_API_HOSTNAME,
-    appEnv: process.env.APP_ENV,
     appVersion: process.env.APP_VERSION,
-    host: process.env.HOSTNAME,
-    nodeEnv: process.env.NODE_ENV,
     locale: defaultLocale, // can change in future
     isClient: false,
     isServer: true,

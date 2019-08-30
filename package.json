@@ -24,6 +24,7 @@
     "@types/react-modal": "^3.8.2",
     "@types/styled-components": "^4.1.16",
     "babel-plugin-styled-components": "^1.10.6",
+    "dotenv": "^8.1.0",
     "prettier": "^1.18.2",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.17.0",

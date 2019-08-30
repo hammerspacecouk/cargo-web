@@ -1,6 +1,7 @@
 import { css } from "styled-components";
 import { COLOURS, scrollbarStyles } from "./colours";
 import { MONOSPACE_FONT, SIZES } from "./typography";
+import { Environment } from "../utils/environment";
 
 export const base = css`
   * {
@@ -18,7 +19,7 @@ export const base = css`
     -webkit-text-size-adjust: 100%;
     margin: 0;
     min-height: 100%;
-    background: ${COLOURS.BODY.BACKGROUND} url("/static/space.1.jpg") fixed;
+    background: ${COLOURS.BODY.BACKGROUND} url("${Environment.assetPrefix}/space.1.jpg") fixed;
     background-size: cover;
   }
 

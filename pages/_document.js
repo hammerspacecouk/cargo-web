@@ -1,5 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { Environment } from "../src/utils/environment";
 
 import { ServerStyleSheet } from "styled-components";
 
@@ -42,7 +43,7 @@ export default class MyDocument extends Document {
                 font-display: swap;
                 font-weight: 400;
                 src: local("Share Tech Mono Regular "), local("Share Tech Mono-Regular"),
-                  url("/static/share-tech-mono-latin-400.1.woff2") format("woff2");
+                  url("${Environment.assetPrefix}/share-tech-mono-latin-400.1.woff2") format("woff2");
               }
           `}}/>
         </Head>
