@@ -86,6 +86,9 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
 
   const departureHandler = async (token: IActionToken): Promise<void> => {
     await portActionHandler(token);
+    if (window) {
+      window.scroll(0, 0);
+    }
     refreshSession();
   };
 

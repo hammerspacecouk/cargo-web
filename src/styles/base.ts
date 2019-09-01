@@ -20,7 +20,7 @@ export const base = css`
     margin: 0;
     min-height: 100%;
     background: ${COLOURS.BODY.BACKGROUND} url("${Environment.assetPrefix}/space.1.jpg") fixed;
-    background-size: cover;
+    background-size: contain;
   }
 
   body {
