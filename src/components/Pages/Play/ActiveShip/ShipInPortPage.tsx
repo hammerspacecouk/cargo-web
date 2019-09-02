@@ -16,6 +16,7 @@ import { TravelTutorial } from "../../../Organisms/Tutorial/TravelTutorial";
 import { Z_INDEX } from "../../../../styles/variables";
 import { TacticalTutorial } from "../../../Organisms/Tutorial/TacticalTutorial";
 import { ShipsTutorial } from "../../../Organisms/Tutorial/ShipsTutorial";
+import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 
 export const ShipInPortPage = () => {
   const { events, tutorialStep } = useActiveShipContext();
@@ -57,7 +58,7 @@ export const ShipInPortPage = () => {
   return (
     <PageWrap>
       <PanelCrates>
-        <Panel title="Cargo" full>
+        <Panel title="Cargo" full id="cargo">
           <Crates />
         </Panel>
       </PanelCrates>
@@ -67,12 +68,12 @@ export const ShipInPortPage = () => {
         </Panel>
       </PanelTravelTutorial>}
       {showNavigation && <PanelNavigation>
-        <Panel title="Navigation">
+        <Panel title="Navigation" id="navigation">
           <Directions />
         </Panel>
       </PanelNavigation>}
       {showCrateIntro && <PanelCrateTutorial>
-        <Panel title="Tutorial">
+        <Panel title="Tutorial" id="crates">
           <CratesTutorial />
         </Panel>
       </PanelCrateTutorial>}
@@ -82,12 +83,12 @@ export const ShipInPortPage = () => {
         </Panel>
       </PanelTacticalTutorial>}
       {showTactical && <PanelTactical>
-        <Panel title="Tactical">
+        <Panel title="Tactical" id="tactical">
           <Tactical />
         </Panel>
       </PanelTactical>}
       {showShips && <PanelShips>
-        <Panel title="Ships">
+        <Panel title="Ships" id="ships">
           <Ships />
         </Panel>
       </PanelShips>}
@@ -97,12 +98,13 @@ export const ShipInPortPage = () => {
         </Panel>
       </PanelLog>}
       {showExtras && <PanelEngineering>
-        <Panel title="Engineering">
+        <Panel title="Engineering" id="engineering">
           <Engineering />
         </Panel>
       </PanelEngineering>}
       {showIntroduction && <IntroductionModal />}
       {showShipsIntro && <ShipsTutorial />}
+      <ShipNavigation />
     </PageWrap>
   );
 };
