@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { BREAKPOINTS } from "../../styles/media";
 import { Environment } from "../../utils/environment";
 
 const rotatingPlanet = keyframes`
@@ -26,7 +25,7 @@ const StyledPlanet = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-    box-shadow: 0 -240px 200px black inset, 0 0px 130px 40px #8cbaff inset, 0 0px 23px 4px #8cbaff inset;
+    box-shadow: 0 -180px 200px black inset, 0 0px 130px 40px #8cbaff inset, 0 0px 23px 4px #8cbaff inset;
   }
 `;
 
@@ -35,9 +34,7 @@ const PlanetInner = styled.div`
   background: url("${Environment.assetPrefix}/planet.1.jpg") repeat top left;
   width: 100%;
   height: 2400px;
-  ${BREAKPOINTS.MAX`
-      animation:  ${rotatingPlanet.getName()} 200s infinite linear;
-    `}
+  //animation:  ${rotatingPlanet} 200s infinite linear;
 `;
 
 // todo - props that change the design for each planet

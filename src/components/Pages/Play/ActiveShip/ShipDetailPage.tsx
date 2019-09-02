@@ -3,10 +3,8 @@ import Head from "next/head";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { ShipInPortPage } from "./ShipInPortPage";
 import { ShipInChannelPage } from "./ShipInChannelPage";
-import { ShipOverview } from "../../../Organisms/ActiveShip/ShipOverview";
 import { MessageModal } from "../../../Organisms/ActiveShip/MessageModal";
 import { pageTitle } from "../../../../utils/pageTitle";
-import { PlayBoardLayout } from "../../../Templates/PlayBoardLayout";
 import { Loading } from "../../../Atoms/Loading";
 import { useGameSessionContext } from "../../../../contexts/GameSessionContext/GameSessionContext";
 import { useEffect } from "react";
@@ -35,7 +33,7 @@ export const ShipDetailPage = () => {
       <Head>
         <title>{pageTitle(ship ? ship.name : "Loading...")}</title>
       </Head>
-      <PlayBoardLayout overview={<ShipOverview />}>{innerPage}</PlayBoardLayout>
+      {innerPage}
       <MessageModal />
     </>
   );

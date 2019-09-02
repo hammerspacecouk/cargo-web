@@ -66,6 +66,6 @@ const StyledMain = styled.main`
     order: 2;
     padding: 0;
     height: calc(100vh - ${MASTHEAD_HEIGHT});
-    overflow-y: auto;
+    overflow-y: none;
   `};
 `;

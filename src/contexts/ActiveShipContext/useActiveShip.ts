@@ -22,7 +22,7 @@ import { IAuthProvider } from "../../data/profile";
 
 export enum ACTIVE_VIEW {
   CARGO,
-  DIRECTIONS,
+  NAVIGATION,
   TACTICAL,
   SHIPS,
   ENGINEERING,

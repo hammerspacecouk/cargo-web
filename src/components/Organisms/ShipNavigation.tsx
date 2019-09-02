@@ -11,14 +11,15 @@ import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShi
 import { ACTIVE_VIEW } from "../../contexts/ActiveShipContext/useActiveShip";
 import { IChildrenProps } from "../../interfaces";
 import { Z_INDEX } from "../../styles/variables";
+import { DisguisedButton } from "../Atoms/Button";
 import { BREAKPOINTS } from "../../styles/media";
 
 export const ShipNavigation = () => {
   return (
     <Nav>
       <List>
-        <NavItem viewName={ACTIVE_VIEW.CARGO} label="Cargo"><Crate /></NavItem>
-        <NavItem viewName={ACTIVE_VIEW.DIRECTIONS} label="Navigation"><DirectionsIcon /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.CARGO} label="Cargo"><Crate colour="inherit" /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.NAVIGATION} label="Navigation"><DirectionsIcon /></NavItem>
         <NavItem viewName={ACTIVE_VIEW.TACTICAL} label="Tactical"><TacticalIcon /></NavItem>
         <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships"><ShipsIcon /></NavItem>
         <NavItem viewName={ACTIVE_VIEW.ENGINEERING} label="Engineering"><EngineeringIcon /></NavItem>
@@ -37,8 +38,8 @@ const NavItem = ({ viewName, label, children }: INavItemProps) => {
   const { activeView, setActiveView } = useActiveShipContext();
   return (
     <Item>
-      <NavLink isActive={activeView === viewName} href={`#${label.toLowerCase()}`}>
-        <ButtonIcon size={SMALL_ICON} onClick={() => setActiveView(viewName)}>
+      <NavLink isActive={activeView === viewName} onClick={() => setActiveView(viewName)}>
+        <ButtonIcon size={SMALL_ICON}>
           {children}
         </ButtonIcon>
         <Label>{label}</Label>
@@ -47,22 +48,24 @@ const NavItem = ({ viewName, label, children }: INavItemProps) => {
   );
 };
 
+
+// todo - this ain't right at all breakpoints
 const Nav = styled.nav`
     position: fixed;
     width: 100%;
     bottom: 0;
+    right: 0;
     background: ${COLOURS.BLACK.STANDARD};
     z-index: ${Z_INDEX.PAGE_TOP};
     padding-bottom: env(safe-area-inset-bottom);
-    ${BREAKPOINTS.L`
-      display: none;
-    `};
+    ${BREAKPOINTS.XL`
+      width: 80%;
+    `}
 }
 `;
 
 const List = styled.ul`
   display: flex;
-  min-width: 44px;
   width: 100%;
   justify-content: space-between;
 `;
@@ -70,9 +73,10 @@ const List = styled.ul`
 const Item = styled.li`
   flex: 1;
   display: flex;
+  min-width: 44px;
 `;
 
-const NavLink = styled.a<{isActive: boolean}>`
+const NavLink = styled(DisguisedButton)<{isActive: boolean}>`
   display: flex;
   justify-content: center;
   flex-direction: column;

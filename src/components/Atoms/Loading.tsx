@@ -53,6 +53,7 @@ const Path = styled.circle`
 
 const WAIT_TO_REVEAL = 1000;
 
+// todo - accompanying text (i.e. Contacting Ship...)
 export const Loading = () => {
   const [show, setShow] = React.useState(false);
   const checkMounted = useMounted();

@@ -4,12 +4,37 @@ import { GRID } from "../../styles/variables";
 import { H2 } from "../Atoms/Heading";
 import { IChildrenProps } from "../../interfaces";
 import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
+import { CloseIcon } from "../Icons/CloseIcon";
+
+export const Panel = React.memo(({ id, className, closeHandler, title, children, full }: IProps) => {
+  let closeButton;
+  if (closeHandler) {
+    closeButton = (
+      <Close onClick={closeHandler}>
+        <CloseIcon />
+      </Close>
+    );
+  }
+
+  return (
+    <StyledPanel className={className} id={id}>
+      <PanelHeader>
+        <PanelTitle>{title}</PanelTitle>
+        {closeButton}
+      </PanelHeader>
+      <PanelBody full={full}>{children}</PanelBody>
+      <PanelFoot>/{title}</PanelFoot>
+    </StyledPanel>
+  );
+});
+
 
 interface IProps extends IChildrenProps {
   id?: string;
   title: string;
   className?: string;
   full?: boolean;
+  closeHandler?: () => void;
 }
 
 const StyledPanel = styled.div`
@@ -18,6 +43,11 @@ const StyledPanel = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+const PanelHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const PanelTitle = styled(H2)`
@@ -40,12 +70,13 @@ const PanelFoot = styled.div`
   margin-top: ${GRID.UNIT};
 `;
 
-export const Panel = React.memo(({ id, className, title, children, full }: IProps) => {
-  return (
-    <StyledPanel className={className} id={id}>
-      <PanelTitle>{title}</PanelTitle>
-      <PanelBody full={full}>{children}</PanelBody>
-      <PanelFoot>/{title}</PanelFoot>
-    </StyledPanel>
-  );
-});
+
+// todo - combine with modal close?
+const Close = styled.button`
+  height: 32px;
+  width: 32px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: ${GRID.UNIT};
+`;

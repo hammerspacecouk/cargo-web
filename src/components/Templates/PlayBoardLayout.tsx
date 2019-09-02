@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { GRID } from "../../styles/variables";
-import { PANEL_BORDER, panelBackground } from "../../styles/colours";
+import { PANEL_BORDER } from "../../styles/colours";
 import { IChildrenProps } from "../../interfaces";
 import { ReactNode } from "react";
 import { H1 } from "../Atoms/Heading";
@@ -41,7 +41,6 @@ const StyledPlayBoard = styled.div`
 const Page = styled.div`
   flex: 1;
   overflow-y: auto;
-  ${panelBackground}
 `;
 
 const StyledOverview = styled.div`
