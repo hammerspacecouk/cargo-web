@@ -19,7 +19,7 @@ export const base = css`
     -webkit-text-size-adjust: 100%;
     margin: 0;
     min-height: 100%;
-    background: ${COLOURS.BODY.BACKGROUND} url("${Environment.assetPrefix}/space.1.jpg") fixed;
+    background: ${COLOURS.BODY.BACKGROUND} url("${Environment.assetPrefix}/space.2.jpg") fixed;
     background-size: contain;
   }
 
@@ -50,6 +50,7 @@ export const base = css`
   svg {
     border: 0;
     max-width: 100%;
+    flex: 1;
   }
   svg:not(:root) {
     overflow: hidden;

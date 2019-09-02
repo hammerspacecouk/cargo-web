@@ -6,6 +6,7 @@ import { IChildrenProps } from "../../interfaces";
 import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
 
 interface IProps extends IChildrenProps {
+  id?: string;
   title: string;
   className?: string;
   full?: boolean;
@@ -39,9 +40,9 @@ const PanelFoot = styled.div`
   margin-top: ${GRID.UNIT};
 `;
 
-export const Panel = React.memo(({ className, title, children, full }: IProps) => {
+export const Panel = React.memo(({ id, className, title, children, full }: IProps) => {
   return (
-    <StyledPanel className={className}>
+    <StyledPanel className={className} id={id}>
       <PanelTitle>{title}</PanelTitle>
       <PanelBody full={full}>{children}</PanelBody>
       <PanelFoot>/{title}</PanelFoot>

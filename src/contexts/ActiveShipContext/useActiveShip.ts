@@ -20,8 +20,18 @@ import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 import { useMounted } from "../../hooks/useMounted";
 import { IAuthProvider } from "../../data/profile";
 
+export enum ACTIVE_VIEW {
+  CARGO,
+  DIRECTIONS,
+  TACTICAL,
+  SHIPS,
+  ENGINEERING,
+  LOG
+}
+
 export interface IActiveShip extends IActiveShipState {
   buttonsDisabled?: boolean;
+  activeView?: ACTIVE_VIEW;
   setRequestNameToken: (token: ITransaction) => void;
   departureHandler: (token: IActionToken) => Promise<void>;
   portActionHandler: (token: IActionToken) => Promise<void>;
@@ -29,6 +39,7 @@ export interface IActiveShip extends IActiveShipState {
   applyHealthHandler: (token: IActionToken) => Promise<void>;
   resetMessage: () => void;
   refreshState: () => Promise<IActiveShipResponse>;
+  setActiveView: (newView: ACTIVE_VIEW) => void;
 }
 
 interface IActiveShipState {
@@ -53,6 +64,7 @@ interface IActiveShipState {
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
   const { refreshSession, updateScore, updateAShipProperty } = useGameSessionContext();
   const [activeShipState, setActiveShipState] = useState({} as IActiveShipState);
+  const [activeView, setActiveViewValue] = useState(null);
   const [message, setMessage] = useState(null);
   const { disableButtons, enableButtons, buttonsDisabled } = useButtonsDisabled();
   const isMounted = useMounted();
@@ -66,6 +78,14 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
       return;
     }
     setActiveShipState(getNewActiveShipState(activeShipState, data));
+  };
+
+  const setActiveView = (view: ACTIVE_VIEW) => {
+    if (activeView === view) {
+      setActiveViewValue(null);
+    } else {
+      setActiveViewValue(view);
+    }
   };
 
   const doPortAction = async (token: IActionToken) => {
@@ -117,11 +137,13 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
 
   return {
     ...activeShipState,
+    activeView,
     buttonsDisabled,
     departureHandler,
     portActionHandler,
     updateShipName,
     applyHealthHandler,
+    setActiveView,
     setRequestNameToken: (token: ITransaction) =>
       isMounted() && setActiveShipState((prev: IActiveShipState) => setPropIfChanged(prev, "requestNameToken", token)),
     message,

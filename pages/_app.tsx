@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import App, { Container } from "next/app";
+import App from "next/app";
 import { Modal, ModalActions, ModalType } from "../src/components/Molecules/Modal";
 import { P } from "../src/components/Atoms/Text";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
@@ -58,7 +58,7 @@ export default class extends App<IProps, IState> {
     }
 
     return (
-      <Container>
+      <>
         <GlobalStyle/>
         <IntlProvider locale={Environment.locale}>
           <Head>
@@ -67,7 +67,7 @@ export default class extends App<IProps, IState> {
           <Component {...pageProps} />
           {errorModal}
         </IntlProvider>
-      </Container>
+      </>
     );
   }
 }
