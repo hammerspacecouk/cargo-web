@@ -79,9 +79,9 @@ const NavLink = styled.a<{isActive: boolean}>`
   align-items: center;
   flex: 1;
   min-width: 44px;
-  padding: 4px 6px;
+  padding: 6px;
   opacity: ${({isActive}) => isActive ? '1' : '0.5'};
-  color: ${COLOURS.WHITE.STANDARD};
+  color: ${({isActive}) => isActive ? COLOURS.BUTTON.ACTION : COLOURS.WHITE.STANDARD};
   &:hover:not(:focus) {
     background: rgba(255,255,255,0.3);
   }

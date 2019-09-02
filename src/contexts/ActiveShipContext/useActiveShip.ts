@@ -39,7 +39,7 @@ export interface IActiveShip extends IActiveShipState {
   applyHealthHandler: (token: IActionToken) => Promise<void>;
   resetMessage: () => void;
   refreshState: () => Promise<IActiveShipResponse>;
-  setActiveView: (newView: ACTIVE_VIEW) => void;
+  setActiveView: (newView?: ACTIVE_VIEW) => void;
 }
 
 interface IActiveShipState {
@@ -80,7 +80,7 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
     setActiveShipState(getNewActiveShipState(activeShipState, data));
   };
 
-  const setActiveView = (view: ACTIVE_VIEW) => {
+  const setActiveView = (view?: ACTIVE_VIEW) => {
     if (activeView === view) {
       setActiveViewValue(null);
     } else {
