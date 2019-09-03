@@ -99,6 +99,7 @@ export const DisguisedButton = styled.button`
   font: inherit;
   outline: none;
   user-select: none;
+  text-align: left;
   &:not([disabled]) {
     cursor: pointer;
   }

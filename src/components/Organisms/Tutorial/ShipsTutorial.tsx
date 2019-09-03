@@ -1,21 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Modal, ModalActions } from "../../Molecules/Modal";
-import { ConfirmButton } from "../../Atoms/Button";
-import { useState } from "react";
 import { SanctuaryIcon } from "../../Icons/SanctuaryIcon";
 import { InlineIcon, TINY_ICON } from "../../Atoms/Icon";
 import { Prose } from "../../Atoms/Prose";
 import { ShieldStrength } from "../../Molecules/ShieldStrength";
 import { GRID } from "../../../styles/variables";
+import { TutorialPanel } from "../../Molecules/TutorialPanel";
+import { COLOURS } from "../../../styles/colours";
 
 export const ShipsTutorial = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const close = () => setIsOpen(false);
-
   return (
-    <Modal isOpen={isOpen} title="Tutorial">
+    <TutorialPanel>
       <Prose>
         <p>
           You have left the safety of the Sanctuaries <InlineIcon size={TINY_ICON}><SanctuaryIcon/></InlineIcon>.
@@ -24,52 +19,46 @@ export const ShipsTutorial = () => {
         </p>
         <p>
           Remember, a Reticulum Shuttle is needed to complete your mission. Keep an eye on your shield strength.
+          The Shield can be repaired in the Engineering panel
         </p>
-        <Shields>
-          <ShieldDescription>
-            <ShieldWrap>
-              <ShieldStrength percent={1}/>
-            </ShieldWrap>
-            <ShieldText>Full shield</ShieldText>
-          </ShieldDescription>
-          <ShieldDescription>
-            <ShieldWrap>
-              <ShieldStrength percent={0.75}/>
-            </ShieldWrap>
-            <ShieldText>Shield OK</ShieldText>
-          </ShieldDescription>
-          <ShieldDescription>
-            <ShieldWrap>
-              <ShieldStrength percent={0.5}/>
-            </ShieldWrap>
-            <ShieldText>Shield low</ShieldText>
-          </ShieldDescription>
-          <ShieldDescription>
-            <ShieldWrap>
-              <ShieldStrength percent={0.1}/>
-            </ShieldWrap>
-            <ShieldText>Shield Critical<br />(destruction imminent)</ShieldText>
-          </ShieldDescription>
-        </Shields>
+        <ShieldDescription>
+          <ShieldWrap>
+            <ShieldStrength percent={1}/>
+          </ShieldWrap>
+          <ShieldText>Full shield</ShieldText>
+        </ShieldDescription>
+        <ShieldDescription>
+          <ShieldWrap>
+            <ShieldStrength percent={0.75}/>
+          </ShieldWrap>
+          <ShieldText>Shield OK</ShieldText>
+        </ShieldDescription>
+        <ShieldDescription>
+          <ShieldWrap>
+            <ShieldStrength percent={0.5}/>
+          </ShieldWrap>
+          <ShieldText>Shield low</ShieldText>
+        </ShieldDescription>
+        <ShieldDescription>
+          <ShieldWrap>
+            <ShieldStrength percent={0.1}/>
+          </ShieldWrap>
+          <ShieldText>Shield Critical<br />(destruction imminent)</ShieldText>
+        </ShieldDescription>
       </Prose>
-      <ModalActions>
-        <ConfirmButton onClick={close}>Ok</ConfirmButton>
-      </ModalActions>
-    </Modal>
+    </TutorialPanel>
   );
 };
 
-const Shields = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 ${GRID.HALF};
-`;
 const ShieldDescription = styled.div`
-  padding: 0 ${GRID.HALF};
-  margin-bottom: ${GRID.UNIT};
-  width: 50%;
+  border-radius: 4px;
+  background: ${COLOURS.BLACK.FULL};
+  padding: ${GRID.HALF};
   display: flex;
   align-items: center;
+  &:not(:last-child) {
+    margin-bottom: ${GRID.UNIT};
+  }
 `;
 const ShieldWrap = styled.div`
   width: 40px;

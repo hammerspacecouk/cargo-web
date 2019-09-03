@@ -10,7 +10,6 @@ import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/Act
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
 import { IntroductionModal } from "../../../Organisms/ActiveShip/IntroductionModal";
 import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../../styles/variables";
-import { ShipsTutorial } from "../../../Organisms/Tutorial/ShipsTutorial";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 import { Planet } from "../../../Molecules/Planet";
 import { PortName } from "../../../Molecules/PortName";
@@ -20,79 +19,24 @@ import { Environment } from "../../../../utils/environment";
 import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShip";
 import { BREAKPOINTS } from "../../../../styles/media";
 import { EventsList } from "../../../Organisms/EventsList";
+import { DisguisedButton } from "../../../Atoms/Button";
+import { useTutorial } from "../../../../hooks/useTutorial";
 
 export const ShipInPortPage = () => {
+  const { activeView, events, setActiveView, ship } = useActiveShipContext();
+  const { allowLog, showIntroduction, } = useTutorial();
 
-  const { activeView, events, setActiveView, ship, tutorialStep } = useActiveShipContext();
-
-  // todo - put this tutorial logic in a hook
-  // let showNavigation = true;
-  // let showTactical = true;
-  // let showShips = true;
-  // let showExtras = true;
-
-  let showIntroduction = false;
-  // let showCrateIntro = false;
-  // let showTravelIntro = false;
-  // let showTacticalIntro = false;
-  let showShipsIntro = false;
-
-  if (tutorialStep) {
-    if (tutorialStep === 4) {
-      showShipsIntro = true;
-    }
-    if (tutorialStep <= 3) {
-      // showShips = false;
-      // showExtras = false;
-      // showTacticalIntro = true;
-    }
-    if (tutorialStep <= 2) {
-      // showTactical = false;
-      // showTravelIntro = true;
-      // showTacticalIntro = false;
-    }
-    if (tutorialStep <= 1) {
-      showIntroduction = true;
-      // showNavigation = false;
-      // showCrateIntro = true;
-      // showTravelIntro = false;
-      // showTacticalIntro = false;
-    }
-  }
-
-  /*
-
-  {showTravelIntro && <PanelTravelTutorial>
-        <Panel title="Tutorial">
-          <TravelTutorial />
-        </Panel>
-      </PanelTravelTutorial>}
-      {showCrateIntro && <PanelCrateTutorial>
-        <Panel title="Tutorial" id="crates">
-          <CratesTutorial />
-        </Panel>
-      </PanelCrateTutorial>}
-      {showTacticalIntro && <PanelTacticalTutorial>
-        <Panel title="Tutorial">
-          <TacticalTutorial />
-        </Panel>
-      </PanelTacticalTutorial>}
-
-      {showExtras && <PanelLog>
-        <Panel title="Log">
-          <StyledEventsList events={events} />
-        </Panel>
-      </PanelLog>}
-   */
-
-  // todo - on desktop, these panels sit on top of the ship overview
   const closeHandler = () => {
     setActiveView(null);
   };
 
   return (
     <StyledPage>
-      <ShipOverview ship={ship} isCurrentView={activeView === null}/>
+      {activeView !== ACTIVE_VIEW.LOG && <ShipOverview ship={ship} isCurrentView={activeView === null}/>}
+
+      {activeView === ACTIVE_VIEW.LOG && <StyledLogPanel closeHandler={closeHandler} title="Log" full id="log">
+        <StyledFullEventsList events={events} />
+      </StyledLogPanel>}
 
       {activeView === ACTIVE_VIEW.CARGO && <StyledShipPanel closeHandler={closeHandler} title="Cargo" full id="cargo">
         <Crates/>
@@ -115,9 +59,10 @@ export const ShipInPortPage = () => {
       </StyledShipPanel>}
 
       {showIntroduction && <IntroductionModal/>}
-      {showShipsIntro && <ShipsTutorial/>}
       <SubBar>
-        {activeView === null && <StyledEventsList events={events} />}
+        {allowLog && activeView === null && <EventsSummary onClick={() => setActiveView(ACTIVE_VIEW.LOG)}>
+          <StyledEventsList events={events} />
+        </EventsSummary>}
         <ShipNavigation/>
       </SubBar>
     </StyledPage>
@@ -125,7 +70,6 @@ export const ShipInPortPage = () => {
 };
 
 
-// todo - this ain't right at all breakpoints
 const SubBar = styled.div`
     z-index: ${Z_INDEX.PAGE_MIDDLE};
     position: fixed;
@@ -135,6 +79,13 @@ const SubBar = styled.div`
     ${BREAKPOINTS.XL`
       width: 80%;
     `}
+    ${BREAKPOINTS.MAX`
+      width: calc(100vw - 400px);
+    `}
+`;
+
+const EventsSummary = styled(DisguisedButton)`
+  width: 100%;
 `;
 
 const StyledEventsList = styled(EventsList)`
@@ -159,6 +110,15 @@ const StyledEventsList = styled(EventsList)`
 
 const StyledPage = styled.div`
   position: relative;
+`;
+
+const StyledLogPanel = styled(Panel)`
+  background: ${COLOURS.BLACK.FULL};
+  min-height: calc(100vh - ${MASTHEAD_HEIGHT});
+`;
+
+const StyledFullEventsList = styled(EventsList)`
+  padding: 0 ${GRID.UNIT} ${GRID.UNIT};
 `;
 
 const StyledShipPanel = styled(Panel)`
@@ -214,8 +174,8 @@ const PlanetPosition = styled.div`
   left: 50%;
   width: 70vw;
   height: 70vw;
-  max-width: 364px;
-  max-height: 364px;
+  max-width: 262px;
+  max-height: 262px;
   pointer-events: none;
   transform: translateX(-50%) translateY(-50%) rotate(-45deg) ;
 `;

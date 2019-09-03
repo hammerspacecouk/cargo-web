@@ -11,6 +11,7 @@ const StyledArea = styled.div<{ hideDisplay: boolean }>`
   ${BREAKPOINTS.XL`
     display: block;
     height: 100%;
+    overflow: auto;
   `};
 `;
 

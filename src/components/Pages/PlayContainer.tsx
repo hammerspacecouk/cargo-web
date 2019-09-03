@@ -6,14 +6,14 @@ import { PromotionModal } from "../Organisms/PromotionModal";
 import { BREAKPOINTS } from "../../styles/media";
 import { Navigation } from "../Organisms/Navigation";
 import { MASTHEAD_HEIGHT } from "../../styles/variables";
-import { useGameSession } from "../../contexts/GameSessionContext/useGameSession";
 import { FlexAllCenter } from "../Atoms/Flex";
 import { Loading } from "../Atoms/Loading";
+import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
-  const gameSession = useGameSession();
+  const {player, isAtHome} = useGameSessionContext();
 
-  if (gameSession.player === undefined) {
+  if (player === undefined) {
     return (
       <FlexAllCenter>
         <Loading />
@@ -27,7 +27,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
       <InGameMasthead />
       <StyledPlayBoard>
         <StyledMain>{children}</StyledMain>
-        <StyledNavigation />
+        <StyledNavigation isAtHome={isAtHome} />
       </StyledPlayBoard>
       <PromotionModal />
     </>
@@ -48,15 +48,18 @@ const StyledPlayBoard = styled.div`
   `};
 `;
 
-const StyledNavigation = styled(Navigation)`
+const StyledNavigation = styled(Navigation)<{isAtHome: boolean}>`
   min-height: calc(100vh - ${MASTHEAD_HEIGHT});
-  display: flex;
+  display: ${({isAtHome}) => isAtHome ? 'flex' : 'none'};
   ${BREAKPOINTS.XL`
+    display: flex;
     width: 20%;
-    max-width: 400px;
     min-width: 240px;
     height: calc(100vh - ${MASTHEAD_HEIGHT});
     order: 1;
+  `}
+  ${BREAKPOINTS.MAX`
+    width: 400px;
   `}
 `;
 
@@ -66,6 +69,5 @@ const StyledMain = styled.main`
     order: 2;
     padding: 0;
     height: calc(100vh - ${MASTHEAD_HEIGHT});
-    overflow-y: none;
   `};
 `;

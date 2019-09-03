@@ -18,6 +18,61 @@ import { H4 } from "../../../Atoms/Heading";
 import { ListLined } from "../../../Atoms/List/ListLined";
 import { ActionRow, ActionRowButton, ActionRowContent } from "../../../Molecules/ActionRow";
 import { Distance } from "../../../Atoms/Distance";
+import { useTutorial } from "../../../../hooks/useTutorial";
+import { TravelTutorial } from "../../Tutorial/TravelTutorial";
+
+export const Directions = () => {
+  const { directions } = useActiveShipContext();
+  const { showNavigationIntro } = useTutorial();
+  let tutorial;
+  if (showNavigationIntro) {
+    tutorial = <TravelTutorial/>;
+  }
+
+  if (!directions) {
+    return <Loading/>;
+  }
+
+  const { NW, NE, W, E, SW, SE } = directions;
+
+  return (
+    <>
+      {tutorial}
+      <ListLined>
+        {NW ? (
+          <Direction direction={NW}>
+            <DirectionNW/>
+          </Direction>
+        ) : null}
+        {NE ? (
+          <Direction direction={NE}>
+            <DirectionNE/>
+          </Direction>
+        ) : null}
+        {W ? (
+          <Direction direction={W}>
+            <DirectionW/>
+          </Direction>
+        ) : null}
+        {E ? (
+          <Direction direction={E}>
+            <DirectionE/>
+          </Direction>
+        ) : null}
+        {SW ? (
+          <Direction direction={SW}>
+            <DirectionSW/>
+          </Direction>
+        ) : null}
+        {SE ? (
+          <Direction direction={SE}>
+            <DirectionSE/>
+          </Direction>
+        ) : null}
+      </ListLined>
+    </>
+  );
+};
 
 interface IProps {
   direction: IDirection;
@@ -38,11 +93,11 @@ const SubLine = styled.div`
   margin-top: ${GRID.HALF};
 `;
 
-export const Direction = ({ direction, children }: IProps) => {
+const Direction = ({ direction, children }: IProps) => {
   const icon = children;
   const detail = direction.detail;
 
-  let subLine = <ScoreValue score={detail.earnings} prefix="+" />;
+  let subLine = <ScoreValue score={detail.earnings} prefix="+"/>;
   if (detail.denialReason) {
     subLine = (
       <TextF as="div">
@@ -57,11 +112,11 @@ export const Direction = ({ direction, children }: IProps) => {
         <PortOverview>
           <PortSummary>
             <H4 as="h3">
-              <PortName port={detail.destination} isHome={detail.isHomePort} />
+              <PortName port={detail.destination} isHome={detail.isHomePort}/>
             </H4>
             <SubLine>{subLine}</SubLine>
           </PortSummary>
-          <Distance value={detail.distanceUnit} />
+          <Distance value={detail.distanceUnit}/>
         </PortOverview>
         <ActionRowButton>
           <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>
@@ -70,50 +125,5 @@ export const Direction = ({ direction, children }: IProps) => {
         </ActionRowButton>
       </ActionRow>
     </li>
-  );
-};
-
-export const Directions = () => {
-  const { directions } = useActiveShipContext();
-
-  if (!directions) {
-    return <Loading />;
-  }
-
-  const { NW, NE, W, E, SW, SE } = directions;
-
-  return (
-    <ListLined>
-      {NW ? (
-        <Direction direction={NW}>
-          <DirectionNW />
-        </Direction>
-      ) : null}
-      {NE ? (
-        <Direction direction={NE}>
-          <DirectionNE />
-        </Direction>
-      ) : null}
-      {W ? (
-        <Direction direction={W}>
-          <DirectionW />
-        </Direction>
-      ) : null}
-      {E ? (
-        <Direction direction={E}>
-          <DirectionE />
-        </Direction>
-      ) : null}
-      {SW ? (
-        <Direction direction={SW}>
-          <DirectionSW />
-        </Direction>
-      ) : null}
-      {SE ? (
-        <Direction direction={SE}>
-          <DirectionSE />
-        </Direction>
-      ) : null}
-    </ListLined>
   );
 };

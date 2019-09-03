@@ -147,6 +147,10 @@ export const COLOURS = {
     CAPACITY: allColours.yellow[4],
   },
 
+  TUTORIAL: {
+    BACKGROUND: ok.DARK,
+    TEXT: allColours.white,
+  },
   HEALTH: {
     FULL: allColours.blue[4],
     GOOD: ok.LIGHTER,
@@ -230,7 +234,7 @@ export const scrollbarStyles = css`
 `;
 
 export const panelBackground = css`
-  background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.75)};
+  background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.95)};
   background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
     linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
   background-size: 100% 2px, 3px 100%;

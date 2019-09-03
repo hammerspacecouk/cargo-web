@@ -38,7 +38,6 @@ export const EventFlag = styled.span`
   display: inline-block;
   width: 32px;
   height: 32px;
-  min-width: 120px;
   vertical-align: middle;
   line-height: 0;
   position: relative;

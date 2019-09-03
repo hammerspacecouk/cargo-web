@@ -5,15 +5,23 @@ import { TacticalEffect } from "../../../Molecules/TacticalEffect";
 import { hiddenCss } from "../../../Atoms/Hidden";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 import { GRID } from "../../../../styles/variables";
+import { useTutorial } from "../../../../hooks/useTutorial";
+import { TacticalTutorial } from "../../Tutorial/TacticalTutorial";
 
 export const Tactical = () => {
   const { tacticalOptions } = useActiveShipContext();
+  const { showTacticalIntro } = useTutorial();
   if (!tacticalOptions) {
     return null;
+  }
+  let tutorial;
+  if (showTacticalIntro) {
+    tutorial = <TacticalTutorial/>;
   }
 
   return (
     <Panel>
+      {tutorial}
       <TacticalTable>
         <thead>
           <tr>

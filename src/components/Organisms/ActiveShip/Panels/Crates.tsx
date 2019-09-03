@@ -6,6 +6,33 @@ import { ChevronUpIcon } from "../../../Icons/ChevronUpIcon";
 import { Icon } from "../../../Atoms/Icon";
 import { GRID } from "../../../../styles/variables";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
+import { useTutorial } from "../../../../hooks/useTutorial";
+import { CratesTutorial } from "../../Tutorial/CratesTutorial";
+
+export const Crates = () => {
+  const { showCrateIntro } = useTutorial();
+  let tutorial;
+  if (showCrateIntro) {
+    tutorial = <CratesTutorial/>;
+  }
+
+  return (
+    <CratesLayout>
+      {tutorial}
+      <StyledCratesList>
+        <CratesOnShip />
+      </StyledCratesList>
+      <DirectionArrow>
+        <Icon>
+          <ChevronUpIcon />
+        </Icon>
+      </DirectionArrow>
+      <StyledCratesList>
+        <CratesAtPort />
+      </StyledCratesList>
+    </CratesLayout>
+  );
+};
 
 const CratesLayout = styled.div`
   display: flex;
@@ -32,21 +59,3 @@ const DirectionArrow = styled.div`
   opacity: 0.5;
   padding: ${GRID.UNIT} 0;
 `;
-
-export const Crates = () => {
-  return (
-    <CratesLayout>
-      <StyledCratesList>
-        <CratesOnShip />
-      </StyledCratesList>
-      <DirectionArrow>
-        <Icon>
-          <ChevronUpIcon />
-        </Icon>
-      </DirectionArrow>
-      <StyledCratesList>
-        <CratesAtPort />
-      </StyledCratesList>
-    </CratesLayout>
-  );
-};

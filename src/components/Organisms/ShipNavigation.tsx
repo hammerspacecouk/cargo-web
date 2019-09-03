@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { Crate } from "../Icons/Crate";
 import { Icon, NORMAL_ICON, SMALL_ICON } from "../Atoms/Icon";
 import { COLOURS } from "../../styles/colours";
@@ -12,16 +12,28 @@ import { ACTIVE_VIEW } from "../../contexts/ActiveShipContext/useActiveShip";
 import { IChildrenProps } from "../../interfaces";
 import { DisguisedButton } from "../Atoms/Button";
 import { BREAKPOINTS } from "../../styles/media";
+import { useTutorial } from "../../hooks/useTutorial";
 
 export const ShipNavigation = () => {
+  const {
+    allowNavigation,
+    allowTactical,
+    allowShips,
+    allowExtras,
+    showCrateIntro,
+    showNavigationIntro,
+    showTacticalIntro,
+    showShipsIntro
+  } = useTutorial();
+
   return (
     <Nav>
       <List>
-        <NavItem viewName={ACTIVE_VIEW.CARGO} label="Cargo"><Crate colour="inherit" /></NavItem>
-        <NavItem viewName={ACTIVE_VIEW.NAVIGATION} label="Navigation"><DirectionsIcon /></NavItem>
-        <NavItem viewName={ACTIVE_VIEW.TACTICAL} label="Tactical"><TacticalIcon /></NavItem>
-        <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships"><ShipsIcon /></NavItem>
-        <NavItem viewName={ACTIVE_VIEW.ENGINEERING} label="Engineering"><EngineeringIcon /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.CARGO} label="Cargo" tutorialHighlight={showCrateIntro}><Crate colour="inherit" /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.NAVIGATION} label="Navigation" tutorialHighlight={showNavigationIntro} disabled={!allowNavigation}><DirectionsIcon /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.TACTICAL} label="Tactical" tutorialHighlight={showTacticalIntro} disabled={!allowTactical}><TacticalIcon /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships" tutorialHighlight={showShipsIntro} disabled={!allowShips}><ShipsIcon /></NavItem>
+        <NavItem viewName={ACTIVE_VIEW.ENGINEERING} label="Engineering" disabled={!allowExtras}><EngineeringIcon /></NavItem>
       </List>
     </Nav>
   );
@@ -29,15 +41,17 @@ export const ShipNavigation = () => {
 
 
 interface INavItemProps extends IChildrenProps {
+  disabled?: boolean;
+  tutorialHighlight?: boolean;
   viewName: ACTIVE_VIEW;
   label: string;
 }
 
-const NavItem = ({ viewName, label, children }: INavItemProps) => {
+const NavItem = ({ viewName, disabled, tutorialHighlight, label, children }: INavItemProps) => {
   const { activeView, setActiveView } = useActiveShipContext();
   return (
     <Item>
-      <NavLink isActive={activeView === viewName} onClick={() => setActiveView(viewName)}>
+      <NavLink tutorialHighlight={tutorialHighlight} disabled={disabled} isActive={activeView === viewName} onClick={() => !disabled && setActiveView(viewName)}>
         <ButtonIcon>
           {children}
         </ButtonIcon>
@@ -66,7 +80,19 @@ const Item = styled.li`
   min-width: 44px;
 `;
 
-const NavLink = styled(DisguisedButton)<{isActive: boolean}>`
+const tutorialHighlightAnimation = keyframes`
+  0% {
+    color: ${COLOURS.WHITE.STANDARD};
+  }
+  50% {
+    color: ${COLOURS.TUTORIAL.BACKGROUND};
+  }
+  100% {
+    color: ${COLOURS.WHITE.STANDARD};
+  }
+`;
+
+const NavLink = styled(DisguisedButton)<{disabled?: boolean, isActive: boolean, tutorialHighlight?: boolean}>`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -76,9 +102,17 @@ const NavLink = styled(DisguisedButton)<{isActive: boolean}>`
   padding: 6px;
   opacity: ${({isActive}) => isActive ? '1' : '0.5'};
   color: ${({isActive}) => isActive ? COLOURS.BUTTON.ACTION : COLOURS.WHITE.STANDARD};
-  &:hover:not(:focus) {
+  ${({tutorialHighlight, isActive}) => !isActive && tutorialHighlight && css`animation: ${tutorialHighlightAnimation}`} 2s ease-in-out infinite;
+  ${({disabled}) => disabled && `
+    cursor: none;
+    opacity: 0.2;
+  `};
+  &:hover:not(:focus):not([disabled]) {
     background: rgba(255,255,255,0.3);
   }
+  ${BREAKPOINTS.L`
+    min-height: 64px;
+  `};
 `;
 
 const ButtonIcon = styled(Icon)`
