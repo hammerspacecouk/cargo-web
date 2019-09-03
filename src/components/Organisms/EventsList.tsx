@@ -87,11 +87,7 @@ const mapEvent = (event: IEvent, firstPerson: boolean) => {
 
 const StyledList = styled(ListUnstyled)`
   ${MONOSPACE_FONT};
-  line-height: 1.6;
   color: ${COLOURS.EVENTS.TEXT};
-  height: 100%;
-  min-height: 60px;
-  overflow: hidden;
 `;
 
 const StyledListItem = styled.li`

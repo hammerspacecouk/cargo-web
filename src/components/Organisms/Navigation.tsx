@@ -10,6 +10,7 @@ import { LaunchIcon } from "../Icons/LaunchIcon";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
+import { Z_INDEX } from "../../styles/variables";
 
 interface IProps {
   className?: string;
@@ -19,6 +20,7 @@ const StyledNavigation = styled.nav`
   display: flex;
   flex-direction: column;
   background: ${COLOURS.BLACK.FADED};
+  z-index: ${Z_INDEX.MENU};
 `;
 
 const Ships = styled.div`

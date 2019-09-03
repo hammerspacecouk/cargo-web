@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Crate } from "../Icons/Crate";
-import { Icon, SMALL_ICON } from "../Atoms/Icon";
+import { Icon, NORMAL_ICON, SMALL_ICON } from "../Atoms/Icon";
 import { COLOURS } from "../../styles/colours";
 import { DirectionsIcon } from "../Icons/DirectionsIcon";
 import { ShipsIcon } from "../Icons/ShipsIcon";
@@ -10,7 +10,6 @@ import { EngineeringIcon } from "../Icons/EngineeringIcon";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
 import { ACTIVE_VIEW } from "../../contexts/ActiveShipContext/useActiveShip";
 import { IChildrenProps } from "../../interfaces";
-import { Z_INDEX } from "../../styles/variables";
 import { DisguisedButton } from "../Atoms/Button";
 import { BREAKPOINTS } from "../../styles/media";
 
@@ -39,7 +38,7 @@ const NavItem = ({ viewName, label, children }: INavItemProps) => {
   return (
     <Item>
       <NavLink isActive={activeView === viewName} onClick={() => setActiveView(viewName)}>
-        <ButtonIcon size={SMALL_ICON}>
+        <ButtonIcon>
           {children}
         </ButtonIcon>
         <Label>{label}</Label>
@@ -49,18 +48,9 @@ const NavItem = ({ viewName, label, children }: INavItemProps) => {
 };
 
 
-// todo - this ain't right at all breakpoints
 const Nav = styled.nav`
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    right: 0;
     background: ${COLOURS.BLACK.STANDARD};
-    z-index: ${Z_INDEX.PAGE_TOP};
     padding-bottom: env(safe-area-inset-bottom);
-    ${BREAKPOINTS.XL`
-      width: 80%;
-    `}
 }
 `;
 
@@ -95,9 +85,18 @@ const ButtonIcon = styled(Icon)`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: ${SMALL_ICON};
+  width: ${SMALL_ICON};
+  ${BREAKPOINTS.L`
+    height: ${NORMAL_ICON};
+    width: ${NORMAL_ICON};
+  `};
 `;
 
 const Label = styled.label`
   margin-top: 2px;
   font-size: 10px;
+  ${BREAKPOINTS.L`
+    font-size: 13px;
+  `};
 `;

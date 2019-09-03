@@ -29,14 +29,16 @@ const StyledEvent = styled.div`
   display: flex;
   width: 100%;
   align-items: flex-start;
-  min-height: 32px;
+  min-height: ${GRID.UNIT};
   flex-wrap: wrap;
+  ${SIZES.F}
 `;
 
 export const EventFlag = styled.span`
   display: inline-block;
   width: 32px;
   height: 32px;
+  min-width: 120px;
   vertical-align: middle;
   line-height: 0;
   position: relative;
@@ -47,11 +49,10 @@ export const EventFlag = styled.span`
 
 const Content = styled.span`
   flex: 1;
-  min-width: 240px;
   margin-right: ${GRID.UNIT};
-  ${SIZES.D};
 `;
 
 const Time = styled(TimeAgo)`
   opacity: 0.6;
+  ${SIZES.F};
 `;

@@ -9,7 +9,7 @@ import { COLOURS, panelBackground } from "../../../../styles/colours";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
 import { IntroductionModal } from "../../../Organisms/ActiveShip/IntroductionModal";
-import { GRID, MASTHEAD_HEIGHT } from "../../../../styles/variables";
+import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../../styles/variables";
 import { ShipsTutorial } from "../../../Organisms/Tutorial/ShipsTutorial";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 import { Planet } from "../../../Molecules/Planet";
@@ -19,10 +19,11 @@ import { ELEMENTS, SIZES } from "../../../../styles/typography";
 import { Environment } from "../../../../utils/environment";
 import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShip";
 import { BREAKPOINTS } from "../../../../styles/media";
+import { EventsList } from "../../../Organisms/EventsList";
 
 export const ShipInPortPage = () => {
 
-  const { activeView, setActiveView, ship, tutorialStep } = useActiveShipContext();
+  const { activeView, events, setActiveView, ship, tutorialStep } = useActiveShipContext();
 
   // todo - put this tutorial logic in a hook
   // let showNavigation = true;
@@ -115,10 +116,46 @@ export const ShipInPortPage = () => {
 
       {showIntroduction && <IntroductionModal/>}
       {showShipsIntro && <ShipsTutorial/>}
-      <ShipNavigation/>
+      <SubBar>
+        {activeView === null && <StyledEventsList events={events} />}
+        <ShipNavigation/>
+      </SubBar>
     </StyledPage>
   );
 };
+
+
+// todo - this ain't right at all breakpoints
+const SubBar = styled.div`
+    z-index: ${Z_INDEX.PAGE_MIDDLE};
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    ${BREAKPOINTS.XL`
+      width: 80%;
+    `}
+`;
+
+const StyledEventsList = styled(EventsList)`
+  padding: ${GRID.UNIT};
+  background: ${COLOURS.BLACK.FULL};
+  height: 120px;
+  max-height: 10vh;
+  overflow: hidden;
+  position: relative;
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    display: block;
+    height: 60%;
+    max-height: 80px;
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+  }
+`;
 
 const StyledPage = styled.div`
   position: relative;
