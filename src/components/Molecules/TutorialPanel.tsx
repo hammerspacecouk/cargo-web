@@ -6,4 +6,5 @@ export const TutorialPanel = styled.div`
     padding: ${GRID.UNIT};
     background: ${COLOURS.TUTORIAL.BACKGROUND};
     color: ${COLOURS.TUTORIAL.TEXT};
+    margin-bottom: ${GRID.UNIT};
 `;
