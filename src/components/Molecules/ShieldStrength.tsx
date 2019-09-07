@@ -67,6 +67,8 @@ const CircleBar = styled(CircleTrack)<{ colour: string }>`
  * Standard way to display a score value (with Icon)
  */
 export const ShieldStrength = React.memo(({ percent, className, player }: IProps) => {
+  const {label, decimal} = usePercent(percent);
+
   const size = 100;
   const barWidth = 12;
 
@@ -74,23 +76,22 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   const radius = centre - barWidth / 2;
   const trackLength = 2 * Math.PI * radius;
 
-  const percentLabel = usePercent(percent);
 
   let bar = null;
   if (percent !== undefined) {
-    const barLength = percent * trackLength;
+    const barLength = decimal * trackLength;
     const dash = `${barLength} ${trackLength}`;
     let colour = COLOURS.HEALTH.FULL;
-    if (percent < 1) {
+    if (percent < 100) {
       colour = COLOURS.HEALTH.GOOD;
     }
-    if (percent <= 0.75) {
+    if (percent <= 75) {
       colour = COLOURS.HEALTH.OK;
     }
-    if (percent <= 0.5) {
+    if (percent <= 50) {
       colour = COLOURS.HEALTH.WARNING;
     }
-    if (percent <= 0.25) {
+    if (percent <= 25) {
       colour = COLOURS.HEALTH.DANGER;
     }
 
@@ -105,7 +106,7 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   }
 
   return (
-    <StyledShieldStrength title={percentLabel} className={className} loading={percent === undefined ? true : undefined}>
+    <StyledShieldStrength title={label} className={className} loading={percent === undefined ? true : undefined}>
       {emblem}
       <StyledSvg viewBox={`0 0 ${size} ${size}`}>
         <CircleTrack cx={centre} cy={centre} r={radius} strokeWidth={barWidth} />

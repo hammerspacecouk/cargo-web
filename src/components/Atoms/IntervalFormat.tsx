@@ -1,13 +1,17 @@
 import * as React from "react";
 
 interface IProps {
-  seconds: number;
+  seconds?: number;
 }
 
 const SECONDS_IN_HOUR: number = 60 * 60;
 const SECONDS_IN_MINUTE: number = 60;
 
-const secondsToFormat = (seconds: number): string => {
+const secondsToFormat = (seconds?: number): string => {
+  if (seconds === null || seconds === undefined) {
+    return '??:??:??';
+  }
+
   let remainingSeconds = Math.max(0, seconds);
   const hours = Math.floor(remainingSeconds / SECONDS_IN_HOUR);
   remainingSeconds = remainingSeconds - hours * SECONDS_IN_HOUR;

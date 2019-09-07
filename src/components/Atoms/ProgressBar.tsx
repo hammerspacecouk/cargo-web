@@ -34,10 +34,10 @@ const Bar = styled.div<{ percentValue: number }>`
 `;
 
 export const ProgressBar = React.memo(({ percent, small = false }: IProps) => {
-  const percentString = usePercent(percent);
+  const {label, decimal} = usePercent(percent);
   return (
     <Track small={small}>
-      <Bar title={percentString} percentValue={percent * 100} />
+      <Bar title={label} percentValue={decimal} />
     </Track>
   );
 });

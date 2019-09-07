@@ -60,7 +60,7 @@ interface IDirectionDetail {
   destination: IPort;
   distanceUnit: number;
   earnings: number;
-  journeyTimeSeconds: number;
+  journeyTimeSeconds?: number;
   minimumRank?: IRank;
   minimumStrength?: number;
   denialReason?: string;

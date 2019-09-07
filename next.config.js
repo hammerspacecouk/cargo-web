@@ -13,14 +13,5 @@ module.exports = {
   onDemandEntries: {
     websocketPort: 3007
   },
-  webpack: config => {
-    config.module.rules.push(
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto",
-      }
-    );
-    return config;
-  }
+  experimental: { publicDirectory: true }
 };

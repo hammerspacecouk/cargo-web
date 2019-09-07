@@ -82,7 +82,7 @@ export const Engineering = () => {
   const { buttonsDisabled, ship, requestNameToken } = useActiveShipContext();
   const isMounted = useMounted();
 
-  const strengthPercent = usePercent(ship.strengthPercent);
+  const {label} = usePercent(ship.strengthPercent);
   const strengthMax = useNumber(ship.shipClass.strength);
   const strengthValue = useNumber(Math.ceil(ship.strengthPercent * ship.shipClass.strength));
 
@@ -117,7 +117,7 @@ export const Engineering = () => {
           <ShieldIntro>
             <SectionTitle>Shield</SectionTitle>
             <SectionDetail>
-              {strengthValue}/{strengthMax} ({strengthPercent})
+              {strengthValue}/{strengthMax} ({label})
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </StyledShield>

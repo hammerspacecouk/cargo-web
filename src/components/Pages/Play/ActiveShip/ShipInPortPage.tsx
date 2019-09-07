@@ -124,8 +124,7 @@ const StyledFullEventsList = styled(EventsList)`
 const StyledShipPanel = styled(Panel)`
   min-height: calc(100vh - ${MASTHEAD_HEIGHT});
   ${panelBackground};
-  padding-bottom: 64px;
-  // todo - this breakpoint choice and value will need tweaking
+  padding-bottom: calc(64px + ${GRID.UNIT});
   ${BREAKPOINTS.XL`
     max-width: 480px;
     position: fixed;

@@ -10,7 +10,6 @@ node_modules/
 
 # Auto-generated files
 yarn-error.log
-icudt64l.dat
 
 # Environment
 /.env

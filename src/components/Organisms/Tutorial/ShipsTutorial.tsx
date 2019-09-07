@@ -23,25 +23,25 @@ export const ShipsTutorial = () => {
         </p>
         <ShieldDescription>
           <ShieldWrap>
-            <ShieldStrength percent={1}/>
+            <ShieldStrength percent={100}/>
           </ShieldWrap>
           <ShieldText>Full shield</ShieldText>
         </ShieldDescription>
         <ShieldDescription>
           <ShieldWrap>
-            <ShieldStrength percent={0.75}/>
+            <ShieldStrength percent={75}/>
           </ShieldWrap>
           <ShieldText>Shield OK</ShieldText>
         </ShieldDescription>
         <ShieldDescription>
           <ShieldWrap>
-            <ShieldStrength percent={0.5}/>
+            <ShieldStrength percent={50}/>
           </ShieldWrap>
           <ShieldText>Shield low</ShieldText>
         </ShieldDescription>
         <ShieldDescription>
           <ShieldWrap>
-            <ShieldStrength percent={0.1}/>
+            <ShieldStrength percent={10}/>
           </ShieldWrap>
           <ShieldText>Shield Critical<br />(destruction imminent)</ShieldText>
         </ShieldDescription>

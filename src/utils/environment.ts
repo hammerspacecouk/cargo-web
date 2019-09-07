@@ -7,9 +7,7 @@ export interface IEnvironment {
   appVersion?: string;
   isClient: boolean;
   isServer: boolean;
-  locale: string;
 }
-export const defaultLocale: string = "en-gb";
 
 let environment: IEnvironment;
 
@@ -21,7 +19,6 @@ if (isClient) {
     appVersion: process.env.APP_VERSION,
     isClient: true,
     isServer: false,
-    locale: navigator.language,
   };
 } else if (isServer) {
   environment = {
@@ -29,7 +26,6 @@ if (isClient) {
     serverApiHostname: process.env.SERVER_API_HOSTNAME,
     clientApiHostname: process.env.CLIENT_API_HOSTNAME,
     appVersion: process.env.APP_VERSION,
-    locale: defaultLocale, // can change in future
     isClient: false,
     isServer: true,
   };

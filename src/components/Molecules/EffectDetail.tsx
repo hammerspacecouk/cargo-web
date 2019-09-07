@@ -37,7 +37,7 @@ export const LockedEffectDetail = ({ minimumRank }: { minimumRank: IRank }) => (
     <EffectSymbol />
     <StyledEffectDescription>
       <H4 as="p">
-        <TextWarning>Requires: {minimumRank.title}</TextWarning>
+        <TextWarning>Minimum rank: {minimumRank.title}</TextWarning>
       </H4>
     </StyledEffectDescription>
   </StyledEffectDetail>
