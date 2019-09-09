@@ -5,7 +5,7 @@ import { Directions } from "../../../Organisms/ActiveShip/Panels/Directions";
 import { Tactical } from "../../../Organisms/ActiveShip/Panels/Tactical";
 import { Engineering } from "../../../Organisms/ActiveShip/Panels/Engineering";
 import styled, { css } from "styled-components";
-import { COLOURS, panelBackground } from "../../../../styles/colours";
+import { COLOURS } from "../../../../styles/colours";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
 import { IntroductionModal } from "../../../Organisms/ActiveShip/IntroductionModal";
@@ -24,7 +24,7 @@ import { useTutorial } from "../../../../hooks/useTutorial";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship } = useActiveShipContext();
-  const { allowLog, showIntroduction, } = useTutorial();
+  const { allowLog, showIntroduction } = useTutorial();
 
   const closeHandler = () => {
     setActiveView(null);
@@ -32,54 +32,67 @@ export const ShipInPortPage = () => {
 
   return (
     <StyledPage>
-      {activeView !== ACTIVE_VIEW.LOG && <ShipOverview ship={ship} isCurrentView={activeView === null}/>}
+      {activeView !== ACTIVE_VIEW.LOG && <ShipOverview ship={ship} isCurrentView={activeView === null} />}
 
-      {activeView === ACTIVE_VIEW.LOG && <StyledLogPanel closeHandler={closeHandler} title="Log" full id="log">
-        <StyledFullEventsList events={events} />
-      </StyledLogPanel>}
+      {activeView === ACTIVE_VIEW.LOG && (
+        <StyledLogPanel closeHandler={closeHandler} title="Log" id="log">
+          <StyledFullEventsList events={events} />
+        </StyledLogPanel>
+      )}
 
-      {activeView === ACTIVE_VIEW.CARGO && <StyledShipPanel closeHandler={closeHandler} title="Cargo" full id="cargo">
-        <Crates/>
-      </StyledShipPanel>}
+      {activeView === ACTIVE_VIEW.CARGO && (
+        <StyledShipPanel closeHandler={closeHandler} title="Cargo" id="cargo">
+          <Crates />
+        </StyledShipPanel>
+      )}
 
-      {activeView === ACTIVE_VIEW.NAVIGATION && <StyledShipPanel closeHandler={closeHandler} title="Navigation" id="navigation">
-        <Directions/>
-      </StyledShipPanel>}
+      {activeView === ACTIVE_VIEW.NAVIGATION && (
+        <StyledShipPanel closeHandler={closeHandler} title="Navigation" id="navigation">
+          <Directions />
+        </StyledShipPanel>
+      )}
 
-      {activeView === ACTIVE_VIEW.TACTICAL && <StyledShipPanel closeHandler={closeHandler} title="Tactical" id="tactical">
-        <Tactical/>
-      </StyledShipPanel>}
+      {activeView === ACTIVE_VIEW.TACTICAL && (
+        <StyledShipPanel closeHandler={closeHandler} title="Tactical" id="tactical">
+          <Tactical />
+        </StyledShipPanel>
+      )}
 
-      {activeView === ACTIVE_VIEW.SHIPS && <StyledShipPanel closeHandler={closeHandler} title="Ships" id="ships">
-        <Ships/>
-      </StyledShipPanel>}
+      {activeView === ACTIVE_VIEW.SHIPS && (
+        <StyledShipPanel closeHandler={closeHandler} title="Ships" id="ships">
+          <Ships />
+        </StyledShipPanel>
+      )}
 
-      {activeView === ACTIVE_VIEW.ENGINEERING && <StyledShipPanel closeHandler={closeHandler} title="Engineering" id="engineering">
-        <Engineering/>
-      </StyledShipPanel>}
+      {activeView === ACTIVE_VIEW.ENGINEERING && (
+        <StyledShipPanel closeHandler={closeHandler} title="Engineering" id="engineering">
+          <Engineering />
+        </StyledShipPanel>
+      )}
 
-      {showIntroduction && <IntroductionModal/>}
+      {showIntroduction && <IntroductionModal />}
       <SubBar>
-        {allowLog && activeView === null && <EventsSummary onClick={() => setActiveView(ACTIVE_VIEW.LOG)}>
-          <StyledEventsList events={events} />
-        </EventsSummary>}
-        <ShipNavigation/>
+        {allowLog && activeView === null && (
+          <EventsSummary onClick={() => setActiveView(ACTIVE_VIEW.LOG)}>
+            <StyledEventsList events={events} />
+          </EventsSummary>
+        )}
+        <ShipNavigation />
       </SubBar>
     </StyledPage>
   );
 };
 
-
 const SubBar = styled.div`
-    z-index: ${Z_INDEX.PAGE_MIDDLE};
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    right: 0;
-    ${BREAKPOINTS.XL`
+  z-index: ${Z_INDEX.PAGE_MIDDLE};
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  ${BREAKPOINTS.XL`
       width: 80%;
     `}
-    ${BREAKPOINTS.MAX`
+  ${BREAKPOINTS.MAX`
       width: calc(100vw - 400px);
     `}
 `;
@@ -100,11 +113,11 @@ const StyledEventsList = styled(EventsList)`
     bottom: 0;
     left: 0;
     right: 0;
-    content: '';
+    content: "";
     display: block;
     height: 60%;
     max-height: 80px;
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
   }
 `;
 
@@ -121,50 +134,54 @@ const StyledFullEventsList = styled(EventsList)`
   padding: 0 ${GRID.UNIT} ${GRID.UNIT};
 `;
 
+// todo - remove magic numbers
 const StyledShipPanel = styled(Panel)`
   min-height: calc(100vh - ${MASTHEAD_HEIGHT});
-  ${panelBackground};
-  padding-bottom: calc(64px + ${GRID.UNIT});
+  padding-bottom: 50px;
   ${BREAKPOINTS.XL`
     max-width: 480px;
     position: fixed;
+    overflow: auto;
     top: ${MASTHEAD_HEIGHT};
+    bottom: 0;
     right: 0;
     border-left: ${COLOURS.PANEL_BORDER} solid 1px;
+    padding-bottom: 64px;
   `}
 `;
 
 // todo - refactor out
-const ShipOverview = ({ ship, isCurrentView }: { ship: IShip, isCurrentView: boolean }) => (
+const ShipOverview = ({ ship, isCurrentView }: { ship: IShip; isCurrentView: boolean }) => (
   <StyledOverview isCurrentView={isCurrentView}>
     <PlanetPosition>
-      <Planet/>
+      <Planet />
     </PlanetPosition>
     <div>
       <h1>
         <TitleName>{ship.name}</TitleName>
         <TitleConjunction> arrived at </TitleConjunction>
         <TitleLocation>
-          <PortName port={ship.location as IPort}/>
+          <PortName port={ship.location as IPort} />
         </TitleLocation>
       </h1>
     </div>
     <Ship>
-      <ShipImage ship={ship}/>
+      <ShipImage ship={ship} />
     </Ship>
   </StyledOverview>
 );
 
-
 const shipSize = "128px";
 
-const StyledOverview = styled.div<{isCurrentView: boolean}>`
+const StyledOverview = styled.div<{ isCurrentView: boolean }>`
   height: calc(100vh - ${MASTHEAD_HEIGHT});
   padding: ${GRID.UNIT} calc(${shipSize} + ${GRID.UNIT}) ${GRID.UNIT} ${GRID.UNIT};
-  ${({isCurrentView}) => !isCurrentView && css`
-    display: none;
-    ${BREAKPOINTS.XL`display: block;`};
-  `}
+  ${({ isCurrentView }) =>
+    !isCurrentView &&
+    css`
+      display: none;
+      ${BREAKPOINTS.XL`display: block;`};
+    `}
 `;
 
 const PlanetPosition = styled.div`
@@ -176,7 +193,7 @@ const PlanetPosition = styled.div`
   max-width: 262px;
   max-height: 262px;
   pointer-events: none;
-  transform: translateX(-50%) translateY(-50%) rotate(-45deg) ;
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
 `;
 
 const Ship = styled.div`
@@ -185,7 +202,6 @@ const Ship = styled.div`
   top: ${GRID.QUADRUPLE};
   right: ${GRID.UNIT};
 `;
-
 
 const TitleConjunction = styled.span`
   ${ELEMENTS.H6};
@@ -197,12 +213,11 @@ const TitleLocation = styled.span`
   margin-top: ${GRID.UNIT};
 `;
 
-
 const TitleName = styled.span`
   ${ELEMENTS.H3};
   ${SIZES.D};
 `;
 
 const ShipImage = ({ ship }: { ship: IShip }) => (
-  <img src={`${Environment.clientApiHostname}${ship.shipClass.image}`} alt={`${ship.name} (${ship.shipClass.name})`}/>
+  <img src={`${Environment.clientApiHostname}${ship.shipClass.image}`} alt={`${ship.name} (${ship.shipClass.name})`} />
 );

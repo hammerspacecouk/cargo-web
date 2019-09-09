@@ -33,12 +33,20 @@ export const EffectDetail = React.memo(({ effect, currentCount, altDescription, 
 ));
 
 export const LockedEffectDetail = ({ minimumRank }: { minimumRank: IRank }) => (
-  <StyledEffectDetail>
+  <LockedDetail>
     <EffectSymbol />
     <StyledEffectDescription>
-      <H4 as="p">
-        <TextWarning>Minimum rank: {minimumRank.title}</TextWarning>
-      </H4>
+      <Minimum as="p">
+        <TextWarning>Minimum Rank: {minimumRank.title}</TextWarning>
+      </Minimum>
     </StyledEffectDescription>
-  </StyledEffectDetail>
+  </LockedDetail>
 );
+
+const LockedDetail = styled(StyledEffectDetail)`
+  align-items: center;
+`;
+
+const Minimum = styled(H4)`
+  text-align: center;
+`;

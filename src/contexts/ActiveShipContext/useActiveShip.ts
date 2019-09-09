@@ -26,7 +26,7 @@ export enum ACTIVE_VIEW {
   TACTICAL,
   SHIPS,
   ENGINEERING,
-  LOG
+  LOG,
 }
 
 export interface IActiveShip extends IActiveShipState {

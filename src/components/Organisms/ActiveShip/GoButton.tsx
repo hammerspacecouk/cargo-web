@@ -5,8 +5,10 @@ import { StackedButton } from "../../Molecules/StackedButton";
 import { TokenButton } from "../../Molecules/TokenButton";
 import { IDirection } from "../../../interfaces";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { Modal, ModalActions, ModalType } from "../../Molecules/Modal";
+import { Modal, ModalType } from "../../Molecules/Modal";
 import { P } from "../../Atoms/Text";
+import { ACTIVE_VIEW } from "../../../contexts/ActiveShipContext/useActiveShip";
+import { ButtonRow } from "../../Molecules/ButtonRow";
 
 interface IProps {
   direction: IDirection;
@@ -15,13 +17,18 @@ interface IProps {
 }
 
 export const GoButton = ({ direction, journeyTime, children }: IProps) => {
-  const { buttonsDisabled, cratesOnShip, cratesInPort, ship, departureHandler } = useActiveShipContext();
+  const { buttonsDisabled, cratesOnShip, cratesInPort, ship, departureHandler, setActiveView } = useActiveShipContext();
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const buttonIsDisabled = direction.action === null || buttonsDisabled;
 
   if (cratesOnShip === undefined) {
     return null;
   }
+
+  const goToCrates = () => {
+    setActiveView(ACTIVE_VIEW.CARGO);
+    setModalIsOpen(false);
+  };
 
   const closeModal = () => setModalIsOpen(false);
 
@@ -39,14 +46,15 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
     modal = (
       <Modal isOpen={true} title="Confirm?" onClose={closeModal} type={ModalType.WARNING}>
         <P>You have not picked up any crates. Are you sure you want to leave?</P>
-        <ModalActions>
+        <ButtonRow>
           <TokenButton token={direction.action} handler={departureHandler}>
             <ActionButton disabled={buttonIsDisabled} type="submit">
               Yes
             </ActionButton>
-          </TokenButton>{" "}
+          </TokenButton>
+          <ConfirmButton onClick={goToCrates}>View crates</ConfirmButton>
           <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
-        </ModalActions>
+        </ButtonRow>
       </Modal>
     );
   }

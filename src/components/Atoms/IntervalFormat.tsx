@@ -9,7 +9,7 @@ const SECONDS_IN_MINUTE: number = 60;
 
 const secondsToFormat = (seconds?: number): string => {
   if (seconds === null || seconds === undefined) {
-    return '??:??:??';
+    return "??:??:??";
   }
 
   let remainingSeconds = Math.max(0, seconds);

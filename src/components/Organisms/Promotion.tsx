@@ -1,11 +1,12 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { IRankStatus } from "../../interfaces";
 import { ProgressBar } from "../Atoms/ProgressBar";
 import { GRID } from "../../styles/variables";
 import { useMounted } from "../../hooks/useMounted";
 import { P } from "../Atoms/Text";
 import { COLOURS } from "../../styles/colours";
+import { BREAKPOINTS } from "../../styles/media";
 
 export const Promotion = ({ rankStatus }: IProps) => {
   const [progress, setProgress] = React.useState(80);
@@ -83,13 +84,11 @@ export const Promotion = ({ rankStatus }: IProps) => {
   );
 };
 
-
 interface IProps {
   rankStatus?: IRankStatus;
 }
 
 const StyledPromotion = styled.div`
-  width: 94vw;
   max-width: 480px;
 `;
 
@@ -97,6 +96,7 @@ const StyledDescription = styled(P)`
   border-top: ${COLOURS.PANEL_INNER_DIVIDER} solid 1px;
   padding-top: ${GRID.UNIT};
   margin-bottom: ${GRID.UNIT};
+  text-align: center;
 `;
 
 const RankBox = styled.div`
@@ -106,21 +106,35 @@ const RankBox = styled.div`
 
 const RankItem = styled.div`
   margin-bottom: ${GRID.HALF};
+  line-height: 1.1;
 `;
 
 const INACTIVE_OPACITY = "0.4";
-const INACTIVE_SIZE = "1.4rem";
+const INACTIVE_SIZE = "1.2rem";
+const INACTIVE_SIZE_LARGE = "1.4rem";
 
 const InactiveRank = styled(RankItem)`
   opacity: ${INACTIVE_OPACITY};
   font-size: ${INACTIVE_SIZE};
+  ${BREAKPOINTS.L`
+    font-size: ${INACTIVE_SIZE_LARGE};
+  `};
 `;
 
 const ActiveRank = styled(RankItem)<{ isOn: boolean }>`
   transition: all 0.8s ease-in;
   will-change: font-size, opacity;
   opacity: ${props => (props.isOn ? "1" : INACTIVE_OPACITY)};
-  font-size: ${props => (props.isOn ? "2.2rem" : INACTIVE_SIZE)};
+  ${props =>
+    props.isOn
+      ? css`
+          font-size: 1.8rem;
+          ${BREAKPOINTS.L`font-size: 2.2rem;`}
+        `
+      : css`
+          font-size: ${INACTIVE_SIZE};
+          ${BREAKPOINTS.L`font-size: ${INACTIVE_SIZE_LARGE}`}
+        `}
 `;
 
 const ANIMATE_START = 500;

@@ -29,7 +29,6 @@ export const TimeAgo = ({ className, datetime }: IProps) => {
       return;
     }
 
-
     let secondsUntilUpdate = 1;
     if (secondsToDecideUpdate > MINUTE) {
       // at the next minute boundary
@@ -57,7 +56,7 @@ export const TimeAgo = ({ className, datetime }: IProps) => {
 
   return (
     <time className={className} dateTime={datetime.toISOString()} title={datetime.toISOString()}>
-      <TimeString relativeSeconds={relativeSeconds}/>
+      <TimeString relativeSeconds={relativeSeconds} />
     </time>
   );
 };
@@ -67,20 +66,20 @@ interface IProps {
   datetime: Date;
 }
 
-const TimeString = React.memo(({relativeSeconds}: {relativeSeconds: number}) => {
+const TimeString = React.memo(({ relativeSeconds }: { relativeSeconds: number }) => {
   const locale = useLocale();
   let value = relativeSeconds;
-  let type = 'second';
+  let type = "second";
 
   if (-relativeSeconds > DAY) {
     value = Math.ceil(relativeSeconds / DAY);
-    type = 'day';
+    type = "day";
   } else if (-relativeSeconds > HOUR) {
     value = Math.ceil(relativeSeconds / HOUR);
-    type = 'hour';
+    type = "hour";
   } else if (-relativeSeconds > MINUTE) {
     value = Math.ceil(relativeSeconds / MINUTE);
-    type = 'minute';
+    type = "minute";
   }
 
   return getString(value, type, locale);
@@ -88,15 +87,15 @@ const TimeString = React.memo(({relativeSeconds}: {relativeSeconds: number}) => 
 
 const getString = (value: number, type: string, locale: any) => {
   if (Intl && (Intl as any).RelativeTimeFormat) {
-    return new (Intl as any).RelativeTimeFormat(locale, { numeric: 'auto' }).format(value, type)
+    return new (Intl as any).RelativeTimeFormat(locale, { numeric: "auto" }).format(value, type);
   }
   // rudimentary english fallback
-  if (value >= 0 && type === 'second') {
-    return 'now';
+  if (value >= 0 && type === "second") {
+    return "now";
   }
-  let plural = '';
+  let plural = "";
   if (Math.abs(value) !== 1) {
-    plural = 's';
+    plural = "s";
   }
   return `${Math.abs(value)} ${type}${plural} ago`;
 };

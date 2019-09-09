@@ -26,11 +26,11 @@ export const Directions = () => {
   const { showNavigationIntro } = useTutorial();
   let tutorial;
   if (showNavigationIntro) {
-    tutorial = <TravelTutorial/>;
+    tutorial = <TravelTutorial />;
   }
 
   if (!directions) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   const { NW, NE, W, E, SW, SE } = directions;
@@ -41,32 +41,32 @@ export const Directions = () => {
       <ListLined>
         {NW ? (
           <Direction direction={NW}>
-            <DirectionNW/>
+            <DirectionNW />
           </Direction>
         ) : null}
         {NE ? (
           <Direction direction={NE}>
-            <DirectionNE/>
+            <DirectionNE />
           </Direction>
         ) : null}
         {W ? (
           <Direction direction={W}>
-            <DirectionW/>
+            <DirectionW />
           </Direction>
         ) : null}
         {E ? (
           <Direction direction={E}>
-            <DirectionE/>
+            <DirectionE />
           </Direction>
         ) : null}
         {SW ? (
           <Direction direction={SW}>
-            <DirectionSW/>
+            <DirectionSW />
           </Direction>
         ) : null}
         {SE ? (
           <Direction direction={SE}>
-            <DirectionSE/>
+            <DirectionSE />
           </Direction>
         ) : null}
       </ListLined>
@@ -97,7 +97,7 @@ const Direction = ({ direction, children }: IProps) => {
   const icon = children;
   const detail = direction.detail;
 
-  let subLine = <ScoreValue score={detail.earnings} prefix="+"/>;
+  let subLine = <ScoreValue score={detail.earnings} prefix="+" />;
   if (detail.denialReason) {
     subLine = (
       <TextF as="div">
@@ -112,11 +112,11 @@ const Direction = ({ direction, children }: IProps) => {
         <PortOverview>
           <PortSummary>
             <H4 as="h3">
-              <PortName port={detail.destination} isHome={detail.isHomePort}/>
+              <PortName port={detail.destination} isHome={detail.isHomePort} />
             </H4>
             <SubLine>{subLine}</SubLine>
           </PortSummary>
-          <Distance value={detail.distanceUnit}/>
+          <Distance value={detail.distanceUnit} />
         </PortOverview>
         <ActionRowButton>
           <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>

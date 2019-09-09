@@ -82,9 +82,9 @@ export const Engineering = () => {
   const { buttonsDisabled, ship, requestNameToken } = useActiveShipContext();
   const isMounted = useMounted();
 
-  const {label} = usePercent(ship.strengthPercent);
+  const { label, decimal } = usePercent(ship.strengthPercent);
   const strengthMax = useNumber(ship.shipClass.strength);
-  const strengthValue = useNumber(Math.ceil(ship.strengthPercent * ship.shipClass.strength));
+  const strengthValue = useNumber(Math.ceil(decimal * ship.shipClass.strength));
 
   return (
     <>

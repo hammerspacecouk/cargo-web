@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Modal, ModalActions, ModalType } from "../../Molecules/Modal";
+import { Modal, ModalType } from "../../Molecules/Modal";
 import { P } from "../../Atoms/Text";
 import { Button } from "../../Atoms/Button";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
+import { ButtonRow } from "../../Molecules/ButtonRow";
 
 export const MessageModal = () => {
   const { message, resetMessage } = useActiveShipContext();
@@ -14,9 +15,9 @@ export const MessageModal = () => {
   return (
     <Modal isOpen={true} onClose={resetMessage} title="Incoming..." type={ModalType.WARNING}>
       <P>{message}</P>
-      <ModalActions>
+      <ButtonRow>
         <Button onClick={resetMessage}>Understood</Button>
-      </ModalActions>
+      </ButtonRow>
     </Modal>
   );
 };

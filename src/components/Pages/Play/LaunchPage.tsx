@@ -7,10 +7,11 @@ import { PlayBoardLayout } from "../../Templates/PlayBoardLayout";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { useLaunchShipsContext } from "../../../contexts/LaunchShipsContext/LaunchShipsContext";
-import { Modal, ModalActions } from "../../Molecules/Modal";
+import { Modal } from "../../Molecules/Modal";
 import { Prose } from "../../Atoms/Prose";
 import { routes } from "../../../routes";
 import { Button, ConfirmButton } from "../../Atoms/Button";
+import { ButtonRow } from "../../Molecules/ButtonRow";
 
 export const LaunchPage = () => {
   const { ships, launchEvent, acknowledgeLaunchEvent } = useLaunchShipsContext();
@@ -25,14 +26,14 @@ export const LaunchPage = () => {
             <em>{launchEvent.newShip.name}</em> was launched at <strong>{launchEvent.atPort.name}</strong>
           </p>
         </Prose>
-        <ModalActions>
+        <ButtonRow>
           <Link as={link.as} href={link.href}>
             <ConfirmButton as="a" href={link.as}>
               Show me
             </ConfirmButton>
           </Link>{" "}
           <Button onClick={acknowledgeLaunchEvent}>Close</Button>
-        </ModalActions>
+        </ButtonRow>
       </Modal>
     );
   }

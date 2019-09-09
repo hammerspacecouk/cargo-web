@@ -19,7 +19,7 @@ export const useTravellingCountdown = (channel: IChannel) => {
   });
 
   const totalSeconds = differenceInSeconds(arrival, start);
-  const percent = Math.max(0, Math.min(1, (totalSeconds - seconds) / totalSeconds));
+  const percent = Math.max(0, Math.min(1, (totalSeconds - seconds) / totalSeconds)) * 100;
 
   return {
     isArriving: seconds <= 0,

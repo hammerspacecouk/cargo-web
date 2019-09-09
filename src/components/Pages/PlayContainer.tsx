@@ -11,7 +11,7 @@ import { Loading } from "../Atoms/Loading";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
-  const {player, isAtHome} = useGameSessionContext();
+  const { player, isAtHome } = useGameSessionContext();
 
   if (player === undefined) {
     return (
@@ -48,9 +48,9 @@ const StyledPlayBoard = styled.div`
   `};
 `;
 
-const StyledNavigation = styled(Navigation)<{isAtHome: boolean}>`
+const StyledNavigation = styled(Navigation)<{ isAtHome: boolean }>`
   min-height: calc(100vh - ${MASTHEAD_HEIGHT});
-  display: ${({isAtHome}) => isAtHome ? 'flex' : 'none'};
+  display: ${({ isAtHome }) => (isAtHome ? "flex" : "none")};
   ${BREAKPOINTS.XL`
     display: flex;
     width: 20%;

@@ -1,6 +1,6 @@
 import { useLocale } from "./useLocale";
 
-const PERCENT_OPTIONS = { style: 'percent' };
+const PERCENT_OPTIONS = { style: "percent" };
 
 export const usePercent = (intValue?: number) => {
   const locale = useLocale();
@@ -14,5 +14,5 @@ export const usePercent = (intValue?: number) => {
   return {
     decimal,
     label,
-  }
+  };
 };

@@ -67,7 +67,7 @@ const CircleBar = styled(CircleTrack)<{ colour: string }>`
  * Standard way to display a score value (with Icon)
  */
 export const ShieldStrength = React.memo(({ percent, className, player }: IProps) => {
-  const {label, decimal} = usePercent(percent);
+  const { label, decimal } = usePercent(percent);
 
   const size = 100;
   const barWidth = 12;
@@ -75,7 +75,6 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   const centre = size / 2;
   const radius = centre - barWidth / 2;
   const trackLength = 2 * Math.PI * radius;
-
 
   let bar = null;
   if (percent !== undefined) {

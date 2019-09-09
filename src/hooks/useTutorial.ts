@@ -53,5 +53,5 @@ export const useTutorial = () => {
     showNavigationIntro,
     showTacticalIntro,
     showShipsIntro,
-  }
+  };
 };

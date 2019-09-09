@@ -1,63 +1,72 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
+import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
 import { H2 } from "../Atoms/Heading";
 import { IChildrenProps } from "../../interfaces";
 import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
-import { CloseIcon } from "../Icons/CloseIcon";
+import { PanelClose } from "../Atoms/PanelClose";
+import { COLOURS, hexToRGBa, panelBackground } from "../../styles/colours";
+import { BREAKPOINTS } from "../../styles/media";
 
-export const Panel = React.memo(({ id, className, closeHandler, title, children, full }: IProps) => {
+export const Panel = React.memo(({ id, className, closeHandler, title, children }: IProps) => {
   let closeButton;
   if (closeHandler) {
-    closeButton = (
-      <Close onClick={closeHandler}>
-        <CloseIcon />
-      </Close>
-    );
+    closeButton = <PanelClose onClick={closeHandler} />;
   }
 
   return (
     <StyledPanel className={className} id={id}>
-      <PanelHeader>
-        <PanelTitle>{title}</PanelTitle>
-        {closeButton}
-      </PanelHeader>
-      <PanelBody full={full}>{children}</PanelBody>
+      <StickyHeader>
+        <PanelHeader>
+          <PanelTitle>{title}</PanelTitle>
+          {closeButton}
+        </PanelHeader>
+      </StickyHeader>
+      <PanelBody>{children}</PanelBody>
       <PanelFoot>/{title}</PanelFoot>
     </StyledPanel>
   );
 });
 
-
 interface IProps extends IChildrenProps {
   id?: string;
   title: string;
   className?: string;
-  full?: boolean;
   closeHandler?: () => void;
 }
 
 const StyledPanel = styled.div`
-  padding: ${GRID.UNIT};
+  ${panelBackground};
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
+const StickyHeader = styled.div`
+  background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.95)};
+  position: sticky;
+  top: ${MASTHEAD_HEIGHT};
+  z-index: ${Z_INDEX.DEFAULT};
+  ${BREAKPOINTS.XL`
+    top: 0; // I'm not keen about this knowing where it sits
+  `}
+`;
+
 const PanelHeader = styled.div`
+  ${panelBackground};
   display: flex;
   justify-content: space-between;
+  padding: ${GRID.UNIT};
 `;
 
 const PanelTitle = styled(H2)`
-  margin-bottom: ${GRID.UNIT};
   line-height: 1;
 `;
 
-const PanelBody = styled.div<{ full: boolean }>`
+const PanelBody = styled.div`
   flex: 1;
-  ${({ full }) => full && `margin: 0 -${GRID.UNIT}`}
+  padding: ${GRID.HALF} ${GRID.UNIT};
 `;
 
 const PanelFoot = styled.div`
@@ -67,16 +76,5 @@ const PanelFoot = styled.div`
   text-align: right;
   font-style: italic;
   text-transform: uppercase;
-  margin-top: ${GRID.UNIT};
-`;
-
-
-// todo - combine with modal close?
-const Close = styled.button`
-  height: 32px;
-  width: 32px;
-  background: none;
-  border: none;
-  padding: 0;
-  margin-left: ${GRID.UNIT};
+  margin: ${GRID.UNIT};
 `;

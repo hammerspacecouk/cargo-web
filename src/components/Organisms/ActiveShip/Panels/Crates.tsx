@@ -13,7 +13,7 @@ export const Crates = () => {
   const { showCrateIntro } = useTutorial();
   let tutorial;
   if (showCrateIntro) {
-    tutorial = <CratesTutorial/>;
+    tutorial = <CratesTutorial />;
   }
 
   return (

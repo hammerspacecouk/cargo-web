@@ -22,8 +22,9 @@ import { IAuthProvider } from "../../data/profile";
 import { TokenButton } from "../Molecules/TokenButton";
 import { Environment } from "../../utils/environment";
 import { useState } from "react";
-import { Modal, ModalActions, ModalType } from "../Molecules/Modal";
+import { Modal, ModalType } from "../Molecules/Modal";
 import { ApiClient } from "../../utils/ApiClient";
+import { ButtonRow } from "../Molecules/ButtonRow";
 
 export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps) => {
   let warning;
@@ -51,7 +52,7 @@ export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps
   );
 };
 
-const Providers = ({providers}: {providers: IAuthProvider[]}) => {
+const Providers = ({ providers }: { providers: IAuthProvider[] }) => {
   const activeCount = providers.reduce((acc, provider) => {
     if (provider.removalToken) {
       acc++;
@@ -63,56 +64,80 @@ const Providers = ({providers}: {providers: IAuthProvider[]}) => {
 
   const providerButtons = providers.map((provider: IAuthProvider) => {
     switch (provider.provider) {
-      case 'amazon':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<AmazonLogo />}
-          text="Amazon" provider={provider} />;
-      case 'apple':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<AppleLogo />}
-          text="Apple" provider={provider} />;
-      case 'facebook':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<FacebookLogo />}
-          text="Facebook" provider={provider} />;
-      case 'google':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<GoogleLogo />}
-          text="Google" provider={provider} />;
-      case 'microsoft':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<MicrosoftLogo />}
-          text="Microsoft" provider={provider} />;
-      case 'reddit':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<RedditLogo />}
-          text="Reddit" provider={provider} />;
-      case 'twitter':
-        return <SocialAccount
-          key={provider.provider}
-          withWarning={withWarning}
-          logo={<TwitterLogo />}
-          text="Twitter" provider={provider} />;
+      case "amazon":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<AmazonLogo />}
+            text="Amazon"
+            provider={provider}
+          />
+        );
+      case "apple":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<AppleLogo />}
+            text="Apple"
+            provider={provider}
+          />
+        );
+      case "facebook":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<FacebookLogo />}
+            text="Facebook"
+            provider={provider}
+          />
+        );
+      case "google":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<GoogleLogo />}
+            text="Google"
+            provider={provider}
+          />
+        );
+      case "microsoft":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<MicrosoftLogo />}
+            text="Microsoft"
+            provider={provider}
+          />
+        );
+      case "reddit":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<RedditLogo />}
+            text="Reddit"
+            provider={provider}
+          />
+        );
+      case "twitter":
+        return (
+          <SocialAccount
+            key={provider.provider}
+            withWarning={withWarning}
+            logo={<TwitterLogo />}
+            text="Twitter"
+            provider={provider}
+          />
+        );
     }
   });
 
-  return (
-  <GridWrapper as="ul">
-    {providerButtons}
-  </GridWrapper>
-  );
+  return <GridWrapper as="ul">{providerButtons}</GridWrapper>;
 };
 
 interface IProps extends IClassNameProps {
@@ -140,22 +165,20 @@ const SocialAccount = ({ logo, text, provider, withWarning }: ISocialAccountProp
         <Modal isOpen={modalIsOpen} title="Are you sure?" onClose={closeModal} type={ModalType.DANGER}>
           <Prose>
             <p>
-              You are unlinking all providers from your account so it will become fully <strong>Anonymous</strong>.
-              In this state if you clear your cookies or reset your browser you will lose access to this game forever.
+              You are unlinking all providers from your account so it will become fully <strong>Anonymous</strong>. In
+              this state if you clear your cookies or reset your browser you will lose access to this game forever.
             </p>
             <p>Are you really sure you want to convert to an anonymous account?</p>
           </Prose>
-          <ModalActions>
+          <ButtonRow>
             <TokenButton token={provider.removalToken} handler={removalHandler}>
               <DangerButton>Yes, unlink {text}</DangerButton>
             </TokenButton>{" "}
             <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
-          </ModalActions>
+          </ButtonRow>
         </Modal>
       );
-      button = (
-        <RemoveButton onClick={() => setModalIsOpen(true)} />
-      );
+      button = <RemoveButton onClick={() => setModalIsOpen(true)} />;
     } else {
       button = (
         <TokenButton token={provider.removalToken} handler={removalHandler}>

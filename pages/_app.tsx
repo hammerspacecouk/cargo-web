@@ -1,10 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import App from "next/app";
-import { Modal, ModalActions, ModalType } from "../src/components/Molecules/Modal";
+import { Modal, ModalType } from "../src/components/Molecules/Modal";
 import { P } from "../src/components/Atoms/Text";
 import { GlobalStyle } from "../src/styles/GlobalStyle";
 import { pageTitle } from "../src/utils/pageTitle";
+import { ButtonRow } from "../src/components/Molecules/ButtonRow";
 
 interface IState {
   errorMessage: string | undefined;
@@ -48,9 +49,9 @@ export default class extends App<IProps, IState> {
         <Modal isOpen={true} title="An error occurred" type={ModalType.DANGER}>
           <P>There was an error loading data. Please reload the page to try again</P>
           <P>Detail: {this.state.errorMessage}</P>
-          <ModalActions>
+          <ButtonRow>
             <a href={window.location.pathname}>Reload</a>
-          </ModalActions>
+          </ButtonRow>
         </Modal>
       );
     }

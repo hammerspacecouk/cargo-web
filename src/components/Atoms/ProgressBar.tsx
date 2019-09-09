@@ -23,7 +23,7 @@ const Bar = styled.div<{ percentValue: number }>`
   height: 102%;
   background: ${COLOURS.BASE};
   // displays minimum of 2% to show that it is a bar that will fill up
-  width: ${({ percentValue }) => percentValue + 2}%;
+  width: ${({ percentValue }) => percentValue}%;
   min-width: 2%;
   margin-left: -1%;
   margin-right: -1%;
@@ -34,10 +34,10 @@ const Bar = styled.div<{ percentValue: number }>`
 `;
 
 export const ProgressBar = React.memo(({ percent, small = false }: IProps) => {
-  const {label, decimal} = usePercent(percent);
+  const { label } = usePercent(percent);
   return (
     <Track small={small}>
-      <Bar title={label} percentValue={decimal} />
+      <Bar title={label} percentValue={percent} />
     </Track>
   );
 });

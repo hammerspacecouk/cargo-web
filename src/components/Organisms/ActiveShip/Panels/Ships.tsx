@@ -25,7 +25,7 @@ export const Ships = () => {
   const { showShipsIntro } = useTutorial();
   let tutorial;
   if (showShipsIntro) {
-    tutorial = <ShipsTutorial/>;
+    tutorial = <ShipsTutorial />;
   }
 
   return (

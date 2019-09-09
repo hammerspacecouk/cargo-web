@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
 import { GRID, MAX_PANEL_WIDTH, Z_INDEX } from "../../styles/variables";
 import { H3 } from "../Atoms/Heading";
-import { CloseIcon } from "../Icons/CloseIcon";
+import { PanelClose } from "../Atoms/PanelClose";
 
 export enum ModalType {
   WARNING = "modal--warning",
@@ -74,15 +74,6 @@ export const modalStyles = css`
   }
 `;
 
-const ModalClose = styled.button`
-  height: 32px;
-  width: 32px;
-  background: none;
-  border: none;
-  padding: 0;
-  margin-left: ${GRID.UNIT};
-`;
-
 const ModalHeader = styled.div`
   display: flex;
   align-items: flex-start;
@@ -110,14 +101,6 @@ const ModalContent = styled.div`
   padding: ${GRID.UNIT};
 `;
 
-export const ModalActions = styled.div`
-  text-align: center;
-  margin-top: ${GRID.UNIT};
-  > * {
-    margin: 0 ${GRID.HALF};
-  }
-`;
-
 export const Modal = React.memo((props: IProps) => {
   // on server just render nothing (as you can't open modals on server)
   if (typeof window === "undefined") {
@@ -129,11 +112,7 @@ export const Modal = React.memo((props: IProps) => {
 
   let closeButton = null;
   if (props.onClose) {
-    closeButton = (
-      <ModalClose onClick={props.onClose}>
-        <CloseIcon />
-      </ModalClose>
-    );
+    closeButton = <PanelClose onClick={props.onClose} />;
   }
 
   return (

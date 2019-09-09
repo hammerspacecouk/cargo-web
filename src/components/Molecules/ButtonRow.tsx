@@ -2,11 +2,10 @@ import styled from "styled-components";
 import { GRID } from "../../styles/variables";
 
 export const ButtonRow = styled.div`
-  text-align: center;
-  > * {
-    display: inline-block;
-    &:not(:first-child) {
-      margin-left: ${GRID.UNIT};
-    }
+  display: flex;
+  justify-content: center;
+  margin-top: ${GRID.UNIT};
+  > *:not(:last-child) {
+    margin-right: ${GRID.UNIT};
   }
 `;

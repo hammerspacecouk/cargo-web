@@ -12,7 +12,6 @@ import { CreditsButton } from "../../Molecules/CreditsButton";
 import { TokenButton } from "../../Molecules/TokenButton";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { ModalActions } from "../../Molecules/Modal";
 import { SIZES } from "../../../styles/typography";
 import { BREAKPOINTS } from "../../../styles/media";
 import { P } from "../../Atoms/Text";
@@ -128,9 +127,7 @@ export const EditShipName = ({ onComplete }: IProps) => {
   return (
     <Container>
       <Text>{textContent}</Text>
-      <ModalActions>
-        <ButtonRow>{buttonContent}</ButtonRow>
-      </ModalActions>
+      <ButtonRow>{buttonContent}</ButtonRow>
     </Container>
   );
 };

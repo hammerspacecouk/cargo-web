@@ -3,9 +3,10 @@ import { useState } from "react";
 import { routes } from "../../routes";
 import { ConfirmButton, WarningButton } from "../Atoms/Button";
 import { CountdownLink } from "../Molecules/CountdownLink";
-import { Modal, ModalActions, ModalType } from "../Molecules/Modal";
+import { Modal, ModalType } from "../Molecules/Modal";
 import { Prose } from "../Atoms/Prose";
 import { H4 } from "../Atoms/Heading";
+import { ButtonRow } from "../Molecules/ButtonRow";
 
 interface IProps {
   readonly isAnonymous: boolean;
@@ -32,12 +33,12 @@ export const LogOutButton = ({ isAnonymous }: IProps) => {
           </p>
           <p>Are you really sure you want to log out and lose this game forever?</p>
         </Prose>
-        <ModalActions>
+        <ButtonRow>
           <CountdownLink time={20000} href={routes.getLogout()}>
             Yes, Log out
           </CountdownLink>{" "}
           <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
-        </ModalActions>
+        </ButtonRow>
       </Modal>
     );
   }
