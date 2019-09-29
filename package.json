@@ -1,6 +1,7 @@
 {
   "name": "saxopholis",
   "version": "0.0.1",
+  "license": "UNLICENSED",
   "description": "Saxopholis: Node, React",
   "dependencies": {
     "b64u": "^2.0.0",
@@ -11,11 +12,11 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-modal": "^3.8.0",
-    "styled-components": "^4.3.1"
+    "styled-components": "^4.3.1",
+    "three": "^0.108.0"
   },
   "devDependencies": {
     "@types/node": "^12.0.10",
-    "@types/query-string": "^6.3.0",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-modal": "^3.8.2",
