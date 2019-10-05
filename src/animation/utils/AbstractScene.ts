@@ -15,7 +15,7 @@ export abstract class AbstractScene {
   }
 
   abstract resize(): void;
-  abstract update(time: number): void;
+  abstract update(msSinceLastFrame: number, msSinceStart: number): void;
 }
 
 type Scene = typeof AbstractScene;

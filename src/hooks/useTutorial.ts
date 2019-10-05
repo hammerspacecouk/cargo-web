@@ -9,7 +9,6 @@ export const useTutorial = () => {
   let allowLog = true;
   let allowExtras = true;
 
-  let showIntroduction = false;
   let showCrateIntro = false;
   let showNavigationIntro = false;
   let showTacticalIntro = false;
@@ -33,7 +32,6 @@ export const useTutorial = () => {
     }
     if (tutorialStep <= 1) {
       allowLog = false;
-      showIntroduction = true;
       showCrateIntro = true;
       allowNavigation = false;
       showNavigationIntro = false;
@@ -48,7 +46,6 @@ export const useTutorial = () => {
     allowExtras,
     allowLog,
 
-    showIntroduction,
     showCrateIntro,
     showNavigationIntro,
     showTacticalIntro,

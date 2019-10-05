@@ -8,7 +8,6 @@ import styled, { css } from "styled-components";
 import { COLOURS } from "../../../../styles/colours";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
-import { IntroductionModal } from "../../../Organisms/ActiveShip/IntroductionModal";
 import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../../styles/variables";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 import { Planet } from "../../../Molecules/Planet";
@@ -24,7 +23,7 @@ import { useTutorial } from "../../../../hooks/useTutorial";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship } = useActiveShipContext();
-  const { allowLog, showIntroduction } = useTutorial();
+  const { allowLog } = useTutorial();
 
   const closeHandler = () => {
     setActiveView(null);
@@ -70,7 +69,6 @@ export const ShipInPortPage = () => {
         </StyledShipPanel>
       )}
 
-      {showIntroduction && <IntroductionModal />}
       <SubBar>
         {allowLog && activeView === null && (
           <EventsSummary onClick={() => setActiveView(ACTIVE_VIEW.LOG)}>

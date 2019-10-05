@@ -1,11 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IPort } from "../../interfaces";
+import { IClassNameProps, IPort } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
 import { HomeIcon } from "../Icons/HomeIcon";
 
-export const PortName = React.memo(({ port, isHome = false }: IProps) => {
+export const PortName = React.memo(({ port, isHome = false, className }: IProps) => {
   let safeIndicator = null;
   let homeIndicator = null;
   if (port.isSafe) {
@@ -23,7 +23,7 @@ export const PortName = React.memo(({ port, isHome = false }: IProps) => {
     );
   }
   return (
-    <Styled>
+    <Styled className={className}>
       <Text>{port.name}</Text>
       {safeIndicator}
       {homeIndicator}
@@ -31,7 +31,7 @@ export const PortName = React.memo(({ port, isHome = false }: IProps) => {
   );
 });
 
-interface IProps {
+interface IProps extends IClassNameProps{
   port: IPort;
   isHome?: boolean;
 }

@@ -8,18 +8,29 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: IScene): UseAnim
 
   useEffect(() => {
     let animationFrame: number;
+    let debounceTimer: number;
+    let startTime: number;
+    let lastTime: number;
     canvasRef.current.style.width = '100%';
     canvasRef.current.style.height= '100%';
 
     const scene = new Scene(canvasRef.current);
 
     const render = (time: number) => {
-      scene.update(time);
+      if (!startTime) {
+        startTime = time;
+      }
+      const msSinceLastFrame = lastTime ? time - lastTime : 0;
+      const msSinceStart = time - startTime;
+      lastTime = time;
+
+      scene.update(msSinceLastFrame, msSinceStart);
       animationFrame = requestAnimationFrame(render);
     };
 
     const onResize = () => {
-      scene.resize();
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => scene.resize(), 200);
     };
 
     window.addEventListener('resize', onResize);

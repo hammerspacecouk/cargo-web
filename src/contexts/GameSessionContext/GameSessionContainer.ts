@@ -51,7 +51,7 @@ const calculateInitialProps = async (context: NextPageContext, Page: IPageWithDa
 
     // get the sub-page data
     if (Page.getInitialProps) {
-      initialProps.page = await Page.getInitialProps(context);
+      initialProps.page = await Page.getInitialProps(context, initialProps.gameSession);
     }
     return initialProps;
   } catch (err) {

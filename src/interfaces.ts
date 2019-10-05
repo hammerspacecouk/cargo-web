@@ -1,6 +1,7 @@
 import { ComponentClass, ReactNode } from "react";
 import { AppInitialProps } from "next/app";
 import { NextPageContext } from "next";
+import { IGameSessionResponse } from "./data/game";
 
 export interface IActionToken {
   path: string;
@@ -226,5 +227,5 @@ export interface IShipClass {
 }
 
 export interface IPageWithData extends ComponentClass {
-  getInitialProps?: (context: NextPageContext) => Promise<AppInitialProps>;
+  getInitialProps?: (context: NextPageContext, sessionData?: IGameSessionResponse) => Promise<AppInitialProps>;
 }
