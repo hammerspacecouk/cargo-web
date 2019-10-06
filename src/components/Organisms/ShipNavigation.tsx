@@ -121,12 +121,15 @@ const Item = styled.li`
 
 const tutorialHighlightAnimation = keyframes`
   0% {
+    color: ${COLOURS.WHITE.STANDARD};
     background: ${hexToRGBa(COLOURS.TUTORIAL.BACKGROUND, 0)};
   }
   50% {
+    color: ${COLOURS.BLACK.STANDARD};
     background: ${hexToRGBa(COLOURS.TUTORIAL.BACKGROUND, 1)};
   }
   100% {
+    color: ${COLOURS.WHITE.STANDARD};
     background: ${hexToRGBa(COLOURS.TUTORIAL.BACKGROUND, 0)};
   }
 `;
@@ -144,8 +147,8 @@ const NavLink = styled(DisguisedButton)<{ disabled?: boolean; isActive: boolean;
     !isActive &&
     tutorialHighlight &&
     css`
-      animation: ${tutorialHighlightAnimation};
-    `} 2s ease-in-out infinite;
+      animation: ${tutorialHighlightAnimation} 2s ease-in-out infinite;
+    `};
   ${({ disabled }) =>
     disabled &&
     `

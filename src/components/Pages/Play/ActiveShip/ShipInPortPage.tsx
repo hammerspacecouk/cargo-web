@@ -10,7 +10,6 @@ import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/Act
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
 import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../../styles/variables";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
-import { Planet } from "../../../Molecules/Planet";
 import { PortName } from "../../../Molecules/PortName";
 import { IPort, IShip } from "../../../../interfaces";
 import { ELEMENTS, SIZES } from "../../../../styles/typography";
@@ -20,9 +19,11 @@ import { BREAKPOINTS } from "../../../../styles/media";
 import { EventsList } from "../../../Organisms/EventsList";
 import { DisguisedButton } from "../../../Atoms/Button";
 import { useTutorial } from "../../../../hooks/useTutorial";
+import { useAnimationScene } from "../../../../hooks/useAnimationScene";
+import { Port } from "../../../../animation/scene/Port";
 
 export const ShipInPortPage = () => {
-  const { activeView, events, setActiveView, ship } = useActiveShipContext();
+  const { activeView, events, setActiveView, ship, port } = useActiveShipContext();
   const { allowLog } = useTutorial();
 
   const closeHandler = () => {
@@ -31,7 +32,7 @@ export const ShipInPortPage = () => {
 
   return (
     <StyledPage>
-      {activeView !== ACTIVE_VIEW.LOG && <ShipOverview ship={ship} isCurrentView={activeView === null} />}
+      {activeView !== ACTIVE_VIEW.LOG && <ShipOverview port={port} ship={ship} isCurrentView={activeView === null} />}
 
       {activeView === ACTIVE_VIEW.LOG && (
         <StyledLogPanel closeHandler={closeHandler} title="Log" id="log">
@@ -149,25 +150,28 @@ const StyledShipPanel = styled(Panel)`
 `;
 
 // todo - refactor out
-const ShipOverview = ({ ship, isCurrentView }: { ship: IShip; isCurrentView: boolean }) => (
-  <StyledOverview isCurrentView={isCurrentView}>
-    <PlanetPosition>
-      <Planet />
-    </PlanetPosition>
-    <div>
-      <h1>
-        <TitleName>{ship.name}</TitleName>
-        <TitleConjunction> arrived at </TitleConjunction>
-        <TitleLocation>
-          <PortName port={ship.location as IPort} />
-        </TitleLocation>
-      </h1>
-    </div>
-    <Ship>
-      <ShipImage ship={ship} />
-    </Ship>
-  </StyledOverview>
-);
+const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort, ship: IShip; isCurrentView: boolean }) => {
+  const planetType = port.id.slice(-1); // todo - abstract to API
+  const canvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType));
+
+  return (
+    <StyledOverview isCurrentView={isCurrentView}>
+      <PlanetPosition ref={canvasRef} />
+      <Detail>
+        <h1>
+          <TitleName>{ship.name}</TitleName>
+          <TitleConjunction> arrived at </TitleConjunction>
+          <TitleLocation>
+            <PortName port={port}/>
+          </TitleLocation>
+        </h1>
+      </Detail>
+      <Ship>
+        <ShipImage ship={ship}/>
+      </Ship>
+    </StyledOverview>
+  );
+};
 
 const shipSize = "128px";
 
@@ -184,14 +188,14 @@ const StyledOverview = styled.div<{ isCurrentView: boolean }>`
 
 const PlanetPosition = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 70vw;
-  height: 70vw;
-  max-width: 262px;
-  max-height: 262px;
-  pointer-events: none;
-  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+`;
+
+const Detail = styled.div`
+position: relative;
 `;
 
 const Ship = styled.div`

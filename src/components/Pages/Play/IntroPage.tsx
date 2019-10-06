@@ -2,7 +2,7 @@ import * as React from "react";
 import { pageTitle } from "../../../utils/pageTitle";
 import Head from "next-server/head";
 import styled, { keyframes } from "styled-components";
-import { Intro } from "../../../animation/Intro";
+import { Intro } from "../../../animation/scene/Intro";
 import { useAnimationScene } from "../../../hooks/useAnimationScene";
 import { SIZES } from "../../../styles/typography";
 import { AnimatedEllipsis } from "../../Atoms/AnimatedEllipsis";
@@ -12,16 +12,17 @@ import { PortName } from "../../Molecules/PortName";
 import { GRID } from "../../../styles/variables";
 import { useEffect } from "react";
 import { COLOURS } from "../../../styles/colours";
-// import { routes } from "../../../routes";
+import { routes } from "../../../routes";
 
 export const IntroPage = () => {
   const { ships } = useGameSessionContext();
-  const canvasRef = useAnimationScene<HTMLDivElement>(Intro);
   const initialShip = ships[0];
+  const planetType = (initialShip.ship.location as IPort).id.slice(-1);  // todo - abstract to API
+  const canvasRef = useAnimationScene<HTMLDivElement>(new Intro(planetType));
 
   useEffect(() => {
     window.setTimeout(() => {
-      // window.location.href = routes.getPlayShip(initialShip.ship.id).as;
+      window.location.href = routes.getPlayShip(initialShip.ship.id).as;
     }, 20 * 1000);
   }, []);
 

@@ -1,9 +1,9 @@
 import { RefObject, useEffect, useRef } from "react";
-import { IScene } from "../animation/utils/AbstractScene";
+import { AbstractScene } from "../animation/scene/AbstractScene";
 
 type UseAnimationSceneType<T extends HTMLElement> = RefObject<T>;
 
-export const useAnimationScene = <T extends HTMLElement>(Scene: IScene): UseAnimationSceneType<T> => {
+export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene): UseAnimationSceneType<T> => {
   const canvasRef = useRef<T>();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: IScene): UseAnim
     canvasRef.current.style.width = '100%';
     canvasRef.current.style.height= '100%';
 
-    const scene = new Scene(canvasRef.current);
+    Scene.initCanvas(canvasRef.current);
 
     const render = (time: number) => {
       if (!startTime) {
@@ -24,13 +24,13 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: IScene): UseAnim
       const msSinceStart = time - startTime;
       lastTime = time;
 
-      scene.update(msSinceLastFrame, msSinceStart);
+      Scene.tick(Date.now(), msSinceLastFrame, msSinceStart);
       animationFrame = requestAnimationFrame(render);
     };
 
     const onResize = () => {
       window.clearTimeout(debounceTimer);
-      debounceTimer = window.setTimeout(() => scene.resize(), 200);
+      debounceTimer = window.setTimeout(() => Scene.resize(), 200);
     };
 
     window.addEventListener('resize', onResize);
