@@ -11,7 +11,8 @@ import { IPort } from "../../../interfaces";
 import { PortName } from "../../Molecules/PortName";
 import { GRID } from "../../../styles/variables";
 import { useEffect } from "react";
-import { routes } from "../../../routes";
+import { COLOURS } from "../../../styles/colours";
+// import { routes } from "../../../routes";
 
 export const IntroPage = () => {
   const { ships } = useGameSessionContext();
@@ -20,7 +21,7 @@ export const IntroPage = () => {
 
   useEffect(() => {
     window.setTimeout(() => {
-      window.location.href = routes.getPlayShip(initialShip.ship.id).as;
+      // window.location.href = routes.getPlayShip(initialShip.ship.id).as;
     }, 20 * 1000);
   }, []);
 
@@ -38,7 +39,7 @@ export const IntroPage = () => {
             <IntroLine1>- Deliver it to Saxopholis</IntroLine1>
           </Mission>
           <IntroLine2>Launching ship <Name>{initialShip.ship.name}</Name><AnimatedEllipsis /></IntroLine2>
-          <IntroLine3>Arriving at <Name><PortName port={initialShip.ship.location as IPort} /></Name><AnimatedEllipsis /></IntroLine3>
+          <IntroLine3>Arriving at <Name><StyledPortName port={initialShip.ship.location as IPort} /></Name><AnimatedEllipsis /></IntroLine3>
           <IntroLine4>Starting navigation computer<AnimatedEllipsis /></IntroLine4>
         </TextContainer>
       </Container>
@@ -61,7 +62,8 @@ const TextContainer = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${SIZES.A};
+  ${SIZES.B};
+  text-shadow: 0 0 2px ${COLOURS.BLACK.FULL};
   line-height: 1.4;
   > * {
     position: absolute;
@@ -103,21 +105,25 @@ const fadeMission = keyframes`
   100% { opacity: 0; }
 `;
 
+const StyledPortName = styled(PortName)`
+  justify-content: center;
+`;
+
 const Mission = styled.div`
    animation: ${fadeMission} 10s ease-out forwards;
+`;
+
+const Name = styled.span`
+  display: block;
+  font-style: italic;
 `;
 
 const IntroLine = styled.div`
    width: 100%;
    padding: ${GRID.UNIT};
-   display: flex;
-   justify-content: center;
+   text-align: center;
    transform: translateX(100vw) skewX(-30deg);
    animation: ${slideIn} 3s ease-out forwards;
-`;
-
-const Name = styled.em`
-  margin-left: ${GRID.UNIT};
 `;
 
 const IntroLine1 = styled(IntroLine)`

@@ -64,10 +64,10 @@ const StyledNavigation = styled(Navigation)<{ isAtHome: boolean }>`
 `;
 
 const StyledMain = styled.main`
+  height: calc(100vh - ${MASTHEAD_HEIGHT});
   ${BREAKPOINTS.XL`
     flex: 1;
     order: 2;
     padding: 0;
-    height: calc(100vh - ${MASTHEAD_HEIGHT});
   `};
 `;

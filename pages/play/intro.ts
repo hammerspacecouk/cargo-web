@@ -26,7 +26,6 @@ class Page extends Component<{isRedirecting?: boolean}, undefined> {
 
   public render() {
     if (this.props.isRedirecting) {
-      console.log('it rednerded');
       return null;
     }
     return createElement(IntroPage);
