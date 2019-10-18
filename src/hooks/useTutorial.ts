@@ -11,23 +11,16 @@ export const useTutorial = () => {
 
   let showCrateIntro = false;
   let showNavigationIntro = false;
-  let showTacticalIntro = false;
-  let showShipsIntro = false;
 
   if (tutorialStep) {
-    if (tutorialStep === 4) {
-      showShipsIntro = true;
-    }
     if (tutorialStep <= 3) {
       allowLog = false;
       allowShips = false;
       allowExtras = false;
-      showTacticalIntro = true;
     }
     if (tutorialStep <= 2) {
       allowLog = false;
       allowTactical = false;
-      showTacticalIntro = false;
       showNavigationIntro = true;
     }
     if (tutorialStep <= 1) {
@@ -35,7 +28,6 @@ export const useTutorial = () => {
       showCrateIntro = true;
       allowNavigation = false;
       showNavigationIntro = false;
-      showTacticalIntro = false;
     }
   }
 
@@ -48,7 +40,5 @@ export const useTutorial = () => {
 
     showCrateIntro,
     showNavigationIntro,
-    showTacticalIntro,
-    showShipsIntro,
   };
 };

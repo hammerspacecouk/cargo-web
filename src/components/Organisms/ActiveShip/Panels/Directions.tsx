@@ -8,7 +8,7 @@ import { DirectionSW } from "../../../Icons/DirectionSW";
 import { DirectionW } from "../../../Icons/DirectionW";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { IDirection } from "../../../../interfaces";
-import { TextF, TextWarning } from "../../../Atoms/Text";
+import { TextF, TextOk, TextWarning } from "../../../Atoms/Text";
 import { PortName } from "../../../Molecules/PortName";
 import { ScoreValue } from "../../../Molecules/ScoreValue";
 import { GoButton } from "../GoButton";
@@ -20,6 +20,7 @@ import { ActionRow, ActionRowButton, ActionRowContent } from "../../../Molecules
 import { Distance } from "../../../Atoms/Distance";
 import { useTutorial } from "../../../../hooks/useTutorial";
 import { TravelTutorial } from "../../Tutorial/TravelTutorial";
+import { TimeAgo } from "../../../Atoms/TimeAgo";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
@@ -98,12 +99,21 @@ const Direction = ({ direction, children }: IProps) => {
   const detail = direction.detail;
 
   let subLine = <ScoreValue score={detail.earnings} prefix="+" />;
+  let lastVisit;
   if (detail.denialReason) {
     subLine = (
       <TextF as="div">
         <TextWarning>{detail.denialReason}</TextWarning>
       </TextF>
     );
+  } else if (detail.lastVisitTime) {
+    lastVisit = (
+      <SubLine>
+        <TextF as="div">
+        <TextOk>Last Visit: <TimeAgo datetime={new Date(detail.lastVisitTime)} /></TextOk>
+      </TextF>
+      </SubLine>
+    )
   }
 
   return (
@@ -115,6 +125,7 @@ const Direction = ({ direction, children }: IProps) => {
               <PortName port={detail.destination} isHome={detail.isHomePort} />
             </H4>
             <SubLine>{subLine}</SubLine>
+            {lastVisit}
           </PortSummary>
           <Distance value={detail.distanceUnit} />
         </PortOverview>

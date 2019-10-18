@@ -20,7 +20,7 @@ export abstract class AbstractScene {
     this.scene = new THREE.Scene();
 
     //setup renderer
-    this.renderer = new THREE.WebGLRenderer({ alpha: true });
+    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     this.renderer.setSize(this.width, this.height);
     this.container.appendChild(this.renderer.domElement);
 

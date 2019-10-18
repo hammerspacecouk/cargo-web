@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { GRID } from "../../../../styles/variables";
 import { PlayerShipList } from "../../PlayerShipList";
-import { useTutorial } from "../../../../hooks/useTutorial";
-import { ShipsTutorial } from "../../Tutorial/ShipsTutorial";
 
 const Panel = styled.div`
   display: flex;
@@ -22,15 +20,9 @@ const OtherShips = styled.div`
 
 export const Ships = () => {
   const { shipsInLocation } = useActiveShipContext();
-  const { showShipsIntro } = useTutorial();
-  let tutorial;
-  if (showShipsIntro) {
-    tutorial = <ShipsTutorial />;
-  }
 
   return (
     <Panel>
-      {tutorial}
       <OtherShips>
         <PlayerShipList ships={shipsInLocation} />
       </OtherShips>

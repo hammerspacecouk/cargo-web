@@ -66,6 +66,7 @@ interface IDirectionDetail {
   minimumStrength?: number;
   denialReason?: string;
   isHomePort: boolean;
+  lastVisitTime?: string; // ISO datetime
 }
 
 export interface IDirection {

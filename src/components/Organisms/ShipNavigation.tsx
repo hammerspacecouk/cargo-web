@@ -24,8 +24,6 @@ export const ShipNavigation = () => {
     allowExtras,
     showCrateIntro,
     showNavigationIntro,
-    showTacticalIntro,
-    showShipsIntro,
   } = useTutorial();
 
   let badge;
@@ -50,12 +48,11 @@ export const ShipNavigation = () => {
         <NavItem
           viewName={ACTIVE_VIEW.TACTICAL}
           label="Tactical"
-          tutorialHighlight={showTacticalIntro}
           disabled={!allowTactical}
         >
           <TacticalIcon />
         </NavItem>
-        <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships" tutorialHighlight={showShipsIntro} disabled={!allowShips}>
+        <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships" disabled={!allowShips}>
           <ShipsIcon />
         </NavItem>
         <NavItem viewName={ACTIVE_VIEW.ENGINEERING} label="Engineering" disabled={!allowExtras}>

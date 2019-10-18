@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
 import { Planet } from "../object/Planet";
+import { Ship } from "../object/Ship";
 
 export const PLANET_Z_POSITION = -350;
 
@@ -10,6 +11,7 @@ export class Port extends AbstractScene {
   private ambientLight: THREE.AmbientLight;
   private light: THREE.Light;
   private planet: Planet;
+  private ship: Ship;
 
   constructor(planetType: string) {
     super();
@@ -20,6 +22,7 @@ export class Port extends AbstractScene {
     this.createAmbientLight();
     this.createLight();
     this.createPlanet();
+    this.createShip();
   }
 
   createAmbientLight() {
@@ -48,8 +51,22 @@ export class Port extends AbstractScene {
     this.scene.add(this.planet.getObject());
   }
 
+  createShip() {
+    if (this.ship) {
+      this.scene.remove(this.ship.getObject());
+    }
+    this.ship = new Ship(
+      this.width / 2,
+      this.height / 2,
+      PLANET_Z_POSITION,
+      150 //(this.width - 32) / 2 // todo - why are the coordinates off
+    );
+    this.scene.add(this.ship.getObject());
+  }
+
   tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
     this.planet.tick(timeNow, msSinceLastFrame, msSinceStart);
+    this.ship.tick(timeNow, msSinceLastFrame, msSinceStart);
     this.renderer.render(this.scene, this.camera);
   }
 }

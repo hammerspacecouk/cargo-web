@@ -2,26 +2,21 @@ import * as React from "react";
 import styled from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { TacticalEffect } from "../../../Molecules/TacticalEffect";
-import { useTutorial } from "../../../../hooks/useTutorial";
-import { TacticalTutorial } from "../../Tutorial/TacticalTutorial";
 import { ListUnstyled } from "../../../Atoms/List/ListUnstyled";
 import { GRID } from "../../../../styles/variables";
 import { COLOURS } from "../../../../styles/colours";
 
 export const Tactical = () => {
-  const { tacticalOptions } = useActiveShipContext();
-  const { showTacticalIntro } = useTutorial();
+  const { tacticalOptions, port } = useActiveShipContext();
   if (!tacticalOptions) {
     return null;
-  }
-  let tutorial;
-  if (showTacticalIntro) {
-    tutorial = <TacticalTutorial />;
   }
 
   return (
     <Panel>
-      {tutorial}
+      <div>
+        {port && `Shop at ${port.name}`} | Inventory
+      </div>
       <ListUnstyled>
         {tacticalOptions.map((option, i) => (
           <Option key={option.effect ? option.effect.id : i}>
