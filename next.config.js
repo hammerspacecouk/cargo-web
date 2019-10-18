@@ -13,5 +13,4 @@ module.exports = {
   onDemandEntries: {
     websocketPort: 3007
   },
-  experimental: { publicDirectory: true }
 };

@@ -15,7 +15,7 @@ services:
       APP_VERSION: "dev-server"
       SERVER_API_HOSTNAME: "http://172.21.0.1:8080"
       CLIENT_API_HOSTNAME: "http://localhost:8080"
-      APP_ASSET_PREFIX: "/static"
+      APP_ASSET_PREFIX: "/"
       HOSTNAME: "dev"
 
   cargo-web-nginx:

@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import { StatusPage } from "../../src/components/Pages/About/StatusPage";
+import { StatusPage } from "../../components/Pages/About/StatusPage";
 
 export default class extends Component {
   public render() {

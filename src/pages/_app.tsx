@@ -1,11 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import App from "next/app";
-import { Modal, ModalType } from "../src/components/Molecules/Modal";
-import { P } from "../src/components/Atoms/Text";
-import { GlobalStyle } from "../src/styles/GlobalStyle";
-import { pageTitle } from "../src/utils/pageTitle";
-import { ButtonRow } from "../src/components/Molecules/ButtonRow";
+import { Modal, ModalType } from "../components/Molecules/Modal";
+import { P } from "../components/Atoms/Text";
+import { GlobalStyle } from "../styles/GlobalStyle";
+import { pageTitle } from "../utils/pageTitle";
+import { ButtonRow } from "../components/Molecules/ButtonRow";
 
 interface IState {
   errorMessage: string | undefined;
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export default class extends App<IProps, IState> {
-  state = { errorMessage: undefined };
+  state: IState = { errorMessage: undefined };
 
   public catchMessage = (error: PromiseRejectionEvent) => {
     this.setState({

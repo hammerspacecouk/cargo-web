@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import { DeletePage } from "../src/components/Pages/DeletePage";
+import { DeletePage } from "../components/Pages/DeletePage";
 import { NextContext } from "next";
 
 export default class extends Component {

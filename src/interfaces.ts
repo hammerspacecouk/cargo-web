@@ -228,5 +228,5 @@ export interface IShipClass {
 }
 
 export interface IPageWithData extends ComponentClass {
-  getInitialProps?: (context: NextPageContext, sessionData?: IGameSessionResponse) => Promise<AppInitialProps>;
+  getInitialProps?: (context: NextPageContext, sessionData?: IGameSessionResponse) => Promise<any>;
 }

@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
-import { ApiClient } from "../src/utils/ApiClient";
-import { HomePage } from "../src/components/Pages/HomePage";
+import { ApiClient } from "../utils/ApiClient";
+import { HomePage } from "../components/Pages/HomePage";
 
 export default class extends Component {
   public static async getInitialProps({req}) {

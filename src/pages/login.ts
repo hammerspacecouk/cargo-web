@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
-import { ApiClient } from "../src/utils/ApiClient";
-import { ILoginOptions } from "../src/interfaces";
-import { LoginPage } from "../src/components/Pages/LoginPage";
+import { ApiClient } from "../utils/ApiClient";
+import { ILoginOptions } from "../interfaces";
+import { LoginPage } from "../components/Pages/LoginPage";
 
 export default class extends Component<IProps, undefined> {
   public static async getInitialProps({req}) {

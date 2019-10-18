@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import { AboutPage } from "../src/components/Pages/AboutPage";
+import { AboutPage } from "../components/Pages/AboutPage";
 
 export default class extends Component {
   public render() {

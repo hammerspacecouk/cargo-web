@@ -1,7 +1,7 @@
 import { createContext, createElement, ReactNode, useContext } from "react";
 import { IActiveShip, useActiveShip } from "./useActiveShip";
 import { IActiveShipResponse } from "../../data/active-ship";
-import Error from "../../../pages/_error";
+import Error from "../../pages/_error";
 
 // hook to use for getting at the active ship context
 export const useActiveShipContext = (): IActiveShip => {
