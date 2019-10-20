@@ -1,10 +1,11 @@
 import * as THREE from "three";
 import { AbstractObject } from "./AbstractObject";
+import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-const TIME_TO_COMPLETE_ORBIT = 20000;
+const TIME_TO_COMPLETE_ORBIT = 100000;
 
 export class Ship extends AbstractObject {
-  private readonly ship: THREE.Sprite;
+  private ship: GLTF;
   private readonly startOffset: number;
   private readonly centreX: number;
   private readonly centreY: number;
@@ -16,7 +17,8 @@ export class Ship extends AbstractObject {
     centreY: number,
     centreZ: number,
     xRadius: number,
-    startOffset = 0
+    startOffset = 0,
+    callback: (object: GLTF) => void
   ) {
     super();
     this.centreX = centreX;
@@ -24,29 +26,37 @@ export class Ship extends AbstractObject {
     this.centreZ = centreZ;
     this.xRadius = xRadius;
     this.startOffset = startOffset;
-    this.ship = new THREE.Sprite(
-      new THREE.SpriteMaterial({
-        map: new THREE.TextureLoader().load( '/ship.svg' )
-      })
-    );
-    this.ship.scale.set(25, 25, 1);
-    this.ship.position.set(this.centreX + this.startOffset, this.centreY, this.centreZ + 50);
+
+    const loader = new GLTFLoader();
+    loader.load('/models/shuttle/scene.gltf', (gltf: GLTF) => {
+      this.ship = gltf;
+      this.ship.scene.scale.set(0.2, 0.2, 0.2);
+      this.ship.scene.rotation.x = 0;
+      this.ship.scene.rotation.y = Math.PI / 2;
+      this.ship.scene.rotation.z = Math.PI / 2;
+      callback(this.ship);
+    });
   }
 
   tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
+    if (!this.ship) {
+      return;
+    }
+
+
     const tickTime = ((timeNow % TIME_TO_COMPLETE_ORBIT) / TIME_TO_COMPLETE_ORBIT) * (Math.PI * 2);
     const x = this.centreX + (Math.sin(tickTime) * this.xRadius);
-    const zRadius = 150;
+    const zRadius = 250;
     const z = this.centreZ + (Math.cos(tickTime) * zRadius);
 
     const yRadius = 60;
     const y = this.centreY + (Math.sin(tickTime) * yRadius);
 
-    // console.log(x);
-    this.ship.position.set(x, y, z);
+    this.ship.scene.rotation.y = tickTime + (Math.PI / 2);
+    this.ship.scene.position.set(x, y, z);
   }
 
   getObject(): THREE.Object3D {
-    return this.ship;
+    return this.ship.scene;
   }
 }

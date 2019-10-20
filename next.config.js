@@ -1,7 +1,8 @@
 // next.config.js
 const dotEnvResult = require('dotenv').config();
+const withTM = require('next-transpile-modules');
 
-module.exports = {
+module.exports = withTM({
   env: {
     CLIENT_API_HOSTNAME: process.env.CLIENT_API_HOSTNAME || 'https://api.saxopholis.com',
     SERVER_API_HOSTNAME: process.env.SERVER_API_HOSTNAME || 'https://api.saxopholis.com',
@@ -13,4 +14,5 @@ module.exports = {
   onDemandEntries: {
     websocketPort: 3007
   },
-};
+  transpileModules: ['three']
+});

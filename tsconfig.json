@@ -10,7 +10,6 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
-//    "noUnusedLocals": true, // todo - run only in prod mode?
     "preserveConstEnums": true,
     "removeComments": false,
     "skipLibCheck": true,

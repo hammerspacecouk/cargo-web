@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
 import { Planet } from "../object/Planet";
 import { Ship } from "../object/Ship";
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 export const PLANET_Z_POSITION = -350;
 
@@ -29,7 +30,7 @@ export class Port extends AbstractScene {
     if (this.ambientLight) {
       this.scene.remove(this.ambientLight);
     }
-    this.ambientLight = new THREE.AmbientLight(0x121212);
+    this.ambientLight = new THREE.AmbientLight(0x242424);
     this.scene.add(this.ambientLight);
   }
 
@@ -59,9 +60,12 @@ export class Port extends AbstractScene {
       this.width / 2,
       this.height / 2,
       PLANET_Z_POSITION,
-      150 //(this.width - 32) / 2 // todo - why are the coordinates off
+      150, //(this.width - 32) / 2 // todo - why are the coordinates off
+      0,
+      (object: GLTF) => {
+        this.scene.add(object.scene);
+      }
     );
-    this.scene.add(this.ship.getObject());
   }
 
   tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {

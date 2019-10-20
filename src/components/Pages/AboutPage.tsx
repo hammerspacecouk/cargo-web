@@ -20,5 +20,7 @@ export const AboutPage = () => (
     </ul>
 
     <p>Planet textures from https://www.solarsystemscope.com</p>
+    <p>Shuttle model from https://sketchfab.com/3d-models/space-shuttle-ff4b00b7ebb24fdd98fb96b08f2c43c9</p>
+    <p>Probe model from https://sketchfab.com/3d-models/pioneer-3d-printable-22a3f655baeb42d8b7a3efd38d7bb09c</p>
   </AboutLayout>
 );
