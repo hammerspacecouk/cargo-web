@@ -8,7 +8,7 @@ import { H3 } from "../Atoms/Heading";
 import { SimplePage } from "../Templates/SimplePage";
 import { PanelPage } from "../Templates/PanelPage";
 
-interface IProps {
+export interface IDeletePageProps {
   stage?: number;
   token?: string;
 }
@@ -23,7 +23,7 @@ const stageTexts = [
       Press ‘Yes’ to proceed.`,
 ];
 
-export const DeletePage = ({ stage, token }: IProps) => {
+export const DeletePage = ({ stage, token }: IDeletePageProps) => {
   const stageText = stageTexts[stage];
   const actionToken = {
     path: "/profile/delete",
