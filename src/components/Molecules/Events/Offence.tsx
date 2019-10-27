@@ -11,14 +11,16 @@ export const Offence = ({ destroyed, event }: IProps) => {
     victimShipName = event.ship.name;
   }
 
-  let destroyedText = '';
+  let destroyedText = "";
   if (destroyed) {
-    destroyedText = ' and destroyed it';
+    destroyedText = " and destroyed it";
   }
 
   return (
     <Event time={event.time}>
-      <em>{shipName}</em> used <strong>{event.effect.name}</strong> ({event.value} damage) against <em>{victimShipName}</em>{destroyedText}
+      <em>{shipName}</em> used <strong>{event.effect.name}</strong> ({event.value} damage) against{" "}
+      <em>{victimShipName}</em>
+      {destroyedText}
     </Event>
   );
 };

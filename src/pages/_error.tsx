@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { NextPageContext } from "next";
 
 class Error extends React.Component<IProps, undefined> {
@@ -10,16 +10,12 @@ class Error extends React.Component<IProps, undefined> {
   // todo - design this
   render() {
     if (this.props.statusCode && this.props.statusCode === 404) {
-      return (
-        <h1>No such page</h1>
-      );
+      return <h1>No such page</h1>;
     }
 
     return (
       <p>
-        {this.props.statusCode
-          ? `An error ${this.props.statusCode} occurred on server`
-          : 'An error occurred on client'}
+        {this.props.statusCode ? `An error ${this.props.statusCode} occurred on server` : "An error occurred on client"}
       </p>
     );
   }

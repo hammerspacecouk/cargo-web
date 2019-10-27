@@ -1,5 +1,5 @@
-import { ReactNode} from "react";
-import {NextPage, NextPageContext} from "next";
+import { ReactNode } from "react";
+import { NextPage, NextPageContext } from "next";
 import { IGameSessionResponse } from "./data/game";
 
 export interface IActionToken {
@@ -87,7 +87,7 @@ export const ACTION_CRATE_NEW = "crate_new";
 export const ACTION_CRATE_PICKUP = "crate_pickup";
 export const ACTION_EFFECT_USE = "effect_use";
 export const ACTION_EFFECT_OFFENCE = "effect_offence";
-export const ACTION_EFFECT_DESTROYED = 'effect_destroyed';
+export const ACTION_EFFECT_DESTROYED = "effect_destroyed";
 export const ACTION_PLAYER_NEW = "player_new";
 export const ACTION_PLAYER_PROMOTION = "player_promotion";
 export const ACTION_SHIP_NEW = "ship_new";

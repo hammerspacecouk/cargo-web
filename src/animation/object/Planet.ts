@@ -11,7 +11,7 @@ export class Planet extends AbstractObject {
     this.planet = new THREE.Mesh(
       new THREE.SphereGeometry(radius, 32, 32),
       new THREE.MeshPhongMaterial({
-        map: new THREE.TextureLoader().load(`/planet-${planetType}.jpg`)
+        map: new THREE.TextureLoader().load(`/planet-${planetType}.jpg`),
       })
     );
   }

@@ -11,8 +11,8 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene): 
     let debounceTimer: number;
     let startTime: number;
     let lastTime: number;
-    canvasRef.current.style.width = '100%';
-    canvasRef.current.style.height= '100%';
+    canvasRef.current.style.width = "100%";
+    canvasRef.current.style.height = "100%";
 
     Scene.initCanvas(canvasRef.current);
 
@@ -33,13 +33,13 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene): 
       debounceTimer = window.setTimeout(() => Scene.resize(), 200);
     };
 
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
     requestAnimationFrame(render); // start
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener("resize", onResize);
       window.cancelAnimationFrame(animationFrame);
-    }
+    };
   }, []);
 
   return canvasRef;

@@ -45,11 +45,7 @@ export const ShipNavigation = () => {
         >
           <DirectionsIcon />
         </NavItem>
-        <NavItem
-          viewName={ACTIVE_VIEW.TACTICAL}
-          label="Tactical"
-          disabled={!allowTactical}
-        >
+        <NavItem viewName={ACTIVE_VIEW.TACTICAL} label="Tactical" disabled={!allowTactical}>
           <TacticalIcon />
         </NavItem>
         <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships" disabled={!allowShips}>

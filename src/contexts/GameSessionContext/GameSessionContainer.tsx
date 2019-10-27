@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GameContextComponent } from "./GameSessionContext";
 import { errorIs, UNAUTHENTICATED_ERROR, UnauthenticatedError } from "../../utils/HttpClient/Error";
 import { PlayContainer } from "../../components/Pages/PlayContainer";
-import {NextPageContext} from "next";
+import { NextPageContext } from "next";
 import { getSession, IGameSessionResponse } from "../../data/game";
 import { routes } from "../../routes";
 import { AUTH_COOKIE_NAME } from "../../utils/HttpClient/ServerClient";

@@ -43,7 +43,7 @@ export class Port extends AbstractScene {
       this.scene.remove(this.light);
     }
     this.light = new THREE.DirectionalLight(0xffffff, 1);
-    this.light.position.set(-(this.width / 2), (this.height / 2), 500);
+    this.light.position.set(-(this.width / 2), this.height / 2, 500);
     this.scene.add(this.light);
   }
 
@@ -60,14 +60,10 @@ export class Port extends AbstractScene {
     if (this.ship) {
       this.scene.remove(this.ship.getObject());
     }
-    const orbitRadius = (Math.max(this.getPlanetSize() * 1.2, this.width * 0.9)) / 2;
-    this.ship = new Ship(
-      orbitRadius,
-      (object: GLTF) => {
-        this.scene.add(object.scene);
-      }
-    );
-
+    const orbitRadius = Math.max(this.getPlanetSize() * 1.2, this.width * 0.9) / 2;
+    this.ship = new Ship(orbitRadius, (object: GLTF) => {
+      this.scene.add(object.scene);
+    });
   }
 
   tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {

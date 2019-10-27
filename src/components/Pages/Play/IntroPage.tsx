@@ -17,7 +17,7 @@ import { routes } from "../../../routes";
 export const IntroPage = () => {
   const { ships } = useGameSessionContext();
   const initialShip = ships[0];
-  const planetType = (initialShip.ship.location as IPort).id.slice(-1);  // todo - abstract to API
+  const planetType = (initialShip.ship.location as IPort).id.slice(-1); // todo - abstract to API
   const canvasRef = useAnimationScene<HTMLDivElement>(new Intro(planetType));
 
   useEffect(() => {
@@ -32,16 +32,28 @@ export const IntroPage = () => {
         <title>{pageTitle("It begins...")}</title>
       </Head>
       <Container>
-        <Container ref={canvasRef}/>
+        <Container ref={canvasRef} />
         <TextContainer>
           <Mission>
             <IntroLine1>Your mission:</IntroLine1>
             <IntroLine1>- Find a Saxophone 🎷</IntroLine1>
             <IntroLine1>- Deliver it to Saxopholis</IntroLine1>
           </Mission>
-          <IntroLine2>Launching ship <Name>{initialShip.ship.name}</Name><AnimatedEllipsis /></IntroLine2>
-          <IntroLine3>Arriving at <Name><StyledPortName port={initialShip.ship.location as IPort} /></Name><AnimatedEllipsis /></IntroLine3>
-          <IntroLine4>Starting navigation computer<AnimatedEllipsis /></IntroLine4>
+          <IntroLine2>
+            Launching ship <Name>{initialShip.ship.name}</Name>
+            <AnimatedEllipsis />
+          </IntroLine2>
+          <IntroLine3>
+            Arriving at{" "}
+            <Name>
+              <StyledPortName port={initialShip.ship.location as IPort} />
+            </Name>
+            <AnimatedEllipsis />
+          </IntroLine3>
+          <IntroLine4>
+            Starting navigation computer
+            <AnimatedEllipsis />
+          </IntroLine4>
         </TextContainer>
       </Container>
     </>
@@ -70,7 +82,6 @@ const TextContainer = styled(Container)`
     position: absolute;
   }
 `;
-
 
 const slideAndFade = keyframes`
     0% {
@@ -111,7 +122,7 @@ const StyledPortName = styled(PortName)`
 `;
 
 const Mission = styled.div`
-   animation: ${fadeMission} 10s ease-out forwards;
+  animation: ${fadeMission} 10s ease-out forwards;
 `;
 
 const Name = styled.span`
@@ -120,33 +131,33 @@ const Name = styled.span`
 `;
 
 const IntroLine = styled.div`
-   width: 100%;
-   padding: ${GRID.UNIT};
-   text-align: center;
-   transform: translateX(100vw) skewX(-30deg);
-   animation: ${slideIn} 3s ease-out forwards;
+  width: 100%;
+  padding: ${GRID.UNIT};
+  text-align: center;
+  transform: translateX(100vw) skewX(-30deg);
+  animation: ${slideIn} 3s ease-out forwards;
 `;
 
 const IntroLine1 = styled(IntroLine)`
-   &:nth-child(2) {
+  &:nth-child(2) {
     animation-delay: 3s;
-   }
-   &:nth-child(3) {
+  }
+  &:nth-child(3) {
     animation-delay: 6s;
-   }
+  }
 `;
 const IntroLine2 = styled(IntroLine)`
-    animation: ${slideAndFade} 5s ease-out forwards;
-    animation-delay: 10s;
+  animation: ${slideAndFade} 5s ease-out forwards;
+  animation-delay: 10s;
 `;
 
 const IntroLine3 = styled(IntroLine)`
-    animation: ${slideAndFade} 5s ease-out forwards;
-    animation-delay: 15s;
+  animation: ${slideAndFade} 5s ease-out forwards;
+  animation-delay: 15s;
 `;
 
 const IntroLine4 = styled(IntroLine)`
-    animation: ${slideAndFade} 5s ease-out forwards;
-    animation-delay: 20s;
-    top: ${GRID.UNIT};
+  animation: ${slideAndFade} 5s ease-out forwards;
+  animation-delay: 20s;
+  top: ${GRID.UNIT};
 `;

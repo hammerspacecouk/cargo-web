@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import {NextPageContext} from "next";
+import { NextPageContext } from "next";
 import { ActiveShipContextComponent } from "./ActiveShipContext";
 import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 

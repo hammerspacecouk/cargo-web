@@ -2,7 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import { ShipUpgrades } from "../../Organisms/ShipUpgrades";
 import { pageTitle } from "../../../utils/pageTitle";
-import Head from "next-server/head";
 import { PlayBoardLayout } from "../../Templates/PlayBoardLayout";
 import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
@@ -12,6 +11,7 @@ import { Prose } from "../../Atoms/Prose";
 import { routes } from "../../../routes";
 import { Button, ConfirmButton } from "../../Atoms/Button";
 import { ButtonRow } from "../../Molecules/ButtonRow";
+import Head from "next/head";
 
 export const LaunchPage = () => {
   const { ships, launchEvent, acknowledgeLaunchEvent } = useLaunchShipsContext();

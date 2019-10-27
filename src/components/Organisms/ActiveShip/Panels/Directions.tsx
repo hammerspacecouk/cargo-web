@@ -110,10 +110,12 @@ const Direction = ({ direction, children }: IProps) => {
     lastVisit = (
       <SubLine>
         <TextF as="div">
-        <TextOk>Last Visit: <TimeAgo datetime={new Date(detail.lastVisitTime)} /></TextOk>
-      </TextF>
+          <TextOk>
+            Last Visit: <TimeAgo datetime={new Date(detail.lastVisitTime)} />
+          </TextOk>
+        </TextF>
       </SubLine>
-    )
+    );
   }
 
   return (

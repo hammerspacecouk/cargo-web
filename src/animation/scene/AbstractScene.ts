@@ -1,7 +1,6 @@
 import * as THREE from "three";
 
 export abstract class AbstractScene {
-
   protected distancePlane = 2000;
 
   protected container: HTMLElement;
@@ -43,7 +42,7 @@ export abstract class AbstractScene {
   }
 
   updateDimensions() {
-    const {width, height} = this.container.getBoundingClientRect();
+    const { width, height } = this.container.getBoundingClientRect();
     this.width = width;
     this.height = height;
   }
@@ -56,7 +55,6 @@ export abstract class AbstractScene {
     this.init();
     this.renderer.render(this.scene, this.camera);
   }
-
 
   abstract init(): void;
   abstract tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void;

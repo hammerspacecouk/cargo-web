@@ -11,23 +11,21 @@ interface IState {
   errorMessage: string | undefined;
 }
 
-interface IProps {
-
-}
+interface IProps {}
 
 export default class extends App<IProps, IState> {
   state: IState = { errorMessage: undefined };
 
   public catchMessage = (error: PromiseRejectionEvent) => {
     this.setState({
-      errorMessage: error.reason.message.toString()
+      errorMessage: error.reason.message.toString(),
     });
     console.error(error);
   };
 
   public componentDidCatch(error: Error, info: React.ErrorInfo) {
     this.setState({
-      errorMessage: error.toString()
+      errorMessage: error.toString(),
     });
     console.error(info);
   }
@@ -58,7 +56,7 @@ export default class extends App<IProps, IState> {
 
     return (
       <>
-        <GlobalStyle/>
+        <GlobalStyle />
         <Head>
           <title>{pageTitle()}</title>
         </Head>

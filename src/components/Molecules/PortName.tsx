@@ -31,7 +31,7 @@ export const PortName = React.memo(({ port, isHome = false, className }: IProps)
   );
 });
 
-interface IProps extends IClassNameProps{
+interface IProps extends IClassNameProps {
   port: IPort;
   isHome?: boolean;
 }

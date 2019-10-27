@@ -150,7 +150,7 @@ const StyledShipPanel = styled(Panel)`
 `;
 
 // todo - refactor out
-const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort, ship: IShip; isCurrentView: boolean }) => {
+const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort; ship: IShip; isCurrentView: boolean }) => {
   const planetType = port.id.slice(-1); // todo - abstract to API
   const canvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType));
 
@@ -162,12 +162,12 @@ const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort, ship: IShip;
           <TitleName>{ship.name}</TitleName>
           <TitleConjunction> arrived at </TitleConjunction>
           <TitleLocation>
-            <PortName port={port}/>
+            <PortName port={port} />
           </TitleLocation>
         </h1>
       </Detail>
       <Ship>
-        <ShipImage ship={ship}/>
+        <ShipImage ship={ship} />
       </Ship>
     </StyledOverview>
   );
@@ -195,7 +195,7 @@ const PlanetPosition = styled.div`
 `;
 
 const Detail = styled.div`
-position: relative;
+  position: relative;
 `;
 
 const Ship = styled.div`

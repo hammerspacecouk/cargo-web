@@ -14,9 +14,7 @@ export const Tactical = () => {
 
   return (
     <Panel>
-      <div>
-        {port && `Shop at ${port.name}`} | Inventory
-      </div>
+      <div>{port && `Shop at ${port.name}`} | Inventory</div>
       <ListUnstyled>
         {tacticalOptions.map((option, i) => (
           <Option key={option.effect ? option.effect.id : i}>

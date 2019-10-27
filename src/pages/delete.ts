@@ -15,7 +15,7 @@ export default class extends Component {
 
     return {
       stage,
-      token
+      token,
     };
   }
 

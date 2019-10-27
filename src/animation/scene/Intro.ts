@@ -5,7 +5,7 @@ import { PLANET_Z_POSITION } from "./Port";
 import { Planet } from "../object/Planet";
 
 interface IStar extends THREE.Vector3 {
-  velocity?: number
+  velocity?: number;
 }
 
 export class Intro extends AbstractScene {
@@ -54,7 +54,7 @@ export class Intro extends AbstractScene {
       this.scene.remove(this.light);
     }
     this.light = new THREE.DirectionalLight(0xffffff, 1);
-    this.light.position.set(-(this.width / 2), (this.height / 2), 100);
+    this.light.position.set(-(this.width / 2), this.height / 2, 100);
     this.scene.add(this.light);
   }
 
@@ -81,12 +81,11 @@ export class Intro extends AbstractScene {
       this.starGeo.vertices.push(star);
     }
 
-
     let sprite = new THREE.TextureLoader().load("/star-texture.png");
     let starMaterial = new THREE.PointsMaterial({
       size: 0.7,
       map: sprite,
-      transparent: true
+      transparent: true,
     });
 
     this.stars = new THREE.Points(this.starGeo, starMaterial);
@@ -110,7 +109,12 @@ export class Intro extends AbstractScene {
       const diffBetweenPositions = this.planetFinalZPosition - this.planetStartZPosition;
       const diffBetweenTime = this.planetStopTime - this.planetAppearTime;
       const timeElapsed = msSinceStart - this.planetAppearTime;
-      this.planet.getObject().position.z = easeOut(timeElapsed,this.planetStartZPosition, diffBetweenPositions, diffBetweenTime);
+      this.planet.getObject().position.z = easeOut(
+        timeElapsed,
+        this.planetStartZPosition,
+        diffBetweenPositions,
+        diffBetweenTime
+      );
     } else {
       this.planet.getObject().position.z = this.planetFinalZPosition;
     }
@@ -119,7 +123,7 @@ export class Intro extends AbstractScene {
   }
 
   handleStars(msSinceLastFrame: number, msSinceStart: number) {
-    const acceleration = ((this.starAccelerationPerSecond / 1000) * Math.min(500, msSinceLastFrame));
+    const acceleration = (this.starAccelerationPerSecond / 1000) * Math.min(500, msSinceLastFrame);
     if (msSinceStart > this.planetStopTime) {
       if (this.stars.parent === this.scene) {
         this.scene.remove(this.stars);
@@ -129,7 +133,7 @@ export class Intro extends AbstractScene {
     this.starGeo.vertices.forEach((p: IStar) => {
       if (p.z > 0) {
         if (msSinceStart < this.planetAppearTime) {
-          p.z = - (500 - (Math.random() * 50));
+          p.z = -(500 - Math.random() * 50);
           p.velocity = 0;
         }
       } else {
