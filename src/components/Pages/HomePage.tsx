@@ -12,7 +12,7 @@ import { ComplexButton } from "../Molecules/ComplexButton";
 import { AnimatedEllipsis } from "../Atoms/AnimatedEllipsis";
 import { SimplePage } from "../Templates/SimplePage";
 
-export const HomePage = ({ events }: IProps) => (
+export const HomePage = ({ events }: IHomePageProps) => (
   <SimplePage isHome={true}>
     <IntroPanel>
       <Prose>
@@ -42,7 +42,7 @@ export const HomePage = ({ events }: IProps) => (
   </SimplePage>
 );
 
-interface IProps {
+export interface IHomePageProps {
   events: IEvent[];
 }
 

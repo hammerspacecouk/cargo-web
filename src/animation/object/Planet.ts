@@ -6,10 +6,10 @@ const PLANET_ROTATION_TIME = 120000;
 export class Planet extends AbstractObject {
   private readonly planet: THREE.Mesh;
 
-  constructor(planetType: string) {
+  constructor(planetType: string, radius: number) {
     super();
     this.planet = new THREE.Mesh(
-      new THREE.SphereGeometry(50, 32, 32),
+      new THREE.SphereGeometry(radius, 32, 32),
       new THREE.MeshPhongMaterial({
         map: new THREE.TextureLoader().load(`/planet-${planetType}.jpg`)
       })

@@ -3,9 +3,9 @@ import { GameSessionContainer } from "../../contexts/GameSessionContext/GameSess
 import { IntroPage } from "../../components/Pages/Play/IntroPage";
 import { NextPageContext } from "next";
 import { IGameSessionResponse } from "../../data/game";
-import { Router } from "next/router";
 
 class Page extends Component<{isRedirecting?: boolean}, undefined> {
+
   public static getInitialProps({ query, req, res }: NextPageContext, sessionData?: IGameSessionResponse) {
     let isRedirecting = false;
     if (sessionData && sessionData.sessionState.rankStatus.previousRank) {
@@ -15,8 +15,6 @@ class Page extends Component<{isRedirecting?: boolean}, undefined> {
           Location: redirectTo
         });
         res.end();
-      } else {
-        Router.push(redirectTo);
       }
     }
     return {

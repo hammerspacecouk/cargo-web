@@ -62,7 +62,8 @@ export class Intro extends AbstractScene {
     if (this.planet) {
       this.scene.remove(this.planet.getObject());
     }
-    this.planet = new Planet(this.planetType);
+    const radius = (Math.min(this.width, this.height) * 0.4) / 2;
+    this.planet = new Planet(this.planetType, radius);
   }
 
   createStars() {

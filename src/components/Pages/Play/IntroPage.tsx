@@ -1,6 +1,6 @@
 import * as React from "react";
+import Head from "next/head";
 import { pageTitle } from "../../../utils/pageTitle";
-import Head from "next-server/head";
 import styled, { keyframes } from "styled-components";
 import { Intro } from "../../../animation/scene/Intro";
 import { useAnimationScene } from "../../../hooks/useAnimationScene";

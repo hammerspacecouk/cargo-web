@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 export abstract class AbstractScene {
 
-  protected distancePlane = 20000;
+  protected distancePlane = 2000;
 
   protected container: HTMLElement;
   protected height: number;
@@ -26,12 +26,20 @@ export abstract class AbstractScene {
 
     this.resetCamera();
     this.init();
+
+    // new OrbitControls( this.camera, this.renderer.domElement );
+    // const axesHelper = new THREE.AxesHelper( 250 );
+    // this.scene.add( axesHelper );
+    //
+    // const plane = new THREE.GridHelper(100, 10);
+    // this.scene.add(plane);
+
     this.renderer.render(this.scene, this.camera);
   }
 
   resetCamera() {
     this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, this.distancePlane);
-    this.camera.position.set(this.width / 2, this.height / 2, 1);
+    this.camera.position.set(0, 0, this.distancePlane / 2);
   }
 
   updateDimensions() {

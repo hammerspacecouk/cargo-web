@@ -1,10 +1,9 @@
 import { Component, createElement } from "react";
-import { NextPageContext } from "next";
+import {NextPageContext} from "next";
 import { ActiveShipContextComponent } from "./ActiveShipContext";
-import { IPageWithData } from "../../interfaces";
 import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 
-export const ActiveShipContainer = (Page: IPageWithData) => {
+export const ActiveShipContainer = (Page: any) => {
   return class extends Component<IProps, undefined> {
     public static async getInitialProps({ query, req, res }: NextPageContext) {
       const shipData = await getShipData(query.ship as string, req, res);
