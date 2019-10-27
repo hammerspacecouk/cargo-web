@@ -11,8 +11,6 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene): 
     let debounceTimer: number;
     let startTime: number;
     let lastTime: number;
-    canvasRef.current.style.width = "100%";
-    canvasRef.current.style.height = "100%";
 
     Scene.initCanvas(canvasRef.current);
 

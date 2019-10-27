@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
 import { Planet } from "../object/Planet";
-import { Ship } from "../object/Ship";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import {ShipInOrbit} from "../object/ShipInOrbit";
 
 export const PLANET_Z_POSITION = -350;
 
@@ -12,7 +12,7 @@ export class Port extends AbstractScene {
   private ambientLight: THREE.AmbientLight;
   private light: THREE.Light;
   private planet: Planet;
-  private ship: Ship;
+  private ship: ShipInOrbit;
 
   constructor(planetType: string) {
     super();
@@ -61,7 +61,7 @@ export class Port extends AbstractScene {
       this.scene.remove(this.ship.getObject());
     }
     const orbitRadius = Math.max(this.getPlanetSize() * 1.2, this.width * 0.9) / 2;
-    this.ship = new Ship(orbitRadius, (object: GLTF) => {
+    this.ship = new ShipInOrbit(orbitRadius, (object: GLTF) => {
       this.scene.add(object.scene);
     });
   }

@@ -8,12 +8,11 @@ import styled, { css } from "styled-components";
 import { COLOURS } from "../../../../styles/colours";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
-import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../../styles/variables";
+import {GRID, MASTHEAD_HEIGHT, NAV_ITEM_HEIGHT, Z_INDEX} from "../../../../styles/variables";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 import { PortName } from "../../../Molecules/PortName";
 import { IPort, IShip } from "../../../../interfaces";
 import { ELEMENTS, SIZES } from "../../../../styles/typography";
-import { Environment } from "../../../../utils/environment";
 import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShip";
 import { BREAKPOINTS } from "../../../../styles/media";
 import { EventsList } from "../../../Organisms/EventsList";
@@ -21,6 +20,7 @@ import { DisguisedButton } from "../../../Atoms/Button";
 import { useTutorial } from "../../../../hooks/useTutorial";
 import { useAnimationScene } from "../../../../hooks/useAnimationScene";
 import { Port } from "../../../../animation/scene/Port";
+import {ShipDisplay} from "../../../../animation/scene/ShipDisplay";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, port } = useActiveShipContext();
@@ -152,11 +152,12 @@ const StyledShipPanel = styled(Panel)`
 // todo - refactor out
 const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort; ship: IShip; isCurrentView: boolean }) => {
   const planetType = port.id.slice(-1); // todo - abstract to API
-  const canvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType));
+  const planetCanvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType));
+  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay());
 
   return (
     <StyledOverview isCurrentView={isCurrentView}>
-      <PlanetPosition ref={canvasRef} />
+      <PlanetPosition ref={planetCanvasRef} />
       <Detail>
         <h1>
           <TitleName>{ship.name}</TitleName>
@@ -165,10 +166,8 @@ const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort; ship: IShip;
             <PortName port={port} />
           </TitleLocation>
         </h1>
+        <ShipPosition ref={shipCanvasRef} />
       </Detail>
-      <Ship>
-        <ShipImage ship={ship} />
-      </Ship>
     </StyledOverview>
   );
 };
@@ -177,7 +176,7 @@ const shipSize = "128px";
 
 const StyledOverview = styled.div<{ isCurrentView: boolean }>`
   height: calc(100vh - ${MASTHEAD_HEIGHT});
-  padding: ${GRID.UNIT} calc(${shipSize} + ${GRID.UNIT}) ${GRID.UNIT} ${GRID.UNIT};
+  padding: 0;
   ${({ isCurrentView }) =>
     !isCurrentView &&
     css`
@@ -194,32 +193,41 @@ const PlanetPosition = styled.div`
   right: 0;
 `;
 
+const ShipPosition = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: ${NAV_ITEM_HEIGHT};
+  height: ${NAV_ITEM_HEIGHT};
+`;
+
 const Detail = styled.div`
   position: relative;
 `;
 
-const Ship = styled.div`
-  width: ${shipSize};
-  position: absolute;
-  top: ${GRID.QUADRUPLE};
-  right: ${GRID.UNIT};
-`;
-
 const TitleConjunction = styled.span`
   ${ELEMENTS.H6};
+  display: block;
+  text-align: center;
 `;
 
 const TitleLocation = styled.span`
   ${ELEMENTS.H1};
   display: block;
   margin-top: ${GRID.UNIT};
+  > * {
+    justify-content: center;
+  }
 `;
 
 const TitleName = styled.span`
   ${ELEMENTS.H3};
   ${SIZES.D};
+  display: flex;
+  align-items: center;
+  min-height: ${NAV_ITEM_HEIGHT};
+  margin-bottom: ${GRID.HALF};
+  padding: ${GRID.HALF} ${shipSize} ${GRID.HALF} ${GRID.HALF};
+  background: ${COLOURS.BLACK.STANDARD};
+  border-bottom: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
 `;
-
-const ShipImage = ({ ship }: { ship: IShip }) => (
-  <img src={`${Environment.clientApiHostname}${ship.shipClass.image}`} alt={`${ship.name} (${ship.shipClass.name})`} />
-);

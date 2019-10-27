@@ -1,7 +1,9 @@
 import * as THREE from "three";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+
+export const DISTANCE_PLANE = 2500;
 
 export abstract class AbstractScene {
-  protected distancePlane = 2000;
 
   protected container: HTMLElement;
   protected height: number;
@@ -26,10 +28,10 @@ export abstract class AbstractScene {
     this.resetCamera();
     this.init();
 
-    // new OrbitControls( this.camera, this.renderer.domElement );
+    new OrbitControls( this.camera, this.renderer.domElement );
     // const axesHelper = new THREE.AxesHelper( 250 );
     // this.scene.add( axesHelper );
-    //
+
     // const plane = new THREE.GridHelper(100, 10);
     // this.scene.add(plane);
 
@@ -37,8 +39,8 @@ export abstract class AbstractScene {
   }
 
   resetCamera() {
-    this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, this.distancePlane);
-    this.camera.position.set(0, 0, this.distancePlane / 2);
+    this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, DISTANCE_PLANE);
+    this.camera.position.set(0, 0, DISTANCE_PLANE / 2);
   }
 
   updateDimensions() {

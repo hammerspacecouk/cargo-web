@@ -19,6 +19,8 @@ import { COLOURS } from "../../styles/colours";
 import { ShipStats } from "./ShipStats";
 import { Hidden } from "../Atoms/Hidden";
 import { useLaunchShipsContext } from "../../contexts/LaunchShipsContext/LaunchShipsContext";
+import {useAnimationScene} from "../../hooks/useAnimationScene";
+import {ShipDisplay} from "../../animation/scene/ShipDisplay";
 
 export const ShipUpgrade = ({ ship }: IProps) => {
   if (ship.available) {
@@ -48,6 +50,7 @@ const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
 
 const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
   const { buttonsDisabled, purchaseHandler } = useLaunchShipsContext();
+  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay());
 
   return (
     <PurchaseCard>
@@ -67,9 +70,7 @@ const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
         </StyledTokenButton>
       </PurchaseCardDetail>
       <PurchaseCardImage notificationCount={ship.currentCount}>
-        <ShipImage>
-          <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt="" />
-        </ShipImage>
+        <ShipImage ref={shipCanvasRef} />
       </PurchaseCardImage>
     </PurchaseCard>
   );
@@ -103,7 +104,6 @@ const StyledTokenButton = styled(TokenButton)`
 const ShipImage = styled.div`
   border-radius: 50%;
   background: ${COLOURS.GREY.DARKER};
-  padding: ${GRID.UNIT};
   width: 112px;
   height: 112px;
   margin-top: 4px; // for the illusion of lining up a circle
