@@ -1,4 +1,4 @@
-import { AbstractScene } from "./AbstractScene";
+import {AbstractScene, DISTANCE_PLANE} from "./AbstractScene";
 import * as THREE from "three";
 import { easeOut } from "../../utils/math";
 import { PLANET_Z_POSITION } from "./Port";
@@ -9,7 +9,7 @@ interface IStar extends THREE.Vector3 {
 }
 
 export class Intro extends AbstractScene {
-  private planetStartZPosition = -this.distancePlane;
+  private planetStartZPosition = DISTANCE_PLANE;
   private planetFinalZPosition = PLANET_Z_POSITION;
   private planetAppearTime = 15000;
   private planetStopTime = 20000;
