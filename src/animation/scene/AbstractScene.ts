@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 export const DISTANCE_PLANE = 2500;
 
@@ -28,7 +27,7 @@ export abstract class AbstractScene {
     this.resetCamera();
     this.init();
 
-    new OrbitControls( this.camera, this.renderer.domElement );
+    // new OrbitControls( this.camera, this.renderer.domElement );
     // const axesHelper = new THREE.AxesHelper( 250 );
     // this.scene.add( axesHelper );
 

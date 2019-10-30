@@ -4,7 +4,9 @@ import { hexToRGBa } from "../../styles/colours";
 import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
 import { GRID } from "../../styles/variables";
 import { Icon, SMALL_ICON } from "../Atoms/Icon";
-import { FacebookLogo, GoogleLogo, MicrosoftLogo, TwitterLogo } from "../Atoms/Logos";
+import {FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo} from "../Atoms/Logos";
+import {IChildrenProps} from "../../interfaces";
+import {AnonIcon} from "../Icons/AnonIcon";
 
 interface IProps {
   href: string;
@@ -59,6 +61,7 @@ const StyledLink = styled.a<{ colour: IColour }>`
 const StyledText = styled.span`
   flex: 1;
   margin-left: ${GRID.UNIT};
+  text-align: left;
 `;
 
 const SocialButton = React.memo(({ href, icon, text, colour }: IButtonProps) => (
@@ -67,6 +70,14 @@ const SocialButton = React.memo(({ href, icon, text, colour }: IButtonProps) => 
     <StyledText>{text}</StyledText>
   </StyledLink>
 ));
+
+
+export const AnonymousButton = ({ children }: IChildrenProps) => (
+  <StyledLink colour={{bg: "#4B9876", fg: "#ffffff"}} as="button">
+    <Icon size={SMALL_ICON}>{<AnonIcon />}</Icon>
+    <StyledText>{children}</StyledText>
+  </StyledLink>
+);
 
 export const FacebookButton = ({ href }: IProps) => (
   <SocialButton
@@ -79,6 +90,7 @@ export const FacebookButton = ({ href }: IProps) => (
     }}
   />
 );
+
 
 export const GoogleButton = ({ href }: IProps) => (
   <SocialButton
@@ -111,6 +123,18 @@ export const TwitterButton = ({ href }: IProps) => (
     text="Twitter"
     colour={{
       bg: "#1da1f2",
+      fg: "#ffffff",
+    }}
+  />
+);
+
+export const RedditButton = ({ href }: IProps) => (
+  <SocialButton
+    href={href}
+    icon={<RedditLogo />}
+    text="Reddit"
+    colour={{
+      bg: "#ff4500",
       fg: "#ffffff",
     }}
   />

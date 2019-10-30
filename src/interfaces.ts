@@ -38,6 +38,7 @@ export interface ILoginOptions {
   google?: string;
   microsoft?: string;
   twitter?: string;
+  reddit?: string;
 }
 
 export interface IRank {
