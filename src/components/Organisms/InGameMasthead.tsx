@@ -5,7 +5,6 @@ import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
 import { Score } from "./Score";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { routes } from "../../routes";
-import { Hidden } from "../Atoms/Hidden";
 import { ChevronLeftIcon } from "../Icons/ChevronLeftIcon";
 import { Icon } from "../Atoms/Icon";
 import { BREAKPOINTS } from "../../styles/media";
@@ -41,9 +40,8 @@ const Back = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${MASTHEAD_HEIGHT};
-  width: ${MASTHEAD_HEIGHT};
   color: ${COLOURS.WHITE.STANDARD};
+  padding-right: ${GRID.HALF};
   &:hover,
   &:active,
   &:focus {
@@ -52,12 +50,17 @@ const Back = styled.a`
   ${BREAKPOINTS.XL`display: none;`}
 `;
 
+const BackIcon = styled(Icon)`
+  height: ${MASTHEAD_HEIGHT};
+  width: ${MASTHEAD_HEIGHT};
+`;
+
 const BackButton = () => (
   <Back href={routes.getPlay()}>
-    <Hidden>Back to fleet list</Hidden>
-    <Icon>
+    <BackIcon>
       <ChevronLeftIcon />
-    </Icon>
+    </BackIcon>
+    <span>Fleet</span>
   </Back>
 );
 
