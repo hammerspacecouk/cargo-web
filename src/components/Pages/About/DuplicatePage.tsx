@@ -11,7 +11,7 @@ export const DuplicatePage = () => (
   <AboutLayout title="Duplicate account">
     <Prose>
       <p>
-        You have tried to associate your account with an third party account which has already been registered. You have
+        You have tried to associate your account with a third party account which has already been registered. You have
         two options:
       </p>
       <H2>1. Use this account</H2>
