@@ -72,8 +72,8 @@ interface IGameSessionState {
 
 const getNewSessionState = (state: IGameSessionState, session: IGameSessionResponse): IGameSessionState => {
   let newState = state;
-  if (session && session.sessionState.isLoggedIn) {
-    newState = setPropIfChanged(newState, "score", session.sessionState.player && session.sessionState.player.score);
+  if (session?.sessionState.isLoggedIn) {
+    newState = setPropIfChanged(newState, "score", session.sessionState?.player?.score);
     newState = setPropIfChanged(newState, "player", session.sessionState.player);
     newState = setPropIfChanged(newState, "rankStatus", session.sessionState.rankStatus);
     newState = setPropIfChanged(newState, "ships", session.fleet.ships);

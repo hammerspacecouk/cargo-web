@@ -33,7 +33,7 @@ export class ServerClient implements IAPIClient {
         headers["content-type"] = "application/json";
       }
 
-      if (incomingRequest && incomingRequest.headers && incomingRequest.headers.cookie) {
+      if (incomingRequest?.headers?.cookie) {
         headers["cookie"] = incomingRequest.headers.cookie;
       }
 

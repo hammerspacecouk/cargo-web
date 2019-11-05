@@ -42,7 +42,7 @@ const calculateInitialProps = async (context: NextPageContext, Page: any): Promi
 
   try {
     // save an unnecessary call to the API if we already know the cookie isn't there
-    if (req && req.headers && (!req.headers.cookie || !req.headers.cookie.includes(AUTH_COOKIE_NAME))) {
+    if (req?.headers && (!req.headers.cookie || !req.headers.cookie.includes(AUTH_COOKIE_NAME))) {
       throw UnauthenticatedError("Cookie not found");
     }
     // get the gameSession data

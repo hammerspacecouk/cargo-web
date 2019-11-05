@@ -20,7 +20,7 @@ export const Ranks = () => {
     <StyledList>
       {ranks.map((rank, i) => {
         let isCurrent = false;
-        if (rank && rank.id === rankStatus.currentRank.id) {
+        if (rank?.id === rankStatus.currentRank.id) {
           hasPassed = true;
           isCurrent = true;
         }

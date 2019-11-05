@@ -86,7 +86,7 @@ const TimeString = React.memo(({ relativeSeconds }: { relativeSeconds: number })
 });
 
 const getString = (value: number, type: string, locale: any) => {
-  if (Intl && (Intl as any).RelativeTimeFormat) {
+  if ((Intl as any)?.RelativeTimeFormat) {
     return new (Intl as any).RelativeTimeFormat(locale, { numeric: "auto" }).format(value, type);
   }
   // rudimentary english fallback
