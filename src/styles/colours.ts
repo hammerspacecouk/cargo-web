@@ -195,7 +195,7 @@ export const COLOURS = {
   },
 
   CRATE: {
-    LEVEL0: allColours.yellow[2],
+    LEVEL0: allColours.yellow[4],
     LEVEL1: allColours.cyan[2],
     LEVEL2: allColours.blue[3],
     LEVEL3: allColours.indigo[3],
