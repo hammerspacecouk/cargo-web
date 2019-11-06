@@ -58,6 +58,7 @@ export default class extends App<IProps, IState> {
       <>
         <GlobalStyle />
         <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
           <title>{pageTitle()}</title>
         </Head>
         <Component {...pageProps} />
