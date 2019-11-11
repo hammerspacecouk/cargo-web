@@ -37,6 +37,12 @@ export abstract class AbstractScene {
     this.renderer.render(this.scene, this.camera);
   }
 
+  tearDown() {
+    while (this.container.firstChild) {
+      this.container.removeChild(this.container.firstChild);
+    }
+  }
+
   resetCamera() {
     this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, DISTANCE_PLANE);
     this.camera.position.set(0, 0, DISTANCE_PLANE / 2);

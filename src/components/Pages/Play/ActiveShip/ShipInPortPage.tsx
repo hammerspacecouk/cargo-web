@@ -152,8 +152,8 @@ const StyledShipPanel = styled(Panel)`
 // todo - refactor out
 const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort; ship: IShip; isCurrentView: boolean }) => {
   const planetType = port.id.slice(-1); // todo - abstract to API
-  const planetCanvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType));
-  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay());
+  const planetCanvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType), [planetType]);
+  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(), []); // todo - proper watch
 
   return (
     <StyledOverview isCurrentView={isCurrentView}>

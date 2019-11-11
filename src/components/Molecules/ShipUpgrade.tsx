@@ -50,7 +50,7 @@ const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
 
 const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
   const { buttonsDisabled, purchaseHandler } = useLaunchShipsContext();
-  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay());
+  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(), []);
 
   return (
     <PurchaseCard>

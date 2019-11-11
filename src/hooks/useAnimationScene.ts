@@ -3,7 +3,7 @@ import { AbstractScene } from "../animation/scene/AbstractScene";
 
 type UseAnimationSceneType<T extends HTMLElement> = RefObject<T>;
 
-export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene): UseAnimationSceneType<T> => {
+export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene, watch: any[]): UseAnimationSceneType<T> => {
   const canvasRef = useRef<T>();
 
   useEffect(() => {
@@ -37,8 +37,9 @@ export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene): 
     return () => {
       window.removeEventListener("resize", onResize);
       window.cancelAnimationFrame(animationFrame);
+      Scene.tearDown();
     };
-  }, []);
+  }, watch);
 
   return canvasRef;
 };

@@ -18,7 +18,7 @@ export const IntroPage = () => {
   const { ships } = useGameSessionContext();
   const initialShip = ships[0];
   const planetType = (initialShip.ship.location as IPort).id.slice(-1); // todo - abstract to API
-  const canvasRef = useAnimationScene<HTMLDivElement>(new Intro(planetType));
+  const canvasRef = useAnimationScene<HTMLDivElement>(new Intro(planetType), [planetType]);
 
   useEffect(() => {
     window.setTimeout(() => {

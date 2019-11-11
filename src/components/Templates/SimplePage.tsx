@@ -9,13 +9,16 @@ import { Button } from "../Atoms/Button";
 import { APP_TITLE } from "../../utils/pageTitle";
 import { ListInline } from "../Atoms/List/ListInline";
 import { COLOURS } from "../../styles/colours";
+import {SiteLogo} from "../Atoms/Logos";
 
 export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
   <TemplateSimple>
     <TemplateIntro>
       <IntroBits>
         <LogoLink href={routes.getHome()}>
-          <Logo>🎷</Logo>
+          <Logo>
+            <SiteLogo />
+          </Logo>
           <StyledTitle as={isHome ? "h1" : "p"}>{APP_TITLE}</StyledTitle>
         </LogoLink>
         {!disablePlayButton && (
@@ -90,7 +93,7 @@ const TemplateMain = styled.section`
 `;
 
 const StyledTitle = styled(H1)`
-  margin-top: -48px;
+  margin-top: -12px;
   margin-bottom: ${GRID.QUADRUPLE};
   text-shadow: 0 0 4px #000;
   ${BREAKPOINTS.L`
@@ -100,8 +103,9 @@ const StyledTitle = styled(H1)`
 
 const Logo = styled.span`
   display: block;
-  text-align: center;
-  font-size: 6rem;
+  margin: 0 auto;
+  width: 120px;
+  color: #A5911C;
 `;
 
 const FooterPanel = styled.section`

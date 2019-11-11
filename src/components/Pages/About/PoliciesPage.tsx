@@ -7,12 +7,13 @@ import { COLOURS } from "../../../styles/colours";
 import { SIZES } from "../../../styles/typography";
 import { GRID, MAX_PROSE_WIDTH } from "../../../styles/variables";
 import { H2, H3 } from "../../Atoms/Heading";
+import {BREAKPOINTS} from "../../../styles/media";
 
 const HashDemo = styled.div`
   ${SIZES.C};
   font-family: monospace;
   display: block;
-  padding: ${GRID.HALF};
+  padding: ${GRID.UNIT};
   background: ${COLOURS.BLACK.COLOURISED};
   color: ${COLOURS.WHITE.STANDARD};
   margin-bottom: ${GRID.UNIT};
@@ -30,9 +31,6 @@ const HashDemoInput = styled.div`
 
 const HashDemoCode = styled.div`
   text-align: center;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: ${MAX_PROSE_WIDTH};
 `;
 
 export const PoliciesPage = () => (
@@ -57,7 +55,7 @@ export const PoliciesPage = () => (
       </p>
       <HashDemo as="div">
         <HashDemoInput>googleid:123456</HashDemoInput>
-        <HashDemoCode>a96b5a8bf6bacf4e56e5091eafb8607f483617eb690ea52c827c93cde4e09173</HashDemoCode>
+        <HashDemoCode>a96b5a8bf6bacf4e56e&hellip;</HashDemoCode>
       </HashDemo>
       <p>
         We have no way of restoring your account ID back from this code. We cannot access your account, post as you or
