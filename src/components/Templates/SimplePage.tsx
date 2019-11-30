@@ -9,7 +9,7 @@ import { Button } from "../Atoms/Button";
 import { APP_TITLE } from "../../utils/pageTitle";
 import { ListInline } from "../Atoms/List/ListInline";
 import { COLOURS } from "../../styles/colours";
-import {SiteLogo} from "../Atoms/Logos";
+import { SiteLogo } from "../Atoms/Logos";
 
 export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
   <TemplateSimple>
@@ -105,7 +105,7 @@ const Logo = styled.span`
   display: block;
   margin: 0 auto;
   width: 120px;
-  color: #A5911C;
+  color: #a5911c;
 `;
 
 const FooterPanel = styled.section`

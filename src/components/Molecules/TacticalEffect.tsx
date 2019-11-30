@@ -1,17 +1,19 @@
 import * as React from "react";
-import { IActionToken, ITacticalOption } from "../../interfaces";
-import { EffectDetail, LockedEffectDetail } from "./EffectDetail";
+import { IActionToken, IEffect, ITacticalOption } from "../../interfaces";
+import { EffectDetail } from "./EffectDetail";
 import { Type } from "../Atoms/Button";
 import { TokenButton } from "./TokenButton";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
 import { CountdownToTime } from "./CountdownToTime";
-import { CreditsButton } from "./CreditsButton";
 import { ComplexButton } from "./ComplexButton";
 import { AlarmActiveIcon } from "../Icons/AlarmActiveIcon";
 import styled from "styled-components";
 import { CheckboxEmpty } from "../Icons/CheckboxEmptyIcon";
 import { CheckboxChecked } from "../Icons/CheckboxCheckedIcon";
 import { ButtonRow } from "./ButtonRow";
+import { GRID } from "../../styles/variables";
+import { COLOURS } from "../../styles/colours";
+import { getEffectColour } from "../Atoms/EffectSymbol";
 
 interface IOffenceEffectProps {
   option: ITacticalOption;
@@ -20,16 +22,11 @@ interface IOffenceEffectProps {
 export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
   const { portActionHandler, buttonsDisabled } = useActiveShipContext();
 
-  if (option.minimumRank) {
-    return <LockedEffectDetail minimumRank={option.minimumRank} />;
-  }
-
   const handler = async (token: IActionToken) => {
     await portActionHandler(token);
   };
 
   let actionButton;
-  let purchaseButton;
 
   if (option.actionToken) {
     actionButton = (
@@ -78,37 +75,38 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
     );
   }
 
-  if (option.purchaseToken) {
-    purchaseButton = (
-      <TokenButton token={option.purchaseToken.actionToken} handler={portActionHandler}>
-        <CreditsButton amount={option.purchaseToken.cost} disabledOverride={buttonsDisabled} />
-      </TokenButton>
-    );
-  }
-
   return (
-    <div>
+    <EffectPane effect={option.effect}>
       <DetailCell>
         <EffectDetail effect={option.effect} currentCount={option.currentCount} />
       </DetailCell>
-      <StyledButtonRow>
-        {purchaseButton}
-        {actionButton}
-      </StyledButtonRow>
-    </div>
+      <StyledButtonRow>{actionButton}</StyledButtonRow>
+    </EffectPane>
   );
 };
+
+// todo - de-duplicate other usages
+const EffectPane = styled.div<{ effect?: IEffect }>`
+  padding: ${GRID.UNIT};
+  border: solid 1px ${COLOURS.GREY.BLACK};
+  background: ${COLOURS.GREY.DARKEST};
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  border-top-color: ${getEffectColour};
+`;
 
 const DetailCell = styled.div`
   width: 100%;
 `;
 
-const StyledButtonRow = styled(ButtonRow)`
-  justify-content: flex-start;
+const StyledButtonRow = styled.div`
+  margin-top: ${GRID.UNIT};
+  display: flex;
+  justify-content: center;
 `;
-const ActionButtonDisabled = styled(ComplexButton)`
-  margin-left: auto;
-`;
-const ActionButtonEnabled = styled(TokenButton)`
-  margin-left: auto;
-`;
+const ActionButtonDisabled = ComplexButton;
+const ActionButtonEnabled = TokenButton;

@@ -24,7 +24,7 @@ export const PortName = React.memo(({ port, isHome = false, className }: IProps)
   }
   return (
     <Styled className={className}>
-      <Text>{port.name}</Text>
+      {port.name}
       {safeIndicator}
       {homeIndicator}
     </Styled>
@@ -37,10 +37,6 @@ interface IProps extends IClassNameProps {
 }
 
 const Styled = styled.span`
-  display: flex;
-  align-items: center;
-`;
-const Text = styled.span`
   display: inline-block;
 `;
 const Icon = styled.abbr`
@@ -48,4 +44,5 @@ const Icon = styled.abbr`
   margin-left: ${GRID.HALF};
   width: 1em;
   height: 1em;
+  vertical-align: middle;
 `;

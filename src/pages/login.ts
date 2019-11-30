@@ -1,15 +1,17 @@
 import { Component, createElement } from "react";
+import { NextPageContext } from "next";
+import { ParsedUrlQuery } from "querystring";
 import { ApiClient } from "../utils/ApiClient";
 import { ILoginOptions } from "../interfaces";
 import { LoginPage } from "../components/Pages/LoginPage";
-import { NextPageContext } from "next";
 
 export default class extends Component<IProps, undefined> {
-  public static async getInitialProps({ req }: NextPageContext) {
+  public static async getInitialProps({ req, query }: NextPageContext) {
     const loginOptions = await ApiClient.fetch("/login", undefined, req);
     // todo - query parameters
     return {
       loginOptions,
+      query,
     };
   }
 
@@ -20,5 +22,5 @@ export default class extends Component<IProps, undefined> {
 
 interface IProps {
   loginOptions: ILoginOptions;
-  query?: string;
+  query?: ParsedUrlQuery;
 }

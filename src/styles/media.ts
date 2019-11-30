@@ -21,7 +21,7 @@ const makeFunction = (size: number): TaggedTemplateFunction => {
 };
 
 export const BREAKPOINTS: ISizeFunctions = {
-  XS: makeFunction(480),
+  XS: makeFunction(375),
   S: makeFunction(600),
   M: makeFunction(768),
   L: makeFunction(912),

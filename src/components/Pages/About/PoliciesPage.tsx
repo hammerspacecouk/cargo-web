@@ -5,9 +5,8 @@ import { MessageOk } from "../../Molecules/Message";
 import { AboutLayout } from "../../Templates/AboutLayout";
 import { COLOURS } from "../../../styles/colours";
 import { SIZES } from "../../../styles/typography";
-import { GRID, MAX_PROSE_WIDTH } from "../../../styles/variables";
+import { GRID } from "../../../styles/variables";
 import { H2, H3 } from "../../Atoms/Heading";
-import {BREAKPOINTS} from "../../../styles/media";
 
 const HashDemo = styled.div`
   ${SIZES.C};

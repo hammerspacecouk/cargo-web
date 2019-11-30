@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {DeletePage, IDeletePageProps} from "../components/Pages/DeletePage";
+import { DeletePage, IDeletePageProps } from "../components/Pages/DeletePage";
 import { NextPageContext } from "next";
 
 export default class extends Component<IDeletePageProps> {

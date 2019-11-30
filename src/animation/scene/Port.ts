@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
 import { Planet } from "../object/Planet";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import {ShipInOrbit} from "../object/ShipInOrbit";
+import { ShipInOrbit } from "../object/ShipInOrbit";
 
 export const PLANET_Z_POSITION = -350;
 

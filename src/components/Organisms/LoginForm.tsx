@@ -1,65 +1,63 @@
 import * as React from "react";
 import styled from "styled-components";
-import {ILoginOptions, IMessage} from "../../interfaces";
-import {GRID} from "../../styles/variables";
-import {Environment} from "../../utils/environment";
-import {ListInline} from "../Atoms/List/ListInline";
-import {P} from "../Atoms/Text";
+import { ILoginOptions, IMessage } from "../../interfaces";
+import { GRID } from "../../styles/variables";
+import { Environment } from "../../utils/environment";
+import { ListInline } from "../Atoms/List/ListInline";
+import { P } from "../Atoms/Text";
 import {
   AnonymousButton,
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
   RedditButton,
-  TwitterButton
+  TwitterButton,
 } from "../Molecules/SocialButton";
-import {MessagesPanel} from "./MessagesPanel";
-import {Loading} from "../Atoms/Loading";
-import {TokenButton} from "../Molecules/TokenButton";
-import {Prose} from "../Atoms/Prose";
-import {BREAKPOINTS} from "../../styles/media";
-import {routes} from "../../routes";
+import { MessagesPanel } from "./MessagesPanel";
+import { Loading } from "../Atoms/Loading";
+import { TokenButton } from "../Molecules/TokenButton";
+import { Prose } from "../Atoms/Prose";
+import { BREAKPOINTS } from "../../styles/media";
+import { routes } from "../../routes";
 
-export const LoginForm = ({loginOptions, messages}: IProps) => {
+export const LoginForm = ({ loginOptions, messages }: IProps) => {
   if (loginOptions === undefined) {
     return (
       <>
-        <MessagesPanel messages={messages}/>
-        <Loading/>
+        <MessagesPanel messages={messages} />
+        <Loading />
       </>
     );
   }
 
   return (
     <>
-      <MessagesPanel messages={messages}/>
-      <Text>
-        Use any of the following authentication providers to begin or continue a game:
-      </Text>
+      <MessagesPanel messages={messages} />
+      <Text>Use any of the following authentication providers to begin or continue a game:</Text>
       <List>
         {loginOptions.facebook && (
           <Item>
-            <FacebookButton href={`${Environment.clientApiHostname}${loginOptions.facebook}`}/>
+            <FacebookButton href={`${Environment.clientApiHostname}${loginOptions.facebook}`} />
           </Item>
         )}
         {loginOptions.google && (
           <Item>
-            <GoogleButton href={`${Environment.clientApiHostname}${loginOptions.google}`}/>
+            <GoogleButton href={`${Environment.clientApiHostname}${loginOptions.google}`} />
           </Item>
         )}
         {loginOptions.microsoft && (
           <Item>
-            <MicrosoftButton href={`${Environment.clientApiHostname}${loginOptions.microsoft}`}/>
+            <MicrosoftButton href={`${Environment.clientApiHostname}${loginOptions.microsoft}`} />
           </Item>
         )}
         {loginOptions.twitter && (
           <Item>
-            <TwitterButton href={`${Environment.clientApiHostname}${loginOptions.twitter}`}/>
+            <TwitterButton href={`${Environment.clientApiHostname}${loginOptions.twitter}`} />
           </Item>
         )}
         {loginOptions.reddit && (
           <Item>
-            <RedditButton href={`${Environment.clientApiHostname}${loginOptions.reddit}`}/>
+            <RedditButton href={`${Environment.clientApiHostname}${loginOptions.reddit}`} />
           </Item>
         )}
         {loginOptions.anon && (
@@ -71,8 +69,7 @@ export const LoginForm = ({loginOptions, messages}: IProps) => {
         )}
       </List>
       <Text>
-        We don't get access to your account details on these
-        services. No spam, no sharing with third parties.{" "}
+        We don't get access to your account details on these services. No spam, no sharing with third parties.{" "}
         <a href={routes.getAboutPolicies()}>More about our login policies</a>
       </Text>
     </>

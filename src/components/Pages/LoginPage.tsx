@@ -4,6 +4,7 @@ import { messageQueryString } from "../../utils/messageQueryString";
 import { ILoginOptions } from "../../interfaces";
 import { SimplePage } from "../Templates/SimplePage";
 import { PanelPage } from "../Templates/PanelPage";
+import { ParsedUrlQuery } from "querystring";
 
 export const LoginPage = ({ loginOptions, query }: IProps) => {
   return (
@@ -17,5 +18,5 @@ export const LoginPage = ({ loginOptions, query }: IProps) => {
 
 interface IProps {
   loginOptions: ILoginOptions;
-  query?: string;
+  query?: ParsedUrlQuery;
 }

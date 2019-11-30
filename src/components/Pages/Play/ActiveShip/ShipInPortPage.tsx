@@ -8,7 +8,7 @@ import styled, { css } from "styled-components";
 import { COLOURS } from "../../../../styles/colours";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
-import {GRID, MASTHEAD_HEIGHT, NAV_ITEM_HEIGHT, Z_INDEX} from "../../../../styles/variables";
+import { GRID, MASTHEAD_HEIGHT, NAV_ITEM_HEIGHT, Z_INDEX } from "../../../../styles/variables";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 import { PortName } from "../../../Molecules/PortName";
 import { IPort, IShip } from "../../../../interfaces";
@@ -20,7 +20,7 @@ import { DisguisedButton } from "../../../Atoms/Button";
 import { useTutorial } from "../../../../hooks/useTutorial";
 import { useAnimationScene } from "../../../../hooks/useAnimationScene";
 import { Port } from "../../../../animation/scene/Port";
-import {ShipDisplay} from "../../../../animation/scene/ShipDisplay";
+import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, port } = useActiveShipContext();
@@ -215,9 +215,7 @@ const TitleLocation = styled.span`
   ${ELEMENTS.H1};
   display: block;
   margin-top: ${GRID.UNIT};
-  > * {
-    justify-content: center;
-  }
+  text-align: center;
 `;
 
 const TitleName = styled.span`

@@ -1,8 +1,7 @@
 import b64u from "b64u";
-import { parse as parseQueryString } from "query-string";
+import { ParsedUrlQuery } from "querystring";
 
-export const messageQueryString = (queryString: string) => {
-  const query = parseQueryString(queryString);
+export const messageQueryString = (query: ParsedUrlQuery) => {
   if (!query.messages) {
     return null;
   }

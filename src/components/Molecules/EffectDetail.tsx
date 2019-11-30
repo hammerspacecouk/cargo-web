@@ -1,10 +1,17 @@
 import { H4 } from "../Atoms/Heading";
 import * as React from "react";
-import { IEffect, IRank } from "../../interfaces";
+import { IEffect } from "../../interfaces";
 import styled from "styled-components";
 import { EffectSymbol } from "../Atoms/EffectSymbol";
 import { GRID } from "../../styles/variables";
-import { TextWarning } from "../Atoms/Text";
+
+export const EffectDetail = React.memo(({ effect, currentCount, altDescription, className }: IProps) => (
+  <div className={className}>
+    <StyledEffectSymbol effect={effect} currentCount={currentCount} />
+    <Title as="h3">{effect.name}</Title>
+    {altDescription || altDescription === null ? altDescription : <p>{effect.description}</p>}
+  </div>
+));
 
 interface IProps {
   effect: IEffect;
@@ -13,40 +20,10 @@ interface IProps {
   altDescription?: React.ReactNode;
 }
 
-const StyledEffectDetail = styled.div`
-  display: flex;
-  align-items: flex-start;
-`;
-const StyledEffectDescription = styled.div`
-  margin-left: ${GRID.UNIT};
-  flex: 1;
+const StyledEffectSymbol = styled(EffectSymbol)`
+  margin: 0 auto ${GRID.HALF};
 `;
 
-export const EffectDetail = React.memo(({ effect, currentCount, altDescription, className }: IProps) => (
-  <StyledEffectDetail className={className}>
-    <EffectSymbol effect={effect} currentCount={currentCount} />
-    <StyledEffectDescription>
-      <H4 as="h3">{effect.name}</H4>
-      {altDescription || altDescription === null ? altDescription : <p>{effect.description}</p>}
-    </StyledEffectDescription>
-  </StyledEffectDetail>
-));
-
-export const LockedEffectDetail = ({ minimumRank }: { minimumRank: IRank }) => (
-  <LockedDetail>
-    <EffectSymbol />
-    <StyledEffectDescription>
-      <Minimum as="p">
-        <TextWarning>Minimum Rank: {minimumRank.title}</TextWarning>
-      </Minimum>
-    </StyledEffectDescription>
-  </LockedDetail>
-);
-
-const LockedDetail = styled(StyledEffectDetail)`
-  align-items: center;
-`;
-
-const Minimum = styled(H4)`
-  text-align: center;
+const Title = styled(H4)`
+  margin-bottom: ${GRID.HALF};
 `;

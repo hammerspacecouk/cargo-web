@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import { NextPage, NextPageContext } from "next";
-import { IGameSessionResponse } from "./data/game";
 
 export interface IActionToken {
   path: string;
@@ -130,13 +128,15 @@ export interface IHealthIncrease extends ITransaction {
   detail: number;
 }
 
+export interface IEffectPurchase extends ITransaction {
+  detail: IEffect;
+}
+
 export interface ITacticalOption extends IEffectAction {
-  minimumRank?: IRank;
   hitsRemaining?: number;
   expiry?: string;
   isActive?: boolean;
   mustSelectShip?: boolean;
-  purchaseToken?: ITransaction;
 }
 
 export interface IEffectAction {

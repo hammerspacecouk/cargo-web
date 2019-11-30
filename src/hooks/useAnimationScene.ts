@@ -3,7 +3,10 @@ import { AbstractScene } from "../animation/scene/AbstractScene";
 
 type UseAnimationSceneType<T extends HTMLElement> = RefObject<T>;
 
-export const useAnimationScene = <T extends HTMLElement>(Scene: AbstractScene, watch: any[]): UseAnimationSceneType<T> => {
+export const useAnimationScene = <T extends HTMLElement>(
+  Scene: AbstractScene,
+  watch: any[]
+): UseAnimationSceneType<T> => {
   const canvasRef = useRef<T>();
 
   useEffect(() => {

@@ -3,7 +3,6 @@ import * as THREE from "three";
 export const DISTANCE_PLANE = 2500;
 
 export abstract class AbstractScene {
-
   protected container: HTMLElement;
   protected height: number;
   protected width: number;

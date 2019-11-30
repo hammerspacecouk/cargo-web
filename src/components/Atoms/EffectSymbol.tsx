@@ -1,24 +1,24 @@
 import * as React from "react";
 import styled from "styled-components";
-import { EffectType, IEffect } from "../../interfaces";
+import { EffectType, IClassNameProps, IEffect } from "../../interfaces";
 import { SIZES } from "../../styles/typography";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
 import { NumberBadge } from "./NumberBadge";
 
-interface IProps {
+interface IProps extends IClassNameProps {
   effect?: IEffect;
   currentCount?: number;
 }
 
-export const EffectSymbol = React.memo(({ effect, currentCount }: IProps) => {
+export const EffectSymbol = React.memo(({ effect, className, currentCount }: IProps) => {
   let numberBadge;
   if (currentCount) {
     numberBadge = <PositionedNumberBadge value={currentCount} />;
   }
 
   return (
-    <Outer effect={effect}>
+    <Outer effect={effect} className={className}>
       <InnerEffectSymbol effect={effect} />
       {numberBadge}
     </Outer>
@@ -35,7 +35,7 @@ const PositionedNumberBadge = styled(NumberBadge)`
   right: -${GRID.HALF};
 `;
 
-const getEffectColour = ({ effect }: { effect?: IEffect }) => {
+export const getEffectColour = ({ effect }: { effect?: IEffect }) => {
   switch (effect && effect.type) {
     case EffectType.OFFENCE:
       return COLOURS.SEMANTIC.DANGER.KEY;

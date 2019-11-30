@@ -25,6 +25,7 @@ const StyledChildren = styled.span`
 
 const StyledIcon = styled(StyledChildren)``;
 
+// todo - delete this file
 export const StackedButton = React.memo(({ icon, children, className, ...props }: IProps) => {
   let styledPrefix;
   if (icon) {

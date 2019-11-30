@@ -4,8 +4,10 @@ import {
   ICrateAction,
   IDirections,
   IEffect,
+  IEffectPurchase,
   IEvent,
   IHealthIncrease,
+  ILockedTransaction,
   IOtherShip,
   IPort,
   IShip,
@@ -47,6 +49,7 @@ interface IActiveShipState {
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
   tacticalOptions?: ITacticalOption[];
+  effectsToPurchase?: (IEffectPurchase | ILockedTransaction)[];
   directions?: IDirections;
   events?: IEvent[];
   healthOptions?: IHealthIncrease[];
@@ -161,6 +164,7 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "ship", activeShip.ship);
   newState = setPropIfChanged(newState, "directions", activeShip.directions);
   newState = setPropIfChanged(newState, "tacticalOptions", activeShip.tacticalOptions);
+  newState = setPropIfChanged(newState, "effectsToPurchase", activeShip.effectsToPurchase);
   newState = setPropIfChanged(newState, "cratesInPort", activeShip.cratesInPort);
   newState = setPropIfChanged(newState, "cratesOnShip", activeShip.cratesOnShip);
   newState = setPropIfChanged(newState, "healthOptions", activeShip.health);

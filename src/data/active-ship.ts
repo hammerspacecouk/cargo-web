@@ -5,6 +5,7 @@ import {
   ICrateAction,
   IDirections,
   IEffect,
+  IEffectPurchase,
   IEvent,
   IHealthIncrease,
   IOtherShip,
@@ -30,6 +31,7 @@ export interface IActiveShipResponse {
   cratesInPort: ICrateAction[];
   cratesOnShip: ICrateAction[];
   tacticalOptions: ITacticalOption[];
+  effectsToPurchase: IEffectPurchase[];
   directions: IDirections;
   events: IEvent[];
   health: IHealthIncrease[];

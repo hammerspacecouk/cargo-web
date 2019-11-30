@@ -4,9 +4,9 @@ import { hexToRGBa } from "../../styles/colours";
 import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
 import { GRID } from "../../styles/variables";
 import { Icon, SMALL_ICON } from "../Atoms/Icon";
-import {FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo} from "../Atoms/Logos";
-import {IChildrenProps} from "../../interfaces";
-import {AnonIcon} from "../Icons/AnonIcon";
+import { FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo } from "../Atoms/Logos";
+import { IChildrenProps } from "../../interfaces";
+import { AnonIcon } from "../Icons/AnonIcon";
 
 interface IProps {
   href: string;
@@ -71,9 +71,8 @@ const SocialButton = React.memo(({ href, icon, text, colour }: IButtonProps) => 
   </StyledLink>
 ));
 
-
 export const AnonymousButton = ({ children }: IChildrenProps) => (
-  <StyledLink colour={{bg: "#4B9876", fg: "#ffffff"}} as="button">
+  <StyledLink colour={{ bg: "#4B9876", fg: "#ffffff" }} as="button">
     <Icon size={SMALL_ICON}>{<AnonIcon />}</Icon>
     <StyledText>{children}</StyledText>
   </StyledLink>
@@ -90,7 +89,6 @@ export const FacebookButton = ({ href }: IProps) => (
     }}
   />
 );
-
 
 export const GoogleButton = ({ href }: IProps) => (
   <SocialButton

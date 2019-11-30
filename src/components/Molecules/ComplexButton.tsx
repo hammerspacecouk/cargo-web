@@ -14,17 +14,22 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
+  line-height: 1;
 `;
 
-const StyledIcon = styled(Icon)`
-  margin-right: 4px;
+const StyledIcon = styled(Icon)<{ suffixed: boolean }>`
+  ${({ suffixed }) => `margin-${suffixed ? "left" : "right"}: 4px`};
 `;
 
 export const ComplexButton = React.memo(({ icon, children, suffixed, styleType = Type.Action, ...props }: IProps) => {
   let styledPrefix;
   let styledSuffix;
   if (icon) {
-    const iconElement = <StyledIcon size={SMALL_ICON}>{icon}</StyledIcon>;
+    const iconElement = (
+      <StyledIcon size={SMALL_ICON} suffixed={suffixed}>
+        {icon}
+      </StyledIcon>
+    );
     if (suffixed) {
       styledSuffix = iconElement;
     } else {

@@ -19,8 +19,8 @@ import { COLOURS } from "../../styles/colours";
 import { ShipStats } from "./ShipStats";
 import { Hidden } from "../Atoms/Hidden";
 import { useLaunchShipsContext } from "../../contexts/LaunchShipsContext/LaunchShipsContext";
-import {useAnimationScene} from "../../hooks/useAnimationScene";
-import {ShipDisplay} from "../../animation/scene/ShipDisplay";
+import { useAnimationScene } from "../../hooks/useAnimationScene";
+import { ShipDisplay } from "../../animation/scene/ShipDisplay";
 
 export const ShipUpgrade = ({ ship }: IProps) => {
   if (ship.available) {

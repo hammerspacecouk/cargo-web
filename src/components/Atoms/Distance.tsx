@@ -1,12 +1,16 @@
+import * as React from "react";
 import styled from "styled-components";
 import { MONOSPACE_FONT } from "../../styles/typography";
 import { TextD, TextF } from "./Text";
-import * as React from "react";
 import { Fraction } from "./Fraction";
+import { GRID } from "../../styles/variables";
 
 const StyledDistance = styled.div`
   ${MONOSPACE_FONT};
   font-variant: small-caps;
+  position: absolute;
+  top: ${GRID.UNIT};
+  right: ${GRID.UNIT};
 `;
 
 export const Distance = React.memo(({ value }: { value: number }) => {

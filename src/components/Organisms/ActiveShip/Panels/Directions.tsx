@@ -21,6 +21,8 @@ import { Distance } from "../../../Atoms/Distance";
 import { useTutorial } from "../../../../hooks/useTutorial";
 import { TravelTutorial } from "../../Tutorial/TravelTutorial";
 import { TimeAgo } from "../../../Atoms/TimeAgo";
+import { GridWrapper } from "../../../Atoms/GridWrapper";
+import { COLOURS } from "../../../../styles/colours";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
@@ -39,66 +41,53 @@ export const Directions = () => {
   return (
     <>
       {tutorial}
-      <ListLined>
-        {NW ? (
-          <Direction direction={NW}>
-            <DirectionNW />
-          </Direction>
-        ) : null}
-        {NE ? (
-          <Direction direction={NE}>
-            <DirectionNE />
-          </Direction>
-        ) : null}
-        {W ? (
-          <Direction direction={W}>
-            <DirectionW />
-          </Direction>
-        ) : null}
-        {E ? (
-          <Direction direction={E}>
-            <DirectionE />
-          </Direction>
-        ) : null}
-        {SW ? (
-          <Direction direction={SW}>
-            <DirectionSW />
-          </Direction>
-        ) : null}
-        {SE ? (
-          <Direction direction={SE}>
-            <DirectionSE />
-          </Direction>
-        ) : null}
-      </ListLined>
+      <GridWrapper as="ul">
+        <Direction direction={NW}>
+          <DirectionNW />
+        </Direction>
+        <Direction direction={NE}>
+          <DirectionNE />
+        </Direction>
+        <Direction direction={W}>
+          <DirectionW />
+        </Direction>
+        <Direction direction={E}>
+          <DirectionE />
+        </Direction>
+        <Direction direction={SW}>
+          <DirectionSW />
+        </Direction>
+        <Direction direction={SE}>
+          <DirectionSE />
+        </Direction>
+      </GridWrapper>
     </>
   );
 };
 
-interface IProps {
-  direction: IDirection;
+interface IDirectionProps {
+  direction?: IDirection;
   children: any;
 }
 
-const PortOverview = styled(ActionRowContent)`
-  display: flex;
-  align-items: center;
-`;
-
-const PortSummary = styled.div`
-  flex: 1;
-  margin-right: ${GRID.UNIT};
-`;
-
 const SubLine = styled.div`
-  margin-top: ${GRID.HALF};
+  margin-bottom: ${GRID.HALF};
 `;
 
-const Direction = ({ direction, children }: IProps) => {
-  const icon = children;
+const Direction = ({ direction, children }: IDirectionProps) => {
+  if (!direction) {
+    return (
+      <StyledDirection>
+        <DirectionPanel disabled>
+          <StyledArrow>{children}</StyledArrow>
+        </DirectionPanel>
+      </StyledDirection>
+    );
+  }
+
   const detail = direction.detail;
 
-  let subLine = <ScoreValue score={detail.earnings} prefix="+" />;
+  let subLine = <StyledScoreValue score={detail.earnings} prefix="+" />;
   let lastVisit;
   if (detail.denialReason) {
     subLine = (
@@ -111,7 +100,9 @@ const Direction = ({ direction, children }: IProps) => {
       <SubLine>
         <TextF as="div">
           <TextOk>
-            Last Visit: <TimeAgo datetime={new Date(detail.lastVisitTime)} />
+            Last Visit
+            <br />
+            <TimeAgo datetime={new Date(detail.lastVisitTime)} />
           </TextOk>
         </TextF>
       </SubLine>
@@ -119,24 +110,58 @@ const Direction = ({ direction, children }: IProps) => {
   }
 
   return (
-    <li>
-      <ActionRow>
-        <PortOverview>
-          <PortSummary>
-            <H4 as="h3">
-              <PortName port={detail.destination} isHome={detail.isHomePort} />
-            </H4>
-            <SubLine>{subLine}</SubLine>
-            {lastVisit}
-          </PortSummary>
-          <Distance value={detail.distanceUnit} />
-        </PortOverview>
-        <ActionRowButton>
-          <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds}>
-            {icon}
-          </GoButton>
-        </ActionRowButton>
-      </ActionRow>
-    </li>
+    <StyledDirection>
+      <DirectionPanel>
+        <StyledArrow>{children}</StyledArrow>
+        <SubLine>
+          <H4 as="h3">
+            <PortName port={detail.destination} isHome={detail.isHomePort} />
+          </H4>
+        </SubLine>
+        <SubLine>{subLine}</SubLine>
+        {lastVisit}
+        <Distance value={detail.distanceUnit} />
+        <ButtonRow>
+          <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds} />
+        </ButtonRow>
+      </DirectionPanel>
+    </StyledDirection>
   );
 };
+
+const StyledArrow = styled.div`
+  width: ${GRID.QUADRUPLE};
+  margin: 0 auto;
+`;
+
+const StyledDirection = styled.li`
+  width: 50%;
+`;
+
+const ButtonRow = styled.div`
+  margin-top: auto;
+`;
+
+const StyledScoreValue = styled(ScoreValue)`
+  justify-content: center;
+`;
+
+// todo - de-dupe
+const DirectionPanel = styled.div<{ disabled?: boolean }>`
+  position: relative;
+  padding: ${GRID.UNIT};
+  border: solid 1px ${COLOURS.GREY.BLACK};
+  background: ${COLOURS.GREY.DARKEST};
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  ${({ disabled }) =>
+    disabled &&
+    `
+    justify-content: flex-start;
+    opacity: 0.4;
+  `}
+`;

@@ -1,4 +1,4 @@
-import {AbstractScene, DISTANCE_PLANE} from "./AbstractScene";
+import { AbstractScene, DISTANCE_PLANE } from "./AbstractScene";
 import * as THREE from "three";
 import { easeOut } from "../../utils/math";
 import { PLANET_Z_POSITION } from "./Port";

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ActionButton, ConfirmButton } from "../../Atoms/Button";
 import { IntervalFormat } from "../../Atoms/IntervalFormat";
-import { StackedButton } from "../../Molecules/StackedButton";
 import { TokenButton } from "../../Molecules/TokenButton";
 import { IDirection } from "../../../interfaces";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
@@ -13,10 +12,9 @@ import { ButtonRow } from "../../Molecules/ButtonRow";
 interface IProps {
   direction: IDirection;
   journeyTime: number;
-  children: JSX.Element;
 }
 
-export const GoButton = ({ direction, journeyTime, children }: IProps) => {
+export const GoButton = ({ direction, journeyTime }: IProps) => {
   const { buttonsDisabled, cratesOnShip, cratesInPort, ship, departureHandler, setActiveView } = useActiveShipContext();
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const buttonIsDisabled = direction.action === null || buttonsDisabled;
@@ -61,9 +59,9 @@ export const GoButton = ({ direction, journeyTime, children }: IProps) => {
 
   return (
     <>
-      <StackedButton type="submit" disabled={buttonIsDisabled} icon={children} onClick={buttonHandler}>
+      <ActionButton type="submit" disabled={buttonIsDisabled} onClick={buttonHandler}>
         <IntervalFormat seconds={journeyTime} />
-      </StackedButton>
+      </ActionButton>
       {modal}
     </>
   );
