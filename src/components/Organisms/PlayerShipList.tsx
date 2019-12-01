@@ -1,14 +1,17 @@
 import * as React from "react";
-import { IOtherShip } from "../../interfaces";
+import { IEffectAction, IOtherShip } from "../../interfaces";
 import { Loading } from "../Atoms/Loading";
 import { PlayerShip } from "../Molecules/PlayerShip";
-import { ListLined } from "../Atoms/List/ListLined";
+import styled from "styled-components";
+import { GridWrapper } from "../Atoms/GridWrapper";
+import { BREAKPOINTS } from "../../styles/media";
 
 interface IProps {
   ships: IOtherShip[];
+  getActionButton: (offenses?: IEffectAction[]) => React.ReactNode;
 }
 
-export const PlayerShipList = ({ ships }: IProps) => {
+export const PlayerShipList = ({ ships, getActionButton }: IProps) => {
   if (ships === undefined) {
     return <Loading />;
   }
@@ -18,12 +21,17 @@ export const PlayerShipList = ({ ships }: IProps) => {
   }
 
   return (
-    <ListLined>
+    <GridWrapper as="ul">
       {ships.map(shipItem => (
-        <li key={shipItem.ship.id}>
-          <PlayerShip ship={shipItem.ship} offence={shipItem.offence} />
-        </li>
+        <StyledItem key={shipItem.ship.id}>
+          <PlayerShip ship={shipItem.ship} offence={shipItem.offence} getActionButton={getActionButton} />
+        </StyledItem>
       ))}
-    </ListLined>
+    </GridWrapper>
   );
 };
+
+const StyledItem = styled.li`
+  width: 100%;
+  ${BREAKPOINTS.XS`width: 50%;`}
+`;

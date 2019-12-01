@@ -1,32 +1,38 @@
 import * as React from "react";
-import { IActionToken, IEffect, ITacticalOption } from "../../interfaces";
+import { IActionToken, IEffectAction, IShip, ITacticalOption } from "../../interfaces";
 import { EffectDetail } from "./EffectDetail";
-import { Type } from "../Atoms/Button";
+import { AttackButton, DangerButton, Type } from "../Atoms/Button";
 import { TokenButton } from "./TokenButton";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
 import { CountdownToTime } from "./CountdownToTime";
 import { ComplexButton } from "./ComplexButton";
 import { AlarmActiveIcon } from "../Icons/AlarmActiveIcon";
-import styled from "styled-components";
 import { CheckboxEmpty } from "../Icons/CheckboxEmptyIcon";
 import { CheckboxChecked } from "../Icons/CheckboxCheckedIcon";
-import { ButtonRow } from "./ButtonRow";
+import { getEffectColour } from "../Atoms/EffectSymbol";
+import { ActionPane, ActionPaneButton, ActionPaneDetail } from "./ActionPane";
+import { Modal } from "./Modal";
+import { P } from "../Atoms/Text";
+import { H4 } from "../Atoms/Heading";
+import styled from "styled-components";
+import { PlayerShipList } from "../Organisms/PlayerShipList";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
-import { getEffectColour } from "../Atoms/EffectSymbol";
 
 interface IOffenceEffectProps {
   option: ITacticalOption;
 }
 
 export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
-  const { portActionHandler, buttonsDisabled } = useActiveShipContext();
+  const { portActionHandler, buttonsDisabled, shipsInLocation } = useActiveShipContext();
+  const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
 
   const handler = async (token: IActionToken) => {
     await portActionHandler(token);
   };
 
   let actionButton;
+  let chooseShipPanel;
 
   if (option.actionToken) {
     actionButton = (
@@ -67,7 +73,34 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         Engaged
       </ActionButtonDisabled>
     );
-  } else if (!option.mustSelectShip) {
+  } else if (option.mustSelectShip) {
+    const applicableShips = shipsInLocation.filter(ship => !!ship.offence);
+    if (applicableShips.length) {
+      actionButton = <DangerButton onClick={() => setChooseShipOpen(true)}>Choose Target</DangerButton>;
+      const getActionButton = (offenses?: IEffectAction[]) => {
+        const matchingEffect = (offenses || []).find(offense => offense.effect.id === option.effect.id);
+        if (matchingEffect) {
+          return (
+            <TokenButton token={matchingEffect.actionToken} handler={portActionHandler}>
+              <DangerButton disabled={buttonsDisabled}>Fire</DangerButton>
+            </TokenButton>
+          );
+        }
+        return null;
+      };
+      chooseShipPanel = (
+        <Modal isOpen={chooseShipOpen} title="Choose Target" onClose={() => setChooseShipOpen(false)}>
+          <H4>{option.effect.name}</H4>
+          <P>{option.effect.description}</P>
+          <Ships>
+            <PlayerShipList ships={applicableShips} getActionButton={getActionButton} />
+          </Ships>
+        </Modal>
+      );
+    } else {
+      actionButton = <DangerButton disabled>No Targets</DangerButton>;
+    }
+  } else {
     actionButton = (
       <ActionButtonDisabled icon={<CheckboxEmpty />} disabled={true}>
         Engage
@@ -76,37 +109,25 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
   }
 
   return (
-    <EffectPane effect={option.effect}>
-      <DetailCell>
-        <EffectDetail effect={option.effect} currentCount={option.currentCount} />
-      </DetailCell>
-      <StyledButtonRow>{actionButton}</StyledButtonRow>
-    </EffectPane>
+    <>
+      <ActionPane highlightColor={getEffectColour({ effect: option.effect })}>
+        <ActionPaneDetail>
+          <EffectDetail effect={option.effect} currentCount={option.currentCount} />
+        </ActionPaneDetail>
+        <ActionPaneButton>{actionButton}</ActionPaneButton>
+      </ActionPane>
+      {chooseShipPanel}
+    </>
   );
 };
 
-// todo - de-duplicate other usages
-const EffectPane = styled.div<{ effect?: IEffect }>`
-  padding: ${GRID.UNIT};
-  border: solid 1px ${COLOURS.GREY.BLACK};
-  background: ${COLOURS.GREY.DARKEST};
-  border-radius: 8px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  text-align: center;
-  border-top-color: ${getEffectColour};
-`;
-
-const DetailCell = styled.div`
-  width: 100%;
-`;
-
-const StyledButtonRow = styled.div`
-  margin-top: ${GRID.UNIT};
-  display: flex;
-  justify-content: center;
-`;
 const ActionButtonDisabled = ComplexButton;
 const ActionButtonEnabled = TokenButton;
+
+const Ships = styled.div`
+  margin-top: ${GRID.UNIT};
+  padding-top: ${GRID.UNIT};
+  border-top: solid 1px ${COLOURS.KEY_LINE};
+  width: calc(100vw - ${GRID.QUADRUPLE});
+  max-width: 500px;
+`;

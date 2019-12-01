@@ -15,14 +15,12 @@ import { GoButton } from "../GoButton";
 import styled from "styled-components";
 import { GRID } from "../../../../styles/variables";
 import { H4 } from "../../../Atoms/Heading";
-import { ListLined } from "../../../Atoms/List/ListLined";
-import { ActionRow, ActionRowButton, ActionRowContent } from "../../../Molecules/ActionRow";
 import { Distance } from "../../../Atoms/Distance";
 import { useTutorial } from "../../../../hooks/useTutorial";
 import { TravelTutorial } from "../../Tutorial/TravelTutorial";
 import { TimeAgo } from "../../../Atoms/TimeAgo";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
-import { COLOURS } from "../../../../styles/colours";
+import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "../../../Molecules/ActionPane";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
@@ -70,17 +68,15 @@ interface IDirectionProps {
   children: any;
 }
 
-const SubLine = styled.div`
-  margin-bottom: ${GRID.HALF};
-`;
-
 const Direction = ({ direction, children }: IDirectionProps) => {
   if (!direction) {
     return (
       <StyledDirection>
-        <DirectionPanel disabled>
-          <StyledArrow>{children}</StyledArrow>
-        </DirectionPanel>
+        <ActionPane disabled>
+          <ActionPaneDetail>
+            <StyledArrow>{children}</StyledArrow>
+          </ActionPaneDetail>
+        </ActionPane>
       </StyledDirection>
     );
   }
@@ -97,7 +93,7 @@ const Direction = ({ direction, children }: IDirectionProps) => {
     );
   } else if (detail.lastVisitTime) {
     lastVisit = (
-      <SubLine>
+      <ActionPaneLine>
         <TextF as="div">
           <TextOk>
             Last Visit
@@ -105,26 +101,28 @@ const Direction = ({ direction, children }: IDirectionProps) => {
             <TimeAgo datetime={new Date(detail.lastVisitTime)} />
           </TextOk>
         </TextF>
-      </SubLine>
+      </ActionPaneLine>
     );
   }
 
   return (
     <StyledDirection>
-      <DirectionPanel>
-        <StyledArrow>{children}</StyledArrow>
-        <SubLine>
-          <H4 as="h3">
-            <PortName port={detail.destination} isHome={detail.isHomePort} />
-          </H4>
-        </SubLine>
-        <SubLine>{subLine}</SubLine>
-        {lastVisit}
+      <ActionPane>
+        <ActionPaneDetail>
+          <StyledArrow>{children}</StyledArrow>
+          <ActionPaneLine>
+            <H4 as="h3">
+              <PortName port={detail.destination} isHome={detail.isHomePort} />
+            </H4>
+          </ActionPaneLine>
+          <ActionPaneLine>{subLine}</ActionPaneLine>
+          {lastVisit}
+        </ActionPaneDetail>
         <Distance value={detail.distanceUnit} />
-        <ButtonRow>
+        <ActionPaneButton>
           <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds} />
-        </ButtonRow>
-      </DirectionPanel>
+        </ActionPaneButton>
+      </ActionPane>
     </StyledDirection>
   );
 };
@@ -138,30 +136,6 @@ const StyledDirection = styled.li`
   width: 50%;
 `;
 
-const ButtonRow = styled.div`
-  margin-top: auto;
-`;
-
 const StyledScoreValue = styled(ScoreValue)`
   justify-content: center;
-`;
-
-// todo - de-dupe
-const DirectionPanel = styled.div<{ disabled?: boolean }>`
-  position: relative;
-  padding: ${GRID.UNIT};
-  border: solid 1px ${COLOURS.GREY.BLACK};
-  background: ${COLOURS.GREY.DARKEST};
-  border-radius: 8px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  ${({ disabled }) =>
-    disabled &&
-    `
-    justify-content: flex-start;
-    opacity: 0.4;
-  `}
 `;

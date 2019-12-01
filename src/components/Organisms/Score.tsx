@@ -1,9 +1,9 @@
 import * as React from "react";
 import { differenceInMilliseconds } from "date-fns";
 import { ScoreValue } from "../Molecules/ScoreValue";
-import { IScore } from "../../interfaces";
+import { IClassNameProps, IScore } from "../../interfaces";
 
-interface IProps {
+interface IProps extends IClassNameProps {
   score: IScore;
 }
 
@@ -51,5 +51,5 @@ export const Score = (props: IProps) => {
     };
   }, [props.score]);
 
-  return <ScoreValue score={score} />;
+  return <ScoreValue className={props.className} score={score} />;
 };

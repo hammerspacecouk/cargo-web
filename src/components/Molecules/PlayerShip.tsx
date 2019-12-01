@@ -1,50 +1,46 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IEffectAction, IShip } from "../../interfaces";
-import { GRID } from "../../styles/variables";
 import { ShieldStrength } from "./ShieldStrength";
-import { OffenceActions } from "../Organisms/OffenceActions";
 import { Score } from "../Organisms/Score";
+import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "./ActionPane";
+import { GRID } from "../../styles/variables";
+import { H3 } from "../Atoms/Heading";
+
+export const PlayerShip = ({ ship, offence, getActionButton }: IProps) => {
+  const action = getActionButton(offence);
+  return (
+    <ActionPane highlightColor={`#${ship.owner.colour}`}>
+      <ActionPaneDetail>
+        <Status>
+          <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />
+        </Status>
+        <ActionPaneLine>
+          <H3>{ship.name}</H3>
+        </ActionPaneLine>
+        <ActionPaneLine>
+          <p>{ship.shipClass.name}</p>
+        </ActionPaneLine>
+        <ActionPaneLine>
+          <StyledScore score={ship.owner.score} />
+        </ActionPaneLine>
+      </ActionPaneDetail>
+      {action && <ActionPaneButton>{action}</ActionPaneButton>}
+    </ActionPane>
+  );
+};
 
 interface IProps {
   ship: IShip;
   offence?: IEffectAction[];
+  getActionButton: (offenses?: IEffectAction[]) => React.ReactNode;
 }
-
-const ShipRow = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const ShipDetail = styled.div`
-  display: flex;
-  margin-right: ${GRID.UNIT};
-  align-items: center;
-`;
 
 const Status = styled.div`
   width: 52px;
-  margin-right: ${GRID.UNIT};
+  margin: 0 auto ${GRID.HALF};
 `;
 
-const Detail = styled.div`
-  flex: 1;
-  line-height: 1;
+const StyledScore = styled(Score)`
+  justify-content: center;
 `;
-
-export const PlayerShip = React.memo(({ ship, offence }: IProps) => (
-  <ShipRow>
-    <ShipDetail>
-      <Status>
-        <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />
-      </Status>
-      <Detail>
-        <h3>{ship.name}</h3>
-        <Score score={ship.owner.score} />
-      </Detail>
-    </ShipDetail>
-    <OffenceActions actions={offence} />
-  </ShipRow>
-));

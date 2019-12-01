@@ -1,15 +1,9 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { TacticalEffect } from "../../../Molecules/TacticalEffect";
-import { ListUnstyled } from "../../../Atoms/List/ListUnstyled";
 import { GRID } from "../../../../styles/variables";
 import { COLOURS } from "../../../../styles/colours";
-import { Button } from "../../../Atoms/Button";
-import { H3 } from "../../../Atoms/Heading";
-import { ComplexButton } from "../../../Molecules/ComplexButton";
-import { ChevronRightIcon } from "../../../Icons/ChevronRightIcon";
-import { ChevronLeftIcon } from "../../../Icons/ChevronLeftIcon";
 import { IEffectPurchase } from "../../../../interfaces";
 import { EffectPurchase } from "../../../Molecules/EffectPurchase";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
@@ -22,72 +16,82 @@ enum VIEWS {
 
 export const Tactical = () => {
   const { effectsToPurchase, tacticalOptions, port } = useActiveShipContext();
-  const [visibleList, setVisibleList] = React.useState(VIEWS.SHOP);
+  const [visibleList, setVisibleList] = React.useState(VIEWS.INVENTORY);
   if (!tacticalOptions) {
     return null;
   }
 
   return (
-    <Panel>
+    <>
+      <Intro>
+        <li>
+          <IntroButton disabled={visibleList === VIEWS.INVENTORY} onClick={() => setVisibleList(VIEWS.INVENTORY)}>
+            Your
+            <br />
+            Inventory
+          </IntroButton>
+        </li>
+        <li>
+          <IntroButton disabled={visibleList === VIEWS.SHOP} onClick={() => setVisibleList(VIEWS.SHOP)}>
+            {port.name}
+            <br />
+            Trading Post
+          </IntroButton>
+        </li>
+      </Intro>
+
       {visibleList === VIEWS.SHOP && (
-        <>
-          <Intro>
-            <H3>{port.name} Trading Post</H3>
-            <ComplexButton suffixed icon={<ChevronRightIcon />} onClick={() => setVisibleList(VIEWS.INVENTORY)}>
-              Inventory
-            </ComplexButton>
-          </Intro>
+        <GridWrapper as="ul">
+          {effectsToPurchase.map((option, i) => (
+            <Option key={option.available ? (option as IEffectPurchase).detail.id : i}>
+              <EffectPurchase option={option} />
+            </Option>
+          ))}
+        </GridWrapper>
+      )}
+      {visibleList === VIEWS.INVENTORY &&
+        (tacticalOptions.length > 0 ? (
           <GridWrapper as="ul">
-            {effectsToPurchase.map((option, i) => (
-              <Option key={option.available ? (option as IEffectPurchase).detail.id : i}>
-                <EffectPurchase option={option} />
+            {tacticalOptions.map((option, i) => (
+              <Option key={option.effect ? option.effect.id : i}>
+                <TacticalEffect option={option} />
               </Option>
             ))}
           </GridWrapper>
-        </>
-      )}
-      {visibleList === VIEWS.INVENTORY && (
-        <>
-          <Intro>
-            <ComplexButton icon={<ChevronLeftIcon />} onClick={() => setVisibleList(VIEWS.SHOP)}>
-              Trading Post
-            </ComplexButton>
-            <H3>Inventory</H3>
-          </Intro>
-          {tacticalOptions.length > 0 ? (
-            <GridWrapper as="ul">
-              {tacticalOptions.map((option, i) => (
-                <Option key={option.effect ? option.effect.id : i}>
-                  <TacticalEffect option={option} />
-                </Option>
-              ))}
-            </GridWrapper>
-          ) : (
-            <p>You have no items</p>
-          )}
-        </>
-      )}
-    </Panel>
+        ) : (
+          <p>You have no items</p>
+        ))}
+    </>
   );
 };
 
-const Panel = styled.div`
+const Intro = styled.ul`
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: ${GRID.UNIT};
+  > li {
+    width: 50%;
+    display: flex;
+  }
+  padding: ${GRID.HALF};
+  border: solid 1px ${COLOURS.KEY_LINE};
+  border-radius: 8px;
 `;
-
-const Intro = styled.div`
-  display: flex;
-  align-items: center;
-  margin: ${GRID.UNIT} 0;
-  padding-bottom: ${GRID.UNIT};
-  border-bottom: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
-  button:first-child {
-    margin-right: ${GRID.UNIT};
-  }
-  button:last-child {
-    margin-left: auto;
-  }
+const IntroButton = styled.button<{ disabled?: boolean }>`
+  display: block;
+  text-align: center;
+  width: 100%;
+  background: none;
+  padding: ${GRID.HALF};
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background-color: ${COLOURS.GREY.LIGHTER};
+      color: ${COLOURS.BLACK.STANDARD};
+    `}
 `;
 
 const Option = styled.li`

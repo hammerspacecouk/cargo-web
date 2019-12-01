@@ -17,7 +17,7 @@ export const Crates = () => {
   }
 
   return (
-    <CratesLayout>
+    <>
       {tutorial}
       <StyledCratesList>
         <CratesOnShip />
@@ -30,25 +30,16 @@ export const Crates = () => {
       <StyledCratesList>
         <CratesAtPort />
       </StyledCratesList>
-    </CratesLayout>
+    </>
   );
 };
 
-const CratesLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const FullFlex = styled.div`
+const StyledCratesList = styled.div`
   flex: 1;
   display: flex;
   > * {
     width: 100%;
   }
-`;
-
-const StyledCratesList = styled(FullFlex)`
   border-top: ${PANEL_INNER_DIVIDER_BORDER};
   border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
 `;
