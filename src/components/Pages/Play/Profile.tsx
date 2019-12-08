@@ -19,7 +19,7 @@ import { routes } from "../../../routes";
 import { useDate } from "../../../hooks/useDate";
 import { IProfileResponse } from "../../../data/profile";
 
-export const PlayHome = ({ profile }: { profile: IProfileResponse }) => {
+export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   const { events, player } = useGameSessionContext();
   const playingSinceDate = useDate(new Date(player.startedAt));
 

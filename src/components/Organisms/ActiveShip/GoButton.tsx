@@ -50,7 +50,7 @@ export const GoButton = ({ direction, journeyTime }: IProps) => {
               Yes
             </ActionButton>
           </TokenButton>
-          <ConfirmButton onClick={goToCrates}>View crates</ConfirmButton>
+          <ConfirmButton onClick={goToCrates}>Crates</ConfirmButton>
           <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
         </ButtonRow>
       </Modal>

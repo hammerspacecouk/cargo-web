@@ -1,8 +1,12 @@
 import * as React from "react";
 import { Crate, CratePlaceholder } from "./Crate";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { CratesList, TITLE_POSITION } from "../../Molecules/CratesList";
 import { ICrateAction } from "../../../interfaces";
+import styled from "styled-components";
+import {COLOURS} from "../../../styles/colours";
+import {H6} from "../../Atoms/Heading";
+import {GRID} from "../../../styles/variables";
+import {ListInline} from "../../Atoms/List/ListInline";
 
 export const CratesOnShip = () => {
   const { ship, cratesOnShip } = useActiveShipContext();
@@ -18,13 +22,55 @@ export const CratesOnShip = () => {
   const placeholderSlots = new Array(ship.shipClass.capacity - availableCrates.length).fill(undefined);
 
   return (
-    <CratesList title={`Loaded ${loadedCount}/${ship.shipClass.capacity}`} titlePosition={TITLE_POSITION.BOTTOM}>
-      {availableCrates.map(crate => (
-        <Crate crateAction={crate} key={`cos-${crate.crate.id}`} />
-      ))}
-      {placeholderSlots.map((_, i) => (
-        <CratePlaceholder key={`p-${i}`} loading={cratesOnShip === undefined ? true : undefined} />
-      ))}
-    </CratesList>
+    <StyledWrapper>
+      <Heading as="h3">
+        Loaded {loadedCount}/{ship.shipClass.capacity}
+      </Heading>
+      <List>
+        {availableCrates.map((crate, i) => (
+          <li key={`crate-${i}`}>
+            <Crate crateAction={crate} key={`cos-${crate.crate.id}`} />
+          </li>
+        ))}
+        {placeholderSlots.map((_, i) => (
+          <li key={`p-${i}`}>
+            <CratePlaceholder loading={cratesOnShip === undefined ? true : undefined} />
+          </li>
+        ))}
+      </List>
+    </StyledWrapper>
   );
 };
+
+const Heading = styled(H6)`
+  position: absolute;
+  padding: ${GRID.HALF};
+  text-transform: uppercase;
+  background: ${COLOURS.GREY.BLACK};
+  border-bottom: solid 1px ${COLOURS.GREY.DARKER};
+  border-top: solid 1px ${COLOURS.GREY.DARKER};
+  top: 100%;
+  right: 1px;
+  border-left: solid 1px ${COLOURS.GREY.DARKER};
+`;
+
+const StyledWrapper = styled.div`
+  position: relative;
+`;
+
+const List = styled(ListInline)`
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: 100%;
+  min-height: 112px;
+  > li {
+    vertical-align: top;
+    border-right: solid 1px ${COLOURS.GREY.DARKER};
+    height: 100%;
+    width: 160px;
+    > * {
+      height: 100%;
+    }
+  }
+`;

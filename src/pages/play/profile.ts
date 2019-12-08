@@ -1,10 +1,10 @@
 import { Component, createElement } from "react";
-import { LandingPage } from "../../components/Pages/Play/LandingPage";
 import { GameSessionContainer } from "../../contexts/GameSessionContext/GameSessionContainer";
 import { NextPageContext } from "next";
 import { getProfile, IProfileResponse } from "../../data/profile";
+import {Profile} from "../../components/Pages/Play/Profile";
 
-export class Page extends Component<{ profile?: IProfileResponse }> {
+export class Page extends Component<{ profile: IProfileResponse }, undefined> {
   public static async getInitialProps({ req, res }: NextPageContext) {
     const data = await getProfile(req, res);
     return {
@@ -13,7 +13,7 @@ export class Page extends Component<{ profile?: IProfileResponse }> {
   }
 
   public render() {
-    return createElement(LandingPage, this.props);
+    return createElement(Profile, this.props);
   }
 }
 

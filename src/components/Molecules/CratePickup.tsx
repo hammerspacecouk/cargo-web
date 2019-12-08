@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const StyledCrate = styled.span`
-  width: 144px;
+  min-width: 144px;
   display: flex;
   align-items: start;
   justify-content: center;

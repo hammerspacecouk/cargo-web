@@ -894,6 +894,13 @@
     "@types/prop-types" "*"
     "@types/react" "*"
 
+"@types/react-svg-pan-zoom@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@types/react-svg-pan-zoom/-/react-svg-pan-zoom-3.3.0.tgz#a6fe37c34db39821dcceb9ba0b276783b0be0492"
+  integrity sha512-FhsGcsmghHew5cM8OyL8gj6e1y3xRkp6QRlEHQw+fvtaWRRFY55ysXAQ1r9qVdVElvNx10RyNP84E+dex+DPIg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.9.13":
   version "16.9.13"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.13.tgz#b3ea5dd443f4a680599e2abba8cc66f5e1ce0059"
@@ -4482,7 +4489,7 @@ prop-types-exact@1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.2:
+prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4645,6 +4652,14 @@ react-modal@^3.11.1:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
+
+react-svg-pan-zoom@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/react-svg-pan-zoom/-/react-svg-pan-zoom-3.6.0.tgz#677da3b1a730b9a4e0c548e2ab4e13415e7200df"
+  integrity sha512-QbZiMFPNKZHSXntx5fRVLaavq0Mod0K2lMvoTdduVbZngr9n0PyMLeLvyZwvpoC+bIVHXmCt1Afjep6ydUBMsg==
+  dependencies:
+    prop-types "^15.7.2"
+    transformation-matrix "^2.1.0"
 
 react@^16.12.0:
   version "16.12.0"
@@ -5381,6 +5396,11 @@ toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
+
+transformation-matrix@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/transformation-matrix/-/transformation-matrix-2.1.1.tgz#50c1cf4049ac9a2c778eda62bb404e158723657d"
+  integrity sha512-74MoNHhwLVuzwaPDcAecFjSkOA9vwWqyOdkeB0Be8Jc/IWSS5SNZKapFllqzkTliqZptkvqX5CZnVeDvfhN8cw==
 
 traverse@0.6.6:
   version "0.6.6"
