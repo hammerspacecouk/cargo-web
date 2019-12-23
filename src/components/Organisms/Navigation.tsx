@@ -11,6 +11,7 @@ import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSes
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
 import { Z_INDEX } from "../../styles/variables";
+import {ShipsIcon} from "../Icons/ShipsIcon";
 
 interface IProps {
   className?: string;
@@ -21,6 +22,7 @@ const StyledNavigation = styled.nav`
   flex-direction: column;
   background: ${COLOURS.BLACK.FADED};
   z-index: ${Z_INDEX.MENU};
+  padding-bottom: env(safe-area-inset-bottom);
 `;
 
 const Ships = styled.div`
@@ -57,6 +59,14 @@ export const Navigation = ({ className }: IProps) => {
       <PlayerOptions>
         <Hidden as="h2">Player</Hidden>
         <NavigationList>
+          <li>
+            <NavigationItem
+              icon={<ShipsIcon />}
+              isCurrent={false}
+              path={{ href: routes.getPlay() }}
+              text="Navigation log"
+            />
+          </li>
           <li>
             <NavigationItem
               icon={<LaunchIcon />}

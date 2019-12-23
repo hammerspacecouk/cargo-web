@@ -72,9 +72,12 @@ export const ShipInPortPage = () => {
 
       <SubBar>
         {allowLog && activeView === null && (
-          <EventsSummary onClick={() => setActiveView(ACTIVE_VIEW.LOG)}>
-            <StyledEventsList events={events} />
-          </EventsSummary>
+          <>
+            <EventsSummary onClick={() => setActiveView(ACTIVE_VIEW.LOG)}>
+              <StyledEventsList events={events} />
+            </EventsSummary>
+            <Arrow />
+          </>
         )}
         <ShipNavigation />
       </SubBar>
@@ -103,7 +106,7 @@ const EventsSummary = styled(DisguisedButton)`
 const StyledEventsList = styled(EventsList)`
   padding: ${GRID.UNIT};
   background: ${COLOURS.BLACK.FULL};
-  height: 120px;
+  height: calc(1px + ${NAV_ITEM_HEIGHT});
   max-height: 10vh;
   overflow: hidden;
   position: relative;
@@ -118,6 +121,18 @@ const StyledEventsList = styled(EventsList)`
     max-height: 80px;
     background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
   }
+`;
+const Arrow = styled.div`
+    height: 0;
+    width: 0;
+    border: solid ${GRID.UNIT} ${COLOURS.BLACK.FULL};
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    position: absolute;
+    top: -${GRID.DOUBLE};
+    left: 50%;
+    transform: translateX(-50%);
 `;
 
 const StyledPage = styled.div`
