@@ -8,10 +8,9 @@ import { DirectionSW } from "../../../Icons/DirectionSW";
 import { DirectionW } from "../../../Icons/DirectionW";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { IDirection } from "../../../../interfaces";
-import { TextF, TextOk, TextWarning } from "../../../Atoms/Text";
+import {P, TextF, TextOk, TextWarning} from "../../../Atoms/Text";
 import { PortName } from "../../../Molecules/PortName";
 import { ScoreValue } from "../../../Molecules/ScoreValue";
-import { GoButton } from "../GoButton";
 import styled from "styled-components";
 import { GRID } from "../../../../styles/variables";
 import { H4 } from "../../../Atoms/Heading";
@@ -21,6 +20,12 @@ import { TravelTutorial } from "../../Tutorial/TravelTutorial";
 import { TimeAgo } from "../../../Atoms/TimeAgo";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
 import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "../../../Molecules/ActionPane";
+import {ActionButton, ConfirmButton} from "../../../Atoms/Button";
+import {IntervalFormat} from "../../../Atoms/IntervalFormat";
+import {ACTIVE_VIEW} from "../../../../contexts/ActiveShipContext/useActiveShip";
+import {Modal, ModalType} from "../../../Molecules/Modal";
+import {ButtonRow} from "../../../Molecules/ButtonRow";
+import {TokenButton} from "../../../Molecules/TokenButton";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
@@ -69,7 +74,10 @@ interface IDirectionProps {
 }
 
 const Direction = ({ direction, children }: IDirectionProps) => {
+  const { buttonsDisabled, cratesOnShip, cratesInPort, ship, departureHandler, setActiveView } = useActiveShipContext();
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
   if (!direction) {
+
     return (
       <StyledDirection>
         <ActionPane disabled>
@@ -80,8 +88,46 @@ const Direction = ({ direction, children }: IDirectionProps) => {
       </StyledDirection>
     );
   }
-
   const detail = direction.detail;
+  const buttonIsDisabled = direction.action === null || buttonsDisabled;
+
+  if (cratesOnShip === undefined) {
+    return null;
+  }
+
+  const goToCrates = () => {
+    setActiveView(ACTIVE_VIEW.CARGO);
+    setModalIsOpen(false);
+  };
+
+  const closeModal = () => setModalIsOpen(false);
+
+  const buttonHandler = () => {
+    if (cratesOnShip.length === 0 && ship.shipClass.capacity > 0 && cratesInPort.length > 0) {
+      setModalIsOpen(true);
+    } else if (direction.action) {
+      setModalIsOpen(false);
+      departureHandler(direction.action);
+    }
+  };
+
+  let modal;
+  if (modalIsOpen) {
+    modal = (
+      <Modal isOpen={true} title="Confirm?" onClose={closeModal} type={ModalType.WARNING}>
+        <P>You have not picked up any crates. Are you sure you want to leave?</P>
+        <ButtonRow>
+          <TokenButton token={direction.action} handler={departureHandler}>
+            <ActionButton disabled={buttonIsDisabled} type="submit">
+              Yes
+            </ActionButton>
+          </TokenButton>
+          <ConfirmButton onClick={goToCrates}>Crates</ConfirmButton>
+          <ConfirmButton onClick={closeModal}>Cancel</ConfirmButton>
+        </ButtonRow>
+      </Modal>
+    );
+  }
 
   let subLine = <StyledScoreValue score={detail.earnings} prefix="+" />;
   let lastVisit;
@@ -109,7 +155,7 @@ const Direction = ({ direction, children }: IDirectionProps) => {
     <StyledDirection>
       <ActionPane>
         <ActionPaneDetail>
-          <StyledArrow>{children}</StyledArrow>
+          <StyledArrow onClick={buttonHandler}>{children}</StyledArrow>
           <ActionPaneLine>
             <H4 as="h3">
               <PortName port={detail.destination} isHome={detail.isHomePort} />
@@ -120,9 +166,12 @@ const Direction = ({ direction, children }: IDirectionProps) => {
         </ActionPaneDetail>
         <Distance value={detail.distanceUnit} />
         <ActionPaneButton>
-          <GoButton direction={direction} journeyTime={detail.journeyTimeSeconds} />
+          <ActionButton type="submit" disabled={buttonIsDisabled} onClick={buttonHandler}>
+            <IntervalFormat seconds={detail.journeyTimeSeconds} />
+          </ActionButton>
         </ActionPaneButton>
       </ActionPane>
+      {modal}
     </StyledDirection>
   );
 };
