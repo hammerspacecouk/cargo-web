@@ -33,6 +33,7 @@ export const ActionPane = styled.div<{ highlightColor?: string; disabled?: boole
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
+  border-top-color: ${COLOURS.GREY.DARK};
   ${({ highlightColor }) => highlightColor && `border-top-color: ${highlightColor};`}
   ${({ disabled }) => disabled && `opacity: 0.4;`}
 `;

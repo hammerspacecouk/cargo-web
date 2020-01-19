@@ -102,7 +102,6 @@ export interface IScore {
 
 export interface IPlayer {
   id: string;
-  colour: string; // todo -remove
   emblem: string;
   startedAt: string;
   score?: IScore;

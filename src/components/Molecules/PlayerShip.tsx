@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IEffectAction, IShip } from "../../interfaces";
-import { ShieldStrength } from "./ShieldStrength";
+import {shieldColour, ShieldStrength} from "./ShieldStrength";
 import { Score } from "../Organisms/Score";
 import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "./ActionPane";
 import { GRID } from "../../styles/variables";
@@ -10,7 +10,7 @@ import { H3 } from "../Atoms/Heading";
 export const PlayerShip = ({ ship, offence, getActionButton }: IProps) => {
   const action = getActionButton(offence);
   return (
-    <ActionPane highlightColor={`#${ship.owner.colour}`}>
+    <ActionPane highlightColor={shieldColour(ship.strengthPercent)}>
       <ActionPaneDetail>
         <Status>
           <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />

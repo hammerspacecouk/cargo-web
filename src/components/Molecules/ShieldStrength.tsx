@@ -63,6 +63,22 @@ const CircleBar = styled(CircleTrack)<{ colour: string }>`
   stroke-linecap: round;
 `;
 
+export const shieldColour = (percent: number) => {
+  if (percent <= 25) {
+    return COLOURS.HEALTH.DANGER;
+  }
+  if (percent <= 50) {
+    return COLOURS.HEALTH.WARNING;
+  }
+  if (percent <= 75) {
+    return COLOURS.HEALTH.OK;
+  }
+  if (percent < 100) {
+    return COLOURS.HEALTH.GOOD;
+  }
+  return COLOURS.HEALTH.FULL;
+};
+
 /**
  * Standard way to display a score value (with Icon)
  */
@@ -80,19 +96,7 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   if (percent !== undefined) {
     const barLength = decimal * trackLength;
     const dash = `${barLength} ${trackLength}`;
-    let colour = COLOURS.HEALTH.FULL;
-    if (percent < 100) {
-      colour = COLOURS.HEALTH.GOOD;
-    }
-    if (percent <= 75) {
-      colour = COLOURS.HEALTH.OK;
-    }
-    if (percent <= 50) {
-      colour = COLOURS.HEALTH.WARNING;
-    }
-    if (percent <= 25) {
-      colour = COLOURS.HEALTH.DANGER;
-    }
+    const colour = shieldColour(percent);
 
     bar = (
       <CircleBar cx={centre} cy={centre} r={radius} strokeWidth={barWidth} strokeDasharray={dash} colour={colour} />
