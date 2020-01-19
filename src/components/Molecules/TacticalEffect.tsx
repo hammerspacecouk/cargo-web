@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IActionToken, IEffectAction, IShip, ITacticalOption } from "../../interfaces";
 import { EffectDetail } from "./EffectDetail";
-import {ActionButton, AttackButton, DangerButton, Type} from "../Atoms/Button";
+import { ActionButton, AttackButton, DangerButton, Type } from "../Atoms/Button";
 import { TokenButton } from "./TokenButton";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
 import { CountdownToTime } from "./CountdownToTime";
@@ -98,12 +98,14 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         </Modal>
       );
     } else {
-      actionButton = <DangerButton disabled>{ship.shipClass.capacity === 0 ? 'N/A (Probe)' : 'No Targets'}</DangerButton>;
+      actionButton = (
+        <DangerButton disabled>{ship.shipClass.capacity === 0 ? "N/A (Probe)" : "No Targets"}</DangerButton>
+      );
     }
   } else {
     actionButton = (
       <ActionButtonDisabled icon={<CheckboxEmpty />} disabled={true}>
-        {ship.shipClass.capacity === 0 ? 'N/A (Probe)' : 'Engage'}
+        {ship.shipClass.capacity === 0 ? "N/A (Probe)" : "Engage"}
       </ActionButtonDisabled>
     );
   }

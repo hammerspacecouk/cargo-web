@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Crate, CratePlaceholder } from "./Crate";
-import styled, {css} from "styled-components";
-import {COLOURS} from "../../../styles/colours";
-import {H6} from "../../Atoms/Heading";
-import {GRID} from "../../../styles/variables";
-import {ListUnstyled} from "../../Atoms/List/ListUnstyled";
-import {BREAKPOINTS} from "../../../styles/media";
+import styled, { css } from "styled-components";
+import { COLOURS } from "../../../styles/colours";
+import { H6 } from "../../Atoms/Heading";
+import { GRID } from "../../../styles/variables";
+import { ListUnstyled } from "../../Atoms/List/ListUnstyled";
+import { BREAKPOINTS } from "../../../styles/media";
 
 export const CratesAtPort = () => {
   const { cratesInPort } = useActiveShipContext();
@@ -23,9 +23,7 @@ export const CratesAtPort = () => {
 
   return (
     <StyledWrapper>
-      <Heading as="h3">
-        Available ({totalAvailable})
-      </Heading>
+      <Heading as="h3">Available ({totalAvailable})</Heading>
       <List>
         {crates.map((crate, i) => (
           <li key={`crate-${i}`}>{crate}</li>
@@ -62,7 +60,7 @@ const List = styled(ListUnstyled)`
     height: 120px;
     width: 50%;
     ${BREAKPOINTS.S`
-      width: ${(100/3).toString(10)}%;
+      width: ${(100 / 3).toString(10)}%;
     `};
     > * {
       height: 100%;

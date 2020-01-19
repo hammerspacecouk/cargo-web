@@ -6,16 +6,22 @@ export interface IActionToken {
 }
 
 export interface IPort {
+  type: "Port";
   id: string;
   name: string;
   isSafe: boolean;
 }
 
 export interface IChannel {
+  type: "Channel";
   destination: IPort;
   startTime: string;
   arrival: string;
 }
+
+export const isInPort = (location: IChannel | IPort): location is IPort => {
+  return (<IPort>location).type === "Port";
+};
 
 export interface ICrate {
   id: string;
@@ -105,6 +111,7 @@ export interface IPlayer {
   emblem: string;
   startedAt: string;
   score?: IScore;
+  rank?: IRank;
 }
 
 export interface ILockedTransaction {

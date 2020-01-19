@@ -1,38 +1,40 @@
 import * as React from "react";
 import styled from "styled-components";
-import {COLOURS, hexToRGBa} from "../../styles/colours";
-import {GRID, MASTHEAD_HEIGHT, Z_INDEX} from "../../styles/variables";
-import {Score} from "./Score";
-import {useGameSessionContext} from "../../contexts/GameSessionContext/GameSessionContext";
-import {routes} from "../../routes";
-import {ChevronLeftIcon} from "../Icons/ChevronLeftIcon";
-import {Icon} from "../Atoms/Icon";
-import {BREAKPOINTS} from "../../styles/media";
-import {SiteLogo} from "../Atoms/Logos";
+import { COLOURS, hexToRGBa } from "../../styles/colours";
+import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
+import { Score } from "./Score";
+import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { routes } from "../../routes";
+import { ChevronLeftIcon } from "../Icons/ChevronLeftIcon";
+import { Icon } from "../Atoms/Icon";
+import { BREAKPOINTS } from "../../styles/media";
+import { SiteLogo } from "../Atoms/Logos";
 
 export const InGameMasthead = () => {
-    const {score, refreshSession, isAtHome} = useGameSessionContext();
+  const { score, refreshSession, isAtHome } = useGameSessionContext();
 
-    return (
-        <MastheadPosition>
-            <StyledMasthead>
-                {!isAtHome && <BackButton/>}
-                <MastHeadScore onClick={refreshSession}>
-                    <Score score={score}/>
-                </MastHeadScore>
-                <LogoArea href="/"><SiteLogo/></LogoArea>
-            </StyledMasthead>
-        </MastheadPosition>
-    );
+  return (
+    <MastheadPosition>
+      <StyledMasthead>
+        {!isAtHome && <BackButton />}
+        <MastHeadScore onClick={refreshSession}>
+          <Score score={score} />
+        </MastHeadScore>
+        <LogoArea href="/">
+          <SiteLogo />
+        </LogoArea>
+      </StyledMasthead>
+    </MastheadPosition>
+  );
 };
 
 const BackButton = () => (
-    <Back href={routes.getPlay()}>
-        <BackIcon>
-            <ChevronLeftIcon/>
-        </BackIcon>
-        <span>Fleet</span>
-    </Back>
+  <Back href={routes.getPlay()}>
+    <BackIcon>
+      <ChevronLeftIcon />
+    </BackIcon>
+    <span>Fleet</span>
+  </Back>
 );
 
 const MastheadPosition = styled.header`

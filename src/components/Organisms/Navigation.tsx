@@ -11,7 +11,7 @@ import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSes
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
 import { Z_INDEX } from "../../styles/variables";
-import {ShipsIcon} from "../Icons/ShipsIcon";
+import { ShipsIcon } from "../Icons/ShipsIcon";
 
 interface IProps {
   className?: string;

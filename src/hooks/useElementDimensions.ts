@@ -1,14 +1,14 @@
-import React, {RefObject} from "react";
+import React, { RefObject } from "react";
 
 export const useElementDimensions = (): IElementDimensions => {
   const ref = React.useRef<HTMLElement>();
-  const [sizes, setSizes] = React.useState<{ width?: number, height?: number }>({width: null, height: null});
+  const [sizes, setSizes] = React.useState<{ width?: number; height?: number }>({ width: null, height: null });
   let debounceTimer: number;
 
   const findSizes = () => {
     if (ref.current) {
-      const {width, height} = ref.current.getBoundingClientRect();
-      setSizes({width, height});
+      const { width, height } = ref.current.getBoundingClientRect();
+      setSizes({ width, height });
     } else {
       setSizes({
         width: null,
@@ -34,8 +34,8 @@ export const useElementDimensions = (): IElementDimensions => {
     ref,
     sizeIsKnown: sizes.width !== null,
     height: sizes.height,
-    width: sizes.width
-  }
+    width: sizes.width,
+  };
 };
 
 interface IElementDimensions {

@@ -3,10 +3,10 @@ import { Crate, CratePlaceholder } from "./Crate";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
 import { ICrateAction } from "../../../interfaces";
 import styled from "styled-components";
-import {COLOURS} from "../../../styles/colours";
-import {H6} from "../../Atoms/Heading";
-import {GRID} from "../../../styles/variables";
-import {ListInline} from "../../Atoms/List/ListInline";
+import { COLOURS } from "../../../styles/colours";
+import { H6 } from "../../Atoms/Heading";
+import { GRID } from "../../../styles/variables";
+import { ListInline } from "../../Atoms/List/ListInline";
 
 export const CratesOnShip = () => {
   const { ship, cratesOnShip } = useActiveShipContext();

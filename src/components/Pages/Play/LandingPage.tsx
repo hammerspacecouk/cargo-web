@@ -1,12 +1,12 @@
 import * as React from "react";
-import {POSITION_NONE, TOOL_PAN, UncontrolledReactSVGPanZoom} from 'react-svg-pan-zoom';
+import { POSITION_NONE, TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
 import styled from "styled-components";
-import {COLOURS} from "../../../styles/colours";
-import {BREAKPOINTS} from "../../../styles/media";
-import {useElementDimensions} from "../../../hooks/useElementDimensions";
+import { COLOURS } from "../../../styles/colours";
+import { BREAKPOINTS } from "../../../styles/media";
+import { useElementDimensions } from "../../../hooks/useElementDimensions";
 
 const Page = styled.div`
-    ${BREAKPOINTS.XL`
+  ${BREAKPOINTS.XL`
     display: block;
     height: 100%;
     overflow: auto;
@@ -14,9 +14,9 @@ const Page = styled.div`
 `;
 
 const Map = styled.div`
-    height: 50vh;
-    width: 100%;
-    overflow: hidden;
+  height: 50vh;
+  width: 100%;
+  overflow: hidden;
 `;
 
 const Rest = styled.div`
@@ -30,33 +30,34 @@ const svg = `
   <text y="0" style="font-family:sans-serif;font-size: 10px;"><tspan x="0" text-anchor="middle">Godrhyl</tspan><tspan x="0" text-anchor="middle" dy="12">Bank</tspan></text><text y="51.961524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="30" text-anchor="middle">Quay</tspan><tspan x="30" text-anchor="middle" dy="12">Fargo</tspan></text><text y="0" style="font-family:sans-serif;font-size: 10px;"><tspan x="60" text-anchor="middle">Woodland</tspan></text><text y="0" style="font-family:sans-serif;font-size: 10px;"><tspan x="480" text-anchor="middle">St.</tspan><tspan x="480" text-anchor="middle" dy="12">Larry</tspan></text><text y="51.961524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="150" text-anchor="middle">Spaceport</tspan><tspan x="150" text-anchor="middle" dy="12">Bigface</tspan></text><text y="103.92304845413" style="font-family:sans-serif;font-size: 10px;"><tspan x="180" text-anchor="middle">Spaceport</tspan><tspan x="180" text-anchor="middle" dy="12">Littleface</tspan></text><text y="259.80762113533" style="font-family:sans-serif;font-size: 10px;"><tspan x="90" text-anchor="middle">Swanton</tspan></text><text y="259.80762113533" style="font-family:sans-serif;font-size: 10px;"><tspan x="210" text-anchor="middle">Vexilton</tspan></text><text y="259.80762113533" style="font-family:sans-serif;font-size: 10px;"><tspan x="270" text-anchor="middle">Nickleown</tspan></text><text y="259.80762113533" style="font-family:sans-serif;font-size: 10px;"><tspan x="390" text-anchor="middle">Prattle</tspan><tspan x="390" text-anchor="middle" dy="12">Rock</tspan></text><text y="51.961524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="510" text-anchor="middle">Fishesworth</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="420" text-anchor="middle">South</tspan><tspan x="420" text-anchor="middle" dy="12">Quirk</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="540" text-anchor="middle">St.</tspan><tspan x="540" text-anchor="middle" dy="12">Teddy</tspan></text><text y="207.84609690827" style="font-family:sans-serif;font-size: 10px;"><tspan x="600" text-anchor="middle">New</tspan><tspan x="600" text-anchor="middle" dy="12">Quanta</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="600" text-anchor="middle">Franklin</tspan><tspan x="600" text-anchor="middle" dy="12">Park</tspan></text><text y="571.57676649773" style="font-family:sans-serif;font-size: 10px;"><tspan x="570" text-anchor="middle">Spaceport</tspan><tspan x="570" text-anchor="middle" dy="12">Spinnaker</tspan></text><text y="363.73066958946" style="font-family:sans-serif;font-size: 10px;"><tspan x="690" text-anchor="middle">Shirley</tspan><tspan x="690" text-anchor="middle" dy="12">Basset</tspan></text><text y="207.84609690827" style="font-family:sans-serif;font-size: 10px;"><tspan x="660" text-anchor="middle">Old</tspan><tspan x="660" text-anchor="middle" dy="12">Quanta</tspan></text><text y="0" style="font-family:sans-serif;font-size: 10px;"><tspan x="540" text-anchor="middle">Beetacre</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="300" text-anchor="middle">Fort</tspan><tspan x="300" text-anchor="middle" dy="12">Cocoon</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="120" text-anchor="middle">Thimbledon</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="-60" text-anchor="middle">Rumcuckle</tspan></text><text y="519.61524227066" style="font-family:sans-serif;font-size: 10px;"><tspan x="240" text-anchor="middle">Cocoasbury</tspan></text><text y="155.8845726812" style="font-family:sans-serif;font-size: 10px;"><tspan x="30" text-anchor="middle">Upper</tspan><tspan x="30" text-anchor="middle" dy="12">Underton</tspan></text><text y="2078.4609690827" style="font-family:sans-serif;font-size: 10px;"><tspan x="-1080" text-anchor="middle">The</tspan><tspan x="-1080" text-anchor="middle" dy="12">Lonely</tspan><tspan x="-1080" text-anchor="middle" dy="12">Island</tspan></text><text y="4001.0373654841" style="font-family:sans-serif;font-size: 10px;"><tspan x="30" text-anchor="middle">Curie</tspan></text><text y="2078.4609690827" style="font-family:sans-serif;font-size: 10px;"><tspan x="1140" text-anchor="middle">Lovelace</tspan></text><text y="2078.4609690827" style="font-family:sans-serif;font-size: 10px;"><tspan x="-3300" text-anchor="middle">Georgium</tspan><tspan x="-3300" text-anchor="middle" dy="12">Sidus</tspan></text><text y="4001.0373654841" style="font-family:sans-serif;font-size: 10px;"><tspan x="-2190" text-anchor="middle">Mortes</tspan></text><text y="155.8845726812" style="font-family:sans-serif;font-size: 10px;"><tspan x="-2190" text-anchor="middle">Pythagoras</tspan></text>
   <text text-anchor="middle" y="23.980762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="15" text-anchor="middle">000555</tspan><tspan x="15" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="-2" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="30" text-anchor="middle">001b97</tspan><tspan x="30" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="23.980762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="45" text-anchor="middle">0022a5</tspan><tspan x="45" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="-2" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="270" text-anchor="middle">00317f</tspan><tspan x="270" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="49.961524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="90" text-anchor="middle">003dd1</tspan><tspan x="90" text-anchor="middle" dy="10">002</tspan></text><text text-anchor="middle" y="75.942286340599" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="165" text-anchor="middle">005160</tspan><tspan x="165" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="179.86533479473" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="135" text-anchor="middle">0059a0</tspan><tspan x="135" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="257.80762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="150" text-anchor="middle">005b0a</tspan><tspan x="150" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="179.86533479473" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="225" text-anchor="middle">005b15</tspan><tspan x="225" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="257.80762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="240" text-anchor="middle">00649a</tspan><tspan x="240" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="257.80762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="330" text-anchor="middle">006c85</tspan><tspan x="330" text-anchor="middle" dy="10">002</tspan></text><text text-anchor="middle" y="153.8845726812" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="450" text-anchor="middle">006cdb</tspan><tspan x="450" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="387.711431703" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="345" text-anchor="middle">007971</tspan><tspan x="345" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="517.61524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="480" text-anchor="middle">00aaef</tspan><tspan x="480" text-anchor="middle" dy="10">002</tspan></text><text text-anchor="middle" y="361.73066958946" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="510" text-anchor="middle">00b656</tspan><tspan x="510" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="517.61524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="570" text-anchor="middle">00d643</tspan><tspan x="570" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="543.5960043842" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="555" text-anchor="middle">00db00</tspan><tspan x="555" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="543.5960043842" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="585" text-anchor="middle">00dbfd</tspan><tspan x="585" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="439.67295593006" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="645" text-anchor="middle">00ed26</tspan><tspan x="645" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="283.78838324886" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="645" text-anchor="middle">00f0a0</tspan><tspan x="645" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="205.84609690827" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="630" text-anchor="middle">00f42e</tspan><tspan x="630" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="127.90381056767" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="555" text-anchor="middle">014226</tspan><tspan x="555" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="23.980762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="495" text-anchor="middle">0153fd</tspan><tspan x="495" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="-2" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="510" text-anchor="middle">01549c</tspan><tspan x="510" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="23.980762113533" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="525" text-anchor="middle">01649e</tspan><tspan x="525" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="517.61524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="360" text-anchor="middle">018505</tspan><tspan x="360" text-anchor="middle" dy="10">002</tspan></text><text text-anchor="middle" y="387.711431703" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="195" text-anchor="middle">01a8ff</tspan><tspan x="195" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="517.61524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="30" text-anchor="middle">01d716</tspan><tspan x="30" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="387.711431703" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="15" text-anchor="middle">020477</tspan><tspan x="15" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="517.61524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="180" text-anchor="middle">020d8a</tspan><tspan x="180" text-anchor="middle" dy="10">003</tspan></text><text text-anchor="middle" y="205.84609690827" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="60" text-anchor="middle">0055a6</tspan><tspan x="60" text-anchor="middle" dy="10">002</tspan></text><text text-anchor="middle" y="517.61524227066" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="270" text-anchor="middle">017f17</tspan><tspan x="270" text-anchor="middle" dy="10">001</tspan></text><text text-anchor="middle" y="1115.1727708819" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="-525" text-anchor="middle">021ee1</tspan><tspan x="-525" text-anchor="middle" dy="10">006</tspan></text><text text-anchor="middle" y="3037.7491672834" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="-525" text-anchor="middle">022529</tspan><tspan x="-525" text-anchor="middle" dy="10">006</tspan></text><text text-anchor="middle" y="2076.4609690827" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="30" text-anchor="middle">02316e</tspan><tspan x="30" text-anchor="middle" dy="10">006</tspan></text><text text-anchor="middle" y="2076.4609690827" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="-2190" text-anchor="middle">0250b0</tspan><tspan x="-2190" text-anchor="middle" dy="10">006</tspan></text><text text-anchor="middle" y="3037.7491672834" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="-1635" text-anchor="middle">0253c8</tspan><tspan x="-1635" text-anchor="middle" dy="10">006</tspan></text><text text-anchor="middle" y="1115.1727708819" style="font-family:sans-serif;font-size: 8px;fill:blue;text-shadow:0 0 1px #fff"><tspan x="-1635" text-anchor="middle">0257a1</tspan><tspan x="-1635" text-anchor="middle" dy="10">006</tspan></text>
 `;
-const viewBox = '-3360 -60 4560 4121.0373654841';
-
+const viewBox = "-3360 -60 4560 4121.0373654841";
 
 export const LandingPage = () => {
-  const {ref, sizeIsKnown, width, height} = useElementDimensions();
+  const { ref, sizeIsKnown, width, height } = useElementDimensions();
 
   return (
     <Page>
       <Map ref={ref}>
-        {sizeIsKnown && <UncontrolledReactSVGPanZoom
-          width={width}
-          height={height}
-          background="rgba(0,0,0,0.3)"
-          SVGBackground="transparent"
-          tool={TOOL_PAN}
-          preventPanOutside={true}
-          miniatureProps={{
-            position: POSITION_NONE,
-            background: 'none',
-            width: 0,
-            height: 0,
-          }}
-        >
-          <svg viewBox={viewBox}>
-            <g dangerouslySetInnerHTML={{__html: svg }} />
-          </svg>
-        </UncontrolledReactSVGPanZoom>}
+        {sizeIsKnown && (
+          <UncontrolledReactSVGPanZoom
+            width={width}
+            height={height}
+            background="rgba(0,0,0,0.3)"
+            SVGBackground="transparent"
+            tool={TOOL_PAN}
+            preventPanOutside={true}
+            miniatureProps={{
+              position: POSITION_NONE,
+              background: "none",
+              width: 0,
+              height: 0,
+            }}
+          >
+            <svg viewBox={viewBox}>
+              <g dangerouslySetInnerHTML={{ __html: svg }} />
+            </svg>
+          </UncontrolledReactSVGPanZoom>
+        )}
       </Map>
       <Rest>THE REST (Log and Progress)</Rest>
     </Page>

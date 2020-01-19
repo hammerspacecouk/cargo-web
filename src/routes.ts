@@ -12,6 +12,7 @@ export const routes = {
   getLoginAnonymous: () => `${Environment.clientApiHostname}/login/anonymous`,
   getLogout: () => `${Environment.clientApiHostname}/logout`,
   getPlay: () => "/play",
+  getPlayer: (id: string = ":player") => ({ href: `/players/[player]?player=${id}`, as: `/players/${id}` }),
   getPlayHome: () => "/play/profile",
   getPlayLaunch: () => "/play/launch",
   getPlayShip: (id: string = ":shipId") => ({ href: `/play/[ship]?ship=${id}`, as: `/play/${id}` }),

@@ -8,7 +8,7 @@ import { DirectionSW } from "../../../Icons/DirectionSW";
 import { DirectionW } from "../../../Icons/DirectionW";
 import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
 import { IDirection } from "../../../../interfaces";
-import {P, TextF, TextOk, TextWarning} from "../../../Atoms/Text";
+import { P, TextF, TextOk, TextWarning } from "../../../Atoms/Text";
 import { PortName } from "../../../Molecules/PortName";
 import { ScoreValue } from "../../../Molecules/ScoreValue";
 import styled from "styled-components";
@@ -20,12 +20,12 @@ import { TravelTutorial } from "../../Tutorial/TravelTutorial";
 import { TimeAgo } from "../../../Atoms/TimeAgo";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
 import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "../../../Molecules/ActionPane";
-import {ActionButton, ConfirmButton} from "../../../Atoms/Button";
-import {IntervalFormat} from "../../../Atoms/IntervalFormat";
-import {ACTIVE_VIEW} from "../../../../contexts/ActiveShipContext/useActiveShip";
-import {Modal, ModalType} from "../../../Molecules/Modal";
-import {ButtonRow} from "../../../Molecules/ButtonRow";
-import {TokenButton} from "../../../Molecules/TokenButton";
+import { ActionButton, ConfirmButton } from "../../../Atoms/Button";
+import { IntervalFormat } from "../../../Atoms/IntervalFormat";
+import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShip";
+import { Modal, ModalType } from "../../../Molecules/Modal";
+import { ButtonRow } from "../../../Molecules/ButtonRow";
+import { TokenButton } from "../../../Molecules/TokenButton";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
@@ -77,7 +77,6 @@ const Direction = ({ direction, children }: IDirectionProps) => {
   const { buttonsDisabled, cratesOnShip, cratesInPort, ship, departureHandler, setActiveView } = useActiveShipContext();
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   if (!direction) {
-
     return (
       <StyledDirection>
         <ActionPane disabled>

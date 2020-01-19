@@ -123,16 +123,16 @@ const StyledEventsList = styled(EventsList)`
   }
 `;
 const Arrow = styled.div`
-    height: 0;
-    width: 0;
-    border: solid ${GRID.UNIT} ${COLOURS.BLACK.FULL};
-    border-top-color: transparent;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    position: absolute;
-    top: -${GRID.DOUBLE};
-    left: 50%;
-    transform: translateX(-50%);
+  height: 0;
+  width: 0;
+  border: solid ${GRID.UNIT} ${COLOURS.BLACK.FULL};
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  position: absolute;
+  top: -${GRID.DOUBLE};
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const StyledPage = styled.div`

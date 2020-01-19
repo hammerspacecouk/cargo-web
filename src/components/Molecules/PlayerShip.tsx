@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { IEffectAction, IShip } from "../../interfaces";
-import {shieldColour, ShieldStrength} from "./ShieldStrength";
+import { shieldColour, ShieldStrength } from "./ShieldStrength";
 import { Score } from "../Organisms/Score";
 import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "./ActionPane";
 import { GRID } from "../../styles/variables";
