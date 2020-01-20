@@ -225,6 +225,7 @@ export interface IShipClassStats {
 }
 
 export interface IShipClass {
+  id: string;
   name: string;
   description: string;
   strength: number;

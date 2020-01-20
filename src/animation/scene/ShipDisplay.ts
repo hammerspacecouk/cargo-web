@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
 import { Ship } from "../object/Ship";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { IShipClass } from "../../interfaces";
 
 const ROTATE_TIME = 30000;
 
@@ -9,6 +10,12 @@ export class ShipDisplay extends AbstractScene {
   private ambientLight: THREE.AmbientLight;
   private light: THREE.Light;
   private ship: Ship;
+  private shipClass: IShipClass;
+
+  constructor(shipClass: IShipClass) {
+    super();
+    this.shipClass = shipClass;
+  }
 
   init() {
     this.camera.position.set(0, 0, 75);
@@ -39,7 +46,7 @@ export class ShipDisplay extends AbstractScene {
     if (this.ship) {
       this.scene.remove(this.ship.getObject());
     }
-    this.ship = new Ship((object: GLTF) => {
+    this.ship = new Ship(this.shipClass, (object: GLTF) => {
       object.scene.position.set(0, 0, 0);
       this.scene.add(object.scene);
     });

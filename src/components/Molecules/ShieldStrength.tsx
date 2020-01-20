@@ -1,15 +1,17 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { IPlayer } from "../../interfaces";
+import { IPlayer, IShip } from "../../interfaces";
 import { COLOURS } from "../../styles/colours";
 import { animate } from "../Atoms/PlaceHolder";
 import { PlayerFlag } from "./PlayerFlag";
 import { usePercent } from "../../hooks/usePercent";
+import { Environment } from "../../utils/environment";
 
 interface IProps {
   percent?: number;
   className?: string;
   player?: IPlayer;
+  ship?: IShip;
 }
 
 const radial = keyframes`
@@ -82,7 +84,7 @@ export const shieldColour = (percent: number) => {
 /**
  * Standard way to display a score value (with Icon)
  */
-export const ShieldStrength = React.memo(({ percent, className, player }: IProps) => {
+export const ShieldStrength = React.memo(({ percent, className, player, ship }: IProps) => {
   const { label, decimal } = usePercent(percent);
 
   const size = 100;
@@ -107,6 +109,9 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
   if (player) {
     emblem = <StyledFlag player={player} />;
   }
+  if (ship) {
+    emblem = <StyledImg as="img" src={`${Environment.clientApiHostname}${ship.shipClass.image}`} alt="" />;
+  }
 
   return (
     <StyledShieldStrength title={label} className={className} loading={percent === undefined ? true : undefined}>
@@ -118,3 +123,11 @@ export const ShieldStrength = React.memo(({ percent, className, player }: IProps
     </StyledShieldStrength>
   );
 });
+
+const StyledImg = styled.img`
+  padding: 6px;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  background: ${COLOURS.BLACK.STANDARD};
+`;

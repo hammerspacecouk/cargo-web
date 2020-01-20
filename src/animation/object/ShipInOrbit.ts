@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { AbstractObject } from "./AbstractObject";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { IShipClass } from "../../interfaces";
 
 const TIME_TO_COMPLETE_ORBIT = 50000;
 
@@ -9,12 +10,12 @@ export class ShipInOrbit extends AbstractObject {
   private ship: GLTF;
   private readonly orbitRadius: number;
 
-  constructor(orbitRadius: number, callback: (object: GLTF) => void) {
+  constructor(shipClass: IShipClass, orbitRadius: number, callback: (object: GLTF) => void) {
     super();
     this.orbitRadius = orbitRadius;
 
     const loader = new GLTFLoader();
-    loader.load("/models/shuttle/scene.gltf", (gltf: GLTF) => {
+    loader.load(`/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
       this.ship = gltf;
       this.ship.scene.rotation.order = "ZYX";
 

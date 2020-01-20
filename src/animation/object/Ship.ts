@@ -1,14 +1,15 @@
 import * as THREE from "three";
 import { AbstractObject } from "./AbstractObject";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { IShipClass } from "../../interfaces";
 
 export class Ship extends AbstractObject {
   private ship: GLTF;
 
-  constructor(callback: (object: GLTF) => void) {
+  constructor(shipClass: IShipClass, callback: (object: GLTF) => void) {
     super();
     const loader = new GLTFLoader();
-    loader.load("/models/shuttle/scene.gltf", (gltf: GLTF) => {
+    loader.load(`/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
       this.ship = gltf;
       callback(this.ship);
     });

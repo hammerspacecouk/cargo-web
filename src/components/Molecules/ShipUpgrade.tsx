@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { CreditsButton } from "./CreditsButton";
 import { TokenButton } from "./TokenButton";
 import { ILockedTransaction, IShipUpgrade } from "../../interfaces";
-import { Environment } from "../../utils/environment";
 import {
   LockedPurchaseCardDetail,
   PurchaseCard,
@@ -19,8 +18,7 @@ import { COLOURS } from "../../styles/colours";
 import { ShipStats } from "./ShipStats";
 import { Hidden } from "../Atoms/Hidden";
 import { useLaunchShipsContext } from "../../contexts/LaunchShipsContext/LaunchShipsContext";
-import { useAnimationScene } from "../../hooks/useAnimationScene";
-import { ShipDisplay } from "../../animation/scene/ShipDisplay";
+import { Environment } from "../../utils/environment";
 
 export const ShipUpgrade = ({ ship }: IProps) => {
   if (ship.available) {
@@ -50,7 +48,6 @@ const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
 
 const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
   const { buttonsDisabled, purchaseHandler } = useLaunchShipsContext();
-  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(), []);
 
   return (
     <PurchaseCard>
@@ -70,7 +67,9 @@ const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
         </StyledTokenButton>
       </PurchaseCardDetail>
       <PurchaseCardImage notificationCount={ship.currentCount}>
-        <ShipImage ref={shipCanvasRef} />
+        <ShipImage>
+          <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt={ship.detail.name} />
+        </ShipImage>
       </PurchaseCardImage>
     </PurchaseCard>
   );

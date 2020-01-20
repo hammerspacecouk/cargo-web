@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IChannel, IFleetShip, IPort } from "../../interfaces";
+import { IChannel, IFleetShip, IPort, IShip } from "../../interfaces";
 import { NavigationItem } from "../Molecules/NavigationItem";
 import { routes } from "../../routes";
 import { NavigationList } from "./Navigation";
@@ -87,7 +87,7 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
 
   return (
     <NavigationItem
-      icon={<ShieldStrength percent={fleetShip.ship.strengthPercent} />}
+      icon={<ShipIcon ship={fleetShip.ship} />}
       path={routes.getPlayShip(fleetShip.ship.id)}
       text={fleetShip.ship.name}
       subtext={subtext}
@@ -95,6 +95,8 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
     />
   );
 };
+
+const ShipIcon = ({ ship }: { ship: IShip }) => <ShieldStrength percent={ship.strengthPercent} ship={ship} />;
 
 const Travelling = ({ channel }: { channel: IChannel }) => {
   const { secondsRemaining } = useTravellingCountdown(channel);
