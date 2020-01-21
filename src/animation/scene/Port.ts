@@ -3,22 +3,22 @@ import { AbstractScene } from "./AbstractScene";
 import { Planet } from "../object/Planet";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { ShipInOrbit } from "../object/ShipInOrbit";
-import { IShipClass } from "../../interfaces";
+import { IShip, IShipClass } from "../../interfaces";
 
 export const PLANET_Z_POSITION = -350;
 
 export class Port extends AbstractScene {
   private readonly planetType: string;
-  private shipClass: IShipClass;
 
   private ambientLight: THREE.AmbientLight;
   private light: THREE.Light;
   private planet: Planet;
-  private ship: ShipInOrbit;
+  private ships: ShipInOrbit[] = [];
+  private allShips: IShip[];
 
-  constructor(planetType: string, shipClass: IShipClass) {
+  constructor(planetType: string, allShips: IShip[]) {
     super();
-    this.shipClass = shipClass;
+    this.allShips = allShips;
     this.planetType = planetType;
   }
 
@@ -26,7 +26,7 @@ export class Port extends AbstractScene {
     this.createAmbientLight();
     this.createLight();
     this.createPlanet();
-    this.createShip();
+    this.createShips();
   }
 
   getPlanetSize() {
@@ -59,19 +59,34 @@ export class Port extends AbstractScene {
     this.scene.add(this.planet.getObject());
   }
 
-  createShip() {
-    if (this.ship) {
-      this.scene.remove(this.ship.getObject());
-    }
-    const orbitRadius = Math.max(this.getPlanetSize() * 1.2, this.width * 0.9) / 2;
-    this.ship = new ShipInOrbit(this.shipClass, orbitRadius, (object: GLTF) => {
-      this.scene.add(object.scene);
+  createShips() {
+    this.ships.forEach(ship => {
+      if (ship) {
+        this.scene.remove(ship.getObject());
+      }
     });
+
+    const orbitRadius = Math.max(this.getPlanetSize() * 1.2, this.width * 0.9) / 2;
+    const total = this.allShips.length;
+    for (let i = 0; i < total; i++) {
+      this.ships.push(
+        new ShipInOrbit(this.allShips[i].shipClass, this.calculateOffset(i, total), orbitRadius, (object: GLTF) => {
+          this.scene.add(object.scene);
+        })
+      );
+    }
+  }
+
+  calculateOffset(index: number, total: number): number {
+    const segment = 1 / total;
+    return index * segment;
   }
 
   tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
     this.planet.tick(timeNow, msSinceLastFrame, msSinceStart);
-    this.ship.tick(timeNow, msSinceLastFrame, msSinceStart);
     this.renderer.render(this.scene, this.camera);
+    this.ships.forEach(ship => {
+      ship.tick(timeNow, msSinceLastFrame, msSinceStart);
+    });
   }
 }

@@ -11,7 +11,7 @@ import { Ships } from "../../../Organisms/ActiveShip/Panels/Ships";
 import { GRID, MASTHEAD_HEIGHT, NAV_ITEM_HEIGHT, Z_INDEX } from "../../../../styles/variables";
 import { ShipNavigation } from "../../../Organisms/ShipNavigation";
 import { PortName } from "../../../Molecules/PortName";
-import { IPort, IShip } from "../../../../interfaces";
+import { IOtherShip, IPort, IShip } from "../../../../interfaces";
 import { ELEMENTS, SIZES } from "../../../../styles/typography";
 import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShip";
 import { BREAKPOINTS } from "../../../../styles/media";
@@ -23,7 +23,7 @@ import { Port } from "../../../../animation/scene/Port";
 import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 
 export const ShipInPortPage = () => {
-  const { activeView, events, setActiveView, ship, port } = useActiveShipContext();
+  const { activeView, events, setActiveView, ship, shipsInLocation, port } = useActiveShipContext();
   const { allowLog } = useTutorial();
 
   const closeHandler = () => {
@@ -32,7 +32,9 @@ export const ShipInPortPage = () => {
 
   return (
     <StyledPage>
-      {activeView !== ACTIVE_VIEW.LOG && <ShipOverview port={port} ship={ship} isCurrentView={activeView === null} />}
+      {activeView !== ACTIVE_VIEW.LOG && (
+        <ShipOverview port={port} shipsInLocation={shipsInLocation} ship={ship} isCurrentView={activeView === null} />
+      )}
 
       {activeView === ACTIVE_VIEW.LOG && (
         <StyledLogPanel closeHandler={closeHandler} title="Log" id="log">
@@ -165,9 +167,22 @@ const StyledShipPanel = styled(Panel)`
 `;
 
 // todo - refactor out
-const ShipOverview = ({ port, ship, isCurrentView }: { port: IPort; ship: IShip; isCurrentView: boolean }) => {
+const ShipOverview = ({
+  port,
+  ship,
+  shipsInLocation,
+  isCurrentView,
+}: {
+  port: IPort;
+  shipsInLocation: IOtherShip[];
+  ship: IShip;
+  isCurrentView: boolean;
+}) => {
   const planetType = port.id.slice(-1); // todo - abstract to API
-  const planetCanvasRef = useAnimationScene<HTMLDivElement>(new Port(planetType, ship.shipClass), [planetType]);
+  const planetCanvasRef = useAnimationScene<HTMLDivElement>(
+    new Port(planetType, [ship, ...shipsInLocation.map(other => other.ship)]),
+    [planetType]
+  );
   const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), []); // todo - proper watch
 
   return (

@@ -8,10 +8,12 @@ const TIME_TO_COMPLETE_ORBIT = 50000;
 // todo - abstract the Ship object itself
 export class ShipInOrbit extends AbstractObject {
   private ship: GLTF;
+  private offset: number;
   private readonly orbitRadius: number;
 
-  constructor(shipClass: IShipClass, orbitRadius: number, callback: (object: GLTF) => void) {
+  constructor(shipClass: IShipClass, offset: number, orbitRadius: number, callback: (object: GLTF) => void) {
     super();
+    this.offset = offset;
     this.orbitRadius = orbitRadius;
 
     const loader = new GLTFLoader();
@@ -32,7 +34,9 @@ export class ShipInOrbit extends AbstractObject {
       return;
     }
 
-    const tickTime = ((timeNow % TIME_TO_COMPLETE_ORBIT) / TIME_TO_COMPLETE_ORBIT) * (Math.PI * 2);
+    const percentComplete = (timeNow % TIME_TO_COMPLETE_ORBIT) / TIME_TO_COMPLETE_ORBIT;
+
+    const tickTime = (percentComplete + this.offset) * (Math.PI * 2);
     const x = Math.sin(tickTime) * this.orbitRadius;
     const y = Math.sin(tickTime) * 50;
     const z = Math.cos(tickTime) * this.orbitRadius;
