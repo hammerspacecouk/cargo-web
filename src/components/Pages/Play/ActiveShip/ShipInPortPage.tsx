@@ -183,7 +183,9 @@ const ShipOverview = ({
     new Port(planetType, [ship, ...shipsInLocation.slice(0, 19).map(other => other.ship)]),
     [planetType]
   );
-  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), []); // todo - proper watch
+  const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), [
+    ship.id
+  ]);
 
   return (
     <StyledOverview isCurrentView={isCurrentView}>
