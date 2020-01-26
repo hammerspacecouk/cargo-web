@@ -13,8 +13,8 @@ import { routes } from "../../routes";
 const StyledSummary = styled.a`
   display: flex;
   align-items: center;
-  padding: 0 ${GRID.UNIT};
-  height: ${NAV_ITEM_HEIGHT};
+  padding: ${GRID.UNIT};
+  min-height: ${NAV_ITEM_HEIGHT};
   &:hover,
   &:focus {
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.1)};
@@ -41,13 +41,13 @@ export const PlayerSummary = () => {
   const { player, rankStatus } = useGameSessionContext();
 
   return (
-    <Link href={routes.getPlayHome()} prefetch={false}>
-      <StyledSummary href={routes.getPlayHome()}>
+    <Link href={routes.getPlayProfile()} prefetch={false}>
+      <StyledSummary href={routes.getPlayProfile()}>
         <Icon>
           <PlayerFlag player={player} />
         </Icon>
         <Rank>
-          <RankTitle>{rankStatus.currentRank.title}</RankTitle>
+          <RankTitle>{rankStatus.currentRank.title} {player.displayName}</RankTitle>
           <ProgressBar small percent={rankStatus.levelProgress} />
         </Rank>
       </StyledSummary>

@@ -19,14 +19,14 @@ export interface IPlayerPageProps {
 export const PlayerPage = ({ player, fleet }: IPlayerPageProps) => (
   <SimplePage>
     <Head>
-      <title>{pageTitle(`Player ${player.id}`)}</title>
+      <title>{pageTitle(`${player.displayName}`)}</title>
     </Head>
     <Panel>
       <FlagSpace>
         <PlayerFlag player={player} />
       </FlagSpace>
       <Detail>
-        <H2 as="h1">{player.id}</H2>
+        <H2 as="h1">{player.displayName}</H2>
         <H3 as="p">{player.rank.title}</H3>
         <StyledScore score={player.score} />
       </Detail>

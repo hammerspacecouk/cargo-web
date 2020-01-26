@@ -29,7 +29,7 @@ export const InGameMasthead = () => {
 };
 
 const BackButton = () => (
-  <Back href={routes.getPlay()}>
+  <Back href={`${routes.getPlay()}#fleet`}>
     <BackIcon>
       <ChevronLeftIcon />
     </BackIcon>

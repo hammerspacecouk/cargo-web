@@ -8,7 +8,7 @@ export default class extends Component<IHomePageProps> {
     const data = await ApiClient.fetch("/", undefined, req);
     return {
       events: data.events,
-      goalCrateLocation: data.goalCrateLocation
+      goalCrateLocation: data.goalCrateLocation,
     };
   }
 

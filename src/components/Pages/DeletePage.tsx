@@ -38,7 +38,7 @@ export const DeletePage = ({ stage, token }: IDeletePageProps) => {
           <p>{stageText}</p>
         </Prose>
         <ButtonRow>
-          <ConfirmButton as="a" href={routes.getPlay()}>
+          <ConfirmButton as="a" href={routes.getPlayProfile()}>
             Cancel
           </ConfirmButton>
           <TokenButton token={actionToken}>

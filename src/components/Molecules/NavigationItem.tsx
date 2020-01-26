@@ -48,6 +48,7 @@ const StyledItem = styled.a<{ isCurrent: boolean }>`
   &:focus {
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.1)};
     text-decoration: none;
+    color: ${COLOURS.WHITE.STANDARD};
   }
   &:active {
     text-decoration: none;

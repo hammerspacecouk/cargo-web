@@ -108,6 +108,7 @@ export interface IScore {
 
 export interface IPlayer {
   id: string;
+  displayName: string;
   emblem: string;
   startedAt: string;
   score?: IScore;

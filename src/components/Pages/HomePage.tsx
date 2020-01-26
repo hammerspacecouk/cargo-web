@@ -1,18 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import {H1, H2} from "../Atoms/Heading";
-import {Prose} from "../Atoms/Prose";
-import {EventsList} from "../Organisms/EventsList";
-import {IEvent, IPort} from "../../interfaces";
-import {routes} from "../../routes";
-import {GRID} from "../../styles/variables";
-import {COLOURS} from "../../styles/colours";
-import {ChevronRightIcon} from "../Icons/ChevronRightIcon";
-import {ComplexButton} from "../Molecules/ComplexButton";
-import {AnimatedEllipsis} from "../Atoms/AnimatedEllipsis";
-import {SimplePage} from "../Templates/SimplePage";
+import { H1, H2 } from "../Atoms/Heading";
+import { Prose } from "../Atoms/Prose";
+import { EventsList } from "../Organisms/EventsList";
+import { IEvent, IPort } from "../../interfaces";
+import { routes } from "../../routes";
+import { GRID } from "../../styles/variables";
+import { COLOURS } from "../../styles/colours";
+import { ChevronRightIcon } from "../Icons/ChevronRightIcon";
+import { ComplexButton } from "../Molecules/ComplexButton";
+import { AnimatedEllipsis } from "../Atoms/AnimatedEllipsis";
+import { SimplePage } from "../Templates/SimplePage";
 
-export const HomePage = ({events, goalCrateLocation}: IHomePageProps) => (
+export const HomePage = ({ events, goalCrateLocation }: IHomePageProps) => (
   <SimplePage isHome={true}>
     <IntroPanel>
       <Prose>
@@ -26,7 +26,7 @@ export const HomePage = ({events, goalCrateLocation}: IHomePageProps) => (
           before someone else does.
         </p>
         <form method="GET" action={routes.getPlay()}>
-          <StyledStartButton icon={<ChevronRightIcon/>} suffixed>
+          <StyledStartButton icon={<ChevronRightIcon />} suffixed>
             Start your journey
           </StyledStartButton>
         </form>
@@ -35,19 +35,18 @@ export const HomePage = ({events, goalCrateLocation}: IHomePageProps) => (
     {goalCrateLocation && (
       <SaxophonePanel>
         <H2 as="p">🎷</H2>
-        <p>A Saxophone was spotted in the vicinity of <br/>
-          <H1 as="span">
-            {goalCrateLocation.name}
-          </H1>
+        <p>
+          A Saxophone was spotted in the vicinity of <br />
+          <H1 as="span">{goalCrateLocation.name}</H1>
         </p>
       </SaxophonePanel>
     )}
     <EventsPanel>
       <PanelHeading>
         What's happening now
-        <AnimatedEllipsis/>
+        <AnimatedEllipsis />
       </PanelHeading>
-      <EventsList events={events}/>
+      <EventsList events={events} />
     </EventsPanel>
   </SimplePage>
 );

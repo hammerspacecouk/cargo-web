@@ -1,58 +1,24 @@
 import * as React from "react";
-import Link from "next/link";
-import { ShipUpgrades } from "../../Organisms/ShipUpgrades";
-import { pageTitle } from "../../../utils/pageTitle";
-import { PlayBoardLayout } from "../../Templates/PlayBoardLayout";
-import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import { useLaunchShipsContext } from "../../../contexts/LaunchShipsContext/LaunchShipsContext";
-import { Modal } from "../../Molecules/Modal";
-import { Prose } from "../../Atoms/Prose";
-import { routes } from "../../../routes";
-import { Button, ConfirmButton } from "../../Atoms/Button";
-import { ButtonRow } from "../../Molecules/ButtonRow";
+import {ShipUpgrades} from "../../Organisms/ShipUpgrades";
+import {pageTitle} from "../../../utils/pageTitle";
 import Head from "next/head";
+import {IShipUpgrade} from "../../../interfaces";
+import {PanelPage} from "../../Templates/PanelPage";
 
-export const LaunchPage = () => {
-  const { ships, launchEvent, acknowledgeLaunchEvent } = useLaunchShipsContext();
+export interface ILaunchPageProps {
+  shipUpgrades: IShipUpgrade[];
+}
 
-  let launchModal;
-  if (launchEvent) {
-    const link = routes.getPlayShip(launchEvent.newShip.id);
-    launchModal = (
-      <Modal isOpen={true} title="Ship Launched" onClose={acknowledgeLaunchEvent}>
-        <Prose>
-          <p>
-            <em>{launchEvent.newShip.name}</em> was launched at <strong>{launchEvent.atPort.name}</strong>
-          </p>
-        </Prose>
-        <ButtonRow>
-          <Link as={link.as} href={link.href}>
-            <ConfirmButton as="a" href={link.as}>
-              Show me
-            </ConfirmButton>
-          </Link>{" "}
-          <Button onClick={acknowledgeLaunchEvent}>Close</Button>
-        </ButtonRow>
-      </Modal>
-    );
-  }
-
+export const LaunchPage = ({shipUpgrades}: ILaunchPageProps) => {
   return (
     <>
       <Head>
-        <title>{pageTitle("Launch ships...")}</title>
+        <title>{pageTitle("Launch Ships...")}</title>
       </Head>
-      <PlayBoardLayout title="Launch ships">
-        <StyledShipUpgrades>
-          <ShipUpgrades shipUpgrades={ships} />
-        </StyledShipUpgrades>
-      </PlayBoardLayout>
-      {launchModal}
+      <PanelPage title="Launch Ships">
+        <ShipUpgrades shipUpgrades={shipUpgrades}/>
+      </PanelPage>
     </>
   );
 };
 
-const StyledShipUpgrades = styled.div`
-  padding: ${GRID.UNIT};
-`;

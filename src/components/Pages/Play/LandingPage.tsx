@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
 import { useElementDimensions } from "../../../hooks/useElementDimensions";
+import {Progress} from "../../Organisms/PlayHome/Panels/Progress";
+import {EventsList} from "../../Organisms/EventsList";
+import {useGameSessionContext} from "../../../contexts/GameSessionContext/GameSessionContext";
 
 const Page = styled.div`
   ${BREAKPOINTS.XL`
@@ -17,11 +20,11 @@ const Map = styled.div`
   height: 50vh;
   width: 100%;
   overflow: hidden;
+  background: rgba(0,0,0,0.5);
 `;
 
 const Rest = styled.div`
   background: ${COLOURS.BODY.BACKGROUND};
-  min-height: 50vh;
 `;
 
 const svg = `
@@ -34,6 +37,7 @@ const viewBox = "-3360 -60 4560 4121.0373654841";
 
 export const LandingPage = () => {
   const { ref, sizeIsKnown, width, height } = useElementDimensions();
+  const { events } = useGameSessionContext();
 
   return (
     <Page>
@@ -60,6 +64,9 @@ export const LandingPage = () => {
         )}
       </Map>
       <Rest>THE REST (Log and Progress)</Rest>
+
+      <Progress />
+      <EventsList events={events} firstPerson />
     </Page>
   );
 };

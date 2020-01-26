@@ -39,6 +39,11 @@ export const buttonColours = (styleType?: Type) => css`
   border: solid 2px ${getColour(styleType)};
   color: ${getColour(styleType)};
   box-shadow: 0 0 16px ${getColour(styleType)}, 0 0 16px inset ${getColour(styleType)};
+  &:hover,
+  &:active,
+  &:focus {
+    color: ${getColour(styleType)};
+  }
 `;
 
 export const Button = styled.button<IProps>`

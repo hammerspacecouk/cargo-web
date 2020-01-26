@@ -10,7 +10,7 @@ import { LaunchIcon } from "../Icons/LaunchIcon";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
-import { Z_INDEX } from "../../styles/variables";
+import {MASTHEAD_HEIGHT, Z_INDEX} from "../../styles/variables";
 import { ShipsIcon } from "../Icons/ShipsIcon";
 
 interface IProps {
@@ -23,6 +23,12 @@ const StyledNavigation = styled.nav`
   background: ${COLOURS.BLACK.FADED};
   z-index: ${Z_INDEX.MENU};
   padding-bottom: env(safe-area-inset-bottom);
+`;
+
+const JumpLink = styled.div`
+  // so that the anchor jumps to the right place
+  margin-top: -${MASTHEAD_HEIGHT};
+  padding-top: ${MASTHEAD_HEIGHT};
 `;
 
 const Ships = styled.div`
@@ -51,6 +57,7 @@ export const Navigation = ({ className }: IProps) => {
 
   return (
     <StyledNavigation className={className}>
+      <JumpLink id="fleet"/>
       <PlayerSummary />
       <Ships>
         <Hidden as="h2">Ships</Hidden>
@@ -64,7 +71,7 @@ export const Navigation = ({ className }: IProps) => {
               icon={<ShipsIcon />}
               isCurrent={false}
               path={{ href: routes.getPlay() }}
-              text="Navigation log"
+              text="Mission Log"
             />
           </li>
           <li>
@@ -72,7 +79,7 @@ export const Navigation = ({ className }: IProps) => {
               icon={<LaunchIcon />}
               isCurrent={false}
               path={{ href: routes.getPlayLaunch() }}
-              text="Launch ships"
+              text="Launch Ships"
             />
           </li>
         </NavigationList>

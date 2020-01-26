@@ -2,34 +2,22 @@ import * as React from "react";
 import styled from "styled-components";
 import { CreditsButton } from "./CreditsButton";
 import { TokenButton } from "./TokenButton";
-import { ILockedTransaction, IShipUpgrade } from "../../interfaces";
-import {
-  LockedPurchaseCardDetail,
-  PurchaseCard,
-  PurchaseCardDescription,
-  PurchaseCardDetail,
-  PurchaseCardImage,
-  PurchaseCardTitle,
-} from "./PurchaseCard";
+import {IActionToken, IChildrenProps, ILockedTransaction, IShipUpgrade} from "../../interfaces";
 import { P, TextWarning } from "../Atoms/Text";
 import { GRID } from "../../styles/variables";
-import { BREAKPOINTS } from "../../styles/media";
 import { COLOURS } from "../../styles/colours";
 import { ShipStats } from "./ShipStats";
 import { Hidden } from "../Atoms/Hidden";
-import { useLaunchShipsContext } from "../../contexts/LaunchShipsContext/LaunchShipsContext";
 import { Environment } from "../../utils/environment";
+import {H4} from "../Atoms/Heading";
+import {NumberBadge} from "../Atoms/NumberBadge";
 
-export const ShipUpgrade = ({ ship }: IProps) => {
+export const ShipUpgrade = ({ disabled = false, purchaseHandler, ship }: IProps) => {
   if (ship.available) {
-    return <ShipPurchase ship={ship as IShipUpgrade} />;
+    return <ShipPurchase ship={ship as IShipUpgrade} disabled={disabled} purchaseHandler={purchaseHandler} />;
   }
   return <ShipLocked ship={ship as ILockedTransaction} />;
 };
-
-interface IProps {
-  ship?: IShipUpgrade | ILockedTransaction;
-}
 
 const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
   <PurchaseCard>
@@ -46,58 +34,107 @@ const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
   </PurchaseCard>
 );
 
-const ShipPurchase = React.memo(({ ship }: { ship: IShipUpgrade }) => {
-  const { buttonsDisabled, purchaseHandler } = useLaunchShipsContext();
+const ShipPurchase = ({ disabled, purchaseHandler, ship }: IShipUpgradeProps ) => (
+  <PurchaseCard>
+    <PurchaseCardDetail>
+      <PurchaseCardTitle>{ship.detail.name}</PurchaseCardTitle>
+      <DetailDescription>{ship.detail.description}</DetailDescription>
+      <Hidden as="h3">Stats</Hidden>
+      <ShipStats stats={ship.detail.stats}/>
+      <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
+        <CreditsButton amount={ship.cost} disabledOverride={disabled}/>
+      </StyledTokenButton>
+    </PurchaseCardDetail>
+    <PurchaseCardImage notificationCount={ship.currentCount}>
+      <ShipImage>
+        <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt={ship.detail.name}/>
+      </ShipImage>
+    </PurchaseCardImage>
+  </PurchaseCard>
+);
 
-  return (
-    <PurchaseCard>
-      <PurchaseCardDetail>
-        <PurchaseCardTitle>{ship.detail.name}</PurchaseCardTitle>
-        <PurchaseCardDescription>
-          <Detail>
-            <DetailDescription>{ship.detail.description}</DetailDescription>
-            <DetailStats>
-              <Hidden as="h3">Stats</Hidden>
-              <ShipStats stats={ship.detail.stats} />
-            </DetailStats>
-          </Detail>
-        </PurchaseCardDescription>
-        <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
-          <CreditsButton amount={ship.cost} disabledOverride={buttonsDisabled} />
-        </StyledTokenButton>
-      </PurchaseCardDetail>
-      <PurchaseCardImage notificationCount={ship.currentCount}>
-        <ShipImage>
-          <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt={ship.detail.name} />
-        </ShipImage>
-      </PurchaseCardImage>
-    </PurchaseCard>
-  );
-});
+interface IProps {
+  disabled?: boolean;
+  ship?: IShipUpgrade | ILockedTransaction;
+  purchaseHandler: (token: IActionToken) => void;
+}
 
-const Detail = styled.div`
+interface IShipUpgradeProps {
+  disabled: boolean;
+  ship: IShipUpgrade;
+  purchaseHandler: (token: IActionToken) => void;
+}
+
+const PurchaseCard = styled.div`
+  background: ${COLOURS.BLACK.FULL};
+  padding: ${GRID.UNIT};
+  border-radius: 8px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  width: 100%;
 `;
+
+const PurchaseCardDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const LockedPurchaseCardDetail = styled(PurchaseCardDetail)`
+  justify-content: center;
+  align-self: center;
+`;
+
+
+const PurchaseCardTitle = ({ children }: IChildrenProps) => <H4 as="h3">{children}</H4>;
+
 const DetailDescription = styled(P)`
   flex: 1;
-  margin-bottom: ${GRID.UNIT};
-  ${BREAKPOINTS.M`margin-bottom: 0`};
-`;
-const DetailStats = styled.div`
-  width: 100%;
-  ${BREAKPOINTS.M`
-      width: 304px;
-      margin-left: ${GRID.UNIT};
-      padding-left: ${GRID.UNIT};
-      border-left: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
-    `};
+  margin: ${GRID.UNIT} 0;
+  color: ${COLOURS.BODY.FADED};
 `;
 
 const StyledTokenButton = styled(TokenButton)`
   display: flex;
   justify-content: center;
-  ${BREAKPOINTS.M`justify-content: flex-end`};
+  margin-top: ${GRID.UNIT};
+`;
+
+
+interface IPurchaseCardImageProps extends IChildrenProps {
+  notificationCount?: number;
+}
+
+const PurchaseCardImage = React.memo(({ children, notificationCount }: IPurchaseCardImageProps) => {
+  let countElement = null;
+  if (notificationCount) {
+    countElement = (
+      <BadgePosition>
+        <NumberBadge value={notificationCount} />
+      </BadgePosition>
+    );
+  }
+
+  return (
+    <StyledPurchaseCardImage>
+      {children}
+      {countElement}
+    </StyledPurchaseCardImage>
+  );
+});
+
+
+
+
+const StyledPurchaseCardImage = styled.div`
+  position: relative;
+  width: 112px;
+  margin: 0 auto ${GRID.UNIT} auto;
+`;
+const BadgePosition = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 const ShipImage = styled.div`
@@ -105,7 +142,6 @@ const ShipImage = styled.div`
   background: ${COLOURS.GREY.DARKER};
   width: 112px;
   height: 112px;
-  margin-top: 4px; // for the illusion of lining up a circle
 `;
 
 const Unknown = styled.div`

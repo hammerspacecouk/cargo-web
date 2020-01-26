@@ -19,14 +19,14 @@ export const DuplicatePage = () => (
         To use <strong>this</strong> account as your preferred account, you will first need to delete your previous
         account which is linked to this third party provider. To do this, login to the other account and visit the{" "}
         <a href={routes.getDeleteAccount()}>Delete</a> page, or{" "}
-        <a href={routes.getPlayHome()}>unlink this third party provider.</a>
+        <a href={routes.getPlayProfile()}>unlink this third party provider.</a>
       </p>
       <MessageInfo>
         You should use an Incognito/Private window to login to your other account so that you do not lose this login.
       </MessageInfo>
       <p>
         Once the other account has been deleted or unlinked, you will be able to link this account to that provider on
-        your <a href={routes.getPlayHome()}>Profile</a> page.
+        your <a href={routes.getPlayProfile()}>Profile</a> page.
       </p>
 
       <H2>2. Use your other account</H2>

@@ -46,11 +46,8 @@ const StyledPanel = styled.div`
 const StickyHeader = styled.div`
   background-color: ${hexToRGBa(COLOURS.GREY.DARKEST, 0.95)};
   position: sticky;
-  top: ${MASTHEAD_HEIGHT};
+  top: 0;
   z-index: ${Z_INDEX.DEFAULT};
-  ${BREAKPOINTS.XL`
-    top: 0; // I'm not keen about this knowing where it sits
-  `}
 `;
 
 const PanelHeader = styled.div`

@@ -64,8 +64,9 @@ const StyledNavigation = styled(Navigation)<{ isAtHome: boolean }>`
 `;
 
 const StyledMain = styled.main`
-  height: calc(100vh - ${MASTHEAD_HEIGHT});
   ${BREAKPOINTS.XL`
+    overflow-y: auto;
+    height: calc(100vh - ${MASTHEAD_HEIGHT});
     flex: 1;
     order: 2;
     padding: 0;

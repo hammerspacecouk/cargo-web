@@ -9,7 +9,7 @@ import { Progress } from "../../Organisms/PlayHome/Panels/Progress";
 import { SocialAccounts } from "../../Organisms/SocialAccounts";
 import { GRID } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading";
-import { DangerButton } from "../../Atoms/Button";
+import {ConfirmButton, DangerButton} from "../../Atoms/Button";
 import { Prose } from "../../Atoms/Prose";
 import { TableSubtle } from "../../Molecules/Table";
 import { TextDanger, TextWarning } from "../../Atoms/Text";
@@ -18,9 +18,15 @@ import { MessageError } from "../../Molecules/Message";
 import { routes } from "../../../routes";
 import { useDate } from "../../../hooks/useDate";
 import { IProfileResponse } from "../../../data/profile";
+import {PanelPage} from "../../Templates/PanelPage";
+import Link from "next/link";
+import {SIZES} from "../../../styles/typography";
+import {Icon, SMALL_ICON, TINY_ICON} from "../../Atoms/Icon";
+import {NewWindowIcon} from "../../Icons/NewWindowIcon";
+import {PlayerFlag} from "../../Molecules/PlayerFlag";
 
 export const Profile = ({ profile }: { profile: IProfileResponse }) => {
-  const { events, player } = useGameSessionContext();
+  const { player } = useGameSessionContext();
   const playingSinceDate = useDate(new Date(player.startedAt));
 
   let mode;
@@ -37,20 +43,24 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   }
 
   return (
-    <StyledArea>
-      <EventsPanel title="Captain's Log">
-        <EventsList events={events} firstPerson />
-      </EventsPanel>
-      <ProgressPanel title="Progress">
-        <Progress />
-      </ProgressPanel>
-      <AccountPanel title="Account">
+    <PanelPage title="Profile">
         <SubPanel>
+          <PublicLink>
+            <a href={routes.getPlayer(player.id).as} target="_blank">
+              View public profile <Icon size={TINY_ICON}><NewWindowIcon /></Icon>
+            </a>
+          </PublicLink>
           <TableSubtle>
             <tbody>
               <tr>
-                <th>Player ID:</th>
-                <td>{player.id}</td>
+                <th>Public Nickname:</th>
+                <td><H3 as="span">{player.displayName}</H3> (<a href="#">change</a>)</td>
+              </tr>
+              <tr>
+                <th>Emblem:</th>
+                <td>
+                  <FlagSpace><PlayerFlag player={player} /></FlagSpace> (<a href="#">change</a>)
+                </td>
               </tr>
               <tr>
                 <th>Home planet:</th>
@@ -65,6 +75,10 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
               <tr>
                 <th>Playing since:</th>
                 <td>{playingSinceDate}</td>
+              </tr>
+              <tr>
+                <th>Player ID:</th>
+                <td>{player.id}</td>
               </tr>
             </tbody>
           </TableSubtle>
@@ -82,10 +96,23 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
         </AccountOption>
         <Heading>Delete Account</Heading>
         <DeleteAccount canDelete={profile.canDelete} />
-      </AccountPanel>
-    </StyledArea>
+    </PanelPage>
   );
 };
+
+const PublicLink = styled.p`
+  ${SIZES.D};
+  margin-bottom: ${GRID.UNIT};
+`;
+
+const FlagSpace = styled.div`
+  display: inline-block;
+  vertical-align: middle;
+  width: 128px;
+  height: 128px;
+  border-radius: 128px;
+  border: solid 4px ${COLOURS.BODY.TEXT};
+`;
 
 const DeleteAccount = ({ canDelete }: { canDelete: boolean }) => {
   let button;
@@ -122,39 +149,6 @@ const DeleteAccount = ({ canDelete }: { canDelete: boolean }) => {
   );
 };
 
-const StyledArea = styled.div`
-  ${BREAKPOINTS.XL`
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 100%;
-    `};
-`;
-
-const EventsPanel = styled(Panel)`
-  background: ${COLOURS.EVENTS.BACKGROUND};
-  border-color: ${COLOURS.PANEL_BORDER};
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  ${BREAKPOINTS.XL`
-    flex: 1;
-    border-bottom: none;
-    border-right-style: solid;
-    border-right-width: 1px;
-    `};
-`;
-
-const ProgressPanel = styled(Panel)`
-  ${BREAKPOINTS.XL`
-    width: 40%;
-    min-width: 320px;
-    `};
-`;
-
-const AccountPanel = styled(Panel)`
-  width: 100%;
-  border-top: solid 1px ${COLOURS.PANEL_BORDER};
-  ${panelBackground}
-`;
 
 const SubPanel = styled.div`
   padding-bottom: ${GRID.UNIT};

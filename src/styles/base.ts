@@ -43,6 +43,7 @@ export const base = css`
     &:active,
     &:focus {
       text-decoration: none;
+      color: ${COLOURS.BODY.FADED};
     }
   }
 
@@ -88,7 +89,7 @@ export const base = css`
   em {
     font-style: italic;
   }
-  
+
   strong {
     font-weight: bold;
   }
