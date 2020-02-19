@@ -7,6 +7,8 @@ import { useElementDimensions } from "../../../hooks/useElementDimensions";
 import {Progress} from "../../Organisms/PlayHome/Panels/Progress";
 import {EventsList} from "../../Organisms/EventsList";
 import {useGameSessionContext} from "../../../contexts/GameSessionContext/GameSessionContext";
+import {H2} from "../../Atoms/Heading";
+import {Mission} from "../../Molecules/Mission";
 
 const Page = styled.div`
   ${BREAKPOINTS.XL`
@@ -37,7 +39,7 @@ const viewBox = "-3360 -60 4560 4121.0373654841";
 
 export const LandingPage = () => {
   const { ref, sizeIsKnown, width, height } = useElementDimensions();
-  const { events } = useGameSessionContext();
+  const { events, allMissions, currentMissions } = useGameSessionContext();
 
   return (
     <Page>
@@ -63,7 +65,28 @@ export const LandingPage = () => {
           </UncontrolledReactSVGPanZoom>
         )}
       </Map>
-      <Rest>THE REST (Log and Progress)</Rest>
+      <Rest>
+        <H2>Current Mission</H2>
+        <ul>
+          {currentMissions.map((mission, idx) => (
+            <li key={mission ? mission.id : idx}>
+              <Mission mission={mission} />
+            </li>
+          ))}
+        </ul>
+
+        <H2>Full mission log</H2>
+
+        <ul>
+          {allMissions.map((mission, idx) => (
+            <li key={mission ? mission.id : idx}>
+              <Mission mission={mission} />
+            </li>
+          ))}
+        </ul>
+
+
+      </Rest>
 
       <Progress />
       <EventsList events={events} firstPerson />

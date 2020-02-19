@@ -32,7 +32,7 @@ export const PlayersPage = ({ players }: IPlayersPageProps) => (
                   <PlayerFlag player={player} />
                 </FlagSpace>
                 <Detail>
-                  <p>{player.rank.title}</p>
+                  <p>{player.rank.title} {player.displayName}</p>
                   <Score score={player.score} />
                 </Detail>
               </Player>
