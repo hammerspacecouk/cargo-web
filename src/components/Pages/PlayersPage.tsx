@@ -11,21 +11,46 @@ import Link from "next/link";
 import { routes } from "../../routes";
 import Head from "next/head";
 import { pageTitle } from "../../utils/pageTitle";
+import {DurationDetail} from "../Atoms/DurationDetail";
 
 export interface IPlayersPageProps {
   players: IPlayer[];
+  winners: {
+    completionTime: number;
+    player: IPlayer;
+  }[]
 }
 
-export const PlayersPage = ({ players }: IPlayersPageProps) => (
+export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
   <SimplePage>
     <Head>
       <title>{pageTitle(`Players`)}</title>
     </Head>
     <Panel>
+      <H1>Winners Board</H1>
+      <ol>
+        {winners.map(winner => (
+          <ListItem key={`winner-${winner.player.id}`}>
+            <Link {...routes.getPlayer(winner.player.id)} prefetch={false}>
+              <Player href={`/players/${winner.player.id}`}>
+                <FlagSpace>
+                  <PlayerFlag player={winner.player} />
+                </FlagSpace>
+                <Detail>
+                  <p>{winner.player.displayName}</p>
+                  <p>Time taken: <DurationDetail seconds={winner.completionTime} /></p>
+                </Detail>
+              </Player>
+            </Link>
+          </ListItem>
+        ))}
+      </ol>
+    </Panel>
+    <Panel>
       <H1>Top Players</H1>
       <ol>
         {players.map(player => (
-          <ListItem key={player.id}>
+          <ListItem key={`player-${player.id}`}>
             <Link {...routes.getPlayer(player.id)} prefetch={false}>
               <Player href={`/players/${player.id}`}>
                 <FlagSpace>

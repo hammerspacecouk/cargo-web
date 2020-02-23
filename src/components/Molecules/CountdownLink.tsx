@@ -12,7 +12,6 @@ const formatTime = (msTime: number) => {
   return Math.ceil(msTime / 1000);
 };
 
-// todo - abstract this so it doesn't always have to be a <DangerButton>
 export const CountdownLink = React.memo(({ time, children, href }: IProps) => {
   const [timeLeft, setTimeLeft] = React.useState(() => formatTime(time));
   const [disabled, setDisabled] = React.useState(false);

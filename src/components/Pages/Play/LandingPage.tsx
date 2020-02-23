@@ -69,7 +69,7 @@ export const LandingPage = () => {
         <H2>Current Mission</H2>
         <ul>
           {currentMissions.map((mission, idx) => (
-            <li key={mission ? mission.id : idx}>
+            <li key={`current-${mission ? mission.id : idx}`}>
               <Mission mission={mission} />
             </li>
           ))}
@@ -79,7 +79,7 @@ export const LandingPage = () => {
 
         <ul>
           {allMissions.map((mission, idx) => (
-            <li key={mission ? mission.id : idx}>
+            <li key={`allMissions-${mission ? mission.id : idx}`}>
               <Mission mission={mission} />
             </li>
           ))}
