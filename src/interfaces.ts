@@ -234,3 +234,10 @@ export interface IShipClass {
   image: string;
   stats: IShipClassStats;
 }
+
+export interface IMission {
+  id: string;
+  name: string;
+  description: string;
+  collectedAt?: string;
+}

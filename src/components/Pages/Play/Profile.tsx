@@ -24,6 +24,7 @@ import {SIZES} from "../../../styles/typography";
 import {Icon, SMALL_ICON, TINY_ICON} from "../../Atoms/Icon";
 import {NewWindowIcon} from "../../Icons/NewWindowIcon";
 import {PlayerFlag} from "../../Molecules/PlayerFlag";
+import {ResetGameButton} from "../../Organisms/ResetGameButton";
 
 export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   const { player } = useGameSessionContext();
@@ -94,6 +95,20 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
           </Prose>
           <LogOutButton isAnonymous={profile.isAnonymous} />
         </AccountOption>
+      {profile.resetToken && (
+        <>
+          <Heading>Reset game</Heading>
+          <AccountOption>
+            <Prose>
+              <p>
+                Reset your game back to the beginning. You will lose all progress,
+                but your profile and purchases will remain intact.
+              </p>
+            </Prose>
+            <ResetGameButton token={profile.resetToken} />
+          </AccountOption>
+        </>
+      )}
         <Heading>Delete Account</Heading>
         <DeleteAccount canDelete={profile.canDelete} />
     </PanelPage>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IEvent, IFleetShip, IPlayer, IRankStatus, IScore } from "../../interfaces";
+import {IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore} from "../../interfaces";
 import { useMounted } from "../../hooks/useMounted";
 import { getSession, IGameSessionResponse } from "../../data/game";
 
@@ -68,6 +68,8 @@ interface IGameSessionState {
   events?: IEvent[];
   rankStatus?: IRankStatus;
   isAtHome?: boolean;
+  currentMissions?: IMission[];
+  allMissions?: IMission[];
 }
 
 const getNewSessionState = (state: IGameSessionState, session: IGameSessionResponse): IGameSessionState => {
@@ -78,12 +80,16 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "rankStatus", session.sessionState.rankStatus);
     newState = setPropIfChanged(newState, "ships", session.fleet.ships);
     newState = setPropIfChanged(newState, "events", session.fleet.events);
+    newState = setPropIfChanged(newState, "currentMissions", session.currentMissions);
+    newState = setPropIfChanged(newState, "allMissions", session.allMissions);
   } else {
     newState = setPropIfChanged(newState, "score", null);
     newState = setPropIfChanged(newState, "player", null);
     newState = setPropIfChanged(newState, "rankStatus", null);
     newState = setPropIfChanged(newState, "ships", null);
     newState = setPropIfChanged(newState, "events", null);
+    newState = setPropIfChanged(newState, "currentMissions", []);
+    newState = setPropIfChanged(newState, "allMissions", []);
   }
   return newState;
 };
