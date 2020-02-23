@@ -1,6 +1,6 @@
 // next.config.js
 const dotEnvResult = require('dotenv').config();
-const withTM = require('next-transpile-modules');
+const withTM = require('next-transpile-modules')(['three']);
 
 module.exports = withTM({
   env: {
@@ -14,5 +14,4 @@ module.exports = withTM({
   onDemandEntries: {
     websocketPort: 3007
   },
-  transpileModules: ['three']
 });
