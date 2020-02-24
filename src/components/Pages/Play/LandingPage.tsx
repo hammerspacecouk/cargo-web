@@ -1,16 +1,25 @@
 import * as React from "react";
-import { POSITION_NONE, TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
+import {POSITION_NONE, TOOL_PAN, UncontrolledReactSVGPanZoom} from "react-svg-pan-zoom";
 import styled from "styled-components";
-import { COLOURS } from "../../../styles/colours";
-import { BREAKPOINTS } from "../../../styles/media";
-import { useElementDimensions } from "../../../hooks/useElementDimensions";
+import {COLOURS} from "../../../styles/colours";
+import {BREAKPOINTS} from "../../../styles/media";
+import {useElementDimensions} from "../../../hooks/useElementDimensions";
 import {Progress} from "../../Organisms/PlayHome/Panels/Progress";
 import {EventsList} from "../../Organisms/EventsList";
 import {useGameSessionContext} from "../../../contexts/GameSessionContext/GameSessionContext";
 import {H2} from "../../Atoms/Heading";
 import {Mission} from "../../Molecules/Mission";
+import {Z_INDEX} from "../../../styles/variables";
+import {DisguisedButton} from "../../Atoms/Button";
+import {Icon, NORMAL_ICON, SMALL_ICON} from "../../Atoms/Icon";
+import {LaunchIcon} from "../../Icons/LaunchIcon";
+import {MissionIcon} from "../../Icons/MissionIcon";
+import {RankIcon} from "../../Icons/RankIcon";
+import {MapIcon} from "../../Icons/MapIcon";
+import {LogIcon} from "../../Icons/LogIcon";
 
 const Page = styled.div`
+  padding-bottom: 64px;
   ${BREAKPOINTS.XL`
     display: block;
     height: 100%;
@@ -19,14 +28,10 @@ const Page = styled.div`
 `;
 
 const Map = styled.div`
-  height: 50vh;
+  height: calc(100vh - 64px);
   width: 100%;
   overflow: hidden;
   background: rgba(0,0,0,0.5);
-`;
-
-const Rest = styled.div`
-  background: ${COLOURS.BODY.BACKGROUND};
 `;
 
 const svg = `
@@ -38,12 +43,12 @@ const svg = `
 const viewBox = "-3360 -60 4560 4121.0373654841";
 
 export const LandingPage = () => {
-  const { ref, sizeIsKnown, width, height } = useElementDimensions();
-  const { events, allMissions, currentMissions } = useGameSessionContext();
+  const {ref, sizeIsKnown, width, height} = useElementDimensions();
+  const {events, allMissions, currentMissions} = useGameSessionContext();
 
   return (
     <Page>
-      <Map ref={ref}>
+      <Map ref={ref} id="map">
         {sizeIsKnown && (
           <UncontrolledReactSVGPanZoom
             width={width}
@@ -60,17 +65,17 @@ export const LandingPage = () => {
             }}
           >
             <svg viewBox={viewBox}>
-              <g dangerouslySetInnerHTML={{ __html: svg }} />
+              <g dangerouslySetInnerHTML={{__html: svg}}/>
             </svg>
           </UncontrolledReactSVGPanZoom>
         )}
       </Map>
-      <Rest>
+      <div id="mission">
         <H2>Current Mission</H2>
         <ul>
           {currentMissions.map((mission, idx) => (
             <li key={`current-${idx}`}>
-              <Mission mission={mission} />
+              <Mission mission={mission}/>
             </li>
           ))}
         </ul>
@@ -80,16 +85,154 @@ export const LandingPage = () => {
         <ul>
           {allMissions.map((mission, idx) => (
             <li key={`allMissions-${idx}`}>
-              <Mission mission={mission} />
+              <Mission mission={mission}/>
             </li>
           ))}
         </ul>
+      </div>
 
+      <div id="rank">
+      <Progress/>
+      </div>
+      <div id="log">
+      <EventsList events={events} firstPerson/>
+      </div>
 
-      </Rest>
+      <SubBar>
+        <Nav>
+          <List>
+            <ShipsItem>
+              <NavLink as="a" href="#fleet">
+                <ButtonIcon>
+                  <LaunchIcon/>
+                </ButtonIcon>
+                <Label>Ships</Label>
+              </NavLink>
+            </ShipsItem>
+            <Item>
+              <NavLink as="a" href="#map">
+                <ButtonIcon>
+                  <MapIcon />
+                </ButtonIcon>
+                <Label>Map</Label>
+              </NavLink>
+            </Item>
+            <Item>
+              <NavLink as="a" href="#mission">
+                <ButtonIcon>
+                  <MissionIcon/>
+                </ButtonIcon>
+                <Label>Mission</Label>
+              </NavLink>
+            </Item>
+            <Item>
+              <NavLink as="a" href="#rank">
+                <ButtonIcon>
+                  <RankIcon/>
+                </ButtonIcon>
+                <Label>Rank</Label>
+              </NavLink>
+            </Item>
+            <Item>
+              <NavLink as="a" href="#log">
+                <ButtonIcon>
+                  <LogIcon/>
+                </ButtonIcon>
+                <Label>Log</Label>
+              </NavLink>
+            </Item>
+          </List>
+        </Nav>
+      </SubBar>
 
-      <Progress />
-      <EventsList events={events} firstPerson />
     </Page>
   );
 };
+
+// todo - combine design with ShipNavigation
+const SubBar = styled.div`
+  z-index: ${Z_INDEX.PAGE_MIDDLE};
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  ${BREAKPOINTS.XL`
+      width: 80%;
+    `}
+  ${BREAKPOINTS.MAX`
+      width: calc(100vw - 400px);
+    `}
+`;
+
+const Nav = styled.nav`
+    background: ${COLOURS.BLACK.STANDARD};
+    padding-bottom: env(safe-area-inset-bottom);
+}
+`;
+
+const List = styled.ul`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const Item = styled.li`
+  flex: 1;
+  display: flex;
+  min-width: 44px;
+  position: relative;
+`;
+
+const ShipsItem = styled(Item)`
+  ${BREAKPOINTS.XL`
+      display: none;
+  `}
+`;
+
+
+const NavLink = styled(DisguisedButton)`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 44px;
+  padding: 6px;
+  color: ${COLOURS.WHITE.STANDARD};
+  svg,
+  label {
+    opacity: 0.5;
+  }
+  &:hover:not(:focus):not([disabled]) {
+    background: rgba(255, 255, 255, 0.3);
+    color: ${COLOURS.WHITE.STANDARD};
+    svg,
+    label {
+      opacity: 1;
+    }
+  }
+  ${BREAKPOINTS.L`
+    min-height: 64px;
+  `};
+`;
+
+const ButtonIcon = styled(Icon)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: ${SMALL_ICON};
+  width: ${SMALL_ICON};
+  position: relative;
+  ${BREAKPOINTS.L`
+    height: ${NORMAL_ICON};
+    width: ${NORMAL_ICON};
+  `};
+`;
+
+const Label = styled.label`
+  margin-top: 2px;
+  font-size: 10px;
+  ${BREAKPOINTS.L`
+    font-size: 13px;
+  `};
+`;

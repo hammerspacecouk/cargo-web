@@ -11,7 +11,7 @@ import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSes
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
 import {MASTHEAD_HEIGHT, Z_INDEX} from "../../styles/variables";
-import { ShipsIcon } from "../Icons/ShipsIcon";
+import {MapIcon} from "../Icons/MapIcon";
 
 interface IProps {
   className?: string;
@@ -68,10 +68,10 @@ export const Navigation = ({ className }: IProps) => {
         <NavigationList>
           <li>
             <NavigationItem
-              icon={<ShipsIcon />}
+              icon={<MapIcon />}
               isCurrent={false}
-              path={{ href: routes.getPlay() }}
-              text="Mission Log"
+              path={{ href: `${routes.getPlay()}#map` }}
+              text="Map"
             />
           </li>
           <li>
