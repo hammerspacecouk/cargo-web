@@ -2,15 +2,15 @@ import * as React from "react";
 import styled from "styled-components";
 import { CreditsButton } from "./CreditsButton";
 import { TokenButton } from "./TokenButton";
-import {IActionToken, IChildrenProps, ILockedTransaction, IShipUpgrade} from "../../interfaces";
+import { IActionToken, IChildrenProps, ILockedTransaction, IShipUpgrade } from "../../interfaces";
 import { P, TextWarning } from "../Atoms/Text";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
 import { ShipStats } from "./ShipStats";
 import { Hidden } from "../Atoms/Hidden";
 import { Environment } from "../../utils/environment";
-import {H4} from "../Atoms/Heading";
-import {NumberBadge} from "../Atoms/NumberBadge";
+import { H4 } from "../Atoms/Heading";
+import { NumberBadge } from "../Atoms/NumberBadge";
 
 export const ShipUpgrade = ({ disabled = false, purchaseHandler, ship }: IProps) => {
   if (ship.available) {
@@ -34,20 +34,20 @@ const ShipLocked = ({ ship }: { ship: ILockedTransaction }) => (
   </PurchaseCard>
 );
 
-const ShipPurchase = ({ disabled, purchaseHandler, ship }: IShipUpgradeProps ) => (
+const ShipPurchase = ({ disabled, purchaseHandler, ship }: IShipUpgradeProps) => (
   <PurchaseCard>
     <PurchaseCardDetail>
       <PurchaseCardTitle>{ship.detail.name}</PurchaseCardTitle>
       <DetailDescription>{ship.detail.description}</DetailDescription>
       <Hidden as="h3">Stats</Hidden>
-      <ShipStats stats={ship.detail.stats}/>
+      <ShipStats stats={ship.detail.stats} />
       <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
-        <CreditsButton amount={ship.cost} disabledOverride={disabled}/>
+        <CreditsButton amount={ship.cost} disabledOverride={disabled} />
       </StyledTokenButton>
     </PurchaseCardDetail>
     <PurchaseCardImage notificationCount={ship.currentCount}>
       <ShipImage>
-        <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt={ship.detail.name}/>
+        <img src={`${Environment.clientApiHostname}${ship.detail.image}`} alt={ship.detail.name} />
       </ShipImage>
     </PurchaseCardImage>
   </PurchaseCard>
@@ -85,7 +85,6 @@ const LockedPurchaseCardDetail = styled(PurchaseCardDetail)`
   align-self: center;
 `;
 
-
 const PurchaseCardTitle = ({ children }: IChildrenProps) => <H4 as="h3">{children}</H4>;
 
 const DetailDescription = styled(P)`
@@ -99,7 +98,6 @@ const StyledTokenButton = styled(TokenButton)`
   justify-content: center;
   margin-top: ${GRID.UNIT};
 `;
-
 
 interface IPurchaseCardImageProps extends IChildrenProps {
   notificationCount?: number;
@@ -122,9 +120,6 @@ const PurchaseCardImage = React.memo(({ children, notificationCount }: IPurchase
     </StyledPurchaseCardImage>
   );
 });
-
-
-
 
 const StyledPurchaseCardImage = styled.div`
   position: relative;

@@ -10,8 +10,8 @@ import { LaunchIcon } from "../Icons/LaunchIcon";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
-import {MASTHEAD_HEIGHT, Z_INDEX} from "../../styles/variables";
-import {MapIcon} from "../Icons/MapIcon";
+import { MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
+import { MapIcon } from "../Icons/MapIcon";
 
 interface IProps {
   className?: string;
@@ -57,7 +57,7 @@ export const Navigation = ({ className }: IProps) => {
 
   return (
     <StyledNavigation className={className}>
-      <JumpLink id="fleet"/>
+      <JumpLink id="fleet" />
       <PlayerSummary />
       <Ships>
         <Hidden as="h2">Ships</Hidden>

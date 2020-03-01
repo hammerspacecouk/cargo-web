@@ -11,14 +11,14 @@ import Link from "next/link";
 import { routes } from "../../routes";
 import Head from "next/head";
 import { pageTitle } from "../../utils/pageTitle";
-import {DurationDetail} from "../Atoms/DurationDetail";
+import { DurationDetail } from "../Atoms/DurationDetail";
 
 export interface IPlayersPageProps {
   players: IPlayer[];
   winners: {
     completionTime: number;
     player: IPlayer;
-  }[]
+  }[];
 }
 
 export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
@@ -38,7 +38,9 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
                 </FlagSpace>
                 <Detail>
                   <p>{winner.player.displayName}</p>
-                  <p>Time taken: <DurationDetail seconds={winner.completionTime} /></p>
+                  <p>
+                    Time taken: <DurationDetail seconds={winner.completionTime} />
+                  </p>
                 </Detail>
               </Player>
             </Link>
@@ -57,7 +59,9 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
                   <PlayerFlag player={player} />
                 </FlagSpace>
                 <Detail>
-                  <p>{player.rank.title} {player.displayName}</p>
+                  <p>
+                    {player.rank.title} {player.displayName}
+                  </p>
                   <Score score={player.score} />
                 </Detail>
               </Player>

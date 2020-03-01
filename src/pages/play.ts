@@ -1,11 +1,16 @@
 import { Component, createElement } from "react";
-import { LandingPage } from "../components/Pages/Play/LandingPage";
+import { ILandingPageProps, LandingPage } from "../components/Pages/Play/LandingPage";
 import { GameSessionContainer } from "../contexts/GameSessionContext/GameSessionContainer";
-import { IProfileResponse } from "../data/profile";
+import { NextPageContext } from "next";
+import { ApiClient } from "../utils/ApiClient";
 
-export class Page extends Component<{ profile?: IProfileResponse }, undefined> {
+export class Page extends Component<ILandingPageProps, undefined> {
+  public static async getInitialProps({ req }: NextPageContext) {
+    return ApiClient.fetch("/play/map", undefined, req);
+  }
+
   public render() {
-    return createElement(LandingPage);
+    return createElement(LandingPage, this.props);
   }
 }
 

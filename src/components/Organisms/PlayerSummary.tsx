@@ -47,7 +47,9 @@ export const PlayerSummary = () => {
           <PlayerFlag player={player} />
         </Icon>
         <Rank>
-          <RankTitle>{rankStatus.currentRank.title} {player.displayName}</RankTitle>
+          <RankTitle>
+            {rankStatus.currentRank.title} {player.displayName}
+          </RankTitle>
           <ProgressBar small percent={rankStatus.levelProgress} />
         </Rank>
       </StyledSummary>

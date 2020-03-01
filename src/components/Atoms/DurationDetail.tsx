@@ -16,12 +16,9 @@ const secondsToFormat = (seconds: number): string => {
   const minutes = Math.floor(remainingSeconds / SECONDS_IN_MINUTE);
   remainingSeconds = remainingSeconds - minutes * SECONDS_IN_MINUTE;
 
-  return [
-    word("day", days),
-    word("hour", hours),
-    word("min", minutes),
-    word("sec", remainingSeconds),
-  ].filter(i => i).join(", ");
+  return [word("day", days), word("hour", hours), word("min", minutes), word("sec", remainingSeconds)]
+    .filter(i => i)
+    .join(", ");
 };
 
 const word = (word: string, num: number): string => {
@@ -35,6 +32,6 @@ const word = (word: string, num: number): string => {
   return `${num} ${word}s`;
 };
 
-export const DurationDetail = ({seconds}: {seconds: number}) => {
-  return <span>{secondsToFormat(seconds)}</span>
+export const DurationDetail = ({ seconds }: { seconds: number }) => {
+  return <span>{secondsToFormat(seconds)}</span>;
 };

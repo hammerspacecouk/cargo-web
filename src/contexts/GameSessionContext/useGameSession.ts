@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore} from "../../interfaces";
+import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore } from "../../interfaces";
 import { useMounted } from "../../hooks/useMounted";
 import { getSession, IGameSessionResponse } from "../../data/game";
 
