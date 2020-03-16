@@ -1,14 +1,12 @@
-import { Component, createElement } from "react";
-import { NextPageContext } from "next";
+import { GetServerSideProps } from "next";
 import { ApiClient } from "../utils/ApiClient";
-import { IPlayersPageProps, PlayersPage } from "../components/Pages/PlayersPage";
+import { PlayersPage } from "../components/Pages/PlayersPage";
 
-export default class extends Component<IPlayersPageProps> {
-  public static async getInitialProps({ req }: NextPageContext) {
-    return ApiClient.fetch(`/players`, undefined, req);
-  }
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const data = await ApiClient.fetch(`/players`, undefined, req);
+  return {
+    props: data,
+  };
+};
 
-  public render() {
-    return createElement(PlayersPage, this.props);
-  }
-}
+export default PlayersPage;

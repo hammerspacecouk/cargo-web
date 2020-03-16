@@ -7,9 +7,7 @@ import { useElementDimensions } from "../../../hooks/useElementDimensions";
 import { Progress } from "../../Organisms/PlayHome/Panels/Progress";
 import { EventsList } from "../../Organisms/EventsList";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
-import { H2 } from "../../Atoms/Heading";
-import { Mission } from "../../Molecules/Mission";
-import { Z_INDEX } from "../../../styles/variables";
+import { GRID, Z_INDEX } from "../../../styles/variables";
 import { DisguisedButton } from "../../Atoms/Button";
 import { Icon, NORMAL_ICON, SMALL_ICON } from "../../Atoms/Icon";
 import { LaunchIcon } from "../../Icons/LaunchIcon";
@@ -18,6 +16,8 @@ import { RankIcon } from "../../Icons/RankIcon";
 import { MapIcon } from "../../Icons/MapIcon";
 import { LogIcon } from "../../Icons/LogIcon";
 import { useRef } from "react";
+import { JumpLink } from "../../Atoms/JumpLink";
+import { MissionPanel } from "../../Organisms/LandingPage/MissionPanel";
 
 const Page = styled.div`
   padding-bottom: 64px;
@@ -28,7 +28,7 @@ const Page = styled.div`
   `};
 `;
 
-const Map = styled.div`
+const Map = styled(JumpLink)`
   height: calc(100vh - 64px);
   width: 100%;
   overflow: hidden;
@@ -44,7 +44,7 @@ export interface ILandingPageProps {
 
 export const LandingPage = ({ viewBox, svg, centerX, centerY }: ILandingPageProps) => {
   const { ref, sizeIsKnown, width, height } = useElementDimensions();
-  const { events, allMissions, currentMissions } = useGameSessionContext();
+  const { events } = useGameSessionContext();
   const viewer = useRef<UncontrolledReactSVGPanZoom>();
 
   React.useEffect(() => {
@@ -80,33 +80,22 @@ export const LandingPage = ({ viewBox, svg, centerX, centerY }: ILandingPageProp
           </UncontrolledReactSVGPanZoom>
         )}
       </Map>
-      <div id="mission">
-        <H2>Current Mission</H2>
-        <ul>
-          {currentMissions.map((mission, idx) => (
-            <li key={`current-${idx}`}>
-              <Mission mission={mission} />
-            </li>
-          ))}
-        </ul>
+      <JumpLink id="mission">
+        <Section>
+          <MissionPanel />
+        </Section>
+      </JumpLink>
 
-        <H2>Full mission log</H2>
-
-        <ul>
-          {allMissions.map((mission, idx) => (
-            <li key={`allMissions-${idx}`}>
-              <Mission mission={mission} />
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div id="rank">
-        <Progress />
-      </div>
-      <div id="log">
-        <EventsList events={events} firstPerson />
-      </div>
+      <JumpLink id="rank">
+        <Section>
+          <Progress />
+        </Section>
+      </JumpLink>
+      <JumpLink id="log">
+        <Section>
+          <EventsList events={events} firstPerson />
+        </Section>
+      </JumpLink>
 
       <SubBar>
         <Nav>
@@ -243,4 +232,9 @@ const Label = styled.label`
   ${BREAKPOINTS.L`
     font-size: 13px;
   `};
+`;
+
+const Section = styled.section`
+  padding: ${GRID.UNIT};
+  border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
 `;

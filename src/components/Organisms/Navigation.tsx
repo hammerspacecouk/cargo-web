@@ -10,8 +10,9 @@ import { LaunchIcon } from "../Icons/LaunchIcon";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
 import { routes } from "../../routes";
-import { MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
+import { Z_INDEX } from "../../styles/variables";
 import { MapIcon } from "../Icons/MapIcon";
+import { JumpLink } from "../Atoms/JumpLink";
 
 interface IProps {
   className?: string;
@@ -23,12 +24,6 @@ const StyledNavigation = styled.nav`
   background: ${COLOURS.BLACK.FADED};
   z-index: ${Z_INDEX.MENU};
   padding-bottom: env(safe-area-inset-bottom);
-`;
-
-const JumpLink = styled.div`
-  // so that the anchor jumps to the right place
-  margin-top: -${MASTHEAD_HEIGHT};
-  padding-top: ${MASTHEAD_HEIGHT};
 `;
 
 const Ships = styled.div`

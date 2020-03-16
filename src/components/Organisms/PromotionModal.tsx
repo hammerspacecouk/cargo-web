@@ -8,6 +8,11 @@ import { Modal } from "../Molecules/Modal";
 import { TokenButton } from "../Molecules/TokenButton";
 import { Promotion } from "./Promotion";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { CurrentMissions } from "../Molecules/CurrentMissions";
+import styled from "styled-components";
+import { GRID } from "../../styles/variables";
+import { COLOURS } from "../../styles/colours";
+import { H2, H3, H4 } from "../Atoms/Heading";
 
 export const PromotionModal = () => {
   const { rankStatus } = useGameSessionContext();
@@ -39,6 +44,10 @@ export const PromotionModal = () => {
   return (
     <Modal isOpen={true} title="Promotion">
       <Promotion rankStatus={rankStatus} />
+      <NewMission>
+        <Heading>New Mission</Heading>
+        <CurrentMissions />
+      </NewMission>
       <TextCenter as="div">
         <TokenButton token={rankStatus.acknowledgeToken} handler={acknowledgePromotion}>
           {button}
@@ -47,3 +56,12 @@ export const PromotionModal = () => {
     </Modal>
   );
 };
+
+const NewMission = styled.div`
+  padding: ${GRID.UNIT};
+  border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+`;
+const Heading = styled(H3)`
+  text-align: center;
+  margin-bottom: ${GRID.UNIT};
+`;

@@ -1,18 +1,15 @@
-import { Component, createElement } from "react";
 import { ApiClient } from "../utils/ApiClient";
-import { HomePage, IHomePageProps } from "../components/Pages/HomePage";
-import { NextPageContext } from "next";
+import { HomePage } from "../components/Pages/HomePage";
+import { GetServerSideProps } from "next";
 
-export default class extends Component<IHomePageProps> {
-  public static async getInitialProps({ req }: NextPageContext) {
-    const data = await ApiClient.fetch("/", undefined, req);
-    return {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const data = await ApiClient.fetch("/", undefined, req);
+  return {
+    props: {
       events: data.events,
       goalCrateLocation: data.goalCrateLocation,
-    };
-  }
+    },
+  };
+};
 
-  public render() {
-    return createElement(HomePage, this.props);
-  }
-}
+export default HomePage;

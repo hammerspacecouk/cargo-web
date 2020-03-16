@@ -7,8 +7,6 @@ import styled from "styled-components";
 import { GRID } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
 import { H2, H3 } from "../../Atoms/Heading";
-import Head from "next/head";
-import { pageTitle } from "../../../utils/pageTitle";
 import { ShieldStrength } from "../../Molecules/ShieldStrength";
 
 export interface IPlayerPageProps {
@@ -18,9 +16,6 @@ export interface IPlayerPageProps {
 
 export const PlayerPage = ({ player, fleet }: IPlayerPageProps) => (
   <SimplePage>
-    <Head>
-      <title>{pageTitle(`${player.displayName}`)}</title>
-    </Head>
     <Panel>
       <FlagSpace>
         <PlayerFlag player={player} />
