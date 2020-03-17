@@ -241,3 +241,8 @@ export interface IMission {
   description: string;
   collectedAt?: string;
 }
+
+export interface ICoordinate {
+  x: number;
+  y: number;
+}

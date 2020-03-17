@@ -18,6 +18,7 @@ import { LogIcon } from "../../Icons/LogIcon";
 import { useRef } from "react";
 import { JumpLink } from "../../Atoms/JumpLink";
 import { MissionPanel } from "../../Organisms/LandingPage/MissionPanel";
+import { IMapProps, MapSchematic } from "../../Organisms/MapSchematic";
 
 const Page = styled.div`
   padding-bottom: 64px;
@@ -36,20 +37,24 @@ const Map = styled(JumpLink)`
 `;
 
 export interface ILandingPageProps {
-  viewBox: string;
-  svg: string;
-  centerX: number;
-  centerY: number;
+  map: {
+    svg: IMapProps["svg"];
+    viewBox: string;
+    center: {
+      x: number;
+      y: number;
+    };
+  };
 }
 
-export const LandingPage = ({ viewBox, svg, centerX, centerY }: ILandingPageProps) => {
+export const LandingPage = ({ map }: ILandingPageProps) => {
   const { ref, sizeIsKnown, width, height } = useElementDimensions();
   const { events } = useGameSessionContext();
   const viewer = useRef<UncontrolledReactSVGPanZoom>();
 
   React.useEffect(() => {
     if (viewer.current) {
-      viewer.current.setPointOnViewerCenter(centerX, centerY, 1);
+      viewer.current.setPointOnViewerCenter(map.center.x, map.center.y, 1);
     }
   }, [viewer.current]);
 
@@ -74,8 +79,8 @@ export const LandingPage = ({ viewBox, svg, centerX, centerY }: ILandingPageProp
             }}
             ref={viewer}
           >
-            <svg viewBox={viewBox}>
-              <g dangerouslySetInnerHTML={{ __html: svg }} />
+            <svg viewBox={map.viewBox}>
+              <MapSchematic svg={map.svg} />
             </svg>
           </UncontrolledReactSVGPanZoom>
         )}
@@ -113,7 +118,7 @@ export const LandingPage = ({ viewBox, svg, centerX, centerY }: ILandingPageProp
                 <ButtonIcon>
                   <MapIcon />
                 </ButtonIcon>
-                <Label>Map</Label>
+                <Label>Schematic</Label>
               </NavLink>
             </Item>
             <Item>

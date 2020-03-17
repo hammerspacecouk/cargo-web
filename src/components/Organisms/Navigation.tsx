@@ -66,7 +66,7 @@ export const Navigation = ({ className }: IProps) => {
               icon={<MapIcon />}
               isCurrent={false}
               path={{ href: `${routes.getPlay()}#map` }}
-              text="Map"
+              text="Status"
             />
           </li>
           <li>
