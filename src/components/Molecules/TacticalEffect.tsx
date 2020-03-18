@@ -24,7 +24,7 @@ interface IOffenceEffectProps {
 }
 
 export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
-  const { portActionHandler, buttonsDisabled, shipsInLocation, ship } = useActiveShipContext();
+  const { portActionHandler, buttonsDisabled, shipsInLocation, ship, port } = useActiveShipContext();
   const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
 
   const handler = async (token: IActionToken) => {
@@ -99,7 +99,9 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
       );
     } else {
       actionButton = (
-        <DangerButton disabled>{ship.shipClass.capacity === 0 ? "N/A (Probe)" : "No Targets"}</DangerButton>
+        <DangerButton disabled>
+          {ship.shipClass.capacity === 0 ? "N/A (Probe)" : port.isSafe ? "Sanctuary" : "No Targets"}
+        </DangerButton>
       );
     }
   } else {

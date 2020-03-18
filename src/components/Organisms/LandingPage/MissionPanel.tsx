@@ -75,6 +75,7 @@ const MissionItem = styled.li`
 
 const Mission = styled.div<{ achieved?: boolean }>`
   width: 100%;
+  min-height: 112px;
   border-radius: ${GRID.UNIT};
   background: ${COLOURS.GREY.DARKEST};
   padding: ${GRID.UNIT};

@@ -45,13 +45,14 @@ export const MapSchematic = ({ svg }: IMapProps) => {
       ))}
       {svg.history.map((lines, index) => {
         const color = JOURNEY_COLOURS[index % JOURNEY_COLOURS.length];
-        return lines.map(line => {
+        return lines.map((line, jndex) => {
           const fromCoords = line.from.angle
             ? orbitPosition(line.from.coords, svg.grid / 4, line.from.angle)
             : line.from.coords;
           const toCoords = line.to.angle ? orbitPosition(line.to.coords, svg.grid / 4, line.to.angle) : line.to.coords;
           return (
             <JourneyLine
+              key={`line-${index}-${jndex}`}
               color={`rgba(${color},${line.opacity})}`}
               x1={fromCoords.x}
               y1={fromCoords.y}
@@ -62,17 +63,14 @@ export const MapSchematic = ({ svg }: IMapProps) => {
         });
       })}
       {svg.ships.map(ship => {
-        const coords = orbitPosition(ship.center, svg.grid / 4, ship.angle);
+        const coords = ship.angle !== undefined ? orbitPosition(ship.center, svg.grid / 4, ship.angle) : ship.center;
         return (
-          <Ship key={`ship-${ship.id}`} href={ship.href} x={coords.x - SHIP_SIZE / 2} y={coords.y - SHIP_SIZE / 2} />
-        );
-      })}
-      {svg.ships.map(ship => {
-        const coords = orbitPosition(ship.center, svg.grid / 4, ship.angle);
-        return (
-          <ShipLabel key={`shipLabel-${ship.id}`} x={coords.x + SPACING} y={coords.y + SPACING / 2}>
-            {ship.name}
-          </ShipLabel>
+          <React.Fragment key={`ship-${ship.id}`}>
+            <Ship href={ship.href} x={coords.x - SHIP_SIZE / 2} y={coords.y - SHIP_SIZE / 2} />
+            <ShipLabel x={coords.x + SPACING} y={coords.y + SPACING / 2}>
+              {ship.name}
+            </ShipLabel>
+          </React.Fragment>
         );
       })}
       {svg.planets.map(planet => (
@@ -103,18 +101,21 @@ interface ILine {
   from: ICoordinate;
   to: ICoordinate;
 }
+
 interface ICircle {
   id: string;
   title?: string;
   coords: ICoordinate;
 }
+
 interface IShipPosition {
   id: string;
   name: string;
   center: ICoordinate;
-  angle: number;
+  angle?: number;
   href: string;
 }
+
 const Highlight = styled.circle`
   fill: none;
   stroke: rgba(255, 255, 255, 0.5);

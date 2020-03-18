@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
   return {
     props: {
       stage,
-      token,
+      token: token || null,
     },
   };
 };
