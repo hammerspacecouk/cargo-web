@@ -36,7 +36,7 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   } else if (profile.isTrial) {
     mode = (
       <TextWarning>
-        Trial (<a href="#">change</a>)
+        Trial (<ComingSoonLink />)
       </TextWarning>
     );
   } else {
@@ -59,7 +59,7 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
             <tr>
               <th>Public Nickname:</th>
               <td>
-                <H3 as="span">{player.displayName}</H3> (<a href="#">change</a>)
+                <H3 as="span">{player.displayName}</H3> (<ComingSoonLink />)
               </td>
             </tr>
             <tr>
@@ -68,13 +68,13 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
                 <FlagSpace>
                   <PlayerFlag player={player} />
                 </FlagSpace>{" "}
-                (<a href="#">change</a>)
+                (<ComingSoonLink />)
               </td>
             </tr>
             <tr>
               <th>Home planet:</th>
               <td>
-                <em>{profile.homePort.name}</em> (<a href="#">change</a>)
+                <em>{profile.homePort.name}</em> (<ComingSoonLink />)
               </td>
             </tr>
             <tr>
@@ -120,6 +120,15 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
       <Heading>Delete Account</Heading>
       <DeleteAccount canDelete={profile.canDelete} />
     </PanelPage>
+  );
+};
+
+const ComingSoonLink = () => {
+  return (
+    <a href="#" onClick={e => {
+      e.preventDefault();
+      window.alert('Coming soon');
+    }}>change</a>
   );
 };
 

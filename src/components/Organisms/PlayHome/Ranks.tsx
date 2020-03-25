@@ -17,7 +17,7 @@ export const Ranks = () => {
 
   let hasPassed = false;
   return (
-    <StyledList>
+    <ol>
       {ranks.map((rank, i) => {
         let isCurrent = false;
         if (rank?.id === rankStatus.currentRank.id) {
@@ -30,13 +30,9 @@ export const Ranks = () => {
           </StyledRankItem>
         );
       })}
-    </StyledList>
+    </ol>
   );
 };
-
-const StyledList = styled.ol`
-  margin-top: ${GRID.HALF};
-`;
 
 const StyledRankItem = styled.li<{ isCurrent: boolean; isActive: boolean }>`
   position: relative;

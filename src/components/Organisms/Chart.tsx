@@ -28,7 +28,7 @@ const PORT_RADIUS = 16;
 const SPACING = 8;
 const SHIP_SIZE = 12;
 
-export const MapSchematic = ({ svg }: IMapProps) => {
+export const Chart = ({ svg }: IMapProps) => {
   // layer order
   // - Nearby paths
   // - Highlight rings
@@ -62,17 +62,6 @@ export const MapSchematic = ({ svg }: IMapProps) => {
           );
         });
       })}
-      {svg.ships.map(ship => {
-        const coords = ship.angle !== undefined ? orbitPosition(ship.center, svg.grid / 4, ship.angle) : ship.center;
-        return (
-          <React.Fragment key={`ship-${ship.id}`}>
-            <Ship href={ship.href} x={coords.x - SHIP_SIZE / 2} y={coords.y - SHIP_SIZE / 2} />
-            <ShipLabel x={coords.x + SPACING} y={coords.y + SPACING / 2}>
-              {ship.name}
-            </ShipLabel>
-          </React.Fragment>
-        );
-      })}
       {svg.planets.map(planet => (
         <Planet key={`planet-${planet.id}`} cx={planet.coords.x} cy={planet.coords.y} r={PORT_RADIUS} />
       ))}
@@ -85,6 +74,17 @@ export const MapSchematic = ({ svg }: IMapProps) => {
           {planet.title}
         </PlanetLabel>
       ))}
+      {svg.ships.map(ship => {
+        const coords = ship.angle !== undefined ? orbitPosition(ship.center, svg.grid / 4, ship.angle) : ship.center;
+        return (
+          <React.Fragment key={`ship-${ship.id}`}>
+            <Ship href={ship.href} x={coords.x - SHIP_SIZE / 2} y={coords.y - SHIP_SIZE / 2} />
+            <ShipLabel x={coords.x + SPACING} y={coords.y + SPACING / 2}>
+              {ship.name}
+            </ShipLabel>
+          </React.Fragment>
+        );
+      })}
     </g>
   );
 };

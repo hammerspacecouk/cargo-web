@@ -46,6 +46,6 @@ export class ShipInOrbit extends AbstractObject {
   }
 
   getObject(): THREE.Object3D {
-    return this.ship.scene;
+    return this.ship?.scene;
   }
 }

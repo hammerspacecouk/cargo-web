@@ -1,5 +1,5 @@
 import * as React from "react";
-import { POSITION_NONE, TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
+import {POSITION_NONE, POSITION_TOP, TOOL_PAN, UncontrolledReactSVGPanZoom} from "react-svg-pan-zoom";
 import styled from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
@@ -7,7 +7,7 @@ import { useElementDimensions } from "../../../hooks/useElementDimensions";
 import { Progress } from "../../Organisms/PlayHome/Panels/Progress";
 import { EventsList } from "../../Organisms/EventsList";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
-import { GRID, Z_INDEX } from "../../../styles/variables";
+import {GRID, MASTHEAD_HEIGHT, Z_INDEX} from "../../../styles/variables";
 import { DisguisedButton } from "../../Atoms/Button";
 import { Icon, NORMAL_ICON, SMALL_ICON } from "../../Atoms/Icon";
 import { LaunchIcon } from "../../Icons/LaunchIcon";
@@ -18,10 +18,13 @@ import { LogIcon } from "../../Icons/LogIcon";
 import { useRef } from "react";
 import { JumpLink } from "../../Atoms/JumpLink";
 import { MissionPanel } from "../../Organisms/LandingPage/MissionPanel";
-import { IMapProps, MapSchematic } from "../../Organisms/MapSchematic";
+import { IMapProps, Chart } from "../../Organisms/Chart";
+import {H2} from "../../Atoms/Heading";
+
+const subNavHeight = '64px';
 
 const Page = styled.div`
-  padding-bottom: 64px;
+  padding-bottom: ${subNavHeight};
   ${BREAKPOINTS.XL`
     display: block;
     height: 100%;
@@ -30,7 +33,7 @@ const Page = styled.div`
 `;
 
 const Map = styled(JumpLink)`
-  height: calc(100vh - 64px);
+  height: calc(100vh - ${subNavHeight});
   width: 100%;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.5);
@@ -68,19 +71,15 @@ export const LandingPage = ({ map }: ILandingPageProps) => {
             background="rgba(0,0,0,0.3)"
             SVGBackground="transparent"
             tool={TOOL_PAN}
-            preventPanOutside={true}
+            preventPanOutside={false}
             scaleFactorMax={4}
-            scaleFactorMin={0.25}
-            miniatureProps={{
-              position: POSITION_NONE,
-              background: "none",
-              width: 0,
-              height: 0,
-            }}
+            scaleFactorMin={0.1}
+            customMiniature={()=>null}
+            customToolbar={()=>null}
             ref={viewer}
           >
             <svg viewBox={map.viewBox}>
-              <MapSchematic svg={map.svg} />
+              <Chart svg={map.svg} />
             </svg>
           </UncontrolledReactSVGPanZoom>
         )}
@@ -93,11 +92,13 @@ export const LandingPage = ({ map }: ILandingPageProps) => {
 
       <JumpLink id="rank">
         <Section>
+          <SectionHeading>Rank</SectionHeading>
           <Progress />
         </Section>
       </JumpLink>
       <JumpLink id="log">
         <Section>
+          <SectionHeading>Log</SectionHeading>
           <EventsList events={events} firstPerson />
         </Section>
       </JumpLink>
@@ -118,7 +119,7 @@ export const LandingPage = ({ map }: ILandingPageProps) => {
                 <ButtonIcon>
                   <MapIcon />
                 </ButtonIcon>
-                <Label>Schematic</Label>
+                <Label>Chart</Label>
               </NavLink>
             </Item>
             <Item>
@@ -214,7 +215,7 @@ const NavLink = styled(DisguisedButton)`
     }
   }
   ${BREAKPOINTS.L`
-    min-height: 64px;
+    min-height: ${subNavHeight};
   `};
 `;
 
@@ -240,6 +241,11 @@ const Label = styled.label`
 `;
 
 const Section = styled.section`
+  min-height: calc(100vh - ${subNavHeight} - ${MASTHEAD_HEIGHT});
   padding: ${GRID.UNIT};
   border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+`;
+
+const SectionHeading = styled(H2)`
+  margin-bottom: ${GRID.UNIT};
 `;

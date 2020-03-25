@@ -98,5 +98,7 @@ const StyledListItem = styled.li`
   align-items: flex-start;
   &:not(:last-child) {
     margin-bottom: ${GRID.HALF};
+    padding-bottom: ${GRID.HALF};
+    border-bottom: solid 1px rgba(255,255,255,0.1);
   }
 `;

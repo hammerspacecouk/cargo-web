@@ -8,16 +8,16 @@ import { PanelClose } from "../Atoms/PanelClose";
 import { COLOURS, hexToRGBa, panelBackground } from "../../styles/colours";
 import { BREAKPOINTS } from "../../styles/media";
 
-export const Panel = React.memo(({ id, className, closeHandler, title, children }: IProps) => {
+export const Panel = React.memo(({ id, isEvents, className, closeHandler, title, children }: IProps) => {
   let closeButton;
   if (closeHandler) {
     closeButton = <PanelClose onClick={closeHandler} />;
   }
 
   return (
-    <StyledPanel className={className} id={id}>
+    <StyledPanel className={className} id={id} isEvents={isEvents}>
       <StickyHeader>
-        <PanelHeader>
+        <PanelHeader isEvents={isEvents}>
           <PanelTitle>{title}</PanelTitle>
           {closeButton}
         </PanelHeader>
@@ -32,11 +32,13 @@ interface IProps extends IChildrenProps {
   id?: string;
   title: string;
   className?: string;
+  isEvents?: boolean;
   closeHandler?: () => void;
 }
 
-const StyledPanel = styled.div`
+const StyledPanel = styled.div<{isEvents?: boolean}>`
   ${panelBackground};
+  ${({isEvents}) => isEvents && `background: ${COLOURS.BLACK.FULL};`};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -50,8 +52,9 @@ const StickyHeader = styled.div`
   z-index: ${Z_INDEX.DEFAULT};
 `;
 
-const PanelHeader = styled.div`
+const PanelHeader = styled.div<{isEvents?: boolean}>`
   ${panelBackground};
+  ${({isEvents}) => isEvents && `background: ${COLOURS.BLACK.FULL};`};
   display: flex;
   justify-content: space-between;
   padding: ${GRID.UNIT};

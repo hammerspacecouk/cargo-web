@@ -61,7 +61,7 @@ export class Port extends AbstractScene {
 
   createShips() {
     this.ships.forEach(ship => {
-      if (ship) {
+      if (ship && ship.getObject()) {
         this.scene.remove(ship.getObject());
       }
     });

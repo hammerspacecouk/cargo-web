@@ -22,8 +22,6 @@ export class Ship extends AbstractObject {
   }
 
   getObject(): THREE.Object3D {
-    if (this.ship) {
-      return this.ship.scene;
-    }
+    return this.ship?.scene;
   }
 }

@@ -22,7 +22,7 @@ import { useAnimationScene } from "../../../../hooks/useAnimationScene";
 import { Port } from "../../../../animation/scene/Port";
 import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 
-export const ShipInPortPage = () => {
+export const  ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, shipsInLocation, port } = useActiveShipContext();
   const { allowLog } = useTutorial();
 
@@ -37,8 +37,8 @@ export const ShipInPortPage = () => {
       )}
 
       {activeView === ACTIVE_VIEW.LOG && (
-        <StyledLogPanel closeHandler={closeHandler} title="Log" id="log">
-          <StyledFullEventsList events={events} />
+        <StyledLogPanel isEvents={true} closeHandler={closeHandler} title={`Log at ${port.name}`} id="log">
+          <EventsList events={events} />
         </StyledLogPanel>
       )}
 
@@ -142,12 +142,7 @@ const StyledPage = styled.div`
 `;
 
 const StyledLogPanel = styled(Panel)`
-  background: ${COLOURS.BLACK.FULL};
   min-height: calc(100vh - ${MASTHEAD_HEIGHT});
-`;
-
-const StyledFullEventsList = styled(EventsList)`
-  padding: 0 ${GRID.UNIT} ${GRID.UNIT};
 `;
 
 // todo - remove magic numbers
@@ -181,7 +176,7 @@ const ShipOverview = ({
   const planetType = port.id.slice(-1); // todo - abstract to API
   const planetCanvasRef = useAnimationScene<HTMLDivElement>(
     new Port(planetType, [ship, ...shipsInLocation.slice(0, 19).map(other => other.ship)]),
-    [planetType]
+    [ship.id]
   );
   const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), [ship.id]);
 
