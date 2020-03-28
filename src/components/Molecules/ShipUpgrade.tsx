@@ -41,9 +41,9 @@ const ShipPurchase = ({ disabled, purchaseHandler, ship }: IShipUpgradeProps) =>
       <DetailDescription>{ship.detail.description}</DetailDescription>
       <Hidden as="h3">Stats</Hidden>
       <ShipStats stats={ship.detail.stats} />
-      <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
+      {ship.actionToken && <StyledTokenButton token={ship.actionToken} handler={purchaseHandler}>
         <CreditsButton amount={ship.cost} disabledOverride={disabled} />
-      </StyledTokenButton>
+      </StyledTokenButton>}
     </PurchaseCardDetail>
     <PurchaseCardImage notificationCount={ship.currentCount}>
       <ShipImage>
