@@ -23,7 +23,8 @@ const StyledNavigation = styled.nav`
   flex-direction: column;
   background: ${COLOURS.BLACK.FADED};
   z-index: ${Z_INDEX.MENU};
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: 50px;
+  padding-bottom: calc(50px + env(safe-area-inset-bottom));
 `;
 
 const Ships = styled.div`

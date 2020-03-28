@@ -17,9 +17,6 @@ export const TravelTutorial = () => (
       </p>
       <p>Some journeys are more perilous and require experience or strength before they can be undertaken.</p>
       <p>Choose your first direction to begin departure.</p>
-      <p>
-        <em>Tip: Remember your choice in case you need to find your way back</em>
-      </p>
     </Prose>
   </TutorialPanel>
 );
