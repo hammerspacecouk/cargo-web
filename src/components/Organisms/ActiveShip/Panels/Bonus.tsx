@@ -1,18 +1,26 @@
-import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
-import { ListUnstyled } from "../../../Atoms/List/ListUnstyled";
 import * as React from "react";
 import { EffectDetail } from "../../../Molecules/EffectDetail";
+import { GridWrapper } from "../../../Atoms/GridWrapper";
+import styled from "styled-components";
+import { IEffect } from "../../../../interfaces";
 
-export const Bonus = () => {
-  const { bonusEffects } = useActiveShipContext();
-
+export const Bonus = ({ bonusEffects }: { bonusEffects: IEffect[] }) => {
   return (
-    <ListUnstyled>
+    <StyledGridWrapper as="ul">
       {bonusEffects.map(bonus => (
-        <li key={`bonus-${bonus.id}`}>
+        <Item key={`bonus-${bonus.id}`}>
           <EffectDetail effect={bonus} />
-        </li>
+        </Item>
       ))}
-    </ListUnstyled>
+    </StyledGridWrapper>
   );
 };
+
+const StyledGridWrapper = styled(GridWrapper)`
+  justify-content: center;
+`;
+
+const Item = styled.li`
+  max-width: 200px;
+  text-align: center;
+`;

@@ -125,10 +125,15 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
 
 const ComingSoonLink = () => {
   return (
-    <a href="#" onClick={e => {
-      e.preventDefault();
-      window.alert('Coming soon');
-    }}>change</a>
+    <a
+      href="#"
+      onClick={e => {
+        e.preventDefault();
+        window.alert("Coming soon");
+      }}
+    >
+      change
+    </a>
   );
 };
 

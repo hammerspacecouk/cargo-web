@@ -4,6 +4,7 @@ export const LARGE_ICON = "64px";
 export const SMALL_ICON = "24px";
 export const TINY_ICON = "16px";
 export const NORMAL_ICON = "32px";
+export const TEXT_ICON = "1em";
 
 interface IProps {
   size?: string;

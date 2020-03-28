@@ -1,7 +1,7 @@
 import * as React from "react";
-import { IActionToken, IEffectAction, IShip, ITacticalOption } from "../../interfaces";
+import { IActionToken, IEffectAction, ITacticalOption } from "../../interfaces";
 import { EffectDetail } from "./EffectDetail";
-import { ActionButton, AttackButton, DangerButton, Type } from "../Atoms/Button";
+import { DangerButton, Type } from "../Atoms/Button";
 import { TokenButton } from "./TokenButton";
 import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
 import { CountdownToTime } from "./CountdownToTime";
@@ -18,6 +18,8 @@ import styled from "styled-components";
 import { PlayerShipList } from "../Organisms/PlayerShipList";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
+import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
+import { Icon, TEXT_ICON } from "../Atoms/Icon";
 
 interface IOffenceEffectProps {
   option: ITacticalOption;
@@ -100,7 +102,7 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
     } else {
       actionButton = (
         <DangerButton disabled>
-          {ship.shipClass.capacity === 0 ? "N/A (Probe)" : port.isSafe ? "Sanctuary" : "No Targets"}
+          {ship.shipClass.capacity === 0 ? "N/A (Probe)" : port.isSafe ? <Sanctuary /> : "No Targets"}
         </DangerButton>
       );
     }
@@ -124,6 +126,22 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
     </>
   );
 };
+
+const Sanctuary = () => (
+  <StyledSanctuary>
+    Sanctuary
+    <Icon size={TEXT_ICON}>
+      <SanctuaryIcon />
+    </Icon>
+  </StyledSanctuary>
+);
+const StyledSanctuary = styled.span`
+  display: flex;
+  align-items: center;
+  > :last-child {
+    margin-left: ${GRID.HALF};
+  }
+`;
 
 const ActionButtonDisabled = ComplexButton;
 const ActionButtonEnabled = TokenButton;

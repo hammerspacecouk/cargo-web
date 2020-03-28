@@ -3,27 +3,31 @@ import { IChannel } from "../interfaces";
 import { useState } from "react";
 import { useFrameEffect } from "./useFrameEffect";
 
-const calculateSecondsRemaining = (arrival: Date) => {
+export const calculateSeconds = (start: Date, arrival: Date) => {
   const now = new Date();
-  return Math.max(0, differenceInSeconds(arrival, now));
+  return {
+    travelled: Math.max(0, differenceInSeconds(now, start)),
+    remaining: Math.max(0, differenceInSeconds(arrival, now)),
+  };
 };
 export const useTravellingCountdown = (channel: IChannel) => {
   const start = new Date(channel.startTime);
   const arrival = new Date(channel.arrival);
 
-  const [seconds, setSeconds] = useState(() => calculateSecondsRemaining(arrival));
+  const [seconds, setSeconds] = useState(() => calculateSeconds(start, arrival));
 
   useFrameEffect(() => {
-    setSeconds(calculateSecondsRemaining(arrival));
-    return seconds > 0;
+    setSeconds(calculateSeconds(start, arrival));
+    return seconds.remaining > 0;
   });
 
   const totalSeconds = differenceInSeconds(arrival, start);
-  const percent = Math.max(0, Math.min(1, (totalSeconds - seconds) / totalSeconds)) * 100;
+  const percent = Math.max(0, Math.min(1, seconds.travelled / totalSeconds)) * 100;
 
   return {
-    isArriving: seconds <= 0,
+    isArriving: seconds.remaining <= 0,
     percent,
-    secondsRemaining: seconds,
+    secondsTravelled: seconds.travelled,
+    secondsRemaining: seconds.remaining,
   };
 };

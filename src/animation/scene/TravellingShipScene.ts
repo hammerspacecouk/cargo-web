@@ -2,19 +2,24 @@ import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
 import { Ship } from "../object/Ship";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { IShipClass } from "../../interfaces";
+import { IChannel, IShipClass } from "../../interfaces";
 
-const ROTATE_TIME = 30000;
+const CYCLE_TIME = 30000;
+const AMPLITUDE = 5;
 
-export class ShipDisplay extends AbstractScene {
+export class TravellingShipScene extends AbstractScene {
   private ambientLight: THREE.AmbientLight;
   private light: THREE.Light;
   private ship: Ship;
   private readonly shipClass: IShipClass;
+  private readonly startTime: Date;
+  private readonly endTime: Date;
 
-  constructor(shipClass: IShipClass) {
+  constructor(shipClass: IShipClass, channel: IChannel) {
     super();
     this.shipClass = shipClass;
+    this.startTime = new Date(channel.startTime);
+    this.endTime = new Date(channel.arrival);
   }
 
   init() {
@@ -47,8 +52,15 @@ export class ShipDisplay extends AbstractScene {
       this.scene.remove(this.ship.getObject());
     }
     this.ship = new Ship(this.shipClass, (object: GLTF) => {
-      object.scene.position.set(0, 0, 0);
+      object.scene.position.set(0, 0, -25);
       this.scene.add(object.scene);
+      if (this.shipClass.capacity === 0) {
+        this.ship.getObject().rotation.x = Math.PI / 2;
+        this.ship.getObject().rotation.y = -Math.PI / 6;
+      } else {
+        this.ship.getObject().rotation.y = Math.PI / 2;
+        this.ship.getObject().rotation.z = Math.PI / 10;
+      }
     });
   }
 
@@ -57,10 +69,8 @@ export class ShipDisplay extends AbstractScene {
       return;
     }
 
-    const tickTime = ((timeNow % ROTATE_TIME) / ROTATE_TIME) * (Math.PI * 2);
-    this.ship.getObject().rotation.x = tickTime;
-    this.ship.getObject().rotation.y = tickTime;
-    this.ship.getObject().rotation.z = tickTime;
+    const tickTime = ((timeNow % CYCLE_TIME) / CYCLE_TIME) * (Math.PI * 2);
+    this.ship.getObject().position.y = Math.sin(tickTime) * AMPLITUDE;
 
     this.renderer.render(this.scene, this.camera);
   }

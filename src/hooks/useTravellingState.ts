@@ -5,7 +5,7 @@ import { useTravellingCountdown } from "./useTravellingCountdown";
 
 export const useTravellingState = () => {
   const { refreshState, channel } = useActiveShipContext();
-  const { percent, secondsRemaining, isArriving } = useTravellingCountdown(channel);
+  const { percent, secondsRemaining, secondsTravelled, isArriving } = useTravellingCountdown(channel);
   const { updateScore, updateRankStatus, refreshSession } = useGameSessionContext();
   let allowArrivalCheck = true;
 
@@ -40,5 +40,6 @@ export const useTravellingState = () => {
   return {
     percent,
     secondsRemaining,
+    secondsTravelled,
   };
 };

@@ -29,7 +29,7 @@ export const useAnimationScene = <T extends HTMLElement>(
         Scene.tick(Date.now(), msSinceLastFrame, msSinceStart);
       } catch (e) {
         // any errors. tear it down and start again
-        console.error('Animation failed. Rebuilding', e); // todo - perhaps refresh the page if it keeps happening
+        console.error("Animation failed. Rebuilding", e); // todo - perhaps refresh the page if it keeps happening
         Scene.tearDown();
         Scene.initCanvas(canvasRef.current);
       }

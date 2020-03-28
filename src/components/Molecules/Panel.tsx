@@ -36,9 +36,9 @@ interface IProps extends IChildrenProps {
   closeHandler?: () => void;
 }
 
-const StyledPanel = styled.div<{isEvents?: boolean}>`
+const StyledPanel = styled.div<{ isEvents?: boolean }>`
   ${panelBackground};
-  ${({isEvents}) => isEvents && `background: ${COLOURS.BLACK.FULL};`};
+  ${({ isEvents }) => isEvents && `background: ${COLOURS.BLACK.FULL};`};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -52,9 +52,9 @@ const StickyHeader = styled.div`
   z-index: ${Z_INDEX.DEFAULT};
 `;
 
-const PanelHeader = styled.div<{isEvents?: boolean}>`
+const PanelHeader = styled.div<{ isEvents?: boolean }>`
   ${panelBackground};
-  ${({isEvents}) => isEvents && `background: ${COLOURS.BLACK.FULL};`};
+  ${({ isEvents }) => isEvents && `background: ${COLOURS.BLACK.FULL};`};
   display: flex;
   justify-content: space-between;
   padding: ${GRID.UNIT};

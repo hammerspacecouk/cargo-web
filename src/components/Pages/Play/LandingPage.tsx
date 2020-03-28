@@ -1,13 +1,13 @@
 import * as React from "react";
-import {POSITION_NONE, POSITION_TOP, TOOL_PAN, UncontrolledReactSVGPanZoom} from "react-svg-pan-zoom";
+import { POSITION_NONE, POSITION_TOP, TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
 import styled from "styled-components";
-import { COLOURS } from "../../../styles/colours";
+import { COLOURS, panelBackground } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
 import { useElementDimensions } from "../../../hooks/useElementDimensions";
 import { Progress } from "../../Organisms/PlayHome/Panels/Progress";
 import { EventsList } from "../../Organisms/EventsList";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
-import {GRID, MASTHEAD_HEIGHT, Z_INDEX} from "../../../styles/variables";
+import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../../styles/variables";
 import { DisguisedButton } from "../../Atoms/Button";
 import { Icon, NORMAL_ICON, SMALL_ICON } from "../../Atoms/Icon";
 import { LaunchIcon } from "../../Icons/LaunchIcon";
@@ -19,9 +19,9 @@ import { useRef } from "react";
 import { JumpLink } from "../../Atoms/JumpLink";
 import { MissionPanel } from "../../Organisms/LandingPage/MissionPanel";
 import { IMapProps, Chart } from "../../Organisms/Chart";
-import {H2} from "../../Atoms/Heading";
+import { H2 } from "../../Atoms/Heading";
 
-const subNavHeight = '64px';
+const subNavHeight = "64px";
 
 const Page = styled.div`
   padding-bottom: ${subNavHeight};
@@ -74,8 +74,8 @@ export const LandingPage = ({ map }: ILandingPageProps) => {
             preventPanOutside={false}
             scaleFactorMax={4}
             scaleFactorMin={0.1}
-            customMiniature={()=>null}
-            customToolbar={()=>null}
+            customMiniature={() => null}
+            customToolbar={() => null}
             ref={viewer}
           >
             <svg viewBox={map.viewBox}>
@@ -90,18 +90,20 @@ export const LandingPage = ({ map }: ILandingPageProps) => {
         </Section>
       </JumpLink>
 
-      <JumpLink id="rank">
-        <Section>
-          <SectionHeading>Rank</SectionHeading>
-          <Progress />
-        </Section>
-      </JumpLink>
-      <JumpLink id="log">
-        <Section>
-          <SectionHeading>Log</SectionHeading>
-          <EventsList events={events} firstPerson />
-        </Section>
-      </JumpLink>
+      <Secondary>
+        <SolidJumpLink id="rank">
+          <Section>
+            <SectionHeading>Rank</SectionHeading>
+            <Progress />
+          </Section>
+        </SolidJumpLink>
+        <SolidJumpLink id="log">
+          <Section>
+            <SectionHeading>Log</SectionHeading>
+            <EventsList events={events} firstPerson />
+          </Section>
+        </SolidJumpLink>
+      </Secondary>
 
       <SubBar>
         <Nav>
@@ -243,9 +245,27 @@ const Label = styled.label`
 const Section = styled.section`
   min-height: calc(100vh - ${subNavHeight} - ${MASTHEAD_HEIGHT});
   padding: ${GRID.UNIT};
-  border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+  border-top: solid 1px ${COLOURS.PANEL_BORDER};
+`;
+
+const SolidJumpLink = styled(JumpLink)`
+  ${panelBackground};
 `;
 
 const SectionHeading = styled(H2)`
   margin-bottom: ${GRID.UNIT};
+`;
+
+const Secondary = styled.div`
+  ${BREAKPOINTS.M`
+    display: flex;
+    align-items: stretch;
+    > :first-child {
+      min-width: 380px;
+      border-right: solid 1px ${COLOURS.PANEL_BORDER};
+    }
+    > :last-child {
+      flex: 1;
+    }
+  `}
 `;

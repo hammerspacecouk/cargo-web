@@ -4,7 +4,7 @@ import { WinRequirement } from "../../../Molecules/WinRequirement";
 import styled from "styled-components";
 import { GRID } from "../../../../styles/variables";
 import { Ranks } from "../Ranks";
-import {H1, H2, H3} from "../../../Atoms/Heading";
+import { H1, H2, H3 } from "../../../Atoms/Heading";
 
 export const Progress = () => {
   const { rankStatus } = useGameSessionContext();
@@ -15,7 +15,9 @@ export const Progress = () => {
         <H1 as="p">{rankStatus.currentRank.title}</H1>
         <PlanetCount as="p">{rankStatus.portsVisited}/1000 planets visited</PlanetCount>
       </Current>
-      <RanksArea><Ranks /></RanksArea>
+      <RanksArea>
+        <Ranks />
+      </RanksArea>
     </>
   );
 };

@@ -22,7 +22,7 @@ import { useAnimationScene } from "../../../../hooks/useAnimationScene";
 import { Port } from "../../../../animation/scene/Port";
 import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 
-export const  ShipInPortPage = () => {
+export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, shipsInLocation, port } = useActiveShipContext();
   const { allowLog } = useTutorial();
 

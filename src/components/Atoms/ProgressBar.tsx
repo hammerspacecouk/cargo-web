@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { COLOURS } from "../../styles/colours";
 import { GRID } from "../../styles/variables";
 import { usePercent } from "../../hooks/usePercent";
+import { IClassNameProps } from "../../interfaces";
 
-interface IProps {
+interface IProps extends IClassNameProps {
   readonly percent: number;
   readonly small?: boolean;
 }
@@ -33,10 +34,10 @@ const Bar = styled.div<{ percentValue: number }>`
   border-radius: 4px;
 `;
 
-export const ProgressBar = React.memo(({ percent, small = false }: IProps) => {
+export const ProgressBar = React.memo(({ className, percent, small = false }: IProps) => {
   const { label } = usePercent(percent);
   return (
-    <Track small={small}>
+    <Track small={small} className={className}>
       <Bar title={label} percentValue={percent} />
     </Track>
   );

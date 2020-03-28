@@ -16,7 +16,7 @@ export const useFrameEffect = (
       startTime = frameTime;
       lastHandledFrameTime = frameTime;
     }
-    const totalTimePassword = frameTime - startTime;
+    const totalTimePassed = frameTime - startTime;
     const timeSinceLast = frameTime - lastHandledFrameTime;
     if (timeSinceLast < minimumWait) {
       // if we have to wait a minimum time, skip this render and make another
@@ -24,7 +24,7 @@ export const useFrameEffect = (
       return;
     }
     lastHandledFrameTime = frameTime;
-    if (mounted.current && frameCallback(totalTimePassword)) {
+    if (mounted.current && frameCallback(totalTimePassed)) {
       frameHandler = window.requestAnimationFrame(frame);
     }
   };

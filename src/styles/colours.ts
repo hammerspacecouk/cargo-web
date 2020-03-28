@@ -219,13 +219,13 @@ export const hexToRGBa = (hex: string, alpha?: number): string => {
 
 export const scrollbarStyles = css`
   /* 1st: thumb, 2nd: track. */
-  scrollbar-color: ${COLOURS.BLACK.FADED} rgba(0, 0, 0, 0.3);
+  scrollbar-color: ${COLOURS.BLACK.FADED} ${COLOURS.BLACK.FULL};
   scrollbar-width: thin;
   &::-webkit-scrollbar {
     width: ${GRID.HALF};
   }
   &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px ${COLOURS.BLACK.FULL};
   }
   &::-webkit-scrollbar-thumb {
     background-color: ${COLOURS.BLACK.FADED};

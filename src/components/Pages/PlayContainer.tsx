@@ -1,15 +1,15 @@
 import * as React from "react";
-import styled, {createGlobalStyle, keyframes} from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import { IChildrenProps } from "../../interfaces";
 import { InGameMasthead } from "../Organisms/InGameMasthead";
 import { PromotionModal } from "../Organisms/PromotionModal";
 import { BREAKPOINTS } from "../../styles/media";
 import { Navigation } from "../Organisms/Navigation";
-import {MASTHEAD_HEIGHT, Z_INDEX} from "../../styles/variables";
+import { MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
 import { FlexAllCenter } from "../Atoms/Flex";
 import { Loading } from "../Atoms/Loading";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import {Router} from "next/router";
+import { Router } from "next/router";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
   const { player, isAtHome } = useGameSessionContext();
@@ -21,7 +21,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
     const handleRouteChange = (url: string) => {
       setIsLoadingRoute(true);
       refreshTimer = window.setTimeout(() => {
-        console.warn('Client side routing took too long. Performing full reload', { url });
+        console.warn("Client side routing took too long. Performing full reload", { url });
         window.location.href = url;
       }, 7500);
     };
@@ -29,13 +29,13 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
       window.clearTimeout(refreshTimer);
       setIsLoadingRoute(false);
     };
-    Router.events.on('routeChangeStart', handleRouteChange);
-    Router.events.on('routeChangeComplete', handleRouteEnd);
+    Router.events.on("routeChangeStart", handleRouteChange);
+    Router.events.on("routeChangeComplete", handleRouteEnd);
     return () => {
       window.clearTimeout(refreshTimer);
-      Router.events.off('routeChangeStart', handleRouteChange);
-      Router.events.off('routeChangeComplete', handleRouteEnd);
-    }
+      Router.events.off("routeChangeStart", handleRouteChange);
+      Router.events.off("routeChangeComplete", handleRouteEnd);
+    };
   }, []);
 
   if (player === undefined) {
@@ -113,16 +113,16 @@ const fadeIn = keyframes`
 `;
 
 const RouteLoadingIndicator = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: ${Z_INDEX.MENU};
-    background: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: ${fadeIn} 1000ms linear 0s 1 normal forwards;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: ${Z_INDEX.MENU};
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ${fadeIn} 1000ms linear 0s 1 normal forwards;
 `;
