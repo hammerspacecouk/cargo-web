@@ -25,6 +25,14 @@ const StyledNavigation = styled.nav`
   z-index: ${Z_INDEX.MENU};
   padding-bottom: 50px;
   padding-bottom: calc(50px + env(safe-area-inset-bottom));
+  ${BREAKPOINTS.L`
+    padding-bottom: 64px;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  `};
+  ${BREAKPOINTS.XL`
+    padding-bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  `};
 `;
 
 const Ships = styled.div`
