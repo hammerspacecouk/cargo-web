@@ -6,7 +6,7 @@
   "dependencies": {
     "b64u": "^3.0.0",
     "date-fns": "^2.8.1",
-    "next": "^9.1.4",
+    "next": "^9.3.2",
     "next-transpile-modules": "^3.0.2",
     "node-fetch": "^2.6.0",
     "react": "^16.12.0",
