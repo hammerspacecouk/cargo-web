@@ -8,7 +8,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
   if (stage < 1 || stage > 3) {
     res.writeHead(400);
     res.end("Invalid stage provided");
-    return {};
+    return {
+      props: {}
+    };
   }
 
   return {
