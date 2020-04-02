@@ -11,7 +11,7 @@ export class ShipInOrbit extends AbstractObject {
   private offset: number;
   private readonly orbitRadius: number;
 
-  constructor(shipClass: IShipClass, offset: number, orbitRadius: number, callback: (object: GLTF) => void) {
+  public constructor(shipClass: IShipClass, offset: number, orbitRadius: number, callback: (object: GLTF) => void) {
     super();
     this.offset = offset;
     this.orbitRadius = orbitRadius;
@@ -29,7 +29,7 @@ export class ShipInOrbit extends AbstractObject {
     });
   }
 
-  tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
+  public tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
     if (!this.ship) {
       return;
     }
@@ -45,7 +45,7 @@ export class ShipInOrbit extends AbstractObject {
     this.ship.scene.position.set(x, y, z);
   }
 
-  getObject(): THREE.Object3D {
+  public getObject(): THREE.Object3D {
     return this.ship?.scene;
   }
 }

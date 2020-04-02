@@ -11,14 +11,14 @@ export abstract class AbstractScene {
   protected camera: THREE.PerspectiveCamera;
   protected renderer: THREE.WebGLRenderer;
 
-  initCanvas(container: HTMLElement) {
+  public initCanvas(container: HTMLElement) {
     this.container = container;
     this.updateDimensions();
 
-    //create scene object
+    // create scene object
     this.scene = new THREE.Scene();
 
-    //setup renderer
+    // setup renderer
     this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     this.renderer.setSize(this.width, this.height);
     this.container.appendChild(this.renderer.domElement);
@@ -36,24 +36,13 @@ export abstract class AbstractScene {
     this.renderer.render(this.scene, this.camera);
   }
 
-  tearDown() {
+  public tearDown() {
     while (this.container.firstChild) {
       this.container.removeChild(this.container.firstChild);
     }
   }
 
-  resetCamera() {
-    this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, DISTANCE_PLANE);
-    this.camera.position.set(0, 0, DISTANCE_PLANE / 2);
-  }
-
-  updateDimensions() {
-    const { width, height } = this.container.getBoundingClientRect();
-    this.width = width;
-    this.height = height;
-  }
-
-  resize() {
+  public resize() {
     this.renderer.setSize(0, 0);
     this.updateDimensions();
     this.renderer.setSize(this.width, this.height);
@@ -62,6 +51,17 @@ export abstract class AbstractScene {
     this.renderer.render(this.scene, this.camera);
   }
 
-  abstract init(): void;
-  abstract tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void;
+  protected resetCamera() {
+    this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, DISTANCE_PLANE);
+    this.camera.position.set(0, 0, DISTANCE_PLANE / 2);
+  }
+
+  protected updateDimensions() {
+    const { width, height } = this.container.getBoundingClientRect();
+    this.width = width;
+    this.height = height;
+  }
+
+  public abstract init(): void;
+  public abstract tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void;
 }

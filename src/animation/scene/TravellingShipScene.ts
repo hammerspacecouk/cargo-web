@@ -15,14 +15,14 @@ export class TravellingShipScene extends AbstractScene {
   private readonly startTime: Date;
   private readonly endTime: Date;
 
-  constructor(shipClass: IShipClass, channel: IChannel) {
+  public constructor(shipClass: IShipClass, channel: IChannel) {
     super();
     this.shipClass = shipClass;
     this.startTime = new Date(channel.startTime);
     this.endTime = new Date(channel.arrival);
   }
 
-  init() {
+  public init() {
     this.camera.position.set(0, 0, 75);
 
     this.createAmbientLight();
@@ -30,41 +30,7 @@ export class TravellingShipScene extends AbstractScene {
     this.createShip();
   }
 
-  createAmbientLight() {
-    if (this.ambientLight) {
-      this.scene.remove(this.ambientLight);
-    }
-    this.ambientLight = new THREE.AmbientLight(0xcccccc);
-    this.scene.add(this.ambientLight);
-  }
-
-  createLight() {
-    if (this.light) {
-      this.scene.remove(this.light);
-    }
-    this.light = new THREE.DirectionalLight(0xffffff, 1);
-    this.light.position.set(-(this.width / 2), this.height / 2, 500);
-    this.scene.add(this.light);
-  }
-
-  createShip() {
-    if (this.ship) {
-      this.scene.remove(this.ship.getObject());
-    }
-    this.ship = new Ship(this.shipClass, (object: GLTF) => {
-      object.scene.position.set(0, 0, -25);
-      this.scene.add(object.scene);
-      if (this.shipClass.capacity === 0) {
-        this.ship.getObject().rotation.x = Math.PI / 2;
-        this.ship.getObject().rotation.y = -Math.PI / 6;
-      } else {
-        this.ship.getObject().rotation.y = Math.PI / 2;
-        this.ship.getObject().rotation.z = Math.PI / 10;
-      }
-    });
-  }
-
-  tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
+  public tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
     if (!this.ship.getObject()) {
       return;
     }
@@ -73,5 +39,39 @@ export class TravellingShipScene extends AbstractScene {
     this.ship.getObject().position.y = Math.sin(tickTime) * AMPLITUDE;
 
     this.renderer.render(this.scene, this.camera);
+  }
+
+  private createAmbientLight() {
+    if (this.ambientLight) {
+      this.scene.remove(this.ambientLight);
+    }
+    this.ambientLight = new THREE.AmbientLight(0xcccccc);
+    this.scene.add(this.ambientLight);
+  }
+
+  private createLight() {
+    if (this.light) {
+      this.scene.remove(this.light);
+    }
+    this.light = new THREE.DirectionalLight(0xffffff, 1);
+    this.light.position.set(-(this.width / 2), this.height / 2, 500);
+    this.scene.add(this.light);
+  }
+
+  private createShip() {
+    if (this.ship) {
+      this.scene.remove(this.ship.getObject());
+    }
+    this.ship = new Ship(this.shipClass, (object: GLTF) => {
+      object.scene.position.set(0, 0, -25);
+      this.scene.add(object.scene);
+      if (this.shipClass.isProbe) {
+        this.ship.getObject().rotation.x = Math.PI / 2;
+        this.ship.getObject().rotation.y = -Math.PI / 6;
+      } else {
+        this.ship.getObject().rotation.y = Math.PI / 2;
+        this.ship.getObject().rotation.z = Math.PI / 10;
+      }
+    });
   }
 }

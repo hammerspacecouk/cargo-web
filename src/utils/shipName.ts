@@ -2,9 +2,7 @@ const characters: string[] = `abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVW
 const originalGuessLength: number = 25;
 const characterIncrement: number = 7;
 
-const getRandomCharacter = (): string => {
-  return characters[Math.floor(Math.random() * characters.length)];
-};
+const getRandomCharacter = (): string => characters[Math.floor(Math.random() * characters.length)];
 
 const getInitial = () => {
   // on the first run make an array of Random characters.

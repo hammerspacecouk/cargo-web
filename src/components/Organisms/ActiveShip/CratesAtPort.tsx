@@ -14,7 +14,7 @@ export const CratesAtPort = () => {
   let totalAvailable = "-";
 
   if (cratesInPort) {
-    crates = cratesInPort.map(crateAction => <Crate key={`cap-${crateAction.crate.id}`} crateAction={crateAction} />);
+    crates = cratesInPort.map((crateAction) => <Crate key={`cap-${crateAction.crate.id}`} crateAction={crateAction} />);
     totalAvailable = cratesInPort.length.toString();
   } else {
     const placeholderSlots = new Array(3).fill(undefined);

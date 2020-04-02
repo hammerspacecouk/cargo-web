@@ -1,6 +1,4 @@
-const hasLocalStorage = (): boolean => {
-  return !!(window && window.localStorage);
-};
+const hasLocalStorage = (): boolean => !!(window && window.localStorage);
 
 export const getStoredItem = (key: string): any => {
   if (!hasLocalStorage()) {

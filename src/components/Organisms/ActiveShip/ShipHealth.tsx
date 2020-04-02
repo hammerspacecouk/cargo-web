@@ -27,7 +27,7 @@ export const ShipHealth = () => {
 
   return (
     <>
-      {healthOptions.map(transaction => {
+      {healthOptions.map((transaction) => {
         let button = (
           <CreditsButton amount={transaction.cost} disabledOverride={buttonsDisabled || !transaction.actionToken} />
         );

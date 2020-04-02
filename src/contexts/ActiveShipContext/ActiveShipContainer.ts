@@ -3,8 +3,8 @@ import { NextPageContext } from "next";
 import { ActiveShipContextComponent } from "./ActiveShipContext";
 import { getShipData, IActiveShipResponse } from "../../data/active-ship";
 
-export const ActiveShipContainer = (Page: any) => {
-  return class extends Component<IProps, undefined> {
+export const ActiveShipContainer = (Page: any) =>
+  class extends Component<IProps, undefined> {
     public static async getInitialProps({ query, req, res }: NextPageContext) {
       const shipData = await getShipData(query.ship as string, req, res);
       return {
@@ -24,7 +24,6 @@ export const ActiveShipContainer = (Page: any) => {
       );
     }
   };
-};
 
 interface IProps {
   shipId: string;

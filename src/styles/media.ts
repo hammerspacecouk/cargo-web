@@ -12,13 +12,11 @@ interface ISizeFunctions {
   MAX: TaggedTemplateFunction;
 }
 
-const makeFunction = (size: number): TaggedTemplateFunction => {
-  return (...args) => css`
-    @media (min-width: ${size / 16}em) {
-      ${css(...args)};
-    }
-  `;
-};
+const makeFunction = (size: number): TaggedTemplateFunction => (...args) => css`
+  @media (min-width: ${size / 16}em) {
+    ${css(...args)};
+  }
+`;
 
 export const BREAKPOINTS: ISizeFunctions = {
   XS: makeFunction(375),

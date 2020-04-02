@@ -5,9 +5,7 @@ import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus } from "../interface
 export const getSession = (
   incomingRequest?: http.IncomingMessage,
   response?: http.ServerResponse
-): Promise<IGameSessionResponse> => {
-  return ApiClient.fetch("/play", undefined, incomingRequest, response);
-};
+): Promise<IGameSessionResponse> => ApiClient.fetch("/play", undefined, incomingRequest, response);
 
 export interface IGameSessionResponse {
   fleet: IFleetResponse;

@@ -127,7 +127,7 @@ const ComingSoonLink = () => {
   return (
     <a
       href="#"
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         window.alert("Coming soon");
       }}

@@ -73,8 +73,7 @@ const TextContainer = styled(Container)`
   right: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
   ${SIZES.B};
   text-shadow: 0 0 2px ${COLOURS.BLACK.FULL};
   line-height: 1.4;

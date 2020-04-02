@@ -1,8 +1,6 @@
 export const UNAUTHENTICATED_ERROR = Symbol();
 
-export const errorIs = (error: IError | any, type: Symbol) => {
-  return error.type && error.type === type;
-};
+export const errorIs = (error: IError | any, type: symbol) => error.type && error.type === type;
 
 export const UnauthenticatedError = (message?: string): IError => ({
   type: UNAUTHENTICATED_ERROR,
@@ -10,6 +8,6 @@ export const UnauthenticatedError = (message?: string): IError => ({
 });
 
 interface IError {
-  type: Symbol;
+  type: symbol;
   message?: string;
 }

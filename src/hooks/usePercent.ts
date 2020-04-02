@@ -4,7 +4,8 @@ const PERCENT_OPTIONS = { style: "percent" };
 
 export const usePercent = (intValue?: number) => {
   const locale = useLocale();
-  let decimal, label;
+  let decimal;
+  let label;
 
   if (intValue) {
     decimal = intValue / 100;

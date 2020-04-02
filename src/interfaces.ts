@@ -19,9 +19,7 @@ export interface IChannel {
   arrival: string;
 }
 
-export const isInPort = (location: IChannel | IPort): location is IPort => {
-  return (<IPort>location).type === "Port";
-};
+export const isInPort = (location: IChannel | IPort): location is IPort => (location as IPort).type === "Port";
 
 export interface ICrate {
   id: string;
@@ -231,6 +229,7 @@ export interface IShipClass {
   description: string;
   strength: number;
   capacity: number;
+  isProbe: boolean;
   image: string;
   stats: IShipClassStats;
 }

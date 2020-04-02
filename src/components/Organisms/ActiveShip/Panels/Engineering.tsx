@@ -109,7 +109,7 @@ export const Engineering = () => {
         <Capacity>
           <SectionTitle>Capacity</SectionTitle>
           <SectionDetail>
-            {ship.shipClass.capacity} crate{ship.shipClass.capacity > 1 && "s"}
+            {ship.shipClass.capacity} crate{ship.shipClass.capacity !== 1 && "s"}
           </SectionDetail>
         </Capacity>
 

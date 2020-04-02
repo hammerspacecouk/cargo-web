@@ -6,7 +6,7 @@ import { IGameSessionResponse } from "../../data/game";
 export const useGameSessionContext = (): IGameSession => {
   const context = useContext(GameSessionContext) as IGameSession;
   if (!context) {
-    throw "useGameSessionContext called outside of the provider";
+    throw new Error("useGameSessionContext called outside of the provider");
   }
   return context;
 };

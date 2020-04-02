@@ -16,24 +16,32 @@ export class Port extends AbstractScene {
   private ships: ShipInOrbit[] = [];
   private allShips: IShip[];
 
-  constructor(planetType: string, allShips: IShip[]) {
+  public constructor(planetType: string, allShips: IShip[]) {
     super();
     this.allShips = allShips;
     this.planetType = planetType;
   }
 
-  init() {
+  public init() {
     this.createAmbientLight();
     this.createLight();
     this.createPlanet();
     this.createShips();
   }
 
-  getPlanetSize() {
+  public tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
+    this.planet.tick(timeNow, msSinceLastFrame, msSinceStart);
+    this.renderer.render(this.scene, this.camera);
+    this.ships.forEach((ship) => {
+      ship.tick(timeNow, msSinceLastFrame, msSinceStart);
+    });
+  }
+
+  private getPlanetSize() {
     return Math.min(Math.min(this.width, this.height) * 0.9, 400);
   }
 
-  createAmbientLight() {
+  private createAmbientLight() {
     if (this.ambientLight) {
       this.scene.remove(this.ambientLight);
     }
@@ -41,7 +49,7 @@ export class Port extends AbstractScene {
     this.scene.add(this.ambientLight);
   }
 
-  createLight() {
+  private createLight() {
     if (this.light) {
       this.scene.remove(this.light);
     }
@@ -50,7 +58,7 @@ export class Port extends AbstractScene {
     this.scene.add(this.light);
   }
 
-  createPlanet() {
+  private createPlanet() {
     if (this.planet) {
       this.scene.remove(this.planet.getObject());
     }
@@ -59,8 +67,8 @@ export class Port extends AbstractScene {
     this.scene.add(this.planet.getObject());
   }
 
-  createShips() {
-    this.ships.forEach(ship => {
+  private createShips() {
+    this.ships.forEach((ship) => {
       if (ship && ship.getObject()) {
         this.scene.remove(ship.getObject());
       }
@@ -77,16 +85,8 @@ export class Port extends AbstractScene {
     }
   }
 
-  calculateOffset(index: number, total: number): number {
+  private calculateOffset(index: number, total: number): number {
     const segment = 1 / total;
     return index * segment;
-  }
-
-  tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
-    this.planet.tick(timeNow, msSinceLastFrame, msSinceStart);
-    this.renderer.render(this.scene, this.camera);
-    this.ships.forEach(ship => {
-      ship.tick(timeNow, msSinceLastFrame, msSinceStart);
-    });
   }
 }

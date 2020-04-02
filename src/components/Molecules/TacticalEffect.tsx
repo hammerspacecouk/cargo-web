@@ -76,11 +76,11 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
       </ActionButtonDisabled>
     );
   } else if (option.mustSelectShip) {
-    const applicableShips = shipsInLocation.filter(ship => !!ship.offence);
+    const applicableShips = shipsInLocation.filter((ship) => !!ship.offence);
     if (applicableShips.length) {
       actionButton = <DangerButton onClick={() => setChooseShipOpen(true)}>Choose Target</DangerButton>;
       const getActionButton = (offenses?: IEffectAction[]) => {
-        const matchingEffect = (offenses || []).find(offense => offense.effect.id === option.effect.id);
+        const matchingEffect = (offenses || []).find((offense) => offense.effect.id === option.effect.id);
         if (matchingEffect) {
           return (
             <TokenButton token={matchingEffect.actionToken} handler={portActionHandler}>
@@ -102,14 +102,14 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
     } else {
       actionButton = (
         <DangerButton disabled>
-          {ship.shipClass.capacity === 0 ? "N/A (Probe)" : port.isSafe ? <Sanctuary /> : "No Targets"}
+          {ship.shipClass.isProbe ? "N/A (Probe)" : port.isSafe ? <Sanctuary /> : "No Targets"}
         </DangerButton>
       );
     }
   } else {
     actionButton = (
       <ActionButtonDisabled icon={<CheckboxEmpty />} disabled={true}>
-        {ship.shipClass.capacity === 0 ? "N/A (Probe)" : "Engage"}
+        {ship.shipClass.isProbe ? "N/A (Probe)" : "Engage"}
       </ActionButtonDisabled>
     );
   }

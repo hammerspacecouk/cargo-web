@@ -75,7 +75,7 @@ export const Promotion = ({ rankStatus }: IProps) => {
         {nextRank && <InactiveRank>{nextRank}</InactiveRank>}
         <ActiveRank isOn={phase2}>{newRank}</ActiveRank>
         <ActiveRank isOn={!phase2}>{previousRank}</ActiveRank>
-        {olderRanks.map(rank => (
+        {olderRanks.map((rank) => (
           <InactiveRank key={rank.title}>{rank.title}</InactiveRank>
         ))}
       </RankBox>
@@ -124,8 +124,8 @@ const InactiveRank = styled(RankItem)`
 const ActiveRank = styled(RankItem)<{ isOn: boolean }>`
   transition: all 0.8s ease-in;
   will-change: font-size, opacity;
-  opacity: ${props => (props.isOn ? "1" : INACTIVE_OPACITY)};
-  ${props =>
+  opacity: ${(props) => (props.isOn ? "1" : INACTIVE_OPACITY)};
+  ${(props) =>
     props.isOn
       ? css`
           font-size: 1.8rem;

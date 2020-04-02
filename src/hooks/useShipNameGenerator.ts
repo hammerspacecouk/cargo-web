@@ -17,7 +17,7 @@ export const useShipNameGenerator = (offeredShipName?: string) => {
         return false;
       }
 
-      setNameGuess(prev => makeRandom(prev, offeredShipName));
+      setNameGuess((prev) => makeRandom(prev, offeredShipName));
 
       if (offeredShipName && !overrideTimer.current) {
         overrideTimer.current = window.setTimeout(() => {

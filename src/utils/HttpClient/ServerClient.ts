@@ -34,7 +34,7 @@ export class ServerClient implements IAPIClient {
       }
 
       if (incomingRequest?.headers?.cookie) {
-        headers["cookie"] = incomingRequest.headers.cookie;
+        headers.cookie = incomingRequest.headers.cookie;
       }
 
       const start = Date.now();

@@ -7,7 +7,7 @@ import { IEffect } from "../../../../interfaces";
 export const Bonus = ({ bonusEffects }: { bonusEffects: IEffect[] }) => {
   return (
     <StyledGridWrapper as="ul">
-      {bonusEffects.map(bonus => (
+      {bonusEffects.map((bonus) => (
         <Item key={`bonus-${bonus.id}`}>
           <EffectDetail effect={bonus} />
         </Item>

@@ -29,7 +29,7 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
     <Panel>
       <H1>Winners Board</H1>
       <ol>
-        {winners.map(winner => (
+        {winners.map((winner) => (
           <ListItem key={`winner-${winner.player.id}`}>
             <Link {...routes.getPlayer(winner.player.id)} prefetch={false}>
               <Player href={`/players/${winner.player.id}`}>
@@ -51,7 +51,7 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
     <Panel>
       <H1>Top Players</H1>
       <ol>
-        {players.map(player => (
+        {players.map((player) => (
           <ListItem key={`player-${player.id}`}>
             <Link {...routes.getPlayer(player.id)} prefetch={false}>
               <Player href={`/players/${player.id}`}>

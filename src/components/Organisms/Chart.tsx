@@ -37,10 +37,10 @@ export const Chart = ({ svg }: IMapProps) => {
   // - Planets and labels
   return (
     <g>
-      {svg.nearby.map(near => (
+      {svg.nearby.map((near) => (
         <Nearby key={`nearby-${near.id}`} x1={near.from.x} y1={near.from.y} x2={near.to.x} y2={near.to.y} />
       ))}
-      {svg.highlights.map(highlight => (
+      {svg.highlights.map((highlight) => (
         <Highlight key={`highlight-${highlight.id}`} cx={highlight.coords.x} cy={highlight.coords.y} r={svg.grid / 4} />
       ))}
       {svg.history.map((lines, index) => {
@@ -62,10 +62,10 @@ export const Chart = ({ svg }: IMapProps) => {
           );
         });
       })}
-      {svg.planets.map(planet => (
+      {svg.planets.map((planet) => (
         <Planet key={`planet-${planet.id}`} cx={planet.coords.x} cy={planet.coords.y} r={PORT_RADIUS} />
       ))}
-      {svg.planets.map(planet => (
+      {svg.planets.map((planet) => (
         <PlanetLabel
           key={`planetLabel-${planet.id}`}
           x={planet.coords.x + PORT_RADIUS + SPACING}
@@ -74,7 +74,7 @@ export const Chart = ({ svg }: IMapProps) => {
           {planet.title}
         </PlanetLabel>
       ))}
-      {svg.ships.map(ship => {
+      {svg.ships.map((ship) => {
         const coords = ship.angle !== undefined ? orbitPosition(ship.center, svg.grid / 4, ship.angle) : ship.center;
         return (
           <React.Fragment key={`ship-${ship.id}`}>

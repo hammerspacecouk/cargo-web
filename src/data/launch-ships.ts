@@ -5,9 +5,7 @@ import { IPort, IShip, IShipUpgrade } from "../interfaces";
 export const getAvailableShips = (
   incomingRequest?: http.IncomingMessage,
   outGoingResponse?: http.ServerResponse
-): Promise<ILaunchShipsResponse> => {
-  return ApiClient.fetch("/play/upgrades", undefined, incomingRequest, outGoingResponse);
-};
+): Promise<ILaunchShipsResponse> => ApiClient.fetch("/play/upgrades", undefined, incomingRequest, outGoingResponse);
 
 export interface ILaunchShipsResponse {
   ships: IShipUpgrade[];

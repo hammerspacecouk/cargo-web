@@ -17,7 +17,7 @@ const secondsToFormat = (seconds: number): string => {
   remainingSeconds = remainingSeconds - minutes * SECONDS_IN_MINUTE;
 
   return [word("day", days), word("hour", hours), word("min", minutes), word("sec", remainingSeconds)]
-    .filter(i => i)
+    .filter((i) => i)
     .join(", ");
 };
 

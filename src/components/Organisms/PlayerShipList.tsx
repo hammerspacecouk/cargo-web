@@ -22,7 +22,7 @@ export const PlayerShipList = ({ ships, getActionButton }: IProps) => {
 
   return (
     <GridWrapper as="ul">
-      {ships.map(shipItem => (
+      {ships.map((shipItem) => (
         <StyledItem key={shipItem.ship.id}>
           <PlayerShip ship={shipItem.ship} offence={shipItem.offence} getActionButton={getActionButton} />
         </StyledItem>

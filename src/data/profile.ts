@@ -5,9 +5,7 @@ import { IActionToken, IPort } from "../interfaces";
 export const getProfile = (
   incomingRequest?: http.IncomingMessage,
   outGoingResponse?: http.ServerResponse
-): Promise<IProfileResponse> => {
-  return ApiClient.fetch("/profile", undefined, incomingRequest, outGoingResponse);
-};
+): Promise<IProfileResponse> => ApiClient.fetch("/profile", undefined, incomingRequest, outGoingResponse);
 
 export interface IProfileResponse {
   isAnonymous: boolean;

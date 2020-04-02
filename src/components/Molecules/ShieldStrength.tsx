@@ -32,7 +32,7 @@ const StyledShieldStrength = styled.span<{ loading?: boolean }>`
   overflow: hidden;
   padding-top: 100%;
   position: relative;
-  ${props => (props.loading ? animate : ``)}
+  ${(props) => (props.loading ? animate : ``)}
   > * {
     position: absolute;
     top: 0;
@@ -57,7 +57,7 @@ const CircleTrack = styled.circle`
 
 const CircleBar = styled(CircleTrack)<{ colour: string }>`
   opacity: 0;
-  stroke: ${props => props.colour};
+  stroke: ${(props) => props.colour};
   animation-delay: 1s;
   animation-duration: 1.5s;
   animation-fill-mode: forwards;

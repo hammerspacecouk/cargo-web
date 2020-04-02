@@ -6,7 +6,7 @@ import { IShipClass } from "../../interfaces";
 export class Ship extends AbstractObject {
   private ship: GLTF;
 
-  constructor(shipClass: IShipClass, callback: (object: GLTF) => void) {
+  public constructor(shipClass: IShipClass, callback: (object: GLTF) => void) {
     super();
     const loader = new GLTFLoader();
     loader.load(`/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
@@ -15,13 +15,13 @@ export class Ship extends AbstractObject {
     });
   }
 
-  tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
+  public tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
     if (!this.ship) {
       return;
     }
   }
 
-  getObject(): THREE.Object3D {
+  public getObject(): THREE.Object3D {
     return this.ship?.scene;
   }
 }

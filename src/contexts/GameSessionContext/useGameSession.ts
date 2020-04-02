@@ -28,7 +28,7 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
   };
 
   const setSession = (newSession: IGameSessionResponse) => {
-    setSessionState(prev => getNewSessionState(prev, newSession));
+    setSessionState((prev) => getNewSessionState(prev, newSession));
   };
 
   const updateSession = (skipFirstTime: boolean) => {
@@ -50,13 +50,13 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
     ...sessionState,
     isAtHome,
     setSession,
-    setActiveShipById: id => isMounted() && setSessionState(prev => setActiveShipById(prev, id)),
-    updateRankStatus: newScore =>
-      isMounted() && setSessionState(prev => setPropIfChanged(prev, "rankStatus", newScore)),
-    updateScore: newScore => isMounted() && setSessionState(prev => setPropIfChanged(prev, "score", newScore)),
+    setActiveShipById: (id) => isMounted() && setSessionState((prev) => setActiveShipById(prev, id)),
+    updateRankStatus: (newScore) =>
+      isMounted() && setSessionState((prev) => setPropIfChanged(prev, "rankStatus", newScore)),
+    updateScore: (newScore) => isMounted() && setSessionState((prev) => setPropIfChanged(prev, "score", newScore)),
     refreshSession,
     updateAShipProperty: (id: string, newProps: object) =>
-      isMounted() && setSessionState(prev => doUpdateAShipProperty(prev, id, newProps)),
+      isMounted() && setSessionState((prev) => doUpdateAShipProperty(prev, id, newProps)),
   };
 };
 
@@ -99,7 +99,7 @@ const doUpdateAShipProperty = (state: IGameSessionState, id: string, newProps: o
     return state; // do nothing
   }
 
-  const updatedShips: IFleetShip[] = state.ships.map(fleetShip => {
+  const updatedShips: IFleetShip[] = state.ships.map((fleetShip) => {
     if (fleetShip.ship.id === id) {
       const newShip = { ...fleetShip.ship, ...newProps };
       return {
@@ -138,7 +138,7 @@ const setActiveShipById = (state: IGameSessionState, id?: string) => {
     }
   }
 
-  if (newShip != currentShip) {
+  if (newShip?.ship.id !== currentShip?.ship.id) {
     return {
       ...state,
       activeShip: newShip,
@@ -150,6 +150,4 @@ const setActiveShipById = (state: IGameSessionState, id?: string) => {
 
 const sessionRefreshTime: number = 1000 * 60 * 2;
 
-interface IUpdateRankStatus {
-  (rankStatus: IRankStatus): void;
-}
+type IUpdateRankStatus = (rankStatus: IRankStatus) => void;

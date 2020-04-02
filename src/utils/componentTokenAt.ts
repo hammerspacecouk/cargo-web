@@ -9,7 +9,7 @@ const calculate = (children: any, index: number) => {
   let childIndex = 0;
 
   while (!token && childIndex < childCount) {
-    let child = children[childIndex++];
+    const child = children[childIndex++];
 
     if (typeof child !== "string") {
       if (!index) {

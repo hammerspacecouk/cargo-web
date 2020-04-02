@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
   };
 };
 
-const Page: NextPage<IPlayerPageProps> = props => (
+const Page: NextPage<IPlayerPageProps> = (props) => (
   <>
     <Head>
       <title>{pageTitle(`${props.player.displayName}`)}</title>

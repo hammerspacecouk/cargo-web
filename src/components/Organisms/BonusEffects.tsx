@@ -16,7 +16,7 @@ export const BonusEffects = React.memo(({ effects }: IProps) => {
     <>
       <TextCenter as="h3">BONUS EARNED</TextCenter>
       <EffectsRow>
-        {effects.map(effect => (
+        {effects.map((effect) => (
           <Effect key={effect.name} effect={effect} />
         ))}
       </EffectsRow>

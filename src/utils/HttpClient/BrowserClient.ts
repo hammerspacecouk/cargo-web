@@ -41,13 +41,10 @@ export class BrowserClient implements IAPIClient {
     if (!response.ok) {
       Logger.info(`[DATA_CLIENT] [FETCH ERROR] ${url}`);
       const message = await response.text();
-      throw {
-        message,
-        statusCode: response.status,
-      };
+      throw new Error(message);
     }
 
-    return await response.json();
+    return response.json();
   }
 
   private getUrl(path: string): string {

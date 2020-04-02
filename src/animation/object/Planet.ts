@@ -6,7 +6,7 @@ const PLANET_ROTATION_TIME = 120000;
 export class Planet extends AbstractObject {
   private readonly planet: THREE.Mesh;
 
-  constructor(planetType: string, radius: number) {
+  public constructor(planetType: string, radius: number) {
     super();
     this.planet = new THREE.Mesh(
       new THREE.SphereGeometry(radius, 32, 32),
@@ -16,12 +16,12 @@ export class Planet extends AbstractObject {
     );
   }
 
-  tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
+  public tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number): void {
     const fractionOfRotation = (timeNow % PLANET_ROTATION_TIME) / PLANET_ROTATION_TIME;
     this.planet.rotation.y = fractionOfRotation * (Math.PI * 2);
   }
 
-  getObject(): THREE.Object3D {
+  public getObject(): THREE.Object3D {
     return this.planet;
   }
 }

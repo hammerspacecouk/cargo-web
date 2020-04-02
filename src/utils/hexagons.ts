@@ -2,7 +2,7 @@ export class Point {
   public x: number;
   public y: number;
 
-  constructor(x: number, y: number) {
+  public constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
@@ -16,9 +16,7 @@ export const calculateHexPoints = (width: number, center: Point): Point[] => {
   const height: number = width / (Math.sqrt(3) / 2);
   const size: number = height / 2;
 
-  const round = (i: number): number => {
-    return Number.parseFloat(i.toFixed(6));
-  };
+  const round = (i: number): number => Number.parseFloat(i.toFixed(6));
 
   const corner = (i: number) => {
     const angle = (Math.PI / 180) * (60 * i + 30);

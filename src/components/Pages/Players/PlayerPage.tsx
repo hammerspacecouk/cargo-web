@@ -29,7 +29,7 @@ export const PlayerPage = ({ player, fleet }: IPlayerPageProps) => (
     <Panel>
       <H2>Fleet</H2>
       <ul>
-        {fleet.map(ship => (
+        {fleet.map((ship) => (
           <li key={ship.id}>
             <Ship>
               <Shield>

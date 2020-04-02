@@ -22,9 +22,7 @@ export const getShipData = (
   shipId: string,
   incomingRequest?: http.IncomingMessage,
   outGoingResponse?: http.ServerResponse
-): Promise<IActiveShipResponse> => {
-  return ApiClient.fetch(`/play/${shipId}`, undefined, incomingRequest, outGoingResponse);
-};
+): Promise<IActiveShipResponse> => ApiClient.fetch(`/play/${shipId}`, undefined, incomingRequest, outGoingResponse);
 
 export interface IActiveShipResponse {
   bonus: IEffect[];

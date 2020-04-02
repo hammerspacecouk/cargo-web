@@ -24,7 +24,7 @@ export const Ships = () => {
       <Modal isOpen={true} title="Choose Weapon" onClose={() => setChooseOffenceOptions(null)}>
         <Choose>
           <GridWrapper as="ul">
-            {chooseOffenceOptions.map(option => (
+            {chooseOffenceOptions.map((option) => (
               <Option key={option.effect.id}>
                 <ActionPane highlightColor={getEffectColour({ effect: option.effect })}>
                   <ActionPaneDetail>

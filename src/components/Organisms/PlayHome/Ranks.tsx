@@ -9,7 +9,7 @@ import { SMALL_ICON, TINY_ICON } from "../../Atoms/Icon";
 export const Ranks = () => {
   const { rankStatus } = useGameSessionContext();
   let ranks = [rankStatus.nextRank, rankStatus.currentRank, rankStatus.previousRank, ...rankStatus.olderRanks].filter(
-    x => x
+    (x) => x
   );
 
   // pad the unknowns

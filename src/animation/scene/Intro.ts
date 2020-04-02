@@ -23,25 +23,25 @@ export class Intro extends AbstractScene {
 
   private readonly planetType: string;
 
-  constructor(planetType: string) {
+  public constructor(planetType: string) {
     super();
     this.planetType = planetType;
   }
 
-  init() {
+  public init() {
     this.createAmbientLight();
     this.createLight();
     this.createStars();
     this.createPlanet();
   }
 
-  tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number) {
+  public tick(timeNow: number, msSinceLastFrame: number, msSinceStart: number) {
     this.handlePlanet(timeNow, msSinceLastFrame, msSinceStart);
     this.handleStars(msSinceLastFrame, msSinceStart);
     this.renderer.render(this.scene, this.camera);
   }
 
-  createAmbientLight() {
+  private createAmbientLight() {
     if (this.ambientLight) {
       this.scene.remove(this.ambientLight);
     }
@@ -49,7 +49,7 @@ export class Intro extends AbstractScene {
     this.scene.add(this.ambientLight);
   }
 
-  createLight() {
+  private createLight() {
     if (this.light) {
       this.scene.remove(this.light);
     }
@@ -58,7 +58,7 @@ export class Intro extends AbstractScene {
     this.scene.add(this.light);
   }
 
-  createPlanet() {
+  private createPlanet() {
     if (this.planet) {
       this.scene.remove(this.planet.getObject());
     }
@@ -66,13 +66,13 @@ export class Intro extends AbstractScene {
     this.planet = new Planet(this.planetType, radius);
   }
 
-  createStars() {
+  private createStars() {
     if (this.stars) {
       this.scene.remove(this.stars);
     }
     this.starGeo = new THREE.Geometry();
     for (let i = 0; i < 6000; i++) {
-      let star: IStar = new THREE.Vector3(
+      const star: IStar = new THREE.Vector3(
         Math.random() * this.width,
         Math.random() * this.height,
         Math.random() * -500
@@ -81,8 +81,8 @@ export class Intro extends AbstractScene {
       this.starGeo.vertices.push(star);
     }
 
-    let sprite = new THREE.TextureLoader().load("/star-texture.png");
-    let starMaterial = new THREE.PointsMaterial({
+    const sprite = new THREE.TextureLoader().load("/star-texture.png");
+    const starMaterial = new THREE.PointsMaterial({
       size: 0.7,
       map: sprite,
       transparent: true,
@@ -92,7 +92,7 @@ export class Intro extends AbstractScene {
     this.scene.add(this.stars);
   }
 
-  handlePlanet(timeNow: number, msSinceLastFrame: number, msSinceStart: number) {
+  private handlePlanet(timeNow: number, msSinceLastFrame: number, msSinceStart: number) {
     // planet does not appear until 5 seconds in
     if (msSinceStart < this.planetAppearTime) {
       return;
@@ -122,7 +122,7 @@ export class Intro extends AbstractScene {
     this.planet.tick(timeNow, msSinceLastFrame, msSinceStart);
   }
 
-  handleStars(msSinceLastFrame: number, msSinceStart: number) {
+  private handleStars(msSinceLastFrame: number, msSinceStart: number) {
     const acceleration = (this.starAccelerationPerSecond / 1000) * Math.min(500, msSinceLastFrame);
     if (msSinceStart > this.planetStopTime) {
       if (this.stars.parent === this.scene) {
