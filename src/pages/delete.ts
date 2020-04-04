@@ -9,7 +9,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
     res.writeHead(400);
     res.end("Invalid stage provided");
     return {
-      props: {}
+      props: {},
     };
   }
 

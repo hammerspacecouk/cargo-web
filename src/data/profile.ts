@@ -11,7 +11,6 @@ export interface IProfileResponse {
   isAnonymous: boolean;
   isTrial: boolean;
   canDelete: boolean;
-  resetToken: string | null;
   homePort: IPort;
   authProviders: IAuthProvider[];
 }

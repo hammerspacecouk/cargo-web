@@ -68,6 +68,7 @@ interface IGameSessionState {
   events?: IEvent[];
   rankStatus?: IRankStatus;
   isAtHome?: boolean;
+  isGameOver?: boolean;
   currentMissions?: IMission[];
   allMissions?: IMission[];
 }
@@ -75,6 +76,7 @@ interface IGameSessionState {
 const getNewSessionState = (state: IGameSessionState, session: IGameSessionResponse): IGameSessionState => {
   let newState = state;
   if (session?.sessionState.isLoggedIn) {
+    newState = setPropIfChanged(newState, "isGameOver", !session.fleet.hasStarterShip);
     newState = setPropIfChanged(newState, "score", session.sessionState?.player?.score);
     newState = setPropIfChanged(newState, "player", session.sessionState.player);
     newState = setPropIfChanged(newState, "rankStatus", session.sessionState.rankStatus);
@@ -83,6 +85,7 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "currentMissions", session.currentMissions);
     newState = setPropIfChanged(newState, "allMissions", session.allMissions);
   } else {
+    newState = setPropIfChanged(newState, "isGameOver", null);
     newState = setPropIfChanged(newState, "score", null);
     newState = setPropIfChanged(newState, "player", null);
     newState = setPropIfChanged(newState, "rankStatus", null);

@@ -10,9 +10,10 @@ import { FlexAllCenter } from "../Atoms/Flex";
 import { Loading } from "../Atoms/Loading";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { Router } from "next/router";
+import { GameOverModal } from "../Organisms/GameOverModal";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
-  const { player, isAtHome } = useGameSessionContext();
+  const { player, isAtHome, isGameOver } = useGameSessionContext();
   const [isLoadingRoute, setIsLoadingRoute] = React.useState(false);
 
   React.useEffect(() => {
@@ -60,6 +61,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
           <Loading />
         </RouteLoadingIndicator>
       )}
+      {isGameOver && <GameOverModal />}
     </>
   );
 };

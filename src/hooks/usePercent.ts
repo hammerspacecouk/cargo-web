@@ -7,7 +7,7 @@ export const usePercent = (intValue?: number) => {
   let decimal;
   let label;
 
-  if (intValue) {
+  if (intValue !== undefined) {
     decimal = intValue / 100;
     label = new Intl.NumberFormat(locale, PERCENT_OPTIONS).format(intValue / 100);
   }

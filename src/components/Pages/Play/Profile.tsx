@@ -1,15 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
-import { BREAKPOINTS } from "../../../styles/media";
-import { COLOURS, panelBackground } from "../../../styles/colours";
-import { Panel } from "../../Molecules/Panel";
-import { EventsList } from "../../Organisms/EventsList";
+import { COLOURS } from "../../../styles/colours";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
-import { Progress } from "../../Organisms/PlayHome/Panels/Progress";
 import { SocialAccounts } from "../../Organisms/SocialAccounts";
 import { GRID } from "../../../styles/variables";
 import { H3 } from "../../Atoms/Heading";
-import { ConfirmButton, DangerButton } from "../../Atoms/Button";
+import { DangerButton } from "../../Atoms/Button";
 import { Prose } from "../../Atoms/Prose";
 import { TableSubtle } from "../../Molecules/Table";
 import { TextDanger, TextWarning } from "../../Atoms/Text";
@@ -19,12 +15,10 @@ import { routes } from "../../../routes";
 import { useDate } from "../../../hooks/useDate";
 import { IProfileResponse } from "../../../data/profile";
 import { PanelPage } from "../../Templates/PanelPage";
-import Link from "next/link";
 import { SIZES } from "../../../styles/typography";
-import { Icon, SMALL_ICON, TINY_ICON } from "../../Atoms/Icon";
+import { Icon, TINY_ICON } from "../../Atoms/Icon";
 import { NewWindowIcon } from "../../Icons/NewWindowIcon";
 import { PlayerFlag } from "../../Molecules/PlayerFlag";
-import { ResetGameButton } from "../../Organisms/ResetGameButton";
 
 export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   const { player } = useGameSessionContext();
@@ -103,20 +97,18 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
         </Prose>
         <LogOutButton isAnonymous={profile.isAnonymous} />
       </AccountOption>
-      {profile.resetToken && (
-        <>
-          <Heading>Reset game</Heading>
-          <AccountOption>
-            <Prose>
-              <p>
-                Reset your game back to the beginning. You will lose all progress, but your profile and purchases will
-                remain intact.
-              </p>
-            </Prose>
-            <ResetGameButton token={profile.resetToken} />
-          </AccountOption>
-        </>
-      )}
+      <Heading>Reset game</Heading>
+      <AccountOption>
+        <Prose>
+          <p>
+            Reset your game back to the beginning. You will lose all progress, but your profile and purchases will
+            remain intact.
+          </p>
+        </Prose>
+        <DangerButton as="a" href={routes.getResetAccount()}>
+          Reset Game
+        </DangerButton>
+      </AccountOption>
       <Heading>Delete Account</Heading>
       <DeleteAccount canDelete={profile.canDelete} />
     </PanelPage>

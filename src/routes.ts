@@ -7,6 +7,7 @@ export const routes = {
   getAboutPolicies: () => "/about/policies",
   getAboutStatus: () => "/about/status",
   getDeleteAccount: () => "/delete",
+  getResetAccount: () => "/reset",
   getHome: () => "/",
   getLogin: () => "/login",
   getLoginAnonymous: () => `${Environment.clientApiHostname}/login/anonymous`,
