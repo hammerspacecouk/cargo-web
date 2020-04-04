@@ -70,7 +70,6 @@ const MissionItem = styled.li`
   ${BREAKPOINTS.XXL`
     width: 20%;
   `}
-  max-width: 320px;
 `;
 
 const Mission = styled.div<{ achieved?: boolean }>`

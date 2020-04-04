@@ -54,7 +54,10 @@ export const Ships = () => {
     <>
       <PlayerShipList
         ships={shipsInLocation}
-        getActionButton={(offenses?: IEffectAction[]) => {
+        getActionButton={(offenses?: IEffectAction[], inactiveReason?: string) => {
+          if (inactiveReason) {
+            return <DangerButton disabled>{inactiveReason}</DangerButton>;
+          }
           if (!offenses?.length) {
             return null;
           }

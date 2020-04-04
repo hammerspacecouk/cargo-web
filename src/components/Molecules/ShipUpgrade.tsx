@@ -85,6 +85,7 @@ const PurchaseCardDetail = styled.div`
 const LockedPurchaseCardDetail = styled(PurchaseCardDetail)`
   justify-content: center;
   align-self: center;
+  text-align: center;
 `;
 
 const PurchaseCardTitle = ({ children }: IChildrenProps) => <H4 as="h3">{children}</H4>;

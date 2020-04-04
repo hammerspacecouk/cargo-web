@@ -160,6 +160,7 @@ export interface IFleetShip {
 export interface IOtherShip {
   ship: IShip;
   offence?: IEffectAction[];
+  inactiveReason?: string;
 }
 
 export interface IShip {
@@ -230,6 +231,7 @@ export interface IShipClass {
   strength: number;
   capacity: number;
   isProbe: boolean;
+  isDefence: boolean;
   image: string;
   stats: IShipClassStats;
 }

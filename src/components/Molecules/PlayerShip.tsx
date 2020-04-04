@@ -7,8 +7,8 @@ import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "
 import { GRID } from "../../styles/variables";
 import { H3 } from "../Atoms/Heading";
 
-export const PlayerShip = ({ ship, offence, getActionButton }: IProps) => {
-  const action = getActionButton(offence);
+export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: IProps) => {
+  const action = getActionButton(offence, inactiveReason);
   return (
     <ActionPane highlightColor={shieldColour(ship.strengthPercent)}>
       <ActionPaneDetail>
@@ -33,7 +33,8 @@ export const PlayerShip = ({ ship, offence, getActionButton }: IProps) => {
 interface IProps {
   ship: IShip;
   offence?: IEffectAction[];
-  getActionButton: (offenses?: IEffectAction[]) => React.ReactNode;
+  inactiveReason?: string;
+  getActionButton: (offenses?: IEffectAction[], inactiveReason?: string) => React.ReactNode;
 }
 
 const Status = styled.div`
