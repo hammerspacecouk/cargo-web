@@ -121,6 +121,14 @@ const action = {
   LIGHTEST: "#e9dcf5",
 };
 
+const info = {
+  DARKEST: "#0071bd",
+  DARK: "#007ed2",
+  MID: "#49a3de",
+  LIGHTER: "#7bbce7",
+  LIGHTEST: "#a4d1ee",
+};
+
 // export only has semantic names
 export const COLOURS = {
   GREY: greyscale,
@@ -173,6 +181,11 @@ export const COLOURS = {
       KEY: warning.MID,
       BACKGROUND: warning.DARKEST,
       FOREGROUND: warning.LIGHTEST,
+    },
+    INFO: {
+      KEY: info.MID,
+      BACKGROUND: info.DARKEST,
+      FOREGROUND: info.LIGHTEST,
     },
   },
 

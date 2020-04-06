@@ -144,6 +144,11 @@ export interface ITacticalOption extends IEffectAction {
   mustSelectShip?: boolean;
 }
 
+export interface IConvoyOption {
+  token: IActionToken;
+  ships: IShip[];
+}
+
 export interface IEffectAction {
   actionToken?: IActionToken;
   currentCount?: number;

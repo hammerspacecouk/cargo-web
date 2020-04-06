@@ -1,6 +1,7 @@
 import {
   IActionToken,
   IChannel,
+  IConvoyOption,
   ICrateAction,
   IDirections,
   IEffect,
@@ -49,6 +50,8 @@ interface IActiveShipState {
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
   tacticalOptions?: ITacticalOption[];
+  convoys?: IConvoyOption[];
+  leaveConvoy?: IActionToken;
   effectsToPurchase?: (IEffectPurchase | ILockedTransaction)[];
   directions?: IDirections;
   events?: IEvent[];
@@ -165,6 +168,8 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "ship", activeShip.ship);
   newState = setPropIfChanged(newState, "directions", activeShip.directions);
   newState = setPropIfChanged(newState, "tacticalOptions", activeShip.tacticalOptions);
+  newState = setPropIfChanged(newState, "convoys", activeShip.convoys);
+  newState = setPropIfChanged(newState, "leaveConvoy", activeShip.leaveConvoy);
   newState = setPropIfChanged(newState, "effectsToPurchase", activeShip.effectsToPurchase);
   newState = setPropIfChanged(newState, "cratesInPort", activeShip.cratesInPort);
   newState = setPropIfChanged(newState, "cratesOnShip", activeShip.cratesOnShip);
