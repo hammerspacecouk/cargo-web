@@ -11,6 +11,7 @@ import { BREAKPOINTS } from "../../../../styles/media";
 import { DangerButton } from "../../../Atoms/Button";
 import { TokenButton } from "../../../Molecules/TokenButton";
 import { JoinConvoyPane } from "../../../Molecules/JoinConvoyPane";
+import { LeaveConvoyPane } from "../../../Molecules/LeaveConvoyPane";
 
 enum VIEWS {
   SHOP,
@@ -59,7 +60,7 @@ export const Tactical = () => {
           <GridWrapper as="ul">
             {leaveConvoy && (
               <Option key="leave-convoy">
-                <Leave token={leaveConvoy} />
+                <LeaveConvoyPane />
               </Option>
             )}
             {convoys && (
@@ -79,14 +80,6 @@ export const Tactical = () => {
     </>
   );
 };
-
-const Leave = ({ token }: { token: IActionToken }) => (
-  <p>
-    <TokenButton token={token}>
-      <DangerButton disabled={false}>Leave</DangerButton>
-    </TokenButton>
-  </p>
-);
 
 const Intro = styled.ul`
   display: flex;

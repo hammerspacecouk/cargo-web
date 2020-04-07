@@ -11,15 +11,18 @@ import { ConvoyIcon } from "../Icons/ConvoyIcon";
 import { H4 } from "../Atoms/Heading";
 import { ShieldStrength } from "./ShieldStrength";
 import { Prose } from "../Atoms/Prose";
-import { IActionToken } from "../../interfaces";
+import { IActionToken, IChildrenProps } from "../../interfaces";
+import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { IFleetResponse } from "../../data/game";
 
 export const JoinConvoyPane = () => {
+  const { updateFleet } = useGameSessionContext();
   const { portActionHandler, buttonsDisabled, convoys } = useActiveShipContext();
   const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
 
   const handler = async (token: IActionToken) => {
-    await portActionHandler(token);
-    // todo - set fleet response
+    const response: { fleet: IFleetResponse } = await portActionHandler(token);
+    updateFleet(response.fleet.ships);
     setChooseShipOpen(false);
   };
 
@@ -58,24 +61,31 @@ export const JoinConvoyPane = () => {
 
   return (
     <>
-      <ActionPane highlightColor={COLOURS.SEMANTIC.INFO.KEY}>
-        <ActionPaneDetail>
-          <IconWrap>
-            <ConvoyIcon />
-          </IconWrap>
-          <Title as="h3">Convoy</Title>
-          <p>Create a convoy to travel as one and combine your strength</p>
-        </ActionPaneDetail>
-        <ActionPaneButton>
-          <ActionButton disabled={buttonsDisabled} onClick={() => setChooseShipOpen(true)}>
-            Join Convoy
-          </ActionButton>
-        </ActionPaneButton>
-      </ActionPane>
+      <ConvoyPane text="Create a convoy to travel as one and combine your strength">
+        <ActionButton disabled={buttonsDisabled} onClick={() => setChooseShipOpen(true)}>
+          Join Convoy
+        </ActionButton>
+      </ConvoyPane>
       {chooseShipPanel}
     </>
   );
 };
+
+interface IConvoyPaneProps extends IChildrenProps {
+  text: string;
+}
+export const ConvoyPane = ({ text, children }: IConvoyPaneProps) => (
+  <ActionPane highlightColor={COLOURS.SEMANTIC.INFO.KEY}>
+    <ActionPaneDetail>
+      <IconWrap>
+        <ConvoyIcon />
+      </IconWrap>
+      <Title as="h3">Convoy</Title>
+      <p>{text}</p>
+    </ActionPaneDetail>
+    <ActionPaneButton>{children}</ActionPaneButton>
+  </ActionPane>
+);
 
 const IconWrap = styled.div`
   width: 40px;

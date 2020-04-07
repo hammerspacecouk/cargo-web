@@ -174,6 +174,7 @@ export interface IShip {
   owner?: IPlayer;
   shipClass?: IShipClass;
   isDestroyed: boolean;
+  convoyId?: string;
   strengthPercent: number;
   location?: IChannel | IPort;
 }

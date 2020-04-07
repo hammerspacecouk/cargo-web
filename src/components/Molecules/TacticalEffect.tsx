@@ -29,16 +29,12 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
   const { portActionHandler, buttonsDisabled, shipsInLocation, ship, port } = useActiveShipContext();
   const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
 
-  const handler = async (token: IActionToken) => {
-    await portActionHandler(token);
-  };
-
   let actionButton;
   let chooseShipPanel;
 
   if (option.actionToken) {
     actionButton = (
-      <ActionButtonEnabled token={option.actionToken} handler={handler}>
+      <ActionButtonEnabled token={option.actionToken} handler={portActionHandler}>
         <ComplexButton icon={<CheckboxEmpty />} type="submit" disabled={buttonsDisabled}>
           Engage
         </ComplexButton>
