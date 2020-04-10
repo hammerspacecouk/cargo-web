@@ -4,10 +4,14 @@ import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/Act
 import { TacticalEffect } from "../../../Molecules/TacticalEffect";
 import { GRID } from "../../../../styles/variables";
 import { COLOURS } from "../../../../styles/colours";
-import { IEffectPurchase } from "../../../../interfaces";
+import { IActionToken, IEffectPurchase } from "../../../../interfaces";
 import { EffectPurchase } from "../../../Molecules/EffectPurchase";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
 import { BREAKPOINTS } from "../../../../styles/media";
+import { DangerButton } from "../../../Atoms/Button";
+import { TokenButton } from "../../../Molecules/TokenButton";
+import { JoinConvoyPane } from "../../../Molecules/JoinConvoyPane";
+import { LeaveConvoyPane } from "../../../Molecules/LeaveConvoyPane";
 
 enum VIEWS {
   SHOP,
@@ -15,11 +19,13 @@ enum VIEWS {
 }
 
 export const Tactical = () => {
-  const { effectsToPurchase, tacticalOptions, port } = useActiveShipContext();
+  const { effectsToPurchase, tacticalOptions, leaveConvoy, convoys, port } = useActiveShipContext();
   const [visibleList, setVisibleList] = React.useState(VIEWS.INVENTORY);
   if (!tacticalOptions) {
     return null;
   }
+
+  const hasTacticalList = tacticalOptions.length > 0 || convoys.length > 0 || leaveConvoy;
 
   return (
     <>
@@ -50,8 +56,18 @@ export const Tactical = () => {
         </GridWrapper>
       )}
       {visibleList === VIEWS.INVENTORY &&
-        (tacticalOptions.length > 0 ? (
+        (hasTacticalList ? (
           <GridWrapper as="ul">
+            {leaveConvoy && (
+              <Option key="leave-convoy">
+                <LeaveConvoyPane />
+              </Option>
+            )}
+            {convoys && (
+              <Option key="join-convoy">
+                <JoinConvoyPane />
+              </Option>
+            )}
             {tacticalOptions.map((option, i) => (
               <Option key={option.effect ? option.effect.id : i}>
                 <TacticalEffect option={option} />

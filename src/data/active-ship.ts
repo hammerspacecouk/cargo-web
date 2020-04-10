@@ -1,7 +1,9 @@
 import http from "http";
 import { ApiClient } from "../utils/ApiClient";
 import {
+  IActionToken,
   IChannel,
+  IConvoyOption,
   ICrateAction,
   IDirections,
   IEffect,
@@ -29,6 +31,8 @@ export interface IActiveShipResponse {
   cratesInPort: ICrateAction[];
   cratesOnShip: ICrateAction[];
   tacticalOptions: ITacticalOption[];
+  convoys: IConvoyOption[];
+  leaveConvoy?: IActionToken;
   effectsToPurchase: IEffectPurchase[];
   directions: IDirections;
   events: IEvent[];

@@ -8,7 +8,7 @@ export interface IGameSession extends IGameSessionState {
   setSession: (newSession: IGameSessionResponse) => void;
   setActiveShipById: (shipId?: string) => void;
   updateScore: (val: IScore) => void;
-  updateAShipProperty: (id: string, newProp: object) => void;
+  updateFleet: (newFleet: IFleetShip[]) => void;
   updateRankStatus: IUpdateRankStatus;
 }
 
@@ -55,8 +55,7 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
       isMounted() && setSessionState((prev) => setPropIfChanged(prev, "rankStatus", newScore)),
     updateScore: (newScore) => isMounted() && setSessionState((prev) => setPropIfChanged(prev, "score", newScore)),
     refreshSession,
-    updateAShipProperty: (id: string, newProps: object) =>
-      isMounted() && setSessionState((prev) => doUpdateAShipProperty(prev, id, newProps)),
+    updateFleet: (newFleet) => isMounted() && setSessionState((prev) => setPropIfChanged(prev, "ships", newFleet)),
   };
 };
 
@@ -95,24 +94,6 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "allMissions", []);
   }
   return newState;
-};
-
-const doUpdateAShipProperty = (state: IGameSessionState, id: string, newProps: object): IGameSessionState => {
-  if (!state.ships) {
-    return state; // do nothing
-  }
-
-  const updatedShips: IFleetShip[] = state.ships.map((fleetShip) => {
-    if (fleetShip.ship.id === id) {
-      const newShip = { ...fleetShip.ship, ...newProps };
-      return {
-        ...fleetShip,
-        ship: newShip,
-      };
-    }
-    return fleetShip;
-  });
-  return setPropIfChanged(state, "ships", updatedShips);
 };
 
 const setPropIfChanged = (

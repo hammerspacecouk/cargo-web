@@ -12,14 +12,46 @@ import { TravelCountdown } from "../Atoms/TravelCountdown";
 import { useTravellingCountdown } from "../../hooks/useTravellingCountdown";
 import { TextDanger, TextOk, TextWarning } from "../Atoms/Text";
 import { PortName } from "../Molecules/PortName";
+import { COLOURS, hexToRGBa, PANEL_BORDER } from "../../styles/colours";
+
+interface IConvoy {
+  [key: string]: IFleetShip[];
+}
 
 export const FleetShips = ({ fleetShips }: IProps) => {
   const { activeShip } = useGameSessionContext();
 
+  const convoys: IConvoy = {};
+  const orphans: IFleetShip[] = [];
+
+  fleetShips.forEach((fleetShip) => {
+    if (!fleetShip.ship.isDestroyed && fleetShip.ship.convoyId) {
+      if (!convoys[fleetShip.ship.convoyId]) {
+        convoys[fleetShip.ship.convoyId] = [];
+      }
+      convoys[fleetShip.ship.convoyId].push(fleetShip);
+      return;
+    }
+    orphans.push(fleetShip);
+  });
+
   return (
     <NavigationList>
-      {/* todo - destroyed ships & attention */}
-      {fleetShips.map((fleetShip: IFleetShip) => (
+      {Object.values(convoys).map((convoy: IFleetShip[]) => (
+        <Convoy key={convoy[0].ship.convoyId}>
+          <ul>
+            {convoy.map((fleetShip: IFleetShip) => (
+              <li key={fleetShip.ship.name}>
+                <ActiveShip
+                  fleetShip={fleetShip}
+                  isCurrent={!!(activeShip && activeShip.ship.id === fleetShip.ship.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        </Convoy>
+      ))}
+      {orphans.map((fleetShip: IFleetShip) => (
         <li key={fleetShip.ship.name}>
           {fleetShip.ship.isDestroyed ? (
             <DestroyedShip fleetShip={fleetShip} />
@@ -40,6 +72,13 @@ interface IItemProps {
   fleetShip: IFleetShip;
   isCurrent?: boolean;
 }
+
+const Convoy = styled.li`
+  background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.1)};
+  &:not(:last-child) {
+    border-bottom: solid 4px ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.7)};
+  }
+`;
 
 const StyledDestroyedShip = styled.div`
   height: ${NAV_ITEM_HEIGHT};

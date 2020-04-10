@@ -14,7 +14,7 @@ export interface IGameSessionResponse {
   allMissions: IMission[];
 }
 
-interface IFleetResponse {
+export interface IFleetResponse {
   ships: IFleetShip[];
   events: IEvent[];
   hasStarterShip: boolean;

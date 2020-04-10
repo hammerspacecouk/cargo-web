@@ -69,7 +69,7 @@ export const EditShipName = ({ onComplete }: IProps) => {
     setAcceptingShipName(true);
     resetOffer();
     const data = await ApiClient.tokenFetch(token);
-    updateShipName(data.ship.name);
+    updateShipName(data.ship.name, data.fleet.ships);
     if (isMounted()) {
       setAcceptingShipName(false);
     }

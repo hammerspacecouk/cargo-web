@@ -1,11 +1,13 @@
 import {
   IActionToken,
   IChannel,
+  IConvoyOption,
   ICrateAction,
   IDirections,
   IEffect,
   IEffectPurchase,
   IEvent,
+  IFleetShip,
   IHealthIncrease,
   ILockedTransaction,
   IOtherShip,
@@ -36,8 +38,8 @@ export interface IActiveShip extends IActiveShipState {
   activeView?: ACTIVE_VIEW;
   setRequestNameToken: (token: ITransaction) => void;
   departureHandler: (token: IActionToken) => Promise<void>;
-  portActionHandler: (token: IActionToken) => Promise<void>;
-  updateShipName: (newName: string) => void;
+  portActionHandler: (token: IActionToken) => Promise<any>;
+  updateShipName: (name: string, newFleet: IFleetShip[]) => void;
   applyHealthHandler: (token: IActionToken) => Promise<void>;
   resetMessage: () => void;
   refreshState: () => Promise<IActiveShipResponse>;
@@ -49,6 +51,8 @@ interface IActiveShipState {
   cratesInPort?: ICrateAction[];
   cratesOnShip?: ICrateAction[];
   tacticalOptions?: ITacticalOption[];
+  convoys?: IConvoyOption[];
+  leaveConvoy?: IActionToken;
   effectsToPurchase?: (IEffectPurchase | ILockedTransaction)[];
   directions?: IDirections;
   events?: IEvent[];
@@ -65,7 +69,7 @@ interface IActiveShipState {
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
-  const { refreshSession, updateScore, updateAShipProperty } = useGameSessionContext();
+  const { refreshSession, updateScore, updateFleet } = useGameSessionContext();
   const [activeShipState, setActiveShipState] = useState({} as IActiveShipState);
   const [activeView, setActiveViewValue] = useState(null);
   const [message, setMessage] = useState(null);
@@ -91,18 +95,18 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
     }
   };
 
-  const doPortAction = async (token: IActionToken) => {
-    const { data, error } = await ApiClient.tokenFetch(token);
-    updateScore(data.playerScore);
-    setDataFromResponse(data);
+  const doPortAction = async (token: IActionToken): Promise<any> => {
+    const response = await ApiClient.tokenFetch(token);
+    updateScore(response.data.playerScore);
+    setDataFromResponse(response.data);
     enableButtons();
-    if (error) {
-      setMessage(error);
+    if (response.error) {
+      setMessage(response.error);
     }
-    return data;
+    return response;
   };
 
-  const portActionHandler = (token: IActionToken): Promise<void> => {
+  const portActionHandler = (token: IActionToken): Promise<any> => {
     disableButtons();
     return doPortAction(token);
   };
@@ -118,17 +122,15 @@ export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse):
 
   const applyHealthHandler = async (token: IActionToken) => {
     disableButtons();
-    const data = await doPortAction(token);
-    updateAShipProperty(activeShipState.ship.id, {
-      strengthPercent: data.ship.strengthPercent,
-    });
+    const { fleet } = await doPortAction(token);
+    updateFleet(fleet.ships);
   };
 
-  const updateShipName = (name: string) => {
+  const updateShipName = (name: string, newFleet: IFleetShip[]) => {
     if (isMounted()) {
       setActiveShipState(setPropIfChanged(activeShipState, "ship", { ...activeShipState.ship, name }));
     }
-    updateAShipProperty(activeShipState.ship.id, { name });
+    updateFleet(newFleet);
   };
 
   const refreshState = async (): Promise<IActiveShipResponse> => {
@@ -165,6 +167,8 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "ship", activeShip.ship);
   newState = setPropIfChanged(newState, "directions", activeShip.directions);
   newState = setPropIfChanged(newState, "tacticalOptions", activeShip.tacticalOptions);
+  newState = setPropIfChanged(newState, "convoys", activeShip.convoys);
+  newState = setPropIfChanged(newState, "leaveConvoy", activeShip.leaveConvoy);
   newState = setPropIfChanged(newState, "effectsToPurchase", activeShip.effectsToPurchase);
   newState = setPropIfChanged(newState, "cratesInPort", activeShip.cratesInPort);
   newState = setPropIfChanged(newState, "cratesOnShip", activeShip.cratesOnShip);

@@ -26,6 +26,8 @@ import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShi
 import { Modal, ModalType } from "../../../Molecules/Modal";
 import { ButtonRow } from "../../../Molecules/ButtonRow";
 import { TokenButton } from "../../../Molecules/TokenButton";
+import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
+import { ConvoyIcon } from "../../../Icons/ConvoyIcon";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
@@ -165,15 +167,28 @@ const Direction = ({ direction, children }: IDirectionProps) => {
         </ActionPaneDetail>
         <Distance value={detail.distanceUnit} />
         <ActionPaneButton>
-          <ActionButton type="submit" disabled={buttonIsDisabled} onClick={buttonHandler}>
+          <GoButton type="submit" disabled={buttonIsDisabled} onClick={buttonHandler}>
+            {ship.convoyId && (
+              <Icon size={TEXT_ICON}>
+                <ConvoyIcon />
+              </Icon>
+            )}
             <IntervalFormat seconds={detail.journeyTimeSeconds} />
-          </ActionButton>
+          </GoButton>
         </ActionPaneButton>
       </ActionPane>
       {modal}
     </StyledDirection>
   );
 };
+
+const GoButton = styled(ActionButton)`
+  display: flex;
+  align-items: center;
+  > :first-child:not(:last-child) {
+    margin-right: ${GRID.QUARTER};
+  }
+`;
 
 const StyledArrow = styled.div`
   width: ${GRID.QUADRUPLE};

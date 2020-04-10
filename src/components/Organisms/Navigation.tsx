@@ -48,7 +48,7 @@ const PlayerOptions = styled.div`
 `;
 
 export const NavigationList = styled(ListUnstyled)`
-  > li {
+  li {
     border-bottom: solid 1px ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.2)};
     &:last-child {
       border-bottom: none;
