@@ -10,7 +10,7 @@ export const PortName = React.memo(({ port, isHome = false, className }: IProps)
   let homeIndicator = null;
   if (port.isSafe) {
     safeIndicator = (
-      <Icon title="Sanctuary">
+      <Icon title="Safe Zone">
         <SanctuaryIcon />
       </Icon>
     );

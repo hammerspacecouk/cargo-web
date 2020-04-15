@@ -59,13 +59,18 @@ export const JoinConvoyPane = () => {
     </Modal>
   );
 
+  let convoyButton = <ActionButton disabled={true}>No friends here</ActionButton>;
+  if (convoys.length) {
+    convoyButton = (
+      <ActionButton disabled={buttonsDisabled} onClick={() => setChooseShipOpen(true)}>
+        Join Convoy
+      </ActionButton>
+    );
+  }
+
   return (
     <>
-      <ConvoyPane text="Create a convoy to travel as one and combine your strength">
-        <ActionButton disabled={buttonsDisabled} onClick={() => setChooseShipOpen(true)}>
-          Join Convoy
-        </ActionButton>
-      </ConvoyPane>
+      <ConvoyPane text="Create a convoy to travel as one and combine your strength">{convoyButton}</ConvoyPane>
       {chooseShipPanel}
     </>
   );

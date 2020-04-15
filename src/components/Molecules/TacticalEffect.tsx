@@ -125,7 +125,7 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
 
 const Sanctuary = () => (
   <StyledSanctuary>
-    Sanctuary
+    Safe Zone
     <Icon size={TEXT_ICON}>
       <SanctuaryIcon />
     </Icon>
