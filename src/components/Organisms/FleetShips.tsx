@@ -12,7 +12,7 @@ import { TravelCountdown } from "../Atoms/TravelCountdown";
 import { useTravellingCountdown } from "../../hooks/useTravellingCountdown";
 import { TextDanger, TextOk, TextWarning } from "../Atoms/Text";
 import { PortName } from "../Molecules/PortName";
-import { COLOURS, hexToRGBa, PANEL_BORDER } from "../../styles/colours";
+import { COLOURS, hexToRGBa } from "../../styles/colours";
 
 interface IConvoy {
   [key: string]: IFleetShip[];

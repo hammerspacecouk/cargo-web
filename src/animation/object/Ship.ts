@@ -9,7 +9,7 @@ export class Ship extends AbstractObject {
   public constructor(shipClass: IShipClass, callback: (object: GLTF) => void) {
     super();
     const loader = new GLTFLoader();
-    loader.load(`/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
+    loader.load(`/_static/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
       this.ship = gltf;
       callback(this.ship);
     });

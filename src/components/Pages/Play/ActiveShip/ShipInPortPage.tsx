@@ -173,9 +173,8 @@ const ShipOverview = ({
   ship: IShip;
   isCurrentView: boolean;
 }) => {
-  const planetType = port.id.slice(-1); // todo - abstract to API
   const planetCanvasRef = useAnimationScene<HTMLDivElement>(
-    new Port(planetType, [ship, ...shipsInLocation.slice(0, 19).map((other) => other.ship)]),
+    new Port(port.id, [ship, ...shipsInLocation.slice(0, 19).map((other) => other.ship)]),
     [ship.id]
   );
   const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), [ship.id]);

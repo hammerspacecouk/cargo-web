@@ -51,6 +51,12 @@ export abstract class AbstractScene {
     this.renderer.render(this.scene, this.camera);
   }
 
+  /**
+   * The camera is positioned in the center of the axis at 0,0.
+   * X goes from Negative Left to Positive Right
+   * Y goes from Negative Up to Positive Down
+   * Z goes from Negative Away from Camera, Positive Toward camera
+   */
   protected resetCamera() {
     this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 1, DISTANCE_PLANE);
     this.camera.position.set(0, 0, DISTANCE_PLANE / 2);

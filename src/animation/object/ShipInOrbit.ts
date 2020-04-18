@@ -17,7 +17,7 @@ export class ShipInOrbit extends AbstractObject {
     this.orbitRadius = orbitRadius;
 
     const loader = new GLTFLoader();
-    loader.load(`/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
+    loader.load(`/_static/models/ships/${shipClass.id}/scene.gltf`, (gltf: GLTF) => {
       this.ship = gltf;
       this.ship.scene.rotation.order = "ZYX";
 

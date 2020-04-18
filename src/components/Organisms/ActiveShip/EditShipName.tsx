@@ -118,7 +118,7 @@ export const EditShipName = ({ onComplete }: IProps) => {
       textContent = <P>You can request a new name option at random. You don't have to take it, but no refunds</P>;
       buttonContent = (
         <TokenButton token={requestNameToken.actionToken} handler={requestShipName}>
-          <CreditsButton amount={500} />
+          <CreditsButton amount={requestNameToken.cost} />
         </TokenButton>
       );
     }

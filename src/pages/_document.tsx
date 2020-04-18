@@ -36,12 +36,12 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" sizes="1024x1024" href="/app-icons/1024x1024.png" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/app-icons/180x180.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/app-icons/32x32.png" />
-          <link rel="mask-icon" color="#1a1f22" href="/app-icons/safari-pinned-tab.svg" />
-          <link rel="shortcut icon" type="image/x-icon" href="/app-icons/32x32.png" />
-          <link rel="icon" type="image/x-icon" href="/app-icons/32x32.png" />
+          <link rel="apple-touch-icon" sizes="1024x1024" href="/_static/app-icons/1024x1024.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/_static/app-icons/180x180.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/_static/app-icons/32x32.png" />
+          <link rel="mask-icon" color="#1a1f22" href="/_static/app-icons/safari-pinned-tab.svg" />
+          <link rel="shortcut icon" type="image/x-icon" href="/_static/app-icons/32x32.png" />
+          <link rel="icon" type="image/x-icon" href="/_static/app-icons/32x32.png" />
           <meta name="apple-mobile-web-app-title" content="Saxopholis" />
           <meta name="application-name" content="Saxopholis" />
           <meta name="theme-color" content="#1a1f22" />

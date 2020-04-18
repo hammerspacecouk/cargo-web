@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
-import { IChildrenProps } from "../../interfaces";
+import { IChannel, IChildrenProps, IFleetShip } from "../../interfaces";
 import { InGameMasthead } from "../Organisms/InGameMasthead";
 import { PromotionModal } from "../Organisms/PromotionModal";
 import { BREAKPOINTS } from "../../styles/media";
@@ -13,8 +13,33 @@ import { Router } from "next/router";
 import { GameOverModal } from "../Organisms/GameOverModal";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
-  const { player, isAtHome, isGameOver } = useGameSessionContext();
+  const { player, isAtHome, isGameOver, refreshSession, ships } = useGameSessionContext();
   const [isLoadingRoute, setIsLoadingRoute] = React.useState(false);
+
+  React.useEffect(() => {
+    // see if any ships are due to arrive and set a session refresh timer
+    let refreshTimer: number;
+
+    let shortestTime: number;
+    ships.forEach((ship: IFleetShip) => {
+      const arrivalTime = (ship.ship?.location as IChannel)?.arrival;
+      if (arrivalTime) {
+        const diff = Math.max(0, Date.parse(arrivalTime) - Date.now()) + 2000;
+        if (!shortestTime || diff < shortestTime) {
+          shortestTime = diff;
+        }
+      }
+    });
+
+    if (shortestTime) {
+      refreshTimer = window.setTimeout(() => {
+        refreshSession();
+      }, shortestTime);
+    }
+    return () => {
+      window.clearTimeout(refreshTimer);
+    };
+  }, [ships]);
 
   React.useEffect(() => {
     let refreshTimer: number;
@@ -44,7 +69,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
       <FlexAllCenter>
         <Loading />
       </FlexAllCenter>
-    ); // todo - skeleton
+    );
   }
 
   return (

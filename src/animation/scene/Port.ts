@@ -3,12 +3,10 @@ import { AbstractScene } from "./AbstractScene";
 import { Planet } from "../object/Planet";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { ShipInOrbit } from "../object/ShipInOrbit";
-import { IShip, IShipClass } from "../../interfaces";
-
-export const PLANET_Z_POSITION = -350;
+import { IShip } from "../../interfaces";
 
 export class Port extends AbstractScene {
-  private readonly planetType: string;
+  private readonly planetId: string;
 
   private ambientLight: THREE.AmbientLight;
   private light: THREE.Light;
@@ -16,10 +14,10 @@ export class Port extends AbstractScene {
   private ships: ShipInOrbit[] = [];
   private allShips: IShip[];
 
-  public constructor(planetType: string, allShips: IShip[]) {
+  public constructor(planetId: string, allShips: IShip[]) {
     super();
     this.allShips = allShips;
-    this.planetType = planetType;
+    this.planetId = planetId;
   }
 
   public init() {
@@ -63,7 +61,7 @@ export class Port extends AbstractScene {
       this.scene.remove(this.planet.getObject());
     }
     const radius = this.getPlanetSize() / 2;
-    this.planet = new Planet(this.planetType, radius);
+    this.planet = new Planet(this.planetId, radius);
     this.scene.add(this.planet.getObject());
   }
 

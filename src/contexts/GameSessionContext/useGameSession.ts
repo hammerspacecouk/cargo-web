@@ -22,7 +22,7 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
     const id = (sessionRefreshInProgress.current = Date.now());
     const session: IGameSessionResponse = await getSession();
     if (sessionRefreshInProgress.current === id) {
-      // prevents out of order refreshes
+      // prevents out of order refreshes. only the last one applies
       setSession(session);
     }
   };

@@ -143,7 +143,7 @@ const Direction = ({ direction, children }: IDirectionProps) => {
       <ActionPaneLine>
         <TextF as="div">
           <TextOk>
-            Last Visit
+            Last Arrival
             <br />
             <TimeAgo datetime={new Date(detail.lastVisitTime)} />
           </TextOk>
