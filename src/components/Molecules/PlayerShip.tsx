@@ -6,6 +6,8 @@ import { Score } from "../Organisms/Score";
 import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "./ActionPane";
 import { GRID } from "../../styles/variables";
 import { H3 } from "../Atoms/Heading";
+import { Icon, TEXT_ICON } from "../Atoms/Icon";
+import { PlagueIcon } from "../Icons/PlagueIcon";
 
 export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: IProps) => {
   const action = getActionButton(offence, inactiveReason);
@@ -16,7 +18,16 @@ export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: I
           <ShieldStrength percent={ship.strengthPercent} player={ship.owner} />
         </Status>
         <ActionPaneLine>
-          <H3>{ship.name}</H3>
+          <H3>
+            {ship.name}
+            {ship.hasPlague && (
+              <Plague title="Infected">
+                <Icon size={TEXT_ICON}>
+                  <PlagueIcon />
+                </Icon>
+              </Plague>
+            )}
+          </H3>
         </ActionPaneLine>
         <ActionPaneLine>
           <p>{ship.shipClass.name}</p>
@@ -36,6 +47,10 @@ interface IProps {
   inactiveReason?: string;
   getActionButton: (offenses?: IEffectAction[], inactiveReason?: string) => React.ReactNode;
 }
+
+const Plague = styled.span`
+  margin-left: ${GRID.HALF};
+`;
 
 const Status = styled.div`
   width: 52px;

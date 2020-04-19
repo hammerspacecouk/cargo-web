@@ -30,7 +30,7 @@ interface IProps {
     href: string;
     as?: string;
   };
-  text: string;
+  text?: ReactNode;
   subtext?: ReactNode;
   icon: JSX.Element;
   isCurrent: boolean;

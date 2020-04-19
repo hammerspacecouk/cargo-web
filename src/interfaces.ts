@@ -97,6 +97,8 @@ export const ACTION_SHIP_NEW = "ship_new";
 export const ACTION_SHIP_ARRIVAL = "ship_arrival";
 export const ACTION_SHIP_DEPARTURE = "ship_departure";
 export const ACTION_SHIP_RENAME = "ship_rename";
+export const ACTION_SHIP_INFECTED = "ship_infected";
+export const ACTION_SHIP_CURED = "ship_cured";
 
 export interface IScore {
   value: number;
@@ -175,6 +177,7 @@ export interface IShip {
   shipClass?: IShipClass;
   isDestroyed: boolean;
   convoyId?: string;
+  hasPlague: boolean;
   strengthPercent: number;
   location?: IChannel | IPort;
 }

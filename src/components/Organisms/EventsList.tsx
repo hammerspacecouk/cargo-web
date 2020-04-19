@@ -9,7 +9,9 @@ import {
   ACTION_PLAYER_NEW,
   ACTION_PLAYER_PROMOTION,
   ACTION_SHIP_ARRIVAL,
+  ACTION_SHIP_CURED,
   ACTION_SHIP_DEPARTURE,
+  ACTION_SHIP_INFECTED,
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
   IEvent,
@@ -29,6 +31,8 @@ import { ShipNew } from "../Molecules/Events/ShipNew";
 import { ShipRename } from "../Molecules/Events/ShipRename";
 import { EffectUse } from "../Molecules/Events/EffectUse";
 import { Offence } from "../Molecules/Events/Offence";
+import { ShipInfected } from "../Molecules/Events/ShipInfected";
+import { ShipCured } from "../Molecules/Events/ShipCured";
 
 export const EventsList = ({ className, events, firstPerson }: IProps) => {
   const len = events && events.length;
@@ -83,6 +87,10 @@ const mapEvent = (event: IEvent, firstPerson: boolean) => {
       return <ShipDeparture event={event} />;
     case ACTION_SHIP_RENAME:
       return <ShipRename event={event} />;
+    case ACTION_SHIP_INFECTED:
+      return <ShipInfected event={event} />;
+    case ACTION_SHIP_CURED:
+      return <ShipCured event={event} />;
     default:
       return `Unknown event: ${event.action}`;
   }

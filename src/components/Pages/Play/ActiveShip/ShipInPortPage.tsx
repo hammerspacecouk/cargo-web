@@ -21,6 +21,8 @@ import { useTutorial } from "../../../../hooks/useTutorial";
 import { useAnimationScene } from "../../../../hooks/useAnimationScene";
 import { Port } from "../../../../animation/scene/Port";
 import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
+import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
+import { PlagueIcon } from "../../../Icons/PlagueIcon";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, shipsInLocation, port } = useActiveShipContext();
@@ -184,7 +186,16 @@ const ShipOverview = ({
       <PlanetPosition ref={planetCanvasRef} />
       <Detail>
         <h1>
-          <TitleName>{ship.name}</TitleName>
+          <TitleName>
+            {ship.name}
+            {ship.hasPlague && (
+              <Plague title="Infected">
+                <Icon size={TEXT_ICON}>
+                  <PlagueIcon />
+                </Icon>
+              </Plague>
+            )}
+          </TitleName>
           <TitleConjunction> arrived at </TitleConjunction>
           <TitleLocation>
             <PortName port={port} />
@@ -197,6 +208,10 @@ const ShipOverview = ({
 };
 
 const shipSize = "128px";
+
+const Plague = styled.span`
+  margin-left: ${GRID.HALF};
+`;
 
 const StyledOverview = styled.div<{ isCurrentView: boolean }>`
   height: calc(100vh - ${MASTHEAD_HEIGHT});

@@ -25,7 +25,7 @@ export const Tactical = () => {
     return null;
   }
 
-  const hasTacticalList = tacticalOptions.length > 0 || convoys.length > 0 || leaveConvoy;
+  const hasTacticalList = tacticalOptions?.length || convoys?.length || leaveConvoy;
 
   return (
     <>

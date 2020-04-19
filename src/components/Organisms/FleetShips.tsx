@@ -13,6 +13,8 @@ import { useTravellingCountdown } from "../../hooks/useTravellingCountdown";
 import { TextDanger, TextOk, TextWarning } from "../Atoms/Text";
 import { PortName } from "../Molecules/PortName";
 import { COLOURS, hexToRGBa } from "../../styles/colours";
+import { Icon, TEXT_ICON } from "../Atoms/Icon";
+import { PlagueIcon } from "../Icons/PlagueIcon";
 
 interface IConvoy {
   [key: string]: IFleetShip[];
@@ -124,11 +126,24 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
     );
   }
 
+  const name = (
+    <>
+      {fleetShip.ship.name}
+      {fleetShip.ship.hasPlague && (
+        <Plague title="Infected">
+          <Icon size={TEXT_ICON}>
+            <PlagueIcon />
+          </Icon>
+        </Plague>
+      )}
+    </>
+  );
+
   return (
     <NavigationItem
       icon={<ShipIcon ship={fleetShip.ship} />}
       path={routes.getPlayShip(fleetShip.ship.id)}
-      text={fleetShip.ship.name}
+      text={name}
       subtext={subtext}
       isCurrent={isCurrent}
     />
@@ -136,6 +151,10 @@ const ActiveShip = ({ fleetShip, isCurrent }: IItemProps) => {
 };
 
 const ShipIcon = ({ ship }: { ship: IShip }) => <ShieldStrength percent={ship.strengthPercent} ship={ship} />;
+
+const Plague = styled.span`
+  margin-left: ${GRID.HALF};
+`;
 
 const Travelling = ({ channel }: { channel: IChannel }) => {
   const { secondsRemaining } = useTravellingCountdown(channel);

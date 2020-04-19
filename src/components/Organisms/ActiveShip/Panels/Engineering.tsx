@@ -12,6 +12,8 @@ import { useMounted } from "../../../../hooks/useMounted";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
 import { usePercent } from "../../../../hooks/usePercent";
 import { useNumber } from "../../../../hooks/useNumber";
+import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
+import { PlagueIcon } from "../../../Icons/PlagueIcon";
 
 const Panel = styled.div`
   display: flex;
@@ -48,6 +50,13 @@ const Capacity = styled.div`
 `;
 
 const Shield = styled.div`
+  width: 100%;
+  margin-top: ${GRID.UNIT};
+  padding-top: ${GRID.UNIT};
+  border-top: ${PANEL_INNER_DIVIDER_BORDER};
+`;
+
+const Plague = styled.div`
   width: 100%;
   margin-top: ${GRID.UNIT};
   padding-top: ${GRID.UNIT};
@@ -125,6 +134,24 @@ export const Engineering = () => {
           </ShieldIntro>
           <ShipHealth />
         </Shield>
+
+        {ship.hasPlague && (
+          <Plague>
+            <SectionTitle>
+              Infected{" "}
+              <Icon size={TEXT_ICON}>
+                <PlagueIcon />
+              </Icon>
+            </SectionTitle>
+            <SectionDetail>
+              <p>
+                This ship is infected with the Space Plague. It can only travel at half of its normal speed and will
+                slowly lose health.
+              </p>
+              <p>Bring this ship in the vicinity of a Medical Ship to cure it.</p>
+            </SectionDetail>
+          </Plague>
+        )}
       </Panel>
       {shipNameModalIsOpen && (
         <Modal isOpen={true} onClose={() => isMounted() && setShipNameModalIsOpen(false)} title="Request new ship name">
