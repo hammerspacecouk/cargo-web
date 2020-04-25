@@ -47,4 +47,5 @@ export interface IActiveShipResponse {
   hint?: string;
   authProviders?: IAuthProvider[];
   tutorialStep?: number;
+  sellToken?: ITransaction;
 }

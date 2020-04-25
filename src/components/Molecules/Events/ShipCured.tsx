@@ -9,7 +9,7 @@ export const ShipCured = ({ event }: IEventProps) => {
 
   return (
     <Event time={event.time}>
-      <em>{victimShipName}</em> was cured of the Space Plague at {event.port.name}
+      <em>{victimShipName}</em> was cured of the Stellar Plague at {event.port.name}
     </Event>
   );
 };

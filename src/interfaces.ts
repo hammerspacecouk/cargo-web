@@ -173,6 +173,7 @@ export interface IOtherShip {
 export interface IShip {
   id: string;
   name: string;
+  launchDate: string;
   owner?: IPlayer;
   shipClass?: IShipClass;
   isDestroyed: boolean;

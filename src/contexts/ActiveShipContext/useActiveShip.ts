@@ -66,6 +66,7 @@ interface IActiveShipState {
   hint?: string;
   authProviders?: IAuthProvider[];
   tutorialStep?: number;
+  sellToken?: ITransaction;
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
@@ -183,6 +184,7 @@ const getNewActiveShipState = (state: IActiveShipState, activeShip: IActiveShipR
   newState = setPropIfChanged(newState, "bonusEffects", activeShip.bonus);
   newState = setPropIfChanged(newState, "events", activeShip.events);
   newState = setPropIfChanged(newState, "tutorialStep", activeShip.tutorialStep);
+  newState = setPropIfChanged(newState, "sellToken", activeShip.sellToken);
   return newState;
 };
 

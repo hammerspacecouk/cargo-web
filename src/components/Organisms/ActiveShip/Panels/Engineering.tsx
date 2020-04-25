@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { SIZES } from "../../../../styles/typography";
 import { GRID } from "../../../../styles/variables";
 import { ShieldStrength } from "../../../Molecules/ShieldStrength";
-import { ActionButton } from "../../../Atoms/Button";
+import {ActionButton, DangerButton} from "../../../Atoms/Button";
 import { EditShipName } from "../EditShipName";
 import { Modal } from "../../../Molecules/Modal";
 import { ShipHealth } from "../ShipHealth";
@@ -14,6 +14,11 @@ import { usePercent } from "../../../../hooks/usePercent";
 import { useNumber } from "../../../../hooks/useNumber";
 import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
 import { PlagueIcon } from "../../../Icons/PlagueIcon";
+import {ScoreValue} from "../../../Molecules/ScoreValue";
+import {TimeAgo} from "../../../Atoms/TimeAgo";
+import {IActionToken} from "../../../../interfaces";
+import {TokenButton} from "../../../Molecules/TokenButton";
+import {ApiClient} from "../../../../utils/ApiClient";
 
 const Panel = styled.div`
   display: flex;
@@ -56,7 +61,7 @@ const Shield = styled.div`
   border-top: ${PANEL_INNER_DIVIDER_BORDER};
 `;
 
-const Plague = styled.div`
+const SimplePanel = styled.div`
   width: 100%;
   margin-top: ${GRID.UNIT};
   padding-top: ${GRID.UNIT};
@@ -82,13 +87,21 @@ const ShipName = styled.div`
   margin-right: ${GRID.UNIT};
 `;
 
-const RenameButton = styled(ActionButton)`
-  ${SIZES.E};
+const SellRow = styled.div`
+  display: flex;
+  align-items: flex-end;
+  margin-top: ${GRID.UNIT};
+`;
+
+const SellLabel = styled.div`
+  flex: 1;
+  margin-right: ${GRID.UNIT};
+  ${SIZES.D};
 `;
 
 export const Engineering = () => {
   const [shipNameModalIsOpen, setShipNameModalIsOpen] = React.useState(false);
-  const { buttonsDisabled, ship, requestNameToken } = useActiveShipContext();
+  const { buttonsDisabled, ship, requestNameToken, sellToken } = useActiveShipContext();
   const isMounted = useMounted();
 
   const { label, decimal } = usePercent(ship.strengthPercent);
@@ -104,9 +117,9 @@ export const Engineering = () => {
             <SectionDetail>{ship.name}</SectionDetail>
           </ShipName>
           {requestNameToken && (
-            <RenameButton disabled={buttonsDisabled} onClick={() => setShipNameModalIsOpen(true)}>
+            <ActionButton disabled={buttonsDisabled} onClick={() => setShipNameModalIsOpen(true)}>
               Rename
-            </RenameButton>
+            </ActionButton>
           )}
         </Name>
 
@@ -126,7 +139,7 @@ export const Engineering = () => {
           <ShieldIntro>
             <SectionTitle>Shield</SectionTitle>
             <SectionDetail>
-              {strengthValue}/{strengthMax} ({label})
+              {Math.max(1,parseInt(strengthValue)).toString()}/{strengthMax} ({label})
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </StyledShield>
@@ -135,8 +148,28 @@ export const Engineering = () => {
           <ShipHealth />
         </Shield>
 
+        <SimplePanel>
+          <SectionTitle>Launched</SectionTitle>
+          <SectionDetail><TimeAgo datetime={new Date(ship.launchDate)} /></SectionDetail>
+          {sellToken && <SellRow>
+            <SellLabel>
+              <SectionTitle>Value</SectionTitle>
+              <ScoreValue score={sellToken.cost} />
+            </SellLabel>
+            <TokenButton
+              token={sellToken.actionToken}
+              handler={async (token: IActionToken) => {
+                await ApiClient.tokenFetch(token);
+                window.location.href = '/play';
+              }}
+            >
+              <DangerButton disabled={buttonsDisabled}>Sell</DangerButton>
+            </TokenButton>
+          </SellRow>}
+        </SimplePanel>
+
         {ship.hasPlague && (
-          <Plague>
+          <SimplePanel>
             <SectionTitle>
               Infected{" "}
               <Icon size={TEXT_ICON}>
@@ -145,12 +178,12 @@ export const Engineering = () => {
             </SectionTitle>
             <SectionDetail>
               <p>
-                This ship is infected with the Space Plague. It can only travel at half of its normal speed and will
+                This ship is infected with the Stellar Plague. It can only travel at half of its normal speed and will
                 slowly lose health.
               </p>
               <p>Bring this ship in the vicinity of a Medical Ship to cure it.</p>
             </SectionDetail>
-          </Plague>
+          </SimplePanel>
         )}
       </Panel>
       {shipNameModalIsOpen && (
