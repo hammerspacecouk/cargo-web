@@ -12,10 +12,10 @@ import { CurrentMissions } from "../Molecules/CurrentMissions";
 import styled from "styled-components";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
-import { H2, H3, H4 } from "../Atoms/Heading";
+import { H3 } from "../Atoms/Heading";
 
 export const PromotionModal = () => {
-  const { rankStatus } = useGameSessionContext();
+  const { rankStatus, currentMissions } = useGameSessionContext();
   const [acknowledging, setAcknowledging] = React.useState(false);
 
   const acknowledgePromotion = async (token: IActionToken) => {
@@ -44,10 +44,12 @@ export const PromotionModal = () => {
   return (
     <Modal isOpen={true} title="Promotion">
       <Promotion rankStatus={rankStatus} />
-      <NewMission>
-        <Heading>New Mission</Heading>
-        <CurrentMissions />
-      </NewMission>
+      {currentMissions.length > 0 && (
+        <NewMission>
+          <Heading>New Mission</Heading>
+          <CurrentMissions />
+        </NewMission>
+      )}
       <TextCenter as="div">
         <TokenButton token={rankStatus.acknowledgeToken} handler={acknowledgePromotion}>
           {button}

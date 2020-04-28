@@ -57,6 +57,12 @@ export interface IRankStatus {
   nextRank: IRank;
   olderRanks: IRank[];
   description?: string;
+  winState?: {
+    completionTime: number;
+    isPersonalBest: boolean;
+    isWorldRecord: boolean;
+    leaderboardPosition: number;
+  };
 }
 
 interface IDirectionDetail {

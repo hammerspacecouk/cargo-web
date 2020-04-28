@@ -9,6 +9,9 @@ module.exports = withTM({
     APP_VERSION: Date.now(),
     APP_ASSET_PREFIX: process.env.APP_ASSET_PREFIX || 'https://static.saxopholis.com'
   },
+  experimental: {
+    reactRefresh: true
+  },
   target: 'serverless',
   poweredByHeader: false,
   onDemandEntries: {

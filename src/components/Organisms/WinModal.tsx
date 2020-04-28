@@ -1,67 +1,109 @@
 import * as React from "react";
-import { IActionToken } from "../../interfaces";
-import { ApiClient } from "../../utils/ApiClient";
-import { Button } from "../Atoms/Button";
-import { Loading } from "../Atoms/Loading";
-import { TextCenter } from "../Atoms/Text";
+import { ConfirmButton, DangerButton, WarningButton } from "../Atoms/Button";
 import { Modal } from "../Molecules/Modal";
-import { TokenButton } from "../Molecules/TokenButton";
-import { Promotion } from "./Promotion";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { CurrentMissions } from "../Molecules/CurrentMissions";
 import styled from "styled-components";
 import { GRID } from "../../styles/variables";
 import { COLOURS } from "../../styles/colours";
-import { H3 } from "../Atoms/Heading";
+import { Prose } from "../Atoms/Prose";
 
-export const PromotionModal = () => {
+const MINUTE = 60;
+const HOUR = MINUTE * 60;
+const DAY = HOUR * 24;
+
+const pluralise = (word: string, value: number): string => {
+  let plural = "";
+  if (Math.abs(value) !== 1) {
+    plural = "s";
+  }
+  return value + " " + word + plural;
+};
+
+const getTimeString = (seconds: number): string => {
+  const parts = [];
+  let value = seconds;
+
+  const days = Math.floor(value / DAY);
+  parts.push(pluralise("day", days));
+  value -= days * DAY;
+
+  const hours = Math.floor(value / HOUR);
+  parts.push(pluralise("hour", hours));
+  value -= hours * HOUR;
+
+  const mins = Math.floor(value / MINUTE);
+  parts.push(pluralise("min", mins));
+  value -= mins * MINUTE;
+
+  parts.push(pluralise("sec", value));
+
+  return parts.join(", ");
+};
+
+export const WinModal = () => {
   const { rankStatus } = useGameSessionContext();
-  const [acknowledging, setAcknowledging] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(true);
 
-  const acknowledgePromotion = async (token: IActionToken) => {
-    setAcknowledging(true);
-
-    // make the API call
-    await ApiClient.tokenFetch(token);
-    window.location.reload();
-  };
-
-  if (!rankStatus || !rankStatus.acknowledgeToken) {
+  if (!rankStatus || rankStatus.acknowledgeToken || !rankStatus.winState) {
     return null;
   }
 
-  let button;
-  if (acknowledging) {
-    button = (
-      <Button type="submit" disabled={true}>
-        <Loading />
-      </Button>
-    );
-  } else {
-    button = <Button type="submit">Ok</Button>;
-  }
+  const { completionTime, isPersonalBest, isWorldRecord, leaderboardPosition } = rankStatus.winState;
 
   return (
-    <Modal isOpen={true} title="Promotion">
-      <Promotion rankStatus={rankStatus} />
-      <NewMission>
-        <Heading>New Mission</Heading>
-        <CurrentMissions />
-      </NewMission>
-      <TextCenter as="div">
-        <TokenButton token={rankStatus.acknowledgeToken} handler={acknowledgePromotion}>
-          {button}
-        </TokenButton>
-      </TextCenter>
+    <Modal isOpen={isOpen} title="Mission Complete">
+      <Prose>
+        <Text>
+          Congratulations. You completed the mission in:
+          <br />
+          {getTimeString(completionTime)}
+        </Text>
+      </Prose>
+      {(isPersonalBest || isWorldRecord) && (
+        <Records>
+          {isPersonalBest && <Record>Personal Best</Record>}
+          {isWorldRecord && <Record>World Record</Record>}
+        </Records>
+      )}
+      <Buttons as="div">
+        <ConfirmButton as="a" href="/players">
+          View Leaderboard (#{leaderboardPosition})
+        </ConfirmButton>
+        <WarningButton onClick={() => setIsOpen(false)}>Continue Playing</WarningButton>
+        <DangerButton as="a" href="/reset">
+          Start Over
+        </DangerButton>
+      </Buttons>
     </Modal>
   );
 };
 
-const NewMission = styled.div`
-  padding: ${GRID.UNIT};
-  border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
-`;
-const Heading = styled(H3)`
+const Text = styled.p`
   text-align: center;
+`;
+
+const Records = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: ${GRID.UNIT};
+  > * {
+    margin: 0 ${GRID.HALF};
+  }
+`;
+
+const Record = styled.div`
+  text-transform: uppercase;
+  background: ${COLOURS.GREY.DARKEST};
+  padding: ${GRID.HALF} ${GRID.UNIT};
+  border-radius: 4px;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  > *:not(:last-child) {
+    margin-bottom: ${GRID.UNIT};
+  }
 `;

@@ -70,7 +70,7 @@ const Description = () => (
     <ul>
       <li>Profile nickname and picture</li>
       <li>Your game subscription (you do not have to pay again)</li>
-      <li>Your winning time and position on the Winners board (if applicable)</li>
+      <li>Your best winning time and position on the Winners board (if applicable)</li>
       <li>Home planet setting</li>
     </ul>
     <hr />

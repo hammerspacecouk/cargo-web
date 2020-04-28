@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { SIZES } from "../../../../styles/typography";
 import { GRID } from "../../../../styles/variables";
 import { ShieldStrength } from "../../../Molecules/ShieldStrength";
-import {ActionButton, DangerButton} from "../../../Atoms/Button";
+import { ActionButton, DangerButton } from "../../../Atoms/Button";
 import { EditShipName } from "../EditShipName";
 import { Modal } from "../../../Molecules/Modal";
 import { ShipHealth } from "../ShipHealth";
@@ -14,11 +14,11 @@ import { usePercent } from "../../../../hooks/usePercent";
 import { useNumber } from "../../../../hooks/useNumber";
 import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
 import { PlagueIcon } from "../../../Icons/PlagueIcon";
-import {ScoreValue} from "../../../Molecules/ScoreValue";
-import {TimeAgo} from "../../../Atoms/TimeAgo";
-import {IActionToken} from "../../../../interfaces";
-import {TokenButton} from "../../../Molecules/TokenButton";
-import {ApiClient} from "../../../../utils/ApiClient";
+import { ScoreValue } from "../../../Molecules/ScoreValue";
+import { TimeAgo } from "../../../Atoms/TimeAgo";
+import { IActionToken } from "../../../../interfaces";
+import { TokenButton } from "../../../Molecules/TokenButton";
+import { ApiClient } from "../../../../utils/ApiClient";
 
 const Panel = styled.div`
   display: flex;
@@ -139,7 +139,7 @@ export const Engineering = () => {
           <ShieldIntro>
             <SectionTitle>Shield</SectionTitle>
             <SectionDetail>
-              {Math.max(1,parseInt(strengthValue)).toString()}/{strengthMax} ({label})
+              {Math.max(1, parseInt(strengthValue)).toString()}/{strengthMax} ({label})
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </StyledShield>
@@ -150,22 +150,26 @@ export const Engineering = () => {
 
         <SimplePanel>
           <SectionTitle>Launched</SectionTitle>
-          <SectionDetail><TimeAgo datetime={new Date(ship.launchDate)} /></SectionDetail>
-          {sellToken && <SellRow>
-            <SellLabel>
-              <SectionTitle>Value</SectionTitle>
-              <ScoreValue score={sellToken.cost} />
-            </SellLabel>
-            <TokenButton
-              token={sellToken.actionToken}
-              handler={async (token: IActionToken) => {
-                await ApiClient.tokenFetch(token);
-                window.location.href = '/play';
-              }}
-            >
-              <DangerButton disabled={buttonsDisabled}>Sell</DangerButton>
-            </TokenButton>
-          </SellRow>}
+          <SectionDetail>
+            <TimeAgo datetime={new Date(ship.launchDate)} />
+          </SectionDetail>
+          {sellToken && (
+            <SellRow>
+              <SellLabel>
+                <SectionTitle>Value</SectionTitle>
+                <ScoreValue score={sellToken.cost} />
+              </SellLabel>
+              <TokenButton
+                token={sellToken.actionToken}
+                handler={async (token: IActionToken) => {
+                  await ApiClient.tokenFetch(token);
+                  window.location.href = "/play";
+                }}
+              >
+                <DangerButton disabled={buttonsDisabled}>Sell</DangerButton>
+              </TokenButton>
+            </SellRow>
+          )}
         </SimplePanel>
 
         {ship.hasPlague && (

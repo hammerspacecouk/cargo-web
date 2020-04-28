@@ -11,6 +11,7 @@ import { Loading } from "../Atoms/Loading";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { Router } from "next/router";
 import { GameOverModal } from "../Organisms/GameOverModal";
+import { WinModal } from "../Organisms/WinModal";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
   const { player, isAtHome, isGameOver, refreshSession, ships } = useGameSessionContext();
@@ -81,6 +82,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
         <StyledNavigation isAtHome={isAtHome} />
       </StyledPlayBoard>
       <PromotionModal />
+      <WinModal />
       {isLoadingRoute && (
         <RouteLoadingIndicator>
           <Loading />

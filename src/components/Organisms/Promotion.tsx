@@ -75,7 +75,7 @@ export const Promotion = ({ rankStatus }: IProps) => {
         {nextRank && <InactiveRank>{nextRank}</InactiveRank>}
         <ActiveRank isOn={phase2}>{newRank}</ActiveRank>
         <ActiveRank isOn={!phase2}>{previousRank}</ActiveRank>
-        {olderRanks.map((rank) => (
+        {olderRanks.slice(0, 3).map((rank) => (
           <InactiveRank key={rank.title}>{rank.title}</InactiveRank>
         ))}
       </RankBox>

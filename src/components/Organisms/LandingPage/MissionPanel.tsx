@@ -79,6 +79,7 @@ const Mission = styled.div<{ achieved?: boolean }>`
   background: ${COLOURS.GREY.DARKEST};
   padding: ${GRID.UNIT};
   border: solid 1px ${({ achieved }) => (achieved ? COLOURS.SEMANTIC.OK.KEY : COLOURS.GREY.MID)};
+  ${({ achieved }) => !achieved && `opacity: 0.6`};
 `;
 
 const LockedMission = styled(Mission)`
