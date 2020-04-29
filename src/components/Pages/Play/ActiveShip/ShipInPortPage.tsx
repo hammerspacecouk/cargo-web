@@ -23,6 +23,8 @@ import { Port } from "../../../../animation/scene/Port";
 import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
 import { PlagueIcon } from "../../../Icons/PlagueIcon";
+import {CountdownLink} from "../../../Molecules/CountdownLink";
+import {CountdownToTime} from "../../../Molecules/CountdownToTime";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, shipsInLocation, port } = useActiveShipContext();
@@ -202,6 +204,14 @@ const ShipOverview = ({
           </TitleLocation>
         </h1>
         <ShipPosition ref={shipCanvasRef} />
+        {port.blockade && (
+          <Blockade>
+            <BlockadeDetail>
+              BLOCKADED BY {port.blockade.player.displayName} (500)<br />
+              <CountdownToTime dateTime={port.blockade.until} />
+            </BlockadeDetail>
+          </Blockade>
+        )}
       </Detail>
     </StyledOverview>
   );
@@ -211,6 +221,20 @@ const shipSize = "128px";
 
 const Plague = styled.span`
   margin-left: ${GRID.HALF};
+`;
+
+const Blockade = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${GRID.HALF};
+`;
+const BlockadeDetail = styled.span`
+  display: block;
+  text-align: center;
+  padding: ${GRID.HALF} ${GRID.UNIT};
+  border-radius: ${GRID.UNIT};
+  background: ${COLOURS.SEMANTIC.DANGER.BACKGROUND};
+  color: ${COLOURS.SEMANTIC.DANGER.FOREGROUND};
 `;
 
 const StyledOverview = styled.div<{ isCurrentView: boolean }>`

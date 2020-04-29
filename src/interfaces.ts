@@ -10,6 +10,10 @@ export interface IPort {
   id: string;
   name: string;
   isSafe: boolean;
+  blockade?: {
+    until: string; // datetime
+    player: IPlayer;
+  }
 }
 
 export interface IChannel {
