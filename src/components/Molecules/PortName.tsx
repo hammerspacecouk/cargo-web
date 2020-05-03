@@ -4,7 +4,7 @@ import { IClassNameProps, IPort } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
 import { HomeIcon } from "../Icons/HomeIcon";
-import {Blockade} from "../Icons/BlockadeIcon";
+import { Blockade } from "../Icons/BlockadeIcon";
 
 export const PortName = React.memo(({ port, isHome = false, className }: IProps) => {
   let safeIndicator = null;

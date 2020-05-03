@@ -48,4 +48,5 @@ export interface IActiveShipResponse {
   authProviders?: IAuthProvider[];
   tutorialStep?: number;
   sellToken?: ITransaction;
+  blockadeStrength?: number;
 }

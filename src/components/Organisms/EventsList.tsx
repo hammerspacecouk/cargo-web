@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   ACTION_CRATE_NEW,
   ACTION_CRATE_PICKUP,
+  ACTION_EFFECT_BLOCKADE,
   ACTION_EFFECT_DESTROYED,
   ACTION_EFFECT_OFFENCE,
   ACTION_EFFECT_USE,
@@ -33,6 +34,7 @@ import { EffectUse } from "../Molecules/Events/EffectUse";
 import { Offence } from "../Molecules/Events/Offence";
 import { ShipInfected } from "../Molecules/Events/ShipInfected";
 import { ShipCured } from "../Molecules/Events/ShipCured";
+import { Blockade } from "../Molecules/Events/Blockade";
 
 export const EventsList = ({ className, events, firstPerson }: IProps) => {
   const len = events && events.length;
@@ -75,6 +77,8 @@ const mapEvent = (event: IEvent, firstPerson: boolean) => {
       return <Offence event={event} firstPerson={firstPerson} />;
     case ACTION_EFFECT_DESTROYED:
       return <Offence event={event} firstPerson={firstPerson} destroyed={true} />;
+    case ACTION_EFFECT_BLOCKADE:
+      return <Blockade event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_NEW:
       return <PlayerNew event={event} firstPerson={firstPerson} />;
     case ACTION_PLAYER_PROMOTION:

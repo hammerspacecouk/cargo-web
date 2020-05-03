@@ -4,12 +4,10 @@ import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/Act
 import { TacticalEffect } from "../../../Molecules/TacticalEffect";
 import { GRID } from "../../../../styles/variables";
 import { COLOURS } from "../../../../styles/colours";
-import { IActionToken, IEffectPurchase } from "../../../../interfaces";
+import { IEffectPurchase } from "../../../../interfaces";
 import { EffectPurchase } from "../../../Molecules/EffectPurchase";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
 import { BREAKPOINTS } from "../../../../styles/media";
-import { DangerButton } from "../../../Atoms/Button";
-import { TokenButton } from "../../../Molecules/TokenButton";
 import { JoinConvoyPane } from "../../../Molecules/JoinConvoyPane";
 import { LeaveConvoyPane } from "../../../Molecules/LeaveConvoyPane";
 

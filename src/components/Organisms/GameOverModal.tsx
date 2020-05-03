@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { GRID } from "../../styles/variables";
 import { PANEL_INNER_DIVIDER_BORDER } from "../../styles/colours";
 import { TextCenter, TextDanger } from "../Atoms/Text";
-import { ActionButton, DangerButton } from "../Atoms/Button";
+import { ActionButton } from "../Atoms/Button";
 import { routes } from "../../routes";
 
 export const GameOverModal = () => {

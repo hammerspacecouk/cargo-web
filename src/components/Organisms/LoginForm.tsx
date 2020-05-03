@@ -4,7 +4,6 @@ import { ILoginOptions, IMessage } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 import { Environment } from "../../utils/environment";
 import { ListInline } from "../Atoms/List/ListInline";
-import { P } from "../Atoms/Text";
 import {
   AnonymousButton,
   FacebookButton,
@@ -16,7 +15,6 @@ import {
 import { MessagesPanel } from "./MessagesPanel";
 import { Loading } from "../Atoms/Loading";
 import { TokenButton } from "../Molecules/TokenButton";
-import { Prose } from "../Atoms/Prose";
 import { BREAKPOINTS } from "../../styles/media";
 import { routes } from "../../routes";
 
