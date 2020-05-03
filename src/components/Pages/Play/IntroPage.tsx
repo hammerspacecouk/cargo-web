@@ -8,7 +8,7 @@ import { AnimatedEllipsis } from "../../Atoms/AnimatedEllipsis";
 import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
 import { IPort, IShip } from "../../../interfaces";
 import { PortName } from "../../Molecules/PortName";
-import { GRID, MASTHEAD_HEIGHT, NAV_ITEM_HEIGHT } from "../../../styles/variables";
+import { GRID, MASTHEAD_HEIGHT } from "../../../styles/variables";
 import { COLOURS } from "../../../styles/colours";
 import { routes } from "../../../routes";
 import { ActionButton } from "../../Atoms/Button";

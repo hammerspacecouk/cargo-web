@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
 import { Crate, CratePlaceholder } from "./Crate";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { COLOURS } from "../../../styles/colours";
 import { H6 } from "../../Atoms/Heading";
 import { GRID } from "../../../styles/variables";

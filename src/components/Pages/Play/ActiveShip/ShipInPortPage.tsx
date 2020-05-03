@@ -23,9 +23,10 @@ import { Port } from "../../../../animation/scene/Port";
 import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
 import { PlagueIcon } from "../../../Icons/PlagueIcon";
+import { CountdownToTime } from "../../../Molecules/CountdownToTime";
 
 export const ShipInPortPage = () => {
-  const { activeView, events, setActiveView, ship, shipsInLocation, port } = useActiveShipContext();
+  const { activeView, events, setActiveView, ship, shipsInLocation, port, blockadeStrength } = useActiveShipContext();
   const { allowLog } = useTutorial();
 
   const closeHandler = () => {
@@ -35,7 +36,13 @@ export const ShipInPortPage = () => {
   return (
     <StyledPage>
       {activeView !== ACTIVE_VIEW.LOG && (
-        <ShipOverview port={port} shipsInLocation={shipsInLocation} ship={ship} isCurrentView={activeView === null} />
+        <ShipOverview
+          port={port}
+          shipsInLocation={shipsInLocation}
+          ship={ship}
+          isCurrentView={activeView === null}
+          blockadeStrength={blockadeStrength}
+        />
       )}
 
       {activeView === ACTIVE_VIEW.LOG && (
@@ -169,11 +176,13 @@ const ShipOverview = ({
   ship,
   shipsInLocation,
   isCurrentView,
+  blockadeStrength,
 }: {
   port: IPort;
   shipsInLocation: IOtherShip[];
   ship: IShip;
   isCurrentView: boolean;
+  blockadeStrength?: number;
 }) => {
   const planetCanvasRef = useAnimationScene<HTMLDivElement>(
     new Port(port.id, [ship, ...shipsInLocation.slice(0, 19).map((other) => other.ship)]),
@@ -202,6 +211,14 @@ const ShipOverview = ({
           </TitleLocation>
         </h1>
         <ShipPosition ref={shipCanvasRef} />
+        {port.blockade && (
+          <Blockade>
+            <BlockadeDetail>
+              BLOCKADED BY {port.blockade.player.displayName} ({blockadeStrength})<br />
+              <CountdownToTime dateTime={port.blockade.until} />
+            </BlockadeDetail>
+          </Blockade>
+        )}
       </Detail>
     </StyledOverview>
   );
@@ -211,6 +228,20 @@ const shipSize = "128px";
 
 const Plague = styled.span`
   margin-left: ${GRID.HALF};
+`;
+
+const Blockade = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${GRID.HALF};
+`;
+const BlockadeDetail = styled.span`
+  display: block;
+  text-align: center;
+  padding: ${GRID.HALF} ${GRID.UNIT};
+  border-radius: ${GRID.UNIT};
+  background: ${COLOURS.SEMANTIC.DANGER.BACKGROUND};
+  color: ${COLOURS.SEMANTIC.DANGER.FOREGROUND};
 `;
 
 const StyledOverview = styled.div<{ isCurrentView: boolean }>`

@@ -4,7 +4,6 @@ import { PlayerShipList } from "../../PlayerShipList";
 import { IActionToken, IEffectAction } from "../../../../interfaces";
 import { AttackButton, DangerButton } from "../../../Atoms/Button";
 import { Modal } from "../../../Molecules/Modal";
-import { TacticalEffect } from "../../../Molecules/TacticalEffect";
 import { GridWrapper } from "../../../Atoms/GridWrapper";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../../../styles/media";

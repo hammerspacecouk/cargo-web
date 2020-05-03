@@ -10,6 +10,10 @@ export interface IPort {
   id: string;
   name: string;
   isSafe: boolean;
+  blockade?: {
+    until: string; // datetime
+    player: IPlayer;
+  };
 }
 
 export interface IChannel {
@@ -94,15 +98,20 @@ export interface IDirections {
 // same as constants from Event.php, with 'public' swapped for 'export'
 export const ACTION_CRATE_NEW = "crate_new";
 export const ACTION_CRATE_PICKUP = "crate_pickup";
+
 export const ACTION_EFFECT_USE = "effect_use";
 export const ACTION_EFFECT_OFFENCE = "effect_offence";
 export const ACTION_EFFECT_DESTROYED = "effect_destroyed";
+export const ACTION_EFFECT_BLOCKADE = "effect_blockaded";
+
 export const ACTION_PLAYER_NEW = "player_new";
 export const ACTION_PLAYER_PROMOTION = "player_promotion";
+
 export const ACTION_SHIP_NEW = "ship_new";
 export const ACTION_SHIP_ARRIVAL = "ship_arrival";
 export const ACTION_SHIP_DEPARTURE = "ship_departure";
 export const ACTION_SHIP_RENAME = "ship_rename";
+
 export const ACTION_SHIP_INFECTED = "ship_infected";
 export const ACTION_SHIP_CURED = "ship_cured";
 

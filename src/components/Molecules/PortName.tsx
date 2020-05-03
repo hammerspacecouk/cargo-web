@@ -4,10 +4,12 @@ import { IClassNameProps, IPort } from "../../interfaces";
 import { GRID } from "../../styles/variables";
 import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
 import { HomeIcon } from "../Icons/HomeIcon";
+import { Blockade } from "../Icons/BlockadeIcon";
 
 export const PortName = React.memo(({ port, isHome = false, className }: IProps) => {
   let safeIndicator = null;
   let homeIndicator = null;
+  let blockadeIndicator = null;
   if (port.isSafe) {
     safeIndicator = (
       <Icon title="Safe Zone">
@@ -22,10 +24,18 @@ export const PortName = React.memo(({ port, isHome = false, className }: IProps)
       </Icon>
     );
   }
+  if (port.blockade) {
+    blockadeIndicator = (
+      <Icon title="Blockaded">
+        <Blockade />
+      </Icon>
+    );
+  }
   return (
     <Styled className={className}>
       {port.name}
       {safeIndicator}
+      {blockadeIndicator}
       {homeIndicator}
     </Styled>
   );

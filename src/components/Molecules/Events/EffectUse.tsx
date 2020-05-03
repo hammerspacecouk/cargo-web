@@ -8,9 +8,12 @@ export const EffectUse = ({ firstPerson, event }: IEventProps) => {
     name = "You ";
   } else if (event.actioningPlayer) {
     name = (
-      <EventFlag>
-        <PlayerFlag player={event.actioningPlayer} />
-      </EventFlag>
+      <>
+        <EventFlag>
+          <PlayerFlag player={event.actioningPlayer} />
+        </EventFlag>{" "}
+        {event.actioningPlayer.displayName}
+      </>
     );
   } else {
     name = "[deleted] ";

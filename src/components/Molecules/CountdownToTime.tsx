@@ -7,7 +7,6 @@ interface IProps {
   readonly dateTime: string;
 }
 
-// todo - same logic as arrival time. combine
 const calculateSeconds = (dateTime: string): number => {
   const calculationDate = new Date(dateTime);
   return Math.max(0, differenceInSeconds(calculationDate, new Date()));

@@ -1,12 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
+import { GRID, Z_INDEX } from "../../styles/variables";
 import { H2 } from "../Atoms/Heading";
 import { IChildrenProps } from "../../interfaces";
 import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
 import { PanelClose } from "../Atoms/PanelClose";
 import { COLOURS, hexToRGBa, panelBackground } from "../../styles/colours";
-import { BREAKPOINTS } from "../../styles/media";
 
 export const Panel = React.memo(({ id, isEvents, className, closeHandler, title, children }: IProps) => {
   let closeButton;

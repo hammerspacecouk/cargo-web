@@ -91,7 +91,6 @@ export class IntroStars extends AbstractScene {
         p.z += p.velocity;
       }
     });
-    this.stars.rotateZ(0.005);
     this.starGeo.verticesNeedUpdate = true;
   }
 }

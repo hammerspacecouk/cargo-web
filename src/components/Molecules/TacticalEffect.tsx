@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IActionToken, IEffectAction, ITacticalOption } from "../../interfaces";
+import { IEffectAction, ITacticalOption } from "../../interfaces";
 import { EffectDetail } from "./EffectDetail";
 import { DangerButton, Type } from "../Atoms/Button";
 import { TokenButton } from "./TokenButton";
@@ -32,6 +32,7 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
   let actionButton;
   let chooseShipPanel;
 
+  // todo - too complicated. can it be broken up
   if (option.actionToken) {
     actionButton = (
       <ActionButtonEnabled token={option.actionToken} handler={portActionHandler}>
@@ -102,6 +103,15 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         </DangerButton>
       );
     }
+  } else if (port.isSafe) {
+    actionButton = (
+      <DangerButton disabled>
+        <Sanctuary />
+      </DangerButton>
+    );
+  } else if (port.blockade) {
+    // todo - cleaner way to determine blockade
+    actionButton = <DangerButton disabled>Blockaded</DangerButton>;
   } else {
     actionButton = (
       <ActionButtonDisabled icon={<CheckboxEmpty />} disabled={true}>

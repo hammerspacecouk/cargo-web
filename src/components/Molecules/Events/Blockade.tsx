@@ -1,27 +1,28 @@
 import * as React from "react";
-import { PlayerFlag } from "../PlayerFlag";
 import { Event, EventFlag, IEventProps } from "./Event";
+import { PlayerFlag } from "../PlayerFlag";
 
-export const PlayerPromotion = ({ event, firstPerson }: IEventProps) => {
+export const Blockade = ({ firstPerson, event }: IEventProps) => {
   let name;
   if (firstPerson) {
-    name = "You were";
+    name = "You ";
   } else if (event.actioningPlayer) {
+    // todo - abstract the name generation
     name = (
       <>
         <EventFlag>
           <PlayerFlag player={event.actioningPlayer} />
         </EventFlag>{" "}
-        {event.actioningPlayer.displayName} was
+        {event.actioningPlayer.displayName}
       </>
     );
   } else {
-    name = "[deleted] was";
+    name = "[deleted] ";
   }
 
   return (
     <Event time={event.time}>
-      {name} promoted to <strong>{event.rank.title}</strong>
+      {name} blockaded <em>{event.port.name}</em>
     </Event>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { POSITION_NONE, POSITION_TOP, TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
+import { TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
 import styled from "styled-components";
 import { COLOURS, panelBackground } from "../../../styles/colours";
 import { BREAKPOINTS } from "../../../styles/media";
