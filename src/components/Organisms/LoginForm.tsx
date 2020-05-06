@@ -18,7 +18,7 @@ import { TokenButton } from "../Molecules/TokenButton";
 import { BREAKPOINTS } from "../../styles/media";
 import { routes } from "../../routes";
 
-export const LoginForm = ({ loginOptions, messages }: IProps) => {
+export const LoginForm = ({ loginOptions, messages, redirect }: IProps) => {
   if (loginOptions === undefined) {
     return (
       <>
@@ -35,27 +35,27 @@ export const LoginForm = ({ loginOptions, messages }: IProps) => {
       <List>
         {loginOptions.facebook && (
           <Item>
-            <FacebookButton href={`${Environment.clientApiHostname}${loginOptions.facebook}`} />
+            <FacebookButton href={`${Environment.clientApiHostname}${loginOptions.facebook}?r=${redirect}`} />
           </Item>
         )}
         {loginOptions.google && (
           <Item>
-            <GoogleButton href={`${Environment.clientApiHostname}${loginOptions.google}`} />
+            <GoogleButton href={`${Environment.clientApiHostname}${loginOptions.google}?r=${redirect}`} />
           </Item>
         )}
         {loginOptions.microsoft && (
           <Item>
-            <MicrosoftButton href={`${Environment.clientApiHostname}${loginOptions.microsoft}`} />
+            <MicrosoftButton href={`${Environment.clientApiHostname}${loginOptions.microsoft}?r=${redirect}`} />
           </Item>
         )}
         {loginOptions.twitter && (
           <Item>
-            <TwitterButton href={`${Environment.clientApiHostname}${loginOptions.twitter}`} />
+            <TwitterButton href={`${Environment.clientApiHostname}${loginOptions.twitter}?r=${redirect}`} />
           </Item>
         )}
         {loginOptions.reddit && (
           <Item>
-            <RedditButton href={`${Environment.clientApiHostname}${loginOptions.reddit}`} />
+            <RedditButton href={`${Environment.clientApiHostname}${loginOptions.reddit}?r=${redirect}`} />
           </Item>
         )}
         {loginOptions.anon && (
@@ -77,6 +77,7 @@ export const LoginForm = ({ loginOptions, messages }: IProps) => {
 interface IProps {
   readonly messages?: IMessage[];
   readonly loginOptions?: ILoginOptions;
+  readonly redirect?: string;
 }
 
 const Text = styled.p`
