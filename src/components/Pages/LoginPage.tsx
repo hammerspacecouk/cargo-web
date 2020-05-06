@@ -10,7 +10,7 @@ export const LoginPage = ({ loginOptions, query }: IProps) => {
   return (
     <SimplePage disablePlayButton>
       <PanelPage title="Login">
-        <LoginForm loginOptions={loginOptions} messages={messageQueryString(query)} />
+        <LoginForm loginOptions={loginOptions} redirect={String(query?.r)} messages={messageQueryString(query)} />
       </PanelPage>
     </SimplePage>
   );
