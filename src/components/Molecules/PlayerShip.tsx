@@ -8,6 +8,8 @@ import { GRID } from "../../styles/variables";
 import { H3 } from "../Atoms/Heading";
 import { Icon, TEXT_ICON } from "../Atoms/Icon";
 import { PlagueIcon } from "../Icons/PlagueIcon";
+import {SIZES} from "../../styles/typography";
+import {PANEL_INNER_DIVIDER_BORDER} from "../../styles/colours";
 
 export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: IProps) => {
   const action = getActionButton(offence, inactiveReason);
@@ -30,7 +32,10 @@ export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: I
           </H3>
         </ActionPaneLine>
         <ActionPaneLine>
-          <p>{ship.shipClass.name}</p>
+          <ShipClassName>{ship.shipClass.name}</ShipClassName>
+        </ActionPaneLine>
+        <ActionPaneLine>
+          <p>{ship.owner.displayName}</p>
         </ActionPaneLine>
         <ActionPaneLine>
           <StyledScore score={ship.owner.score} />
@@ -50,6 +55,13 @@ interface IProps {
 
 const Plague = styled.span`
   margin-left: ${GRID.HALF};
+`;
+
+const ShipClassName = styled.p`
+  ${SIZES.F};
+  margin: 0 ${GRID.HALF};
+  border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
+  padding-bottom: ${GRID.HALF};
 `;
 
 const Status = styled.div`
