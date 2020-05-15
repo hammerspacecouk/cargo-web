@@ -24,6 +24,7 @@ import { ShipDisplay } from "../../../../animation/scene/ShipDisplay";
 import { Icon, TEXT_ICON } from "../../../Atoms/Icon";
 import { PlagueIcon } from "../../../Icons/PlagueIcon";
 import { CountdownToTime } from "../../../Molecules/CountdownToTime";
+import { useNumber } from "../../../../hooks/useNumber";
 
 export const ShipInPortPage = () => {
   const { activeView, events, setActiveView, ship, shipsInLocation, port, blockadeStrength } = useActiveShipContext();
@@ -190,6 +191,8 @@ const ShipOverview = ({
   );
   const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), [ship.id]);
 
+  const blockadeStrengthLabel = useNumber(blockadeStrength);
+
   return (
     <StyledOverview isCurrentView={isCurrentView}>
       <PlanetPosition ref={planetCanvasRef} />
@@ -214,7 +217,7 @@ const ShipOverview = ({
         {port.blockade && (
           <Blockade>
             <BlockadeDetail>
-              BLOCKADED BY {port.blockade.player.displayName} ({blockadeStrength})<br />
+              BLOCKADED BY {port.blockade.player.displayName} ({blockadeStrengthLabel})<br />
               <CountdownToTime dateTime={port.blockade.until} />
             </BlockadeDetail>
           </Blockade>

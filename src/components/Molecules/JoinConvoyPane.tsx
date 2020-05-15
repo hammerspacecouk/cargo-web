@@ -20,6 +20,10 @@ export const JoinConvoyPane = () => {
   const { portActionHandler, buttonsDisabled, convoys } = useActiveShipContext();
   const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
 
+  if (convoys === null) {
+    return null;
+  }
+
   const handler = async (token: IActionToken) => {
     const response: { fleet: IFleetResponse } = await portActionHandler(token);
     updateFleet(response.fleet.ships);

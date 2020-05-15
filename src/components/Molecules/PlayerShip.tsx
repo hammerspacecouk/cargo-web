@@ -8,8 +8,8 @@ import { GRID } from "../../styles/variables";
 import { H3 } from "../Atoms/Heading";
 import { Icon, TEXT_ICON } from "../Atoms/Icon";
 import { PlagueIcon } from "../Icons/PlagueIcon";
-import {SIZES} from "../../styles/typography";
-import {PANEL_INNER_DIVIDER_BORDER} from "../../styles/colours";
+import { SIZES } from "../../styles/typography";
+import { PANEL_INNER_DIVIDER_BORDER } from "../../styles/colours";
 
 export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: IProps) => {
   const action = getActionButton(offence, inactiveReason);

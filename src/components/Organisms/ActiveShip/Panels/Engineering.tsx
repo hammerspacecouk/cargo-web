@@ -106,7 +106,7 @@ export const Engineering = () => {
 
   const { label, decimal } = usePercent(ship.strengthPercent);
   const strengthMax = useNumber(ship.shipClass.strength);
-  const strengthValue = useNumber(Math.ceil(decimal * ship.shipClass.strength));
+  const strengthValue = useNumber(Math.max(1, Math.ceil(decimal * ship.shipClass.strength)));
 
   return (
     <>
@@ -139,7 +139,7 @@ export const Engineering = () => {
           <ShieldIntro>
             <SectionTitle>Shield</SectionTitle>
             <SectionDetail>
-              {Math.max(1, parseInt(strengthValue)).toString()}/{strengthMax} ({label})
+              {strengthValue}/{strengthMax} ({label})
               <StyledShield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </StyledShield>
