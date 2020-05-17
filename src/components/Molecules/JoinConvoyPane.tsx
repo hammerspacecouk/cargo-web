@@ -14,11 +14,13 @@ import { Prose } from "../Atoms/Prose";
 import { IActionToken, IChildrenProps } from "../../interfaces";
 import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
 import { IFleetResponse } from "../../data/game";
+import { useMounted } from "../../hooks/useMounted";
 
 export const JoinConvoyPane = () => {
   const { updateFleet } = useGameSessionContext();
   const { portActionHandler, buttonsDisabled, convoys } = useActiveShipContext();
   const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
+  const isMounted = useMounted();
 
   if (convoys === null) {
     return null;
@@ -27,7 +29,9 @@ export const JoinConvoyPane = () => {
   const handler = async (token: IActionToken) => {
     const response: { fleet: IFleetResponse } = await portActionHandler(token);
     updateFleet(response.fleet.ships);
-    setChooseShipOpen(false);
+    if (isMounted()) {
+      setChooseShipOpen(false);
+    }
   };
 
   const chooseShipPanel = (

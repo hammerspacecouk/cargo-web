@@ -13,6 +13,7 @@ export interface IProfileResponse {
   canDelete: boolean;
   homePort: IPort;
   authProviders: IAuthProvider[];
+  distanceTravelled: number;
 }
 
 export interface IAuthProvider {
