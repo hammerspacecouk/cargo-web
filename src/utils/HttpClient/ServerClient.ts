@@ -55,7 +55,10 @@ export class ServerClient implements IAPIClient {
         // you don't have access to this. might need to login or not allowed
         return null;
       }
-      if (response.status === 404) {
+      if (response.status === 404 || response.status === 410) {
+        if (outgoingResponse) {
+          outgoingResponse.statusCode = response.status;
+        }
         return null;
       }
       if (response.status === 409) {

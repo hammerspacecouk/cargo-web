@@ -46,7 +46,7 @@ export default class extends App<IProps, IState> {
       errorModal = (
         <Modal isOpen={true} title="An error occurred" type={ModalType.DANGER}>
           <P>There was an error loading data. Please reload the page to try again</P>
-          <P>Detail: {this.state.errorMessage}</P>
+          {/*<P>Detail: {this.state.errorMessage}</P>*/}
           <ButtonRow>
             <a href={window.location.pathname}>Reload</a>
           </ButtonRow>

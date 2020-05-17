@@ -1,7 +1,7 @@
 import { createContext, createElement, ReactNode, useContext } from "react";
 import { IActiveShip, useActiveShip } from "./useActiveShip";
 import { IActiveShipResponse } from "../../data/active-ship";
-import ErrorPage from "../../pages/_error";
+import { ShipGonePage } from "../../components/Pages/Play/ActiveShip/ShipGonePage";
 
 // hook to use for getting at the active ship context
 export const useActiveShipContext = (): IActiveShip => {
@@ -17,7 +17,7 @@ export const ActiveShipContextComponent = ({ shipId, initialShipData, children }
   const activeShip = useActiveShip(shipId, initialShipData);
 
   if (activeShip.ship === null) {
-    return createElement(ErrorPage, { statusCode: 404 });
+    return createElement(ShipGonePage);
   }
 
   return createElement(
