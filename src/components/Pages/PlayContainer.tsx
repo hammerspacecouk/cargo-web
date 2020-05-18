@@ -50,7 +50,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
       refreshTimer = window.setTimeout(() => {
         console.warn("Client side routing took too long. Performing full reload", { url });
         window.location.href = url;
-      }, 7500);
+      }, 15000);
     };
     const handleRouteEnd = () => {
       window.clearTimeout(refreshTimer);

@@ -8,7 +8,7 @@ import { H3 } from "../../Atoms/Heading";
 import { DangerButton } from "../../Atoms/Button";
 import { Prose } from "../../Atoms/Prose";
 import { TableSubtle } from "../../Molecules/Table";
-import { TextDanger, TextWarning } from "../../Atoms/Text";
+import { TextDanger, TextF, TextWarning } from "../../Atoms/Text";
 import { LogOutButton } from "../../Organisms/LogOutButton";
 import { MessageError } from "../../Molecules/Message";
 import { routes } from "../../../routes";
@@ -19,10 +19,12 @@ import { SIZES } from "../../../styles/typography";
 import { Icon, TINY_ICON } from "../../Atoms/Icon";
 import { NewWindowIcon } from "../../Icons/NewWindowIcon";
 import { PlayerFlag } from "../../Molecules/PlayerFlag";
+import { useNumber } from "../../../hooks/useNumber";
 
 export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   const { player } = useGameSessionContext();
   const playingSinceDate = useDate(new Date(player.startedAt));
+  const distanceTravelled = useNumber(profile.distanceTravelled);
 
   let mode;
   if (profile.isAnonymous) {
@@ -78,6 +80,15 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
             <tr>
               <th>Playing since:</th>
               <td>{playingSinceDate}</td>
+            </tr>
+            <tr>
+              <th>Distance Travelled:</th>
+              <td>
+                {distanceTravelled}
+                <abbr title="light years">
+                  <TextF>ly</TextF>
+                </abbr>
+              </td>
             </tr>
             <tr>
               <th>Player ID:</th>
