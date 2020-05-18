@@ -24,7 +24,7 @@ import { useNumber } from "../../../hooks/useNumber";
 export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   const { player } = useGameSessionContext();
   const playingSinceDate = useDate(new Date(player.startedAt));
-  const distanceTravelled = useNumber(profile.distanceTravelled);
+  const distanceTravelled = useNumber(profile.distanceTravelled, 2);
 
   let mode;
   if (profile.isAnonymous) {
