@@ -1,10 +1,10 @@
 import * as React from "react";
-import { IEffectAction, IOtherShip } from "../../interfaces";
-import { Loading } from "../Atoms/Loading";
-import { PlayerShip } from "../Molecules/PlayerShip";
+import { IEffectAction, IOtherShip } from "@src/interfaces";
+import { Loading } from "@src/components/Atoms/Loading";
+import { PlayerShip } from "@src/components/Molecules/PlayerShip";
 import styled from "styled-components";
-import { GridWrapper } from "../Atoms/GridWrapper";
-import { BREAKPOINTS } from "../../styles/media";
+import { GridWrapper } from "@src/components/Atoms/GridWrapper";
+import { BREAKPOINTS } from "@src/styles/media";
 
 interface IProps {
   ships: IOtherShip[];

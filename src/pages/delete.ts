@@ -1,4 +1,4 @@
-import { DeletePage } from "../components/Pages/DeletePage";
+import { DeletePage } from "@src/components/Pages/DeletePage";
 import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {

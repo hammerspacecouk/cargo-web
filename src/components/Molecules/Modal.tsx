@@ -1,10 +1,10 @@
 import * as React from "react";
 import ReactModal from "react-modal";
 import styled, { css } from "styled-components";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { GRID, MAX_PANEL_WIDTH, Z_INDEX } from "../../styles/variables";
-import { H3 } from "../Atoms/Heading";
-import { PanelClose } from "../Atoms/PanelClose";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { GRID, MAX_PANEL_WIDTH, Z_INDEX } from "@src/styles/variables";
+import { H3 } from "@src/components/Atoms/Heading";
+import { PanelClose } from "@src/components/Atoms/PanelClose";
 
 export enum ModalType {
   WARNING = "modal--warning",

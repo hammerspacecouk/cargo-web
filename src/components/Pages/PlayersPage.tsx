@@ -1,17 +1,17 @@
 import * as React from "react";
-import { IPlayer } from "../../interfaces";
-import { PlayerFlag } from "../Molecules/PlayerFlag";
-import { Score } from "../Organisms/Score";
-import { SimplePage } from "../Templates/SimplePage";
+import { IPlayer } from "@src/interfaces";
+import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
+import { Score } from "@src/components/Organisms/Score";
+import { SimplePage } from "@src/components/Templates/SimplePage";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
-import { H1 } from "../Atoms/Heading";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { H1 } from "@src/components/Atoms/Heading";
 import Link from "next/link";
-import { routes } from "../../routes";
+import { routes } from "@src/routes";
 import Head from "next/head";
-import { pageTitle } from "../../utils/pageTitle";
-import { DurationDetail } from "../Atoms/DurationDetail";
+import { pageTitle } from "@src/utils/pageTitle";
+import { DurationDetail } from "@src/components/Atoms/DurationDetail";
 
 export interface IPlayersPageProps {
   players: IPlayer[];

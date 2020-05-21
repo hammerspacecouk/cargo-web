@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { COLOURS } from "../../styles/colours";
-import { GRID } from "../../styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
 
 export const Table = styled.table`
   width: 100%;

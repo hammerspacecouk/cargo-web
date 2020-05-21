@@ -1,10 +1,10 @@
 import * as React from "react";
-import { WarningButton } from "../Atoms/Button";
+import { WarningButton } from "@src/components/Atoms/Button";
 import { TokenButton } from "./TokenButton";
-import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
-import { IActionToken } from "../../interfaces";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { IFleetResponse } from "../../data/game";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { IActionToken } from "@src/interfaces";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { IFleetResponse } from "@src/data/game";
 import { ConvoyPane } from "./JoinConvoyPane";
 
 export const LeaveConvoyPane = () => {

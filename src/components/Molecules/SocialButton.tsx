@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { hexToRGBa } from "../../styles/colours";
-import { MONOSPACE_FONT, SIZES } from "../../styles/typography";
-import { GRID } from "../../styles/variables";
-import { Icon, SMALL_ICON } from "../Atoms/Icon";
-import { FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo } from "../Atoms/Logos";
-import { IChildrenProps } from "../../interfaces";
-import { AnonIcon } from "../Icons/AnonIcon";
+import { hexToRGBa } from "@src/styles/colours";
+import { MONOSPACE_FONT, SIZES } from "@src/styles/typography";
+import { GRID } from "@src/styles/variables";
+import { Icon, SMALL_ICON } from "@src/components/Atoms/Icon";
+import { FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo } from "@src/components/Atoms/Logos";
+import { IChildrenProps } from "@src/interfaces";
+import { AnonIcon } from "@src/components/Icons/AnonIcon";
 
 interface IProps {
   href: string;

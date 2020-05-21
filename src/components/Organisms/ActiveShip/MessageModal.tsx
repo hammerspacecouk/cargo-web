@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Modal, ModalType } from "../../Molecules/Modal";
-import { P } from "../../Atoms/Text";
-import { Button } from "../../Atoms/Button";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { ButtonRow } from "../../Molecules/ButtonRow";
+import { Modal, ModalType } from "@src/components/Molecules/Modal";
+import { P } from "@src/components/Atoms/Text";
+import { Button } from "@src/components/Atoms/Button";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { ButtonRow } from "@src/components/Molecules/ButtonRow";
 
 export const MessageModal = () => {
   const { message, resetMessage } = useActiveShipContext();

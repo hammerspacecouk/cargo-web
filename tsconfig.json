@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": "src/",
+    "paths": {
+      "@src/*": ["*"]
+    },
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "lib": [

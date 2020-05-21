@@ -1,8 +1,8 @@
 import React from "react";
-import { ApiClient } from "../../utils/ApiClient";
+import { ApiClient } from "@src/utils/ApiClient";
 import { GetServerSideProps, NextPage } from "next";
-import { IPlayerPageProps, PlayerPage } from "../../components/Pages/Players/PlayerPage";
-import { pageTitle } from "../../utils/pageTitle";
+import { IPlayerPageProps, PlayerPage } from "@src/components/Pages/Players/PlayerPage";
+import { pageTitle } from "@src/utils/pageTitle";
 import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {

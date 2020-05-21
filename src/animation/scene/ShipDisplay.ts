@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
-import { Ship } from "../object/Ship";
+import { Ship } from "@src/animation/object/Ship";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { IShipClass } from "../../interfaces";
+import { IShipClass } from "@src/interfaces";
 
 const ROTATE_TIME = 30000;
 

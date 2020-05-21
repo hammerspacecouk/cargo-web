@@ -1,16 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
-import { H1, H2 } from "../Atoms/Heading";
-import { Prose } from "../Atoms/Prose";
-import { EventsList } from "../Organisms/EventsList";
-import { IEvent, IPort } from "../../interfaces";
-import { routes } from "../../routes";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
-import { ChevronRightIcon } from "../Icons/ChevronRightIcon";
-import { ComplexButton } from "../Molecules/ComplexButton";
-import { AnimatedEllipsis } from "../Atoms/AnimatedEllipsis";
-import { SimplePage } from "../Templates/SimplePage";
+import { H1, H2 } from "@src/components/Atoms/Heading";
+import { Prose } from "@src/components/Atoms/Prose";
+import { EventsList } from "@src/components/Organisms/EventsList";
+import { IEvent, IPort } from "@src/interfaces";
+import { routes } from "@src/routes";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { ChevronRightIcon } from "@src/components/Icons/ChevronRightIcon";
+import { ComplexButton } from "@src/components/Molecules/ComplexButton";
+import { AnimatedEllipsis } from "@src/components/Atoms/AnimatedEllipsis";
+import { SimplePage } from "@src/components/Templates/SimplePage";
 
 export const HomePage = ({ events, goalCrateLocation }: IHomePageProps) => (
   <SimplePage isHome={true}>

@@ -1,3 +1,3 @@
-import { CheatingPage } from "../../components/Pages/About/CheatingPage";
+import { CheatingPage } from "@src/components/Pages/About/CheatingPage";
 
 export default CheatingPage;

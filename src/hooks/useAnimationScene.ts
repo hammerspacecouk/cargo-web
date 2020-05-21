@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useRef } from "react";
-import { AbstractScene } from "../animation/scene/AbstractScene";
+import { AbstractScene } from "@src/animation/scene/AbstractScene";
 
 type UseAnimationSceneType<T extends HTMLElement> = RefObject<T>;
 

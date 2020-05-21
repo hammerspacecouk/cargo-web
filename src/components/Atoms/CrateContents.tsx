@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ICrate } from "../../interfaces";
-import { COLOURS } from "../../styles/colours";
-import { Crate } from "../Icons/Crate";
+import { ICrate } from "@src/interfaces";
+import { COLOURS } from "@src/styles/colours";
+import { Crate } from "@src/components/Icons/Crate";
 
 interface IProps {
   crate: ICrate;

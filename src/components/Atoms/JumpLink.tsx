@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { MASTHEAD_HEIGHT } from "../../styles/variables";
-import { BREAKPOINTS } from "../../styles/media";
+import { MASTHEAD_HEIGHT } from "@src/styles/variables";
+import { BREAKPOINTS } from "@src/styles/media";
 
 export const JumpLink = styled.div`
   // so that the anchor jumps to the right place

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Event, IEventProps } from "./Event";
-import { CrateContents } from "../../Atoms/CrateContents";
+import { CrateContents } from "@src/components/Atoms/CrateContents";
 
 export const CrateNew = ({ firstPerson, event }: IEventProps) => {
   let you = "";

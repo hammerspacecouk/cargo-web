@@ -1,17 +1,17 @@
 import * as React from "react";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
-import { IChannel, IChildrenProps, IFleetShip } from "../../interfaces";
-import { InGameMasthead } from "../Organisms/InGameMasthead";
-import { PromotionModal } from "../Organisms/PromotionModal";
-import { BREAKPOINTS } from "../../styles/media";
-import { Navigation } from "../Organisms/Navigation";
-import { MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
-import { FlexAllCenter } from "../Atoms/Flex";
-import { Loading } from "../Atoms/Loading";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { IChannel, IChildrenProps, IFleetShip } from "@src/interfaces";
+import { InGameMasthead } from "@src/components/Organisms/InGameMasthead";
+import { PromotionModal } from "@src/components/Organisms/PromotionModal";
+import { BREAKPOINTS } from "@src/styles/media";
+import { Navigation } from "@src/components/Organisms/Navigation";
+import { MASTHEAD_HEIGHT, Z_INDEX } from "@src/styles/variables";
+import { FlexAllCenter } from "@src/components/Atoms/Flex";
+import { Loading } from "@src/components/Atoms/Loading";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { Router } from "next/router";
-import { GameOverModal } from "../Organisms/GameOverModal";
-import { WinModal } from "../Organisms/WinModal";
+import { GameOverModal } from "@src/components/Organisms/GameOverModal";
+import { WinModal } from "@src/components/Organisms/WinModal";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
   const { player, isAtHome, isGameOver, refreshSession, ships } = useGameSessionContext();

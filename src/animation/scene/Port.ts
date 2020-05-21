@@ -1,9 +1,9 @@
 import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
-import { Planet } from "../object/Planet";
+import {Planet} from "@src/animation/object/Planet";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { ShipInOrbit } from "../object/ShipInOrbit";
-import { IShip } from "../../interfaces";
+import { ShipInOrbit } from "@src/animation/object/ShipInOrbit";
+import { IShip } from "@src/interfaces";
 
 export class Port extends AbstractScene {
   private readonly planetId: string;

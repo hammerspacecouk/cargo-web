@@ -1,5 +1,5 @@
 import { differenceInSeconds } from "date-fns";
-import { IChannel } from "../interfaces";
+import { IChannel } from "@src/interfaces";
 import { useState } from "react";
 import { useFrameEffect } from "./useFrameEffect";
 

@@ -1,15 +1,15 @@
 import * as React from "react";
-import { ConfirmButton, DangerButton } from "../Atoms/Button";
-import { Prose } from "../Atoms/Prose";
-import { TokenButton } from "../Molecules/TokenButton";
-import { routes } from "../../routes";
-import { ButtonRow } from "../Molecules/ButtonRow";
-import { H4 } from "../Atoms/Heading";
-import { SimplePage } from "../Templates/SimplePage";
-import { PanelPage } from "../Templates/PanelPage";
-import { Icon, TINY_ICON } from "../Atoms/Icon";
-import { CreditsIcon } from "../Icons/CreditsIcon";
-import { MessageError } from "../Molecules/Message";
+import { ConfirmButton, DangerButton } from "@src/components/Atoms/Button";
+import { Prose } from "@src/components/Atoms/Prose";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { routes } from "@src/routes";
+import { ButtonRow } from "@src/components/Molecules/ButtonRow";
+import { H4 } from "@src/components/Atoms/Heading";
+import { SimplePage } from "@src/components/Templates/SimplePage";
+import { PanelPage } from "@src/components/Templates/PanelPage";
+import { Icon, TINY_ICON } from "@src/components/Atoms/Icon";
+import { CreditsIcon } from "@src/components/Icons/CreditsIcon";
+import { MessageError } from "@src/components/Molecules/Message";
 
 export interface IResetPageProps {
   token?: string;

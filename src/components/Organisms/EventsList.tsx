@@ -16,25 +16,25 @@ import {
   ACTION_SHIP_NEW,
   ACTION_SHIP_RENAME,
   IEvent,
-} from "../../interfaces";
-import { COLOURS } from "../../styles/colours";
-import { MONOSPACE_FONT } from "../../styles/typography";
-import { GRID } from "../../styles/variables";
-import { ListUnstyled } from "../Atoms/List/ListUnstyled";
-import { TextCursor } from "../Atoms/TextCursor";
-import { CrateNew } from "../Molecules/Events/CrateNew";
-import { CratePickup } from "../Molecules/Events/CratePickup";
-import { PlayerNew } from "../Molecules/Events/PlayerNew";
-import { PlayerPromotion } from "../Molecules/Events/PlayerPromotion";
-import { ShipArrival } from "../Molecules/Events/ShipArrival";
-import { ShipDeparture } from "../Molecules/Events/ShipDeparture";
-import { ShipNew } from "../Molecules/Events/ShipNew";
-import { ShipRename } from "../Molecules/Events/ShipRename";
-import { EffectUse } from "../Molecules/Events/EffectUse";
-import { Offence } from "../Molecules/Events/Offence";
-import { ShipInfected } from "../Molecules/Events/ShipInfected";
-import { ShipCured } from "../Molecules/Events/ShipCured";
-import { Blockade } from "../Molecules/Events/Blockade";
+} from "@src/interfaces";
+import { COLOURS } from "@src/styles/colours";
+import { MONOSPACE_FONT } from "@src/styles/typography";
+import { GRID } from "@src/styles/variables";
+import { ListUnstyled } from "@src/components/Atoms/List/ListUnstyled";
+import { TextCursor } from "@src/components/Atoms/TextCursor";
+import { CrateNew } from "@src/components/Molecules/Events/CrateNew";
+import { CratePickup } from "@src/components/Molecules/Events/CratePickup";
+import { PlayerNew } from "@src/components/Molecules/Events/PlayerNew";
+import { PlayerPromotion } from "@src/components/Molecules/Events/PlayerPromotion";
+import { ShipArrival } from "@src/components/Molecules/Events/ShipArrival";
+import { ShipDeparture } from "@src/components/Molecules/Events/ShipDeparture";
+import { ShipNew } from "@src/components/Molecules/Events/ShipNew";
+import { ShipRename } from "@src/components/Molecules/Events/ShipRename";
+import { EffectUse } from "@src/components/Molecules/Events/EffectUse";
+import { Offence } from "@src/components/Molecules/Events/Offence";
+import { ShipInfected } from "@src/components/Molecules/Events/ShipInfected";
+import { ShipCured } from "@src/components/Molecules/Events/ShipCured";
+import { Blockade } from "@src/components/Molecules/Events/Blockade";
 
 export const EventsList = ({ className, events, firstPerson }: IProps) => {
   const len = events && events.length;

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useGameSessionContext } from "../../../../contexts/GameSessionContext/GameSessionContext";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import styled from "styled-components";
-import { GRID } from "../../../../styles/variables";
-import { Ranks } from "../Ranks";
-import { H1, H3 } from "../../../Atoms/Heading";
+import { GRID } from "@src/styles/variables";
+import { Ranks } from "@src/components/Organisms/PlayHome/Ranks";
+import { H1, H3 } from "@src/components/Atoms/Heading";
 
 export const Progress = () => {
   const { rankStatus } = useGameSessionContext();

@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { PlaceholderContents } from "../../Atoms/CrateContents";
-import { CrateButton } from "../../Atoms/HaloButton";
-import { CratePickup } from "../../Molecules/CratePickup";
-import { TokenButton } from "../../Molecules/TokenButton";
-import { ICrateAction } from "../../../interfaces";
-import { GRID } from "../../../styles/variables";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { animate } from "../../Atoms/PlaceHolder";
+import { PlaceholderContents } from "@src/components/Atoms/CrateContents";
+import { CrateButton } from "@src/components/Atoms/HaloButton";
+import { CratePickup } from "@src/components/Molecules/CratePickup";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { ICrateAction } from "@src/interfaces";
+import { GRID } from "@src/styles/variables";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { animate } from "@src/components/Atoms/PlaceHolder";
 
 interface ICrateOnShipProps {
   crateAction: ICrateAction;

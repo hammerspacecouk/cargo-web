@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { H1 } from "../../../Atoms/Heading";
-import { GRID } from "../../../../styles/variables";
+import { H1 } from "@src/components/Atoms/Heading";
+import { GRID } from "@src/styles/variables";
 
 export const ShipGonePage = () => (
   <Container>

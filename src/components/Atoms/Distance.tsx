@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { MONOSPACE_FONT } from "../../styles/typography";
+import { MONOSPACE_FONT } from "@src/styles/typography";
 import { TextD, TextF } from "./Text";
 import { Fraction } from "./Fraction";
-import { GRID } from "../../styles/variables";
+import { GRID } from "@src/styles/variables";
 
 const StyledDistance = styled.div`
   ${MONOSPACE_FONT};

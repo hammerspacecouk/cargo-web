@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ListUnstyled } from "../Atoms/List/ListUnstyled";
-import { GRID } from "../../styles/variables";
-import { EFFECT_WIDTH } from "../Molecules/Effect";
+import { ListUnstyled } from "@src/components/Atoms/List/ListUnstyled";
+import { GRID } from "@src/styles/variables";
+import { EFFECT_WIDTH } from "@src/components/Molecules/Effect";
 
 const StyledRow = styled(ListUnstyled)`
   display: flex;

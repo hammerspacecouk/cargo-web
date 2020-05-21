@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CreditsButton } from "../../Molecules/CreditsButton";
-import { TokenButton } from "../../Molecules/TokenButton";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { GRID } from "../../../styles/variables";
-import { SIZES } from "../../../styles/typography";
+import { CreditsButton } from "@src/components/Molecules/CreditsButton";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { GRID } from "@src/styles/variables";
+import { SIZES } from "@src/styles/typography";
 
 const StyledRow = styled.div`
   display: flex;

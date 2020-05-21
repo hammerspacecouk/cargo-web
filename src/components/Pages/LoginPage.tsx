@@ -1,9 +1,9 @@
 import * as React from "react";
-import { LoginForm } from "../Organisms/LoginForm";
-import { messageQueryString } from "../../utils/messageQueryString";
-import { ILoginOptions } from "../../interfaces";
-import { SimplePage } from "../Templates/SimplePage";
-import { PanelPage } from "../Templates/PanelPage";
+import { LoginForm } from "@src/components/Organisms/LoginForm";
+import { messageQueryString } from "@src/utils/messageQueryString";
+import { ILoginOptions } from "@src/interfaces";
+import { SimplePage } from "@src/components/Templates/SimplePage";
+import { PanelPage } from "@src/components/Templates/PanelPage";
 import { ParsedUrlQuery } from "querystring";
 
 export const LoginPage = ({ loginOptions, query }: IProps) => {

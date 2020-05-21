@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PlayerFlag } from "../PlayerFlag";
+import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 import { Event, EventFlag, IEventProps } from "./Event";
 
 export const PlayerPromotion = ({ event, firstPerson }: IEventProps) => {

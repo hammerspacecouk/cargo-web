@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
-import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
-import { TacticalEffect } from "../../../Molecules/TacticalEffect";
-import { GRID } from "../../../../styles/variables";
-import { COLOURS } from "../../../../styles/colours";
-import { IEffectPurchase } from "../../../../interfaces";
-import { EffectPurchase } from "../../../Molecules/EffectPurchase";
-import { GridWrapper } from "../../../Atoms/GridWrapper";
-import { BREAKPOINTS } from "../../../../styles/media";
-import { JoinConvoyPane } from "../../../Molecules/JoinConvoyPane";
-import { LeaveConvoyPane } from "../../../Molecules/LeaveConvoyPane";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { TacticalEffect } from "@src/components/Molecules/TacticalEffect";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { IEffectPurchase } from "@src/interfaces";
+import { EffectPurchase } from "@src/components/Molecules/EffectPurchase";
+import { GridWrapper } from "@src/components/Atoms/GridWrapper";
+import { BREAKPOINTS } from "@src/styles/media";
+import { JoinConvoyPane } from "@src/components/Molecules/JoinConvoyPane";
+import { LeaveConvoyPane } from "@src/components/Molecules/LeaveConvoyPane";
 
 enum VIEWS {
   SHOP,

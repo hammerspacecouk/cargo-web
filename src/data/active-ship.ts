@@ -1,5 +1,5 @@
 import http from "http";
-import { ApiClient } from "../utils/ApiClient";
+import { ApiClient } from "@src/utils/ApiClient";
 import {
   IActionToken,
   IChannel,
@@ -17,7 +17,7 @@ import {
   IShip,
   ITacticalOption,
   ITransaction,
-} from "../interfaces";
+} from "@src/interfaces";
 import { IAuthProvider } from "./profile";
 
 export const getShipData = (

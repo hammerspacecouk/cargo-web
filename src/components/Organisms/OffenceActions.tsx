@@ -1,13 +1,13 @@
 import * as React from "react";
-import { IEffectAction } from "../../interfaces";
-import { DangerButton } from "../Atoms/Button";
-import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
-import { TokenButton } from "../Molecules/TokenButton";
-import { ListInline } from "../Atoms/List/ListInline";
-import { InnerEffectSymbol } from "../Atoms/EffectSymbol";
+import { IEffectAction } from "@src/interfaces";
+import { DangerButton } from "@src/components/Atoms/Button";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { ListInline } from "@src/components/Atoms/List/ListInline";
+import { InnerEffectSymbol } from "@src/components/Atoms/EffectSymbol";
 import styled from "styled-components";
-import { NumberBadge } from "../Atoms/NumberBadge";
-import { GRID } from "../../styles/variables";
+import { NumberBadge } from "@src/components/Atoms/NumberBadge";
+import { GRID } from "@src/styles/variables";
 
 export const OffenceActions = ({ actions }: IProps) => {
   const { portActionHandler, buttonsDisabled } = useActiveShipContext();

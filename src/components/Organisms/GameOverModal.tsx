@@ -1,12 +1,12 @@
-import { Modal } from "../Molecules/Modal";
+import { Modal } from "@src/components/Molecules/Modal";
 import * as React from "react";
-import { H3 } from "../Atoms/Heading";
+import { H3 } from "@src/components/Atoms/Heading";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { PANEL_INNER_DIVIDER_BORDER } from "../../styles/colours";
-import { TextCenter, TextDanger } from "../Atoms/Text";
-import { ActionButton } from "../Atoms/Button";
-import { routes } from "../../routes";
+import { GRID } from "@src/styles/variables";
+import { PANEL_INNER_DIVIDER_BORDER } from "@src/styles/colours";
+import { TextCenter, TextDanger } from "@src/components/Atoms/Text";
+import { ActionButton } from "@src/components/Atoms/Button";
+import { routes } from "@src/routes";
 
 export const GameOverModal = () => {
   const [isOpen, setIsOpen] = React.useState(true);

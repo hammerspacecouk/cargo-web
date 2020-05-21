@@ -1,9 +1,9 @@
-import { H4 } from "../Atoms/Heading";
+import { H4 } from "@src/components/Atoms/Heading";
 import * as React from "react";
-import { IEffect } from "../../interfaces";
+import { IEffect } from "@src/interfaces";
 import styled from "styled-components";
-import { EffectSymbol } from "../Atoms/EffectSymbol";
-import { GRID } from "../../styles/variables";
+import { EffectSymbol } from "@src/components/Atoms/EffectSymbol";
+import { GRID } from "@src/styles/variables";
 
 export const EffectDetail = React.memo(({ effect, currentCount, altDescription, className }: IProps) => (
   <div className={className}>

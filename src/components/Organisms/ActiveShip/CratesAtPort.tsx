@@ -1,12 +1,12 @@
 import * as React from "react";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 import { Crate, CratePlaceholder } from "./Crate";
 import styled from "styled-components";
-import { COLOURS } from "../../../styles/colours";
-import { H6 } from "../../Atoms/Heading";
-import { GRID } from "../../../styles/variables";
-import { ListUnstyled } from "../../Atoms/List/ListUnstyled";
-import { BREAKPOINTS } from "../../../styles/media";
+import { COLOURS } from "@src/styles/colours";
+import { H6 } from "@src/components/Atoms/Heading";
+import { GRID } from "@src/styles/variables";
+import { ListUnstyled } from "@src/components/Atoms/List/ListUnstyled";
+import { BREAKPOINTS } from "@src/styles/media";
 
 export const CratesAtPort = () => {
   const { cratesInPort } = useActiveShipContext();

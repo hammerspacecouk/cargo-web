@@ -1,19 +1,19 @@
 import * as React from "react";
 import { useMemo } from "react";
-import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 import styled from "styled-components";
-import { BREAKPOINTS } from "../../../../styles/media";
-import { PANEL_BORDER } from "../../../../styles/colours";
-import { Panel } from "../../../Molecules/Panel";
-import { Hint } from "../../../Organisms/ActiveShip/Panels/Hint";
-import { Bonus } from "../../../Organisms/ActiveShip/Panels/Bonus";
-import { TextCenter } from "../../../Atoms/Text";
-import { ProgressBar } from "../../../Atoms/ProgressBar";
-import { useTravellingState } from "../../../../hooks/useTravellingState";
-import { GRID, MASTHEAD_HEIGHT } from "../../../../styles/variables";
-import { TravelCountdown } from "../../../Atoms/TravelCountdown";
-import { SIZES } from "../../../../styles/typography";
-import { TravellingShip } from "../../../Organisms/ActiveShip/TravellingShip";
+import { BREAKPOINTS } from "@src/styles/media";
+import { PANEL_BORDER } from "@src/styles/colours";
+import { Panel } from "@src/components/Molecules/Panel";
+import { Hint } from "@src/components/Organisms/ActiveShip/Panels/Hint";
+import { Bonus } from "@src/components/Organisms/ActiveShip/Panels/Bonus";
+import { TextCenter } from "@src/components/Atoms/Text";
+import { ProgressBar } from "@src/components/Atoms/ProgressBar";
+import { useTravellingState } from "@src/hooks/useTravellingState";
+import { GRID, MASTHEAD_HEIGHT } from "@src/styles/variables";
+import { TravelCountdown } from "@src/components/Atoms/TravelCountdown";
+import { SIZES } from "@src/styles/typography";
+import { TravellingShip } from "@src/components/Organisms/ActiveShip/TravellingShip";
 
 export const ShipInChannelPage = () => {
   const { bonusEffects, channel, ship, hint } = useActiveShipContext();

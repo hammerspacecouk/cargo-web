@@ -1,11 +1,11 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
-import { COLOURS } from "../../styles/colours";
-import { GRID } from "../../styles/variables";
-import { MONOSPACE_FONT } from "../../styles/typography";
-import { AttackIcon } from "../Icons/AttackIcon";
-import { CloseIcon } from "../Icons/CloseIcon";
-import { AddIcon } from "../Icons/AddIcon";
+import { COLOURS } from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
+import { MONOSPACE_FONT } from "@src/styles/typography";
+import { AttackIcon } from "@src/components/Icons/AttackIcon";
+import { CloseIcon } from "@src/components/Icons/CloseIcon";
+import { AddIcon } from "@src/components/Icons/AddIcon";
 
 export enum Type {
   Confirm,

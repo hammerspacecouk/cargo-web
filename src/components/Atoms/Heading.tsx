@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ELEMENTS } from "../../styles/typography";
+import { ELEMENTS } from "@src/styles/typography";
 
 export const H1 = styled.h1`
   ${ELEMENTS.H1};

@@ -1,6 +1,6 @@
 import http from "http";
-import { ApiClient } from "../utils/ApiClient";
-import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus } from "../interfaces";
+import { ApiClient } from "@src/utils/ApiClient";
+import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus } from "@src/interfaces";
 
 export const getSession = (
   incomingRequest?: http.IncomingMessage,

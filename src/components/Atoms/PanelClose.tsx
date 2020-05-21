@@ -1,7 +1,7 @@
-import { CloseIcon } from "../Icons/CloseIcon";
+import { CloseIcon } from "@src/components/Icons/CloseIcon";
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
+import { GRID } from "@src/styles/variables";
 import { ButtonHTMLAttributes } from "react";
 
 export const PanelClose = (props: ButtonHTMLAttributes<HTMLButtonElement>) => (

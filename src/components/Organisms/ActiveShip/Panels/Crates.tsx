@@ -1,16 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CratesAtPort } from "../CratesAtPort";
-import { CratesOnShip } from "../CratesOnShip";
-import { ChevronUpIcon } from "../../../Icons/ChevronUpIcon";
-import { Icon } from "../../../Atoms/Icon";
-import { GRID } from "../../../../styles/variables";
-import { PANEL_INNER_DIVIDER_BORDER } from "../../../../styles/colours";
-import { useTutorial } from "../../../../hooks/useTutorial";
-import { CratesTutorial } from "../../Tutorial/CratesTutorial";
-import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
-import { ActionButton } from "../../../Atoms/Button";
-import { ACTIVE_VIEW } from "../../../../contexts/ActiveShipContext/useActiveShip";
+import { CratesAtPort } from "@src/components/Organisms/ActiveShip/CratesAtPort";
+import { CratesOnShip } from "@src/components/Organisms/ActiveShip/CratesOnShip";
+import { ChevronUpIcon } from "@src/components/Icons/ChevronUpIcon";
+import { Icon } from "@src/components/Atoms/Icon";
+import { GRID } from "@src/styles/variables";
+import { PANEL_INNER_DIVIDER_BORDER } from "@src/styles/colours";
+import { useTutorial } from "@src/hooks/useTutorial";
+import { CratesTutorial } from "@src/components/Organisms/Tutorial/CratesTutorial";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { ActionButton } from "@src/components/Atoms/Button";
+import { ACTIVE_VIEW } from "@src/contexts/ActiveShipContext/useActiveShip";
 
 export const Crates = () => {
   const { cratesOnShip, ship, setActiveView } = useActiveShipContext();

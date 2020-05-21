@@ -1,14 +1,14 @@
 import * as React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { GRID, NAV_ITEM_HEIGHT } from "../../styles/variables";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { Icon } from "../Atoms/Icon";
-import { PlayerFlag } from "../Molecules/PlayerFlag";
-import { ProgressBar } from "../Atoms/ProgressBar";
-import { ELEMENTS } from "../../styles/typography";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { routes } from "../../routes";
+import { GRID, NAV_ITEM_HEIGHT } from "@src/styles/variables";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { Icon } from "@src/components/Atoms/Icon";
+import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
+import { ProgressBar } from "@src/components/Atoms/ProgressBar";
+import { ELEMENTS } from "@src/styles/typography";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { routes } from "@src/routes";
 
 const StyledSummary = styled.a`
   display: flex;

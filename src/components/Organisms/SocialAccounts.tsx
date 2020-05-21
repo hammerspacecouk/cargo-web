@@ -1,12 +1,12 @@
-import { MessageWarning } from "../Molecules/Message";
+import { MessageWarning } from "@src/components/Molecules/Message";
 import * as React from "react";
-import { GridWrapper } from "../Atoms/GridWrapper";
+import { GridWrapper } from "@src/components/Atoms/GridWrapper";
 import styled from "styled-components";
-import { Prose } from "../Atoms/Prose";
-import { GRID } from "../../styles/variables";
-import { Icon } from "../Atoms/Icon";
+import { Prose } from "@src/components/Atoms/Prose";
+import { GRID } from "@src/styles/variables";
+import { Icon } from "@src/components/Atoms/Icon";
 import { ReactNode } from "react";
-import { AddButton, ConfirmButton, DangerButton, RemoveButton } from "../Atoms/Button";
+import { AddButton, ConfirmButton, DangerButton, RemoveButton } from "@src/components/Atoms/Button";
 import {
   AmazonLogo,
   AppleLogo,
@@ -15,16 +15,16 @@ import {
   MicrosoftLogo,
   RedditLogo,
   TwitterLogo,
-} from "../Atoms/Logos";
-import { IActionToken, IClassNameProps } from "../../interfaces";
-import { routes } from "../../routes";
-import { IAuthProvider } from "../../data/profile";
-import { TokenButton } from "../Molecules/TokenButton";
-import { Environment } from "../../utils/environment";
+} from "@src/components/Atoms/Logos";
+import { IActionToken, IClassNameProps } from "@src/interfaces";
+import { routes } from "@src/routes";
+import { IAuthProvider } from "@src/data/profile";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { Environment } from "@src/utils/environment";
 import { useState } from "react";
-import { Modal, ModalType } from "../Molecules/Modal";
-import { ApiClient } from "../../utils/ApiClient";
-import { ButtonRow } from "../Molecules/ButtonRow";
+import { Modal, ModalType } from "@src/components/Molecules/Modal";
+import { ApiClient } from "@src/utils/ApiClient";
+import { ButtonRow } from "@src/components/Molecules/ButtonRow";
 
 export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps) => {
   let warning;

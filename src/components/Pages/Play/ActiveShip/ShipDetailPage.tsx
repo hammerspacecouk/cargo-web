@@ -1,12 +1,12 @@
 import * as React from "react";
 import Head from "next/head";
-import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 import { ShipInPortPage } from "./ShipInPortPage";
 import { ShipInChannelPage } from "./ShipInChannelPage";
-import { MessageModal } from "../../../Organisms/ActiveShip/MessageModal";
-import { pageTitle } from "../../../../utils/pageTitle";
-import { Loading } from "../../../Atoms/Loading";
-import { useGameSessionContext } from "../../../../contexts/GameSessionContext/GameSessionContext";
+import { MessageModal } from "@src/components/Organisms/ActiveShip/MessageModal";
+import { pageTitle } from "@src/utils/pageTitle";
+import { Loading } from "@src/components/Atoms/Loading";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { useEffect } from "react";
 
 export const ShipDetailPage = () => {

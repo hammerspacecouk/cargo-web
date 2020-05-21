@@ -1,10 +1,10 @@
 import React from "react";
-import { CheckboxChecked } from "../Icons/CheckboxCheckedIcon";
-import { CheckboxEmpty } from "../Icons/CheckboxEmptyIcon";
+import { CheckboxChecked } from "@src/components/Icons/CheckboxCheckedIcon";
+import { CheckboxEmpty } from "@src/components/Icons/CheckboxEmptyIcon";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { COLOURS } from "../../styles/colours";
+import { GRID } from "@src/styles/variables";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { COLOURS } from "@src/styles/colours";
 
 export const CurrentMissions = () => {
   const { currentMissions } = useGameSessionContext();

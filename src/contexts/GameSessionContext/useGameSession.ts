@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore } from "../../interfaces";
-import { useMounted } from "../../hooks/useMounted";
-import { getSession, IGameSessionResponse } from "../../data/game";
+import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore } from "@src/interfaces";
+import { useMounted } from "@src/hooks/useMounted";
+import { getSession, IGameSessionResponse } from "@src/data/game";
 
 export interface IGameSession extends IGameSessionState {
   refreshSession: () => void;

@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IChildrenProps, IMessage } from "../../interfaces";
-import { COLOURS } from "../../styles/colours";
-import { GRID } from "../../styles/variables";
-import { ErrorIcon } from "../Icons/ErrorIcon";
-import { InfoIcon } from "../Icons/InfoIcon";
-import { TickIcon } from "../Icons/TickIcon";
-import { WarningIcon } from "../Icons/WarningIcon";
+import { IChildrenProps, IMessage } from "@src/interfaces";
+import { COLOURS } from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
+import { ErrorIcon } from "@src/components/Icons/ErrorIcon";
+import { InfoIcon } from "@src/components/Icons/InfoIcon";
+import { TickIcon } from "@src/components/Icons/TickIcon";
+import { WarningIcon } from "@src/components/Icons/WarningIcon";
 
 // these are not using Symbol() because messages can come from the server
 export const TYPE_OK = "ok";

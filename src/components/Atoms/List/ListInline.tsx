@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import { COLOURS } from "../../../styles/colours";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
 
 export const ListInline = styled.ul<{ spaced?: boolean; lined?: boolean }>`
   margin: 0;

@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import { H1 } from "../Atoms/Heading";
-import { IChildrenProps } from "../../interfaces";
-import { routes } from "../../routes";
-import { BREAKPOINTS } from "../../styles/media";
-import { GRID } from "../../styles/variables";
-import { Button } from "../Atoms/Button";
-import { APP_TITLE } from "../../utils/pageTitle";
-import { ListInline } from "../Atoms/List/ListInline";
-import { COLOURS } from "../../styles/colours";
-import { SiteLogo } from "../Atoms/Logos";
+import { H1 } from "@src/components/Atoms/Heading";
+import { IChildrenProps } from "@src/interfaces";
+import { routes } from "@src/routes";
+import { BREAKPOINTS } from "@src/styles/media";
+import { GRID } from "@src/styles/variables";
+import { Button } from "@src/components/Atoms/Button";
+import { APP_TITLE } from "@src/utils/pageTitle";
+import { ListInline } from "@src/components/Atoms/List/ListInline";
+import { COLOURS } from "@src/styles/colours";
+import { SiteLogo } from "@src/components/Atoms/Logos";
 
 export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
   <TemplateSimple>

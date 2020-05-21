@@ -1,8 +1,8 @@
 import * as React from "react";
-import { IEffect } from "../../interfaces";
-import { TextCenter } from "../Atoms/Text";
+import { IEffect } from "@src/interfaces";
+import { TextCenter } from "@src/components/Atoms/Text";
 import { EffectsRow } from "./EffectsRow";
-import { Effect } from "../Molecules/Effect";
+import { Effect } from "@src/components/Molecules/Effect";
 
 interface IProps {
   effects?: IEffect[];

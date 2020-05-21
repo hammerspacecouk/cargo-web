@@ -1,8 +1,8 @@
 import * as React from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { Icon, SMALL_ICON } from "../Atoms/Icon";
-import { Button, Type } from "../Atoms/Button";
+import { Icon, SMALL_ICON } from "@src/components/Atoms/Icon";
+import { Button, Type } from "@src/components/Atoms/Button";
 import { ButtonHTMLAttributes } from "react";
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {

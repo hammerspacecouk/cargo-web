@@ -1,5 +1,5 @@
 import http from "http";
-import { IActionToken } from "../interfaces";
+import { IActionToken } from "@src/interfaces";
 import { BrowserClient } from "./HttpClient/BrowserClient";
 import { ServerClient } from "./HttpClient/ServerClient";
 import { isClient, isServer } from "./runtime";

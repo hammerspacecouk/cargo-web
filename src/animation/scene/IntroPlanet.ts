@@ -1,7 +1,7 @@
 import { AbstractScene, DISTANCE_PLANE } from "./AbstractScene";
 import * as THREE from "three";
-import { easeOut } from "../../utils/math";
-import { Planet } from "../object/Planet";
+import { easeOut } from "@src/utils/math";
+import { Planet } from "@src/animation/object/Planet";
 
 export class IntroPlanet extends AbstractScene {
   private planetStartZPosition = -DISTANCE_PLANE / 2;

@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IEffectAction, IShip } from "../../interfaces";
+import { IEffectAction, IShip } from "@src/interfaces";
 import { shieldColour, ShieldStrength } from "./ShieldStrength";
-import { Score } from "../Organisms/Score";
+import { Score } from "@src/components/Organisms/Score";
 import { ActionPane, ActionPaneButton, ActionPaneDetail, ActionPaneLine } from "./ActionPane";
-import { GRID } from "../../styles/variables";
-import { H3 } from "../Atoms/Heading";
-import { Icon, TEXT_ICON } from "../Atoms/Icon";
-import { PlagueIcon } from "../Icons/PlagueIcon";
-import { SIZES } from "../../styles/typography";
-import { PANEL_INNER_DIVIDER_BORDER } from "../../styles/colours";
+import { GRID } from "@src/styles/variables";
+import { H3 } from "@src/components/Atoms/Heading";
+import { Icon, TEXT_ICON } from "@src/components/Atoms/Icon";
+import { PlagueIcon } from "@src/components/Icons/PlagueIcon";
+import { SIZES } from "@src/styles/typography";
+import { PANEL_INNER_DIVIDER_BORDER } from "@src/styles/colours";
 
 export const PlayerShip = ({ ship, offence, inactiveReason, getActionButton }: IProps) => {
   const action = getActionButton(offence, inactiveReason);

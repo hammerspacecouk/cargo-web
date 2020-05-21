@@ -1,6 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
-import { Environment } from "../utils/environment";
+import { Environment } from "@src/utils/environment";
 
 import { ServerStyleSheet } from "styled-components";
 

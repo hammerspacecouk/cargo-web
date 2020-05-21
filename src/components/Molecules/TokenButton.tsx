@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IActionToken } from "../../interfaces";
-import { Environment } from "../../utils/environment";
+import { IActionToken } from "@src/interfaces";
+import { Environment } from "@src/utils/environment";
 
 interface IProps {
   readonly token: IActionToken;

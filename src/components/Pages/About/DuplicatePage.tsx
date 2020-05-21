@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Prose } from "../../Atoms/Prose";
-import { MessageInfo } from "../../Molecules/Message";
-import { LogOutButton } from "../../Organisms/LogOutButton";
-import { AboutLayout } from "../../Templates/AboutLayout";
-import { routes } from "../../../routes";
-import { H2 } from "../../Atoms/Heading";
+import { Prose } from "@src/components/Atoms/Prose";
+import { MessageInfo } from "@src/components/Molecules/Message";
+import { LogOutButton } from "@src/components/Organisms/LogOutButton";
+import { AboutLayout } from "@src/components/Templates/AboutLayout";
+import { routes } from "@src/routes";
+import { H2 } from "@src/components/Atoms/Heading";
 
 export const DuplicatePage = () => (
   <AboutLayout title="Duplicate account">

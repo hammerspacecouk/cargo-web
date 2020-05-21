@@ -1,6 +1,6 @@
 import http from "http";
-import { ApiClient } from "../utils/ApiClient";
-import { IPort, IShip, IShipUpgrade } from "../interfaces";
+import { ApiClient } from "@src/utils/ApiClient";
+import { IPort, IShip, IShipUpgrade } from "@src/interfaces";
 
 export const getAvailableShips = (
   incomingRequest?: http.IncomingMessage,

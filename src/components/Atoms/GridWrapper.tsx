@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
+import { GRID } from "@src/styles/variables";
 
 export const GridWrapper = styled.div`
   display: flex;

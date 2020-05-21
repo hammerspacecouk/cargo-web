@@ -1,8 +1,8 @@
 import * as React from "react";
-import { IClassNameProps, IShipClassStats } from "../../interfaces";
+import { IClassNameProps, IShipClassStats } from "@src/interfaces";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
 
 export const ShipStats = React.memo(({ className, stats }: IShipStatsProps) => (
   <StyledTable className={className}>

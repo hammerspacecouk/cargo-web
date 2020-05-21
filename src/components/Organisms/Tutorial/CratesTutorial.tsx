@@ -1,8 +1,8 @@
 import * as React from "react";
-import { InlineIcon, TINY_ICON } from "../../Atoms/Icon";
-import { Prose } from "../../Atoms/Prose";
-import { CreditsIcon } from "../../Icons/CreditsIcon";
-import { TutorialPanel } from "../../Molecules/TutorialPanel";
+import { InlineIcon, TINY_ICON } from "@src/components/Atoms/Icon";
+import { Prose } from "@src/components/Atoms/Prose";
+import { CreditsIcon } from "@src/components/Icons/CreditsIcon";
+import { TutorialPanel } from "@src/components/Molecules/TutorialPanel";
 
 export const CratesTutorial = () => (
   <TutorialPanel>

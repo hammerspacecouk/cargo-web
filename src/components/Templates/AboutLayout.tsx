@@ -1,11 +1,11 @@
 import * as React from "react";
 import { SimplePage } from "./SimplePage";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
-import { APP_TITLE } from "../../utils/pageTitle";
-import { CrumbTitle } from "../Molecules/CrumbTitle";
-import { routes } from "../../routes";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { APP_TITLE } from "@src/utils/pageTitle";
+import { CrumbTitle } from "@src/components/Molecules/CrumbTitle";
+import { routes } from "@src/routes";
 
 interface IProps {
   readonly title?: string;

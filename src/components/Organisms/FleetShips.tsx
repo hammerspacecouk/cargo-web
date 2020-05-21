@@ -1,20 +1,20 @@
 import * as React from "react";
-import { IChannel, IFleetShip, IPort, IShip } from "../../interfaces";
-import { NavigationItem } from "../Molecules/NavigationItem";
-import { routes } from "../../routes";
+import { IChannel, IFleetShip, IPort, IShip } from "@src/interfaces";
+import { NavigationItem } from "@src/components/Molecules/NavigationItem";
+import { routes } from "@src/routes";
 import { NavigationList } from "./Navigation";
 import styled from "styled-components";
-import { GRID, NAV_ITEM_HEIGHT } from "../../styles/variables";
-import { ELEMENTS } from "../../styles/typography";
-import { ShieldStrength } from "../Molecules/ShieldStrength";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { TravelCountdown } from "../Atoms/TravelCountdown";
-import { useTravellingCountdown } from "../../hooks/useTravellingCountdown";
-import { TextDanger, TextOk, TextWarning } from "../Atoms/Text";
-import { PortName } from "../Molecules/PortName";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { Icon, TEXT_ICON } from "../Atoms/Icon";
-import { PlagueIcon } from "../Icons/PlagueIcon";
+import { GRID, NAV_ITEM_HEIGHT } from "@src/styles/variables";
+import { ELEMENTS } from "@src/styles/typography";
+import { ShieldStrength } from "@src/components/Molecules/ShieldStrength";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { TravelCountdown } from "@src/components/Atoms/TravelCountdown";
+import { useTravellingCountdown } from "@src/hooks/useTravellingCountdown";
+import { TextDanger, TextOk, TextWarning } from "@src/components/Atoms/Text";
+import { PortName } from "@src/components/Molecules/PortName";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { Icon, TEXT_ICON } from "@src/components/Atoms/Icon";
+import { PlagueIcon } from "@src/components/Icons/PlagueIcon";
 
 interface IConvoy {
   [key: string]: IFleetShip[];

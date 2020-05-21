@@ -1,11 +1,11 @@
 import * as React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { GRID, NAV_ITEM_HEIGHT } from "../../styles/variables";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { Icon, TINY_ICON } from "../Atoms/Icon";
-import { ChevronRightIcon } from "../Icons/ChevronRightIcon";
-import { SIZES } from "../../styles/typography";
+import { GRID, NAV_ITEM_HEIGHT } from "@src/styles/variables";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { Icon, TINY_ICON } from "@src/components/Atoms/Icon";
+import { ChevronRightIcon } from "@src/components/Icons/ChevronRightIcon";
+import { SIZES } from "@src/styles/typography";
 import { ReactNode } from "react";
 
 export const NavigationItem = React.memo(({ path, text, subtext, icon, isCurrent }: IProps) => {

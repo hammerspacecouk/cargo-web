@@ -1,13 +1,13 @@
 import * as React from "react";
-import { IPlayer, IPort, IShip, isInPort } from "../../../interfaces";
-import { PlayerFlag } from "../../Molecules/PlayerFlag";
-import { Score } from "../../Organisms/Score";
-import { SimplePage } from "../../Templates/SimplePage";
+import { IPlayer, IPort, IShip, isInPort } from "@src/interfaces";
+import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
+import { Score } from "@src/components/Organisms/Score";
+import { SimplePage } from "@src/components/Templates/SimplePage";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import { COLOURS } from "../../../styles/colours";
-import { H2, H3 } from "../../Atoms/Heading";
-import { ShieldStrength } from "../../Molecules/ShieldStrength";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { H2, H3 } from "@src/components/Atoms/Heading";
+import { ShieldStrength } from "@src/components/Molecules/ShieldStrength";
 
 export interface IPlayerPageProps {
   player: IPlayer;

@@ -1,18 +1,18 @@
 import * as React from "react";
-import { IActionToken } from "../../interfaces";
-import { ApiClient } from "../../utils/ApiClient";
-import { Button } from "../Atoms/Button";
-import { Loading } from "../Atoms/Loading";
-import { TextCenter } from "../Atoms/Text";
-import { Modal } from "../Molecules/Modal";
-import { TokenButton } from "../Molecules/TokenButton";
+import { IActionToken } from "@src/interfaces";
+import { ApiClient } from "@src/utils/ApiClient";
+import { Button } from "@src/components/Atoms/Button";
+import { Loading } from "@src/components/Atoms/Loading";
+import { TextCenter } from "@src/components/Atoms/Text";
+import { Modal } from "@src/components/Molecules/Modal";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
 import { Promotion } from "./Promotion";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { CurrentMissions } from "../Molecules/CurrentMissions";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { CurrentMissions } from "@src/components/Molecules/CurrentMissions";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
-import { H3 } from "../Atoms/Heading";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { H3 } from "@src/components/Atoms/Heading";
 
 export const PromotionModal = () => {
   const { rankStatus, currentMissions } = useGameSessionContext();

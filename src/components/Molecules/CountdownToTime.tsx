@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useFrameEffect } from "../../hooks/useFrameEffect";
-import { IntervalFormat } from "../Atoms/IntervalFormat";
+import { useFrameEffect } from "@src/hooks/useFrameEffect";
+import { IntervalFormat } from "@src/components/Atoms/IntervalFormat";
 import { differenceInSeconds } from "date-fns";
 
 interface IProps {

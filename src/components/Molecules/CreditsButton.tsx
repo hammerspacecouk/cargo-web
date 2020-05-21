@@ -1,9 +1,9 @@
 import * as React from "react";
-import { getValue } from "../Organisms/Score";
-import { IScore } from "../../interfaces";
+import { getValue } from "@src/components/Organisms/Score";
+import { IScore } from "@src/interfaces";
 import { ComplexButton } from "./ComplexButton";
 import { ScoreValue } from "./ScoreValue";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 
 interface IProps {
   readonly amount: number;

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { makeRandom } from "../utils/shipName";
+import { makeRandom } from "@src/utils/shipName";
 import { useFrameEffect } from "./useFrameEffect";
 import { useMounted } from "./useMounted";
 

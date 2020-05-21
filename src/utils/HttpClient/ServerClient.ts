@@ -1,9 +1,9 @@
 const fetch = require("node-fetch");
 import http from "http";
-import { IActionToken } from "../../interfaces";
-import { IAPIClient } from "../ApiClient";
-import { Environment } from "../environment";
-import { Logger } from "../Logger";
+import { IActionToken } from "@src/interfaces";
+import { IAPIClient } from "@src/utils/ApiClient";
+import { Environment } from "@src/utils/environment";
+import { Logger } from "@src/utils/Logger";
 import { UnauthenticatedError } from "./Error";
 
 export const AUTH_COOKIE_NAME = "AUTHENTICATION_TOKEN";

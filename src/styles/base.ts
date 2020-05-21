@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 import { COLOURS, scrollbarStyles } from "./colours";
 import { MONOSPACE_FONT, SIZES } from "./typography";
-import { Environment } from "../utils/environment";
+import { Environment } from "@src/utils/environment";
 
 export const base = css`
   * {

@@ -1,6 +1,6 @@
 import http from "http";
-import { ApiClient } from "../utils/ApiClient";
-import { IActionToken, IPort } from "../interfaces";
+import { ApiClient } from "@src/utils/ApiClient";
+import { IActionToken, IPort } from "@src/interfaces";
 
 export const getProfile = (
   incomingRequest?: http.IncomingMessage,

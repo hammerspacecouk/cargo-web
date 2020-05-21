@@ -1,6 +1,6 @@
 import * as React from "react";
-import { AboutLayout } from "../../Templates/AboutLayout";
-import { Prose } from "../../Atoms/Prose";
+import { AboutLayout } from "@src/components/Templates/AboutLayout";
+import { Prose } from "@src/components/Atoms/Prose";
 
 export const CheatingPage = () => (
   <AboutLayout title="Cheating">

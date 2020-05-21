@@ -1,11 +1,11 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { IPlayer, IShip } from "../../interfaces";
-import { COLOURS } from "../../styles/colours";
-import { animate } from "../Atoms/PlaceHolder";
+import { IPlayer, IShip } from "@src/interfaces";
+import { COLOURS } from "@src/styles/colours";
+import { animate } from "@src/components/Atoms/PlaceHolder";
 import { PlayerFlag } from "./PlayerFlag";
-import { usePercent } from "../../hooks/usePercent";
-import { Environment } from "../../utils/environment";
+import { usePercent } from "@src/hooks/usePercent";
+import { Environment } from "@src/utils/environment";
 
 interface IProps {
   percent?: number;

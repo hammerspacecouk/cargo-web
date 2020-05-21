@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IPlayer } from "../../interfaces";
-import { COLOURS } from "../../styles/colours";
-import { Environment } from "../../utils/environment";
+import { IPlayer } from "@src/interfaces";
+import { COLOURS } from "@src/styles/colours";
+import { Environment } from "@src/utils/environment";
 
 export const PlayerFlag = React.memo(({ player, className }: IProps) => {
   if (player) {

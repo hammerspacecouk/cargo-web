@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useFrameEffect } from "../../hooks/useFrameEffect";
-import { DangerButton } from "../Atoms/Button";
+import { useFrameEffect } from "@src/hooks/useFrameEffect";
+import { DangerButton } from "@src/components/Atoms/Button";
 
 interface IProps {
   readonly time: number;

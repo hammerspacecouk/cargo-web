@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { modalStyles } from "../components/Molecules/Modal";
+import { modalStyles } from "@src/components/Molecules/Modal";
 import { base } from "./base";
 import { reset } from "./reset";
 

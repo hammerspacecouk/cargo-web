@@ -1,14 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "../../styles/variables";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "@src/styles/variables";
 import { Score } from "./Score";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { routes } from "../../routes";
-import { ChevronLeftIcon } from "../Icons/ChevronLeftIcon";
-import { Icon } from "../Atoms/Icon";
-import { BREAKPOINTS } from "../../styles/media";
-import { SiteLogo } from "../Atoms/Logos";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { routes } from "@src/routes";
+import { ChevronLeftIcon } from "@src/components/Icons/ChevronLeftIcon";
+import { Icon } from "@src/components/Atoms/Icon";
+import { BREAKPOINTS } from "@src/styles/media";
+import { SiteLogo } from "@src/components/Atoms/Logos";
 
 export const InGameMasthead = () => {
   const { score, refreshSession, isAtHome } = useGameSessionContext();

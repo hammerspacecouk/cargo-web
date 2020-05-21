@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import { TimeAgo } from "../../Atoms/TimeAgo";
-import { COLOURS } from "../../../styles/colours";
-import { IEvent } from "../../../interfaces";
-import { SIZES } from "../../../styles/typography";
+import { GRID } from "@src/styles/variables";
+import { TimeAgo } from "@src/components/Atoms/TimeAgo";
+import { COLOURS } from "@src/styles/colours";
+import { IEvent } from "@src/interfaces";
+import { SIZES } from "@src/styles/typography";
 
 export interface IEventProps {
   readonly event: IEvent;

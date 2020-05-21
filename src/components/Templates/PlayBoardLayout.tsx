@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { PANEL_BORDER } from "../../styles/colours";
-import { IChildrenProps } from "../../interfaces";
+import { GRID } from "@src/styles/variables";
+import { PANEL_BORDER } from "@src/styles/colours";
+import { IChildrenProps } from "@src/interfaces";
 import { ReactNode } from "react";
-import { H1 } from "../Atoms/Heading";
+import { H1 } from "@src/components/Atoms/Heading";
 
 export const PlayBoardLayout = ({ title, overview, children }: IProps) => {
   let overviewContent;

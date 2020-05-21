@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
-import { IEffect } from "../../interfaces";
-import { SIZES } from "../../styles/typography";
-import { buttonColours, Type } from "../Atoms/Button";
-import { GRID } from "../../styles/variables";
+import { IEffect } from "@src/interfaces";
+import { SIZES } from "@src/styles/typography";
+import { buttonColours, Type } from "@src/components/Atoms/Button";
+import { GRID } from "@src/styles/variables";
 
 interface IProps {
   readonly effect?: IEffect;

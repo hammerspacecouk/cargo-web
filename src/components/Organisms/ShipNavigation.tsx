@@ -1,19 +1,19 @@
 import * as React from "react";
 import styled, { css, keyframes } from "styled-components";
-import { Crate } from "../Icons/Crate";
-import { Icon, NORMAL_ICON, SMALL_ICON } from "../Atoms/Icon";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { DirectionsIcon } from "../Icons/DirectionsIcon";
-import { ShipsIcon } from "../Icons/ShipsIcon";
-import { TacticalIcon } from "../Icons/TacticalIcon";
-import { EngineeringIcon } from "../Icons/EngineeringIcon";
-import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
-import { ACTIVE_VIEW } from "../../contexts/ActiveShipContext/useActiveShip";
-import { IChildrenProps } from "../../interfaces";
-import { DisguisedButton } from "../Atoms/Button";
-import { BREAKPOINTS } from "../../styles/media";
-import { useTutorial } from "../../hooks/useTutorial";
-import { Badge } from "../Atoms/Badge";
+import { Crate } from "@src/components/Icons/Crate";
+import { Icon, NORMAL_ICON, SMALL_ICON } from "@src/components/Atoms/Icon";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { DirectionsIcon } from "@src/components/Icons/DirectionsIcon";
+import { ShipsIcon } from "@src/components/Icons/ShipsIcon";
+import { TacticalIcon } from "@src/components/Icons/TacticalIcon";
+import { EngineeringIcon } from "@src/components/Icons/EngineeringIcon";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { ACTIVE_VIEW } from "@src/contexts/ActiveShipContext/useActiveShip";
+import { IChildrenProps } from "@src/interfaces";
+import { DisguisedButton } from "@src/components/Atoms/Button";
+import { BREAKPOINTS } from "@src/styles/media";
+import { useTutorial } from "@src/hooks/useTutorial";
+import { Badge } from "@src/components/Atoms/Badge";
 
 export const ShipNavigation = () => {
   const { ship, cratesOnShip } = useActiveShipContext();

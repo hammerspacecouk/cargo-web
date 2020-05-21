@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
-import { Ship } from "../object/Ship";
+import { Ship } from "@src/animation/object/Ship";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { IChannel, IShipClass } from "../../interfaces";
+import { IChannel, IShipClass } from "@src/interfaces";
 
 const CYCLE_TIME = 30000;
 const AMPLITUDE = 5;

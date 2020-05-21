@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
 import { NextPageContext } from "next";
 import { ActiveShipContextComponent } from "./ActiveShipContext";
-import { getShipData, IActiveShipResponse } from "../../data/active-ship";
+import { getShipData, IActiveShipResponse } from "@src/data/active-ship";
 
 export const ActiveShipContainer = (Page: any) =>
   class extends Component<IProps, undefined> {

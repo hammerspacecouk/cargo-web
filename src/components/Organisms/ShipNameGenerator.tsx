@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useShipNameGenerator } from "../../hooks/useShipNameGenerator";
-import { IActionToken } from "../../interfaces";
+import { useShipNameGenerator } from "@src/hooks/useShipNameGenerator";
+import { IActionToken } from "@src/interfaces";
 import styled from "styled-components";
-import { SIZES } from "../../styles/typography";
-import { BREAKPOINTS } from "../../styles/media";
+import { SIZES } from "@src/styles/typography";
+import { BREAKPOINTS } from "@src/styles/media";
 
 interface IProps {
   offeredShipName?: string;

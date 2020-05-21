@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
-import { GameSessionContainer } from "../../contexts/GameSessionContext/GameSessionContainer";
-import { ActiveShipContainer } from "../../contexts/ActiveShipContext/ActiveShipContainer";
-import { ShipDetailPage } from "../../components/Pages/Play/ActiveShip/ShipDetailPage";
+import { GameSessionContainer } from "@src/contexts/GameSessionContext/GameSessionContainer";
+import { ActiveShipContainer } from "@src/contexts/ActiveShipContext/ActiveShipContainer";
+import { ShipDetailPage } from "@src/components/Pages/Play/ActiveShip/ShipDetailPage";
 
 class Page extends Component {
   public render() {

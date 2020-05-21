@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useActiveShipContext } from "../contexts/ActiveShipContext/ActiveShipContext";
-import { useGameSessionContext } from "../contexts/GameSessionContext/GameSessionContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { useTravellingCountdown } from "./useTravellingCountdown";
 
 export const useTravellingState = () => {

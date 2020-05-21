@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-import { useLocale } from "../../hooks/useLocale";
-import { useMounted } from "../../hooks/useMounted";
+import { useLocale } from "@src/hooks/useLocale";
+import { useMounted } from "@src/hooks/useMounted";
 import { differenceInSeconds } from "date-fns";
 
 /**

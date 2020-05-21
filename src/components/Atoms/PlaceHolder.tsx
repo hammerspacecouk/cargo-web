@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import { COLOURS } from "../../styles/colours";
+import { COLOURS } from "@src/styles/colours";
 
 const frames = keyframes`
     0% {

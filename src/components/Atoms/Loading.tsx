@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { COLOURS } from "../../styles/colours";
-import { useMounted } from "../../hooks/useMounted";
+import { COLOURS } from "@src/styles/colours";
+import { useMounted } from "@src/hooks/useMounted";
 
 const loadingSize = "28px";
 const loadingDuration = "1.4s";

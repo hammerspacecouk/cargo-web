@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ActionButton } from "../Atoms/Button";
-import { Icon } from "../Atoms/Icon";
+import { ActionButton } from "@src/components/Atoms/Button";
+import { Icon } from "@src/components/Atoms/Icon";
 
 interface IProps {
   readonly icon?: JSX.Element;

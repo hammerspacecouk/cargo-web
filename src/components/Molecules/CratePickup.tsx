@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ICrateAction } from "../../interfaces";
-import { GRID } from "../../styles/variables";
-import { CrateWithContents } from "../Atoms/CrateContents";
-import { Icon, SMALL_ICON } from "../Atoms/Icon";
-import { TextE } from "../Atoms/Text";
-import { CreditsIcon } from "../Icons/CreditsIcon";
-import { useNumber } from "../../hooks/useNumber";
+import { ICrateAction } from "@src/interfaces";
+import { GRID } from "@src/styles/variables";
+import { CrateWithContents } from "@src/components/Atoms/CrateContents";
+import { Icon, SMALL_ICON } from "@src/components/Atoms/Icon";
+import { TextE } from "@src/components/Atoms/Text";
+import { CreditsIcon } from "@src/components/Icons/CreditsIcon";
+import { useNumber } from "@src/hooks/useNumber";
 
 interface IProps {
   crateAction: ICrateAction;

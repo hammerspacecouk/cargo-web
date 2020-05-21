@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
-import { IRankStatus } from "../../interfaces";
-import { ProgressBar } from "../Atoms/ProgressBar";
-import { GRID } from "../../styles/variables";
-import { useMounted } from "../../hooks/useMounted";
-import { P } from "../Atoms/Text";
-import { COLOURS } from "../../styles/colours";
-import { BREAKPOINTS } from "../../styles/media";
+import { IRankStatus } from "@src/interfaces";
+import { ProgressBar } from "@src/components/Atoms/ProgressBar";
+import { GRID } from "@src/styles/variables";
+import { useMounted } from "@src/hooks/useMounted";
+import { P } from "@src/components/Atoms/Text";
+import { COLOURS } from "@src/styles/colours";
+import { BREAKPOINTS } from "@src/styles/media";
 
 export const Promotion = ({ rankStatus }: IProps) => {
   const [progress, setProgress] = React.useState(80);

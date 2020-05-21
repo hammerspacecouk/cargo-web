@@ -1,7 +1,7 @@
 import * as React from "react";
 import { differenceInMilliseconds } from "date-fns";
-import { ScoreValue } from "../Molecules/ScoreValue";
-import { IClassNameProps, IScore } from "../../interfaces";
+import { ScoreValue } from "@src/components/Molecules/ScoreValue";
+import { IClassNameProps, IScore } from "@src/interfaces";
 
 interface IProps extends IClassNameProps {
   score: IScore;

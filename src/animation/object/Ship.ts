@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { AbstractObject } from "./AbstractObject";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { IShipClass } from "../../interfaces";
+import { IShipClass } from "@src/interfaces";
 
 export class Ship extends AbstractObject {
   private ship: GLTF;

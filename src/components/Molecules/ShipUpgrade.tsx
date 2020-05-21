@@ -2,15 +2,15 @@ import * as React from "react";
 import styled from "styled-components";
 import { CreditsButton } from "./CreditsButton";
 import { TokenButton } from "./TokenButton";
-import { IActionToken, IChildrenProps, ILockedTransaction, IShipUpgrade } from "../../interfaces";
-import { P, TextWarning } from "../Atoms/Text";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
+import { IActionToken, IChildrenProps, ILockedTransaction, IShipUpgrade } from "@src/interfaces";
+import { P, TextWarning } from "@src/components/Atoms/Text";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
 import { ShipStats } from "./ShipStats";
-import { Hidden } from "../Atoms/Hidden";
-import { Environment } from "../../utils/environment";
-import { H4 } from "../Atoms/Heading";
-import { NumberBadge } from "../Atoms/NumberBadge";
+import { Hidden } from "@src/components/Atoms/Hidden";
+import { Environment } from "@src/utils/environment";
+import { H4 } from "@src/components/Atoms/Heading";
+import { NumberBadge } from "@src/components/Atoms/NumberBadge";
 
 export const ShipUpgrade = ({ disabled = false, purchaseHandler, ship }: IProps) => {
   if (ship.available) {

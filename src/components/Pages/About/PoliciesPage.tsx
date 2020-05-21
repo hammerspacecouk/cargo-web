@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Prose } from "../../Atoms/Prose";
-import { MessageOk } from "../../Molecules/Message";
-import { AboutLayout } from "../../Templates/AboutLayout";
-import { COLOURS } from "../../../styles/colours";
-import { SIZES } from "../../../styles/typography";
-import { GRID } from "../../../styles/variables";
-import { H2, H3 } from "../../Atoms/Heading";
+import { Prose } from "@src/components/Atoms/Prose";
+import { MessageOk } from "@src/components/Molecules/Message";
+import { AboutLayout } from "@src/components/Templates/AboutLayout";
+import { COLOURS } from "@src/styles/colours";
+import { SIZES } from "@src/styles/typography";
+import { GRID } from "@src/styles/variables";
+import { H2, H3 } from "@src/components/Atoms/Heading";
 
 const HashDemo = styled.div`
   ${SIZES.C};

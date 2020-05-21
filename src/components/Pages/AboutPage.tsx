@@ -1,7 +1,7 @@
 import * as React from "react";
-import { AboutLayout } from "../Templates/AboutLayout";
-import { routes } from "../../routes";
-import { Prose } from "../Atoms/Prose";
+import { AboutLayout } from "@src/components/Templates/AboutLayout";
+import { routes } from "@src/routes";
+import { Prose } from "@src/components/Atoms/Prose";
 
 export const AboutPage = () => (
   <AboutLayout>

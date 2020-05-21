@@ -1,8 +1,8 @@
 import * as React from "react";
-import { IMessage } from "../../interfaces";
-import { Hidden } from "../Atoms/Hidden";
-import { ListUnstyled } from "../Atoms/List/ListUnstyled";
-import { Message } from "../Molecules/Message";
+import { IMessage } from "@src/interfaces";
+import { Hidden } from "@src/components/Atoms/Hidden";
+import { ListUnstyled } from "@src/components/Atoms/List/ListUnstyled";
+import { Message } from "@src/components/Molecules/Message";
 
 export interface IListsProps {
   readonly messages?: IMessage[];

@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IClassNameProps, IPort } from "../../interfaces";
-import { GRID } from "../../styles/variables";
-import { SanctuaryIcon } from "../Icons/SanctuaryIcon";
-import { HomeIcon } from "../Icons/HomeIcon";
-import { Blockade } from "../Icons/BlockadeIcon";
+import { IClassNameProps, IPort } from "@src/interfaces";
+import { GRID } from "@src/styles/variables";
+import { SanctuaryIcon } from "@src/components/Icons/SanctuaryIcon";
+import { HomeIcon } from "@src/components/Icons/HomeIcon";
+import { Blockade } from "@src/components/Icons/BlockadeIcon";
 
 export const PortName = React.memo(({ port, isHome = false, className }: IProps) => {
   let safeIndicator = null;

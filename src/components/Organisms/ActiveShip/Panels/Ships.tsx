@@ -1,17 +1,17 @@
 import * as React from "react";
-import { useActiveShipContext } from "../../../../contexts/ActiveShipContext/ActiveShipContext";
-import { PlayerShipList } from "../../PlayerShipList";
-import { IActionToken, IEffectAction } from "../../../../interfaces";
-import { AttackButton, DangerButton } from "../../../Atoms/Button";
-import { Modal } from "../../../Molecules/Modal";
-import { GridWrapper } from "../../../Atoms/GridWrapper";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { PlayerShipList } from "@src/components/Organisms/PlayerShipList";
+import { IActionToken, IEffectAction } from "@src/interfaces";
+import { AttackButton, DangerButton } from "@src/components/Atoms/Button";
+import { Modal } from "@src/components/Molecules/Modal";
+import { GridWrapper } from "@src/components/Atoms/GridWrapper";
 import styled from "styled-components";
-import { BREAKPOINTS } from "../../../../styles/media";
-import { getEffectColour } from "../../../Atoms/EffectSymbol";
-import { ActionPane, ActionPaneButton, ActionPaneDetail } from "../../../Molecules/ActionPane";
-import { EffectDetail } from "../../../Molecules/EffectDetail";
-import { TokenButton } from "../../../Molecules/TokenButton";
-import { GRID } from "../../../../styles/variables";
+import { BREAKPOINTS } from "@src/styles/media";
+import { getEffectColour } from "@src/components/Atoms/EffectSymbol";
+import { ActionPane, ActionPaneButton, ActionPaneDetail } from "@src/components/Molecules/ActionPane";
+import { EffectDetail } from "@src/components/Molecules/EffectDetail";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { GRID } from "@src/styles/variables";
 
 export const Ships = () => {
   const { shipsInLocation, buttonsDisabled, portActionHandler } = useActiveShipContext();

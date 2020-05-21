@@ -1,4 +1,4 @@
-import { useActiveShipContext } from "../contexts/ActiveShipContext/ActiveShipContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 
 export const useTutorial = () => {
   const { tutorialStep } = useActiveShipContext();

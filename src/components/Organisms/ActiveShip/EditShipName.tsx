@@ -1,20 +1,20 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ShipNameGenerator } from "../ShipNameGenerator";
-import { useMounted } from "../../../hooks/useMounted";
-import { IActionToken } from "../../../interfaces";
-import { GRID } from "../../../styles/variables";
-import { ApiClient } from "../../../utils/ApiClient";
-import { ConfirmButton, DangerButton } from "../../Atoms/Button";
-import { TextCursor } from "../../Atoms/TextCursor";
-import { ButtonRow } from "../../Molecules/ButtonRow";
-import { CreditsButton } from "../../Molecules/CreditsButton";
-import { TokenButton } from "../../Molecules/TokenButton";
-import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { SIZES } from "../../../styles/typography";
-import { BREAKPOINTS } from "../../../styles/media";
-import { P } from "../../Atoms/Text";
+import { ShipNameGenerator } from "@src/components/Organisms/ShipNameGenerator";
+import { useMounted } from "@src/hooks/useMounted";
+import { IActionToken } from "@src/interfaces";
+import { GRID } from "@src/styles/variables";
+import { ApiClient } from "@src/utils/ApiClient";
+import { ConfirmButton, DangerButton } from "@src/components/Atoms/Button";
+import { TextCursor } from "@src/components/Atoms/TextCursor";
+import { ButtonRow } from "@src/components/Molecules/ButtonRow";
+import { CreditsButton } from "@src/components/Molecules/CreditsButton";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { SIZES } from "@src/styles/typography";
+import { BREAKPOINTS } from "@src/styles/media";
+import { P } from "@src/components/Atoms/Text";
 
 const Container = styled.div`
   width: calc(100vw - (4 * ${GRID.UNIT}));

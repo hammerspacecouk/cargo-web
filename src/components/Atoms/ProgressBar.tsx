@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { COLOURS } from "../../styles/colours";
-import { GRID } from "../../styles/variables";
-import { usePercent } from "../../hooks/usePercent";
-import { IClassNameProps } from "../../interfaces";
+import { COLOURS } from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
+import { usePercent } from "@src/hooks/usePercent";
+import { IClassNameProps } from "@src/interfaces";
 
 interface IProps extends IClassNameProps {
   readonly percent: number;

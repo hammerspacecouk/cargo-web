@@ -1,18 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import { COLOURS, hexToRGBa } from "../../styles/colours";
-import { Hidden } from "../Atoms/Hidden";
+import { COLOURS, hexToRGBa } from "@src/styles/colours";
+import { Hidden } from "@src/components/Atoms/Hidden";
 import { PlayerSummary } from "./PlayerSummary";
-import { ListUnstyled } from "../Atoms/List/ListUnstyled";
-import { BREAKPOINTS } from "../../styles/media";
-import { NavigationItem } from "../Molecules/NavigationItem";
-import { LaunchIcon } from "../Icons/LaunchIcon";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { ListUnstyled } from "@src/components/Atoms/List/ListUnstyled";
+import { BREAKPOINTS } from "@src/styles/media";
+import { NavigationItem } from "@src/components/Molecules/NavigationItem";
+import { LaunchIcon } from "@src/components/Icons/LaunchIcon";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
-import { routes } from "../../routes";
-import { Z_INDEX } from "../../styles/variables";
-import { MapIcon } from "../Icons/MapIcon";
-import { JumpLink } from "../Atoms/JumpLink";
+import { routes } from "@src/routes";
+import { Z_INDEX } from "@src/styles/variables";
+import { MapIcon } from "@src/components/Icons/MapIcon";
+import { JumpLink } from "@src/components/Atoms/JumpLink";
 
 interface IProps {
   className?: string;

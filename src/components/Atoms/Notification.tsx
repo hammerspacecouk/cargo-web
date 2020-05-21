@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
-import { COLOURS } from "../../styles/colours";
-import { GRID } from "../../styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
 
 const frames = keyframes`
     0% {

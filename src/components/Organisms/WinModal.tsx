@@ -1,11 +1,11 @@
 import * as React from "react";
-import { ConfirmButton, DangerButton, WarningButton } from "../Atoms/Button";
-import { Modal } from "../Molecules/Modal";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
+import { ConfirmButton, DangerButton, WarningButton } from "@src/components/Atoms/Button";
+import { Modal } from "@src/components/Molecules/Modal";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
-import { Prose } from "../Atoms/Prose";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { Prose } from "@src/components/Atoms/Prose";
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;

@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import styled, { css } from "styled-components";
-import { COLOURS } from "../../../styles/colours";
-import { GRID } from "../../../styles/variables";
-import { SIZES } from "../../../styles/typography";
-import { SMALL_ICON, TINY_ICON } from "../../Atoms/Icon";
+import { COLOURS } from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
+import { SIZES } from "@src/styles/typography";
+import { SMALL_ICON, TINY_ICON } from "@src/components/Atoms/Icon";
 
 export const Ranks = () => {
   const { rankStatus } = useGameSessionContext();

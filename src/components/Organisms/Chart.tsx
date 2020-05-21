@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ICoordinate } from "../../interfaces";
+import { ICoordinate } from "@src/interfaces";
 import styled from "styled-components";
 
 export interface IMapProps {

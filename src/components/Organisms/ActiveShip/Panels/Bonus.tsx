@@ -1,8 +1,8 @@
 import * as React from "react";
-import { EffectDetail } from "../../../Molecules/EffectDetail";
-import { GridWrapper } from "../../../Atoms/GridWrapper";
+import { EffectDetail } from "@src/components/Molecules/EffectDetail";
+import { GridWrapper } from "@src/components/Atoms/GridWrapper";
 import styled from "styled-components";
-import { IEffect } from "../../../../interfaces";
+import { IEffect } from "@src/interfaces";
 
 export const Bonus = ({ bonusEffects }: { bonusEffects: IEffect[] }) => {
   return (

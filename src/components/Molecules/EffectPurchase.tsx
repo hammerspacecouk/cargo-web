@@ -1,11 +1,11 @@
-import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 import { EffectDetail } from "./EffectDetail";
-import { IEffectPurchase, ILockedTransaction } from "../../interfaces";
+import { IEffectPurchase, ILockedTransaction } from "@src/interfaces";
 import { TokenButton } from "./TokenButton";
 import { CreditsButton } from "./CreditsButton";
 import * as React from "react";
-import { TextF, TextWarning } from "../Atoms/Text";
-import { getEffectColour } from "../Atoms/EffectSymbol";
+import { TextF, TextWarning } from "@src/components/Atoms/Text";
+import { getEffectColour } from "@src/components/Atoms/EffectSymbol";
 import { ActionPane, ActionPaneButton, ActionPaneDetail } from "./ActionPane";
 
 export const EffectPurchase = ({ option }: { option: IEffectPurchase | ILockedTransaction }) => {

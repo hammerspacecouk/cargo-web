@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { GRID, MAX_PROSE_WIDTH } from "../../styles/variables";
-import { SIZES } from "../../styles/typography";
+import { GRID, MAX_PROSE_WIDTH } from "@src/styles/variables";
+import { SIZES } from "@src/styles/typography";
 
 export const Prose = styled.div`
   p,

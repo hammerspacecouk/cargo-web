@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IChildrenProps, IClassNameProps } from "../../interfaces";
+import { IChildrenProps, IClassNameProps } from "@src/interfaces";
 
 const Wrap = styled.div`
   display: block;

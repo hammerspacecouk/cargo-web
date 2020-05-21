@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useState } from "react";
-import { routes } from "../../routes";
-import { ConfirmButton, WarningButton } from "../Atoms/Button";
-import { CountdownLink } from "../Molecules/CountdownLink";
-import { Modal, ModalType } from "../Molecules/Modal";
-import { Prose } from "../Atoms/Prose";
-import { H4 } from "../Atoms/Heading";
-import { ButtonRow } from "../Molecules/ButtonRow";
+import { routes } from "@src/routes";
+import { ConfirmButton, WarningButton } from "@src/components/Atoms/Button";
+import { CountdownLink } from "@src/components/Molecules/CountdownLink";
+import { Modal, ModalType } from "@src/components/Molecules/Modal";
+import { Prose } from "@src/components/Atoms/Prose";
+import { H4 } from "@src/components/Atoms/Heading";
+import { ButtonRow } from "@src/components/Molecules/ButtonRow";
 
 interface IProps {
   readonly isAnonymous: boolean;

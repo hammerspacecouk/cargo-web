@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { TextD } from "../Atoms/Text";
-import { Icon, SMALL_ICON } from "../Atoms/Icon";
-import { GRID } from "../../styles/variables";
-import { TickIcon } from "../Icons/TickIcon";
-import { COLOURS } from "../../styles/colours";
-import { CloseIcon } from "../Icons/CloseIcon";
-import { IChildrenProps } from "../../interfaces";
+import { TextD } from "@src/components/Atoms/Text";
+import { Icon, SMALL_ICON } from "@src/components/Atoms/Icon";
+import { GRID } from "@src/styles/variables";
+import { TickIcon } from "@src/components/Icons/TickIcon";
+import { COLOURS } from "@src/styles/colours";
+import { CloseIcon } from "@src/components/Icons/CloseIcon";
+import { IChildrenProps } from "@src/interfaces";
 
 export const WinRequirement = React.memo(({ achieved, children }: IProps) => {
   let IndicatorIcon, color;

@@ -15,14 +15,14 @@ import {
   IShip,
   ITacticalOption,
   ITransaction,
-} from "../../interfaces";
+} from "@src/interfaces";
 import { useEffect, useState } from "react";
-import { ApiClient } from "../../utils/ApiClient";
-import { useButtonsDisabled } from "../../hooks/useButtonsDisabled";
-import { useGameSessionContext } from "../GameSessionContext/GameSessionContext";
-import { getShipData, IActiveShipResponse } from "../../data/active-ship";
-import { useMounted } from "../../hooks/useMounted";
-import { IAuthProvider } from "../../data/profile";
+import { ApiClient } from "@src/utils/ApiClient";
+import { useButtonsDisabled } from "@src/hooks/useButtonsDisabled";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { getShipData, IActiveShipResponse } from "@src/data/active-ship";
+import { useMounted } from "@src/hooks/useMounted";
+import { IAuthProvider } from "@src/data/profile";
 
 export enum ACTIVE_VIEW {
   CARGO,

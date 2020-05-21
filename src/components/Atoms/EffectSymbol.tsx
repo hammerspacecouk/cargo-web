@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { EffectType, IClassNameProps, IEffect } from "../../interfaces";
-import { SIZES } from "../../styles/typography";
-import { GRID } from "../../styles/variables";
-import { COLOURS } from "../../styles/colours";
+import { EffectType, IClassNameProps, IEffect } from "@src/interfaces";
+import { SIZES } from "@src/styles/typography";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
 import { NumberBadge } from "./NumberBadge";
 
 interface IProps extends IClassNameProps {

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Crate, CratePlaceholder } from "./Crate";
-import { useActiveShipContext } from "../../../contexts/ActiveShipContext/ActiveShipContext";
-import { ICrateAction } from "../../../interfaces";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
+import { ICrateAction } from "@src/interfaces";
 import styled from "styled-components";
-import { COLOURS } from "../../../styles/colours";
-import { H6 } from "../../Atoms/Heading";
-import { GRID } from "../../../styles/variables";
-import { ListInline } from "../../Atoms/List/ListInline";
+import { COLOURS } from "@src/styles/colours";
+import { H6 } from "@src/components/Atoms/Heading";
+import { GRID } from "@src/styles/variables";
+import { ListInline } from "@src/components/Atoms/List/ListInline";
 
 export const CratesOnShip = () => {
   const { ship, cratesOnShip } = useActiveShipContext();

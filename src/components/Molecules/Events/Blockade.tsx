@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Event, EventFlag, IEventProps } from "./Event";
-import { PlayerFlag } from "../PlayerFlag";
+import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 
 export const Blockade = ({ firstPerson, event }: IEventProps) => {
   let name;

@@ -1,15 +1,15 @@
 import * as React from "react";
-import { H2, H3 } from "../../Atoms/Heading";
-import { useGameSessionContext } from "../../../contexts/GameSessionContext/GameSessionContext";
+import { H2, H3 } from "@src/components/Atoms/Heading";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import styled from "styled-components";
-import { GRID } from "../../../styles/variables";
-import { BREAKPOINTS } from "../../../styles/media";
-import { COLOURS } from "../../../styles/colours";
-import { CurrentMissions } from "../../Molecules/CurrentMissions";
-import { GridWrapper } from "../../Atoms/GridWrapper";
-import { CheckboxChecked } from "../../Icons/CheckboxCheckedIcon";
-import { CheckboxEmpty } from "../../Icons/CheckboxEmptyIcon";
-import { SIZES } from "../../../styles/typography";
+import { GRID } from "@src/styles/variables";
+import { BREAKPOINTS } from "@src/styles/media";
+import { COLOURS } from "@src/styles/colours";
+import { CurrentMissions } from "@src/components/Molecules/CurrentMissions";
+import { GridWrapper } from "@src/components/Atoms/GridWrapper";
+import { CheckboxChecked } from "@src/components/Icons/CheckboxCheckedIcon";
+import { CheckboxEmpty } from "@src/components/Icons/CheckboxEmptyIcon";
+import { SIZES } from "@src/styles/typography";
 
 export const MissionPanel = () => {
   const { allMissions } = useGameSessionContext();

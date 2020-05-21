@@ -1,8 +1,8 @@
-import { IActionToken } from "../../interfaces";
-import { IAPIClient } from "../ApiClient";
-import { Environment } from "../environment";
-import { Logger } from "../Logger";
-import { routes } from "../../routes";
+import { IActionToken } from "@src/interfaces";
+import { IAPIClient } from "@src/utils/ApiClient";
+import { Environment } from "@src/utils/environment";
+import { Logger } from "@src/utils/Logger";
+import { routes } from "@src/routes";
 
 export class BrowserClient implements IAPIClient {
   public tokenFetch(token: IActionToken): Promise<any> {

@@ -1,3 +1,3 @@
-import { PoliciesPage } from "../../components/Pages/About/PoliciesPage";
+import { PoliciesPage } from "@src/components/Pages/About/PoliciesPage";
 
 export default PoliciesPage;

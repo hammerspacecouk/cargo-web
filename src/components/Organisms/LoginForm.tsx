@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ILoginOptions, IMessage } from "../../interfaces";
-import { GRID } from "../../styles/variables";
-import { Environment } from "../../utils/environment";
-import { ListInline } from "../Atoms/List/ListInline";
+import { ILoginOptions, IMessage } from "@src/interfaces";
+import { GRID } from "@src/styles/variables";
+import { Environment } from "@src/utils/environment";
+import { ListInline } from "@src/components/Atoms/List/ListInline";
 import {
   AnonymousButton,
   FacebookButton,
@@ -11,12 +11,12 @@ import {
   MicrosoftButton,
   RedditButton,
   TwitterButton,
-} from "../Molecules/SocialButton";
+} from "@src/components/Molecules/SocialButton";
 import { MessagesPanel } from "./MessagesPanel";
-import { Loading } from "../Atoms/Loading";
-import { TokenButton } from "../Molecules/TokenButton";
-import { BREAKPOINTS } from "../../styles/media";
-import { routes } from "../../routes";
+import { Loading } from "@src/components/Atoms/Loading";
+import { TokenButton } from "@src/components/Molecules/TokenButton";
+import { BREAKPOINTS } from "@src/styles/media";
+import { routes } from "@src/routes";
 
 export const LoginForm = ({ loginOptions, messages, redirect }: IProps) => {
   if (loginOptions === undefined) {

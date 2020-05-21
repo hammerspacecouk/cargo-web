@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { GameContextComponent } from "./GameSessionContext";
-import { errorIs, UNAUTHENTICATED_ERROR, UnauthenticatedError } from "../../utils/HttpClient/Error";
-import { PlayContainer } from "../../components/Pages/PlayContainer";
+import { errorIs, UNAUTHENTICATED_ERROR, UnauthenticatedError } from "@src/utils/HttpClient/Error";
+import { PlayContainer } from "@src/components/Pages/PlayContainer";
 import { NextPageContext } from "next";
-import { getSession, IGameSessionResponse } from "../../data/game";
-import { routes } from "../../routes";
-import { AUTH_COOKIE_NAME } from "../../utils/HttpClient/ServerClient";
+import { getSession, IGameSessionResponse } from "@src/data/game";
+import { routes } from "@src/routes";
+import { AUTH_COOKIE_NAME } from "@src/utils/HttpClient/ServerClient";
 
 // responsible for fetching the data required for this context
 export const GameSessionContainer = (Page: any, isAtHome: boolean = false) => {

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { WarningButton } from "../Atoms/Button";
-import { P } from "../Atoms/Text";
-import { ButtonRow } from "../Molecules/ButtonRow";
-import { Modal, ModalType } from "../Molecules/Modal";
+import { WarningButton } from "@src/components/Atoms/Button";
+import { P } from "@src/components/Atoms/Text";
+import { ButtonRow } from "@src/components/Molecules/ButtonRow";
+import { Modal, ModalType } from "@src/components/Molecules/Modal";
 
 interface IProps {
   text?: string;

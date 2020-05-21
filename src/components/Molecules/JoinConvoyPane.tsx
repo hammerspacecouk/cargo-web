@@ -1,20 +1,20 @@
 import * as React from "react";
-import { ActionButton } from "../Atoms/Button";
+import { ActionButton } from "@src/components/Atoms/Button";
 import { TokenButton } from "./TokenButton";
-import { useActiveShipContext } from "../../contexts/ActiveShipContext/ActiveShipContext";
+import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 import { ActionPane, ActionPaneButton, ActionPaneDetail } from "./ActionPane";
 import { Modal } from "./Modal";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { COLOURS, PANEL_INNER_DIVIDER_BORDER } from "../../styles/colours";
-import { ConvoyIcon } from "../Icons/ConvoyIcon";
-import { H4 } from "../Atoms/Heading";
+import { GRID } from "@src/styles/variables";
+import { COLOURS, PANEL_INNER_DIVIDER_BORDER } from "@src/styles/colours";
+import { ConvoyIcon } from "@src/components/Icons/ConvoyIcon";
+import { H4 } from "@src/components/Atoms/Heading";
 import { ShieldStrength } from "./ShieldStrength";
-import { Prose } from "../Atoms/Prose";
-import { IActionToken, IChildrenProps } from "../../interfaces";
-import { useGameSessionContext } from "../../contexts/GameSessionContext/GameSessionContext";
-import { IFleetResponse } from "../../data/game";
-import { useMounted } from "../../hooks/useMounted";
+import { Prose } from "@src/components/Atoms/Prose";
+import { IActionToken, IChildrenProps } from "@src/interfaces";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
+import { IFleetResponse } from "@src/data/game";
+import { useMounted } from "@src/hooks/useMounted";
 
 export const JoinConvoyPane = () => {
   const { updateFleet } = useGameSessionContext();

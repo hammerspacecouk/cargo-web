@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { H1 } from "../Atoms/Heading";
-import { P } from "../Atoms/Text";
+import { GRID } from "@src/styles/variables";
+import { H1 } from "@src/components/Atoms/Heading";
+import { P } from "@src/components/Atoms/Text";
 
 export const NotFoundPage = () => (
   <Container>

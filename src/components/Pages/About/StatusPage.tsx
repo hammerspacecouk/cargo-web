@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Button } from "../../Atoms/Button";
-import { TableStriped } from "../../Molecules/Table";
-import { AboutLayout } from "../../Templates/AboutLayout";
-import { Environment } from "../../../utils/environment";
+import { Button } from "@src/components/Atoms/Button";
+import { TableStriped } from "@src/components/Molecules/Table";
+import { AboutLayout } from "@src/components/Templates/AboutLayout";
+import { Environment } from "@src/utils/environment";
 
 export const StatusPage = () => (
   <AboutLayout title="Status">

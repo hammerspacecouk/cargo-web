@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GRID } from "../../styles/variables";
-import { H1 } from "../Atoms/Heading";
-import { COLOURS } from "../../styles/colours";
-import { BREAKPOINTS } from "../../styles/media";
+import { GRID } from "@src/styles/variables";
+import { H1 } from "@src/components/Atoms/Heading";
+import { COLOURS } from "@src/styles/colours";
+import { BREAKPOINTS } from "@src/styles/media";
 
 export const PanelPage = (props: IProps) => (
   <StyledPage>

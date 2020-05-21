@@ -1,5 +1,5 @@
-import { ApiClient } from "../utils/ApiClient";
-import { HomePage } from "../components/Pages/HomePage";
+import { ApiClient } from "@src/utils/ApiClient";
+import { HomePage } from "@src/components/Pages/HomePage";
 import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {

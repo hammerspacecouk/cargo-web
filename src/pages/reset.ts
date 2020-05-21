@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { ResetPage } from "../components/Pages/ResetPage";
+import { ResetPage } from "@src/components/Pages/ResetPage";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {

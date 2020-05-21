@@ -1,8 +1,8 @@
 import { Component, createElement } from "react";
-import { GameSessionContainer } from "../../contexts/GameSessionContext/GameSessionContainer";
+import { GameSessionContainer } from "@src/contexts/GameSessionContext/GameSessionContainer";
 import { NextPageContext } from "next";
-import { getProfile, IProfileResponse } from "../../data/profile";
-import { Profile } from "../../components/Pages/Play/Profile";
+import { getProfile, IProfileResponse } from "@src/data/profile";
+import { Profile } from "@src/components/Pages/Play/Profile";
 
 export class Page extends Component<{ profile: IProfileResponse }, undefined> {
   public static async getInitialProps({ req, res }: NextPageContext) {
