@@ -10,6 +10,7 @@ export const getProfile = (
 export interface IProfileResponse {
   isAnonymous: boolean;
   isTrial: boolean;
+  status: string;
   canDelete: boolean;
   homePort: IPort;
   authProviders: IAuthProvider[];

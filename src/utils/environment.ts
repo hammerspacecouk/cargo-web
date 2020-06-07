@@ -4,6 +4,7 @@ export interface IEnvironment {
   assetPrefix: string;
   serverApiHostname?: string;
   clientApiHostname?: string;
+  stripePublicKey?: string;
   appVersion?: string;
   isClient: boolean;
   isServer: boolean;
@@ -16,6 +17,7 @@ if (isClient) {
     assetPrefix: process.env.APP_ASSET_PREFIX,
     serverApiHostname: process.env.SERVER_API_HOSTNAME,
     clientApiHostname: process.env.CLIENT_API_HOSTNAME,
+    stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
     appVersion: process.env.APP_VERSION,
     isClient: true,
     isServer: false,
@@ -25,6 +27,7 @@ if (isClient) {
     assetPrefix: process.env.APP_ASSET_PREFIX,
     serverApiHostname: process.env.SERVER_API_HOSTNAME,
     clientApiHostname: process.env.CLIENT_API_HOSTNAME,
+    stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
     appVersion: process.env.APP_VERSION,
     isClient: false,
     isServer: true,

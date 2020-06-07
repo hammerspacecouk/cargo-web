@@ -6,6 +6,7 @@ module.exports = withTM({
   env: {
     CLIENT_API_HOSTNAME: process.env.CLIENT_API_HOSTNAME || 'https://api.saxopholis.com',
     SERVER_API_HOSTNAME: process.env.SERVER_API_HOSTNAME || 'https://api.saxopholis.com',
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY || 'none',
     APP_VERSION: Date.now(),
     APP_ASSET_PREFIX: process.env.APP_ASSET_PREFIX || 'https://static.saxopholis.com'
   },

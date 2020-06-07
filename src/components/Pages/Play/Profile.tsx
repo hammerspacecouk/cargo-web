@@ -5,12 +5,12 @@ import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSess
 import { SocialAccounts } from "@src/components/Organisms/SocialAccounts";
 import { GRID } from "@src/styles/variables";
 import { H3 } from "@src/components/Atoms/Heading";
-import { DangerButton } from "@src/components/Atoms/Button";
+import { Button, DangerButton } from "@src/components/Atoms/Button";
 import { Prose } from "@src/components/Atoms/Prose";
 import { TableSubtle } from "@src/components/Molecules/Table";
 import { TextDanger, TextF, TextWarning } from "@src/components/Atoms/Text";
 import { LogOutButton } from "@src/components/Organisms/LogOutButton";
-import { MessageError } from "@src/components/Molecules/Message";
+import { MessageError, MessageOk } from "@src/components/Molecules/Message";
 import { routes } from "@src/routes";
 import { useDate } from "@src/hooks/useDate";
 import { IProfileResponse } from "@src/data/profile";
@@ -21,7 +21,12 @@ import { NewWindowIcon } from "@src/components/Icons/NewWindowIcon";
 import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 import { useNumber } from "@src/hooks/useNumber";
 
-export const Profile = ({ profile }: { profile: IProfileResponse }) => {
+export interface IProfileProps {
+  profile: IProfileResponse;
+  purchaseState?: boolean;
+}
+
+export const Profile = ({ profile, purchaseState }: IProfileProps) => {
   const { player } = useGameSessionContext();
   const playingSinceDate = useDate(new Date(player.startedAt));
   const distanceTravelled = useNumber(profile.distanceTravelled, 2);
@@ -32,16 +37,31 @@ export const Profile = ({ profile }: { profile: IProfileResponse }) => {
   } else if (profile.isTrial) {
     mode = (
       <TextWarning>
-        Trial (<ComingSoonLink />)
+        Trial (<a href={routes.getPurchaseUpgrade()}>Upgrade</a>)
       </TextWarning>
     );
   } else {
     mode = "Standard";
   }
 
+  let purchasePanel;
+  if (purchaseState !== undefined) {
+    if (purchaseState) {
+      purchasePanel = <MessageOk>Thank you for your purchase</MessageOk>;
+    } else {
+      purchasePanel = (
+        <MessageError>
+          There seems to be a delay in verifying your purchase.{" "}
+          <Button onClick={() => window.location.reload()}>Check again</Button>
+        </MessageError>
+      );
+    }
+  }
+
   return (
     <PanelPage title="Profile">
       <SubPanel>
+        {purchasePanel}
         <PublicLink>
           <a href={routes.getPlayer(player.id).as} target="_blank">
             View public profile{" "}
@@ -135,7 +155,7 @@ const ComingSoonLink = () => {
         window.alert("Coming soon");
       }}
     >
-      change
+      Change
     </a>
   );
 };

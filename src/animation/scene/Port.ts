@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { AbstractScene } from "./AbstractScene";
-import {Planet} from "@src/animation/object/Planet";
+import { Planet } from "@src/animation/object/Planet";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { ShipInOrbit } from "@src/animation/object/ShipInOrbit";
 import { IShip } from "@src/interfaces";

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { GRID, MAX_PROSE_WIDTH } from "@src/styles/variables";
 import { SIZES } from "@src/styles/typography";
+import { COLOURS } from "@src/styles/colours";
 
 export const Prose = styled.div`
   p,
@@ -31,5 +32,13 @@ export const Prose = styled.div`
   }
   ul {
     list-style: square;
+  }
+  small {
+    ${SIZES.F};
+  }
+  hr {
+    border: 0;
+    border-top: solid 1px ${COLOURS.KEY_LINE};
+    margin-bottom: ${GRID.UNIT};
   }
 `;

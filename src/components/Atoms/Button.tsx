@@ -6,6 +6,7 @@ import { MONOSPACE_FONT } from "@src/styles/typography";
 import { AttackIcon } from "@src/components/Icons/AttackIcon";
 import { CloseIcon } from "@src/components/Icons/CloseIcon";
 import { AddIcon } from "@src/components/Icons/AddIcon";
+import { EditIcon } from "@src/components/Icons/EditIcon";
 
 export enum Type {
   Confirm,
@@ -112,8 +113,8 @@ export const DisguisedButton = styled.button`
 
 const iconButtonStyles = css`
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   line-height: 0;
   padding: 4px 6px;
 `;
@@ -123,6 +124,10 @@ const IconDangerButton = styled(DangerButton)`
 `;
 
 const IconConfirmButton = styled(ConfirmButton)`
+  ${iconButtonStyles};
+`;
+
+const IconActionButton = styled(ActionButton)`
   ${iconButtonStyles};
 `;
 
@@ -142,4 +147,10 @@ export const RemoveButton = React.memo((props: any) => (
   <IconDangerButton title="Remove" {...props}>
     <CloseIcon />
   </IconDangerButton>
+));
+
+export const EditButton = React.memo((props: any) => (
+  <IconActionButton title="Edit" {...props}>
+    <EditIcon />
+  </IconActionButton>
 ));

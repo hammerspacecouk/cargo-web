@@ -14,7 +14,7 @@ export const Table = styled.table`
   td {
     text-align: left;
     padding: ${GRID.HALF} ${GRID.UNIT};
-    border-bottom: solid 1px ${COLOURS.BODY.FADED};
+    border-bottom: solid 1px ${COLOURS.KEY_LINE};
     &:first-child {
       padding-left: 0;
     }
@@ -33,6 +33,6 @@ export const TableSubtle = styled(Table)`
 
 export const TableStriped = styled(Table)`
   tr:nth-child(even) {
-    background: ${COLOURS.BLACK.COLOURISED};
+    background: ${COLOURS.BLACK.FADED};
   }
 `;

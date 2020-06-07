@@ -18,4 +18,5 @@ export const routes = {
   getPlayLaunch: () => "/play/launch",
   getPlayShip: (id: string = ":shipId") => ({ href: `/play/[ship]?ship=${id}`, as: `/play/${id}` }),
   getPortsList: () => "/ports",
+  getPurchaseUpgrade: () => "/purchase/upgrade",
 };

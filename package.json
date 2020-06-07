@@ -4,6 +4,7 @@
   "license": "UNLICENSED",
   "description": "Saxopholis: Node, React",
   "dependencies": {
+    "@stripe/stripe-js": "^1.7.0",
     "b64u": "^3.0.0",
     "date-fns": "^2.8.1",
     "next": "^9.1.4",
