@@ -33,7 +33,13 @@ export const Profile = ({ profile, purchaseState }: IProfileProps) => {
 
   let mode;
   if (profile.isAnonymous) {
-    mode = <TextDanger>Anonymous</TextDanger>;
+    mode = (
+      <>
+        <TextDanger>Anonymous</TextDanger>
+        <br />
+        Link to an Authentication Provider below to be able to upgrade to a full account
+      </>
+    );
   } else if (profile.isTrial) {
     mode = (
       <TextWarning>
