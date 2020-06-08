@@ -25,8 +25,10 @@ import { Icon, TEXT_ICON } from "@src/components/Atoms/Icon";
 import { PlagueIcon } from "@src/components/Icons/PlagueIcon";
 import { CountdownToTime } from "@src/components/Molecules/CountdownToTime";
 import { useNumber } from "@src/hooks/useNumber";
+import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 
 export const ShipInPortPage = () => {
+  const { isGameOver } = useGameSessionContext();
   const { activeView, events, setActiveView, ship, shipsInLocation, port, blockadeStrength } = useActiveShipContext();
   const { allowLog } = useTutorial();
 
@@ -54,31 +56,31 @@ export const ShipInPortPage = () => {
 
       {activeView === ACTIVE_VIEW.CARGO && (
         <StyledShipPanel closeHandler={closeHandler} title="Cargo" id="cargo">
-          <Crates />
+          {!isGameOver && <Crates />}
         </StyledShipPanel>
       )}
 
       {activeView === ACTIVE_VIEW.NAVIGATION && (
         <StyledShipPanel closeHandler={closeHandler} title="Navigation" id="navigation">
-          <Directions />
+          {!isGameOver && <Directions />}
         </StyledShipPanel>
       )}
 
       {activeView === ACTIVE_VIEW.TACTICAL && (
         <StyledShipPanel closeHandler={closeHandler} title="Tactical" id="tactical">
-          <Tactical />
+          {!isGameOver && <Tactical />}
         </StyledShipPanel>
       )}
 
       {activeView === ACTIVE_VIEW.SHIPS && (
         <StyledShipPanel closeHandler={closeHandler} title="Ships" id="ships">
-          <Ships />
+          {!isGameOver && <Ships />}
         </StyledShipPanel>
       )}
 
       {activeView === ACTIVE_VIEW.ENGINEERING && (
         <StyledShipPanel closeHandler={closeHandler} title="Engineering" id="engineering">
-          <Engineering />
+          {!isGameOver && <Engineering />}
         </StyledShipPanel>
       )}
 

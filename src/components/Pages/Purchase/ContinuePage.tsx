@@ -12,13 +12,13 @@ import { MessageError } from "@src/components/Molecules/Message";
 
 const stripePromise = loadStripe(Environment.stripePublicKey);
 
-export const UpgradePage = () => {
+export const ContinuePage = () => {
   const { buttonsDisabled, disableButtons } = useButtonsDisabled();
   const [error, setError] = React.useState<string>();
 
   const handleCheckoutClick = async () => {
     disableButtons();
-    const stripeSession = await ApiClient.fetch("/purchase/upgrade");
+    const stripeSession = await ApiClient.fetch("/purchase/continue");
     if (stripeSession) {
       const stripe = await stripePromise;
       const { error } = await stripe.redirectToCheckout(stripeSession);
@@ -26,25 +26,25 @@ export const UpgradePage = () => {
         setError(error.message);
       }
     } else {
-      setError("You cannot purchase this item more than once");
+      setError("You cannot purchase this item");
     }
   };
 
   return (
     <PurchaseLayout>
       <Prose>
-        <H1>Upgrade Account</H1>
+        <H1>Continue Game</H1>
         {error && <MessageError>{error}</MessageError>}
-        <p>You can play up to 25% of the game for free.</p>
-
-        <p>Upgrade your account to be able to play the remaining 75% of the game beyond the trial period.</p>
         <p>
-          This is a one-time cost for your account. You will not have to pay again if you choose to start your game
-          over.
+          A Reticulum Shuttle is required to complete the game. If yours has been destroyed, you can purchase a new one
+          to continue without losing progress.
+        </p>
+        <p>
+          You can also <a href="/reset">Start over</a> for free
         </p>
         <hr />
         <TextCenter>
-          <H2 as="span">£7.99</H2>
+          <H2 as="span">£2.99</H2>
         </TextCenter>
         <TextCenter>
           <ActionButton disabled={buttonsDisabled} onClick={handleCheckoutClick}>

@@ -14,22 +14,30 @@ export const GameOverModal = () => {
   return (
     <Modal isOpen={isOpen} title="Game Over!" onClose={() => setIsOpen(false)}>
       <TextCenter>
-        <TextDanger>Your Reticulum Shuttle was destroyed.</TextDanger>
+        <TextDanger>
+          Your Reticulum Shuttle was destroyed.
+          <br />
+          It is no longer possible to complete the game.
+        </TextDanger>
       </TextCenter>
       <Option>
-        <OptionTitle>Reset game</OptionTitle>
+        <OptionTitle>Start over</OptionTitle>
         <OptionText>This will remove all progress and start again from the beginning.</OptionText>
         <OptionButton>
           <ActionButton as="a" href={routes.getResetAccount()}>
-            Reset Game
+            Start over
           </ActionButton>
         </OptionButton>
       </Option>
       <Option>
         <OptionTitle>Continue</OptionTitle>
-        <OptionText>Purchase a new Reticulum Shuttle. This will continue with all progress intact.</OptionText>
+        <OptionText>
+          Purchase a new Reticulum Shuttle. This will continue your current game with all progress intact.
+        </OptionText>
         <OptionButton>
-          <ActionButton disabled>$2 (Coming soon)</ActionButton>
+          <ActionButton as="a" href={routes.getPurchaseContinue()}>
+            Continue
+          </ActionButton>
         </OptionButton>
       </Option>
     </Modal>
