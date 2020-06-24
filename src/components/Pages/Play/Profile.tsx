@@ -20,6 +20,7 @@ import { Icon, TINY_ICON } from "@src/components/Atoms/Icon";
 import { NewWindowIcon } from "@src/components/Icons/NewWindowIcon";
 import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 import { useNumber } from "@src/hooks/useNumber";
+import { PurchaseHistory } from "@src/components/Organisms/PurchaseHistory";
 
 export interface IProfileProps {
   profile: IProfileResponse;
@@ -126,6 +127,10 @@ export const Profile = ({ profile, purchaseState }: IProfileProps) => {
       <SubPanel>
         <Heading>Linked Authentication Providers</Heading>
         <SocialAccounts isAnonymous={profile.isAnonymous} authProviders={profile.authProviders} />
+      </SubPanel>
+      <SubPanel>
+        <Heading>Purchases</Heading>
+        <PurchaseHistory purchases={profile.purchases} />
       </SubPanel>
       <Heading>Logout</Heading>
       <AccountOption>

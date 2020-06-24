@@ -15,6 +15,12 @@ export interface IProfileResponse {
   homePort: IPort;
   authProviders: IAuthProvider[];
   distanceTravelled: number;
+  purchases: {
+    id: string;
+    product: string;
+    datetime: string;
+    total: string;
+  }[];
 }
 
 export interface IAuthProvider {

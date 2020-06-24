@@ -5,7 +5,8 @@ import { GRID } from "@src/styles/variables";
 export const Table = styled.table`
   width: 100%;
   thead {
-    background: ${COLOURS.BODY.FADED};
+    background: ${COLOURS.BODY.BACKGROUND};
+    border-bottom: solid 1px ${COLOURS.KEY_LINE};
   }
   th {
     font-weight: bold;
