@@ -70,6 +70,8 @@ interface IGameSessionState {
   isGameOver?: boolean;
   currentMissions?: IMission[];
   allMissions?: IMission[];
+  showTrialEnded?: boolean;
+  showTrialWarning?: boolean;
 }
 
 const getNewSessionState = (state: IGameSessionState, session: IGameSessionResponse): IGameSessionState => {
@@ -83,6 +85,8 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "events", session.fleet.events);
     newState = setPropIfChanged(newState, "currentMissions", session.currentMissions);
     newState = setPropIfChanged(newState, "allMissions", session.allMissions);
+    newState = setPropIfChanged(newState, "showTrialEnded", session.showTrialEnded);
+    newState = setPropIfChanged(newState, "showTrialWarning", session.showTrialWarning);
   } else {
     newState = setPropIfChanged(newState, "isGameOver", null);
     newState = setPropIfChanged(newState, "score", null);
@@ -92,6 +96,8 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "events", null);
     newState = setPropIfChanged(newState, "currentMissions", []);
     newState = setPropIfChanged(newState, "allMissions", []);
+    newState = setPropIfChanged(newState, "showTrialEnded", false);
+    newState = setPropIfChanged(newState, "showTrialWarning", false);
   }
   return newState;
 };

@@ -35,9 +35,9 @@ export const UpgradePage = () => {
       <Prose>
         <H1>Upgrade Account</H1>
         {error && <MessageError>{error}</MessageError>}
-        <p>You can play up to 25% of the game for free.</p>
+        <p>You can play the first 15% of the game for free.</p>
 
-        <p>Upgrade your account to be able to play the remaining 75% of the game beyond the trial period.</p>
+        <p>Upgrade your account to be able to play the remaining 85% of the game beyond the trial period.</p>
         <p>
           This is a one-time cost for your account. You will not have to pay again if you choose to start your game
           over.

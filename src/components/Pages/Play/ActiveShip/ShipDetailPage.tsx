@@ -8,6 +8,7 @@ import { pageTitle } from "@src/utils/pageTitle";
 import { Loading } from "@src/components/Atoms/Loading";
 import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { useEffect } from "react";
+import { TrialWarningModal } from "@src/components/Organisms/TrialWarningModal";
 
 export const ShipDetailPage = () => {
   const { setActiveShipById } = useGameSessionContext();
@@ -35,6 +36,7 @@ export const ShipDetailPage = () => {
       </Head>
       {innerPage}
       <MessageModal />
+      <TrialWarningModal />
     </>
   );
 };

@@ -21,7 +21,7 @@ export const PurchaseHistory = ({ purchases }: IProps) => {
       </thead>
       <tbody>
         {purchases.map((purchase) => (
-          <Row purchase={purchase} />
+          <Row key={purchase.id} purchase={purchase} />
         ))}
       </tbody>
     </TableSubtle>

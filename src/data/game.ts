@@ -12,6 +12,8 @@ export interface IGameSessionResponse {
   sessionState: ISessionResponse;
   currentMissions: IMission[];
   allMissions: IMission[];
+  showTrialEnded: boolean;
+  showTrialWarning: boolean;
 }
 
 export interface IFleetResponse {
