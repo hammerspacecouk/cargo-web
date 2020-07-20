@@ -21,6 +21,7 @@ export interface IProfileResponse {
     datetime: string;
     total: string;
   }[];
+  setNickname: string | null;
 }
 
 export interface IAuthProvider {

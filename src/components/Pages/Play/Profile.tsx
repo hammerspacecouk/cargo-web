@@ -21,6 +21,7 @@ import { NewWindowIcon } from "@src/components/Icons/NewWindowIcon";
 import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 import { useNumber } from "@src/hooks/useNumber";
 import { PurchaseHistory } from "@src/components/Organisms/PurchaseHistory";
+import { SetNicknameLink } from "@src/components/Organisms/SetNicknameLink";
 
 export interface IProfileProps {
   profile: IProfileResponse;
@@ -82,7 +83,7 @@ export const Profile = ({ profile, purchaseState }: IProfileProps) => {
             <tr>
               <th>Public Nickname:</th>
               <td>
-                <H3 as="span">{player.displayName}</H3> (<ComingSoonLink />)
+                <H3 as="span">{player.displayName}</H3> <SetNicknameLink token={profile.setNickname} />
               </td>
             </tr>
             <tr>
