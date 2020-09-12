@@ -1,52 +1,64 @@
 import React from "react";
-import {ISliderProps, Slider} from "@src/components/Atoms/Slider";
+import { ISliderProps, Slider } from "@src/components/Atoms/Slider";
 import styled from "styled-components";
-import {GRID} from "@src/styles/variables";
-import {COLOURS} from "@src/styles/colours";
+import { GRID } from "@src/styles/variables";
+import { COLOURS } from "@src/styles/colours";
+import { TextRight } from "@src/components/Atoms/Text";
+import { IClassNameProps } from "@src/interfaces";
 
-export const SliderGroup: React.FC<IProps> = ({sliders, maxTotal}) => {
+const calculateTotalUsed = (sliders: IProps["sliders"]): number => {
+  return sliders.reduce((a, s) => a + s.current, 0);
+};
+
+export const SliderGroup: React.FC<IProps> = ({ className, sliders, maxTotal }) => {
   const [slidersValue, setSliders] = React.useState(sliders);
 
-  const totalUsed = slidersValue.reduce((a, s) => a + s.current, 0);
-  const remaining = maxTotal - totalUsed;
+  const remaining = maxTotal - calculateTotalUsed(slidersValue);
 
   return (
-    <div>
-      Available: {remaining}
+    <div className={className}>
+      <AvailableCount>
+        Available: {remaining}/{maxTotal}
+      </AvailableCount>
       <StyledSliderList>
-      {slidersValue.map((slider, i) => (
-        <Slider
-          key={slider.title}
-          title={slider.title}
-          current={slider.current}
-          max={maxTotal}
-          description={slider.description}
-          onUpdate={(newValue) => {
-            const newSliders = [...sliders];
-            newSliders[i].current = newValue;
-            setSliders(newSliders);
-            return newValue;
-          }}
-        />
-      ))}
-    </StyledSliderList>
+        {slidersValue.map((slider, i) => (
+          <Slider
+            key={slider.title}
+            title={slider.title}
+            current={slider.current}
+            currentMax={Math.min(maxTotal, slider.current + remaining)}
+            max={maxTotal}
+            description={slider.description}
+            onUpdate={(newValue) => {
+              const newSliders = [...sliders];
+              newSliders[i].current = newValue;
+              setSliders(newSliders);
+              return newValue;
+            }}
+          />
+        ))}
+      </StyledSliderList>
     </div>
   );
 };
 
-interface IProps {
+interface IProps extends IClassNameProps {
   sliders: {
-    title: ISliderProps['title'];
-    description: ISliderProps['description'];
-    current: ISliderProps['current'];
+    title: ISliderProps["title"];
+    description: ISliderProps["description"];
+    current: ISliderProps["current"];
   }[];
   maxTotal: number;
 }
 
 const StyledSliderList = styled.div`
   > *:not(:last-child) {
-    margin-bottom: ${GRID.HALF};
-    padding-bottom: ${GRID.HALF};
+    margin-bottom: ${GRID.UNIT};
+    padding-bottom: ${GRID.UNIT};
     border-bottom: solid 1px ${COLOURS.KEY_LINE};
   }
+`;
+
+const AvailableCount = styled(TextRight)`
+  margin-bottom: ${GRID.HALF};
 `;
