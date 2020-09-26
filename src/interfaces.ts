@@ -53,7 +53,7 @@ export interface IRank {
 }
 
 export interface IRankStatus {
-  acknowledgeToken?: IActionToken;
+  acknowledgeToken?: string;
   portsVisited: number;
   levelProgress: number;
   currentRank: IRank;
@@ -61,6 +61,13 @@ export interface IRankStatus {
   nextRank: IRank;
   olderRanks: IRank[];
   description?: string;
+  availableCredits?: number;
+  market?: {
+    history: number;
+    discovery: number;
+    economy: number;
+    military: number;
+  };
   winState?: {
     completionTime: number;
     isPersonalBest: boolean;

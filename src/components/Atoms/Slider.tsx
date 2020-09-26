@@ -45,42 +45,47 @@ export const Slider: React.FC<ISliderProps> = ({
 
   return (
     <div>
-      <StyledTitle>
-        <span>
-          <label htmlFor={inputId}>{title}</label>
-          <HelpButton onClick={() => setDescriptionOpen(!descriptionOpen)}>?</HelpButton>
-        </span>
-        <StyledValue>{value}</StyledValue>
-      </StyledTitle>
-      <StyledInput
-        id={inputId}
-        type="range"
-        min={0}
-        step={1}
-        max={max}
-        value={value}
-        onChange={onChange}
-        {...inputProps}
-      />
+      <StyledRow>
+        <label htmlFor={inputId}>{title}</label>
+        <HelpButton type="button" onClick={(e) => {
+          e.preventDefault();
+          setDescriptionOpen(!descriptionOpen)
+        }}>?</HelpButton>
+      </StyledRow>
+      <StyledRow>
+        <StyledInput
+          id={inputId}
+          type="range"
+          min={0}
+          step={1}
+          max={max}
+          value={value}
+          onChange={onChange}
+          {...inputProps}
+        />
+        <StyledValue>{value.toString(10).padStart(2, "0")}</StyledValue>
+      </StyledRow>
       {descriptionOpen && <p>{description}</p>}
     </div>
   );
 };
 
-const StyledTitle = styled.span`
+const StyledRow = styled.span`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${GRID.HALF};
+  &:not(:last-child) {
+    margin-bottom: ${GRID.UNIT};
+  }
+  > *:not(:last-child) {
+    margin-right: ${GRID.UNIT};
+  }
 `;
 
 const StyledInput = styled.input`
   display: block;
   width: 100%;
   -webkit-appearance: none;
-  &:not(:last-child) {
-    margin-bottom: ${GRID.HALF};
-  }
 
   &:focus {
     outline: none;

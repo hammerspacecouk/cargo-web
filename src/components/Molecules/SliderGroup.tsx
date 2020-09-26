@@ -26,6 +26,7 @@ export const SliderGroup: React.FC<IProps> = ({ className, sliders, maxTotal }) 
             key={slider.title}
             title={slider.title}
             current={slider.current}
+            name={slider.name}
             currentMax={Math.min(maxTotal, slider.current + remaining)}
             max={maxTotal}
             description={slider.description}
@@ -47,6 +48,7 @@ interface IProps extends IClassNameProps {
     title: ISliderProps["title"];
     description: ISliderProps["description"];
     current: ISliderProps["current"];
+    name: ISliderProps["name"];
   }[];
   maxTotal: number;
 }
