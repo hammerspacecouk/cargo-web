@@ -33,7 +33,7 @@ export const Slider: React.FC<ISliderProps> = ({
 
   const inputId = useMemo(() => id || `input-${Math.floor(Math.random() * 1000000)}`, [id]);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = parseInt(e.target.value);
     if (currentMax === undefined || val <= currentMax) {
       if (onUpdate) {
@@ -47,10 +47,15 @@ export const Slider: React.FC<ISliderProps> = ({
     <div>
       <StyledRow>
         <label htmlFor={inputId}>{title}</label>
-        <HelpButton type="button" onClick={(e) => {
-          e.preventDefault();
-          setDescriptionOpen(!descriptionOpen)
-        }}>?</HelpButton>
+        <HelpButton
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            setDescriptionOpen(!descriptionOpen);
+          }}
+        >
+          ?
+        </HelpButton>
       </StyledRow>
       <StyledRow>
         <StyledInput

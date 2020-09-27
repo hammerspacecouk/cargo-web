@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button} from "@src/components/Atoms/Button";
+import { Button } from "@src/components/Atoms/Button";
 import { Loading } from "@src/components/Atoms/Loading";
 import { TextCenter } from "@src/components/Atoms/Text";
 import { Modal } from "@src/components/Molecules/Modal";
@@ -11,7 +11,7 @@ import { GRID } from "@src/styles/variables";
 import { COLOURS } from "@src/styles/colours";
 import { H3 } from "@src/components/Atoms/Heading";
 import { SliderGroup } from "@src/components/Molecules/SliderGroup";
-import {Environment} from "@src/utils/environment";
+import { Environment } from "@src/utils/environment";
 
 export const PromotionModal = () => {
   const { rankStatus, currentMissions } = useGameSessionContext();
@@ -49,39 +49,37 @@ export const PromotionModal = () => {
       >
         <input type="hidden" name="token" value={rankStatus.acknowledgeToken} />
         {rankStatus.market && rankStatus.availableCredits !== undefined && (
-        <Sliders
-          sliders={[
-            {
-              title: "History",
-              current: rankStatus.market.history,
-              description: "Show more previously visited planets on the map",
-              name: "set_history",
-            },
-            {
-              title: "Discovery",
-              current: rankStatus.market.discovery,
-              description: "Increase speed of ships to make it easier to find new planets",
-              name: "set_discovery",
-            },
-            {
-              title: "Economy",
-              current: rankStatus.market.economy,
-              description: "Reduce the cost of all purchases",
-              name: "set_economy",
-            },
-            {
-              title: "Military",
-              current: rankStatus.market.military,
-              description: "Increase power of your weapons. Reduce effectiveness of attacks on your ships",
-              name: "set_military",
-            },
-          ]}
-          maxTotal={rankStatus.availableCredits}
-        />
-      )}
-      <TextCenter as="div">
-        {button}
-      </TextCenter>
+          <Sliders
+            sliders={[
+              {
+                title: "History",
+                current: rankStatus.market.history,
+                description: "Show more previously visited planets on the map",
+                name: "set_history",
+              },
+              {
+                title: "Discovery",
+                current: rankStatus.market.discovery,
+                description: "Increase speed of ships to make it easier to find new planets",
+                name: "set_discovery",
+              },
+              {
+                title: "Economy",
+                current: rankStatus.market.economy,
+                description: "Reduce the cost of all purchases",
+                name: "set_economy",
+              },
+              {
+                title: "Military",
+                current: rankStatus.market.military,
+                description: "Increase power of your weapons. Reduce effectiveness of attacks on your ships",
+                name: "set_military",
+              },
+            ]}
+            maxTotal={rankStatus.availableCredits}
+          />
+        )}
+        <TextCenter as="div">{button}</TextCenter>
       </form>
     </Modal>
   );
