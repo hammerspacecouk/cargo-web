@@ -11,7 +11,7 @@ import { BREAKPOINTS } from "@src/styles/media";
 export const Promotion = ({ rankStatus }: IProps) => {
   const [progress, setProgress] = React.useState(80);
   const [phase2, setPhase2] = React.useState(false);
-  const startTime = React.useRef(null);
+  const startTime = React.useRef<number>();
   const isMounted = useMounted();
   let frame: number = null;
 
