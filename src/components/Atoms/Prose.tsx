@@ -7,6 +7,7 @@ export const Prose = styled.div`
   p,
   ul,
   ol,
+  dl,
   h1,
   h2,
   h3,
@@ -40,5 +41,14 @@ export const Prose = styled.div`
     border: 0;
     border-top: solid 1px ${COLOURS.KEY_LINE};
     margin-bottom: ${GRID.UNIT};
+  }
+  dt {
+    ${SIZES.D};
+  }
+  dt + dd {
+    margin-left: ${GRID.UNIT};
+  }
+  dd + dt {
+    margin-top: ${GRID.UNIT};
   }
 `;

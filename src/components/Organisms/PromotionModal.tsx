@@ -29,7 +29,7 @@ export const PromotionModal = () => {
       </Button>
     );
   } else {
-    button = <Button type="submit">Ok</Button>;
+    button = <Button type="submit" title="Accept and Continue">🎉</Button>;
   }
 
   return (
@@ -54,25 +54,21 @@ export const PromotionModal = () => {
               {
                 title: "History",
                 current: rankStatus.market.history,
-                description: "Show more previously visited planets on the map",
                 name: "set_history",
               },
               {
                 title: "Discovery",
                 current: rankStatus.market.discovery,
-                description: "Increase speed of ships to make it easier to find new planets",
                 name: "set_discovery",
               },
               {
                 title: "Economy",
                 current: rankStatus.market.economy,
-                description: "Reduce the cost of all purchases",
                 name: "set_economy",
               },
               {
                 title: "Military",
                 current: rankStatus.market.military,
-                description: "Increase power of your weapons. Reduce effectiveness of attacks on your ships",
                 name: "set_military",
               },
             ]}
@@ -88,12 +84,13 @@ export const PromotionModal = () => {
 const NewMission = styled.div`
   padding: ${GRID.UNIT};
   border-top: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+  border-bottom: solid 1px ${COLOURS.PANEL_INNER_DIVIDER};
+  margin-bottom: ${GRID.UNIT};
 `;
 const Heading = styled(H3)`
   text-align: center;
   margin-bottom: ${GRID.UNIT};
 `;
 const Sliders = styled(SliderGroup)`
-  max-width: 480px;
-  margin-bottom: ${GRID.UNIT};
+  margin-bottom: ${GRID.DOUBLE};
 `;

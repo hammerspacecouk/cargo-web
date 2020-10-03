@@ -69,7 +69,7 @@ export const Promotion = ({ rankStatus }: IProps) => {
   const olderRanks = rankStatus.olderRanks;
 
   return (
-    <StyledPromotion>
+    <div>
       <ProgressBar percent={progress} />
       <RankBox>
         {nextRank && <InactiveRank>{nextRank}</InactiveRank>}
@@ -80,17 +80,13 @@ export const Promotion = ({ rankStatus }: IProps) => {
         ))}
       </RankBox>
       {rankStatus.description && <StyledDescription>{rankStatus.description}</StyledDescription>}
-    </StyledPromotion>
+    </div>
   );
 };
 
 interface IProps {
   rankStatus?: IRankStatus;
 }
-
-const StyledPromotion = styled.div`
-  max-width: 480px;
-`;
 
 const StyledDescription = styled(P)`
   border-top: ${COLOURS.PANEL_INNER_DIVIDER} solid 1px;

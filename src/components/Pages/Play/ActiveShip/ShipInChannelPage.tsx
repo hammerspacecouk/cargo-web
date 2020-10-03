@@ -46,7 +46,7 @@ export const ShipInChannelPage = () => {
             <Bonus bonusEffects={lockedBonus} />
           </GeneralPanel>
         )}
-        <GeneralPanel title="Incoming...">
+        <GeneralPanel title="Incoming…">
           <Hint hint={lockedHint} />
         </GeneralPanel>
       </Extra>

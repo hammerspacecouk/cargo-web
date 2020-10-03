@@ -4,6 +4,7 @@ import { GRID } from "@src/styles/variables";
 import { Button } from "@src/components/Atoms/Button";
 import { SIZES } from "@src/styles/typography";
 import { COLOURS } from "@src/styles/colours";
+import {H3} from "@src/components/Atoms/Heading";
 
 export interface ISliderProps
   extends Omit<
@@ -11,7 +12,6 @@ export interface ISliderProps
     "max" | "type" | "min" | "minLength" | "maxLength" | "step" | "value"
   > {
   title: string;
-  description: string;
   current: number;
   max: number;
   currentMax?: number;
@@ -24,12 +24,11 @@ export const Slider: React.FC<ISliderProps> = ({
   id,
   currentMax,
   max,
-  description,
   onUpdate,
+  className,
   ...inputProps
 }) => {
   const [value, setValue] = React.useState(current);
-  const [descriptionOpen, setDescriptionOpen] = React.useState(false);
 
   const inputId = useMemo(() => id || `input-${Math.floor(Math.random() * 1000000)}`, [id]);
 
@@ -44,18 +43,9 @@ export const Slider: React.FC<ISliderProps> = ({
   };
 
   return (
-    <div>
+    <StyledSlider className={className}>
       <StyledRow>
-        <label htmlFor={inputId}>{title}</label>
-        <HelpButton
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            setDescriptionOpen(!descriptionOpen);
-          }}
-        >
-          ?
-        </HelpButton>
+        <H3 as="span">{title}</H3>
       </StyledRow>
       <StyledRow>
         <StyledInput
@@ -70,10 +60,13 @@ export const Slider: React.FC<ISliderProps> = ({
         />
         <StyledValue>{value.toString(10).padStart(2, "0")}</StyledValue>
       </StyledRow>
-      {descriptionOpen && <p>{description}</p>}
-    </div>
+    </StyledSlider>
   );
 };
+
+const StyledSlider = styled.label`
+  display: block;
+`;
 
 const StyledRow = styled.span`
   display: flex;
@@ -124,9 +117,4 @@ const StyledInput = styled.input`
 
 const StyledValue = styled.span`
   ${SIZES.C};
-`;
-
-const HelpButton = styled(Button)`
-  margin-left: ${GRID.UNIT};
-  padding: 0 ${GRID.HALF};
 `;
