@@ -9,21 +9,9 @@ export interface IMapProps {
     planets: ICircle[];
     highlights: ICircle[];
     ships: IShipPosition[];
-    history: {
-      from: {
-        angle?: number;
-        coords: ICoordinate;
-      };
-      to: {
-        angle?: number;
-        coords: ICoordinate;
-      };
-      opacity: number;
-    }[][];
   };
 }
 
-const JOURNEY_COLOURS = ["73,184,139", "171,134,208", "231,86,74", "255,195,20", "103,115,228", "223,134,75"];
 const PORT_RADIUS = 16;
 const SPACING = 8;
 const SHIP_SIZE = 12;
@@ -32,7 +20,6 @@ export const Chart = ({ svg }: IMapProps) => {
   // layer order
   // - Nearby paths
   // - Highlight rings
-  // - Ship history paths
   // - Ships and labels
   // - Planets and labels
   return (
@@ -43,27 +30,8 @@ export const Chart = ({ svg }: IMapProps) => {
       {svg.highlights.map((highlight) => (
         <Highlight key={`highlight-${highlight.id}`} cx={highlight.coords.x} cy={highlight.coords.y} r={svg.grid / 4} />
       ))}
-      {svg.history.map((lines, index) => {
-        const color = JOURNEY_COLOURS[index % JOURNEY_COLOURS.length];
-        return lines.map((line, jndex) => {
-          const fromCoords = line.from.angle
-            ? orbitPosition(line.from.coords, svg.grid / 4, line.from.angle)
-            : line.from.coords;
-          const toCoords = line.to.angle ? orbitPosition(line.to.coords, svg.grid / 4, line.to.angle) : line.to.coords;
-          return (
-            <JourneyLine
-              key={`line-${index}-${jndex}`}
-              color={`rgba(${color},${line.opacity})}`}
-              x1={fromCoords.x}
-              y1={fromCoords.y}
-              x2={toCoords.x}
-              y2={toCoords.y}
-            />
-          );
-        });
-      })}
       {svg.planets.map((planet) => (
-        <Planet key={`planet-${planet.id}`} cx={planet.coords.x} cy={planet.coords.y} r={PORT_RADIUS} />
+        <Planet key={`planet-${planet.id}`} cx={planet.coords.x} cy={planet.coords.y} r={PORT_RADIUS} $visited={planet.isVisited} />
       ))}
       {svg.planets.map((planet) => (
         <PlanetLabel
@@ -106,6 +74,7 @@ interface ICircle {
   id: string;
   title?: string;
   coords: ICoordinate;
+  isVisited: boolean;
 }
 
 interface IShipPosition {
@@ -121,8 +90,8 @@ const Highlight = styled.circle`
   stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 2px;
 `;
-const Planet = styled.circle`
-  fill: #ffb511;
+const Planet = styled.circle<{$visited: boolean}>`
+  fill: ${({$visited}) => $visited ? `#ffb511` : `#cccccc`};
 `;
 const PlanetLabel = styled.text`
   font-size: 15px;
@@ -139,8 +108,4 @@ const Ship = styled.image`
 const ShipLabel = styled.text`
   font-size: 8px;
   fill: white;
-`;
-const JourneyLine = styled.line<{ color: string }>`
-  stroke: ${({ color }) => color};
-  stroke-width: 4px;
 `;
