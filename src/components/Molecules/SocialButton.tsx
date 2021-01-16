@@ -8,11 +8,11 @@ import { FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo } from
 import { IChildrenProps } from "@src/interfaces";
 import { AnonIcon } from "@src/components/Icons/AnonIcon";
 
-interface IProps extends React.HTMLProps<HTMLAnchorElement> {
+interface IProps extends Omit<React.HTMLProps<HTMLAnchorElement>, "ref" | "as"> {
   text?: string;
 }
 
-interface IButtonProps extends React.HTMLProps<HTMLAnchorElement> {
+interface IButtonProps extends Omit<React.HTMLProps<HTMLAnchorElement>, "ref" | "as"> {
   icon: JSX.Element;
   text: string;
   colour: IColour;

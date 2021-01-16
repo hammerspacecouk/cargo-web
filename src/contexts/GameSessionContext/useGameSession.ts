@@ -14,7 +14,10 @@ export interface IGameSession extends IGameSessionState {
 }
 
 // game session data calculation
-export const useGameSession = (initialSession?: IGameSessionResponse, currentPage = null): IGameSession => {
+export const useGameSession = (
+  initialSession?: IGameSessionResponse,
+  currentPage: CurrentPage = null
+): IGameSession => {
   const [sessionState, setSessionState] = useState(() => getNewSessionState({}, initialSession));
   const isMounted = useMounted();
   const sessionRefreshInProgress = useRef<number>(null);
