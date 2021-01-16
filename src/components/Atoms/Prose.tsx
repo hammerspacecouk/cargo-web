@@ -15,8 +15,10 @@ export const Prose = styled.div`
   h5,
   h6,
   table {
-    // when part of prose, elements get their spacing back
-    margin-bottom: ${GRID.UNIT};
+    &:not(:last-child) {
+      // when part of prose, elements get their spacing back
+      margin-bottom: ${GRID.UNIT};
+    }
   }
   li {
     margin-left: ${GRID.UNIT};

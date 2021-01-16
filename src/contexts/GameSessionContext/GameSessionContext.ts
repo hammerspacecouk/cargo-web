@@ -1,6 +1,7 @@
 import { createContext, createElement, ReactNode, useContext } from "react";
 import { IGameSession, useGameSession } from "./useGameSession";
 import { IGameSessionResponse } from "@src/data/game";
+import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
 
 // hook to use for getting at the game session context
 export const useGameSessionContext = (): IGameSession => {
@@ -12,13 +13,13 @@ export const useGameSessionContext = (): IGameSession => {
 };
 
 // responsible for being the session provider
-export const GameContextComponent = ({ initialSession, children, isAtHome = false }: IProps) => {
-  const gameSession = useGameSession(initialSession, isAtHome);
+export const GameContextComponent = ({ initialSession, children, currentPage = null }: IProps) => {
+  const gameSession = useGameSession(initialSession, currentPage);
   return createElement(GameSessionContext.Provider, { value: gameSession }, children);
 };
 
 interface IProps {
-  isAtHome?: boolean;
+  currentPage: CurrentPage | null;
   initialSession?: IGameSessionResponse;
   children?: ReactNode;
 }

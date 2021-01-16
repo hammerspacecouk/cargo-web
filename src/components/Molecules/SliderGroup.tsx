@@ -44,7 +44,7 @@ export const SliderGroup: React.FC<IProps> = ({ className, sliders, maxTotal }) 
         <HelpText>
           <p>
             Set the sliders for what is most important for you. These can be changed at your next promotion. You have{" "}
-            {maxTotal} unit{maxTotal !== 1 ? 's' : ''} to spread between:
+            {maxTotal} unit{maxTotal !== 1 ? "s" : ""} to spread between:
           </p>
           <dl>
             <dt>History</dt>
@@ -107,10 +107,12 @@ const StyledSlider = styled(Slider)`
 `;
 
 const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   margin-bottom: ${GRID.UNIT};
+  ${BREAKPOINTS.S`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  `}
 `;
 
 const HelpButton = styled(Button)`

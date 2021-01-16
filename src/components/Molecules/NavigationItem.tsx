@@ -1,17 +1,18 @@
 import * as React from "react";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { GRID, NAV_ITEM_HEIGHT } from "@src/styles/variables";
 import { COLOURS, hexToRGBa } from "@src/styles/colours";
 import { Icon, TINY_ICON } from "@src/components/Atoms/Icon";
 import { ChevronRightIcon } from "@src/components/Icons/ChevronRightIcon";
 import { SIZES } from "@src/styles/typography";
 import { ReactNode } from "react";
+import { tutorialHighlightAnimation } from "@src/components/Organisms/ShipNavigation";
 
-export const NavigationItem = React.memo(({ path, text, subtext, icon, isCurrent }: IProps) => {
+export const NavigationItem = React.memo(({ path, text, subtext, icon, isCurrent, highlight }: IProps) => {
   return (
     <Link href={path.href} as={path.as} prefetch={false}>
-      <StyledItem href={path.as || path.href} isCurrent={isCurrent}>
+      <StyledItem href={path.as || path.href} $isCurrent={isCurrent} $highlight={highlight}>
         <StyledIcon>{icon}</StyledIcon>
         <Detail>
           <Text>{text}</Text>
@@ -34,9 +35,10 @@ interface IProps {
   subtext?: ReactNode;
   icon: JSX.Element;
   isCurrent: boolean;
+  highlight?: boolean;
 }
 
-const StyledItem = styled.a<{ isCurrent: boolean }>`
+const StyledItem = styled.a<{ $isCurrent: boolean; $highlight: boolean }>`
   display: flex;
   padding: ${GRID.UNIT} ${GRID.UNIT} ${GRID.UNIT} ${GRID.HALF};
   border-left: solid transparent ${GRID.HALF};
@@ -54,11 +56,17 @@ const StyledItem = styled.a<{ isCurrent: boolean }>`
     text-decoration: none;
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.05)};
   }
-  ${({ isCurrent }) =>
-    isCurrent &&
+  ${({ $isCurrent }) =>
+    $isCurrent &&
     `
     border-left-color: ${COLOURS.ACTIVE_HIGHLIGHT};
   `}
+  ${({ $highlight, $isCurrent }) =>
+    $highlight &&
+    !$isCurrent &&
+    css`
+      animation: ${tutorialHighlightAnimation} 2s ease-in-out infinite;
+    `};
 `;
 
 const StyledIcon = styled(Icon)`
@@ -82,7 +90,7 @@ const SubText = styled.span`
   ${SIZES.F};
 `;
 
-const ArrowIcon = styled(Icon)`
+export const ArrowIcon = styled(Icon)`
   opacity: 0.5;
   margin-left: ${GRID.HALF};
 `;

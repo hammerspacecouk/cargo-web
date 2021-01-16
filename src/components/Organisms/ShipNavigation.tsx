@@ -24,6 +24,7 @@ export const ShipNavigation = () => {
     allowExtras,
     showCrateIntro,
     showNavigationIntro,
+    showReadyForConvoy,
   } = useTutorial();
 
   let badge;
@@ -45,7 +46,12 @@ export const ShipNavigation = () => {
         >
           <DirectionsIcon />
         </NavItem>
-        <NavItem viewName={ACTIVE_VIEW.TACTICAL} label="Tactical" disabled={!allowTactical}>
+        <NavItem
+          viewName={ACTIVE_VIEW.TACTICAL}
+          label="Tactical"
+          tutorialHighlight={showReadyForConvoy}
+          disabled={!allowTactical}
+        >
           <TacticalIcon />
         </NavItem>
         <NavItem viewName={ACTIVE_VIEW.SHIPS} label="Ships" disabled={!allowShips}>
@@ -112,7 +118,7 @@ const Item = styled.li`
   position: relative;
 `;
 
-const tutorialHighlightAnimation = keyframes`
+export const tutorialHighlightAnimation = keyframes`
   0% {
     color: ${COLOURS.WHITE.STANDARD};
     background: ${hexToRGBa(COLOURS.TUTORIAL.BACKGROUND, 0)};

@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { COLOURS, hexToRGBa } from "@src/styles/colours";
 import { GRID, MASTHEAD_HEIGHT, Z_INDEX } from "@src/styles/variables";
 import { Score } from "./Score";
@@ -9,14 +9,18 @@ import { ChevronLeftIcon } from "@src/components/Icons/ChevronLeftIcon";
 import { Icon } from "@src/components/Atoms/Icon";
 import { BREAKPOINTS } from "@src/styles/media";
 import { SiteLogo } from "@src/components/Atoms/Logos";
+import { tutorialHighlightAnimation } from "@src/components/Organisms/ShipNavigation";
+import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
 
 export const InGameMasthead = () => {
-  const { score, refreshSession, isAtHome } = useGameSessionContext();
+  const { score, refreshSession, currentPage, tutorialStep } = useGameSessionContext();
 
   return (
     <MastheadPosition>
       <StyledMasthead>
-        {!isAtHome && <BackButton />}
+        {currentPage !== CurrentPage.home && (
+          <BackButton highlight={tutorialStep === 4 && currentPage !== CurrentPage.launch} />
+        )}
         <MastHeadScore onClick={refreshSession}>
           <Score score={score} />
         </MastHeadScore>
@@ -28,8 +32,8 @@ export const InGameMasthead = () => {
   );
 };
 
-const BackButton = () => (
-  <Back href={`${routes.getPlay()}#fleet`}>
+const BackButton = ({ highlight }: { highlight?: boolean }) => (
+  <Back href={`${routes.getPlay()}#fleet`} $highlight={highlight}>
     <BackIcon>
       <ChevronLeftIcon />
     </BackIcon>
@@ -67,7 +71,7 @@ const MastHeadScore = styled.div`
   flex: 1;
 `;
 
-const Back = styled.a`
+const Back = styled.a<{ $highlight?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,6 +83,11 @@ const Back = styled.a`
     background: ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.2)};
   }
   ${BREAKPOINTS.XL`display: none;`}
+  ${({ $highlight }) =>
+    $highlight &&
+    css`
+      animation: ${tutorialHighlightAnimation} 2s ease-in-out infinite;
+    `};
 `;
 
 const BackIcon = styled(Icon)`

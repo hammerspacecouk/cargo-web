@@ -81,7 +81,7 @@ const LogoLink = styled.a`
 
 const TemplateSimple = styled.div`
   position: relative;
-  max-width: 67rem;
+  max-width: 80rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: [main] 1fr [edge-right];

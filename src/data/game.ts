@@ -14,6 +14,7 @@ export interface IGameSessionResponse {
   allMissions: IMission[];
   showTrialEnded: boolean;
   showTrialWarning: boolean;
+  tutorialStep: number | null;
 }
 
 export interface IFleetResponse {

@@ -7,8 +7,13 @@ import { getSession, IGameSessionResponse } from "@src/data/game";
 import { routes } from "@src/routes";
 import { AUTH_COOKIE_NAME } from "@src/utils/HttpClient/ServerClient";
 
+export enum CurrentPage {
+  home,
+  launch,
+}
+
 // responsible for fetching the data required for this context
-export const GameSessionContainer = (Page: any, isAtHome: boolean = false) => {
+export const GameSessionContainer = (Page: any, currentPage: CurrentPage = null) => {
   return class extends Component<IProps, undefined> {
     public static async getInitialProps(context: NextPageContext) {
       return calculateInitialProps(context, Page);
@@ -18,7 +23,7 @@ export const GameSessionContainer = (Page: any, isAtHome: boolean = false) => {
       const { gameSession, page } = this.props;
 
       return (
-        <GameContextComponent isAtHome={isAtHome} initialSession={gameSession}>
+        <GameContextComponent currentPage={currentPage} initialSession={gameSession}>
           <PlayContainer>
             <Page {...page} />
           </PlayContainer>

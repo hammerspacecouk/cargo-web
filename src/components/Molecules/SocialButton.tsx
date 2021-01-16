@@ -8,12 +8,11 @@ import { FacebookLogo, GoogleLogo, MicrosoftLogo, RedditLogo, TwitterLogo } from
 import { IChildrenProps } from "@src/interfaces";
 import { AnonIcon } from "@src/components/Icons/AnonIcon";
 
-interface IProps {
-  href: string;
+interface IProps extends React.HTMLProps<HTMLAnchorElement> {
+  text?: string;
 }
 
-interface IButtonProps {
-  href: string;
+interface IButtonProps extends React.HTMLProps<HTMLAnchorElement> {
   icon: JSX.Element;
   text: string;
   colour: IColour;
@@ -48,12 +47,14 @@ const StyledLink = styled.a<{ colour: IColour }>`
       background: ${({ colour }) => hexToRGBa(colour.bg, 1)};
       box-shadow: 0 0 32px ${({ colour }) => colour.bg}, 0 0 16px inset ${({ colour }) => colour.bg};
       text-decoration: none;
+      color: currentColor;
     }
     &:active {
       background: ${({ colour }) => hexToRGBa(colour.bg, 1)};
       box-shadow: 0 0 16px ${({ colour }) => colour.bg}, 0 0 16px inset ${({ colour }) => colour.bg};
       transform: scale(0.98);
       text-decoration: none;
+      color: currentColor;
     }
   }
 `;
@@ -64,8 +65,8 @@ const StyledText = styled.span`
   text-align: left;
 `;
 
-const SocialButton = React.memo(({ href, icon, text, colour }: IButtonProps) => (
-  <StyledLink colour={colour} href={href}>
+const SocialButton = React.memo(({ icon, text, colour, ...rest }: IButtonProps) => (
+  <StyledLink colour={colour} {...rest}>
     <Icon size={SMALL_ICON}>{icon}</Icon>
     <StyledText>{text}</StyledText>
   </StyledLink>
@@ -114,15 +115,15 @@ export const MicrosoftButton = ({ href }: IProps) => (
   />
 );
 
-export const TwitterButton = ({ href }: IProps) => (
+export const TwitterButton = ({ text, ...rest }: IProps) => (
   <SocialButton
-    href={href}
     icon={<TwitterLogo />}
-    text="Twitter"
+    text={text || "Twitter"}
     colour={{
       bg: "#1da1f2",
       fg: "#ffffff",
     }}
+    {...rest}
   />
 );
 

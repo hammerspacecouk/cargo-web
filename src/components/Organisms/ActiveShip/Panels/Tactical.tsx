@@ -10,6 +10,8 @@ import { GridWrapper } from "@src/components/Atoms/GridWrapper";
 import { BREAKPOINTS } from "@src/styles/media";
 import { JoinConvoyPane } from "@src/components/Molecules/JoinConvoyPane";
 import { LeaveConvoyPane } from "@src/components/Molecules/LeaveConvoyPane";
+import { useTutorial } from "@src/hooks/useTutorial";
+import { TacticalTutorial } from "@src/components/Organisms/Tutorial/TacticalTutorial";
 
 enum VIEWS {
   SHOP,
@@ -18,6 +20,7 @@ enum VIEWS {
 
 export const Tactical = () => {
   const { effectsToPurchase, tacticalOptions, leaveConvoy, convoys, port } = useActiveShipContext();
+  const { showReadyForConvoy } = useTutorial();
   const [visibleList, setVisibleList] = React.useState(VIEWS.INVENTORY);
   if (!tacticalOptions) {
     return null;
@@ -27,6 +30,7 @@ export const Tactical = () => {
 
   return (
     <>
+      {showReadyForConvoy && <TacticalTutorial />}
       <Intro>
         <li>
           <IntroButton disabled={visibleList === VIEWS.INVENTORY} onClick={() => setVisibleList(VIEWS.INVENTORY)}>

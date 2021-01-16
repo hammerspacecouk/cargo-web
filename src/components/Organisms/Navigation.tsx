@@ -57,7 +57,7 @@ export const NavigationList = styled(ListUnstyled)`
 `;
 
 export const Navigation = ({ className }: IProps) => {
-  const { ships } = useGameSessionContext();
+  const { ships, tutorialStep } = useGameSessionContext();
 
   return (
     <StyledNavigation className={className}>
@@ -84,6 +84,7 @@ export const Navigation = ({ className }: IProps) => {
               isCurrent={false}
               path={{ href: routes.getPlayLaunch() }}
               text="Launch Ships"
+              highlight={tutorialStep === 4}
             />
           </li>
         </NavigationList>

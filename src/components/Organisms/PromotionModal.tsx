@@ -12,7 +12,9 @@ import { COLOURS } from "@src/styles/colours";
 import { H3 } from "@src/components/Atoms/Heading";
 import { SliderGroup } from "@src/components/Molecules/SliderGroup";
 import { Environment } from "@src/utils/environment";
-import {clientPath} from "@src/utils/runtime";
+import { clientPath } from "@src/utils/runtime";
+import { TwitterLogo } from "@src/components/Atoms/Logos";
+import { TwitterButton } from "@src/components/Molecules/SocialButton";
 
 export const PromotionModal = () => {
   const { rankStatus, currentMissions } = useGameSessionContext();
@@ -40,6 +42,14 @@ export const PromotionModal = () => {
   return (
     <Modal isOpen={true} title="Promotion">
       <Promotion rankStatus={rankStatus} />
+      <TweetButton>
+        <TwitterButton
+          href={`https://twitter.com/intent/tweet?text=I was promoted to ${rankStatus.currentRank.title} while playing https://www.saxopholis.com`}
+          text="Tweet"
+          target="_blank"
+          rel="noopener"
+        />
+      </TweetButton>
       {currentMissions.length > 0 && (
         <NewMission>
           <Heading>New Mission</Heading>
@@ -99,4 +109,12 @@ const Heading = styled(H3)`
 `;
 const Sliders = styled(SliderGroup)`
   margin-bottom: ${GRID.DOUBLE};
+`;
+const TweetButton = styled.div`
+  display: block;
+  text-align: center;
+  margin-bottom: ${GRID.UNIT};
+  > a {
+    display: inline-flex;
+  }
 `;

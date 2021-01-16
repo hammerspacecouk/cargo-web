@@ -8,6 +8,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     props: {
       events: data.events,
       goalCrateLocation: data.goalCrateLocation,
+      topPlayer: data.topPlayer,
+      topWinner: data.topWinner,
     },
   };
 };

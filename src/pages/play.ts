@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 import { ILandingPageProps, LandingPage } from "@src/components/Pages/Play/LandingPage";
-import { GameSessionContainer } from "@src/contexts/GameSessionContext/GameSessionContainer";
+import { CurrentPage, GameSessionContainer } from "@src/contexts/GameSessionContext/GameSessionContainer";
 import { NextPageContext } from "next";
 import { ApiClient } from "@src/utils/ApiClient";
 
@@ -14,4 +14,4 @@ export class Page extends Component<ILandingPageProps, undefined> {
   }
 }
 
-export default GameSessionContainer(Page, true);
+export default GameSessionContainer(Page, CurrentPage.home);

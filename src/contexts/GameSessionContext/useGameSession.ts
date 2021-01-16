@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore } from "@src/interfaces";
 import { useMounted } from "@src/hooks/useMounted";
 import { getSession, IGameSessionResponse } from "@src/data/game";
+import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
 
 export interface IGameSession extends IGameSessionState {
   refreshSession: () => void;
@@ -13,10 +14,10 @@ export interface IGameSession extends IGameSessionState {
 }
 
 // game session data calculation
-export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome = false): IGameSession => {
+export const useGameSession = (initialSession?: IGameSessionResponse, currentPage = null): IGameSession => {
   const [sessionState, setSessionState] = useState(() => getNewSessionState({}, initialSession));
   const isMounted = useMounted();
-  const sessionRefreshInProgress = useRef(null);
+  const sessionRefreshInProgress = useRef<number>(null);
 
   const refreshSession = async () => {
     const id = (sessionRefreshInProgress.current = Date.now());
@@ -48,7 +49,7 @@ export const useGameSession = (initialSession?: IGameSessionResponse, isAtHome =
 
   return {
     ...sessionState,
-    isAtHome,
+    currentPage,
     setSession,
     setActiveShipById: (id) => isMounted() && setSessionState((prev) => setActiveShipById(prev, id)),
     updateRankStatus: (newScore) =>
@@ -66,12 +67,13 @@ interface IGameSessionState {
   ships?: IFleetShip[];
   events?: IEvent[];
   rankStatus?: IRankStatus;
-  isAtHome?: boolean;
+  currentPage?: CurrentPage | null;
   isGameOver?: boolean;
   currentMissions?: IMission[];
   allMissions?: IMission[];
   showTrialEnded?: boolean;
   showTrialWarning?: boolean;
+  tutorialStep?: number | null;
 }
 
 const getNewSessionState = (state: IGameSessionState, session: IGameSessionResponse): IGameSessionState => {
@@ -87,6 +89,7 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "allMissions", session.allMissions);
     newState = setPropIfChanged(newState, "showTrialEnded", session.showTrialEnded);
     newState = setPropIfChanged(newState, "showTrialWarning", session.showTrialWarning);
+    newState = setPropIfChanged(newState, "tutorialStep", session.tutorialStep);
   } else {
     newState = setPropIfChanged(newState, "isGameOver", null);
     newState = setPropIfChanged(newState, "score", null);
@@ -98,6 +101,7 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "allMissions", []);
     newState = setPropIfChanged(newState, "showTrialEnded", false);
     newState = setPropIfChanged(newState, "showTrialWarning", false);
+    newState = setPropIfChanged(newState, "tutorialStep", null);
   }
   return newState;
 };

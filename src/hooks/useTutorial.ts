@@ -11,12 +11,23 @@ export const useTutorial = () => {
 
   let showCrateIntro = false;
   let showNavigationIntro = false;
+  let showRiskyTravelIntro = false;
+  let showNeedsConvoy = false;
+  let showReadyForConvoy = false;
 
   if (tutorialStep) {
+    if (tutorialStep === 6) {
+      showReadyForConvoy = true;
+    }
+    if (tutorialStep === 5) {
+      showNeedsConvoy = true;
+    }
+
     if (tutorialStep <= 3) {
       allowLog = false;
       allowShips = false;
       allowExtras = false;
+      showRiskyTravelIntro = true;
     }
     if (tutorialStep <= 2) {
       allowLog = false;
@@ -40,5 +51,8 @@ export const useTutorial = () => {
 
     showCrateIntro,
     showNavigationIntro,
+    showRiskyTravelIntro,
+    showNeedsConvoy,
+    showReadyForConvoy,
   };
 };

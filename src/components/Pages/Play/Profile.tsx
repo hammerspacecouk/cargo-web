@@ -22,6 +22,7 @@ import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 import { useNumber } from "@src/hooks/useNumber";
 import { PurchaseHistory } from "@src/components/Organisms/PurchaseHistory";
 import { SetNicknameLink } from "@src/components/Organisms/SetNicknameLink";
+import { BREAKPOINTS } from "@src/styles/media";
 
 export interface IProfileProps {
   profile: IProfileResponse;
@@ -233,10 +234,12 @@ const Heading = styled(H3)`
 
 const AccountOption = styled.div`
   margin-bottom: ${GRID.UNIT};
-  display: flex;
-  align-items: flex-start;
-  > :first-child {
-    flex: 1;
-    margin-right: ${GRID.UNIT};
-  }
+  ${BREAKPOINTS.L`
+    display: flex;
+    align-items: flex-start;
+    > :first-child {
+      flex: 1;
+      margin-right: ${GRID.UNIT};
+    }
+  `}
 `;

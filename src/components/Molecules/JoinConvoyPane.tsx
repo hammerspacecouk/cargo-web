@@ -36,13 +36,13 @@ export const JoinConvoyPane = () => {
 
   const chooseShipPanel = (
     <Modal isOpen={chooseShipOpen} title="Create/Join Convoy" onClose={() => setChooseShipOpen(false)}>
-      <Prose>
+      <StyledProse>
         <p>
           When you join two or more of your ships into convoy, their combined strength will be used to calculate their
           eligibility to travel to dangerous areas. All ships in a convoy will travel together, at the speed of the
           slowest ship.
         </p>
-      </Prose>
+      </StyledProse>
       <ul>
         {convoys.map((convoy) => (
           <Convoy key={convoy.token.token}>
@@ -118,6 +118,10 @@ const Convoy = styled.li`
     padding-bottom: ${GRID.UNIT};
     border-bottom: ${PANEL_INNER_DIVIDER_BORDER};
   }
+`;
+
+const StyledProse = styled(Prose)`
+  margin-bottom: ${GRID.UNIT};
 `;
 
 const Ship = styled.li`

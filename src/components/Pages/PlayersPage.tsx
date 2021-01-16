@@ -21,6 +21,38 @@ export interface IPlayersPageProps {
   }[];
 }
 
+export const Winner = ({ winner }: { winner: IPlayersPageProps["winners"][0] }) => (
+  <Link {...routes.getPlayer(winner.player.id)} prefetch={false}>
+    <Player href={`/players/${winner.player.id}`}>
+      <FlagSpace>
+        <PlayerFlag player={winner.player} />
+      </FlagSpace>
+      <Detail>
+        <p>{winner.player.displayName}</p>
+        <p>
+          Time taken: <DurationDetail seconds={winner.completionTime} />
+        </p>
+      </Detail>
+    </Player>
+  </Link>
+);
+
+export const PlayerLink = ({ player }: { player: IPlayer }) => (
+  <Link {...routes.getPlayer(player.id)} prefetch={false}>
+    <Player href={`/players/${player.id}`}>
+      <FlagSpace>
+        <PlayerFlag player={player} />
+      </FlagSpace>
+      <Detail>
+        <p>
+          {player.rank.title} {player.displayName}
+        </p>
+        <Score score={player.score} />
+      </Detail>
+    </Player>
+  </Link>
+);
+
 export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
   <SimplePage>
     <Head>
@@ -29,23 +61,15 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
     <Panel>
       <H1>Winners Board</H1>
       <ol>
-        {winners.map((winner) => (
-          <ListItem key={`winner-${winner.player.id}`}>
-            <Link {...routes.getPlayer(winner.player.id)} prefetch={false}>
-              <Player href={`/players/${winner.player.id}`}>
-                <FlagSpace>
-                  <PlayerFlag player={winner.player} />
-                </FlagSpace>
-                <Detail>
-                  <p>{winner.player.displayName}</p>
-                  <p>
-                    Time taken: <DurationDetail seconds={winner.completionTime} />
-                  </p>
-                </Detail>
-              </Player>
-            </Link>
-          </ListItem>
-        ))}
+        {winners.length ? (
+          winners.map((winner) => (
+            <ListItem key={`winner-${winner.player.id}`}>
+              <Winner winner={winner} />
+            </ListItem>
+          ))
+        ) : (
+          <p>Who will be the first winner?</p>
+        )}
       </ol>
     </Panel>
     <Panel>
@@ -53,19 +77,7 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
       <ol>
         {players.map((player) => (
           <ListItem key={`player-${player.id}`}>
-            <Link {...routes.getPlayer(player.id)} prefetch={false}>
-              <Player href={`/players/${player.id}`}>
-                <FlagSpace>
-                  <PlayerFlag player={player} />
-                </FlagSpace>
-                <Detail>
-                  <p>
-                    {player.rank.title} {player.displayName}
-                  </p>
-                  <Score score={player.score} />
-                </Detail>
-              </Player>
-            </Link>
+            <PlayerLink player={player} />
           </ListItem>
         ))}
       </ol>
@@ -85,6 +97,7 @@ const ListItem = styled.li`
 const Player = styled.a`
   display: flex;
   align-items: center;
+  text-align: left;
   color: ${COLOURS.BODY.TEXT};
   background: ${COLOURS.GREY.DARKEST};
   padding: ${GRID.HALF};

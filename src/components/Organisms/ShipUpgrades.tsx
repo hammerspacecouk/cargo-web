@@ -18,9 +18,10 @@ import { Button, ConfirmButton } from "@src/components/Atoms/Button";
 import { ILaunchEvent, ILaunchShipsResponse } from "@src/data/launch-ships";
 import { IGameSessionResponse } from "@src/data/game";
 import { BREAKPOINTS } from "@src/styles/media";
+import { LaunchTutorial } from "@src/components/Organisms/Tutorial/LaunchTutorial";
 
 export const ShipUpgrades = ({ shipUpgrades, className }: IProps) => {
-  const { setSession } = useGameSessionContext();
+  const { setSession, tutorialStep } = useGameSessionContext();
   const [launchEvent, setLaunchEvent] = useState(null);
   const [ships, setShips] = useState(shipUpgrades);
   const { disableButtons, enableButtons, buttonsDisabled } = useButtonsDisabled();
@@ -62,6 +63,7 @@ export const ShipUpgrades = ({ shipUpgrades, className }: IProps) => {
 
   return (
     <>
+      {tutorialStep === 4 && <StyledTutorial />}
       <StyledShipsList as="ol" className={className}>
         {ships.map((ship, index) => (
           <ListItem key={`ship-upgrades-${index}`}>
@@ -89,6 +91,10 @@ const StyledShipsList = styled(ListUnstyled)`
   display: flex;
   flex-wrap: wrap;
   margin-left: -${GRID.UNIT};
+`;
+
+const StyledTutorial = styled(LaunchTutorial)`
+  margin-bottom: ${GRID.UNIT};
 `;
 
 // todo - equalgrid component

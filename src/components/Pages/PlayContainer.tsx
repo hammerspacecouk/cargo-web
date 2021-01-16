@@ -12,9 +12,10 @@ import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSess
 import { Router } from "next/router";
 import { GameOverModal } from "@src/components/Organisms/GameOverModal";
 import { WinModal } from "@src/components/Organisms/WinModal";
+import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
-  const { player, isAtHome, isGameOver, refreshSession, ships } = useGameSessionContext();
+  const { player, currentPage, isGameOver, refreshSession, ships } = useGameSessionContext();
   const [isLoadingRoute, setIsLoadingRoute] = React.useState(false);
 
   React.useEffect(() => {
@@ -79,7 +80,7 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
       <InGameMasthead />
       <StyledPlayBoard>
         <StyledMain>{children}</StyledMain>
-        <StyledNavigation isAtHome={isAtHome} />
+        <StyledNavigation isAtHome={currentPage === CurrentPage.home} />
       </StyledPlayBoard>
       <PromotionModal />
       <WinModal />
@@ -109,6 +110,7 @@ const StyledPlayBoard = styled.div`
 
 const StyledNavigation = styled(Navigation)<{ isAtHome: boolean }>`
   min-height: calc(100vh - ${MASTHEAD_HEIGHT});
+  min-height: calc(100vh - (${MASTHEAD_HEIGHT} + env(safe-area-inset-bottom)));
   display: ${({ isAtHome }) => (isAtHome ? "flex" : "none")};
   ${BREAKPOINTS.XL`
     display: flex;

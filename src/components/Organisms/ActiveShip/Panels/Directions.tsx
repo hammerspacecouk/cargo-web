@@ -28,13 +28,25 @@ import { ButtonRow } from "@src/components/Molecules/ButtonRow";
 import { TokenButton } from "@src/components/Molecules/TokenButton";
 import { Icon, TEXT_ICON } from "@src/components/Atoms/Icon";
 import { ConvoyIcon } from "@src/components/Icons/ConvoyIcon";
+import { RiskyTravelTutorial } from "@src/components/Organisms/Tutorial/RiskyTravelTutorial";
+import { NeedsConvoyTutorial } from "@src/components/Organisms/Tutorial/NeedsConvoyTutorial";
+import { ReadyForConvoyTutorial } from "@src/components/Organisms/Tutorial/ReadyForConvoyTutorial";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
-  const { showNavigationIntro } = useTutorial();
+  const { showNavigationIntro, showRiskyTravelIntro, showNeedsConvoy, showReadyForConvoy } = useTutorial();
   let tutorial;
   if (showNavigationIntro) {
     tutorial = <TravelTutorial />;
+  }
+  if (showRiskyTravelIntro) {
+    tutorial = <RiskyTravelTutorial />;
+  }
+  if (showNeedsConvoy) {
+    tutorial = <NeedsConvoyTutorial />;
+  }
+  if (showReadyForConvoy) {
+    tutorial = <ReadyForConvoyTutorial />;
   }
 
   if (!directions) {

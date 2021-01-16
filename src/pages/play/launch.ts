@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 import { ILaunchPageProps, LaunchPage } from "@src/components/Pages/Play/LaunchPage";
-import { GameSessionContainer } from "@src/contexts/GameSessionContext/GameSessionContainer";
+import { CurrentPage, GameSessionContainer } from "@src/contexts/GameSessionContext/GameSessionContainer";
 import { NextPageContext } from "next";
 import { getAvailableShips } from "@src/data/launch-ships";
 
@@ -17,4 +17,4 @@ class Page extends Component<ILaunchPageProps> {
   }
 }
 
-export default GameSessionContainer(Page);
+export default GameSessionContainer(Page, CurrentPage.launch);
