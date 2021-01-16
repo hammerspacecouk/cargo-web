@@ -71,7 +71,7 @@ interface IActiveShipState {
 }
 
 export const useActiveShip = (shipId: string, initialShip: IActiveShipResponse): IActiveShip => {
-  const { refreshSession, updateScore, updateFleet } = useGameSessionContext();
+  const { refreshSession, updateScore, updateFleet, showTrialEnded } = useGameSessionContext();
   const [activeShipState, setActiveShipState] = useState({} as IActiveShipState);
   const [activeView, setActiveViewValue] = useState(null);
   const [message, setMessage] = useState(null);

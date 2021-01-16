@@ -35,7 +35,7 @@ export class BrowserClient implements IAPIClient {
       window.location.href = routes.getAboutCheating();
       return null;
     }
-    if (response.status === 404) {
+    if (response.status === 404 || response.status === 402) {
       return null;
     }
     if (!response.ok) {

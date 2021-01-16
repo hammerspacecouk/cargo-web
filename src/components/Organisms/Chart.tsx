@@ -31,7 +31,13 @@ export const Chart = ({ svg }: IMapProps) => {
         <Highlight key={`highlight-${highlight.id}`} cx={highlight.coords.x} cy={highlight.coords.y} r={svg.grid / 4} />
       ))}
       {svg.planets.map((planet) => (
-        <Planet key={`planet-${planet.id}`} cx={planet.coords.x} cy={planet.coords.y} r={PORT_RADIUS} $visited={planet.isVisited} />
+        <Planet
+          key={`planet-${planet.id}`}
+          cx={planet.coords.x}
+          cy={planet.coords.y}
+          r={PORT_RADIUS}
+          $visited={planet.isVisited}
+        />
       ))}
       {svg.planets.map((planet) => (
         <PlanetLabel
@@ -90,8 +96,8 @@ const Highlight = styled.circle`
   stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 2px;
 `;
-const Planet = styled.circle<{$visited: boolean}>`
-  fill: ${({$visited}) => $visited ? `#ffb511` : `#cccccc`};
+const Planet = styled.circle<{ $visited: boolean }>`
+  fill: ${({ $visited }) => ($visited ? `#ffb511` : `#cccccc`)};
 `;
 const PlanetLabel = styled.text`
   font-size: 15px;

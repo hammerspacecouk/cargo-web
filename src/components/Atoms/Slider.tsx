@@ -4,7 +4,7 @@ import { GRID } from "@src/styles/variables";
 import { Button } from "@src/components/Atoms/Button";
 import { SIZES } from "@src/styles/typography";
 import { COLOURS } from "@src/styles/colours";
-import {H3} from "@src/components/Atoms/Heading";
+import { H3 } from "@src/components/Atoms/Heading";
 
 export interface ISliderProps
   extends Omit<

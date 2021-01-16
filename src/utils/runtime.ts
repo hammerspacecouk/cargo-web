@@ -1,5 +1,5 @@
-const isClient = typeof window !== "undefined" && typeof window.document !== "undefined";
+export const isClient = typeof window !== "undefined" && typeof window.document !== "undefined";
 
-const isServer = typeof process !== "undefined" && process.versions != null && process.versions.node != null;
+export const isServer = typeof process !== "undefined" && process.versions != null && process.versions.node != null;
 
-export { isClient, isServer };
+export const clientPath = isClient ? window.location.pathname : '';

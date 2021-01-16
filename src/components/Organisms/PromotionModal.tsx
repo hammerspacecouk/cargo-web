@@ -12,6 +12,7 @@ import { COLOURS } from "@src/styles/colours";
 import { H3 } from "@src/components/Atoms/Heading";
 import { SliderGroup } from "@src/components/Molecules/SliderGroup";
 import { Environment } from "@src/utils/environment";
+import {clientPath} from "@src/utils/runtime";
 
 export const PromotionModal = () => {
   const { rankStatus, currentMissions } = useGameSessionContext();
@@ -29,7 +30,11 @@ export const PromotionModal = () => {
       </Button>
     );
   } else {
-    button = <Button type="submit" title="Accept and Continue">🎉</Button>;
+    button = (
+      <Button type="submit" title="Accept and Continue">
+        Continue
+      </Button>
+    );
   }
 
   return (
@@ -48,6 +53,7 @@ export const PromotionModal = () => {
         onSubmit={() => setAcknowledging(true)}
       >
         <input type="hidden" name="token" value={rankStatus.acknowledgeToken} />
+        <input type="hidden" name="returnPath" value={clientPath} />
         {rankStatus.market && rankStatus.availableCredits !== undefined && (
           <Sliders
             sliders={[
