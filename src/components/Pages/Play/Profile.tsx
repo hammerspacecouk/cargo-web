@@ -214,7 +214,8 @@ const DeleteAccount = ({ canDelete }: { canDelete: boolean }) => {
         <p>
           Completely remove your account and all associated information. Once complete the data{" "}
           <strong>CANNOT BE RECOVERED</strong> in any way, as indicated in the{" "}
-          <a href={routes.getAboutPolicies()}>Privacy Policy</a>.
+          <a href={routes.getAboutPolicies()}>Privacy Policy</a>. No refunds can be requested for deleted accounts.
+          Think carefully.
         </p>
       </Prose>
       {button}

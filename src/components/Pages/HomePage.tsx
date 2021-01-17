@@ -29,16 +29,18 @@ export const HomePage = ({ events, goalCrateLocation, topPlayer, topWinner }: IH
         the other side of the galaxy?
       </p>
 
-      <p>
-        <IntroImage src="/_static/img/intro-2.jpg" alt="A screenshot of gameplay, showing a schematic of planets" />
-        <strong>1,000</strong> planets. It's a race to the finish. But it's a wild west out there. Can you survive,
-        thrive and deliver that saxophone before someone else does.
+      <div>
+        <p>
+          <IntroImage src="/_static/img/intro-2.jpg" alt="A screenshot of gameplay, showing a schematic of planets" />
+          <strong>1,000</strong> planets. It's a race to the finish. But it's a wild west out there. Can you survive,
+          thrive and deliver that saxophone before someone else does.
+        </p>
         <form method="GET" action={routes.getPlay()}>
           <StyledStartButton icon={<ChevronRightIcon />} suffixed>
-            Start your journey
+            Begin your journey for free
           </StyledStartButton>
         </form>
-      </p>
+      </div>
     </IntroPanel>
     <Summaries>
       {goalCrateLocation && (

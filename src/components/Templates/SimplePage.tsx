@@ -14,10 +14,6 @@ import { SIZES } from "@src/styles/typography";
 
 export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
   <TemplateSimple>
-    <WarningMessage>
-      This game is still under development. <br />
-      Please be aware that your account & progress may be deleted at any time.
-    </WarningMessage>
     <TemplateIntro>
       <IntroBits>
         <LogoLink href={routes.getHome()}>
@@ -44,6 +40,11 @@ export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
             <a href={routes.getAboutPolicies()}>Privacy Policy</a>
           </li>
           <li>
+            <a href="https://www.reddit.com/r/saxopholis/" target="_blank" rel="noopener">
+              Reddit (r/saxopholis)
+            </a>
+          </li>
+          <li>
             &copy; {new Date().getFullYear()}{" "}
             <a href="https://www.hammerspace.co.uk" target="_blank">
               Hammerspace LTD
@@ -59,21 +60,6 @@ interface IProps extends IChildrenProps {
   isHome?: boolean;
   disablePlayButton?: boolean;
 }
-
-const WarningMessage = styled.div`
-  display: block;
-  grid-column: main;
-  background: #a5911c;
-  color: #000;
-  ${SIZES.D};
-  font-weight: bold;
-  padding: ${GRID.UNIT};
-  text-align: center;
-  ${BREAKPOINTS.L`
-    grid-column-start: intro;
-    grid-column-end: edge-right;
-  `}
-`;
 
 const LogoLink = styled.a`
   color: inherit;

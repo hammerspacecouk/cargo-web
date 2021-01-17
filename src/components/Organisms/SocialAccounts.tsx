@@ -40,17 +40,19 @@ export const SocialAccounts = ({ isAnonymous, authProviders, className }: IProps
   return (
     <div className={className}>
       {warning}
-      <Prose>
-        <p>
-          We recognise your account through the association with one of these authentication providers. We don't store
-          or access your personal data on these platforms.{" "}
-          <a href={routes.getAboutPolicies()}>Read more about your privacy</a>.
-        </p>
-      </Prose>
+      <Message>
+        We recognise your account through the association with one of these authentication providers. We don't store or
+        access your personal data on these platforms.{" "}
+        <a href={routes.getAboutPolicies()}>Read more about your privacy</a>.
+      </Message>
       <Providers providers={authProviders} />
     </div>
   );
 };
+
+const Message = styled.p`
+  margin-bottom: ${GRID.UNIT};
+`;
 
 const Providers = ({ providers }: { providers: IAuthProvider[] }) => {
   const activeCount = providers.reduce((acc, provider) => {

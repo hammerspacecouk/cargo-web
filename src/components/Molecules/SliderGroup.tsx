@@ -124,5 +124,6 @@ const HelpButton = styled(Button)`
 
 const HelpText = styled(Prose)`
   border-bottom: solid 1px ${COLOURS.KEY_LINE};
+  padding-bottom: ${GRID.UNIT};
   margin-bottom: ${GRID.UNIT};
 `;

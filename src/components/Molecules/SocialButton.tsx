@@ -127,14 +127,14 @@ export const TwitterButton = ({ text, ...rest }: IProps) => (
   />
 );
 
-export const RedditButton = ({ href }: IProps) => (
+export const RedditButton = ({ text, ...rest }: IProps) => (
   <SocialButton
-    href={href}
     icon={<RedditLogo />}
-    text="Reddit"
+    text={text || "Reddit"}
     colour={{
       bg: "#ff4500",
       fg: "#ffffff",
     }}
+    {...rest}
   />
 );

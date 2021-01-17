@@ -68,7 +68,8 @@ export const LoginForm = ({ loginOptions, messages, redirect }: IProps) => {
       </List>
       <Text>
         We don't get access to your account details on these services. No spam, no sharing with third parties.{" "}
-        <a href={routes.getAboutPolicies()}>More about our login policies</a>
+        <a href={routes.getAboutPolicies()}>More about our login policies</a>. By logging in you are agreeing to the{" "}
+        <a href="/about/terms">Terms & Conditions</a> of this game.
       </Text>
     </>
   );
