@@ -16,7 +16,7 @@ export const LoginPage = ({ loginOptions, query }: IProps) => {
               After which you may decide to upgrade to the full game for <s>£7.99</s> £2.99 (launch offer)
               <br /><br />
           </H3>
-        <LoginForm loginOptions={loginOptions} redirect={String(query?.r)} messages={messageQueryString(query)} />
+        <LoginForm loginOptions={loginOptions} redirect={String(query?.r || '/play')} messages={messageQueryString(query)} />
       </PanelPage>
     </SimplePage>
   );

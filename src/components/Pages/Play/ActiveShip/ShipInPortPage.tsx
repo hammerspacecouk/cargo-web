@@ -214,6 +214,9 @@ const ShipOverview = ({
           <TitleLocation>
             <PortName port={port} />
           </TitleLocation>
+          {ship.shipClass.isProbe && (
+            <ProbeInfo>Probe will automatically navigate within an hour</ProbeInfo>
+          )}
         </h1>
         <ShipPosition ref={shipCanvasRef} />
         {port.blockade && (
@@ -291,6 +294,14 @@ const TitleLocation = styled.span`
   display: block;
   margin-top: ${GRID.UNIT};
   text-align: center;
+`;
+
+const ProbeInfo = styled.span`
+  ${ELEMENTS.H3};
+  display: block;
+  margin-top: ${GRID.UNIT};
+  text-align: center;
+  padding: 0 ${GRID.UNIT};
 `;
 
 const TitleName = styled.span`
