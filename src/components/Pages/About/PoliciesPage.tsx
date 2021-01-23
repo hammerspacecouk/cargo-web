@@ -108,7 +108,8 @@ export const PoliciesPage = () => (
       <H3>Trust</H3>
       <p>
         You may not want to believe everything that is written above. But to help with trust, this application is coded
-        in the open. You can view all of the code that makes up this game at:
+        in the open. You can view all of the code that makes up this game at Github
+        (<a href="https://github.com/hammerspacecouk/cargo-api">API</a>)|(<a href="https://github.com/hammerspacecouk/cargo-web">Frontend</a>)
       </p>
       <p>
         In fact, if you want to submit bug fixes and feature requests please do over there, as long as they adhere to

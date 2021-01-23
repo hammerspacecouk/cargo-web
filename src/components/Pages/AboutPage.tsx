@@ -2,17 +2,21 @@ import * as React from "react";
 import { AboutLayout } from "@src/components/Templates/AboutLayout";
 import { routes } from "@src/routes";
 import { Prose } from "@src/components/Atoms/Prose";
+import {H2} from "@src/components/Atoms/Heading";
 
 export const AboutPage = () => (
   <AboutLayout>
     <Prose>
-      <h2>More pages</h2>
+      <H2>Contact</H2>
+      <p>You may e-mail contact@saxopholis.com with any queries. Please note relies may take some time.</p>
+
+      <H2>More pages</H2>
       <ul>
         <li>
           <a href={routes.getAboutPolicies()}>Policies</a>
         </li>
         <li>
-          <a href={routes.getAboutStatus()}>Application Status</a>
+          <a href={routes.getAboutTerms()}>Terms & Conditions </a>
         </li>
       </ul>
 

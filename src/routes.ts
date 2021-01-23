@@ -5,6 +5,7 @@ export const routes = {
   getAboutCheating: () => "/about/cheating",
   getAboutDuplicate: () => "/about/duplicate", // todo - shouldn't be needed now
   getAboutPolicies: () => "/about/policies",
+  getAboutTerms: () => "/about/terms",
   getAboutStatus: () => "/about/status",
   getDeleteAccount: () => "/delete",
   getResetAccount: () => "/reset",

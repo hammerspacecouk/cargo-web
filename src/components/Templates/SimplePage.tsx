@@ -23,9 +23,14 @@ export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
           <StyledTitle as={isHome ? "h1" : "p"}>{APP_TITLE}</StyledTitle>
         </LogoLink>
         {!disablePlayButton && (
+          <>
           <Button as="a" href={routes.getPlay()}>
             Go to game
           </Button>
+            <br />
+            <br />
+            <strong>FREE</strong> trial then <br /><s>£7.99</s> £2.99 (launch offer)
+          </>
         )}
       </IntroBits>
     </TemplateIntro>

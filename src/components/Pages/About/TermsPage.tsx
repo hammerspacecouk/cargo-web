@@ -69,6 +69,12 @@ export const TermsPage = () => (
         right to remove any of Your Content from this Website at any time without notice.
       </p>
 
+      <H3>Purchase</H3>
+      <p>
+        Hammerspace LTD will endeavour to keep the game running for three months after a purchase.
+        If the game is to be shut down new payments will be stopped and the month notice will be given on the homepage.
+      </p>
+
       <H3>Refunds</H3>
       <p>
         Due to the immediate delivery of digital access after a purchase, you waive your right to the 14 day cooling off
