@@ -37,7 +37,7 @@ export const HomePage = ({ events, goalCrateLocation, topPlayer, topWinner }: IH
         </p>
         <form method="GET" action={routes.getPlay()}>
           <StyledStartButton icon={<ChevronRightIcon />} suffixed>
-            Begin your journey for free
+            Begin your journey
           </StyledStartButton>
         </form>
       </div>
