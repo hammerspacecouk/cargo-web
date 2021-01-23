@@ -17,7 +17,7 @@ import { PlayerLink, Winner } from "@src/components/Pages/PlayersPage";
 export const HomePage = ({ events, goalCrateLocation, topPlayer, topWinner }: IHomePageProps) => (
   <SimplePage isHome={true}>
     <IntroPanel>
-      <IntroQuote>It's a massively multiplayer online idle game?</IntroQuote>
+      <IntroQuote>It's a massively multiplayer online incremental game?</IntroQuote>
       <p>
         <IntroImage
           $right
