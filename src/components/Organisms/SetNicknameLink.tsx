@@ -17,7 +17,7 @@ export const SetNicknameLink = ({ token }: { token: IProfileResponse["setNicknam
 
   let changeModal = (
     <Prose>
-      <p>You must upgrade to a full account to be able to set a public nickname</p>
+      <p>You must reach the rank of Petty Officer to set a public nickname</p>
     </Prose>
   );
 

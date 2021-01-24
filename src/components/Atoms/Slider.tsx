@@ -29,16 +29,19 @@ export const Slider: React.FC<ISliderProps> = ({
   ...inputProps
 }) => {
   const [value, setValue] = React.useState(current);
+  const [displayValue, setDisplayValue] = React.useState(current);
 
   const inputId = useMemo(() => id || `input-${Math.floor(Math.random() * 1000000)}`, [id]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = parseInt(e.target.value);
+    let val = parseFloat(e.target.value);
+    let whole = Math.round(val);
     if (currentMax === undefined || val <= currentMax) {
       if (onUpdate) {
-        val = onUpdate(val);
+        whole = onUpdate(whole);
       }
       setValue(val);
+      setDisplayValue(whole);
     }
   };
 
@@ -52,13 +55,13 @@ export const Slider: React.FC<ISliderProps> = ({
           id={inputId}
           type="range"
           min={0}
-          step={1}
+          step={max < 10 ? 0.1 : 1}
           max={max}
           value={value}
           onChange={onChange}
           {...inputProps}
         />
-        <StyledValue>{value.toString(10).padStart(2, "0")}</StyledValue>
+        <StyledValue>{displayValue.toString(10).padStart(2, "0")}</StyledValue>
       </StyledRow>
     </StyledSlider>
   );

@@ -214,9 +214,7 @@ const ShipOverview = ({
           <TitleLocation>
             <PortName port={port} />
           </TitleLocation>
-          {ship.shipClass.isProbe && (
-            <ProbeInfo>Probe will automatically navigate within an hour</ProbeInfo>
-          )}
+          {ship.shipClass.isProbe && <ProbeInfo>Probe will automatically navigate shortly</ProbeInfo>}
         </h1>
         <ShipPosition ref={shipCanvasRef} />
         {port.blockade && (

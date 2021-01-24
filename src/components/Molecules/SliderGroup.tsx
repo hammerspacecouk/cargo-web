@@ -7,17 +7,18 @@ import { IClassNameProps } from "@src/interfaces";
 import { BREAKPOINTS } from "@src/styles/media";
 import { GridWrapper } from "@src/components/Atoms/GridWrapper";
 import { H3, H4 } from "@src/components/Atoms/Heading";
-import { Button } from "@src/components/Atoms/Button";
+import { ConfirmButton } from "@src/components/Atoms/Button";
 import { SIZES } from "@src/styles/typography";
 import { Prose } from "@src/components/Atoms/Prose";
+import { TutorialPanel } from "@src/components/Molecules/TutorialPanel";
 
 const calculateTotalUsed = (sliders: IProps["sliders"]): number => {
   return sliders.reduce((a, s) => a + s.current, 0);
 };
 
-export const SliderGroup: React.FC<IProps> = ({ className, sliders, maxTotal }) => {
+export const SliderGroup: React.FC<IProps> = ({ helpOpen = false, className, sliders, maxTotal }) => {
   const [slidersValue, setSliders] = React.useState(sliders);
-  const [helpOpen, setHelpOpen] = React.useState(false);
+  const [isHelpOpen, setHelpOpen] = React.useState(helpOpen);
 
   const remaining = maxTotal - calculateTotalUsed(slidersValue);
 
@@ -30,7 +31,7 @@ export const SliderGroup: React.FC<IProps> = ({ className, sliders, maxTotal }) 
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              setHelpOpen(!helpOpen);
+              setHelpOpen(!isHelpOpen);
             }}
           >
             ?
@@ -40,23 +41,25 @@ export const SliderGroup: React.FC<IProps> = ({ className, sliders, maxTotal }) 
           Available: {remaining}/{maxTotal}
         </H4>
       </Header>
-      {helpOpen && (
-        <HelpText>
-          <p>
-            Set the sliders for what is most important for you. These can be changed at your next promotion. You have{" "}
-            {maxTotal} unit{maxTotal !== 1 ? "s" : ""} to spread between:
-          </p>
-          <dl>
-            <dt>History</dt>
-            <dd>Show more previously visited planets on the map.</dd>
-            <dt>Discovery</dt>
-            <dd>Increase speed of ships to make it easier to find new planets.</dd>
-            <dt>Economy</dt>
-            <dd>Reduce the cost of all purchases.</dd>
-            <dt>Military</dt>
-            <dd>Increase power of your weapons.</dd>
-          </dl>
-        </HelpText>
+      {isHelpOpen && (
+        <TutorialPanel>
+          <Prose>
+            <p>
+              Set the sliders for what is most important for you. These can be changed at your next promotion. For this
+              promotion you have {maxTotal} unit{maxTotal !== 1 ? "s" : ""} to spread between:
+            </p>
+            <dl>
+              <dt>History</dt>
+              <dd>Show more previously visited planets on the map.</dd>
+              <dt>Discovery</dt>
+              <dd>Increase speed of ships to make it easier to find new planets.</dd>
+              <dt>Economy</dt>
+              <dd>Reduce the cost of all purchases.</dd>
+              <dt>Military</dt>
+              <dd>Increase power of your weapons.</dd>
+            </dl>
+          </Prose>
+        </TutorialPanel>
       )}
       <StyledSliderList>
         {slidersValue.map((slider, i) => (
@@ -88,6 +91,7 @@ interface IProps extends IClassNameProps {
     name: ISliderProps["name"];
   }[];
   maxTotal: number;
+  helpOpen: boolean;
 }
 
 const StyledSliderList = styled(GridWrapper)`
@@ -115,15 +119,9 @@ const Header = styled.div`
   `}
 `;
 
-const HelpButton = styled(Button)`
+const HelpButton = styled(ConfirmButton)`
   margin-left: ${GRID.HALF};
   padding: 0 ${GRID.HALF};
   ${SIZES.D};
   font-style: normal;
-`;
-
-const HelpText = styled(Prose)`
-  border-bottom: solid 1px ${COLOURS.KEY_LINE};
-  padding-bottom: ${GRID.UNIT};
-  margin-bottom: ${GRID.UNIT};
 `;

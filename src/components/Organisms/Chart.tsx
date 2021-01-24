@@ -37,6 +37,7 @@ export const Chart = ({ svg }: IMapProps) => {
           cy={planet.coords.y}
           r={PORT_RADIUS}
           $visited={planet.isVisited}
+          $safe={planet.isSafe}
         />
       ))}
       {svg.planets.map((planet) => (
@@ -81,6 +82,7 @@ interface ICircle {
   title?: string;
   coords: ICoordinate;
   isVisited: boolean;
+  isSafe: boolean;
 }
 
 interface IShipPosition {
@@ -96,8 +98,22 @@ const Highlight = styled.circle`
   stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 2px;
 `;
-const Planet = styled.circle<{ $visited: boolean }>`
-  fill: ${({ $visited }) => ($visited ? `#ffb511` : `#cccccc`)};
+
+const getColor = (visited: boolean, safe: boolean): string => {
+  if (visited) {
+    if (safe) {
+      return "#ffb511";
+    }
+    return "#ff2511";
+  }
+  if (safe) {
+    return "#a28d61";
+  }
+  return "#926360";
+};
+
+const Planet = styled.circle<{ $visited: boolean; $safe: boolean }>`
+  fill: ${({ $visited, $safe }) => getColor($visited, $safe)};
 `;
 const PlanetLabel = styled.text`
   font-size: 15px;

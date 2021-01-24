@@ -44,7 +44,11 @@ export const UpgradePage = () => {
         </p>
         <hr />
         <TextCenter>
-          <H2 as="span"><s>£7.99</s><br />£2.99 (launch offer)</H2>
+          <H2 as="span">
+            <s>£7.99</s>
+            <br />
+            £2.99 (launch offer)
+          </H2>
         </TextCenter>
         <TextCenter>
           <ActionButton disabled={buttonsDisabled} onClick={handleCheckoutClick}>

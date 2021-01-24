@@ -16,6 +16,7 @@ export const ShipDetailPage = () => {
 
   useEffect(() => {
     const id = ship ? ship.id : null;
+    window.sessionStorage.setItem("LAST_VIEWED_SHIP", id);
     setActiveShipById(id);
     return () => setActiveShipById(null);
   }, [ship]);

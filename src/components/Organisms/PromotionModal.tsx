@@ -13,7 +13,6 @@ import { H3 } from "@src/components/Atoms/Heading";
 import { SliderGroup } from "@src/components/Molecules/SliderGroup";
 import { Environment } from "@src/utils/environment";
 import { clientPath } from "@src/utils/runtime";
-import { TwitterLogo } from "@src/components/Atoms/Logos";
 import { RedditButton, TwitterButton } from "@src/components/Molecules/SocialButton";
 
 export const PromotionModal = () => {
@@ -49,7 +48,7 @@ export const PromotionModal = () => {
           target="_blank"
           rel="noopener"
         />
-        <RedditButton href="https://www.reddit.com/r/saxopholis/" text="Reddit" target="_blank" rel="noopener" />
+        <RedditButton href="https://www.reddit.com/r/saxopholis/" text="Discuss" target="_blank" rel="noopener" />
       </SocialButtons>
       {currentMissions.length > 0 && (
         <NewMission>
@@ -67,6 +66,7 @@ export const PromotionModal = () => {
         <input type="hidden" name="returnPath" value={clientPath} />
         {rankStatus.market && rankStatus.availableCredits !== undefined && (
           <Sliders
+            helpOpen={rankStatus.olderRanks.length === 0}
             sliders={[
               {
                 title: "History",

@@ -2,7 +2,7 @@ import * as React from "react";
 import { AboutLayout } from "@src/components/Templates/AboutLayout";
 import { routes } from "@src/routes";
 import { Prose } from "@src/components/Atoms/Prose";
-import {H2} from "@src/components/Atoms/Heading";
+import { H2 } from "@src/components/Atoms/Heading";
 
 export const AboutPage = () => (
   <AboutLayout>

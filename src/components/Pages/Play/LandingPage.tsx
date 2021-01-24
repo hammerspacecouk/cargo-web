@@ -57,7 +57,17 @@ export const LandingPage = ({ map }: ILandingPageProps) => {
 
   React.useEffect(() => {
     if (viewer.current) {
-      viewer.current.setPointOnViewerCenter(map.center.x, map.center.y, 1);
+      const viewed = window.sessionStorage.getItem("LAST_VIEWED_SHIP");
+      let x = map.center.x;
+      let y = map.center.y;
+      if (viewed) {
+        const currentShip = map.svg.ships.find((ship) => ship.id === viewed);
+        if (currentShip) {
+          x = currentShip.center.x;
+          y = currentShip.center.y;
+        }
+      }
+      viewer.current.setPointOnViewerCenter(x, y, 1);
     }
   }, [viewer.current]);
 

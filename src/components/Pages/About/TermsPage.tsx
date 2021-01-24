@@ -71,8 +71,8 @@ export const TermsPage = () => (
 
       <H3>Purchase</H3>
       <p>
-        Hammerspace LTD will endeavour to keep the game running for three months after a purchase.
-        If the game is to be shut down new payments will be stopped and the month notice will be given on the homepage.
+        Hammerspace LTD will endeavour to keep the game running for three months after a purchase. If the game is to be
+        shut down new payments will be stopped and the month notice will be given on the homepage.
       </p>
 
       <H3>Refunds</H3>

@@ -12,7 +12,7 @@ export const CratesTutorial = () => (
         tactical abilities. The more light years (ly) you ship a crate, the more <CreditSymbol /> it will earn you.
       </p>
       <p>Below you can find which crates are available to pick up at this port and which you already have on board</p>
-      <p>Tap your first crate to begin.</p>
+      <p>Tap your first crate to begin (you may need to scroll down).</p>
     </Prose>
   </TutorialPanel>
 );

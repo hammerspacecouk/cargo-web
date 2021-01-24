@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
-import {H1, H2} from "@src/components/Atoms/Heading";
+import { H1, H2 } from "@src/components/Atoms/Heading";
 import { EventsList } from "@src/components/Organisms/EventsList";
 import { IEvent, IPlayer, IPort } from "@src/interfaces";
 import { routes } from "@src/routes";
@@ -35,8 +35,8 @@ export const HomePage = ({ events, goalCrateLocation, topPlayer, topWinner }: IH
           <strong>1,000</strong> planets. It's a race to the finish. But it's a wild west out there. Can you survive,
           thrive and deliver that saxophone before someone else does.
           <br />
-            Trial the first 15% of the game (several hours of play) for <strong>FREE</strong>.
-            After which you may decide to upgrade to the full game.
+          Trial the first 15% of the game (several hours of play) for <strong>FREE</strong>. After which you may decide
+          to upgrade to the full game.
         </p>
         <form method="GET" action={routes.getPlay()}>
           <StyledStartButton icon={<ChevronRightIcon />} suffixed>
