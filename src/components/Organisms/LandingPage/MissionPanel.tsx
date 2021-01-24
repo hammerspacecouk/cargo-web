@@ -7,7 +7,7 @@ import { BREAKPOINTS } from "@src/styles/media";
 import { COLOURS } from "@src/styles/colours";
 import { CurrentMissions } from "@src/components/Molecules/CurrentMissions";
 import { GridWrapper } from "@src/components/Atoms/GridWrapper";
-import {Mission, StyledMission} from "@src/components/Molecules/Mission";
+import { Mission, StyledMission } from "@src/components/Molecules/Mission";
 
 export const MissionPanel = () => {
   const { allMissions } = useGameSessionContext();

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IEffectAction, ITacticalOption } from "@src/interfaces";
 import { EffectDetail } from "./EffectDetail";
-import { DangerButton, Type } from "@src/components/Atoms/Button";
+import { ActionButton, DangerButton, Type } from "@src/components/Atoms/Button";
 import { TokenButton } from "./TokenButton";
 import { useActiveShipContext } from "@src/contexts/ActiveShipContext/ActiveShipContext";
 import { CountdownToTime } from "./CountdownToTime";
@@ -20,6 +20,7 @@ import { GRID } from "@src/styles/variables";
 import { COLOURS } from "@src/styles/colours";
 import { SanctuaryIcon } from "@src/components/Icons/SanctuaryIcon";
 import { Icon, TEXT_ICON } from "@src/components/Atoms/Icon";
+import { SpecialPanel } from "@src/components/Organisms/SpecialPanel";
 
 interface IOffenceEffectProps {
   option: ITacticalOption;
@@ -27,10 +28,10 @@ interface IOffenceEffectProps {
 
 export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
   const { portActionHandler, buttonsDisabled, shipsInLocation, ship, port } = useActiveShipContext();
-  const [chooseShipOpen, setChooseShipOpen] = React.useState(false);
+  const [secondaryPanelOpen, setSecondaryPanelOpen] = React.useState(false);
 
   let actionButton;
-  let chooseShipPanel;
+  let secondaryPanel;
 
   // todo - too complicated. can it be broken up
   if (option.actionToken) {
@@ -72,10 +73,26 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         Engaged
       </ActionButtonDisabled>
     );
+  } else if (option.special) {
+    actionButton = (
+      <ActionButton
+        disabled={buttonsDisabled}
+        onClick={() => {
+          setSecondaryPanelOpen(true);
+        }}
+      >
+        {option.special}
+      </ActionButton>
+    );
+    secondaryPanel = (
+      <Modal isOpen={secondaryPanelOpen} title={option.special} onClose={() => setSecondaryPanelOpen(false)}>
+        <SpecialPanel option={option} ship={ship} onComplete={() => setSecondaryPanelOpen(false)} />
+      </Modal>
+    );
   } else if (option.mustSelectShip) {
     const applicableShips = shipsInLocation.filter((ship) => !!ship.offence);
     if (applicableShips.length) {
-      actionButton = <DangerButton onClick={() => setChooseShipOpen(true)}>Choose Target</DangerButton>;
+      actionButton = <DangerButton onClick={() => setSecondaryPanelOpen(true)}>Choose Target</DangerButton>;
       const getActionButton = (offenses?: IEffectAction[]) => {
         const matchingEffect = (offenses || []).find((offense) => offense.effect.id === option.effect.id);
         if (matchingEffect) {
@@ -87,8 +104,8 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         }
         return null;
       };
-      chooseShipPanel = (
-        <Modal isOpen={chooseShipOpen} title="Choose Target" onClose={() => setChooseShipOpen(false)}>
+      secondaryPanel = (
+        <Modal isOpen={secondaryPanelOpen} title="Choose Target" onClose={() => setSecondaryPanelOpen(false)}>
           <H4>{option.effect.name}</H4>
           <P>{option.effect.description}</P>
           <Ships>
@@ -128,7 +145,7 @@ export const TacticalEffect = ({ option }: IOffenceEffectProps) => {
         </ActionPaneDetail>
         <ActionPaneButton>{actionButton}</ActionPaneButton>
       </ActionPane>
-      {chooseShipPanel}
+      {secondaryPanel}
     </>
   );
 };

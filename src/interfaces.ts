@@ -166,6 +166,7 @@ export interface ITacticalOption extends IEffectAction {
   expiry?: string;
   isActive?: boolean;
   mustSelectShip?: boolean;
+  special?: string;
 }
 
 export interface IConvoyOption {
