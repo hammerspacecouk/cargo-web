@@ -120,7 +120,7 @@ const MissionItem = styled.li`
   ${BREAKPOINTS.S`
     width: 50%;
   `}
-  ${BREAKPOINTS.XL`
-    width: 25%;
+  ${BREAKPOINTS.XXL`
+    width: 33.33333%;
   `}
 `;
