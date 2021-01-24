@@ -29,8 +29,7 @@ export const SliderGroup: React.FC<IProps> = ({ helpOpen = false, className, sli
           Set new priorities{" "}
           <HelpButton
             type="button"
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={() => {
               setHelpOpen(!isHelpOpen);
             }}
           >
