@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ICoordinate } from "@src/interfaces";
 import styled from "styled-components";
+import {COLOURS} from "@src/styles/colours";
 
 export interface IMapProps {
   svg: {
@@ -37,7 +38,6 @@ export const Chart = ({ svg }: IMapProps) => {
           cy={planet.coords.y}
           r={PORT_RADIUS}
           $visited={planet.isVisited}
-          $safe={planet.isSafe}
         />
       ))}
       {svg.planets.map((planet) => (
@@ -45,6 +45,7 @@ export const Chart = ({ svg }: IMapProps) => {
           key={`planetLabel-${planet.id}`}
           x={planet.coords.x + PORT_RADIUS + SPACING}
           y={planet.coords.y + PORT_RADIUS}
+          $safe={planet.isSafe}
         >
           {planet.title}
         </PlanetLabel>
@@ -99,25 +100,12 @@ const Highlight = styled.circle`
   stroke-width: 2px;
 `;
 
-const getColor = (visited: boolean, safe: boolean): string => {
-  if (visited) {
-    if (safe) {
-      return "#ffb511";
-    }
-    return "#ff2511";
-  }
-  if (safe) {
-    return "#a28d61";
-  }
-  return "#926360";
-};
-
-const Planet = styled.circle<{ $visited: boolean; $safe: boolean }>`
-  fill: ${({ $visited, $safe }) => getColor($visited, $safe)};
+const Planet = styled.circle<{ $visited: boolean; }>`
+  fill: ${({ $visited }) => $visited ? COLOURS.BASE : COLOURS.BLACK.STANDARD};
 `;
-const PlanetLabel = styled.text`
+const PlanetLabel = styled.text<{ $safe: boolean }>`
   font-size: 15px;
-  fill: #ffb511;
+  fill:  ${({ $safe }) => $safe ? '#ffb511' : '#ff2511'};
 `;
 const Nearby = styled.line`
   stroke: #999;
