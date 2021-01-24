@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ICoordinate } from "@src/interfaces";
 import styled from "styled-components";
-import {COLOURS} from "@src/styles/colours";
+import { COLOURS } from "@src/styles/colours";
 
 export interface IMapProps {
   svg: {
@@ -100,12 +100,12 @@ const Highlight = styled.circle`
   stroke-width: 2px;
 `;
 
-const Planet = styled.circle<{ $visited: boolean; }>`
-  fill: ${({ $visited }) => $visited ? COLOURS.BASE : COLOURS.BLACK.STANDARD};
+const Planet = styled.circle<{ $visited: boolean }>`
+  fill: ${({ $visited }) => ($visited ? COLOURS.BASE : COLOURS.BLACK.STANDARD)};
 `;
 const PlanetLabel = styled.text<{ $safe: boolean }>`
   font-size: 15px;
-  fill:  ${({ $safe }) => $safe ? '#ffb511' : '#ff2511'};
+  fill: ${({ $safe }) => ($safe ? "#ffb511" : "#ff2511")};
 `;
 const Nearby = styled.line`
   stroke: #999;

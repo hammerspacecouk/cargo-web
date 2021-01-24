@@ -1,5 +1,5 @@
 import * as React from "react";
-import { H2, H3 } from "@src/components/Atoms/Heading";
+import { H2 } from "@src/components/Atoms/Heading";
 import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import styled from "styled-components";
 import { GRID } from "@src/styles/variables";
@@ -7,9 +7,7 @@ import { BREAKPOINTS } from "@src/styles/media";
 import { COLOURS } from "@src/styles/colours";
 import { CurrentMissions } from "@src/components/Molecules/CurrentMissions";
 import { GridWrapper } from "@src/components/Atoms/GridWrapper";
-import { CheckboxChecked } from "@src/components/Icons/CheckboxCheckedIcon";
-import { CheckboxEmpty } from "@src/components/Icons/CheckboxEmptyIcon";
-import { SIZES } from "@src/styles/typography";
+import {Mission, StyledMission} from "@src/components/Molecules/Mission";
 
 export const MissionPanel = () => {
   const { allMissions } = useGameSessionContext();
@@ -25,15 +23,7 @@ export const MissionPanel = () => {
       <GridWrapper as="ul">
         {allMissions.map((mission, idx) => (
           <MissionItem key={`allMissions-${idx}`}>
-            {mission ? (
-              <Mission achieved={!!mission.collectedAt}>
-                <Check>{mission.collectedAt ? <CheckboxChecked /> : <CheckboxEmpty />}</Check>
-                <Name>{mission.name}</Name>
-                <Description>{mission.description}</Description>
-              </Mission>
-            ) : (
-              <LockedMission>Locked</LockedMission>
-            )}
+            {mission ? <Mission mission={mission} /> : <LockedMission>Locked</LockedMission>}
           </MissionItem>
         ))}
       </GridWrapper>
@@ -72,35 +62,10 @@ const MissionItem = styled.li`
   `}
 `;
 
-const Mission = styled.div<{ achieved?: boolean }>`
-  width: 100%;
-  min-height: 112px;
-  border-radius: ${GRID.UNIT};
-  background: ${COLOURS.GREY.DARKEST};
-  padding: ${GRID.UNIT};
-  border: solid 1px ${({ achieved }) => (achieved ? COLOURS.SEMANTIC.OK.KEY : COLOURS.GREY.MID)};
-  ${({ achieved }) => !achieved && `opacity: 0.6`};
-`;
-
-const LockedMission = styled(Mission)`
+const LockedMission = styled(StyledMission)`
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
   color: ${COLOURS.SEMANTIC.WARNING.KEY};
-`;
-
-const Check = styled.span`
-  display: inline-block;
-  width: 32px;
-  margin: 0 0 ${GRID.UNIT} ${GRID.UNIT};
-  float: right;
-`;
-
-const Name = styled(H3)`
-  margin-bottom: ${GRID.HALF};
-`;
-
-const Description = styled.p`
-  ${SIZES.F};
 `;
