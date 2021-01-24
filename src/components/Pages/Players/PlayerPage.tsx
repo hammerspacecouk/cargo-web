@@ -8,6 +8,8 @@ import { GRID } from "@src/styles/variables";
 import { COLOURS } from "@src/styles/colours";
 import { H2, H3 } from "@src/components/Atoms/Heading";
 import { ShieldStrength } from "@src/components/Molecules/ShieldStrength";
+import {Icon, TEXT_ICON} from "@src/components/Atoms/Icon";
+import {PlagueIcon} from "@src/components/Icons/PlagueIcon";
 
 export interface IPlayerPageProps {
   player: IPlayer;
@@ -35,7 +37,11 @@ export const PlayerPage = ({ player, fleet }: IPlayerPageProps) => (
               <Shield>
                 <ShieldStrength percent={ship.strengthPercent} />
               </Shield>
-              <Name>{ship.name}</Name>
+              <Name>{ship.name} {ship.hasPlague && (
+                <Icon size={TEXT_ICON} title="Infected">
+                  <PlagueIcon />
+                </Icon>
+              )}</Name>
               <span>{ship.shipClass.name}</span>
               <span>{isInPort(ship.location) ? (ship.location as IPort).name : "Travelling"}</span>
             </Ship>
