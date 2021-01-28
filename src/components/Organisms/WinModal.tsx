@@ -40,9 +40,8 @@ const getTimeString = (seconds: number): string => {
   return parts.join(", ");
 };
 
-export const WinModal = () => {
+export const WinModal = ({isOpen, close}: {isOpen: boolean, close: () => void}) => {
   const { rankStatus } = useGameSessionContext();
-  const [isOpen, setIsOpen] = React.useState(true);
 
   if (!rankStatus || rankStatus.acknowledgeToken || !rankStatus.winState) {
     return null;
@@ -69,7 +68,7 @@ export const WinModal = () => {
         <ConfirmButton as="a" href="/players">
           View Leaderboard (#{leaderboardPosition})
         </ConfirmButton>
-        <WarningButton onClick={() => setIsOpen(false)}>Continue Playing</WarningButton>
+        <WarningButton onClick={() => close()}>Continue Playing</WarningButton>
         <DangerButton as="a" href="/reset">
           Start Over
         </DangerButton>
@@ -80,6 +79,7 @@ export const WinModal = () => {
 
 const Text = styled.p`
   text-align: center;
+  margin-bottom: ${GRID.UNIT};
 `;
 
 const Records = styled.div`

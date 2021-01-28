@@ -11,7 +11,6 @@ import { Loading } from "@src/components/Atoms/Loading";
 import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { Router } from "next/router";
 import { GameOverModal } from "@src/components/Organisms/GameOverModal";
-import { WinModal } from "@src/components/Organisms/WinModal";
 import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
 
 export const PlayContainer = ({ children }: IChildrenProps) => {
@@ -83,7 +82,6 @@ export const PlayContainer = ({ children }: IChildrenProps) => {
         <StyledNavigation isAtHome={currentPage === CurrentPage.home} />
       </StyledPlayBoard>
       <PromotionModal />
-      <WinModal />
       {isLoadingRoute && (
         <RouteLoadingIndicator>
           <Loading />

@@ -60,6 +60,9 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
     </Head>
     <Panel>
       <H1>Winners Board</H1>
+      <p>
+        These are the champions who have visited every planet and delivered a saxophone to Saxopholis
+      </p>
       <ol>
         {winners.length ? (
           winners.map((winner) => (
@@ -68,7 +71,7 @@ export const PlayersPage = ({ players, winners }: IPlayersPageProps) => (
             </ListItem>
           ))
         ) : (
-          <p>Who will be the first winner?</p>
+          <p>None yet</p>
         )}
       </ol>
     </Panel>

@@ -11,9 +11,27 @@ import { BREAKPOINTS } from "@src/styles/media";
 import { SiteLogo } from "@src/components/Atoms/Logos";
 import { tutorialHighlightAnimation } from "@src/components/Organisms/ShipNavigation";
 import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
+import {WinModal} from "@src/components/Organisms/WinModal";
+import {useEffect, useState} from "react";
+import {Button} from "@src/components/Atoms/Button";
+
+const MODAL_KEY = 'WIN_MODAL_DISMISSED';
 
 export const InGameMasthead = () => {
-  const { score, refreshSession, currentPage, tutorialStep } = useGameSessionContext();
+  const { score, refreshSession, rankStatus, currentPage, tutorialStep } = useGameSessionContext();
+  const [winModalOpen, setWinModalOpen] = useState(false);
+
+  const closeModal = () => {
+    window.sessionStorage.setItem(MODAL_KEY, 'true');
+    setWinModalOpen(false);
+  }
+
+  useEffect(() => {
+    const opened = window.sessionStorage.getItem(MODAL_KEY);
+    if (!opened) {
+      setWinModalOpen(true);
+    }
+  })
 
   return (
     <MastheadPosition>
@@ -22,12 +40,16 @@ export const InGameMasthead = () => {
           <BackButton highlight={tutorialStep === 4 && currentPage !== CurrentPage.launch} />
         )}
         <MastHeadScore onClick={refreshSession}>
+          {rankStatus && !rankStatus.acknowledgeToken && rankStatus.winState && (
+            <WinButton onClick={() => setWinModalOpen(true)}>🎉</WinButton>
+          )}
           <Score score={score} />
         </MastHeadScore>
         <LogoArea href="/">
           <SiteLogo />
         </LogoArea>
       </StyledMasthead>
+      <WinModal isOpen={winModalOpen} close={closeModal} />
     </MastheadPosition>
   );
 };
@@ -40,6 +62,10 @@ const BackButton = ({ highlight }: { highlight?: boolean }) => (
     <span>Fleet</span>
   </Back>
 );
+
+const WinButton = styled(Button)`
+  margin-right: ${GRID.HALF};
+`;
 
 const MastheadPosition = styled.header`
   position: sticky;
