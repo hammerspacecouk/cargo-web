@@ -40,7 +40,7 @@ const getTimeString = (seconds: number): string => {
   return parts.join(", ");
 };
 
-export const WinModal = ({isOpen, close}: {isOpen: boolean, close: () => void}) => {
+export const WinModal = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
   const { rankStatus } = useGameSessionContext();
 
   if (!rankStatus || rankStatus.acknowledgeToken || !rankStatus.winState) {

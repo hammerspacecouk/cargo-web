@@ -1,22 +1,12 @@
 import * as React from "react";
-import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
-import { Event, EventFlag, IEventProps } from "./Event";
+import { Event, EventPlayerName, IEventProps } from "./Event";
 
 export const EffectUse = ({ firstPerson, event }: IEventProps) => {
   let name;
   if (firstPerson) {
     name = "You ";
-  } else if (event.actioningPlayer) {
-    name = (
-      <>
-        <EventFlag>
-          <PlayerFlag player={event.actioningPlayer} />
-        </EventFlag>{" "}
-        {event.actioningPlayer.displayName}
-      </>
-    );
   } else {
-    name = "[deleted] ";
+    name = <EventPlayerName player={event.actioningPlayer} />;
   }
 
   const effectName = event.effect ? <em>{event.effect.name}</em> : "unknown";

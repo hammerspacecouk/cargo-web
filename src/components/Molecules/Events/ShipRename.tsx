@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Event, IEventProps } from "./Event";
+import { Event, EventShipName, IEventProps } from "./Event";
 
 export const ShipRename = ({ event }: IEventProps) => {
   if (!event.ship) {
@@ -8,7 +8,10 @@ export const ShipRename = ({ event }: IEventProps) => {
 
   return (
     <Event time={event.time}>
-      <em>{event.value}</em> was renamed to <em>{event.ship.name}</em>
+      <em>{event.value}</em> was renamed to{" "}
+      <em>
+        <EventShipName ship={event.ship} />
+      </em>
     </Event>
   );
 };

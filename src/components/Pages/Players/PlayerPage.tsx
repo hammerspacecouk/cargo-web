@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IMission, IPlayer, IPort, IShip, isInPort } from "@src/interfaces";
+import { IEvent, IMission, IPlayer, IPort, IShip, isInPort } from "@src/interfaces";
 import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 import { Score } from "@src/components/Organisms/Score";
 import { SimplePage } from "@src/components/Templates/SimplePage";
@@ -10,19 +10,20 @@ import { H2, H3 } from "@src/components/Atoms/Heading";
 import { ShieldStrength } from "@src/components/Molecules/ShieldStrength";
 import { Icon, TEXT_ICON } from "@src/components/Atoms/Icon";
 import { PlagueIcon } from "@src/components/Icons/PlagueIcon";
-import { CheckboxChecked } from "@src/components/Icons/CheckboxCheckedIcon";
-import { CheckboxEmpty } from "@src/components/Icons/CheckboxEmptyIcon";
 import { GridWrapper } from "@src/components/Atoms/GridWrapper";
 import { BREAKPOINTS } from "@src/styles/media";
 import { Mission } from "@src/components/Molecules/Mission";
+import { AnimatedEllipsis } from "@src/components/Atoms/AnimatedEllipsis";
+import { EventsList } from "@src/components/Organisms/EventsList";
 
 export interface IPlayerPageProps {
   player: IPlayer;
   fleet: IShip[];
+  events: IEvent[];
   missions: IMission[];
 }
 
-export const PlayerPage = ({ player, fleet, missions }: IPlayerPageProps) => {
+export const PlayerPage = ({ player, fleet, missions, events }: IPlayerPageProps) => {
   return (
     <SimplePage>
       <Panel>
@@ -35,6 +36,10 @@ export const PlayerPage = ({ player, fleet, missions }: IPlayerPageProps) => {
           <StyledScore score={player.score} />
         </Detail>
       </Panel>
+      <EventsPanel>
+        <H2>Latest work</H2>
+        <EventsList events={events} />
+      </EventsPanel>
       <Panel>
         <H2>Completed Missions</H2>
         <GridWrapper as="ul">
@@ -123,4 +128,8 @@ const MissionItem = styled.li`
   ${BREAKPOINTS.XXL`
     width: 33.33333%;
   `}
+`;
+
+const EventsPanel = styled(Panel)`
+  background: ${COLOURS.BLACK.STANDARD};
 `;

@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { GRID } from "@src/styles/variables";
 import { TimeAgo } from "@src/components/Atoms/TimeAgo";
 import { COLOURS } from "@src/styles/colours";
-import { IEvent } from "@src/interfaces";
+import { IEvent, IPlayer, IShip } from "@src/interfaces";
 import { SIZES } from "@src/styles/typography";
+import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
 
 export interface IEventProps {
   readonly event: IEvent;
@@ -17,6 +18,40 @@ export const Event = ({ children, time }: IProps) => {
       <Content>{children}</Content>
       <Time datetime={new Date(time)} />
     </StyledEvent>
+  );
+};
+
+export const EventShipName = ({ ship }: { ship?: IShip }) => {
+  if (!ship) {
+    return <>[deleted]</>;
+  }
+
+  if (ship?.owner) {
+    return (
+      <a href={`/players/${ship.owner.id}`} target="_blank">
+        <EventFlag>
+          <PlayerFlag player={ship.owner} />
+        </EventFlag>{" "}
+        {ship.name}
+      </a>
+    );
+  }
+
+  return <>{ship.name}</>;
+};
+
+export const EventPlayerName = ({ player }: { player?: IPlayer }) => {
+  if (!player) {
+    return <>[deleted]</>;
+  }
+
+  return (
+    <a href={`/players/${player.id}`} target="_blank">
+      <EventFlag>
+        <PlayerFlag player={player} />
+      </EventFlag>{" "}
+      {player.displayName}
+    </a>
   );
 };
 

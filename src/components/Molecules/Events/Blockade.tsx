@@ -1,23 +1,12 @@
 import * as React from "react";
-import { Event, EventFlag, IEventProps } from "./Event";
-import { PlayerFlag } from "@src/components/Molecules/PlayerFlag";
+import { Event, EventPlayerName, IEventProps } from "./Event";
 
 export const Blockade = ({ firstPerson, event }: IEventProps) => {
   let name;
   if (firstPerson) {
     name = "You ";
-  } else if (event.actioningPlayer) {
-    // todo - abstract the name generation
-    name = (
-      <>
-        <EventFlag>
-          <PlayerFlag player={event.actioningPlayer} />
-        </EventFlag>{" "}
-        {event.actioningPlayer.displayName}
-      </>
-    );
   } else {
-    name = "[deleted] ";
+    name = <EventPlayerName player={event.actioningPlayer} />;
   }
 
   return (

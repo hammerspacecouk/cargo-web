@@ -11,27 +11,27 @@ import { BREAKPOINTS } from "@src/styles/media";
 import { SiteLogo } from "@src/components/Atoms/Logos";
 import { tutorialHighlightAnimation } from "@src/components/Organisms/ShipNavigation";
 import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
-import {WinModal} from "@src/components/Organisms/WinModal";
-import {useEffect, useState} from "react";
-import {Button} from "@src/components/Atoms/Button";
+import { WinModal } from "@src/components/Organisms/WinModal";
+import { useEffect, useState } from "react";
+import { Button } from "@src/components/Atoms/Button";
 
-const MODAL_KEY = 'WIN_MODAL_DISMISSED';
+const MODAL_KEY = "WIN_MODAL_DISMISSED";
 
 export const InGameMasthead = () => {
   const { score, refreshSession, rankStatus, currentPage, tutorialStep } = useGameSessionContext();
   const [winModalOpen, setWinModalOpen] = useState(false);
 
   const closeModal = () => {
-    window.sessionStorage.setItem(MODAL_KEY, 'true');
+    window.sessionStorage.setItem(MODAL_KEY, "true");
     setWinModalOpen(false);
-  }
+  };
 
   useEffect(() => {
     const opened = window.sessionStorage.getItem(MODAL_KEY);
     if (!opened) {
       setWinModalOpen(true);
     }
-  })
+  });
 
   return (
     <MastheadPosition>
