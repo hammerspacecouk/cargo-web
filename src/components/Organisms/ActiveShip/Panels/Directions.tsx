@@ -12,7 +12,7 @@ import { P, TextF, TextOk, TextWarning } from "@src/components/Atoms/Text";
 import { PortName } from "@src/components/Molecules/PortName";
 import { ScoreValue } from "@src/components/Molecules/ScoreValue";
 import styled from "styled-components";
-import { GRID } from "@src/styles/variables";
+import { GRID, NAV_ITEM_HEIGHT, Z_INDEX } from "@src/styles/variables";
 import { H4 } from "@src/components/Atoms/Heading";
 import { Distance } from "@src/components/Atoms/Distance";
 import { useTutorial } from "@src/hooks/useTutorial";
@@ -31,10 +31,18 @@ import { ConvoyIcon } from "@src/components/Icons/ConvoyIcon";
 import { RiskyTravelTutorial } from "@src/components/Organisms/Tutorial/RiskyTravelTutorial";
 import { NeedsConvoyTutorial } from "@src/components/Organisms/Tutorial/NeedsConvoyTutorial";
 import { ReadyForConvoyTutorial } from "@src/components/Organisms/Tutorial/ReadyForConvoyTutorial";
+import { MapIcon } from "@src/components/Icons/MapIcon";
+import { ComplexButton } from "@src/components/Molecules/ComplexButton";
+import { useEffect, useState } from "react";
+import { ApiClient } from "@src/utils/ApiClient";
+import { ChartBox } from "@src/components/Organisms/ChartBox";
+import { CloseIcon } from "@src/components/Icons/CloseIcon";
+import { BREAKPOINTS } from "@src/styles/media";
 
 export const Directions = () => {
   const { directions } = useActiveShipContext();
   const { showNavigationIntro, showRiskyTravelIntro, showNeedsConvoy, showReadyForConvoy } = useTutorial();
+  const [mapModalOpen, setMapModalOpen] = useState(false);
   let tutorial;
   if (showNavigationIntro) {
     tutorial = <TravelTutorial />;
@@ -58,6 +66,11 @@ export const Directions = () => {
   return (
     <>
       {tutorial}
+      <ButtonBar>
+        <ComplexButton icon={<MapIcon />} onClick={() => setMapModalOpen(true)}>
+          Chart
+        </ComplexButton>
+      </ButtonBar>
       <GridWrapper as="ul">
         <Direction direction={NW}>
           <DirectionNW />
@@ -78,9 +91,56 @@ export const Directions = () => {
           <DirectionSE />
         </Direction>
       </GridWrapper>
+      {mapModalOpen && <MapModal onClose={() => setMapModalOpen(false)} />}
     </>
   );
 };
+
+const MapModal = ({ onClose }: { onClose: () => void }) => {
+  const [mapDetail, setMapDetail] = useState();
+  useEffect(() => {
+    (async () => {
+      const response = await ApiClient.fetch("/play/map");
+      if (response.map) {
+        setMapDetail(response.map);
+      }
+    })();
+  }, []);
+
+  let inner = <Loading />;
+  if (mapDetail) {
+    inner = <ChartBox map={mapDetail} />;
+  }
+
+  return (
+    <FullBox>
+      {inner}
+      <StyledCloseButton icon={<CloseIcon />} onClick={onClose} />
+    </FullBox>
+  );
+};
+
+const FullBox = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: ${Z_INDEX.MODAL_PANEL};
+`;
+
+const StyledCloseButton = styled(ComplexButton)`
+  position: fixed;
+  top: ${GRID.UNIT};
+  right: ${GRID.UNIT};
+  ${BREAKPOINTS.L`
+    top: calc(${NAV_ITEM_HEIGHT});
+  `}
+`;
 
 interface IDirectionProps {
   direction?: IDirection;
@@ -213,4 +273,10 @@ const StyledDirection = styled.li`
 
 const StyledScoreValue = styled(ScoreValue)`
   justify-content: center;
+`;
+
+const ButtonBar = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${GRID.UNIT};
 `;

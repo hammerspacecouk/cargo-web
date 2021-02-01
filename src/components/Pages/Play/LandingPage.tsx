@@ -1,9 +1,7 @@
 import * as React from "react";
-import { TOOL_PAN, UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
 import styled from "styled-components";
 import { COLOURS, panelBackground } from "@src/styles/colours";
 import { BREAKPOINTS } from "@src/styles/media";
-import { useElementDimensions } from "@src/hooks/useElementDimensions";
 import { Progress } from "@src/components/Organisms/PlayHome/Panels/Progress";
 import { EventsList } from "@src/components/Organisms/EventsList";
 import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
@@ -15,11 +13,10 @@ import { MissionIcon } from "@src/components/Icons/MissionIcon";
 import { RankIcon } from "@src/components/Icons/RankIcon";
 import { MapIcon } from "@src/components/Icons/MapIcon";
 import { LogIcon } from "@src/components/Icons/LogIcon";
-import { useRef } from "react";
 import { JumpLink } from "@src/components/Atoms/JumpLink";
 import { MissionPanel } from "@src/components/Organisms/LandingPage/MissionPanel";
-import { IMapProps, Chart } from "@src/components/Organisms/Chart";
 import { H2 } from "@src/components/Atoms/Heading";
+import { ChartBox, IChartBoxProps } from "@src/components/Organisms/ChartBox";
 
 const subNavHeight = "64px";
 
@@ -40,59 +37,15 @@ const Map = styled(JumpLink)`
 `;
 
 export interface ILandingPageProps {
-  map: {
-    svg: IMapProps["svg"];
-    viewBox: string;
-    center: {
-      x: number;
-      y: number;
-    };
-  };
+  map: IChartBoxProps["map"];
 }
 
 export const LandingPage = ({ map }: ILandingPageProps) => {
-  const { ref, sizeIsKnown, width, height } = useElementDimensions();
   const { events } = useGameSessionContext();
-  const viewer = useRef<UncontrolledReactSVGPanZoom>();
-
-  React.useEffect(() => {
-    if (viewer.current) {
-      const viewed = window.sessionStorage.getItem("LAST_VIEWED_SHIP");
-      let x = map.center.x;
-      let y = map.center.y;
-      if (viewed) {
-        const currentShip = map.svg.ships.find((ship) => ship.id === viewed);
-        if (currentShip) {
-          x = currentShip.center.x;
-          y = currentShip.center.y;
-        }
-      }
-      viewer.current.setPointOnViewerCenter(x, y, 1);
-    }
-  }, [viewer.current]);
-
   return (
     <Page>
-      <Map ref={ref} id="map">
-        {sizeIsKnown && (
-          <UncontrolledReactSVGPanZoom
-            width={width}
-            height={height}
-            background="rgba(0,0,0,0.3)"
-            SVGBackground="transparent"
-            tool={TOOL_PAN}
-            preventPanOutside={false}
-            scaleFactorMax={4}
-            scaleFactorMin={0.1}
-            customMiniature={() => null}
-            customToolbar={() => null}
-            ref={viewer}
-          >
-            <svg viewBox={map.viewBox}>
-              <Chart svg={map.svg} />
-            </svg>
-          </UncontrolledReactSVGPanZoom>
-        )}
+      <Map id="map">
+        <ChartBox map={map} />
       </Map>
       <JumpLink id="mission">
         <Section>
