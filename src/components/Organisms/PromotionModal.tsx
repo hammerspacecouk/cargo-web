@@ -39,7 +39,7 @@ export const PromotionModal = () => {
   }
 
   return (
-    <Modal isOpen={true} title="Promotion">
+    <Modal isOpen={true} title="You have been promoted">
       <Promotion rankStatus={rankStatus} />
       <SocialButtons>
         <TwitterButton
