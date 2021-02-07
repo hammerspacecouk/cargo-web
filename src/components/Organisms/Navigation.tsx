@@ -64,7 +64,7 @@ export const Navigation = ({ className }: IProps) => {
     <StyledNavigation className={className}>
       <JumpLink id="fleet" />
       <PlayerSummary />
-      {goalCrateLocations.length > 0 && rankStatus.portsVisited >= 850 && <GoalCrate ports={goalCrateLocations} />}
+      {goalCrateLocations && goalCrateLocations.length > 0 && rankStatus.portsVisited >= 850 && <GoalCrate ports={goalCrateLocations} />}
       <Ships>
         <Hidden as="h2">Ships</Hidden>
         <FleetShips fleetShips={ships} />
