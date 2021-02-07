@@ -10,9 +10,10 @@ import { LaunchIcon } from "@src/components/Icons/LaunchIcon";
 import { useGameSessionContext } from "@src/contexts/GameSessionContext/GameSessionContext";
 import { FleetShips } from "./FleetShips";
 import { routes } from "@src/routes";
-import { Z_INDEX } from "@src/styles/variables";
+import { GRID, NAV_ITEM_HEIGHT, Z_INDEX } from "@src/styles/variables";
 import { MapIcon } from "@src/components/Icons/MapIcon";
 import { JumpLink } from "@src/components/Atoms/JumpLink";
+import { IPort } from "@src/interfaces";
 
 interface IProps {
   className?: string;
@@ -57,12 +58,13 @@ export const NavigationList = styled(ListUnstyled)`
 `;
 
 export const Navigation = ({ className }: IProps) => {
-  const { ships, tutorialStep } = useGameSessionContext();
+  const { ships, tutorialStep, goalCrateLocations, rankStatus } = useGameSessionContext();
 
   return (
     <StyledNavigation className={className}>
       <JumpLink id="fleet" />
       <PlayerSummary />
+      {goalCrateLocations.length > 0 && rankStatus.portsVisited >= 850 && <GoalCrate ports={goalCrateLocations} />}
       <Ships>
         <Hidden as="h2">Ships</Hidden>
         <FleetShips fleetShips={ships} />
@@ -92,3 +94,39 @@ export const Navigation = ({ className }: IProps) => {
     </StyledNavigation>
   );
 };
+
+const GoalCrate = ({ ports }: { ports: IPort[] }) => {
+  return (
+    <StyledGoal>
+      <StyledGoalIcon>🎷</StyledGoalIcon>
+      <StyledGoalText>
+        Spotted near:
+        <br />
+        {ports.map((g) => g.name).join(", ")}
+      </StyledGoalText>
+    </StyledGoal>
+  );
+};
+
+const StyledGoal = styled.div`
+  display: flex;
+  padding: ${GRID.UNIT} ${GRID.UNIT} ${GRID.UNIT} ${GRID.HALF};
+  border-left: solid transparent ${GRID.HALF};
+  min-height: ${NAV_ITEM_HEIGHT};
+  align-items: center;
+  color: ${COLOURS.WHITE.STANDARD};
+  border-top: solid 1px ${hexToRGBa(COLOURS.WHITE.STANDARD, 0.2)};
+`;
+
+const StyledGoalIcon = styled.div`
+  width: 32px;
+  margin-right: ${GRID.UNIT};
+  text-align: center;
+  line-height: 32px;
+  border-radius: 32px;
+  background ${COLOURS.BLACK.FULL};
+`;
+
+const StyledGoalText = styled.span`
+  flex: 1;
+`;

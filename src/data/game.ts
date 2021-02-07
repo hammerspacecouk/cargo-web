@@ -1,6 +1,6 @@
 import http from "http";
 import { ApiClient } from "@src/utils/ApiClient";
-import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus } from "@src/interfaces";
+import { IEvent, IFleetShip, IMission, IPlayer, IPort, IRankStatus } from "@src/interfaces";
 
 export const getSession = (
   incomingRequest?: http.IncomingMessage,
@@ -15,6 +15,7 @@ export interface IGameSessionResponse {
   showTrialEnded: boolean;
   showTrialWarning: boolean;
   tutorialStep: number | null;
+  goalCrateLocations: IPort[];
 }
 
 export interface IFleetResponse {

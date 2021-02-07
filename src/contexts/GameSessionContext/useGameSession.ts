@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IEvent, IFleetShip, IMission, IPlayer, IRankStatus, IScore } from "@src/interfaces";
+import { IEvent, IFleetShip, IMission, IPlayer, IPort, IRankStatus, IScore } from "@src/interfaces";
 import { useMounted } from "@src/hooks/useMounted";
 import { getSession, IGameSessionResponse } from "@src/data/game";
 import { CurrentPage } from "@src/contexts/GameSessionContext/GameSessionContainer";
@@ -77,6 +77,7 @@ interface IGameSessionState {
   showTrialEnded?: boolean;
   showTrialWarning?: boolean;
   tutorialStep?: number | null;
+  goalCrateLocations?: IPort[];
 }
 
 const getNewSessionState = (state: IGameSessionState, session: IGameSessionResponse): IGameSessionState => {
@@ -93,6 +94,7 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "showTrialEnded", session.showTrialEnded);
     newState = setPropIfChanged(newState, "showTrialWarning", session.showTrialWarning);
     newState = setPropIfChanged(newState, "tutorialStep", session.tutorialStep);
+    newState = setPropIfChanged(newState, "goalCrateLocations", session.goalCrateLocations);
   } else {
     newState = setPropIfChanged(newState, "isGameOver", null);
     newState = setPropIfChanged(newState, "score", null);
@@ -105,6 +107,7 @@ const getNewSessionState = (state: IGameSessionState, session: IGameSessionRespo
     newState = setPropIfChanged(newState, "showTrialEnded", false);
     newState = setPropIfChanged(newState, "showTrialWarning", false);
     newState = setPropIfChanged(newState, "tutorialStep", null);
+    newState = setPropIfChanged(newState, "goalCrateLocations", []);
   }
   return newState;
 };

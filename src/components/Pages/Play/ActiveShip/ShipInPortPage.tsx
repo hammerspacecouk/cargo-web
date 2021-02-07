@@ -192,6 +192,7 @@ const ShipOverview = ({
     [ship.id]
   );
   const shipCanvasRef = useAnimationScene<HTMLDivElement>(new ShipDisplay(ship.shipClass), [ship.id]);
+  const { rankStatus } = useGameSessionContext();
 
   const blockadeStrengthLabel = useNumber(blockadeStrength);
 
@@ -214,7 +215,12 @@ const ShipOverview = ({
           <TitleLocation>
             <PortName port={port} />
           </TitleLocation>
-          {ship.shipClass.isProbe && <ProbeInfo>Probe will automatically navigate shortly</ProbeInfo>}
+          {ship.shipClass.isProbe &&
+            (rankStatus.nextRank ? (
+              <ProbeInfo>Probe will automatically navigate shortly</ProbeInfo>
+            ) : (
+              <ProbeInfo>Nowhere left to explore</ProbeInfo>
+            ))}
         </h1>
         <ShipPosition ref={shipCanvasRef} />
         {port.blockade && (

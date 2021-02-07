@@ -122,6 +122,7 @@ const BackIcon = styled(Icon)`
 `;
 
 const LogoArea = styled.a`
+  display: none;
   width: 42px;
   height: 28px;
   position: absolute;
@@ -132,4 +133,7 @@ const LogoArea = styled.a`
   &:hover {
     opacity: 0.7;
   }
+  ${BREAKPOINTS.M`
+    display: block;
+  `}
 `;
