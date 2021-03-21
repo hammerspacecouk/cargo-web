@@ -12,10 +12,7 @@ export const LoginPage = ({ loginOptions, query }: IProps) => {
     <SimplePage disablePlayButton>
       <PanelPage title="Login">
         <H3 as="p">
-          Trial the first 15% of the game (several hours of play) for <strong>FREE</strong>. After which you may decide
-          to upgrade to the full game for <s>£7.99</s> £2.99 (launch offer)
-          <br />
-          <br />
+          Sorry, new players are not being accepted right now.
         </H3>
         <LoginForm
           loginOptions={loginOptions}

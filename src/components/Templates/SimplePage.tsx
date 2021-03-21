@@ -14,6 +14,10 @@ import { SIZES } from "@src/styles/typography";
 
 export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
   <TemplateSimple>
+    <WarningMessage>
+      Under the <a href="/about/terms">terms</a>, this notices states that this game will
+      be shutting down on 24th April 2021.
+    </WarningMessage>
     <TemplateIntro>
       <IntroBits>
         <LogoLink href={routes.getHome()}>
@@ -27,10 +31,6 @@ export const SimplePage = ({ children, isHome, disablePlayButton }: IProps) => (
             <Button as="a" href={routes.getPlay()}>
               Go to game
             </Button>
-            <br />
-            <br />
-            <strong>FREE</strong> trial then <br />
-            <s>£7.99</s> £2.99 (launch offer)
           </>
         )}
       </IntroBits>
@@ -125,4 +125,23 @@ const FooterPanel = styled.section`
   padding: ${GRID.DOUBLE};
   background: ${COLOURS.BODY.BACKGROUND};
   text-align: center;
+`;
+
+const WarningMessage = styled.div`
+  display: block;
+  grid-column: main;
+  background: #a5911c;
+  color: #000;
+  ${SIZES.D};
+  font-weight: bold;
+  padding: ${GRID.UNIT};
+  text-align: center;
+  ${BREAKPOINTS.L`
+    grid-column-start: intro;
+    grid-column-end: edge-right;
+  `}
+  a {
+    color: currentColor;
+    text-decoration: underline;
+  }
 `;

@@ -46,7 +46,7 @@ export const Profile = ({ profile, purchaseState }: IProfileProps) => {
   } else if (profile.isTrial) {
     mode = (
       <TextWarning>
-        Trial (<a href={routes.getPurchaseUpgrade()}>Upgrade</a>)
+        Trial
       </TextWarning>
     );
   } else {

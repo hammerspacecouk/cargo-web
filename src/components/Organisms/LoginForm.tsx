@@ -5,7 +5,6 @@ import { GRID } from "@src/styles/variables";
 import { Environment } from "@src/utils/environment";
 import { ListInline } from "@src/components/Atoms/List/ListInline";
 import {
-  AnonymousButton,
   FacebookButton,
   GoogleButton,
   MicrosoftButton,
@@ -56,13 +55,6 @@ export const LoginForm = ({ loginOptions, messages, redirect }: IProps) => {
         {loginOptions.reddit && (
           <Item>
             <RedditButton href={`${Environment.clientApiHostname}${loginOptions.reddit}?r=${redirect}`} />
-          </Item>
-        )}
-        {loginOptions.anon && (
-          <Item>
-            <AnonForm token={loginOptions.anon}>
-              <AnonymousButton>New Anonymous Game</AnonymousButton>
-            </AnonForm>
           </Item>
         )}
       </List>
